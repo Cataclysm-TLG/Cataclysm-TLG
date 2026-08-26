@@ -3163,6 +3163,7 @@ void npc::die( map *here, Creature *nkiller )
         const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
         Creature *grabber = nullptr;
         for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            const efftype_id grab_id = grab.get_id();
             // Is our grabber around?
             for( const tripoint_bub_ms loc : surrounding ) {
                 Creature *someone = creatures.creature_at( loc );
@@ -3173,14 +3174,14 @@ void npc::die( map *here, Creature *nkiller )
                 }
             }
             if( grabber == nullptr ) {
-                remove_effect( grab.get_id() );
+                remove_effect( grab_id );
                 add_msg_debug( debugmode::DF_MATTACK, "Orphan grab found and removed from dead NPC" );
                 continue;
             }
             if( grabber && !grabber->is_monster() ) {
                 grabber->as_character()->release_grapple();
             }
-            remove_effect( grab.get_id() );
+            remove_effect( grab_id );
         }
     }
     release_grapple();
