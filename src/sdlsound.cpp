@@ -2,6 +2,7 @@
 
 #include "sdlsound.h"
 
+#include <atomic>
 #include <cstdlib>
 #include <algorithm>
 #include <chrono>
@@ -34,8 +35,6 @@
 #endif
 #include "sounds.h"
 #include "units.h"
-#include "avatar.h"
-#include "game.h"
 
 #define dbg(x) DebugLog((x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
@@ -693,20 +692,12 @@ bool sfx::has_exact_variant_sound( const std::string &id, const std::string &var
     return iter != nullptr;
 }
 
-static bool is_time_slowed()
-{
-    if( g == nullptr || g->uquit != QUIT_NO ) {
-        return false;
-    }
-    // if the player have significantly more moves than their speed, they probably used an artifact/CBM to slow time.
-    // I checked; the only things that increase a player's # of moves is spells/cbms that slow down time (and also unit tests) so this should work.
-    // Would get_speed_base() be better?
-    return std::max( get_avatar().get_speed(), 100 ) * 2 < get_avatar().get_moves();
-}
-
 // helper data for sound_effect_handler
 namespace
 {
+// Keep character state on the main thread and publish only what the audio callback needs.
+std::atomic_bool time_is_slowed = false;
+
 // Because we're not allowed to call Mix_HaltChannel inside audio callbacks, slowed_time_effect() adds the channel the sound effect is playing on to this list when it wants to stop the sound.
 // whenever make_audio() is called, it will halt any channels in this list.
 std::vector < sfx::channel > channels_to_end = {};
@@ -714,6 +705,11 @@ std::vector < sfx::channel > channels_to_end = {};
 // need a mutex so that make_audio() and slowed_time_effect() don't modify channels_to_end simultaneously
 std::mutex channels_to_end_mutex;
 } // namespace
+
+void set_time_slowed( bool slowed )
+{
+    time_is_slowed.store( slowed, std::memory_order_relaxed );
+}
 
 // used with SDL's Mix_RegisterEffect(). each sound that is currently playing has one. needed to dynamically control playback speed for slowing time
 struct sound_effect_handler {
@@ -752,7 +748,8 @@ struct sound_effect_handler {
         constexpr int bytes_per_sample = sizeof( sample ) *
                                          2; // 2 samples per ear (is there a better terminology for this?)
 
-        float playback_speed = is_time_slowed() ? sound_speed_factor : 1; //
+        const float playback_speed = time_is_slowed.load( std::memory_order_relaxed ) ?
+                                     sound_speed_factor : 1;
         int num_source_samples = handler->audio_src->alen / bytes_per_sample;
 
         cata_assert( audio_format == AUDIO_S16 );
