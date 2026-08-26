@@ -213,6 +213,7 @@ static const quality_id qual_BOIL( "BOIL" );
 static const quality_id qual_JACK( "JACK" );
 static const quality_id qual_LIFT( "LIFT" );
 
+static const skill_id skill_archery( "archery" );
 static const skill_id skill_cooking( "cooking" );
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_survival( "survival" );
@@ -12539,7 +12540,7 @@ bool item::reload( Character &u, item_location ammo, int qty )
         return false;
     }
     // Check that passed gun mode is valid and we are able to use it
-    if( has_flag( flag_CROSSBOW ) ) {
+    if( gun_skill() == skill_archery ) {
         gun_mode gmode = gun_current_mode();
         if( !( u.can_use( *gmode ) ) ) {
             u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s." ), tname() );
