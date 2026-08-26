@@ -449,6 +449,7 @@ void overmap_npc_move()
 bool do_turn()
 {
     if( g->is_game_over() ) {
+        set_time_slowed( false );
         return turn_handler::cleanup_at_end();
     }
 
@@ -486,6 +487,10 @@ bool do_turn()
     get_item_wakeups().process( calendar::turn );
     mission::process_all();
     avatar &u = get_avatar();
+    const auto update_time_slowed = [&u]() {
+        set_time_slowed( g->uquit == QUIT_NO &&
+                         std::max( u.get_speed(), 100 ) * 2 < u.get_moves() );
+    };
     map &m = get_map();
     // If controlling a vehicle that is owned by someone else
     if( u.in_vehicle && u.controlling_vehicle ) {
@@ -533,8 +538,10 @@ bool do_turn()
 
     g->perhaps_add_random_npc( /* ignore_spawn_timers_and_rates = */ false );
     while( u.get_moves() > 0 && u.activity ) {
+        update_time_slowed();
         u.activity.do_turn( u );
     }
+    update_time_slowed();
     // FIXME: hack needed due to the legacy code in advanced_inventory::move_all_items()
     if( !u.activity ) {
         kill_advanced_inv();
@@ -581,12 +588,15 @@ bool do_turn()
                     g->queue_screenshot = false;
                 }
 
+                update_time_slowed();
                 if( g->handle_action() ) {
                     ++g->moves_since_last_save;
                     u.action_taken();
                 }
+                update_time_slowed();
 
                 if( g->is_game_over() ) {
+                    set_time_slowed( false );
                     return turn_handler::cleanup_at_end();
                 }
 
@@ -594,9 +604,12 @@ bool do_turn()
                     break;
                 }
                 while( u.get_moves() > 0 && u.activity ) {
+                    update_time_slowed();
                     u.activity.do_turn( u );
                 }
+                update_time_slowed();
             }
+            update_time_slowed();
             // Reset displayed sound markers now that the turn is over.
             // We only want this to happen if the player had a chance to examine the sounds.
             sounds::reset_markers();
