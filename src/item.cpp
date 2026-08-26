@@ -180,6 +180,7 @@ static const itype_id itype_craft( "craft" );
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_efile_recipes( "efile_recipes" );
+static const itype_id itype_electric_spanner( "electric_spanner" );
 static const itype_id itype_hand_crossbow( "hand_crossbow" );
 static const itype_id itype_joint_lit( "joint_lit" );
 static const itype_id itype_pistol_crossbow( "pistol_crossbow" );
@@ -12541,19 +12542,37 @@ bool item::reload( Character &u, item_location ammo, int qty )
     }
     // Check that passed gun mode is valid and we are able to use it
     if( gun_skill() == skill_archery ) {
+        bool spanner_used = false;
+        bool spanner_found = false;
+        for( const item *maybe_spanner : gunmods() ) {
+            if( !spanner_found ) {
+                item this_spanner = *maybe_spanner;
+                if( !spanner_found && this_spanner.typeId() == itype_electric_spanner && !this_spanner.is_broken() ) {
+                    if( this_spanner.has_ammo() ) {
+                        this_spanner.ammo_consume( 1, u.pos_bub(), &u );
+                        spanner_used = true;
+                    }
+                    spanner_found = true;
+                }
+            }
+        }
         gun_mode gmode = gun_current_mode();
-        if( !( u.can_use( *gmode ) ) ) {
-            u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s." ), tname() );
+        if( !( u.can_use( *gmode ) ) && !spanner_used ) {
+            if( spanner_found ) {
+                u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s, and its electric spanner is unpowered." ), tname() );
+            } else {
+                u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s." ), tname() );
+            }
             return false;
         }
     }
     bool ammo_from_map = !ammo.held_by( u );
     if( ammo->has_flag( flag_SPEEDLOADER ) || ammo->has_flag( flag_SPEEDLOADER_CLIP ) ) {
-        // if the thing passed in is a speed loader, we want the ammo
+        // If the thing passed in is a speed loader, we want the ammo.
         ammo = item_location( ammo, &ammo->first_ammo() );
     }
 
-    // limit quantity of ammo loaded to remaining capacity
+    // Limit quantity of ammo loaded to remaining capacity.
     int limit = 0;
     if( is_watertight_container() && ammo->made_of_from_type( phase_id::LIQUID ) ) {
         limit = get_remaining_capacity_for_liquid( *ammo );
