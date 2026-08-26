@@ -182,6 +182,7 @@ static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_efile_recipes( "efile_recipes" );
 static const itype_id itype_hand_crossbow( "hand_crossbow" );
 static const itype_id itype_joint_lit( "joint_lit" );
+static const itype_id itype_pistol_crossbow( "pistol_crossbow" );
 static const itype_id itype_power_cord( "power_cord" );
 static const itype_id itype_rad_badge( "rad_badge" );
 static const itype_id itype_stock_none( "stock_none" );
@@ -12208,7 +12209,7 @@ ret_val<void> item::is_gunmod_compatible( const item &mod ) const
                !mod.type->gunmod->usable.count( gun_type_type( typeId().str() ) ) ) {
         return ret_val<void>::make_failure( _( "cannot have a %s" ), mod.tname() );
 
-    } else if( typeId() == itype_hand_crossbow &&
+    } else if( typeId() == itype_hand_crossbow || typeId() == itype_pistol_crossbow &&
                !mod.type->gunmod->usable.count( pistol_gun_type ) ) {
         return ret_val<void>::make_failure( _( "isn't big enough to use that mod" ) );
 
@@ -12537,7 +12538,14 @@ bool item::reload( Character &u, item_location ammo, int qty )
     if( !can_reload_with( *ammo.get_item(), true ) ) {
         return false;
     }
-
+    // Check that passed gun mode is valid and we are able to use it
+    if( has_flag( flag_CROSSBOW ) ) {
+        gun_mode gmode = gun_current_mode();
+        if( !( u.can_use( *gmode ) ) ) {
+            u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s." ), tname() );
+            return false;
+        }
+    }
     bool ammo_from_map = !ammo.held_by( u );
     if( ammo->has_flag( flag_SPEEDLOADER ) || ammo->has_flag( flag_SPEEDLOADER_CLIP ) ) {
         // if the thing passed in is a speed loader, we want the ammo
