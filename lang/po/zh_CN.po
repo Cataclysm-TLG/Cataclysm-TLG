@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-"PO-Revision-Date: 2026-08-26 18:10+0800\n"
+"PO-Revision-Date: 2026-08-28 01:25+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -2644,7 +2644,7 @@ msgstr "冰冷的食物保质期更长。找个凉快的地下室或者建个储
 #. ~ Snippet in category "tip"
 #: data/core/tips.json
 msgid "Construction can be a good way to gain your first rank of mechanics and electronics."
-msgstr ""
+msgstr "建造是提升机械和电子学初始等级的好方法。"
 
 #. ~ Snippet in category "tip"
 #: data/core/tips.json
@@ -2859,7 +2859,7 @@ msgstr "如果你因为断腿被困在室内，可以读一些书来打发时间
 #. ~ Snippet in category "tip"
 #: data/core/tips.json
 msgid "Injuries take longer to heal the worse they are.  Don't overdo it!"
-msgstr ""
+msgstr "伤势越重，愈合所需的时间就越长。别逞强！"
 
 #. ~ Snippet in category "tip"
 #: data/core/tips.json
@@ -3797,7 +3797,7 @@ msgstr "赛博朋克"
 #. ~ Partial tagline from Romer's Day of the Dead
 #: data/json/achievements.json
 msgid "Darkest day of horror"
-msgstr ""
+msgstr "最黑暗的恐怖之日"
 
 #. ~ Name of achievement
 #: data/json/achievements.json
@@ -4668,7 +4668,7 @@ msgstr "百战天龙马盖先"
 #. ~ Name of achievement
 #: data/json/achievements.json
 msgid "Marathon"
-msgstr ""
+msgstr "马拉松"
 
 #. ~ Name of achievement
 #: data/json/achievements.json
@@ -4684,7 +4684,7 @@ msgstr "大厨"
 #. ~ Partial quote from Revelation 9:6 in the Bible
 #: data/json/achievements.json
 msgid "Men seek death, and shall not find it"
-msgstr ""
+msgstr "世人求死，却不得死"
 
 #. ~ Name of achievement
 #: data/json/achievements.json
@@ -4730,7 +4730,7 @@ msgstr "九条命"
 #. ~ Partial tagline from Romer's Dawn of the Dead
 #: data/json/achievements.json
 msgid "No more room in hell"
-msgstr ""
+msgstr "地狱已满"
 
 #. ~ Description of achievement "Ace Driver"
 #: data/json/achievements.json
@@ -4740,7 +4740,7 @@ msgstr "没有转不过的弯。"
 #. ~ Name of achievement
 #: data/json/achievements.json
 msgid "Now what?"
-msgstr ""
+msgstr "现在怎么办？"
 
 #. ~ Name of achievement
 #: data/json/achievements.json
@@ -5095,12 +5095,12 @@ msgstr "活过一年"
 #. ~ Description of achievement "28 days later"
 #: data/json/achievements.json
 msgid "Survive for one month"
-msgstr ""
+msgstr "存活一个月"
 
 #. ~ Description of achievement "Men seek death, and shall not find it"
 #: data/json/achievements.json
 msgid "Survive for one season"
-msgstr ""
+msgstr "存活一个季节"
 
 #. ~ Name of achievement
 #: data/json/achievements.json
@@ -5181,7 +5181,7 @@ msgstr "我手里有力量。"
 #. ~ Tagline for the 1968 film Night of the Living Dead
 #: data/json/achievements.json
 msgid "They won't stay dead"
-msgstr ""
+msgstr "它们不会安息"
 
 #. ~ Description of achievement "HackerMan"
 #: data/json/achievements.json
@@ -5265,7 +5265,7 @@ msgstr "数量至上！"
 #. ~ Description of achievement "500 miles and 500 more"
 #: data/json/achievements.json
 msgid "Walk 1000 miles."
-msgstr ""
+msgstr "行走 1000 英里。"
 
 #. ~ Name of achievement
 #: data/json/achievements.json
@@ -8319,6 +8319,8 @@ msgid ""
 "repairing damage stopping bleeding at the cost of extra power and stored calories.  Excessive use of this CBM "
 "can depress the immune system.  No power is consumed if there is nothing to heal."
 msgstr ""
+"在你体内有一支由微型休眠机器人组成的舰队。激活后，它们会在你体内穿梭，以额外能量和储存的卡路里为代价，缓慢修复"
+"损伤并止血。过度使用此CBM可能会抑制免疫系统。若无需治疗，则不消耗能量。"
 
 #. ~ Name of a bionic
 #. ~ Item name
@@ -10414,7 +10416,7 @@ msgstr "用你的藤蔓爬下去。"
 #. ~ Menu text for descent with ""
 #: data/json/climbing.json
 msgid "Climb down with this ladder."
-msgstr ""
+msgstr "用这个梯子爬下去。"
 
 #. ~ Query: really descend with "item_stepladder"?
 #. ~ Query: really descend with "item_aluminum_stepladder"?
@@ -15886,7 +15888,7 @@ msgstr "充足"
 #. ~ Name of effect type id "fungalpoison"
 #: data/json/effects.json
 msgid "Fungal Toxin"
-msgstr ""
+msgstr "真菌毒素"
 
 #. ~ Name of effect type id "mutagen_gastropod"
 #: data/json/effects.json
@@ -16436,7 +16438,7 @@ msgstr "医疗变形"
 #. ~ Description of effect type "Zolpidem"
 #: data/json/effects.json
 msgid "Medication is making you more drowsy by the minute."
-msgstr ""
+msgstr "药物让你越来越昏昏欲睡。"
 
 #. ~ Name of effect type id "melatonin"
 #: data/json/effects.json
@@ -19891,7 +19893,7 @@ msgstr "你出bug的腿残废得面目全非。你现在怎么跳？"
 #. ~ Miss message of effect type "Blisters"
 #: data/json/effects.json
 msgid "Your burns distract you."
-msgstr ""
+msgstr "你的烧伤让你分心。"
 
 #. ~ Description of effect type "Charged Capacitor"
 #: data/json/effects.json
@@ -20498,17 +20500,17 @@ msgstr "EOC_IS_MUTATION_GRADUAL 运行正常"
 #. ~ Player message in effect in EoC "EOC_TEST_MUTATION_GRADUAL"
 #: data/json/effects_on_condition/debug_eocs.json
 msgid "Initial setup complete (1 if true): <u_val:setup_mutating_gradual>"
-msgstr ""
+msgstr "初始设置完成（真为1）：<u_val:setup_mutating_gradual>"
 
 #. ~ Player message in effect in EoC "EOC_TEST_MUTATION_GRADUAL"
 #: data/json/effects_on_condition/debug_eocs.json
 msgid "Mutation threshold: <u_val:MUTATING_GRADUAL_threshold>"
-msgstr ""
+msgstr "变异阈值：<u_val:MUTATING_GRADUAL_threshold>"
 
 #. ~ Player message in effect in EoC "EOC_TEST_MUTATION_GRADUAL"
 #: data/json/effects_on_condition/debug_eocs.json
 msgid "Mutation vitamin: <u_val:MUTATING_GRADUAL_vitamin>"
-msgstr ""
+msgstr "变异维生素：<u_val:MUTATING_GRADUAL_vitamin>"
 
 #. ~ Player message in effect in EoC "EOC_TEST_MUTATION_GRADUAL"
 #: data/json/effects_on_condition/debug_eocs.json
@@ -20518,7 +20520,7 @@ msgstr "突变后冷却时间(-1 if off cooldown): <u_val:recently_mutated_coold
 #. ~ Player message in effect in EoC "EOC_TEST_MUTATION_GRADUAL"
 #: data/json/effects_on_condition/debug_eocs.json
 msgid "Surplus mutagen since cooldown: <u_val:MUTATING_GRADUAL_surplus> units"
-msgstr ""
+msgstr "冷却后剩余诱变剂：<u_val:MUTATING_GRADUAL_surplus> 单位"
 
 #. ~ Player message in nested effect in then statement in effect in EoC "EOC_DERMATIK_BIRTH"
 #: data/json/effects_on_condition/effects_eocs.json
@@ -21276,7 +21278,7 @@ msgstr "微小的涟漪开始出现在你的皮肤上，像波浪一样向外扩
 msgid ""
 "You begin to feel a sickening ache, the feeling of your cells tearing apart and recombining in strange new "
 "patterns."
-msgstr ""
+msgstr "你开始感到一阵令人作呕的剧痛，仿佛你的细胞正在撕裂，并以奇异的新方式重新组合。"
 
 #. ~ Snippet in category "<CHANGING_ENDS>"
 #: data/json/effects_on_condition/mutation_eocs/changing_eocs.json
@@ -23727,7 +23729,7 @@ msgstr "浓雾"
 #. ~ Field intensity level
 #: data/json/field_type.json
 msgid "dense spore cloud"
-msgstr ""
+msgstr "浓密孢子云"
 
 #. ~ Field intensity level
 #: data/json/field_type.json
@@ -23762,7 +23764,7 @@ msgstr "微弱等离子体"
 #. ~ Field intensity level
 #: data/json/field_type.json
 msgid "fine spore cloud"
-msgstr ""
+msgstr "细密孢子云"
 
 #. ~ Field intensity level
 #: data/json/field_type.json
@@ -27953,7 +27955,7 @@ msgstr[0] "燃油发电机"
 #: data/json/items/appliances/appliances_generators.json
 msgid "gasoline generator"
 msgid_plural "gasoline generator"
-msgstr[0] ""
+msgstr[0] "汽油发电机"
 
 #. ~ Vehicle part name
 #. ~ Furniture name
@@ -27963,12 +27965,12 @@ msgstr[0] ""
 #: data/json/items/appliances/appliances_generators.json
 msgid "huge diesel generator"
 msgid_plural "huge diesel generator"
-msgstr[0] ""
+msgstr[0] "大型柴油发电机"
 
 #. ~ Vehicle part name
 #: data/json/furniture_and_terrain/appliances_generators.json
 msgid "portable gasoline generator"
-msgstr ""
+msgstr "便携式汽油发电机"
 
 #. ~ Description of vehicle part "chest freezer"
 #: data/json/furniture_and_terrain/appliances_refrigeration.json
@@ -35432,7 +35434,7 @@ msgstr "木制发酵桶"
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-tools.json
 msgid "wooden folding ladder"
-msgstr ""
+msgstr "木制折叠梯"
 
 #. ~ Description of furniture "composting midden"
 #: data/json/furniture_and_terrain/furniture-triffid.json
@@ -35492,14 +35494,14 @@ msgstr "一台为军事设施供电的巨大箱式机器。"
 #. ~ Description of furniture "portable generator"
 #: data/json/furniture_and_terrain/furniture_generators.json
 msgid "Small enough to lug around by hand, this generator can burn gasoline to power basic appliances."
-msgstr ""
+msgstr "这台发电机小巧到可以手提搬运，能够燃烧汽油为基本电器供电。"
 
 #. ~ Description of furniture "active portable generator"
 #: data/json/furniture_and_terrain/furniture_generators.json
 msgid ""
 "Small enough to lug around by hand, this generator can burn gasoline to power basic appliances.  It's "
 "currently running."
-msgstr ""
+msgstr "这台发电机小巧到可以手提搬运，能够燃烧汽油为基本电器供电。目前正在运行中。"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture_generators.json
@@ -108638,7 +108640,7 @@ msgstr "一份脱水的大蒜。你肯定不想直接这样干吃，但可以磨
 #. ~ Description of "dry rice"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "Dehydrated long-grain rice.  Tasty and nutritious when cooked, inedible when dry."
-msgstr ""
+msgstr "脱水长粒米。煮熟后美味且营养丰富，干燥时则不可食用。"
 
 #. ~ Description of "dehydrated vegetable"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -108744,7 +108746,7 @@ msgstr "把生竹笋去皮、裹上面粉后炸熟。美味且营养丰富。"
 #. ~ Description of "dry wild rice"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "Raw, milled wild rice.  Tasty and nutritious when cooked, inedible when dry."
-msgstr ""
+msgstr "生的、碾磨过的野生稻米。煮熟后美味且营养丰富，干燥时则不可食用。"
 
 #. ~ Description of "rehydrated chili pepper"
 #: data/json/items/comestibles/veggy_dishes.json
@@ -109434,7 +109436,7 @@ msgstr[0] "干淀粉"
 #: data/json/items/comestibles/veggy_dishes.json
 msgid "dry rice"
 msgid_plural "dry rice"
-msgstr[0] ""
+msgstr[0] "干米"
 
 #. ~ Item name
 #: data/json/items/comestibles/veggy_dishes.json
@@ -110441,7 +110443,7 @@ msgstr "当你饿得不行时，生吃也没什么影响，当然，弄熟了再
 #. ~ Description of "sponge cake"
 #: data/json/items/comestibles/wheat.json
 msgid "Plain, fluffy cake."
-msgstr ""
+msgstr "普通松软蛋糕"
 
 #. ~ Description of "French toast"
 #: data/json/items/comestibles/wheat.json
@@ -110461,7 +110463,7 @@ msgstr "这些一口大小的饼干适合用来配汤，但直接吃会让你很
 #. ~ Description of "space cake"
 #: data/json/items/comestibles/wheat.json
 msgid "This cake's destiny is to take you on a gnarly trip.  There is cake, and you will be baked."
-msgstr ""
+msgstr "这块蛋糕的使命是带你踏上一段狂野的旅程。蛋糕就在那里，而你将会被它彻底“烤”嗨。"
 
 #. ~ Description of "'special' brownie"
 #: data/json/items/comestibles/wheat.json
@@ -141253,7 +141255,7 @@ msgstr[0] "折叠刀"
 #: data/json/items/melee/short_blades.json
 msgid "poignard"
 msgid_plural "poignards"
-msgstr[0] ""
+msgstr[0] "细身短剑"
 
 #. ~ Item name
 #: data/json/items/melee/short_blades.json
@@ -147399,7 +147401,7 @@ msgstr[0] "杂项软件"
 #: data/json/items/software.json
 msgid "phlebotomy data"
 msgid_plural "phlebotomy data"
-msgstr[0] ""
+msgstr[0] "静脉血液学数据"
 
 #. ~ Item name
 #: data/json/items/software.json
@@ -152494,7 +152496,7 @@ msgstr "你需要点火工具！"
 #: data/json/items/tool/metalworking.json
 msgid "belt grinder"
 msgid_plural "belt grinders"
-msgstr[0] ""
+msgstr[0] "砂带打磨机"
 
 #. ~ Item name
 #: data/json/items/tool/metalworking.json
@@ -153415,7 +153417,7 @@ msgstr[0] "多功能口哨"
 #: data/json/items/tool/misc.json
 msgid "wooden ladder (folded)"
 msgid_plural "wooden ladder (folded)s"
-msgstr[0] ""
+msgstr[0] "木制梯子（已折叠）"
 
 #. ~ Description of "tuba"
 #. ~ ol' is an informal short-form for old, and here is part of big-ol as large-and-cumbersome.
@@ -164541,7 +164543,7 @@ msgstr "垃圾场"
 #. ~ Signage placed on map farm_dairy_twd_1, farm_dairy_twd_2, null, null, farm_dairy_twd_5, farm_dairy_twd_6, farm_dairy_twd_7, farm_dairy_twd_8, farm_dairy_twd_9, farm_dairy_twd_10, farm_dairy_twd_11, farm_dairy_twd_12
 #: data/json/mapgen/farm_dairy_2.json
 msgid "St. John Dairy.  Daily Farm Tours"
-msgstr ""
+msgstr "圣约翰乳业。每日农场参观。"
 
 #. ~ Signage placed on map TreeFarm_1a, TreeFarm_1b
 #: data/json/mapgen/farm_tree.json
@@ -166362,7 +166364,7 @@ msgstr "私有财产。严禁非法侵入！"
 #. ~ Name of the monster "mon_woodlouse" placed on map ranch_camp_19, ranch_camp_20, ranch_camp_21, ranch_camp_28, ranch_camp_29, ranch_camp_30
 #: data/json/mapgen/ranch_camp.json
 msgid "Durst"
-msgstr ""
+msgstr "德斯特"
 
 #. ~ Signage placed on map recyclecenter_2
 #: data/json/mapgen/recycle_center.json
@@ -174302,7 +174304,7 @@ msgstr "倒影行动"
 #. ~ Description of spell "Spore Cloud"
 #: data/json/monster_special_attacks/spells.json
 msgid "Release a cloud of spores."
-msgstr ""
+msgstr "释放一团孢子云。"
 
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json
@@ -174404,12 +174406,12 @@ msgstr "在一片锥形区域的地面上喷射出淤泥。"
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json
 msgid "Spore Cloud"
-msgstr ""
+msgstr "孢子云"
 
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json
 msgid "Spray Spores"
-msgstr ""
+msgstr "喷射孢子"
 
 #. ~ Description of spell "Acid Spray"
 #: data/json/monster_special_attacks/spells.json
@@ -174424,7 +174426,7 @@ msgstr "在锥形区域喷射一波火波。"
 #. ~ Description of spell "Spray Spores"
 #: data/json/monster_special_attacks/spells.json
 msgid "Sprays a cloud of spores in a cone."
-msgstr ""
+msgstr "呈锥形喷出一团孢子云。"
 
 #. ~ Spell name
 #: data/json/monster_special_attacks/spells.json
@@ -176088,6 +176090,8 @@ msgid ""
 "This may have once been a crow or a raven, but now it's a deformed monstrosity nearly the size of a man.  It "
 "heaves its sable bulk awkwardly along the ground, too fat now to fly but still in constant search of more meat."
 msgstr ""
+"这也许曾经是一只乌鸦或渡鸦，但如今已变成近一人高的畸形怪物。它笨拙地拖动着黑色的庞大身躯在地面上移动，如今已过"
+"于臃肿而无法飞行，却仍不停搜寻着更多的肉。"
 
 #. ~ Monster name
 #: data/json/monsters/bird.json
@@ -176147,7 +176151,7 @@ msgstr[0] "神学书籍模版"
 #: data/json/monsters/bird.json
 msgid "gluttonous crow"
 msgid_plural "gluttonous crows"
-msgstr[0] ""
+msgstr[0] "暴食鸦"
 
 #. ~ Monster name
 #: data/json/monsters/bird.json data/json/obsoletion_and_migration/obsoletion.json
@@ -176207,7 +176211,7 @@ msgstr[0] "知更鸟"
 #: data/json/monsters/bird.json
 msgid "scavenger crow"
 msgid_plural "scavenger crows"
-msgstr[0] ""
+msgstr[0] "食腐鸦"
 
 #. ~ Monster name
 #: data/json/monsters/bird.json
@@ -176317,7 +176321,7 @@ msgstr[0] "绝望受害者"
 #: data/json/monsters/civilians.json
 msgid "fanatic cop"
 msgid_plural "fanatic cops"
-msgstr[0] ""
+msgstr[0] "狂热警察"
 
 #. ~ Monster name
 #: data/json/monsters/civilians.json
@@ -176794,6 +176798,8 @@ msgid ""
 "even greater madness.  They scan for threats with bloodshot eyes and a semi-automatic rifle, and a flashlight "
 "strapped to their helmet illuminates their surroundings."
 msgstr ""
+"从他们混搭战术装备上的徽章来看，此人似乎曾属于大灾变前十年间变得极为常见的某个极端组织之一，不过如今他们已陷入"
+"更深的疯狂之中。他们用充血的眼睛和一把半自动步枪扫视着威胁，头盔上绑着的手电筒照亮了周围的环境。"
 
 #. ~ Description of monster "mad servant"
 #: data/json/monsters/feral_humans.json
@@ -390543,7 +390549,7 @@ msgstr "孢子把 %1$s 转化成 %2$s！"
 
 #: src/monstergenerator.cpp:1151 src/monstergenerator.cpp:1152 src/mtype.cpp:515 src/mtype.cpp:525
 msgid "movement."
-msgstr ""
+msgstr "移动声。"
 
 #: src/morale.cpp:643
 msgid "Nothing affects your morale"
