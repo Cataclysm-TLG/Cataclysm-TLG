@@ -92,7 +92,7 @@
     "name": { "str": "sylvan sample" },
     "description": "A faintly luminescent of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "blood", "vegetable" ]
+    "material": [ "hflesh", "hblood", "vegetable" ]
   },
   {
     "type": "ITEM",
