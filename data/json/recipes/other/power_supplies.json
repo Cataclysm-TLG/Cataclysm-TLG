@@ -223,7 +223,7 @@
     ],
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
     "components": [
-      [ [ "motor_small", 1 ], [ "alternator_bicycle", 1 ], [ "alternator_motorbike", 1 ] ],
+      [ [ "motor_medium", 1 ], [ "alternator_bicycle", 1 ], [ "alternator_motorbike", 1 ] ],
       [ [ "2x4", 5 ], [ "frame_wood", 1 ] ],
       [ [ "sheet_metal_small", 3 ] ],
       [ [ "nails", 20, "LIST" ] ],
@@ -260,7 +260,7 @@
       [ [ "2x4", 30 ], [ "frame_wood", 4 ] ],
       [ [ "sheet_metal_small", 12 ] ],
       [
-        [ "motor_small", 4 ],
+        [ "motor_medium", 4 ],
         [ "alternator_bicycle", 4 ],
         [ "alternator_motorbike", 4 ],
         [ "alternator_car", 2 ],
@@ -302,7 +302,7 @@
       { "id": "WRENCH", "level": 2 }
     ],
     "components": [
-      [ [ "motor_small", 1 ], [ "alternator_bicycle", 1 ], [ "alternator_motorbike", 1 ] ],
+      [ [ "motor_medium", 1 ], [ "alternator_bicycle", 1 ], [ "alternator_motorbike", 1 ] ],
       [ [ "2x4", 20 ], [ "frame_wood", 3 ] ],
       [ [ "sheet_metal_small", 6 ] ],
       [ [ "nails", 80, "LIST" ] ],
@@ -325,7 +325,7 @@
       { "id": "WRENCH", "level": 2 }
     ],
     "components": [
-      [ [ "motor_small", 1 ], [ "alternator_bicycle", 1 ], [ "alternator_motorbike", 1 ] ],
+      [ [ "motor_medium", 1 ], [ "alternator_bicycle", 1 ], [ "alternator_motorbike", 1 ] ],
       [ [ "2x4", 20 ], [ "frame_wood", 3 ] ],
       [ [ "sheet_metal_small", 6 ] ],
       [ [ "nails", 80, "LIST" ] ],
@@ -365,7 +365,7 @@
       [ [ "2x4", 50 ], [ "frame_wood", 9 ] ],
       [ [ "sheet_metal_small", 18 ] ],
       [
-        [ "motor_small", 3 ],
+        [ "motor_medium", 3 ],
         [ "alternator_bicycle", 3 ],
         [ "alternator_motorbike", 3 ],
         [ "alternator_car", 2 ],
@@ -396,7 +396,7 @@
       [ [ "2x4", 50 ], [ "frame_wood", 9 ] ],
       [ [ "sheet_metal_small", 18 ] ],
       [
-        [ "motor_small", 3 ],
+        [ "motor_medium", 3 ],
         [ "alternator_bicycle", 3 ],
         [ "alternator_motorbike", 3 ],
         [ "alternator_car", 2 ],

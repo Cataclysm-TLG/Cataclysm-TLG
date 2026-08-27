@@ -824,7 +824,7 @@
       { "item": "hard_plate", "prob": 30 },
       { "item": "motor", "prob": 2 },
       { "item": "motor_large", "prob": 1 },
-      { "item": "motor_small", "prob": 1 },
+      { "item": "motor_medium", "prob": 1 },
       { "item": "hose", "prob": 15 },
       { "item": "pants_army", "prob": 30 },
       { "item": "flight_helmet", "prob": 10, "charges": [ 0, 100 ] },

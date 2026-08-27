@@ -54,8 +54,8 @@
   },
   {
     "type": "ITEM",
-    "id": "motor_small",
-    "name": { "str": "small electric motor" },
+    "id": "motor_medium",
+    "name": { "str": "medium electric motor" },
     "description": "A light-duty electrical motor, strong enough for an electric mopeds and golf carts.",
     "weight": "4 kg",
     "volume": "6 L",
@@ -66,9 +66,9 @@
   },
   {
     "type": "ITEM",
-    "id": "motor_tiny",
-    "name": { "str": "tiny electric motor" },
-    "description": "A tiny electric motor, suitable for an electric bicycle.",
+    "id": "motor_small",
+    "name": { "str": "small electric motor" },
+    "description": "A motor suitable for powering an electric bicycle or other small vehicle.",
     "weight": "2500 g",
     "color": "light_cyan",
     "symbol": ",",
@@ -77,6 +77,34 @@
     "category": "veh_parts",
     "price": "20 USD",
     "price_postapoc": "1 USD"
+  },
+  {
+    "type": "ITEM",
+    "id": "motor_micro",
+    "symbol": ",",
+    "color": "light_gray",
+    "name": { "str": "micro electric motor" },
+    "category": "spare_parts",
+    "description": "A very small electric motor like those used in RC cars or electric hair trimmers.",
+    "price": "10 USD",
+    "price_postapoc": "25 cent",
+    "material": [ "steel", "plastic" ],
+    "weight": "125 g",
+    "volume": "25 ml"
+  },
+  {
+    "type": "ITEM",
+    "id": "motor_tiny",
+    "name": { "str": "tiny electric motor" },
+    "description": "A little motor that might be used to run a blender, weed whacker, or other small appliance.",
+    "weight": "600 g",
+    "color": "light_cyan",
+    "symbol": ",",
+    "material": [ "steel", "plastic" ],
+    "volume": "300 ml",
+    "category": "spare_parts",
+    "price": "10 USD",
+    "price_postapoc": "50 cent"
   },
   {
     "type": "ITEM",

@@ -1103,7 +1103,7 @@
         { "item": "iron_chunk", "count": [ 2, 4 ] },
         { "item": "scrap", "count": [ 12, 16 ] },
         { "item": "pipe", "count": [ 0, 4 ] },
-        { "item": "motor_small", "count": 1 }
+        { "item": "motor_medium", "count": 1 }
       ]
     }
   },

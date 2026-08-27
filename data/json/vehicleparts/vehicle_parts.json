@@ -2237,7 +2237,7 @@
     "color": "light_green",
     "damage_modifier": 10,
     "durability": 50,
-    "description": "A small electric motor.  Installed on the same frame as a door or curtain, it will allow you to remotely open the door or curtain from the vehicle controls.",
+    "description": "A tiny electric motor.  Installed on the same frame as a door or curtain, it will allow you to remotely open the door or curtain from the vehicle controls.",
     "item": "motor_tiny",
     "folded_volume": "250 ml",
     "requirements": {
@@ -2401,7 +2401,7 @@
     },
     "flags": [ "REMOTE_CONTROLS", "OBSTACLE", "CABLE_PORTS", "NO_COVER" ],
     "breaks_into": [
-      { "item": "motor_tiny", "count": [ 1, 3 ] },
+      { "item": "motor_tiny", "count": [ 1, 2 ] },
       { "item": "steel_fragment", "count": [ 1, 3 ] },
       { "item": "e_scrap", "count": [ 1, 5 ] }
     ],
@@ -2808,7 +2808,7 @@
     },
     "flags": [ "REAPER", "CARGO", "EXTRA_DRAG" ],
     "breaks_into": [
-      { "item": "motor_small" },
+      { "item": "motor_medium" },
       { "item": "cable", "charges": [ 3, 6 ] },
       { "item": "e_scrap", "count": [ 4, 10 ] },
       { "item": "plastic_chunk", "count": [ 1, 3 ] },

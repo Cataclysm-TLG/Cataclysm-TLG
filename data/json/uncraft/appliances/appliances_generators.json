@@ -88,7 +88,7 @@
       [ [ "copper_fragment", 50 ] ],
       [ [ "bearing", 20 ] ],
       [ [ "battery_car", 2 ] ],
-      [ [ "motor_tiny", 2 ] ],
+      [ [ "motor_small", 2 ] ],
       [ [ "well_pump", 2 ] ],
       [ [ "hinge", 12 ] ],
       [ [ "spring", 2 ] ],

@@ -726,7 +726,7 @@
         { "item": "filter_air", "x": 79, "y": 16, "chance": 50, "repeat": [ 10, 40 ] },
         { "item": "filter_liquid", "x": 79, "y": 16, "chance": 50, "repeat": [ 10, 40 ] },
         { "item": "glowplug", "x": 79, "y": 16, "chance": 50, "repeat": [ 10, 40 ] },
-        { "item": "motor_small", "x": 79, "y": 17, "chance": 50, "repeat": [ 10, 20 ] },
+        { "item": "motor_medium", "x": 79, "y": 17, "chance": 50, "repeat": [ 10, 20 ] },
         { "item": "power_supply", "x": 79, "y": 17, "chance": 50, "repeat": [ 10, 20 ] },
         { "item": "cable", "x": 79, "y": 17, "chance": 50, "repeat": [ 1, 20 ] },
         { "item": "engine_block_large", "x": 79, "y": 18, "chance": 50, "repeat": [ 1, 3 ] },
