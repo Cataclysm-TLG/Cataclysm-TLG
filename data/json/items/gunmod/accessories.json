@@ -204,6 +204,6 @@
     ],
     "use_action": { "type": "transform", "msg": "You turn the electric spanner off.", "target": "electric_spanner" },
     "tool_ammo": [ "battery" ],
-    "extend": { "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ] }
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
   }
 ]
