@@ -3536,7 +3536,7 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
         info.emplace_back( "GUNMOD", _( "Reload modifier: " ), _( "<num>%" ),
                            iteminfo::lower_is_better, mod.reload_modifier );
     }
-    if( mod.min_str_required_mod > 0 && parts->test( iteminfo_parts::GUNMOD_STRENGTH ) ) {
+    if( mod.min_str_required_mod != 0 && parts->test( iteminfo_parts::GUNMOD_STRENGTH ) ) {
         info.emplace_back( "GUNMOD", _( "Minimum strength required modifier: " ),
                            mod.min_str_required_mod );
     }
@@ -12210,7 +12210,7 @@ ret_val<void> item::is_gunmod_compatible( const item &mod ) const
     } else if( !mod.type->gunmod->usable.count( gun_type() ) &&
                !mod.type->gunmod->usable.count( gun_type_type( typeId().str() ) ) ) {
         return ret_val<void>::make_failure( _( "cannot have a %s" ), mod.tname() );
-        
+
     } else if( ( typeId() == itype_hand_crossbow || typeId() == itype_pistol_crossbow ) &&
                !mod.type->gunmod->usable.count( pistol_gun_type ) ) {
         return ret_val<void>::make_failure( _( "isn't big enough to use that mod" ) );
@@ -12540,7 +12540,7 @@ bool item::reload( Character &u, item_location ammo, int qty )
     if( !can_reload_with( *ammo.get_item(), true ) ) {
         return false;
     }
-    
+
     bool ammo_from_map = !ammo.held_by( u );
     if( ammo->has_flag( flag_SPEEDLOADER ) || ammo->has_flag( flag_SPEEDLOADER_CLIP ) ) {
         // If the thing passed in is a speed loader, we want the ammo.

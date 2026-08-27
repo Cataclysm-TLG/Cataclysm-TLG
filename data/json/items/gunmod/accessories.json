@@ -145,16 +145,15 @@
     "type": "ITEM",
     "subtypes": [ "TOOL", "GUNMOD" ],
     "name": { "str": "electric spanner" },
-    "description": "A homemade device consisting of a little electric motor that spools a pair of cables with hooks at the end.  When attached to a crossbow and powered on, the motor reels these cables in, drawing the bowstring without requiring that the user to be strong enough to do it on their own.  This mod is not compatible with crossbows of unusual design, nor those which are spanned with a lever or some other device.",
-    "weight": "68 g",
-    "volume": "150 ml",
-    "longest_side": "63 mm",
-    "price": "50 USD",
+    "description": "A homemade device consisting of a little electric motor that runs a pulley system which, when attached to a crossbow and powered, aids in pulling the string and cocking the bow.  This mod is not compatible with crossbows of unusual design, nor those which are spanned with a lever or some other device.",
+    "weight": "2600 g",
+    "volume": "800 ml",
+    "price": "30 USD",
     "price_postapoc": "4 USD",
     "install_time": "4 m",
     "material": [ "steel", "plastic" ],
     "symbol": ":",
-    "color": "brown",
+    "color": "dark_gray",
     "location": "mechanism",
     "mod_targets": [ "crossbow" ],
     "min_skills": [ [ "archery", 1 ], [ "mechanics", 2 ] ],
@@ -167,6 +166,44 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
+    "use_action": {
+      "type": "transform",
+      "msg": "You turn the electric spanner on.",
+      "target": "electric_spanner_on",
+      "need_charges": 1,
+      "need_charges_msg": "The electric spanner's batteries are dead."
+    },
     "tool_ammo": [ "battery" ]
+  },
+  {
+    "id": "electric_spanner_on",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "GUNMOD" ],
+    "name": { "str": "electric spanner (on)", "str_pl": "electric spanners (on)" },
+    "description": "A homemade device consisting of a little electric motor that runs a pulley system which, when attached to a crossbow and powered, aids in pulling the string and cocking the bow.  This mod is not compatible with crossbows of unusual design, nor those which are spanned with a lever or some other device.",
+    "weight": "2600 g",
+    "volume": "800 ml",
+    "price": "30 USD",
+    "price_postapoc": "4 USD",
+    "install_time": "4 m",
+    "material": [ "steel", "plastic" ],
+    "symbol": ":",
+    "color": "brown",
+    "location": "mechanism",
+    "mod_targets": [ "crossbow" ],
+    "min_skills": [ [ "archery", 1 ], [ "mechanics", 2 ] ],
+    "min_str_required_mod": -4,
+    "power_draw": "1200 mW",
+    "pocket_data": [
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "rigid": true,
+        "flag_restriction": [ "BATTERY_MEDIUM" ],
+        "default_magazine": "medium_battery_cell"
+      }
+    ],
+    "use_action": { "type": "transform", "msg": "You turn the electric spanner off.", "target": "electric_spanner" },
+    "tool_ammo": [ "battery" ],
+    "extend": { "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ] }
   }
 ]

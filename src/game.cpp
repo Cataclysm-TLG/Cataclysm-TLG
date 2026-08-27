@@ -296,7 +296,6 @@ static const itype_id fuel_type_animal( "animal" );
 static const itype_id fuel_type_muscle( "muscle" );
 static const itype_id itype_battery( "battery" );
 static const itype_id itype_disassembly( "disassembly" );
-static const itype_id itype_electric_spanner( "electric_spanner" );
 static const itype_id itype_grapnel( "grapnel" );
 static const itype_id itype_holybook_bible1( "holybook_bible1" );
 static const itype_id itype_holybook_bible2( "holybook_bible2" );
@@ -9655,32 +9654,7 @@ void game::reload( item_location &loc, bool prompt, bool empty )
     }
 
     if( opt ) {
-    // Check that passed gun mode is valid and we are able to use it
-    if( loc->gun_skill() == skill_archery && !opt.ammo->is_battery() ) {
-        bool spanner_used = false;
-        bool spanner_found = false;
-        for( const item *maybe_spanner : loc->gunmods() ) {
-            if( !spanner_found ) {
-                item this_spanner = *maybe_spanner;
-                if( !spanner_found && this_spanner.typeId() == itype_electric_spanner ) {
-                    if( this_spanner.has_ammo() && !this_spanner.is_broken() ) {
-                        this_spanner.ammo_consume( 1, u.pos_bub(), &u );
-                        spanner_used = true;
-                    }
-                    spanner_found = true;
-                }
-            }
-        }
-        gun_mode gmode = loc->gun_current_mode();
-        if( !u.can_use( *gmode ) && !spanner_used ) {
-            if( spanner_found ) {
-                u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s, and its electric spanner is unpowered." ), loc->tname() );
-            } else {
-                u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s." ), loc->tname() );
-            }
-            return;
-        }
-    }
+        // Check that passed gun mode is valid and we are able to use it
         const int extra_moves = loc->get_var( "dirt", 0 ) > 7800 ? 2500 : 0;
         if( extra_moves > 0 ) {
             add_msg( m_warning, _( "You struggle to reload the fouled %s." ), loc->tname() );

@@ -726,7 +726,7 @@ bool avatar_action::can_fire_weapon( avatar &you, const map &m, const item &weap
     }
 
     if( !you.try_break_relax_gas( _( "Your eyes steel, and you raise your weapon!" ),
-                                  _( "You can't fire your weapon, it's too heavy…" ) ) ) {
+                                  _( "You can't bring yourself to fire your weaponZ…" ) ) ) {
         return false;
     }
 
