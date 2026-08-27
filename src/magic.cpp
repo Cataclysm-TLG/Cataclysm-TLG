@@ -731,7 +731,8 @@ std::optional<tripoint_bub_ms> spell::select_target( Creature *source )
                     target = trajectory.back();
                     target_is_valid = is_valid_target( source_avatar, target );
                     if( has_flag( spell_flag::MAX_RANGE_ONLY ) &&
-                        trig_dist( source_avatar.pos_bub(), target ) != range( source_avatar ) && !( is_valid_target( spell_target::ground ) || source_avatar.sees( here, target ) ) ) {
+                        trig_dist( source_avatar.pos_bub(), target ) != range( source_avatar ) &&
+                        !( is_valid_target( spell_target::ground ) || source_avatar.sees( here, target ) ) ) {
                         target_is_valid = false;
                     }
                     if( !( is_valid_target( spell_target::ground ) || source_avatar.sees( here, target ) ) ) {

@@ -4482,7 +4482,7 @@ void target_ui::panel_spell_info( int &text_y )
     }
     if( casting->damage( get_player_character() ) != 0 ) {
         mvwprintz( w_target, point( 1, text_y++ ), c_light_red, _( "Damage: %s" ),
-                casting->damage_string( get_player_character() ) );
+                   casting->damage_string( get_player_character() ) );
     }
 
     text_y += fold_and_print( w_target, point( 1, text_y ), getmaxx( w_target ) - 2, clr,
