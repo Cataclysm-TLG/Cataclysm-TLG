@@ -378,6 +378,13 @@ void monster::on_move( const tripoint_abs_ms &old_pos )
 void monster::poly( const mtype_id &id )
 {
     double hp_percentage = static_cast<double>( hp ) / static_cast<double>( type->hp );
+    dissectable_inv.erase(
+        std::remove_if( dissectable_inv.begin(), dissectable_inv.end(),
+            []( const item &it ) {
+                return it.has_flag( json_flag_MUTAGEN_SAMPLE );
+            } ),
+        dissectable_inv.end()
+    );
     if( !no_extra_death_drops ) {
         generate_inventory();
     }
