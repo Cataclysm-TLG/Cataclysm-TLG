@@ -12210,8 +12210,8 @@ ret_val<void> item::is_gunmod_compatible( const item &mod ) const
     } else if( !mod.type->gunmod->usable.count( gun_type() ) &&
                !mod.type->gunmod->usable.count( gun_type_type( typeId().str() ) ) ) {
         return ret_val<void>::make_failure( _( "cannot have a %s" ), mod.tname() );
-
-    } else if( typeId() == itype_hand_crossbow || typeId() == itype_pistol_crossbow &&
+        
+    } else if( ( typeId() == itype_hand_crossbow || typeId() == itype_pistol_crossbow ) &&
                !mod.type->gunmod->usable.count( pistol_gun_type ) ) {
         return ret_val<void>::make_failure( _( "isn't big enough to use that mod" ) );
 
