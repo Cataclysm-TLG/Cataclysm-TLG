@@ -12540,32 +12540,7 @@ bool item::reload( Character &u, item_location ammo, int qty )
     if( !can_reload_with( *ammo.get_item(), true ) ) {
         return false;
     }
-    // Check that passed gun mode is valid and we are able to use it
-    if( gun_skill() == skill_archery ) {
-        bool spanner_used = false;
-        bool spanner_found = false;
-        for( const item *maybe_spanner : gunmods() ) {
-            if( !spanner_found ) {
-                item this_spanner = *maybe_spanner;
-                if( !spanner_found && this_spanner.typeId() == itype_electric_spanner ) {
-                    if( this_spanner.has_ammo() && !this_spanner.is_broken() ) {
-                        this_spanner.ammo_consume( 1, u.pos_bub(), &u );
-                        spanner_used = true;
-                    }
-                    spanner_found = true;
-                }
-            }
-        }
-        gun_mode gmode = gun_current_mode();
-        if( !u.can_use( *gmode ) && !spanner_used ) {
-            if( spanner_found ) {
-                u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s, and its electric spanner is unpowered." ), tname() );
-            } else {
-                u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s." ), tname() );
-            }
-            return false;
-        }
-    }
+    
     bool ammo_from_map = !ammo.held_by( u );
     if( ammo->has_flag( flag_SPEEDLOADER ) || ammo->has_flag( flag_SPEEDLOADER_CLIP ) ) {
         // If the thing passed in is a speed loader, we want the ammo.
