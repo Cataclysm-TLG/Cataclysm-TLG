@@ -12547,8 +12547,8 @@ bool item::reload( Character &u, item_location ammo, int qty )
         for( const item *maybe_spanner : gunmods() ) {
             if( !spanner_found ) {
                 item this_spanner = *maybe_spanner;
-                if( !spanner_found && this_spanner.typeId() == itype_electric_spanner && !this_spanner.is_broken() ) {
-                    if( this_spanner.has_ammo() ) {
+                if( !spanner_found && this_spanner.typeId() == itype_electric_spanner ) {
+                    if( this_spanner.has_ammo() && !this_spanner.is_broken() ) {
                         this_spanner.ammo_consume( 1, u.pos_bub(), &u );
                         spanner_used = true;
                     }
@@ -12557,7 +12557,7 @@ bool item::reload( Character &u, item_location ammo, int qty )
             }
         }
         gun_mode gmode = gun_current_mode();
-        if( !( u.can_use( *gmode ) ) && !spanner_used ) {
+        if( !u.can_use( *gmode ) && !spanner_used ) {
             if( spanner_found ) {
                 u.add_msg_if_player( m_warning,  _( "You lack the strength to draw your %s, and its electric spanner is unpowered." ), tname() );
             } else {
