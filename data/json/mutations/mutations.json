@@ -4195,14 +4195,15 @@
     "id": "INSECT_LEAP",
     "name": { "str": "Insect Flight" },
     "points": 1,
-    "description": "With powerful legs and buzzing wings, you can leap and fly a fair distance, provided you have enough clearance.",
+    "description": "With powerful legs and buzzing wings, you can leap and fly a fair distance, provided you have enough room to do so.",
     "active": true,
     "kcal": true,
     "cost": 4,
     "activated_is_setup": false,
     "activated_eocs": [ "EOC_INSECT_LEAP" ],
     "prereqs": [ "WINGS_INSECT" ],
-    "category": [ "INSECT" ]
+    "category": [ "INSECT" ],
+    "threshreq": [ "THRESH_INSECT" ]
   },
   {
     "type": "mutation",

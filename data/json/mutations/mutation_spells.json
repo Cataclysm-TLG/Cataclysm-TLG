@@ -194,7 +194,7 @@
     "type": "SPELL",
     "id": "spell_insect_leap",
     "name": "Insect Flight",
-    "description": "A wing-assisted jump.",
+    "description": "A wing-assisted jump that requires a great deal of clearance, meaning you may only select points at the maximum range.",
     "valid_targets": [ "ground" ],
     "flags": [ "SILENT", "NO_LEGS", "NO_HANDS", "NO_EXPLOSION_SFX", "AIRBORNE", "MAX_RANGE_ONLY" ],
     "effect": "dash",
