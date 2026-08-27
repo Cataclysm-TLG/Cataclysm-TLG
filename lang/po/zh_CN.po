@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-"PO-Revision-Date: 2026-08-26 18:10+0800\n"
+"PO-Revision-Date: 2026-08-28 01:12+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.9\n"
+"X-Generator: Poedit 3.8\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -390543,7 +390543,7 @@ msgstr "孢子把 %1$s 转化成 %2$s！"
 
 #: src/monstergenerator.cpp:1151 src/monstergenerator.cpp:1152 src/mtype.cpp:515 src/mtype.cpp:525
 msgid "movement."
-msgstr ""
+msgstr "移动声。"
 
 #: src/morale.cpp:643
 msgid "Nothing affects your morale"
