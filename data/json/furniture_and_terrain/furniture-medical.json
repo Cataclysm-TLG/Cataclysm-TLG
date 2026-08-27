@@ -96,7 +96,7 @@
     "coverage": 25,
     "concealment": 25,
     "required_str": 16,
-    "looks_like": "f_washer",
+    "looks_like": "f_dishwasher",
     "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "EASY_DECONSTRUCT" ],
     "deconstruct": { "items": [ { "item": "autoclave", "count": 1 } ] },
     "examine_action": "autoclave_empty",
@@ -128,7 +128,7 @@
     "coverage": 25,
     "concealment": 25,
     "required_str": 16,
-    "looks_like": "f_washer",
+    "looks_like": "f_dishwasher",
     "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "SEALED" ],
     "deconstruct": {
       "items": [
