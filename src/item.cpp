@@ -180,7 +180,6 @@ static const itype_id itype_craft( "craft" );
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_efile_recipes( "efile_recipes" );
-static const itype_id itype_electric_spanner( "electric_spanner" );
 static const itype_id itype_hand_crossbow( "hand_crossbow" );
 static const itype_id itype_joint_lit( "joint_lit" );
 static const itype_id itype_pistol_crossbow( "pistol_crossbow" );
