@@ -69,7 +69,14 @@
         { "not": { "u_has_effect": "immobilization" } },
         { "not": { "u_has_effect": "stunned" } },
         { "not": { "u_has_effect": "beartrap" } },
-        { "not": { "u_has_move_mode": "prone" } }
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
       ]
     },
     "effect": [
@@ -98,7 +105,14 @@
         { "not": { "u_has_effect": "immobilization" } },
         { "not": { "u_has_effect": "stunned" } },
         { "not": { "u_has_effect": "beartrap" } },
-        { "not": { "u_has_move_mode": "prone" } }
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
       ]
     },
     "effect": [
@@ -124,7 +138,14 @@
         { "not": { "u_has_effect": "immobilization" } },
         { "not": { "u_has_effect": "stunned" } },
         { "not": { "u_has_effect": "beartrap" } },
-        { "not": { "u_has_move_mode": "prone" } }
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
       ]
     },
     "effect": [
@@ -150,7 +171,14 @@
         { "not": { "u_has_effect": "immobilization" } },
         { "not": { "u_has_effect": "stunned" } },
         { "not": { "u_has_effect": "beartrap" } },
-        { "not": { "u_has_move_mode": "prone" } }
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
       ]
     },
     "effect": [
@@ -176,7 +204,14 @@
         { "not": { "u_has_effect": "immobilization" } },
         { "not": { "u_has_effect": "stunned" } },
         { "not": { "u_has_effect": "beartrap" } },
-        { "not": { "u_has_move_mode": "prone" } }
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
       ]
     },
     "effect": [
@@ -187,6 +222,39 @@
           "prep_time": 1,
           "spell_to_cast": "spell_raptor_leap",
           "message_success": { "i18n": true, "str": "You leap forward, talons ready to strike." },
+          "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
+        }
+      }
+    ],
+    "false_effect": [ { "u_message": "You can't move properly, so leaping is out of the question." } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_INSECT_LEAP",
+    "condition": {
+      "and": [
+        { "not": { "u_has_effect": "downed" } },
+        { "not": { "u_has_effect": "immobilization" } },
+        { "not": { "u_has_effect": "stunned" } },
+        { "not": { "u_has_effect": "beartrap" } },
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+      ]
+    },
+    "effect": [
+      {
+        "run_eocs": "EOC_GENERIC_SPELL_MUTATION",
+        "variables": {
+          "energy_amount": 1400,
+          "prep_time": 1,
+          "spell_to_cast": "spell_insect_leap",
+          "message_success": { "i18n": true, "str": "You launch yourself forward, wings buzzing." },
           "message_fail": { "i18n": true, "str": "You are too tired to perform a jump." }
         }
       }
@@ -234,7 +302,14 @@
         { "not": { "u_has_effect": "immobilization" } },
         { "not": { "u_has_effect": "stunned" } },
         { "not": { "u_has_effect": "beartrap" } },
-        { "not": { "u_has_move_mode": "prone" } }
+        { "not": { "u_has_effect": "webbed" } },
+        { "not": { "u_has_effect": "sludged" } },
+        { "not": { "u_has_effect": "sap" } },
+        { "not": { "u_has_effect": "zapped" } },
+        { "not": { "u_has_effect": "electrocuted" } },
+        { "not": { "u_has_effect": "grabbed" } },
+        { "not": { "u_has_move_mode": "prone" } },
+        { "not": { "u_has_flag": "CANNOT_MOVE" } }
       ]
     },
     "effect": [
