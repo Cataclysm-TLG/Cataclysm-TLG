@@ -5,7 +5,7 @@
     "symbol": "q",
     "color": "red",
     "name": { "str": "abstract mutagen sample" },
-    "description": "This item needs a description defined, and is copied from abstract mutagen sample.",
+    "description": "Carefully collected tissue samples from deep within the vitals of some unlucky organism.",
     "price": "10 USD",
     "price_postapoc": "50 cent",
     "material": [ "flesh" ],
@@ -20,9 +20,9 @@
     "copy-from": "mutagen_sample",
     "color": "red",
     "name": { "str": "alpha sample" },
-    "description": "A slurry of superiority.",
+    "description": "A neatly arranged collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "hflesh", "hblood", "bone" ]
+    "material": [ "hflesh", "hblood" ]
   },
   {
     "type": "ITEM",
@@ -30,9 +30,9 @@
     "copy-from": "mutagen_sample",
     "color": "green",
     "name": { "str": "batrachian sample" },
-    "description": "A slurry of simplicity.",
+    "description": "A wet clump of tissue samples from deep within the vitals of some unlucky amphibian.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "slime", "blood" ]
+    "material": [ "flesh", "blood" ]
   },
   {
     "type": "ITEM",
@@ -40,9 +40,9 @@
     "copy-from": "mutagen_sample",
     "color": "light_red",
     "name": { "str": "beast sample" },
-    "description": "A slurry of might.",
+    "description": "A heaving mass of tissue samples from deep within the vitals of some unlucky creature.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "blood", "bone", "fur" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -50,9 +50,9 @@
     "copy-from": "mutagen_sample",
     "color": "cyan",
     "name": { "str": "avian sample" },
-    "description": "A slurry of freedom.",
+    "description": "A thinly sliced collection of tissue samples from deep within the vitals of some unlucky bird.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "bone" ]
+    "material": [ "flesh", "blood", "feathers" ]
   },
   {
     "type": "ITEM",
@@ -60,9 +60,9 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "bovoid sample" },
-    "description": "A slurry of tranquility.",
+    "description": "A thick slab of tissue samples from deep within the vitals of some unlucky ungulate.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "gutskin" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -70,9 +70,9 @@
     "copy-from": "mutagen_sample",
     "color": "black",
     "name": { "str": "cephalopod sample" },
-    "description": "A slurry of curiosity.",
+    "description": "A bizarrely arranged collection of tissue samples from deep within the vitals of some unlucky cephalopod.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "slime" ]
+    "material": [ "flesh" ]
   },
   {
     "type": "ITEM",
@@ -80,9 +80,9 @@
     "copy-from": "mutagen_sample",
     "color": "white",
     "name": { "str": "chimera sample" },
-    "description": "A slurry of adaptation.",
+    "description": "A hideous confusion of tissue samples from deep within the vitals of several unlucky creatures.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "gutskin", "bone", "fur" ]
+    "material": [ "flesh", "blood", "fur", "feathers", "scales" ]
   },
   {
     "type": "ITEM",
@@ -90,9 +90,9 @@
     "copy-from": "mutagen_sample",
     "color": "light_green",
     "name": { "str": "sylvan sample" },
-    "description": "A slurry of responsibility.",
+    "description": "A faintly luminescent of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "vegetable", "hblood" ]
+    "material": [ "hflesh", "hblood", "vegetable" ]
   },
   {
     "type": "ITEM",
@@ -100,9 +100,9 @@
     "copy-from": "mutagen_sample",
     "color": "light_gray",
     "name": { "str": "feline sample" },
-    "description": "A slurry of flexibility.",
+    "description": "A fuzzy clump collection of tissue samples from deep within the vitals of some unlucky feline.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "fur", "blood" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -110,9 +110,9 @@
     "copy-from": "mutagen_sample",
     "color": "yellow",
     "name": { "str": "piscine sample" },
-    "description": "A slurry of transformation.",
+    "description": "A silvery collection of tissue samples from deep within the vitals of some unlucky fish.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "blood", "water" ]
+    "material": [ "flesh", "blood" ]
   },
   {
     "type": "ITEM",
@@ -120,9 +120,9 @@
     "copy-from": "mutagen_sample",
     "color": "brown_cyan",
     "name": { "str": "gastropod sample" },
-    "description": "A slurry of steadfastness.",
+    "description": "A slimy collection of tissue samples from deep within the vitals of some unlucky gastropod.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "chitin", "slime" ]
+    "material": [ "flesh" ]
   },
   {
     "type": "ITEM",
@@ -130,7 +130,7 @@
     "copy-from": "mutagen_sample",
     "color": "black_red",
     "name": { "str": "human sample" },
-    "description": "A slurry of purity.",
+    "description": "A collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
     "material": [ "hflesh", "hblood" ]
   },
@@ -140,7 +140,7 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "insect sample" },
-    "description": "A slurry of stability.",
+    "description": "A disgusting collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
     "material": [ "iflesh", "chitin" ]
   },
@@ -150,9 +150,9 @@
     "copy-from": "mutagen_sample",
     "color": "green_cyan",
     "name": { "str": "reptilian sample" },
-    "description": "A slurry of healing.",
+    "description": "A coiled mass of tissue samples from deep within the vitals of some unlucky reptile.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "blood" ]
+    "material": [ "flesh", "blood", "scales" ]
   },
   {
     "type": "ITEM",
@@ -160,9 +160,9 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "canine sample" },
-    "description": "A slurry of community.",
+    "description": "A group of tissue samples from deep within the vitals of some unlucky canine.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "fur", "flesh", "blood" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -170,8 +170,8 @@
     "copy-from": "mutagen_sample",
     "color": "magenta",
     "name": { "str": "medical sample" },
-    "description": "A slurry of satisfaction.",
-    "material": [ "hflesh", "iron" ]
+    "description": "A pulsating collection of tissue samples from deep within the vitals of some unlucky person.  Somehow, the sample appears to be alive.",
+    "material": [ "hflesh", "hblood" ]
   },
   {
     "type": "ITEM",
@@ -179,9 +179,9 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "murine sample" },
-    "description": "A slurry of experimentation.",
+    "description": "A tiny clump of tissue samples from deep within the vitals of some unlucky rodent.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "bone" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -189,7 +189,7 @@
     "copy-from": "mutagen_sample",
     "color": "green",
     "name": { "str": "plant sample" },
-    "description": "A slurry of peace.",
+    "description": "A woody mat of tissue samples from deep within some unlucky plant.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
     "material": [ "vegetable", "wood" ]
   },
@@ -199,9 +199,9 @@
     "copy-from": "mutagen_sample",
     "color": "red",
     "name": { "str": "theropod sample" },
-    "description": "A slurry of evolution.",
+    "description": "A mixed-up collection of tissue samples from deep within the vitals of some unlucky bird and reptile.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "bone" ]
+    "material": [ "flesh", "blood", "feathers", "scales" ]
   },
   {
     "type": "ITEM",
@@ -209,9 +209,9 @@
     "copy-from": "mutagen_sample",
     "color": "light_gray",
     "name": { "str": "lagomorph sample" },
-    "description": "A slurry of luck.",
+    "description": "A furry little collection of tissue samples from deep within the vitals of some unlucky rabbit.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "fur" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -219,9 +219,9 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "rattine sample" },
-    "description": "A slurry of survival.",
+    "description": "A gristly collection of tissue samples from deep within the vitals of some unlucky rodent.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "fur", "bone" ]
+    "material": [ "flesh", "blood", "fur" ]
   },
   {
     "type": "ITEM",
@@ -229,7 +229,7 @@
     "copy-from": "mutagen_sample",
     "color": "light_green",
     "name": { "str": "slime sample" },
-    "description": "A slurry of sharing.",
+    "description": "A weird little blob.  It looks almost alive.",
     "looks_like": "medical_sample",
     "material": [ "slime" ]
   },
@@ -239,9 +239,9 @@
     "copy-from": "mutagen_sample",
     "color": "dark_gray",
     "name": { "str": "aranean sample" },
-    "description": "A slurry of sustainability.",
+    "description": "A fine web of tissue samples from deep within the vitals of some unlucky arachnid.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "chitin", "fur" ]
+    "material": [ "chitin", "flesh" ]
   },
   {
     "type": "ITEM",
@@ -249,9 +249,9 @@
     "copy-from": "mutagen_sample",
     "color": "light_gray",
     "name": { "str": "troglobite sample" },
-    "description": "A slurry of reliability.",
+    "description": "A deathly pale collection of tissue samples from deep within the vitals of some subterranean creature.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "soil" ]
+    "material": [ "flesh", "blood" ]
   },
   {
     "type": "ITEM",
@@ -259,9 +259,9 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "ursine sample" },
-    "description": "A slurry of toughness.",
+    "description": "A dense mass of tissue samples from deep within the vitals of some unlucky bear.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "flesh", "fur", "gutskin" ]
+    "material": [ "flesh", "fur" ]
   },
   {
     "type": "ITEM",
@@ -269,7 +269,7 @@
     "copy-from": "mutagen_sample",
     "color": "red",
     "name": { "str": "crustacean sample" },
-    "description": "A slurry of toughness.",
+    "description": "A sinewy collection of tissue samples from deep within the vitals of some unlucky crustacean.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
     "material": [ "flesh", "chitin" ]
   },
@@ -279,8 +279,8 @@
     "copy-from": "mutagen_sample",
     "color": "brown",
     "name": { "str": "chiropteran sample" },
-    "description": "A slurry of silence.",
+    "description": "A bloody collection of tissue samples from deep within the vitals of some unlucky bat.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
-    "material": [ "bone", "blood" ]
+    "material": [ "flesh", "blood" ]
   }
 ]
