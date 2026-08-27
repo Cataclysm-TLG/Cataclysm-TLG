@@ -3,9 +3,9 @@
     "id": "weed_farm",
     "type": "item_group",
     "items": [
-      { "item": "weed", "prob": 70, "count": [ 0, 20 ] },
+      { "item": "weed", "prob": 40, "count": [ 0, 10 ] },
       { "item": "seed_weed", "prob": 60, "count": 2 },
-      { "item": "cannabis", "prob": 50 },
+      { "item": "cannabis", "prob": 10 },
       { "item": "withered", "prob": 70 }
     ]
   },
@@ -79,7 +79,7 @@
         "T": { "param": "linoleum_color", "fallback": "t_linoleum_white" }
       },
       "liquids": { "H": { "liquid": "water_clean", "amount": [ 0, 100 ] } },
-      "sealed_item": { "Q": { "item": { "item": "seed_weed" }, "furniture": "f_planter_mature" } },
+      "sealed_item": { "Q": { "item": { "item": "seed_weed" }, "furniture": "f_planter_mature", "chance": 5 } },
       "furniture": {
         "T": "f_workbench",
         "G": "f_glass_cabinet",

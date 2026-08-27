@@ -225,7 +225,7 @@
     "copy-from": "scooter_abstract",
     "name": "Electric Scooter",
     "blueprint": [ "o>o" ],
-    "parts": [ { "x": 0, "y": 0, "parts": [ "medium_storage_battery", "engine_electric_small" ] } ]
+    "parts": [ { "x": 0, "y": 0, "parts": [ "medium_storage_battery", "engine_electric_medium" ] } ]
   },
   {
     "id": "superbike",

@@ -1950,20 +1950,6 @@
   },
   {
     "type": "ITEM",
-    "id": "motor_micro",
-    "symbol": ",",
-    "color": "light_gray",
-    "name": { "str": "micro electric motor" },
-    "category": "spare_parts",
-    "description": "A very small electric motor like those used in RC cars or electric hair trimmers.",
-    "price": "10 USD",
-    "price_postapoc": "25 cent",
-    "material": [ "steel", "plastic" ],
-    "weight": "125 g",
-    "volume": "25 ml"
-  },
-  {
-    "type": "ITEM",
     "id": "circuit",
     "symbol": ",",
     "color": "green",

@@ -30,9 +30,10 @@
       [ "compressor", 10 ],
       [ "hd_compressor", 2 ],
       [ "magnet", 5 ],
-      [ "motor_small", 10 ],
-      [ "motor_tiny", 30 ],
-      [ "motor_micro", 40 ],
+      [ "motor_medium", 10 ],
+      [ "motor_small", 20 ],
+      [ "motor_tiny", 40 ],
+      [ "motor_micro", 50 ],
       [ "extension_cable", 45 ],
       [ "jumper_cable", 15 ],
       [ "jumper_cable_heavy", 5 ],
@@ -806,7 +807,7 @@
       [ "filter_liquid", 60 ],
       [ "glowplug", 10 ],
       [ "rubber_cement", 25 ],
-      [ "motor_small", 20 ],
+      [ "motor_medium", 20 ],
       [ "pump_complex", 10 ],
       [ "well_pump", 50 ]
     ]

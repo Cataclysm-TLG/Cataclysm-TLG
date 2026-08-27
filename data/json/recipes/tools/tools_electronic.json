@@ -57,7 +57,7 @@
     "autolearn": true,
     "using": [ [ "soldering_standard", 20 ] ],
     "proficiencies": [ { "proficiency": "prof_elec_soldering" }, { "proficiency": "prof_elec_circuits" } ],
-    "qualities": [ { "id": "SCREW", "level": 1, "amount": 1 }, { "id": "HAMMER", "level": 3, "amount": 1 } ],
+    "qualities": [ { "id": "SCREW_FINE", "level": 1, "amount": 1 } ],
     "components": [
       [ [ "scrap", 4 ] ],
       [ [ "cable", 2 ] ],
@@ -619,7 +619,7 @@
     "qualities": [ { "id": "SAW_M", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_welding_basic" } ],
     "components": [
-      [ [ "motor_small", 1 ] ],
+      [ [ "motor_medium", 1 ] ],
       [ [ "jerrycan", 1 ] ],
       [ [ "sheet_metal_small", 4 ] ],
       [ [ "scrap", 5 ] ],

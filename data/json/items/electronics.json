@@ -26,7 +26,7 @@
     "volume": "4 L",
     "price": "40 USD",
     "price_postapoc": "10 cent",
-    "looks_like": "motor_small",
+    "looks_like": "motor_medium",
     "material": [ "steel" ],
     "symbol": ":",
     "color": "light_gray"

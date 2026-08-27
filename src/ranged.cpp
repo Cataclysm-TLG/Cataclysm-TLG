@@ -1660,7 +1660,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
 
 void practice_archery_proficiency( Character &p, const item &relevant )
 {
-    // Do nothing, we are not doing archery
+    // Do nothing, we are not doing archery.
     if( relevant.gun_skill() != skill_archery ) {
         return;
     }
@@ -1732,8 +1732,7 @@ static void do_aim( Character &you, const item &relevant, const double min_recoi
         if( relevant.gun_skill() == skill_archery && !relevant.has_flag( json_flag_CROSSBOW ) &&
             !relevant.has_flag( flag_WONT_TRAIN_MARKSMANSHIP ) ) {
             practice_archery_proficiency( you, relevant );
-
-            // Only drain stamina on initial draw
+            // Only drain stamina on initial draw.
             if( you.get_moves() == 1 ) {
                 mod_stamina_archery( you, relevant );
             }

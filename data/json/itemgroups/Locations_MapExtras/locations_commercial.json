@@ -1803,7 +1803,7 @@
       { "group": "superglue", "prob": 55 },
       { "item": "rubber_spray_can", "prob": 5, "charges": 10 },
       [ "screwdriver", 60 ],
-      [ "motor_small", 30 ]
+      [ "motor_medium", 30 ]
     ]
   },
   {

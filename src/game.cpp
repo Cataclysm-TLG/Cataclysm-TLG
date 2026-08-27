@@ -9594,7 +9594,7 @@ void game::reload( item_location &loc, bool prompt, bool empty )
             u.add_msg_if_player( _( "Selected %s as default ammo for %s." ), opt.ammo->tname(), loc->tname() );
             u.ammo_location = opt.ammo;
         } else {
-            u.add_msg_if_player( _( "You need to keep that ammo on you to select it as default ammo." ) );
+            u.add_msg_if_player( _( "That ammo must be in your inventory to be selected as default." ) );
         }
         return;
     }
@@ -9653,6 +9653,7 @@ void game::reload( item_location &loc, bool prompt, bool empty )
     }
 
     if( opt ) {
+        // Check that passed gun mode is valid and we are able to use it
         const int extra_moves = loc->get_var( "dirt", 0 ) > 7800 ? 2500 : 0;
         if( extra_moves > 0 ) {
             add_msg( m_warning, _( "You struggle to reload the fouled %s." ), loc->tname() );

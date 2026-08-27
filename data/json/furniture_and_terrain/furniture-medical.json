@@ -139,7 +139,7 @@
         { "item": "sheet_metal", "count": [ 2, 6 ] },
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 1, 2 ] },
-        { "item": "motor_tiny", "count": 1 },
+        { "item": "motor_small", "count": 1 },
         { "item": "cu_pipe", "count": [ 2, 5 ] }
       ]
     },
@@ -186,7 +186,7 @@
         { "item": "condensor_coil", "count": 1 },
         { "item": "evaporator_coil", "count": 1 },
         { "item": "refrigerant_tank", "count": 1 },
-        { "item": "motor_tiny", "count": 1 }
+        { "item": "motor_small", "count": 1 }
       ]
     },
     "bash": {
@@ -203,7 +203,7 @@
         { "item": "hose", "count": 1 },
         { "item": "cu_pipe", "count": [ 2, 4 ] },
         { "item": "copper_fragment", "count": [ 1, 2 ] },
-        { "item": "motor_tiny", "prob": 25 }
+        { "item": "motor_small", "prob": 25 }
       ]
     }
   },
@@ -421,7 +421,7 @@
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "bottle_glass", "count": [ 2, 3 ] },
-        { "item": "motor_tiny", "count": 2 }
+        { "item": "motor_small", "count": 2 }
       ]
     },
     "bash": {
@@ -466,7 +466,7 @@
         { "item": "cable", "charges": [ 1, 15 ] },
         { "item": "hose", "count": [ 3, 6 ] },
         { "item": "bottle_glass", "count": [ 2, 3 ] },
-        { "item": "motor_tiny", "count": 2 }
+        { "item": "motor_small", "count": 2 }
       ]
     },
     "bash": {

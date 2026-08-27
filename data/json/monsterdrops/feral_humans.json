@@ -867,10 +867,7 @@
     "type": "item_group",
     "subtype": "collection",
     "id": "mon_feral_sailor_death_drops",
-    "entries": [
-      { "item": "wrench", "prob": 100, "damage": [ -1, 5 ] },
-      { "group": "mon_zombie_sailor_death_drops", "prob": 100 }
-    ]
+    "entries": [ { "item": "wrench", "prob": 100, "damage": [ -1, 5 ] }, { "group": "mon_zombie_sailor_death_drops", "prob": 100 } ]
   },
   {
     "type": "item_group",

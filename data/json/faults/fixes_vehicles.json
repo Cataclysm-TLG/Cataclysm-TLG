@@ -92,6 +92,6 @@
     "time": "10 m",
     "faults_removed": [ "fault_engine_starter" ],
     "skills": { "mechanics": 3 },
-    "requirements": [ { "qualities": [ { "id": "WRENCH_FINE", "level": 1 } ], "components": [ [ [ "motor_tiny", 1 ] ] ] } ]
+    "requirements": [ { "qualities": [ { "id": "WRENCH_FINE", "level": 1 } ], "components": [ [ [ "motor_small", 1 ] ] ] } ]
   }
 ]

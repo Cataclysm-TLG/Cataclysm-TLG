@@ -1334,7 +1334,7 @@
     "components": [
       [ [ "pipe", 12 ] ],
       [ [ "sheet_metal_small", 10 ] ],
-      [ [ "motor_small", 1 ] ],
+      [ [ "motor_medium", 1 ] ],
       [ [ "small_storage_battery", 1 ] ],
       [ [ "wheel_small", 2 ] ],
       [ [ "wheel_mount_light", 2 ] ],
