@@ -261,7 +261,7 @@
     "use_action": [ "UNFOLD_GENERIC" ],
     "variables": {
       "vehicle_name": "Concrete mixer",
-      "folded_parts": "[{\"id\": \"frame_concrete_mix\",\"base\":{\"typeid\":\"frame_concrete_mix\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"wheel_mount_concrete_mix\",\"base\":{\"typeid\":\"wheel_mount_concrete_mix\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\": 0,\"mount_dy\": 0},{\"id\":\"wheel_set_concrete_mix\",\"base\":{\"typeid\":\"wheel_set_concrete_mix\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\": 0,\"mount_dy\":0},{\"id\":\"drum_concrete_mix\",\"base\":{\"typeid\":\"30gal_barrel\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"engine_electric_small\",\"base\":{\"typeid\":\"motor_small\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"small_storage_battery\",\"base\":{\"typeid\":\"small_storage_battery\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+      "folded_parts": "[{\"id\": \"frame_concrete_mix\",\"base\":{\"typeid\":\"frame_concrete_mix\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"wheel_mount_concrete_mix\",\"base\":{\"typeid\":\"wheel_mount_concrete_mix\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\": 0,\"mount_dy\": 0},{\"id\":\"wheel_set_concrete_mix\",\"base\":{\"typeid\":\"wheel_set_concrete_mix\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\": 0,\"mount_dy\":0},{\"id\":\"drum_concrete_mix\",\"base\":{\"typeid\":\"30gal_barrel\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"engine_electric_medium\",\"base\":{\"typeid\":\"motor_medium\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0},{\"id\":\"small_storage_battery\",\"base\":{\"typeid\":\"small_storage_battery\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
     },
     "melee_damage": { "bash": 15 },
     "//2": "Based on https://www.amazon.com/dp/B01EGB6TJ4 - save for the numbers that the Amazon arcticle got straight up wrong (weight and drum opening) which were taken from the owner's manual - https://assets.northerntool.com/products/494/documents/manuals/49413.pdf"
@@ -1169,7 +1169,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "lug wrench", "str_pl": "lug wrenches" },
-    "description": "A steel rod bent 90 degrees with a socket on the shorter end, made to hold the lug nuts of a car's wheels to either fasten or loosen for convenient removal and replacement.  Makes for a decent melee weapon in a pinch.",
+    "description": "Two steel rods welded together at a right angle to form an X shape.  Each end holds a socket that matches a lug nut, and this tool's unusual shape makes turning these fast and easy.  Unfortunately, this also makes it rather awkward as a weapon.",
     "weight": "1565 g",
     "longest_side": "46 cm",
     "volume": "460 ml",
@@ -1180,8 +1180,7 @@
     "symbol": "L",
     "color": "light_gray",
     "qualities": [ [ "WHEEL_FAST", 1 ] ],
-    "melee_damage": { "bash": 11 },
-    "//": "Based on https://www.amazon.com/dp/B06XPWS3HJ"
+    "melee_damage": { "bash": 11 }
   },
   {
     "id": "toolbox_empty",
@@ -1193,8 +1192,8 @@
     "volume": "8000 ml",
     "longest_side": "42 cm",
     "price": "17 USD",
-    "price_postapoc": "1 USD",
-    "to_hit": -2,
+    "price_postapoc": "50 cent",
+    "to_hit": { "grip": "none", "length": "hand", "surface": "any", "balance": "clumsy" },
     "material": [ "steel" ],
     "symbol": ";",
     "color": "red",
@@ -1211,9 +1210,9 @@
     "weight": "8618 g",
     "volume": "34400 ml",
     "longest_side": "66 cm",
-    "price": "140 USD 99 cent",
-    "price_postapoc": "4 USD 50 cent",
-    "to_hit": -2,
+    "price": "140 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": { "grip": "none", "length": "hand", "surface": "any", "balance": "clumsy" },
     "material": [ "steel" ],
     "symbol": ";",
     "color": "red",
@@ -1406,26 +1405,6 @@
     "weapon_category": [ "BATONS" ],
     "//": "Based on: https://www.amazon.com/Crescent-AC210VS-Tools-Wrenches-Adjustable/dp/B00002N5L1/ref=sr_1_5?crid=2979KVN9DXDUH&keywords=10+inch+crescent+wrench+adjustable&qid=1680859779&sprefix=10+inch+crescent+wrench+adjustable%2Caps%2C555&sr=8-5",
     "melee_damage": { "bash": 10 }
-  },
-  {
-    "id": "wrench_large",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "large adjustable wrench", "str_pl": "large adjustable wrenches" },
-    "description": "An unusually large adjustable crescent wrench, with a long handle and jaws that widen over two inches.  This could easily turn most bolts, and should even work on wheel lug nuts.",
-    "//": "WESTWARD 31D018 from Walmart, 18-inch length, 2-3/8-inch jaws, 4.23 lb, assume 8g/ml steel density with some margin for mechanism and other empty space.",
-    "looks_like": "wrench",
-    "weight": "1900 g",
-    "volume": "250 ml",
-    "longest_side": "46 cm",
-    "price": "12 USD",
-    "price_postapoc": "1 USD",
-    "material": [ "steel" ],
-    "symbol": ";",
-    "color": "light_gray",
-    "qualities": [ [ "WRENCH", 2 ], [ "WHEEL_FAST", 1 ] ],
-    "flags": [ "BELT_CLIP" ],
-    "melee_damage": { "bash": 12 }
   },
   {
     "id": "makeshift_hose",

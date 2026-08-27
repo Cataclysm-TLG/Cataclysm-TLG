@@ -128,6 +128,7 @@ static const damage_type_id damage_bullet( "bullet" );
 static const damage_type_id damage_cut( "cut" );
 static const damage_type_id damage_stab( "stab" );
 
+static const efftype_id effect_anemia( "anemia" );
 static const efftype_id effect_asthma( "asthma" );
 static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_bite( "bite" );
@@ -147,6 +148,7 @@ static const efftype_id effect_npc_flee_player( "npc_flee_player" );
 static const efftype_id effect_npc_player_still_looking( "npc_player_still_looking" );
 static const efftype_id effect_npc_run_away( "npc_run_away" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_scurvy( "scurvy" );
 static const efftype_id effect_stumbled_into_invisible( "stumbled_into_invisible" );
 static const efftype_id effect_stunned( "stunned" );
 
@@ -164,21 +166,26 @@ static const itype_id itype_water_clean( "water_clean" );
 
 static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
 static const json_character_flag json_flag_BLOODFEEDER( "BLOODFEEDER" );
+static const json_character_flag json_flag_PARAIMMUNE( "PARAIMMUNE" );
 
 static const npc_class_id NC_EVAC_SHOPKEEP( "NC_EVAC_SHOPKEEP" );
 
 static const skill_id skill_firstaid( "firstaid" );
 
-static const trait_id trait_ALCMET( "ALCMET" );
 static const string_id<behavior::node_t> behavior_node_t_npc_homeostasis( "npc_homeostasis" );
 static const string_id<behavior::node_t> behavior_node_t_npc_decision( "npc_decision" );
 static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
 
+static const trait_id trait_ALCMET( "ALCMET" );
+static const trait_id trait_GOURMAND( "GOURMAND" );
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
 static const trait_id trait_RETURN_TO_START_POS( "RETURN_TO_START_POS" );
 
 static const vitamin_id vitamin_ethanol( "ethanol" );
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
+static const vitamin_id vitamin_calcium( "calcium" );
+static const vitamin_id vitamin_iron( "iron" );
+static const vitamin_id vitamin_vitC( "vitC" );
 
 static const zone_type_id zone_type_NO_NPC_PICKUP( "NO_NPC_PICKUP" );
 static const zone_type_id zone_type_NPC_NO_GO( "NPC_NO_GO" );
@@ -2743,7 +2750,8 @@ npc_action npc::address_needs( float danger )
     // Extreme food/water pathing: the pre-gate block only consumed adjacent
     // resources. If extreme need persists and we passed the danger gate,
     // path to distant ground food or water deterministically.
-    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
+    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ||
+        has_effect( effect_scurvy ) || has_effect( effect_anemia ) ) {
         if( consume_food_from_camp() ) {
             add_msg_debug( debugmode::DF_NPC_NEEDS,
                            "NPC %s consuming food or drink from camp due to extreme need.", get_name() );
@@ -3776,7 +3784,7 @@ void npc::worker_downtime()
 void npc::move_pause()
 
 {
-    // make sure we're using the best weapon
+    // Make sure we're using the best weapon.
     if( calendar::once_every( 1_hours ) ) {
         deactivate_bionic_by_id( bio_sleep_shutdown );
         for( const bionic_id &bio_id : health_cbms ) {
@@ -4533,7 +4541,7 @@ item *npc::evaluate_best_weapon() const
 
 bool npc::wield_better_weapon()
 {
-    // These are also assigned here so npc::evaluate_best_weapon() can be called by itself
+    // These are also assigned here so npc::evaluate_best_weapon() can be called by itself.
     bool can_use_gun = !is_player_ally() || rules.has_flag( ally_rule::use_guns );
     bool use_silent = is_player_ally() && rules.has_flag( ally_rule::use_silent );
 
@@ -4553,7 +4561,7 @@ bool npc::wield_better_weapon()
     add_msg_debug( debugmode::DF_NPC, "Wielding %s at value %.1f", better_weapon->type->get_id().str(),
                    evaluate_weapon( *better_weapon, can_use_gun, use_silent ) );
 
-    // Always returns true, but future proof
+    // Always returns true, but future proof.
     bool wield_success = wield( *better_weapon );
     if( !wield_success ) {
         debugmsg( "NPC failed to wield better weapon %s", better_weapon->tname() );
@@ -4886,25 +4894,105 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
                       int want_quench )
 {
     const auto &food = it.get_comestible();
-    if( !food ) {
-        return 0.0f;
-    }
 
-    // Don't eat it if it's filled with parasites
-    if( food->parasites && !it.has_flag( flag_NO_PARASITES ) ) {
+    // Don't eat it if it's filled with parasites, unless we're immune.
+    if( food->parasites && !has_flag( json_flag_PARAIMMUNE ) && !it.has_flag( flag_NO_PARASITES ) ) {
         return 0.0;
     }
 
     // TODO: Use the actual nutrition for this food, rather than the default?
-    int nutr = food->get_default_nutr();
+    nutrients food_nutrients = compute_effective_nutrients( it );
+    const units::volume water_vol = masticated_volume( it ).first;
+    units::volume food_vol = masticated_volume( it ).second;
+    const double ratio = compute_effective_food_volume_ratio( it );
+    const int nutr = nutrition_for( it );
+    const int fun = fun_for( it, false ).first;
+
+    // Ballpark our chance to get sick and bail if it seems like we will.
+    // TODO: Starving people should be less picky about this, and maybe they could pace themselves.
+    float modified_fun = fun;
+    if( has_trait( trait_GOURMAND ) && modified_fun < -1.f ) {
+        modified_fun *= 0.75f;
+    }
+    if( modified_fun < -5.f ) {
+        return 0;
+    }
+
     int quench = food->quench;
 
-    if( nutr <= 0 && quench <= 0 ) {
+    food_summary to_eat{
+        water_vol,
+        food_vol * ratio,
+        food_nutrients
+    };
+    // Vitamin checks might more comfortably fit in npc::consume_food(), but these are
+    // also where we'll need to manage addictions, and it would be hard to put that in scope
+    // unless we added an extra int for vitamin need and ran this function for each
+    // deficient/wanted vitamin.
+    int calcium_estimate = 0;
+    int iron_estimate = 0;
+    int vitC_estimate = 0;
+    for( const auto &v : food_nutrients.vitamins() ) {
+        // Update the estimated values for daily vitamins.
+        // Actual vitamins happen during digestion.
+        if( v.first == vitamin_calcium ) {
+            calcium_estimate = v.second;
+        }
+        if( v.first == vitamin_iron ) {
+            iron_estimate = v.second;
+        }
+        if( v.first == vitamin_vitC ) {
+            vitC_estimate = v.second;
+        }
+    }
+
+    for( const auto &method : it.type->use_methods ) {
+        const auto *drug = dynamic_cast<const consume_drug_iuse *>(
+                               method.second.get_actor_ptr()
+                           );
+
+        if( !drug ) {
+            continue;
+        }
+
+        for( const auto &v : drug->vitamins ) {
+            const int lo = v.first->RDA_to_default( v.second.first );
+            const int high = v.first->RDA_to_default( v.second.second );
+            const int estimate = ( lo + high ) / 2;
+
+            if( v.first == vitamin_calcium ) {
+                calcium_estimate += estimate;
+            } else if( v.first == vitamin_iron ) {
+                iron_estimate += estimate;
+            } else if( v.first == vitamin_vitC ) {
+                vitC_estimate += estimate;
+            }
+        }
+    }
+
+    int calcium_deficiency = vitamin_calcium.obj().severity( vitamin_get( vitamin_calcium ) );
+    int iron_deficiency = vitamin_iron.obj().severity( vitamin_get( vitamin_iron ) );
+    int vitC_deficiency = vitamin_vitC.obj().severity( vitamin_get( vitamin_vitC ) );
+
+    float weight = 0.0f;
+
+    // Check our three main vitamins and the food's nutritional value. Add weights now so we skip checks below.
+    if( calcium_deficiency > 0 && calcium_estimate > 0 ) {
+        weight = 10.f;
+    }
+    if( iron_deficiency > 0 && iron_estimate > 0 ) {
+        weight = 10.f;
+    }
+    if( vitC_deficiency > 0 && vitC_estimate > 0 ) {
+        weight = 10.f;
+    }
+
+    if( weight <= 0.f && nutr <= 0 && quench <= 0 ) {
         // Not food - may be salt, drugs etc.
         return 0.0f;
     }
 
-    if( !it.type->use_methods.empty() ) {
+    if( weight <= 0.f && !it.type->use_methods.empty() ) {
         // TODO: Get a good method of telling apart:
         // raw meat (parasites - don't eat unless mutant)
         // zed meat (poison - don't eat unless mutant)
@@ -4912,7 +5000,7 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
         // hallucination mushrooms (NPCs don't hallucinate, so don't eat those)
         // honeycomb (harmless iuse)
         // royal jelly (way too expensive to eat as food)
-        // mutagenic crap (don't eat, we want player to micromanage muties)
+        // mutagenic crap (don't eat, we want player to micromanage mutagens)
         // marloss (NPCs don't turn fungal)
         // seeds (too expensive)
 
@@ -4937,8 +5025,6 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     }
 
     double relative_rot = it.get_relative_rot();
-    float weight = 0.0f;
-
     if( relative_rot >= 1.0f ) {
         if( !( who.can_consume_rot() ) ) {
             return 0.0f;
@@ -4951,12 +5037,8 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
         weight = std::max( 1.0f, static_cast<float>( 10.0 * relative_rot ) );
     }
 
-    // TODO: I feel like we should exclude *really* un-fun foods (flour, hot sauce, etc)
-    //       rather than discount them. Eating cooked liver is fine, eating raw flour... :/
-    //       Likewise, *fun* foods should be boosted in attractiveness.
-    if( it.get_comestible_fun() < 0 ) {
-        // This helps to avoid eating stuff like flour
-        weight /= ( -it.get_comestible_fun() ) + 1;
+    if( fun < 0 ) {
+        weight /= ( -fun ) + 1;
     }
 
     // NPCs will avoid unhealthy foods.
@@ -5078,7 +5160,10 @@ bool npc::consume_food()
     int want_hunger = std::max( 0, get_hunger() );
     int want_quench = std::max( 0, get_thirst() );
 
-    const std::vector<item *> inv_food = cache_get_items_with( "is_food", &item::is_food );
+    // Add medication to our food list so we can eat vitamins.
+    std::vector<item *> inv_food = cache_get_items_with( "is_medication", &item::is_medication );
+    const auto food = cache_get_items_with( "is_food", &item::is_food );
+    inv_food.insert( inv_food.end(), food.begin(), food.end() );
 
     if( inv_food.empty() ) {
         if( !needs_food() ) {

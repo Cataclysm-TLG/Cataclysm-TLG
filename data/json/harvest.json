@@ -516,6 +516,37 @@
     ]
   },
   {
+    "id": "fish_freshwater_tiny",
+    "type": "harvest",
+    "entries": [
+      { "drop": "fish_freshwater", "type": "flesh", "mass_ratio": 0.32 },
+      { "drop": "animal_blood", "type": "blood", "mass_ratio": 0.1 },
+      { "drop": "fish_scrap_freshwater", "type": "flesh", "mass_ratio": 0.08 }
+    ]
+  },
+  {
+    "id": "fish_freshwater_small",
+    "type": "harvest",
+    "entries": [
+      { "drop": "fish_freshwater", "type": "flesh", "mass_ratio": 0.32 },
+      { "drop": "animal_blood", "type": "blood", "mass_ratio": 0.1 },
+      { "drop": "fish_scrap_freshwater", "type": "flesh", "mass_ratio": 0.08 },
+      { "drop": "bone", "type": "bone", "mass_ratio": 0.1 }
+    ]
+  },
+  {
+    "id": "fish_freshwater_large",
+    "type": "harvest",
+    "message": "You gut and fillet the fish.",
+    "entries": [
+      { "drop": "fish_freshwater", "type": "flesh", "mass_ratio": 0.38 },
+      { "drop": "animal_blood", "type": "blood", "mass_ratio": 0.1 },
+      { "drop": "fish_scrap_freshwater", "type": "flesh", "mass_ratio": 0.02 },
+      { "drop": "liver", "type": "offal", "mass_ratio": 0.01 },
+      { "drop": "bone", "type": "bone", "mass_ratio": 0.1 }
+    ]
+  },
+  {
     "id": "mutant_fish",
     "type": "harvest",
     "entries": [

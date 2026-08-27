@@ -30,9 +30,10 @@
       [ "compressor", 10 ],
       [ "hd_compressor", 2 ],
       [ "magnet", 5 ],
-      [ "motor_small", 10 ],
-      [ "motor_tiny", 30 ],
-      [ "motor_micro", 40 ],
+      [ "motor_medium", 10 ],
+      [ "motor_small", 20 ],
+      [ "motor_tiny", 40 ],
+      [ "motor_micro", 50 ],
       [ "extension_cable", 45 ],
       [ "jumper_cable", 15 ],
       [ "jumper_cable_heavy", 5 ],
@@ -54,10 +55,18 @@
       { "item": "faux_fur_sheet", "prob": 50 },
       { "item": "neoprene_sheet", "prob": 10 },
       { "item": "leather_sheet", "prob": 50 },
+      { "group": "synthetic_fluff_bag", "prob": 90 },
+      { "group": "cotton_ball_bag_full", "prob": 90 },
       { "item": "fur_sheet", "prob": 20 },
       { "item": "kevlar_sheet", "prob": 6 },
       { "item": "nomex_sheet", "prob": 3 }
     ]
+  },
+  {
+    "id": "synthetic_fluff_bag",
+    "type": "item_group",
+    "container-item": "bag_plastic",
+    "items": [ { "item": "synthetic_fluff", "count": 200 } ]
   },
   {
     "id": "sandbag",
@@ -798,7 +807,7 @@
       [ "filter_liquid", 60 ],
       [ "glowplug", 10 ],
       [ "rubber_cement", 25 ],
-      [ "motor_small", 20 ],
+      [ "motor_medium", 20 ],
       [ "pump_complex", 10 ],
       [ "well_pump", 50 ]
     ]

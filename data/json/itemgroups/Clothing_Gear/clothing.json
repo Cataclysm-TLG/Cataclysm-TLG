@@ -1457,6 +1457,7 @@
     "magazine": 100,
     "items": [
       [ "coat_winter", 50 ],
+      [ "coat_winter_xs", 10 ],
       [ "peacoat", 30 ],
       [ "ski_jacket", 40 ],
       [ "greatcoat", 15 ],

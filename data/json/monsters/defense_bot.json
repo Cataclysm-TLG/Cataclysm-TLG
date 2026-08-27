@@ -29,7 +29,9 @@
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
           ]
         },
         "cooldown": 1,
@@ -95,7 +97,9 @@
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
           ]
         },
         "cooldown": 1,
@@ -159,7 +163,9 @@
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
           ]
         },
         "cooldown": 8,
@@ -213,7 +219,9 @@
             { "not": { "u_has_effect": "maimed_arm" } },
             { "not": { "u_has_flag": "grab" } },
             { "not": { "u_has_flag": "grab_filter" } },
-            { "not": { "u_has_effect": "blind" } }
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
           ]
         },
         "cooldown": 1,

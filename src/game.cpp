@@ -9594,7 +9594,7 @@ void game::reload( item_location &loc, bool prompt, bool empty )
             u.add_msg_if_player( _( "Selected %s as default ammo for %s." ), opt.ammo->tname(), loc->tname() );
             u.ammo_location = opt.ammo;
         } else {
-            u.add_msg_if_player( _( "You need to keep that ammo on you to select it as default ammo." ) );
+            u.add_msg_if_player( _( "That ammo must be in your inventory to be selected as default." ) );
         }
         return;
     }
@@ -9653,6 +9653,7 @@ void game::reload( item_location &loc, bool prompt, bool empty )
     }
 
     if( opt ) {
+        // Check that passed gun mode is valid and we are able to use it
         const int extra_moves = loc->get_var( "dirt", 0 ) > 7800 ? 2500 : 0;
         if( extra_moves > 0 ) {
             add_msg( m_warning, _( "You struggle to reload the fouled %s." ), loc->tname() );
@@ -11214,7 +11215,7 @@ bool game::grabbed_furn_move( const tripoint_rel_ms &dp )
 
         ///\EFFECT_STR determines ability to drag furniture
     } else if( str_req > str &&
-               one_in( std::max( 20 - str_req - str, 2 ) ) ) {
+               one_in( std::max( 20 - ( str_req - str ), 2 ) ) ) {
         add_msg( m_bad, _( "You strain yourself trying to move the heavy %s!" ),
                  furntype.name() );
         u.mod_pain( 1 ); // Hurt ourselves.
@@ -13705,21 +13706,32 @@ void game::climb_down_using( const tripoint_bub_ms &examp, climbing_aid_id aid_i
 
     map &here = get_map();
     Character &you = get_player_character();
-    // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
+    // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free.
     if( !you.move_effects( false, examp ) ) {
-        // move_effects determined we could not move, waste all moves
+        // Move_effects determined we could not move, waste all moves.
         you.set_moves( 0 );
         return;
     }
 
     if( !here.valid_move( you.pos_bub(), examp, false, true ) ) {
-        // Can't move horizontally to the ledge
+        // Can't move horizontally to the ledge.
         return;
     }
 
     // Scan the height of the drop and what's in the way.
     const climbing_aid::fall_scan fall( examp );
-
+    const item_location weapon = you.get_wielded_item();
+    if( weapon && weapon->is_two_handed( you ) ) {
+        if( query_yn(
+                _( "You can't climb because you have to wield a %s with both hands.\n\nPut it away?" ),
+                weapon->tname() ) ) {
+            if( !you.unwield() ) {
+                return;
+            }
+        } else {
+            return;
+        }
+    }
     int estimated_climb_cost = you.climbing_cost( tripoint_bub_ms( fall.pos_bottom() ), examp );
     const float fall_mod = you.fall_damage_mod();
     add_msg_debug( debugmode::DF_IEXAMINE, "Climb cost %d", estimated_climb_cost );
@@ -13744,7 +13756,7 @@ void game::climb_down_using( const tripoint_bub_ms &examp, climbing_aid_id aid_i
         damage_estimate *= std::pow( fall_mod, 30.f / damage_estimate );
     }
 
-    // Rough messaging about safety.  "seems safe" can leave a 1-2% chance unlike "perfectly safe".
+    // Rough messaging about safety. "Seems safe" can leave a 1-2% chance unlike "perfectly safe".
     bool seems_perfectly_safe = slip_chance < -5 && aid.down.max_height >= fall.height;
     if( seems_perfectly_safe ) {
         query = _( "It <color_green>seems perfectly safe</color> to climb down like this." );

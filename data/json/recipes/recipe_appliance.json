@@ -27,7 +27,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 16 ] ]
     ]
@@ -61,7 +61,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 16 ] ]
     ]
@@ -94,7 +94,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 3 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 10 ] ]
     ]

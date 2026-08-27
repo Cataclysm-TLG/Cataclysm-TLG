@@ -1033,7 +1033,7 @@
       },
       { "id": "drag_followup" }
     ],
-    "death_drops": "mon_zombie_swimmer_death_drops",
+    "death_drops": "mon_zombie_drowned_death_drops",
     "burn_into": "mon_zombie_scorched",
     "flags": [
       "SEES",
@@ -1603,7 +1603,7 @@
     "armor": { "bash": 2, "cut": 8, "stab": 8, "heat": 10, "bullet": 10, "electric": 2 }
   },
   {
-    "id": "mon_zombie_swimmer_base",
+    "id": "mon_zombie_drowned",
     "type": "MONSTER",
     "name": { "str": "drowned zombie" },
     "description": "A zombie that must have died in or near water judging by its pallor and swollen, waterlogged state.",
@@ -1630,10 +1630,10 @@
     "harvest": "zombie_humanoid",
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
-    "death_drops": "mon_zombie_swimmer_death_drops",
+    "death_drops": "mon_zombie_drowned_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_fungal",
-    "upgrades": { "half_life": 120, "into": "mon_zombie_swimmer" },
+    "upgrades": { "half_life": 96, "into": "mon_zombie_swimmer" },
     "categories": [ "CLASSIC" ],
     "flags": [
       "SEES",
@@ -1658,6 +1658,7 @@
     "name": { "str": "swimmer zombie" },
     "description": "A slick and glistening human body, face and belly bloated from what must have been a watery death.  Its hands and feet are elongated and webbed, suggesting some kind of rapid aquatic evolution.",
     "default_faction": "zombie",
+    "looks_like": "mon_zombie_drowned",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
     "volume": "75000 ml",
@@ -1681,7 +1682,7 @@
     "//grab": "Tier 2 mob, but webbed hands don't sound very grabby",
     "grab_strength": 20,
     "special_attacks": [ { "id": "grab", "cooldown": 7 }, { "id": "scratch_humanoid" }, { "id": "bite_humanoid", "cooldown": 5 } ],
-    "death_drops": "mon_zombie_swimmer_death_drops",
+    "death_drops": "mon_zombie_drowned_death_drops",
     "burn_into": "mon_zombie_scorched",
     "fungalize_into": "mon_zombie_fungal",
     "upgrades": { "half_life": 168, "into": "mon_zombie_mancroc" },

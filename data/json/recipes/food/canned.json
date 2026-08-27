@@ -41,7 +41,14 @@
     "components": [
       [ [ "water_clean", 1 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
-      [ [ "meat_nofish", 1, "LIST" ], [ "fish", 1 ], [ "lobster", 1 ] ],
+      [
+        [ "meat_nofish", 1, "LIST" ],
+        [ "fish", 1 ],
+        [ "fish_freshwater", 1 ],
+        [ "fish_scrap", 10 ],
+        [ "fish_scrap_freshwater", 10 ],
+        [ "lobster", 1 ]
+      ],
       [ [ "vegetable_green", 1, "LIST" ] ]
     ]
   },
@@ -66,7 +73,14 @@
     "components": [
       [ [ "water_clean", 6 ] ],
       [ [ "jar_3l_glass_sealed", 1 ] ],
-      [ [ "meat_nofish", 6, "LIST" ], [ "fish", 6 ], [ "lobster", 6 ] ],
+      [
+        [ "meat_nofish", 6, "LIST" ],
+        [ "fish", 6 ],
+        [ "fish_freshwater", 6 ],
+        [ "fish_scrap", 60 ],
+        [ "fish_scrap_freshwater", 60 ],
+        [ "lobster", 6 ]
+      ],
       [ [ "vegetable_green", 6, "LIST" ] ]
     ]
   },
@@ -91,7 +105,13 @@
     "components": [
       [ [ "water_clean", 1 ] ],
       [ [ "jar_glass_sealed", 1 ] ],
-      [ [ "meat_nofish", 4, "LIST" ], [ "fish", 4 ], [ "fish", 4 ] ]
+      [
+        [ "meat_nofish", 4, "LIST" ],
+        [ "fish", 4 ],
+        [ "fish_freshwater", 4 ],
+        [ "fish_scrap", 40 ],
+        [ "fish_scrap_freshwater", 40 ]
+      ]
     ]
   },
   {
@@ -115,7 +135,14 @@
     "components": [
       [ [ "water_clean", 6 ] ],
       [ [ "jar_3l_glass_sealed", 1 ] ],
-      [ [ "meat_nofish", 24, "LIST" ], [ "fish", 24 ], [ "lobster", 24 ] ]
+      [
+        [ "meat_nofish", 24, "LIST" ],
+        [ "fish", 24 ],
+        [ "fish_freshwater", 24 ],
+        [ "fish_scrap", 240 ],
+        [ "fish_scrap_freshwater", 240 ],
+        [ "lobster", 24 ]
+      ]
     ]
   },
   {
@@ -196,7 +223,11 @@
     "batch_time_factors": [ 83, 5 ],
     "using": [ [ "canning_high_heat", 1 ] ],
     "//1": "pressure canning is measured in 0.5 liter quantities, so 1u of canning_high_heat.",
-    "components": [ [ [ "water_clean", 1 ] ], [ [ "jar_glass_sealed", 1 ] ], [ [ "fish", 2 ] ] ]
+    "components": [
+      [ [ "water_clean", 1 ] ],
+      [ [ "jar_glass_sealed", 1 ] ],
+      [ [ "fish", 2 ], [ "fish_freshwater", 2 ], [ "fish_scrap", 20 ], [ "fish_scrap_freshwater", 20 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -468,7 +499,11 @@
     "batch_time_factors": [ 83, 5 ],
     "using": [ [ "canning_high_heat", 6 ] ],
     "//1": "pressure canning is measured in 0.5 liter quantities, so 6u of canning_high_heat.",
-    "components": [ [ [ "water_clean", 6 ] ], [ [ "jar_3l_glass_sealed", 1 ] ], [ [ "fish", 12 ] ] ]
+    "components": [
+      [ [ "water_clean", 6 ] ],
+      [ [ "jar_3l_glass_sealed", 1 ] ],
+      [ [ "fish", 12 ], [ "fish_freshwater", 12 ], [ "fish_scrap", 120 ], [ "fish_scrap_freshwater", 120 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -1151,7 +1186,12 @@
     "batch_time_factors": [ 83, 5 ],
     "using": [ [ "canning_low_heat", 1 ] ],
     "//1": "waterbath canning is measured in 0.5 liter quantities, so 1u of canning_low_heat. Due to pickling, ordinarily pressure canned vegetable can be water bathed.",
-    "components": [ [ [ "salt", 10 ], [ "saline", 10 ] ], [ [ "jar_glass_sealed", 1 ] ], [ [ "fish", 2 ] ], [ [ "vinegar", 16 ] ] ]
+    "components": [
+      [ [ "salt", 10 ], [ "saline", 10 ] ],
+      [ [ "jar_glass_sealed", 1 ] ],
+      [ [ "fish", 2 ], [ "fish_freshwater", 2 ], [ "fish_scrap", 20 ], [ "fish_scrap_freshwater", 20 ] ],
+      [ [ "vinegar", 16 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -1170,7 +1210,12 @@
     "batch_time_factors": [ 83, 5 ],
     "using": [ [ "canning_low_heat", 6 ] ],
     "//1": "waterbath canning is measured in 0.5 liter quantities, so 6u of canning_low_heat. Due to pickling, ordinarily pressure canned vegetable can be water bathed.",
-    "components": [ [ [ "salt", 60 ], [ "saline", 60 ] ], [ [ "jar_3l_glass_sealed", 1 ] ], [ [ "fish", 12 ] ], [ [ "vinegar", 96 ] ] ]
+    "components": [
+      [ [ "salt", 60 ], [ "saline", 60 ] ],
+      [ [ "jar_3l_glass_sealed", 1 ] ],
+      [ [ "fish", 12 ], [ "fish_freshwater", 12 ], [ "fish_scrap", 120 ], [ "fish_scrap_freshwater", 120 ] ],
+      [ [ "vinegar", 96 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -1590,7 +1635,14 @@
     "batch_time_factors": [ 83, 5 ],
     "components": [
       [ [ "water_clean", 1 ] ],
-      [ [ "meat_nofish", 1, "LIST" ], [ "fish", 1 ], [ "lobster", 1 ] ],
+      [
+        [ "meat_nofish", 1, "LIST" ],
+        [ "fish", 1 ],
+        [ "lobster", 1 ],
+        [ "fish_freshwater", 1 ],
+        [ "fish_scrap", 10 ],
+        [ "fish_scrap_freshwater", 10 ]
+      ],
       [ [ "vegetable_green", 1, "LIST" ] ]
     ],
     "using": [ [ "canning_metal", 2 ], [ "tincan_medium", 1 ] ],
@@ -1614,7 +1666,14 @@
     "batch_time_factors": [ 83, 5 ],
     "components": [
       [ [ "water_clean", 1 ] ],
-      [ [ "meat_nofish", 6, "LIST" ], [ "fish", 6 ], [ "lobster", 6 ] ],
+      [
+        [ "meat_nofish", 6, "LIST" ],
+        [ "fish", 6 ],
+        [ "lobster", 6 ],
+        [ "fish_freshwater", 6 ],
+        [ "fish_scrap", 60 ],
+        [ "fish_scrap_freshwater", 60 ]
+      ],
       [ [ "vegetable_green", 6, "LIST" ] ]
     ],
     "using": [ [ "canning_metal", 12 ], [ "tincan_large", 1 ] ],
@@ -1635,7 +1694,17 @@
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_preservation" }, { "proficiency": "prof_food_canning" } ],
     "contained": true,
     "batch_time_factors": [ 83, 5 ],
-    "components": [ [ [ "water_clean", 1 ] ], [ [ "meat_nofish", 2, "LIST" ], [ "fish", 2 ], [ "lobster", 2 ] ] ],
+    "components": [
+      [ [ "water_clean", 1 ] ],
+      [
+        [ "meat_nofish", 2, "LIST" ],
+        [ "fish", 2 ],
+        [ "lobster", 2 ],
+        [ "fish_freshwater", 2 ],
+        [ "fish_scrap", 20 ],
+        [ "fish_scrap_freshwater", 20 ]
+      ]
+    ],
     "using": [ [ "canning_metal", 1 ], [ "tincan_small", 1 ] ],
     "//1": "tincan canning is measured in 0.25 liter quantities, so 1u of canning_metal.",
     "byproducts": [ [ "water_clean", 1 ] ]
@@ -1655,7 +1724,17 @@
     "container": "can_medium",
     "charges": 2,
     "batch_time_factors": [ 83, 5 ],
-    "components": [ [ [ "water_clean", 1 ] ], [ [ "meat_nofish", 4, "LIST" ], [ "fish", 4 ], [ "lobster", 4 ] ] ],
+    "components": [
+      [ [ "water_clean", 1 ] ],
+      [
+        [ "meat_nofish", 4, "LIST" ],
+        [ "fish", 4 ],
+        [ "lobster", 4 ],
+        [ "fish_freshwater", 4 ],
+        [ "fish_scrap", 40 ],
+        [ "fish_scrap_freshwater", 40 ]
+      ]
+    ],
     "using": [ [ "canning_metal", 2 ], [ "tincan_medium", 1 ] ],
     "//1": "tincan canning is measured in 0.25 liter quantities, so 2u of canning_metal.",
     "byproducts": [ [ "water_clean", 1 ] ]
@@ -1676,7 +1755,17 @@
     "charges": 12,
     "batch_time_factors": [ 83, 5 ],
     "tools": [ [ [ "surface_heat", 60, "LIST" ] ] ],
-    "components": [ [ [ "water_clean", 1 ] ], [ [ "meat_nofish", 24, "LIST" ], [ "fish", 24 ], [ "lobster", 24 ] ] ],
+    "components": [
+      [ [ "water_clean", 1 ] ],
+      [
+        [ "meat_nofish", 24, "LIST" ],
+        [ "fish", 24 ],
+        [ "lobster", 24 ],
+        [ "fish_freshwater", 24 ],
+        [ "fish_scrap", 240 ],
+        [ "fish_scrap_freshwater", 240 ]
+      ]
+    ],
     "using": [ [ "canning_metal", 12 ], [ "tincan_large", 1 ] ],
     "//1": "tincan canning is measured in 0.25 liter quantities, so 12u of canning_metal.",
     "byproducts": [ [ "water_clean", 6 ] ]
@@ -1811,7 +1900,10 @@
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_preservation" }, { "proficiency": "prof_food_canning" } ],
     "contained": true,
     "batch_time_factors": [ 83, 5 ],
-    "components": [ [ [ "water_clean", 1 ] ], [ [ "fish", 1 ] ] ],
+    "components": [
+      [ [ "water_clean", 1 ] ],
+      [ [ "fish", 1 ], [ "fish_freshwater", 1 ], [ "fish_scrap", 10 ], [ "fish_scrap_freshwater", 10 ] ]
+    ],
     "using": [ [ "canning_metal", 1 ], [ "tincan_small", 1 ] ],
     "//1": "tincan canning is measured in 0.25 liter quantities, so 1u of canning_metal.",
     "byproducts": [ [ "water_clean", 1 ] ]
@@ -1831,7 +1923,10 @@
     "container": "can_medium",
     "charges": 2,
     "batch_time_factors": [ 83, 5 ],
-    "components": [ [ [ "water_clean", 1 ] ], [ [ "fish", 2 ] ] ],
+    "components": [
+      [ [ "water_clean", 1 ] ],
+      [ [ "fish", 2 ], [ "fish_freshwater", 2 ], [ "fish_scrap", 20 ], [ "fish_scrap_freshwater", 20 ] ]
+    ],
     "using": [ [ "canning_metal", 2 ], [ "tincan_medium", 1 ] ],
     "//1": "tincan canning is measured in 0.25 liter quantities, so 2u of canning_metal.",
     "byproducts": [ [ "water_clean", 1 ] ]
@@ -1851,7 +1946,10 @@
     "container": "can_food_big",
     "charges": 12,
     "batch_time_factors": [ 83, 5 ],
-    "components": [ [ [ "water_clean", 6 ] ], [ [ "fish", 12 ] ] ],
+    "components": [
+      [ [ "water_clean", 6 ] ],
+      [ [ "fish", 12 ], [ "fish_freshwater", 12 ], [ "fish_scrap", 120 ], [ "fish_scrap_freshwater", 120 ] ]
+    ],
     "using": [ [ "canning_metal", 12 ], [ "tincan_large", 1 ] ],
     "//1": "tincan canning is measured in 0.25 liter quantities, so 12u of canning_metal.",
     "byproducts": [ [ "water_clean", 6 ] ]

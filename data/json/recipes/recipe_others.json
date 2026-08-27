@@ -40,7 +40,7 @@
     "reversible": true,
     "autolearn": true,
     "using": [ [ "sewing_standard", 12 ] ],
-    "components": [ [ [ "cotton_patch", 60 ] ], [ [ "down_feather", 1160 ] ] ]
+    "components": [ [ [ "nylon_sheet", 12 ] ], [ [ "nylon_patch", 96 ] ], [ [ "down_feather", 1160 ] ] ]
   },
   {
     "type": "recipe",
@@ -1334,7 +1334,7 @@
     "components": [
       [ [ "pipe", 12 ] ],
       [ [ "sheet_metal_small", 10 ] ],
-      [ [ "motor_small", 1 ] ],
+      [ [ "motor_medium", 1 ] ],
       [ [ "small_storage_battery", 1 ] ],
       [ [ "wheel_small", 2 ] ],
       [ [ "wheel_mount_light", 2 ] ],

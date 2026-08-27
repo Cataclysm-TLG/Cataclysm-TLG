@@ -182,6 +182,7 @@ static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_efile_recipes( "efile_recipes" );
 static const itype_id itype_hand_crossbow( "hand_crossbow" );
 static const itype_id itype_joint_lit( "joint_lit" );
+static const itype_id itype_pistol_crossbow( "pistol_crossbow" );
 static const itype_id itype_power_cord( "power_cord" );
 static const itype_id itype_rad_badge( "rad_badge" );
 static const itype_id itype_stock_none( "stock_none" );
@@ -212,6 +213,7 @@ static const quality_id qual_BOIL( "BOIL" );
 static const quality_id qual_JACK( "JACK" );
 static const quality_id qual_LIFT( "LIFT" );
 
+static const skill_id skill_archery( "archery" );
 static const skill_id skill_cooking( "cooking" );
 static const skill_id skill_melee( "melee" );
 static const skill_id skill_survival( "survival" );
@@ -3533,7 +3535,7 @@ void item::gunmod_info( std::vector<iteminfo> &info, const iteminfo_query *parts
         info.emplace_back( "GUNMOD", _( "Reload modifier: " ), _( "<num>%" ),
                            iteminfo::lower_is_better, mod.reload_modifier );
     }
-    if( mod.min_str_required_mod > 0 && parts->test( iteminfo_parts::GUNMOD_STRENGTH ) ) {
+    if( mod.min_str_required_mod != 0 && parts->test( iteminfo_parts::GUNMOD_STRENGTH ) ) {
         info.emplace_back( "GUNMOD", _( "Minimum strength required modifier: " ),
                            mod.min_str_required_mod );
     }
@@ -9491,7 +9493,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
         if( shield_hp > 0 ) {
             return armor_status::UNDAMAGED;
         } else {
-            //Shields deliberately ignore the enchantment multiplier, as the health mechanic wouldn't make sense otherwise.
+            // Shields deliberately ignore the enchantment multiplier, as the health mechanic wouldn't make sense otherwise.
             mod_damage( itype::damage_scale * 6 );
             return armor_status::DESTROYED;
         }
@@ -12208,7 +12210,7 @@ ret_val<void> item::is_gunmod_compatible( const item &mod ) const
                !mod.type->gunmod->usable.count( gun_type_type( typeId().str() ) ) ) {
         return ret_val<void>::make_failure( _( "cannot have a %s" ), mod.tname() );
 
-    } else if( typeId() == itype_hand_crossbow &&
+    } else if( ( typeId() == itype_hand_crossbow || typeId() == itype_pistol_crossbow ) &&
                !mod.type->gunmod->usable.count( pistol_gun_type ) ) {
         return ret_val<void>::make_failure( _( "isn't big enough to use that mod" ) );
 
@@ -12540,11 +12542,11 @@ bool item::reload( Character &u, item_location ammo, int qty )
 
     bool ammo_from_map = !ammo.held_by( u );
     if( ammo->has_flag( flag_SPEEDLOADER ) || ammo->has_flag( flag_SPEEDLOADER_CLIP ) ) {
-        // if the thing passed in is a speed loader, we want the ammo
+        // If the thing passed in is a speed loader, we want the ammo.
         ammo = item_location( ammo, &ammo->first_ammo() );
     }
 
-    // limit quantity of ammo loaded to remaining capacity
+    // Limit quantity of ammo loaded to remaining capacity.
     int limit = 0;
     if( is_watertight_container() && ammo->made_of_from_type( phase_id::LIQUID ) ) {
         limit = get_remaining_capacity_for_liquid( *ammo );

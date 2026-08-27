@@ -200,7 +200,7 @@
     "category": "container",
     "name": { "str": "plastic bag" },
     "looks_like": "bag_canvas",
-    "description": "An open plastic bag.  Essentially trash.",
+    "description": "A big plastic bag.",
     "weight": "5 g",
     "volume": "10 ml",
     "price": "0 cent",

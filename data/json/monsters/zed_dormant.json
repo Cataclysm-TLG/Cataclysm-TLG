@@ -190,7 +190,7 @@
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
     "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "AQUATIC", "WATER_CAMOUFLAGE", "REVIVES_HEALTHY" ],
-    "zombify_into": "mon_zombie_swimmer_base",
+    "zombify_into": "mon_zombie_drowned",
     "special_attacks": [
       {
         "id": "pseudo_dormant_trap_setup_attk",

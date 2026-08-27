@@ -394,7 +394,7 @@
   {
     "id": "mon_crow_mutant_small",
     "type": "MONSTER",
-    "name": { "str": "carrion bird" },
+    "name": { "str": "scavenger crow" },
     "description": "A crow or raven grown three or four times bigger than ought to be possible.  Its sharp beak, vicious talons, and insatiable hunger make it a threat to the living and the dead.",
     "bodytype": "bird",
     "default_faction": "corvid",
@@ -444,7 +444,7 @@
   {
     "id": "mon_crow_mutant",
     "type": "MONSTER",
-    "name": { "str": "gluttonous carrion bird" },
+    "name": { "str": "gluttonous crow" },
     "description": "This may have once been a crow or a raven, but now it's a deformed monstrosity nearly the size of a man.  It heaves its sable bulk awkwardly along the ground, too fat now to fly but still in constant search of more meat.",
     "bodytype": "bird",
     "default_faction": "corvid",

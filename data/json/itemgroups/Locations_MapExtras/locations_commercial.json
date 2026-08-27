@@ -1486,8 +1486,8 @@
       [ "jack", 60 ],
       [ "jack_small", 60 ],
       [ "jack_makeshift", 30 ],
-      [ "wrench", 50 ],
-      [ "wrench_large", 20 ],
+      [ "wrench", 30 ],
+      [ "lug_wrench", 50 ],
       [ "socket_wrench_set", 40 ],
       [ "gloves_work", 30 ],
       [ "glasses_safety", 20 ]
@@ -1803,7 +1803,7 @@
       { "group": "superglue", "prob": 55 },
       { "item": "rubber_spray_can", "prob": 5, "charges": 10 },
       [ "screwdriver", 60 ],
-      [ "motor_small", 30 ]
+      [ "motor_medium", 30 ]
     ]
   },
   {

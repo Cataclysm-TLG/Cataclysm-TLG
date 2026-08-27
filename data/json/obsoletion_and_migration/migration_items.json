@@ -4222,5 +4222,20 @@
     "type": "MIGRATION",
     "id": "bellyband",
     "replace": "bellywrap"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plaguedoctor_robe",
+    "replace": "cassock"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wrench_large",
+    "replace": "wrench"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "engine_electric_small",
+    "to": "engine_electric_medium"
   }
 ]

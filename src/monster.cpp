@@ -378,6 +378,13 @@ void monster::on_move( const tripoint_abs_ms &old_pos )
 void monster::poly( const mtype_id &id )
 {
     double hp_percentage = static_cast<double>( hp ) / static_cast<double>( type->hp );
+    dissectable_inv.erase(
+        std::remove_if( dissectable_inv.begin(), dissectable_inv.end(),
+            []( const item &it ) {
+                return it.has_flag( json_flag_MUTAGEN_SAMPLE );
+            } ),
+        dissectable_inv.end()
+    );
     if( !no_extra_death_drops ) {
         generate_inventory();
     }
@@ -3059,6 +3066,7 @@ void monster::die( map *here, Creature *nkiller )
         const tripoint_range<tripoint_bub_ms> &surrounding = here->points_in_radius( pos_bub(), 1, 0 );
         Creature *grabber = nullptr;
         for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            const efftype_id grab_id = grab.get_id();
             // Is our grabber around?
             for( const tripoint_bub_ms loc : surrounding ) {
                 Character *guy = creatures.creature_at<Character>( loc );
@@ -3070,14 +3078,14 @@ void monster::die( map *here, Creature *nkiller )
                 }
             }
             if( grabber == nullptr ) {
-                remove_effect( grab.get_id() );
+                remove_effect( grab_id );
                 add_msg_debug( debugmode::DF_MONSTER, "Orphan grab found and removed from dead monster" );
                 continue;
             }
             if( grabber && !grabber->is_monster() ) {
                 grabber->as_character()->release_grapple();
             }
-            remove_effect( grab.get_id() );
+            remove_effect( grab_id );
         }
     }
     if( has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
@@ -4415,14 +4423,16 @@ std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() cons
 {
     std::vector<std::pair<std::string, std::string>> rval;
 
-    // get effects
-    // at this moment we share id for effect overlay for character and for monster
+    // Get effects.
     if( show_creature_overlay_icons ) {
-        // if at one point there would be more overlay types than one
-        // someone would need to tinker pre-allocation
         rval.reserve( effects->size() );
         for( const auto &eff_pr : *effects ) {
-            rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
+            std::string effect_id = "effect_" + eff_pr.first.str();
+            const int intensity = get_effect_int( eff_pr.first );
+            if( intensity > 1 ) {
+                effect_id += "_int" + std::to_string( intensity );
+            }
+            rval.emplace_back( effect_id, "" );
         }
     }
 

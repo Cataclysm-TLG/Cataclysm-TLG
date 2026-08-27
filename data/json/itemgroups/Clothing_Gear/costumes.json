@@ -101,7 +101,7 @@
       { "item": "longcoat", "prob": 10 },
       { "item": "longcoat_faux_fur", "prob": 15 },
       { "item": "sleeveless_longcoat_faux_fur", "prob": 15 },
-      { "item": "plaguedoctor_robe", "prob": 15 },
+      { "item": "cassock", "prob": 20 },
       { "item": "nun_habit", "prob": 10 },
       { "item": "house_coat", "prob": 5 },
       { "item": "suit_bostonchan", "prob": 20 }

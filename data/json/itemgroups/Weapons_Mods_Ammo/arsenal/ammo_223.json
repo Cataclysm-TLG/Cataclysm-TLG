@@ -26,7 +26,7 @@
     "type": "item_group",
     "container-item": "ammo_box",
     "on_overflow": "discard",
-    "items": [ { "group": "clip223_10rd_556", "count": 3 } ]
+    "items": [ { "group": "clip223_10rd_556", "count": 2 } ]
   },
   {
     "id": "clip223_10rd_556",

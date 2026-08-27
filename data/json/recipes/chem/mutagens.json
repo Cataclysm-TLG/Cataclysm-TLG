@@ -353,6 +353,9 @@
       [ [ "water", 160 ] ],
       [
         [ "fish", 3 ],
+        [ "fish_freshwater", 3 ],
+        [ "fish_scrap", 30 ],
+        [ "fish_scrap_freshwater", 30 ],
         [ "can_sardine", 2 ],
         [ "can_tuna", 2 ],
         [ "can_salmon", 2 ],

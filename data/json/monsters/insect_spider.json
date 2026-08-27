@@ -53,7 +53,7 @@
     "special_attacks": [
       {
         "type": "spell",
-        "spell_data": { "id": "acid_spit", "min_level": 7 },
+        "spell_data": { "id": "acid_spit", "min_level": 8 },
         "monster_message": "The %s spews acid!",
         "cooldown": 10,
         "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
@@ -989,8 +989,8 @@
   {
     "id": "mon_fly_mega",
     "type": "MONSTER",
-    "name": { "str": "frigate fly", "str_pl": "frigate flies" },
-    "description": "A mutant housefly nearly the size of a man, creating a loud buzzing sound as it inexplicably stays airborne.",
+    "name": { "str": "balloon fly", "str_pl": "balloon flies" },
+    "description": "Barely recognizable as a fly, this mutant monstrosity has become a huge balloon, carried aloft by its gas-filled abdomen.  Its wings appear to give it some ability to steer, and corrosive slime drips from its bulging proboscis.",
     "copy-from": "mon_fly",
     "diff": 5,
     "proportional": { "hp": 18, "speed": 0.25, "vision_day": 2 },
@@ -1004,8 +1004,8 @@
     "special_attacks": [
       {
         "type": "spell",
-        "spell_data": { "id": "acid_barf", "min_level": 6 },
-        "monster_message": "The %s spits acid!",
+        "spell_data": { "id": "acid_barf", "min_level": 8 },
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
       },
@@ -2495,7 +2495,7 @@
     "special_attacks": [
       {
         "type": "spell",
-        "spell_data": { "id": "acid_spray", "min_level": 6 },
+        "spell_data": { "id": "acid_spray", "min_level": 7 },
         "monster_message": "The %s sprays acid!",
         "cooldown": 13,
         "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }

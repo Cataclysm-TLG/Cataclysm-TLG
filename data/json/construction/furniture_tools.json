@@ -71,7 +71,7 @@
       [ [ "cable", 12 ] ],
       [ [ "pipe", 4 ] ],
       [ [ "clamp", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "medium_storage_battery", 2 ] ],
       [ [ "frame", 1 ] ],
       [ [ "mortar_build", 10 ], [ "mortar_lime", 10 ] ]

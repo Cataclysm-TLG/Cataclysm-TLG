@@ -3901,14 +3901,11 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
     int order;
     std::string overlay_id;
     std::string variant;
-    // first get effects
-    if( show_creature_overlay_icons ) {
-        for( const auto &eff_pr : *effects ) {
-            rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
-        }
-    }
 
-    // then get mutations
+    // This function controls the order that overlays are drawn. We want to
+    // go from skin layer to the outermost layer.
+
+    // First, get mutations.
     for( const auto &mut : cached_mutations ) {
         if( mut.second.corrupted > 0 || !mut.second.show_sprite ) {
             continue;
@@ -3921,7 +3918,7 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
         mutation_sorting.emplace( order, std::pair<std::string, std::string> { overlay_id, variant } );
     }
 
-    // then get bionics
+    // Then get bionics.
     for( const bionic &bio : *my_bionics ) {
         if( !bio.show_sprite ) {
             continue;
@@ -3935,11 +3932,24 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
         rval.emplace_back( "mutation_" + mutorder.second.first, mutorder.second.second );
     }
 
-    // next clothing
+    // Next, clothing.
     worn.get_overlay_ids( rval );
 
-    // last weapon
-    // TODO: might there be clothing that covers the weapon?
+    // Then effects.
+    if( show_creature_overlay_icons ) {
+        for( const auto &eff_pr : *effects ) {
+            std::string effect_id = "effect_" + eff_pr.first.str();
+            const int intensity = get_effect_int( eff_pr.first );
+
+            if( intensity > 1 ) {
+                effect_id += "_int" + std::to_string( intensity );
+            }
+
+            rval.emplace_back( effect_id, "" );
+        }
+    }
+
+    // Last, we do weapon.
     if( is_armed() ) {
         const std::string variant = weapon.has_itype_variant() ? weapon.itype_variant().id : "";
         rval.emplace_back( "wielded_" + weapon.typeId().str(), variant );
@@ -8020,7 +8030,7 @@ void Character::recalculate_bodyparts()
         body_set.set( bp.id() );
     }
     body_set = enchantment_cache->modify_bodyparts( body_set );
-    // first come up with the bodyparts that need to be removed from body
+    // First, come up with the bodyparts that need to be removed from body.
     for( auto bp_iter = body.begin(); bp_iter != body.end(); ) {
         if( !body_set.test( bp_iter->first ) ) {
             bp_iter = body.erase( bp_iter );
@@ -8028,7 +8038,7 @@ void Character::recalculate_bodyparts()
             ++bp_iter;
         }
     }
-    // then add the parts in bodyset that are missing from body
+    // Then, add the parts in bodyset that are missing from body.
     for( const bodypart_str_id &bp : body_set ) {
         if( body.find( bp ) == body.end() ) {
             body[bp] = bodypart( bp );

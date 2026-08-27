@@ -799,7 +799,7 @@
     "components": [
       [ [ "power_supply", 4 ] ],
       [ [ "plut_cell", 1 ] ],
-      [ [ "motor_small", 2 ] ],
+      [ [ "motor_medium", 2 ] ],
       [ [ "tazer", 1 ] ],
       [ [ "e_scrap", 3 ] ],
       [ [ "steel_fragment", 12 ] ]
@@ -1590,7 +1590,7 @@
     "using": [ [ "soldering_standard", 5 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
     "components": [
-      [ [ "motor_tiny", 8 ] ],
+      [ [ "motor_tiny", 4 ] ],
       [ [ "power_supply", 8 ] ],
       [ [ "cable", 16 ] ],
       [ [ "scrap", 6 ] ],
@@ -2806,7 +2806,7 @@
     "time": "45 m",
     "using": [ [ "soldering_standard", 20 ] ],
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "WRENCH", "level": 1 }, { "id": "SAW_M", "level": 1 } ],
-    "components": [ [ [ "motor_tiny", 3 ] ], [ [ "processor", 3 ] ], [ [ "RAM", 2 ] ], [ [ "plastic_chunk", 2 ] ] ]
+    "components": [ [ [ "motor_tiny", 2 ] ], [ [ "processor", 3 ] ], [ [ "RAM", 2 ] ], [ [ "plastic_chunk", 2 ] ] ]
   },
   {
     "result": "sewing_kit",
@@ -3390,7 +3390,7 @@
       [ [ "cable", 8 ] ],
       [ [ "hose", 1 ] ],
       [ [ "cu_pipe", 3 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "e_scrap", 4 ] ],
       [ [ "element", 4 ] ],
       [ [ "power_supply", 4 ] ],
@@ -3415,7 +3415,7 @@
       [ [ "cable", 15 ] ],
       [ [ "hose", 2 ] ],
       [ [ "pipe_fittings", 6 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "cu_pipe", 5 ] ]
     ]
   },
@@ -3430,7 +3430,7 @@
       [ [ "cable", 8 ] ],
       [ [ "hose", 1 ] ],
       [ [ "cu_pipe", 3 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "e_scrap", 4 ] ],
       [ [ "element", 4 ] ],
       [ [ "power_supply", 4 ] ],
@@ -3454,7 +3454,7 @@
       [ [ "sheet_metal", 6 ] ],
       [ [ "cable", 15 ] ],
       [ [ "hose", 2 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "cu_pipe", 5 ] ]
     ]
@@ -3472,7 +3472,7 @@
       [ [ "sheet_metal", 2 ] ],
       [ [ "cable", 10 ] ],
       [ [ "hose", 4 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "pipe_fittings", 2 ] ],
       [ [ "cu_pipe", 4 ] ]
     ]
@@ -3491,7 +3491,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "spike", 1 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3506,7 +3506,7 @@
       [ [ "cable", 12 ] ],
       [ [ "pipe", 4 ] ],
       [ [ "clamp", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "medium_storage_battery", 2 ] ],
       [ [ "frame", 1 ] ]
     ]
@@ -3525,7 +3525,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "circsaw_blade", 2 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3542,7 +3542,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "circsaw_blade", 2 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3559,7 +3559,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "wire", 2 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3576,7 +3576,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "spike", 2 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3593,7 +3593,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "blade", 2 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3610,7 +3610,7 @@
       [ [ "steel_plate", 3 ] ],
       [ [ "blade", 2 ] ],
       [ [ "plastic_chunk", 8 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3625,7 +3625,7 @@
       [ [ "sheet_metal_small", 4 ] ],
       [ [ "cable", 10 ] ],
       [ [ "hose", 5 ] ],
-      [ [ "motor_small", 1 ] ],
+      [ [ "motor_medium", 1 ] ],
       [ [ "metal_tank", 1 ] ],
       [ [ "plastic_chunk", 5 ] ],
       [ [ "pipe_fittings", 4 ] ]
@@ -3645,7 +3645,7 @@
       [ [ "steel_plate", 2 ] ],
       [ [ "pipe", 4 ] ],
       [ [ "chain", 1 ] ],
-      [ [ "motor_small", 1 ] ]
+      [ [ "motor_medium", 1 ] ]
     ]
   },
   {
@@ -3680,7 +3680,7 @@
       [ [ "sheet_metal", 6 ] ],
       [ [ "cable", 15 ] ],
       [ [ "hose", 2 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "cu_pipe", 5 ] ]
     ]
   },
@@ -5382,9 +5382,10 @@
     "time": "60 m",
     "qualities": [ { "id": "CUT_FINE", "level": 1 }, { "id": "SAW_W", "level": 2 }, { "id": "SCREW", "level": 1 } ],
     "components": [
-      [ [ "cotton_sheet", 13 ] ],
-      [ [ "cotton_patch", 6 ] ],
+      [ [ "nylon_sheet", 13 ] ],
+      [ [ "nylon_patch", 6 ] ],
       [ [ "wooden_post_short", 6 ] ],
+      [ [ "synthetic_fluff", 1000 ] ],
       [ [ "wood_block", 4 ] ],
       [ [ "nuts_bolts", 16 ] ],
       [ [ "splinter", 30 ] ]
@@ -5590,14 +5591,6 @@
     "components": [ [ [ "copper", 49 ] ] ]
   },
   {
-    "result": "wrench_large",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "time": "15 m",
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
-    "components": [ [ [ "steel_chunk", 1 ] ], [ [ "steel_fragment", 3 ] ] ]
-  },
-  {
     "result": "wheel_rim_bicycle",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
@@ -5636,6 +5629,14 @@
     "time": "20 s",
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "fish_scrap", 10 ] ] ]
+  },
+  {
+    "result": "fish_freshwater",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "time": "20 s",
+    "qualities": [ { "id": "CUT", "level": 1 } ],
+    "components": [ [ [ "fish_scrap_freshwater", 10 ] ] ]
   },
   {
     "result": "meat",
