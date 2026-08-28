@@ -2883,8 +2883,8 @@
   {
     "type": "effect_type",
     "id": "chafing",
-    "name": [ "Uncomfortable" ],
-    "desc": [ "Your %s is uncomfortable.  Wearing something soft under your hard armor would help." ],
+    "name": [ "Chafing" ],
+    "desc": [ "Rigid equipment worn over your %s is causing discomfort.  Wearing something soft underneath it would help." ],
     "max_intensity": 1,
     "part_descs": true,
     "immune_bp_flags": [ "BIONIC_LIMB" ],
