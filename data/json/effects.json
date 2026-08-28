@@ -2890,14 +2890,15 @@
     "immune_bp_flags": [ "BIONIC_LIMB" ],
     "base_mods": { "speed_mod": [ -4 ], "pain_min": [ 1 ], "pain_chance": [ 2 ], "pain_max_val": [ 15 ] },
     "limb_score_mods": [
-      { "limb_score": "manip", "modifier": -0.05 },
-      { "limb_score": "grip", "modifier": -0.05 },
-      { "limb_score": "block", "modifier": -0.05 },
-      { "limb_score": "lift", "modifier": -0.05 },
-      { "limb_score": "move_speed", "modifier": -0.05 },
-      { "limb_score": "balance", "modifier": -0.05 },
-      { "limb_score": "swimming", "modifier": -0.05 },
-      { "limb_score": "crawl", "modifier": -0.05 }
+      { "limb_score": "manip", "modifier": 0.8 },
+      { "limb_score": "grip", "modifier": 0.8 },
+      { "limb_score": "block", "modifier": 0.8 },
+      { "limb_score": "lift", "modifier": 0.8 },
+      { "limb_score": "move_speed", "modifier": 0.8 },
+      { "limb_score": "balance", "modifier": 0.8 },
+      { "limb_score": "swimming", "modifier": 0.8 },
+      { "limb_score": "crawl", "modifier": 0.8 },
+      { "limb_score": "reaction", "modifier": 0.8 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD_LOCAL" ]
   },
@@ -2955,8 +2956,8 @@
     "max_intensity": 2,
     "scaling_mods": { "speed_mod": [ -5 ] },
     "limb_score_mods": [
-      { "limb_score": "manip", "modifier": 0 },
-      { "limb_score": "grip", "modifier": 0 },
+      { "limb_score": "manip", "modifier": 0.5, "scaling": -0.25 },
+      { "limb_score": "grip", "modifier": 0.5, "scaling": -0.25 },
       { "limb_score": "block", "modifier": 0.5, "scaling": -0.25 },
       { "limb_score": "lift", "modifier": 0.5, "scaling": -0.25 },
       { "limb_score": "move_speed", "modifier": 0.75, "scaling": -0.25 },
