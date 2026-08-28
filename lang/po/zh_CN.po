@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-"PO-Revision-Date: 2026-08-28 01:25+0800\n"
+"PO-Revision-Date: 2026-08-28 14:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -393131,7 +393131,7 @@ msgstr "让所有队员暂时……"
 
 #: src/npctalk.cpp:1141 src/npctalk.cpp:1758
 msgid "yell"
-msgstr "黄色"
+msgstr "喊的"
 
 #: src/npctalk.cpp:1143 src/npctalk.cpp:1760
 msgid "hiss"
