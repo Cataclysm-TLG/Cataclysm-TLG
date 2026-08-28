@@ -117,11 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-<<<<<<< Updated upstream
-"PO-Revision-Date: 2026-08-28 14:01+0800\n"
-=======
-"PO-Revision-Date: 2026-08-28 21:52+0800\n"
->>>>>>> Stashed changes
+"PO-Revision-Date: 2026-08-28 01:25+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -176833,8 +176829,6 @@ msgid ""
 "Unfortunately, they've been swept up in the tide of madness that killed the world.  Equipped with a handgun "
 "and survival gear, they now wander among the dead, never realizing the irony of their fate."
 msgstr ""
-"病态的猜疑驱使他们为一场鲜有人相信的末日做好了准备。不幸的是，他们已被那场毁灭世界的疯狂浪潮所吞噬。如今，他们"
-"手持手枪、身负生存装备，在死者间游荡，却始终未能察觉自身命运的讽刺之处。"
 
 #. ~ Description of monster "mon_feral_sailor_axe"
 #: data/json/monsters/feral_humans.json
@@ -176874,12 +176868,12 @@ msgstr ""
 #. ~ Description of special attack of monster "deranged warden"
 #: data/json/monsters/feral_humans.json
 msgid "The deranged warden fires a rifle!"
-msgstr "疯狂的狱警开枪了！"
+msgstr ""
 
 #. ~ Description of special attack of monster "paranoiac"
 #: data/json/monsters/feral_humans.json
 msgid "The disturbed prepper fires a handgun!"
-msgstr "癫狂的生存主义者开枪了！"
+msgstr ""
 
 #. ~ Description of special attack of monster "feral human"
 #: data/json/monsters/feral_humans.json
@@ -176889,32 +176883,32 @@ msgstr "野性疯人扔了一块石头！"
 #. ~ Description of special attack of monster "broken officer"
 #: data/json/monsters/feral_humans.json
 msgid "The feral officer fires a SIG M18 pistol!"
-msgstr "狂暴的军官用 SIG M18 手枪射击！"
+msgstr ""
 
 #. ~ Description of special attack of monster "frenzied security guard"
 #: data/json/monsters/feral_humans.json
 msgid "The frenzied security guard fires a Beretta M9A1 pistol!"
-msgstr "狂乱的保安用贝雷塔 M9A1 手枪射击！"
+msgstr ""
 
 #. ~ Description of special attack of monster "lunatic"
 #: data/json/monsters/feral_humans.json
 msgid "The lunatic throws a rock!"
-msgstr "疯子扔了一块石头！"
+msgstr ""
 
 #. ~ Description of special attack of monster "mad biker"
 #: data/json/monsters/feral_humans.json
 msgid "The mad biker fires a shotgun!"
-msgstr "疯狂的飞车党开了一枪！"
+msgstr ""
 
 #. ~ Description of special attack of monster "militia lunatic"
 #: data/json/monsters/feral_humans.json
 msgid "The militia lunatic fires a rifle!"
-msgstr "疯狂的民兵开了一枪！"
+msgstr ""
 
 #. ~ Description of special attack of monster "pyromaniac"
 #: data/json/monsters/feral_humans.json
 msgid "The pyromaniac throws a Molotov cocktail!"
-msgstr "纵火狂扔出了一枚莫洛托夫鸡尾酒！"
+msgstr ""
 
 #. ~ Description of monster "deranged warden"
 #: data/json/monsters/feral_humans.json
@@ -176931,7 +176925,7 @@ msgstr ""
 #. ~ Description of special attack of monster "well-dressed killer"
 #: data/json/monsters/feral_humans.json
 msgid "The well-dressed killer shoots their crossbow!"
-msgstr "衣着考究的杀手射出了弩箭！"
+msgstr ""
 
 #. ~ Description of monster "lunatic"
 #: data/json/monsters/feral_humans.json
@@ -176975,8 +176969,6 @@ msgid ""
 "This person must have been some sort of technician before the Cataclysm.  Now, they're reduced to a mad thing, "
 "still wearing the remains of a work uniform and clutching a hammer that is now nothing more than a weapon."
 msgstr ""
-"此人想必在大灾变前是一名技术人员。如今，他们已沦为疯狂的怪物，仍穿着破烂的工作服，紧握着一把如今只是武器的锤"
-"子。"
 
 #. ~ Description of monster "broken officer"
 #: data/json/monsters/feral_humans.json
@@ -177035,7 +177027,7 @@ msgstr "穿着花哨的衣服，手里拿着剑，这个疯子曾经是个社交
 msgid ""
 "What was once a service member has been lost to the crushing madness of the Cataclysm.  Tense, dirty hands "
 "grip a combat knife as their bloodshot eyes scan for threats."
-msgstr "这名曾经的军人已被大灾变的毁灭性疯狂所吞噬。紧绷的双手紧握着一把战斗刀，布满血丝的双眼扫视着潜在的威胁。"
+msgstr ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
@@ -177053,25 +177045,25 @@ msgstr[0] "斧头杀人狂"
 #: data/json/monsters/feral_humans.json
 msgid "bloodthirsty servant"
 msgid_plural "bloodthirsty servants"
-msgstr[0] "嗜血仆从"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "broken officer"
 msgid_plural "broken officers"
-msgstr[0] "失魂警官"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "deranged marine"
 msgid_plural "deranged marines"
-msgstr[0] "疯狂陆战队员"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "deranged warden"
 msgid_plural "deranged wardens"
-msgstr[0] "疯狂狱警"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
@@ -177089,43 +177081,43 @@ msgstr[0] "野性疯人"
 #: data/json/monsters/feral_humans.json
 msgid "frenzied security guard"
 msgid_plural "frenzied security guards"
-msgstr[0] "狂乱保安"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "frenzied soldier"
 msgid_plural "frenzied soldiers"
-msgstr[0] "狂乱士兵"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "frenzied worker"
 msgid_plural "frenzied workers"
-msgstr[0] "狂乱工人"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "killer cop"
 msgid_plural "killer cops"
-msgstr[0] "杀手警察"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "lost survivor"
 msgid_plural "lost survivors"
-msgstr[0] "迷失的幸存者"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "lunatic"
 msgid_plural "lunatics"
-msgstr[0] "狂人"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "mad biker"
 msgid_plural "mad bikers"
-msgstr[0] "疯狂飞车党"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
@@ -177137,55 +177129,55 @@ msgstr[0] "疯狂科学家"
 #: data/json/monsters/feral_humans.json
 msgid "mad servant"
 msgid_plural "mad servants"
-msgstr[0] "疯狂仆从"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "manhunter"
 msgid_plural "manhunters"
-msgstr[0] "追猎者"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "militia lunatic"
 msgid_plural "militia lunatic"
-msgstr[0] "疯狂民兵"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "murderous servant"
 msgid_plural "murderous servants"
-msgstr[0] "杀人仆从"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "paranoiac"
 msgid_plural "paranoiacs"
-msgstr[0] "偏执狂"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "psycho killer"
 msgid_plural "psycho killers"
-msgstr[0] "疯狂杀手"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "pyromaniac"
 msgid_plural "pyromaniacs"
-msgstr[0] "纵火狂"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "raving security guard"
 msgid_plural "raving security guards"
-msgstr[0] "疯狂保安"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
 msgid "well-dressed killer"
 msgid_plural "well-dressed killers"
-msgstr[0] "衣着考究的杀手"
+msgstr[0] ""
 
 #. ~ Description of monster "kokanee salmon"
 #: data/json/monsters/fish.json
@@ -178224,8 +178216,6 @@ msgid ""
 "The abdomen of this sickly-looking giant spider is now home to many lumps of blooming fungi.  Its fangs still "
 "look like they work, and there's a thick, grayish fluid drooling from them in filmy strands."
 msgstr ""
-"这只看起来病恹恹的巨型蜘蛛的腹部，如今已是许多盛开的真菌肿块的栖息地。它的毒牙看起来依然管用，有黏稠的灰色液体"
-"从牙尖垂落，形成丝丝缕缕的薄膜。"
 
 #. ~ Description of monster "giant fungal wasp queen"
 #: data/json/monsters/fungus.json
@@ -178444,7 +178434,7 @@ msgstr ""
 #: data/json/monsters/fungus_zombie.json
 #, c-format
 msgid "The %s releases a cloud of spores!"
-msgstr "%s 释放出一团孢子云！"
+msgstr ""
 
 #. ~ Monster message of special attack of monster "craggy fungal bulk"
 #. ~ Monster message of special attack of monster "fungal boomer"
@@ -178455,7 +178445,7 @@ msgstr "%s 释放出一团孢子云！"
 #: data/json/monsters/fungus_zombie.json
 #, c-format
 msgid "The %s spews a cloud of spores!"
-msgstr "%s 喷出一团孢子云！"
+msgstr ""
 
 #. ~ Description of monster "spore host"
 #: data/json/monsters/fungus_zombie.json
@@ -178491,7 +178481,7 @@ msgstr ""
 msgid ""
 "The sorry remains of this bear, its shape nearly lost in the sloughing of its moldering flesh, still wield the "
 "claws and teeth that failed to protect it in life."
-msgstr "这只熊的残骸几乎已辨认不出原本的形态，腐烂的血肉不断剥落，但它生前未能保护自己的利爪与尖牙依然还在。"
+msgstr ""
 
 #. ~ Description of monster "scarred fungal zombie"
 #: data/json/monsters/fungus_zombie.json
@@ -178607,7 +178597,7 @@ msgstr[0] "真菌胀气丧尸"
 #: data/json/monsters/fungus_zombie.json
 msgid "craggy fungal bulk"
 msgid_plural "craggy fungal bulks"
-msgstr[0] "崎岖真菌巨块"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/fungus_zombie.json
@@ -178619,7 +178609,7 @@ msgstr[0] "真菌丧尸"
 #: data/json/monsters/fungus_zombie.json
 msgid "fungal bear"
 msgid_plural "fungal bears"
-msgstr[0] "真菌熊"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/fungus_zombie.json
@@ -178733,7 +178723,7 @@ msgstr[0] "绳索起重器"
 #: data/json/monsters/fungus_zombie.json
 msgid "spore zombie"
 msgid_plural "spore zombies"
-msgstr[0] "孢子丧尸"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/fungus_zombie.json
@@ -180314,7 +180304,7 @@ msgstr[0] "雌地窖蛛"
 #: data/json/monsters/insect_spider.json
 msgid "monstrous cellar spider"
 msgid_plural "monstrous cellar spiders"
-msgstr[0] "巨型地窖蜘蛛"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -180326,7 +180316,7 @@ msgstr[0] "一动不动的鹿"
 #: data/json/monsters/insect_spider.json
 msgid "mutant mantis"
 msgid_plural "mutant mantises"
-msgstr[0] "变异螳螂"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -181899,8 +181889,6 @@ msgid ""
 "to the center of its body with some sort of a diaphragm or a membrane on the end.  The thing seems like an "
 "integral part of the mi-go's body, and all its appendages are supporting it to prevent swaying."
 msgstr ""
-"这只纤细的米戈比同族其他个体略小一些。其身体中央连接着一个奇特的椭圆形装置，末端带有某种隔膜或薄膜结构。这东西"
-"似乎是米-戈身体不可分割的一部分，它的所有附肢都支撑着它，以防止其晃动。"
 
 #. ~ Monster name
 #: data/json/monsters/mi-go.json
@@ -182125,7 +182113,7 @@ msgstr[0] "假人"
 #: data/json/monsters/misc.json
 msgid "fursuit zombie"
 msgid_plural "fursuit zombies"
-msgstr[0] "福瑞丧尸"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/misc.json
@@ -182159,19 +182147,19 @@ msgstr[0] "抓取测试怪物（中）"
 #. ~ Description of monster "fursuit zombie"
 #: data/json/monsters/misc.json
 msgid "no no no no"
-msgstr "不不不不"
+msgstr ""
 
 #. ~ Monster name
 #: data/json/monsters/misc.json
 msgid "red dragon"
 msgid_plural "red dragons"
-msgstr[0] "红龙"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/misc.json
 msgid "sexy zombie"
 msgid_plural "sexy zombies"
-msgstr[0] "风骚丧尸"
+msgstr[0] ""
 
 #. ~ Monster name
 #: data/json/monsters/misc.json
@@ -183712,7 +183700,7 @@ msgstr "美国牛蛙，在自然栖息地生活，他捕食昆虫、老鼠、蜥
 msgid ""
 "The timber rattlesnake, the most venomous viper native to New England.  These animals prefer to avoid humans, "
 "but can be very dangerous if they bite."
-msgstr "木纹响尾蛇，新英格兰地区毒性最强的本地蝮蛇。这种动物倾向于避开人类，但若被咬到，则极其危险。"
+msgstr ""
 
 #. ~ Monster name
 #: data/json/monsters/reptile_amphibian.json
@@ -184040,7 +184028,7 @@ msgstr ""
 #: data/json/monsters/starers.json
 msgid "charred madman"
 msgid_plural "charred madmans"
-msgstr[0] "焦尸狂人"
+msgstr[0] ""
 
 #. ~ Description of monster "triffid"
 #: data/json/monsters/triffid.json
@@ -185719,8 +185707,6 @@ msgid ""
 "churns.  The ribcage has arched outward, forming a hive-like construct covered by severely stretched "
 "epidermis.  Bulging through the taut abdominal flesh, something squirms as if trying to break free."
 msgstr ""
-"曾经是一个孩子，如今这团由松弛血肉和蠕动器官构成的可怕巨物在微弱地抽搐着，腹部不断翻搅。肋骨向外拱起，形成一种"
-"蜂窝状的结构，覆盖着极度拉伸的表皮。紧绷的腹部肌肉下有什么东西在蠕动着，仿佛试图挣脱出来。"
 
 #. ~ Monster message of special attack of monster "wretched hatchery"
 #: data/json/monsters/zed_children.json
@@ -187258,8 +187244,6 @@ msgid ""
 "melted plates that have fused to its skin and thickened hide.  It's riddled with wounds that might have once "
 "been bullet holes, puckering and drool an acrid slime."
 msgstr ""
-"这只僵尸穿着一套曾经似乎是士兵制服和护甲的衣物，如今已是一系列碎裂熔融的甲片，与它的皮肤和增厚的皮肉融为一体。"
-"它身上布满了或许曾是弹孔的伤口，那些伤口皱缩着，滴落着刺鼻的黏液。"
 
 #. ~ Monster name
 #: data/json/monsters/zed_soldiers.json
@@ -237075,7 +237059,7 @@ msgstr "我爸爸对过去发生的事情还是难以忘怀。还有什么面试
 msgid ""
 "Not many travelers come through here these days.  There's not much left to wander too, besides a horde of "
 "<zombies>."
-msgstr "这些天没有多少游客经过这里。  除了一群<丧尸>之外，也没什么可逛的了。"
+msgstr "这些天没有多少游客经过这里。  除了一群<僵尸>之外，也没什么可逛的了。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Olwen_Powell.json
@@ -237083,7 +237067,7 @@ msgid ""
 "Not many travelers come through here these days.  There's not much left to wander too, besides a horde of "
 "<zombies>.  The people here won't be too friendly with you either, so that sucks."
 msgstr ""
-"这些天没有多少游客经过这里。  除了一群<丧尸>之外，也没什么可逛的了。  这里的人对你也不会太友好，所以这很糟糕。"
+"这些天没有多少游客经过这里。  除了一群<僵尸>之外，也没什么可逛的了。  这里的人对你也不会太友好，所以这很糟糕。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Olwen_Powell.json
@@ -239521,7 +239505,7 @@ msgid ""
 "hadn't been looted yet and there weren't any <zombies> lurking around; just the spot to stay 'till who knows "
 "when."
 msgstr ""
-"当我逃离城市的混乱时，我发现了这个紧急避难所。  幸运的是，这里还没有被洗劫一空，也没有<丧尸>潜伏在周围；只是一"
+"当我逃离城市的混乱时，我发现了这个紧急避难所。  幸运的是，这里还没有被洗劫一空，也没有<僵尸>潜伏在周围；只是一"
 "个停留的地方，直到谁知道什么时候。"
 
 #. ~ NPC dialogue line
@@ -239534,7 +239518,7 @@ msgid ""
 "hadn't been looted yet and there weren't any <zombies> lurking around; just the spot to stay 'till who knows "
 "when."
 msgstr ""
-"当我逃离城市的混乱时，我发现了这个紧急避难所。  幸运的是，这里还没有被洗劫一空，也没有<丧尸>潜伏在周围；只是一"
+"当我逃离城市的混乱时，我发现了这个紧急避难所。  幸运的是，这里还没有被洗劫一空，也没有<僵尸>潜伏在周围；只是一"
 "个停留的地方，直到谁知道什么时候。"
 
 #. ~ NPC dialogue line
@@ -239547,7 +239531,7 @@ msgid ""
 "hadn't been looted yet and there weren't any <zombies> lurking around; just the spot to stay 'till who knows "
 "when."
 msgstr ""
-"当我逃离城市的混乱时，我发现了这个紧急避难所。  幸运的是，这里还没有被洗劫一空，也没有<丧尸>潜伏在周围；只是一"
+"当我逃离城市的混乱时，我发现了这个紧急避难所。  幸运的是，这里还没有被洗劫一空，也没有<僵尸>潜伏在周围；只是一"
 "个停留的地方，直到谁知道什么时候。"
 
 #. ~ NPC dialogue line
@@ -289238,7 +289222,7 @@ msgstr ""
 "他们死后站起来，砸碎尸体\n"
 "城外的政府大楼，差点死了，秘密？？？\n"
 "每天喂 Besse 3 次\n"
-"不要吃<丧尸>\n"
+"不要吃<僵尸>\n"
 "北边的大社区，好地方吗？\n"
 "罗德岛还好吗？  听到传闻"
 
@@ -393147,7 +393131,7 @@ msgstr "让所有队员暂时……"
 
 #: src/npctalk.cpp:1141 src/npctalk.cpp:1758
 msgid "yell"
-msgstr "喊的"
+msgstr "黄色"
 
 #: src/npctalk.cpp:1143 src/npctalk.cpp:1760
 msgid "hiss"
