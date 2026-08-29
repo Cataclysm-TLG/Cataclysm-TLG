@@ -891,17 +891,5 @@
       { "u_spawn_item": "antler", "count": 2 },
       { "u_add_trait": "ANTLERS_SHED" }
     ]
-  },
-  {
-    "type": "effect_on_condition",
-    "id": "EOC_ALBINO_HAIR",
-    "eoc_type": "EVENT",
-    "required_event": "gains_mutation",
-    "condition": {
-      "and": [ { "u_has_trait": "ALBINO" }, { "not": { "u_has_trait": "natural_hair_color_white" } } ]
-    },
-    "effect": [
-      { "u_add_trait": "natural_hair_color_white" }
-    ]
   }
 ]
