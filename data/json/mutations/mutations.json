@@ -6426,14 +6426,13 @@
   {
     "type": "mutation",
     "id": "PALE",
-    "name": { "str": "Pale Skin" },
+    "name": { "str": "Pallid" },
     "points": 0,
     "visibility": 3,
     "ugliness": 1,
-    "description": "Your skin is rather pale.",
+    "description": "Your skin appears unnaturally pale.",
     "changes_to": [ "ALBINO" ],
-    "category": [ "LUPINE", "TROGLOBITE", "MOUSE", "RABBIT", "BEAST" ],
-    "types": [ "skin_tone" ]
+    "category": [ "LUPINE", "TROGLOBITE", "MOUSE", "RABBIT", "BEAST" ]
   },
   {
     "type": "mutation",
