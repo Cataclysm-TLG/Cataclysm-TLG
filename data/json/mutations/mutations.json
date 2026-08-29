@@ -184,7 +184,6 @@
       "CAMO2",
       "MUCUS_SECRETION",
       "MUCUS_SECRETION2",
-      "PALE",
       "SLIME_SPRAY",
       "SNAIL_TRAIL",
       "SORES",
@@ -1880,7 +1879,7 @@
     "starting_trait": true,
     "changes_to": [ "SUNBURN" ],
     "category": [ "TROGLOBITE", "MOUSE", "RABBIT" ],
-    "prereqs": [ "PALE" ],
+    "prereqs": [ "SKIN_PALE" ],
     "flags": [ "ALBINO" ]
   },
   {

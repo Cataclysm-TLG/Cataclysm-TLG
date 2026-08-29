@@ -310,6 +310,16 @@
   },
   {
     "type": "mutation",
+    "id": "PALE",
+    "name": { "str": "Pale Skin" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.  It is now Skin tone: pale",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
     "id": "FASTLEARNER",
     "name": { "str": "Fast Learner" },
     "points": 0,
