@@ -398,7 +398,7 @@ std::optional<std::list<item>::iterator> outfit::wear_item( Character &guy, cons
         guy.add_msg_if_npc( _( "<npcname> puts on their %s." ), to_wear.tname() );
     }
 
-    // skip this for unsorted items in debug mode
+    // Skip this for unsorted items in debug mode.
     if( do_sort_items ) {
         new_item_it->on_wear( guy );
 
@@ -1392,9 +1392,7 @@ static ret_val<void> rigid_test(
 
 ret_val<void> outfit::check_rigid_conflicts( const item &clothing, side s ) const
 {
-
     std::unordered_set<sub_bodypart_id> to_test;
-
     // if not overridden get the actual side of the item
     if( s == side::num_sides ) {
         s = clothing.get_side();
@@ -1436,14 +1434,11 @@ ret_val<void> outfit::check_rigid_conflicts( const item &clothing ) const
     if( !clothing.is_sided() ) {
         return check_rigid_conflicts( clothing, side::BOTH );
     }
-
     ret_val<void> ls = check_rigid_conflicts( clothing, side::LEFT );
     ret_val<void> rs = check_rigid_conflicts( clothing, side::RIGHT );
-
     if( !ls.success() && !rs.success() ) {
         return ls;
     }
-
     return ret_val<void>::make_success();
 }
 
