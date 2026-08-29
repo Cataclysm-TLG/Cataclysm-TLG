@@ -20,6 +20,20 @@
     "types": [ "eye_color" ]
   },
   {
+    "type": "mutation",
+    "id": "PALE",
+    "name": { "str": "Skin tone: pale" },
+    "points": 0,
+    "starting_trait": true,
+    "valid": false,
+    "player_display": true,
+    "vanity": true,
+    "description": "You have very pale skin.",
+    "leads_to": [ "ALBINO" ],
+    "category": [ "LUPINE", "TROGLOBITE", "MOUSE", "RABBIT", "BEAST" ],
+    "types": [ "skin_tone" ]
+  },
+  {
     "id": "SKIN_DARK",
     "type": "mutation",
     "name": { "str": "Skin tone: dark brown" },
@@ -35,7 +49,7 @@
     "id": "SKIN_LIGHT",
     "type": "mutation",
     "name": { "str": "Skin tone: light" },
-    "description": "You have a light peach skin tone.",
+    "description": "You have a light skin tone.",
     "points": 0,
     "starting_trait": true,
     "valid": false,
