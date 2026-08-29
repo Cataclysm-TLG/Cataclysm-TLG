@@ -1138,33 +1138,6 @@ body_part_set item::get_covered_body_parts( const side s, const Character *you )
     return res;
 }
 
-namespace
-{
-
-const std::array<bodypart_str_id, 4> &left_side_parts()
-{
-    static const std::array<bodypart_str_id, 4> result{ {
-            body_part_arm_l,
-            body_part_hand_l,
-            body_part_leg_l,
-            body_part_foot_l
-        } };
-    return result;
-}
-
-const std::array<bodypart_str_id, 4> &right_side_parts()
-{
-    static const std::array<bodypart_str_id, 4> result{ {
-            body_part_arm_r,
-            body_part_hand_r,
-            body_part_leg_r,
-            body_part_foot_r
-        } };
-    return result;
-}
-
-} // namespace
-
 static void iterate_helper_sbp_masked( const item *i, const side s,
                                        const std::function<void( const sub_bodypart_str_id & )> &cb,
                                        const body_part_set *mask = nullptr );
@@ -1177,7 +1150,6 @@ static void iterate_helper_sbp_masked( const item *i, const side s,
     if( armor == nullptr ) {
         return;
     }
-
     for( const armor_portion_data &data : armor->sub_data ) {
         if( !data.sub_coverage.empty() ) {
             for( const sub_bodypart_str_id &sbp : data.sub_coverage ) {
@@ -1193,8 +1165,6 @@ static void iterate_helper_sbp_masked( const item *i, const side s,
         }
     }
 }
-
-
 
 static void iterate_helper_masked( const item *i, const side s,
                                    const std::function<void( const bodypart_str_id & )> &cb,
@@ -1227,13 +1197,11 @@ static void iterate_helper_masked( const item *i, const side s,
     if( armor == nullptr ) {
         return;
     }
-    const auto &opposite_side_parts = s == side::LEFT ? right_side_parts() : left_side_parts();
     for( const armor_portion_data &data : armor->data ) {
         if( data.covers.has_value() ) {
             for( const bodypart_str_id &bpid : data.covers.value() ) {
                 if( s != side::BOTH && s != side::num_sides ) {
-                    if( std::find( opposite_side_parts.begin(), opposite_side_parts.end(),
-                                   bpid ) != opposite_side_parts.end() ) {
+                    if( bpid->part_side != s && bpid->part_side != side::BOTH ) {
                         continue;
                     }
                 }
