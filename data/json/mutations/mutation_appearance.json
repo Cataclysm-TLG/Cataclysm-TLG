@@ -21,7 +21,7 @@
   },
   {
     "type": "mutation",
-    "id": "PALE",
+    "id": "SKIN_PALE",
     "name": { "str": "Skin tone: pale" },
     "points": 0,
     "starting_trait": true,
