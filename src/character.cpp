@@ -246,6 +246,7 @@ static const efftype_id effect_fungus( "fungus" );
 static const efftype_id effect_glowing( "glowing" );
 static const efftype_id effect_glowy_led( "glowy_led" );
 static const efftype_id effect_grabbed( "grabbed" );
+static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_harnessed( "harnessed" );
 static const efftype_id effect_heavysnare( "heavysnare" );
 static const efftype_id effect_hot( "hot" );
@@ -3940,11 +3941,9 @@ std::vector<std::pair<std::string, std::string>> Character::get_overlay_ids() co
         for( const auto &eff_pr : *effects ) {
             std::string effect_id = "effect_" + eff_pr.first.str();
             const int intensity = get_effect_int( eff_pr.first );
-
-            if( intensity > 1 ) {
+            if( intensity > 1 && eff_pr.first != effect_grabbed && eff_pr.first != effect_grabbing ) {
                 effect_id += "_int" + std::to_string( intensity );
             }
-
             rval.emplace_back( effect_id, "" );
         }
     }
