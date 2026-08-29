@@ -105,6 +105,7 @@ static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
 static const efftype_id effect_fallout( "fallout" );
 static const efftype_id effect_fungus( "fungus" );
+static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
@@ -4429,7 +4430,7 @@ std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() cons
         for( const auto &eff_pr : *effects ) {
             std::string effect_id = "effect_" + eff_pr.first.str();
             const int intensity = get_effect_int( eff_pr.first );
-            if( intensity > 1 ) {
+            if( intensity > 1 && eff_pr.first != effect_grabbed && eff_pr.first != effect_grabbing ) {
                 effect_id += "_int" + std::to_string( intensity );
             }
             rval.emplace_back( effect_id, "" );
