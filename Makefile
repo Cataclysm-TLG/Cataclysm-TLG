@@ -340,6 +340,14 @@ else
     CXX = $(CROSS)$(OS_COMPILER)
     LD  = $(CROSS)$(OS_LINKER)
   endif
+  CXX_WARNINGS += -Wno-unknown-warning
+  WARNINGS += -Wno-unknown-warning
+  # GCC 16 -Wsfinae-incomplete: SFINAE on incomplete forward-declared types
+  # (e.g. std::reference_wrapper<vehicle>) is link-compatible across TUs.
+  GCC_MAJOR := $(shell $(CROSS)$(OS_COMPILER) -dumpversion 2>/dev/null | cut -d. -f1)
+  ifeq ($(shell expr $(GCC_MAJOR) \>= 16 2>/dev/null), 1)
+    CXX_WARNINGS += -Wno-error=sfinae-incomplete
+  endif
 endif
 
 STRIP = $(CROSS)strip
@@ -551,7 +559,7 @@ ifeq ($(NATIVE), osx)
   DEFINES += -DMACOSX
   CXXFLAGS += -mmacosx-version-min=10.15
   LDFLAGS += -mmacosx-version-min=10.15 -framework CoreFoundation -Wl,-headerpad_max_install_names
-  LDFLAGS += -liconv 
+  LDFLAGS += -liconv
   ifeq ($(UNIVERSAL_BINARY), 1)
     CXXFLAGS += -arch x86_64 -arch arm64
     LDFLAGS += -arch x86_64 -arch arm64
