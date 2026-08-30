@@ -7826,10 +7826,26 @@ void Character::shout( std::string msg, bool order )
     }
     if( noise <= 2 ) {
         add_msg_if_player( m_warning, _( "Your %s is barely audible!" ), shout );
-        msg = is_avatar() ? _( "your faint voice." ) : _( "an indistinct voice." );
+        if( msg.empty() ) {
+            if( is_avatar() ) {
+                msg = _( "your own faint voice." );
+            } else if( get_player_character().sees( get_map(), *this ) ) {
+                msg = string_format( _( "%s indistinct voice." ), disp_name( true, true ) );
+            } else {
+                msg = _( "an indistinct voice." );
+            }
+        }
     }
     if( msg.empty() ) {
-        msg = is_avatar() ? _( "yourself shout loudly!" ) : _( "a loud shout!" );
+        if( msg.empty() ) {
+            if( is_avatar() ) {
+                msg = _( "yourself shout loudly!" );
+            } else if( get_player_character().sees( get_map(), *this ) ) {
+                msg = string_format( _( "%s shout loudly!" ), disp_name( false, true ) );
+            } else {
+                msg = _( "a loud shout!" );
+            }
+        }
     }
     sounds::sound( pos_bub(), noise, order ? sounds::sound_t::order : sounds::sound_t::alert, msg,
                    false,
