@@ -530,7 +530,7 @@ void sounds::process_sounds()
     recent_sounds.clear();
 }
 
-// skip some sounds to avoid message spam
+// Skip some sounds to avoid message spam.
 static bool describe_sound( sounds::sound_t category, bool from_player_position )
 {
     if( from_player_position ) {
@@ -568,7 +568,7 @@ static bool describe_sound( sounds::sound_t category, bool from_player_position 
             case sounds::sound_t::activity:
                 return one_in( 50 );
             case sounds::sound_t::destructive_activity:
-                return one_in( 20 );
+                return one_in( 10 );
             case sounds::sound_t::speech:
             case sounds::sound_t::electronic_speech:
             case sounds::sound_t::alarm:
