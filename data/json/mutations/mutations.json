@@ -5159,7 +5159,8 @@
     "prereqs2": [ "PRED3" ],
     "threshreq": [ "THRESH_LUPINE" ],
     "category": [ "LUPINE" ],
-    "flags": [ "PRED3" ]
+    "flags": [ "PRED3" ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "COMBAT_CATCHUP", "multiply": 2.0 } ] } ]
   },
   {
     "type": "mutation",
