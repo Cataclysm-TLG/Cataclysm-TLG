@@ -580,12 +580,15 @@ void suffer::while_awake( Character &you )
     }
 
     if( you.has_trait( trait_SHOUT1 ) && one_turn_in( 6_hours ) ) {
+        you.add_msg_if_player( _( "You shout loudly!" ) );
         you.shout();
     }
     if( you.has_trait( trait_SHOUT2 ) && one_turn_in( 4_hours ) ) {
+        you.add_msg_if_player( _( "You scream loudly!" ) );
         you.shout();
     }
     if( you.has_trait( trait_SHOUT3 ) && one_turn_in( 3_hours ) ) {
+        you.add_msg_if_player( _( "You let out a piercing howl!" ) );
         you.shout();
     }
     if( you.has_trait( trait_M_SPORES ) && one_turn_in( 4_hours ) ) {

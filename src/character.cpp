@@ -7781,17 +7781,35 @@ void Character::shout( std::string msg, bool order )
     // Mutations make shouting louder or quieter, they also define the default message.
     if( has_trait( trait_SHOUT3 ) ) {
         if( msg.empty() ) {
-            msg = is_avatar() ? _( "yourself let out a piercing howl!" ) : _( "a piercing howl!" );
+            if( is_avatar() ) {
+                msg = _( "yourself let out a piercing howl!" );
+            } else if( get_player_character().sees( get_map(), *this ) ) {
+                msg = string_format( _( "%s let out a piercing howl!" ), disp_name( false, true ) );
+            } else {
+                msg = _( "a piercing howl!" );
+            }
             shout = "howl";
         }
     } else if( has_trait( trait_SHOUT2 ) ) {
         if( msg.empty() ) {
-            msg = is_avatar() ? _( "yourself scream loudly!" ) : _( "a loud scream!" );
+            if( is_avatar() ) {
+                msg = _( "yourself scream loudly!" );
+            } else if( get_player_character().sees( get_map(), *this ) ) {
+                msg = string_format( _( "%s scream loudly!" ), disp_name( false, true ) );
+            } else {
+                msg = _( "a loud scream!" );
+            }
             shout = "scream";
         }
     } else if( has_trait( trait_SCREECH ) ) {
         if( msg.empty() ) {
-            msg = is_avatar() ? _( "yourself screech loudly!" ) : _( "a loud screech!" );
+            if( is_avatar() ) {
+                msg = _( "yourself screech loudly!" );
+            } else if( get_player_character().sees( get_map(), *this ) ) {
+                msg = string_format( _( "%s screech loudly!" ), disp_name( false, true ) );
+            } else {
+                msg = _( "a loud screech!" );
+            }
             shout = "screech";
         }
     }
