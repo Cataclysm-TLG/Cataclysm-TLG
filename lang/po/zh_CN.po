@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-"PO-Revision-Date: 2026-08-29 22:26+0800\n"
+"PO-Revision-Date: 2026-08-31 23:47+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -187917,7 +187917,7 @@ msgstr "行走"
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Bearded Lady"
-msgstr ""
+msgstr "胡子女士"
 
 #. ~ Description of variant "Hair: black, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -187927,7 +187927,7 @@ msgstr "黑发扎成两束。"
 #. ~ Description of variant "Hair: black, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Black hair, short and parted on the side."
-msgstr ""
+msgstr "黑色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: blond, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -187937,7 +187937,7 @@ msgstr "金色的头发扎成两束。"
 #. ~ Description of variant "Hair: blond, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Blond hair, short and parted on the side."
-msgstr ""
+msgstr "金色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: blue, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -187947,7 +187947,7 @@ msgstr "蓝色的头发扎成两束。"
 #. ~ Description of variant "Hair: blue, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Blue hair, short and parted on the side."
-msgstr ""
+msgstr "蓝色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: brown, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -187957,7 +187957,7 @@ msgstr "棕色的头发扎成两束。"
 #. ~ Description of variant "Hair: brown, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Brown hair, short and parted on the side."
-msgstr ""
+msgstr "棕色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: gray, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -187967,7 +187967,7 @@ msgstr "灰色的头发扎成两团。"
 #. ~ Description of variant "Hair: gray, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Gray hair, short and parted on the side."
-msgstr ""
+msgstr "灰色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: green, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -187977,7 +187977,7 @@ msgstr "绿色的头发扎成两团。"
 #. ~ Description of variant "Hair: green, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Green hair, short and parted on the side."
-msgstr ""
+msgstr "绿色的头发，短发且向两侧分开。"
 
 #. ~ Description of mutation "Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188022,12 +188022,12 @@ msgstr "发型：寸头（黑色）"
 #. ~ Variant name of mutation "Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, crew cut"
-msgstr ""
+msgstr "发型：侧分短发（黑色）"
 
 #. ~ Variant name of mutation "Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, fade"
-msgstr ""
+msgstr "发型：渐变短发（黑色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188037,12 +188037,12 @@ msgstr "发型：长发（黑色）"
 #. ~ Variant name of mutation "Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long braid"
-msgstr ""
+msgstr "发型：长发辫（黑色）"
 
 #. ~ Variant name of mutation "Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long feathered"
-msgstr ""
+msgstr "发型：长羽毛剪（黑色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188052,17 +188052,17 @@ msgstr "发型：凌乱长发（黑色）"
 #. ~ Variant name of mutation "Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, long wavy"
-msgstr ""
+msgstr "发型：长波浪（黑色）"
 
 #. ~ Variant name of mutation "Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, medium curls"
-msgstr ""
+msgstr "发型：中长卷发（黑色）"
 
 #. ~ Variant name of mutation "Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, medium fringe"
-msgstr ""
+msgstr "发型：中长刘海（黑色）"
 
 #. ~ Variant name of mutation "Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188082,7 +188082,7 @@ msgstr "发型：鲻鱼头（黑色）"
 #. ~ Variant name of mutation "Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, pigtails"
-msgstr ""
+msgstr "发型：双马尾（黑色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188097,7 +188097,7 @@ msgstr "发型：蓬蓬头（黑色）"
 #. ~ Variant name of mutation "Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, shag"
-msgstr ""
+msgstr "发型：碎发（黑色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188107,22 +188107,22 @@ msgstr "发型：短发（黑色）"
 #. ~ Variant name of mutation "Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, short curls"
-msgstr ""
+msgstr "发型：短卷发（黑色）"
 
 #. ~ Variant name of mutation "Hair: short fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, short fringe"
-msgstr ""
+msgstr "发型：短刘海（黑色）"
 
 #. ~ Variant name of mutation "Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, side part"
-msgstr ""
+msgstr "发型：侧分（黑色）"
 
 #. ~ Variant name of mutation "Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: black, side shave"
-msgstr ""
+msgstr "发型：侧剃（黑色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188157,12 +188157,12 @@ msgstr "发型：寸头（金色）"
 #. ~ Variant name of mutation "Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, crew cut"
-msgstr ""
+msgstr "发型：寸头（金色）"
 
 #. ~ Variant name of mutation "Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, fade"
-msgstr ""
+msgstr "发型：渐变短发（金色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188172,12 +188172,12 @@ msgstr "发型：长发（金色）"
 #. ~ Variant name of mutation "Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long braid"
-msgstr ""
+msgstr "发型：长发辫（金色）"
 
 #. ~ Variant name of mutation "Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long feathered"
-msgstr ""
+msgstr "发型：长羽毛剪（金色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188187,17 +188187,17 @@ msgstr "发型：凌乱长发（金色）"
 #. ~ Variant name of mutation "Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, long wavy"
-msgstr ""
+msgstr "发型：长波浪（金色）"
 
 #. ~ Variant name of mutation "Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, medium curls"
-msgstr ""
+msgstr "发型：中长卷发（金色）"
 
 #. ~ Variant name of mutation "Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, medium fringe"
-msgstr ""
+msgstr "发型：中长刘海（金色）"
 
 #. ~ Variant name of mutation "Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188217,7 +188217,7 @@ msgstr "发型：鲻鱼头（金色）"
 #. ~ Variant name of mutation "Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, pigtails"
-msgstr ""
+msgstr "发型：双马尾（金色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188232,7 +188232,7 @@ msgstr "发型：蓬蓬头（金色）"
 #. ~ Variant name of mutation "Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, shag"
-msgstr ""
+msgstr "发型：碎发（金色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188242,22 +188242,22 @@ msgstr "发型：短发（金色）"
 #. ~ Variant name of mutation "Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, short curls"
-msgstr ""
+msgstr "发型：短卷发（金色）"
 
 #. ~ Variant name of mutation "Hair: short fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, short fringe"
-msgstr ""
+msgstr "发型：短刘海（金色）"
 
 #. ~ Variant name of mutation "Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, side part"
-msgstr ""
+msgstr "发型：侧分（金色"
 
 #. ~ Variant name of mutation "Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blond, side shave"
-msgstr ""
+msgstr "发型：侧剃（金色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188292,12 +188292,12 @@ msgstr "发型：寸头（蓝色）"
 #. ~ Variant name of mutation "Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, crew cut"
-msgstr ""
+msgstr "发型：寸头（蓝色）"
 
 #. ~ Variant name of mutation "Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, fade"
-msgstr ""
+msgstr "发型：渐变短发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188307,12 +188307,12 @@ msgstr "发型：长发（蓝色）"
 #. ~ Variant name of mutation "Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long braid"
-msgstr ""
+msgstr "发型：长发辫（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long feathered"
-msgstr ""
+msgstr "发型：长羽毛剪（蓝色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188322,17 +188322,17 @@ msgstr "发型：凌乱长发（蓝色）"
 #. ~ Variant name of mutation "Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, long wavy"
-msgstr ""
+msgstr "发型：长波浪（蓝色）"
 
 #. ~ Variant name of mutation "Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, medium curls"
-msgstr ""
+msgstr "发型：中长卷发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, medium fringe"
-msgstr ""
+msgstr "发型：中长刘海（蓝色）"
 
 #. ~ Variant name of mutation "Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188352,7 +188352,7 @@ msgstr "发型：鲻鱼头（蓝色）"
 #. ~ Variant name of mutation "Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, pigtails"
-msgstr ""
+msgstr "发型：双马尾（蓝色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188367,7 +188367,7 @@ msgstr "发型：蓬蓬头（蓝色）"
 #. ~ Variant name of mutation "Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, shag"
-msgstr ""
+msgstr "发型：碎发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188377,22 +188377,22 @@ msgstr "发型：短发（蓝色）"
 #. ~ Variant name of mutation "Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, short curls"
-msgstr ""
+msgstr "发型：短卷发（蓝色）"
 
 #. ~ Variant name of mutation "Hair: short fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, short fringe"
-msgstr ""
+msgstr "发型：短刘海（蓝色）"
 
 #. ~ Variant name of mutation "Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, side part"
-msgstr ""
+msgstr "发型：侧分（蓝色）"
 
 #. ~ Variant name of mutation "Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: blue, side shave"
-msgstr ""
+msgstr "发型：侧剃（蓝色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188427,12 +188427,12 @@ msgstr "发型：寸头（棕色）"
 #. ~ Variant name of mutation "Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, crew cut"
-msgstr ""
+msgstr "发型：寸头（棕色）"
 
 #. ~ Variant name of mutation "Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, fade"
-msgstr ""
+msgstr "发型：渐变短发（棕色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188442,12 +188442,12 @@ msgstr "发型：长发（棕色）"
 #. ~ Variant name of mutation "Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long braid"
-msgstr ""
+msgstr "发型：长发辫（棕色）"
 
 #. ~ Variant name of mutation "Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long feathered"
-msgstr ""
+msgstr "发型：长羽毛剪（棕色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188457,17 +188457,17 @@ msgstr "发型：凌乱长发（棕色）"
 #. ~ Variant name of mutation "Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, long wavy"
-msgstr ""
+msgstr "发型：长波浪（棕色）"
 
 #. ~ Variant name of mutation "Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, medium curls"
-msgstr ""
+msgstr "发型：中长卷发（棕色）"
 
 #. ~ Variant name of mutation "Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, medium fringe"
-msgstr ""
+msgstr "发型：中长刘海（棕色）"
 
 #. ~ Variant name of mutation "Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188487,7 +188487,7 @@ msgstr "发型：鲻鱼头（棕色）"
 #. ~ Variant name of mutation "Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, pigtails"
-msgstr ""
+msgstr "发型：双马尾（棕色）"
 
 #. ~ Variant name of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188502,7 +188502,7 @@ msgstr "发型：蓬蓬头（棕色）"
 #. ~ Variant name of mutation "Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, shag"
-msgstr ""
+msgstr "发型：碎发（棕色）"
 
 #. ~ Variant name of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188512,22 +188512,22 @@ msgstr "发型：短发（棕色）"
 #. ~ Variant name of mutation "Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, short curls"
-msgstr ""
+msgstr "发型：短卷发（棕色）"
 
 #. ~ Variant name of mutation "Hair: short fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, short fringe"
-msgstr ""
+msgstr "发型：短刘海（棕色）"
 
 #. ~ Variant name of mutation "Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, side part"
-msgstr ""
+msgstr "发型：侧分（棕色）"
 
 #. ~ Variant name of mutation "Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: brown, side shave"
-msgstr ""
+msgstr "发型：侧剃（棕色）"
 
 #. ~ Variant name of mutation "Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188547,17 +188547,17 @@ msgstr "发型：发髻"
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: buzzcut"
-msgstr ""
+msgstr "发型：寸头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: crew cut"
-msgstr ""
+msgstr "发型：平头"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: fade"
-msgstr ""
+msgstr "发型：渐变短发"
 
 #. ~ Variant name of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188582,12 +188582,12 @@ msgstr "发型：寸头（灰色）"
 #. ~ Variant name of mutation "Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, crew cut"
-msgstr ""
+msgstr "发型：寸头（灰色）"
 
 #. ~ Variant name of mutation "Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, fade"
-msgstr ""
+msgstr "发型：渐变短发（灰色）"
 
 #. ~ Variant name of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188597,12 +188597,12 @@ msgstr "发型：长发（灰色）"
 #. ~ Variant name of mutation "Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, long braid"
-msgstr ""
+msgstr "发型：长发辫（灰色）"
 
 #. ~ Variant name of mutation "Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, long feathered"
-msgstr ""
+msgstr "发型：长羽毛剪（灰色）"
 
 #. ~ Variant name of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
@@ -188612,12 +188612,12 @@ msgstr "发型：凌乱长发（灰色）"
 #. ~ Variant name of mutation "Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, long wavy"
-msgstr ""
+msgstr "发型：长波浪（灰色）"
 
 #. ~ Variant name of mutation "Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Hair: gray, medium curls"
-msgstr ""
+msgstr "发型：中长卷发（灰色）"
 
 #. ~ Variant name of mutation "Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
@@ -213114,7 +213114,7 @@ msgstr "来个侦探剪裁吧"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a fade."
-msgstr ""
+msgstr "理个渐变发型。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
@@ -213144,12 +213144,12 @@ msgstr "找到一枚马洛斯变异莓。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a long braid."
-msgstr ""
+msgstr "编个长辫子。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a long cut with a side shave."
-msgstr ""
+msgstr "剪个侧剃长发。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
@@ -213159,12 +213159,12 @@ msgstr "快滚。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a long feathered cut."
-msgstr ""
+msgstr "剪个长羽毛剪发。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a medium cut with a fringe."
-msgstr ""
+msgstr "剪个带刘海中长发。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
@@ -213224,12 +213224,12 @@ msgstr "胡须：短箱式胡"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a short cut parted on one side."
-msgstr ""
+msgstr "剪个侧分短发。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get a short cut with a fringe."
-msgstr ""
+msgstr "剪个带刘海的短发。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
@@ -213264,22 +213264,22 @@ msgstr "离我远点。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get an afro."
-msgstr ""
+msgstr "做个爆炸头。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get it beaded."
-msgstr ""
+msgstr "做个串珠发型。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get medium-length curls."
-msgstr ""
+msgstr "弄个中长卷发。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get pigtails."
-msgstr ""
+msgstr "扎个双马尾。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
@@ -213304,7 +213304,7 @@ msgstr "去干活吧。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/EOC_talkers/haircutting.json
 msgid "Get your hair styled in puffs."
-msgstr ""
+msgstr "把头发弄成蓬蓬头。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/EOC_talkers/haircutting.json
@@ -214576,6 +214576,14 @@ msgid ""
 "running low on supplies, you can tell me to stop recharging when I'm not full.\n"
 "  I'll tell you if I'm low on bionic energy and can't recharge, and what fuel I need."
 msgstr ""
+"生化插件算是一种强化改造吧？它们以这种可安装的紧凑型生化插件模块（CBM）形式存在，我可以使用其中一部分——如果你检"
+"查一个CBM，它会告诉你我能不能用。\n"
+"找个可编程手术仪或自动手术台，让我躺到手术台上，激活它，你就可以安装合适的CBM了。如果我比你更擅长安装CBM，就由"
+"我来替你装。\n"
+"我几乎可以使用所有被动型生化插件，以及一部分主动型生化插件。如果我有主动型插件，我会尽量合理使用，但如果我们遇"
+"到危险，我会激活任何能让我占上风的东西。如果武器类插件比你给我的武器更好，我也会用它们；但如果你觉得我应该节省"
+"生化能量，你可以告诉我应该预留多少。我会尽量保持生化能量充足，但如果补给不足，你也能告诉我不用充满也没关系。\n"
+"如果我的生化能量不足且无法充能，我会告诉你，以及需要什么燃料。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -218279,7 +218287,7 @@ msgstr "[教程]你能告诉我些事吗？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json data/json/npcs/your_followers/luo_follower.json
 msgid "Can you teach something?"
-msgstr ""
+msgstr "你能教我些什么吗？"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
@@ -229561,6 +229569,8 @@ msgid ""
 "Excellent.  Take this blood draw kit; once you've produced a zombie corpse, use it to extract blood from the "
 "body, then take it to a hospital for analysis.  After all that, bring the phlebotomy data back to me."
 msgstr ""
+"很好。带上这个采血工具包；等你弄到一具丧尸尸体后，用它抽取血液样本，然后送到医院进行分析。做完这些之后，把静脉"
+"血液学数据带回来给我。"
 
 #. ~ Mission name
 #: data/json/npcs/missiondef.json
@@ -229681,6 +229691,8 @@ msgid ""
 "<color_light_red>learn how to craft cattail jelly</color>.  Raise your <color_light_blue>ecology skill to at "
 "least 1</color> by harvesting cattail stalks or foraging in underbrush."
 msgstr ""
+"从沼泽中采集 <color_light_blue>20 根香蒲茎</color> 带回来，以<color_light_red>学习制作香蒲果冻的方法</color>。"
+"通过采集香蒲茎或在灌木丛中搜寻，将你的<color_light_blue>生态学技能提升至至少 1 级</color>。"
 
 #. ~ Mission name
 #: data/json/npcs/missiondef.json data/mods/innawood/npcs/missiondef.json
@@ -231577,7 +231589,7 @@ msgstr "你有金属板吗？"
 #. ~ Dialogue line in mission "Renewable Energy"
 #: data/json/npcs/necc/godco_missions.json
 msgid "Do you have the solar arrays?"
-msgstr ""
+msgstr "你有太阳能板阵列吗？"
 
 #. ~ Dialogue line in mission "Mathematical Measures"
 #: data/json/npcs/necc/godco_missions.json
@@ -231750,7 +231762,7 @@ msgstr "为海伦娜·米森特找来两台刨床。"
 #. ~ Description of mission "Renewable Energy"
 #: data/json/npcs/necc/godco_missions.json
 msgid "Find two solar arrays for Corrie."
-msgstr ""
+msgstr "为科里找到两组太阳能板阵列。"
 
 #. ~ Mission name
 #: data/json/npcs/necc/godco_missions.json
@@ -250877,7 +250889,7 @@ msgstr "有机会的话你记得要回来哦，我们确实需要夺回这片区
 msgid ""
 "Deliver 10 solar panel arrays to help the Free Merchants set up a renewable power grid in exchange for a "
 "handsome reward."
-msgstr ""
+msgstr "运送 10 组太阳能板阵列，帮助自由商人建立可再生能源电网，以换取丰厚的报酬。"
 
 #. ~ Description of mission "In a Pickle"
 #: data/json/npcs/refugee_center/surface_staff/Smokes/free_merchant_shopkeep_missions.json
@@ -266250,7 +266262,7 @@ msgstr "地眠者"
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Epicuticle (molted) (obsolete)"
-msgstr ""
+msgstr "外表皮（已蜕）（已废弃）"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -266878,7 +266890,7 @@ msgstr "调查Hub-01"
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Collect 25 Magnetrons"
-msgstr ""
+msgstr "收集25个磁控管"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
@@ -316885,12 +316897,12 @@ msgstr "哔！"
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "CAW! CAW!"
-msgstr ""
+msgstr "呱！呱！"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "CRASH!"
-msgstr ""
+msgstr "哐当！"
 
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
@@ -317923,7 +317935,7 @@ msgstr "从故障生化插件中解救自己"
 #. ~ Description of mission "Social butterfly"
 #: data/json/starting_missions.json
 msgid "Go and recruit 3 followers, and maybe you'll be able to survive together."
-msgstr ""
+msgstr "去招募 3 名追随者吧，也许你们能一起活下去。"
 
 #. ~ Mission name
 #: data/json/starting_missions.json
@@ -331127,47 +331139,47 @@ msgstr "自动步枪"
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Batons"
-msgstr ""
+msgstr "警棍"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Bionic Swords"
-msgstr ""
+msgstr "仿生剑"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Bionic Weaponry"
-msgstr ""
+msgstr "仿生武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Bludgeons"
-msgstr ""
+msgstr "棍棒类武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Fencing Weaponry"
-msgstr ""
+msgstr "刺剑类武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Flails"
-msgstr ""
+msgstr "连枷"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Great Axes"
-msgstr ""
+msgstr "重型战斧"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Great Hammers"
-msgstr ""
+msgstr "大锤"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Great Swords"
-msgstr ""
+msgstr "巨剑"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
@@ -333886,7 +333898,7 @@ msgstr[0] "发射器型\"鹰爪\"无人车（关）"
 #. ~ MOD name
 #: data/mods/Gun_Control/modinfo.json
 msgid "Gun Control"
-msgstr ""
+msgstr "枪支管制"
 
 #. ~ Description of MOD "Gun Control"
 #: data/mods/Gun_Control/modinfo.json
@@ -348817,7 +348829,7 @@ msgstr "丢下物品至相邻位置"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Drop items while peeking"
-msgstr ""
+msgstr "在探头窥视时放下物品"
 
 #. ~ Key binding name
 #: data/raw/keybindings.json
