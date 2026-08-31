@@ -2721,7 +2721,7 @@
         "specifically_covers": [ "torso_hanging_front" ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ]
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ]
   },
   {
     "id": "stomach_sealed",
@@ -2860,7 +2860,7 @@
         "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -2896,7 +2896,7 @@
         "specifically_covers": [ "torso_hanging_front" ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -2932,7 +2932,7 @@
         "specifically_covers": [ "torso_hanging_front" ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "melee_damage": { "bash": 3 }
   },
   {
