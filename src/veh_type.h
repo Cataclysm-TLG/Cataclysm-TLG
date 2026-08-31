@@ -424,7 +424,7 @@ class vpart_info
 
         /** Volume of a foldable part when folded */
         std::optional<units::volume> folded_volume = std::nullopt;
-        
+
         /** Cargo location volume */
         units::volume size = 0_ml;
 

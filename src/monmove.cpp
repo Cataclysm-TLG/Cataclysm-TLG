@@ -1584,64 +1584,77 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
     map &here = get_map();
     const int source_cost = here.move_cost( f );
     const int dest_cost = here.move_cost( t );
-    // Digging and flying monsters ignore terrain cost
+    int snow_penalty = 0;
+    // Digging and flying monsters ignore terrain cost.
     if( flies() || ( digging() && here.has_flag( ter_furn_flag::TFLAG_DIGGABLE, t ) ) ) {
         movecost = 100;
-        // Swimming monsters move super fast in water
+        // Swimming monsters move very fast in water, like fish and sharks.
     } else if( swims() ) {
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
             here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( f );
+            snow_penalty += 1;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( t );
+            snow_penalty += 1;
         }
     } else if( can_submerge() ) {
-        // No-breathe monsters have to walk underwater slowly
+        // No-breathe monsters have to walk underwater slowly.
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
             here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( f );
+            snow_penalty += 1;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( t );
+            snow_penalty += 1;
         }
         movecost /= 2;
     } else if( climbs() ) {
         if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, f ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+            here.has_flag( ter_furn_flag::TFLAG_LADDER, f ) ) {
             movecost += 150;
         } else {
             movecost += 50 * here.move_cost( f );
+            snow_penalty += 1;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_CLIMBABLE, t ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+            here.has_flag( ter_furn_flag::TFLAG_LADDER, t ) ) {
             movecost += 150;
         } else {
             movecost += 50 * here.move_cost( t );
+            snow_penalty += 1;
         }
         movecost /= 2;
     } else {
         movecost = ( ( 50 * source_cost ) + ( 50 * dest_cost ) ) / 2.0;
+    }
+    if( snow_penalty > 0 ) {
         // Snow depth movement penalty (outdoor, unroofed tiles only)
         if( here.is_outside( pos_bub() ) && !here.is_roofed( pos_bub() ) ) {
+            add_msg( _( "%s is in snow" ), name() );
             const double snow_mm = get_weather().get_snow_depth_mm( pos_abs_omt() );
             if( snow_mm >= 100 ) {
-                const int penalty = snow_mm >= 500 ? 100 : ( snow_mm >= 250 ? 50 : 20 );
+                int penalty = snow_mm >= 500 ? 100 : ( snow_mm >= 250 ? 50 : 20 );
+                if( snow_penalty == 1 ) {
+                    penalty /= 2;
+                }
+                add_msg( _( "%1s is in snow and gets penalty %2s" ), name(), penalty );
                 movecost += penalty;
             }
         }
     }
-
     return movecost;
 }
 
@@ -2528,7 +2541,8 @@ void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,
                             if( vpi.has_flag( "INITIAL_PART" ) ) {
                                 add_msg_if_player_sees( nearby_destination, m_bad, _( "The %s falls over!" ), veh.name );
                             } else {
-                                add_msg_if_player_sees( nearby_destination, m_bad, _( "The %1$s's %2$s is disconnected!" ), veh.name,
+                                add_msg_if_player_sees( nearby_destination, m_bad, _( "The %1$s's %2$s is disconnected!" ),
+                                                        veh.name,
                                                         vp.part().name() );
                             }
                             if( vpi.has_flag( VPFLAG_POWER_TRANSFER ) ) {
