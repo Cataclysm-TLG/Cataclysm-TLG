@@ -32,8 +32,6 @@ class vehicle;
 
 template <typename T> class generic_factory;
 
-static const itype_id itype_generic_folded_vehicle( "generic_folded_vehicle" );
-
 namespace vehicles
 {
 // separator for variant when loading vehicle prototypes part array and map memory
@@ -426,10 +424,7 @@ class vpart_info
 
         /** Volume of a foldable part when folded */
         std::optional<units::volume> folded_volume = std::nullopt;
-
-        /** Volume of a foldable part when folded */
-        itype_id folded_item = itype_generic_folded_vehicle;
-
+        
         /** Cargo location volume */
         units::volume size = 0_ml;
 
