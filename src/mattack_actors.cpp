@@ -335,10 +335,14 @@ bool mon_spellcasting_actor::call( monster &mon ) const
 
     if( !spell_data.self && !allow_no_target ) {
         Creature *tgt_creature = get_creature_tracker().creature_at( target_pos );
+        map &here = get_map();
+        // Prevent monsters from attacking through terrain if they are submerged under it & target isn't.
         if( tgt_creature && mon.is_underwater() && !tgt_creature->is_underwater() &&
-            get_map().has_flag_ter_or_furn( ter_furn_flag::TFLAG_SWIM_UNDER, mon.pos_bub() ) ) {
+            ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, mon.pos_bub() ) ||
+              here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, tgt_creature->pos_bub() ) ) ) {
             return false;
         }
+
     }
 
     // Bail out if the target is out of range.
@@ -505,7 +509,14 @@ Creature *melee_actor::find_target( monster &z ) const
                                trig_dist_precise(
                                    z.pos_bub(), target->pos_bub() ) ) ) <= range;
         }
-
+        // Prevent attacking through terrain if the target isn't underwater.
+        if( in_range ) {
+            if( z.is_underwater() && !target->is_underwater() &&
+                ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ||
+                  here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, target->pos_bub() ) ) ) {
+                in_range = false;
+            }
+        }
         if( !in_range ||
             !z.sees( here, *target ) ||
             !here.clear_path( z.pos_bub( here ), target->pos_bub( here ),
@@ -793,8 +804,10 @@ bool melee_actor::call( monster &z ) const
         return false;
     }
 
+    // Prevent attacking through terrain if the target isn't underwater.
     if( z.is_underwater() && !target->is_underwater() &&
-        here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ) {
+        ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ||
+          here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, target->pos_bub() ) ) ) {
         return false;
     }
 

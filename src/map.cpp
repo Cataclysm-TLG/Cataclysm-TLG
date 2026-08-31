@@ -2694,7 +2694,6 @@ bool map::is_open_air( const tripoint_bub_ms &p ) const
 }
 
 // Move cost: 3D
-
 int map::move_cost( const tripoint_bub_ms &p, const bool ignore_fields ) const
 {
     // To save all of the bound checks and submaps fetching, we extract it
@@ -2707,9 +2706,7 @@ int map::move_cost( const tripoint_bub_ms &p, const bool ignore_fields ) const
     if( current_submap == nullptr ) {
         return 0;
     }
-
     field static nofield;
-
     const furn_t &furniture = current_submap->get_furn( l ).obj();
     const ter_t &terrain = current_submap->get_ter( l ).obj();
     const field &field = current_submap->get_field( l );

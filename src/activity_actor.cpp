@@ -5584,7 +5584,7 @@ static void stop_grab( Character &who )
     if( avatar *a = dynamic_cast<avatar *>( &who ) ) {
         a->grab( object_type::NONE );
     } else {
-        debugmsg( "who in grabbing is not an avatar??" );
+        debugmsg( "A non-player character is grabbing somehow." );
     }
 }
 
