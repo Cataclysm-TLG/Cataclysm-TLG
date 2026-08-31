@@ -153,6 +153,31 @@
     ]
   },
   {
+    "id": "luggage_large",
+    "type": "vehicle",
+    "name": "Large Suitcase",
+    "blueprint": [ [ "o" ] ],
+    "parts": [ { "x": 0, "y": 0, "parts": [ "suitcase_large" ] } ],
+    "items": [
+      { "x": 0, "y": 0, "chance": 60, "item_groups": [ "airliner_luggage" ] },
+      { "x": 0, "y": 0, "chance": 40, "item_groups": [ "airliner_luggage" ] },
+      { "x": 0, "y": 0, "chance": 20, "item_groups": [ "airliner_luggage" ] },
+      { "x": 0, "y": 0, "chance": 20, "item_groups": [ "airliner_luggage" ] }
+    ]
+  },
+  {
+    "id": "luggage",
+    "type": "vehicle",
+    "name": "Suitcase",
+    "blueprint": [ [ "o" ] ],
+    "parts": [ { "x": 0, "y": 0, "parts": [ "suitcase" ] } ],
+    "items": [
+      { "x": 0, "y": 0, "chance": 60, "item_groups": [ "airliner_luggage" ] },
+      { "x": 0, "y": 0, "chance": 20, "item_groups": [ "airliner_luggage" ] },
+      { "x": 0, "y": 0, "chance": 20, "item_groups": [ "airliner_luggage" ] }
+    ]
+  },
+  {
     "id": "grocery_cart",
     "type": "vehicle",
     "name": "Grocery Cart",

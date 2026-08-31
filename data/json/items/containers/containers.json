@@ -164,7 +164,7 @@
     "category": "container",
     "name": { "str": "canvas sack" },
     "looks_like": "bag_plastic",
-    "description": "A large and sturdy canvas sack.  Smells faintly of soil and hard work.",
+    "description": "A large and sturdy canvas sack.",
     "weight": "415 g",
     "volume": "1 L",
     "price": "0 cent",

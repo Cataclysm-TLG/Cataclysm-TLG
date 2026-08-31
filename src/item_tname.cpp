@@ -125,7 +125,7 @@ std::string durability( item const &it, unsigned int /* quantity */,
 std::string wheel_diameter( item const &it, unsigned int /* quantity */,
                             segment_bitset const &/* segments */ )
 {
-    if( it.is_wheel() && it.type->wheel->diameter > 0 ) {
+    if( it.is_wheel() && !it.is_tool() && it.type->wheel->diameter > 0 ) {
         return string_format( pgettext( "vehicle adjective", "%d\" " ), it.type->wheel->diameter );
     }
     return {};

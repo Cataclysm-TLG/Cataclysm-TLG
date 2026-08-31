@@ -43,7 +43,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       },
@@ -241,7 +241,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -304,7 +304,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -416,7 +416,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -427,39 +427,6 @@
     "armor": [
       { "encumbrance": [ 10, 55 ], "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
-  },
-  {
-    "id": "basket_laundry",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "laundry basket" },
-    "description": "A plastic basket meant for storing and hauling clothing.",
-    "weight": "680 g",
-    "volume": "52500 ml",
-    "price": "75 cent",
-    "price_postapoc": "10 cent",
-    "to_hit": -2,
-    "material": [ "plastic" ],
-    "symbol": ")",
-    "looks_like": "plastic_shopping_bag",
-    "color": "light_gray",
-    "armor": [
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 5, "encumbrance": [ 50, 50 ] },
-      { "covers": [ "hand_l", "hand_r" ], "coverage": 5, "encumbrance": [ 50, 50 ] }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "50 L",
-        "max_contains_weight": "12 kg",
-        "max_item_length": "80 cm",
-        "moves": 300
-      }
-    ],
-    "material_thickness": 2,
-    "flags": [ "OVERSIZE", "RESTRICT_HANDS", "NO_SALVAGE" ],
-    "melee_damage": { "bash": 1 }
   },
   {
     "id": "bigback",
@@ -546,7 +513,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -557,31 +524,6 @@
     "armor": [
       { "encumbrance": [ 16, 65 ], "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] }
     ]
-  },
-  {
-    "id": "bindle",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "bindle" },
-    "description": "You're ready for a trip down some train tracks.  Also known as a hobo stick.",
-    "weight": "980 g",
-    "volume": "3 L",
-    "price": "80 cent",
-    "price_postapoc": "10 cent",
-    "to_hit": -2,
-    "material": [ "cotton", "wood" ],
-    "symbol": "[",
-    "looks_like": "plastic_shopping_bag",
-    "color": "light_gray",
-    "sided": true,
-    "armor": [
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 4, "encumbrance": [ 30, 33 ] },
-      { "covers": [ "hand_l", "hand_r" ], "coverage": 4, "encumbrance": [ 30, 32 ] }
-    ],
-    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "5 L", "max_contains_weight": "15 kg", "moves": 300 } ],
-    "material_thickness": 1,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
-    "melee_damage": { "bash": 4 }
   },
   {
     "id": "boxpack",
@@ -616,7 +558,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       },
@@ -641,69 +583,6 @@
     "flags": [ "BELTED", "OVERSIZE", "NO_REPAIR" ],
     "armor": [ { "encumbrance": 20, "coverage": 80, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_back" ] } ],
     "melee_damage": { "bash": 16, "cut": 4 }
-  },
-  {
-    "id": "briefcase",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "briefcase" },
-    "description": "Useful for carrying money, documents, or smuggled goods.",
-    "weight": "1700 g",
-    "volume": "15750 ml",
-    "longest_side": "46 cm",
-    "price": "240 USD",
-    "price_postapoc": "50 cent",
-    "to_hit": -2,
-    "material": [ "plastic" ],
-    "symbol": "[",
-    "looks_like": "plastic_shopping_bag",
-    "color": "light_gray",
-    "sided": true,
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "15 L",
-        "max_contains_weight": "30 kg",
-        "max_item_length": "50 cm",
-        "moves": 200
-      }
-    ],
-    "material_thickness": 2,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": 30, "coverage": 10, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ] } ],
-    "melee_damage": { "bash": 5 }
-  },
-  {
-    "id": "case_violin",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "violin case" },
-    "description": "Useful to carry your precious musical instrument around protected from any harm.",
-    "weight": "2800 g",
-    "volume": "10500 ml",
-    "price": "240 USD",
-    "price_postapoc": "50 cent",
-    "to_hit": -4,
-    "material": [ "plastic", "steel", "leather" ],
-    "symbol": "&",
-    "looks_like": "briefcase",
-    "color": "dark_gray",
-    "sided": true,
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "10 L",
-        "max_contains_weight": "20 kg",
-        "max_item_length": "65 cm",
-        "moves": 200
-      }
-    ],
-    "material_thickness": 5,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": 30, "coverage": 10, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ] } ],
-    "melee_damage": { "bash": 8 }
   },
   {
     "id": "daypack",
@@ -740,7 +619,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       },
@@ -1136,7 +1015,7 @@
     "id": "hide_bag",
     "copy-from": "raw_leather",
     "type": "ITEM",
-    "subtypes": [ "COMESTIBLE", "ARMOR" ],
+    "subtypes": [ "COMESTIBLE" ],
     "category": "clothing",
     "name": { "str": "hide bag" },
     "description": "The raw skin of an animal, quickly turned into a makeshift bag for storage.  It will still rot, and needs to be cured and tanned.",
@@ -1144,16 +1023,6 @@
     "looks_like": "plastic_shopping_bag",
     "color": "pink",
     "proportional": { "weight": 6.0, "volume": 6.0, "price": 6.0, "quench": 6.0, "calories": 6.0, "healthy": 6.0, "fun": 6.0 },
-    "sided": true,
-    "armor": [
-      {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 } ],
-        "encumbrance": 10,
-        "volume_encumber_modifier": 0.5,
-        "coverage": 5,
-        "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ]
-      }
-    ],
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -1162,47 +1031,11 @@
         "max_item_length": "50 cm",
         "moves": 300
       }
-    ],
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ]
-  },
-  {
-    "id": "hide_tainted_bag",
-    "copy-from": "raw_tainted_leather",
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE", "ARMOR" ],
-    "category": "clothing",
-    "name": { "str": "tainted hide bag" },
-    "description": "The raw skin of a monster, quickly turned into a makeshift bag for storage.  It will still rot, and needs to be cured and tanned.",
-    "symbol": "[",
-    "looks_like": "hide_bag",
-    "color": "pink",
-    "price_postapoc": "10 cent",
-    "proportional": { "weight": 6.0, "volume": 6.0, "price": 6.0, "quench": 6.0, "calories": 6.0, "healthy": 6.0, "fun": 6.0 },
-    "sided": true,
-    "armor": [
-      {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 0.1 } ],
-        "encumbrance": 10,
-        "volume_encumber_modifier": 0.5,
-        "coverage": 5,
-        "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ]
-      }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "15 L",
-        "max_contains_weight": "30 kg",
-        "max_item_length": "50 cm",
-        "moves": 300
-      }
-    ],
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ]
+    ]
   },
   {
     "id": "hk_briefcase",
     "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
     "copy-from": "briefcase",
     "looks_like": "briefcase",
     "weight": "1500 g",
@@ -1326,7 +1159,7 @@
       {
         "encumbrance": 1,
         "volume_encumber_modifier": 0.18,
-        "coverage": 70,
+        "coverage": 65,
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
       },
@@ -1344,36 +1177,20 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "diving pouches", "str_pl": "pairs of diving pouches" },
-    "description": "A set of pouches that can be worn on the thighs using buckled neoprene rig.  This variety is favored by the divers.",
-    "//": "Based on skeletonized version of these https://fourthelement.com/product/technical-shorts/ with added lower buckles like here https://www.divegarage.com/neoprene-tech-shorts.html",
+    "description": "A pair of bulky pouches that belt around the waist and thighs, affixed with several clips for easy storage.",
     "weight": "305 g",
     "volume": "1150 ml",
     "price": "30 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "neoprene", "nylon", "nylon_2" ],
+    "material": [ "neoprene", "nylon" ],
     "symbol": "[",
     "color": "dark_gray",
-    "//3": "Two large pockets separated into four, two small zipper pockets on flaps, four bungee loops.",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
         "max_contains_volume": "1650 ml",
         "max_contains_weight": "1500 g",
         "max_item_length": "32 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "1650 ml",
-        "max_contains_weight": "1500 g",
-        "max_item_length": "32 cm",
-        "moves": 80
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "1650 ml",
-        "max_contains_weight": "1500 g",
-        "max_item_length": "32 cm",
         "moves": 100
       },
       {
@@ -1384,18 +1201,14 @@
         "moves": 100
       },
       {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "500 g",
-        "max_item_length": "19 cm",
-        "moves": 130
-      },
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "500 ml",
-        "max_contains_weight": "500 g",
-        "max_item_length": "19 cm",
-        "moves": 130
+        "holster": true,
+        "min_item_volume": "50 ml",
+        "max_contains_volume": "1 L",
+        "max_contains_weight": "1000 g",
+        "max_item_length": "70 cm",
+        "extra_encumbrance": 2,
+        "moves": 50,
+        "flag_restriction": [ "BELT_CLIP" ]
       },
       {
         "holster": true,
@@ -1405,7 +1218,7 @@
         "max_item_length": "70 cm",
         "extra_encumbrance": 2,
         "moves": 50,
-        "flag_restriction": [ "BELT_CLIP", "SHEATH_KNIFE" ]
+        "flag_restriction": [ "BELT_CLIP" ]
       },
       {
         "holster": true,
@@ -1415,7 +1228,7 @@
         "max_item_length": "70 cm",
         "extra_encumbrance": 2,
         "moves": 50,
-        "flag_restriction": [ "BELT_CLIP", "SHEATH_KNIFE" ]
+        "flag_restriction": [ "BELT_CLIP" ]
       },
       {
         "holster": true,
@@ -1425,41 +1238,66 @@
         "max_item_length": "70 cm",
         "extra_encumbrance": 2,
         "moves": 50,
-        "flag_restriction": [ "BELT_CLIP", "SHEATH_KNIFE" ]
-      },
-      {
-        "holster": true,
-        "min_item_volume": "50 ml",
-        "max_contains_volume": "1 L",
-        "max_contains_weight": "1000 g",
-        "max_item_length": "70 cm",
-        "extra_encumbrance": 2,
-        "moves": 50,
-        "flag_restriction": [ "BELT_CLIP", "SHEATH_KNIFE" ]
+        "flag_restriction": [ "BELT_CLIP" ]
       }
     ],
     "flags": [ "OVERSIZE", "WATER_FRIENDLY", "BELTED" ],
     "armor": [
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 100, "thickness": 2.0 }
+          { "type": "neoprene", "covered_by_mat": 70, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "covers": [ "leg_l", "leg_r" ],
-        "coverage": 100,
-        "encumbrance": 2,
+        "coverage": 50,
+        "encumbrance": 3,
         "volume_encumber_modifier": 0.2,
-        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r", "leg_upper_l", "leg_upper_r" ]
       },
       {
         "material": [
-          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 },
-          { "type": "neoprene", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "nylon_2", "covered_by_mat": 50, "thickness": 1.5 }
+          { "type": "neoprene", "covered_by_mat": 70, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
         ],
-        "covers": [ "leg_l", "leg_r" ],
-        "coverage": 40,
-        "specifically_covers": [ "leg_upper_l", "leg_upper_r" ]
+        "covers": [
+          "cephalopod_arm_1",
+          "cephalopod_arm_2",
+          "cephalopod_arm_3",
+          "cephalopod_arm_4",
+          "cephalopod_arm_5",
+          "cephalopod_arm_6"
+        ],
+        "coverage": 50,
+        "encumbrance": 3,
+        "volume_encumber_modifier": 0.2,
+        "specifically_covers": [
+          "cephalopod_arm_1_base",
+          "cephalopod_arm_2_base",
+          "cephalopod_arm_3_base",
+          "cephalopod_arm_4_base",
+          "cephalopod_arm_5_base",
+          "cephalopod_arm_6_base"
+        ]
+      },
+      {
+        "material": [
+          { "type": "neoprene", "covered_by_mat": 70, "thickness": 2.0 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
+        "covers": [ "crab_leg_1", "crab_leg_2", "crab_leg_3", "crab_leg_4" ],
+        "coverage": 5,
+        "encumbrance": 3,
+        "volume_encumber_modifier": 0.2,
+        "specifically_covers": [
+          "crab_leg_1_coxa",
+          "crab_leg_1_merus",
+          "crab_leg_2_coxa",
+          "crab_leg_2_merus",
+          "crab_leg_3_coxa",
+          "crab_leg_3_merus",
+          "crab_leg_4_coxa",
+          "crab_leg_4_merus"
+        ]
       }
     ]
   },
@@ -1505,6 +1343,20 @@
         "coverage": 70,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_r", "leg_hip_l", "leg_upper_r", "leg_upper_l" ]
+      },
+      {
+        "encumbrance": 3,
+        "volume_encumber_modifier": 0.22,
+        "coverage": 70,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 3,
+        "volume_encumber_modifier": 0.22,
+        "coverage": 70,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -1532,6 +1384,20 @@
         "coverage": 50,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      },
+      {
+        "encumbrance": 1,
+        "volume_encumber_modifier": 0.35,
+        "coverage": 50,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 1,
+        "volume_encumber_modifier": 0.35,
+        "coverage": 50,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ],
     "use_action": {
@@ -1574,6 +1440,13 @@
         "coverage": 50,
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
+      },
+      {
+        "encumbrance": 0,
+        "volume_encumber_modifier": 0.35,
+        "coverage": 50,
+        "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
       }
     ],
     "use_action": {
@@ -1616,6 +1489,13 @@
         "coverage": 25,
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_ankle_r", "foot_ankle_l" ]
+      },
+      {
+        "encumbrance": 1,
+        "volume_encumber_modifier": 0.2,
+        "coverage": 25,
+        "covers": [ "hoof_l", "hoof_r" ],
+        "specifically_covers": [ "hoof_fetlock_l", "hoof_fetlock_r" ]
       }
     ]
   },
@@ -1651,7 +1531,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -1856,7 +1736,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -1948,7 +1828,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -2040,7 +1920,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       }
@@ -2123,30 +2003,6 @@
     "use_action": [ "CAPTURE_MONSTER_ACT" ],
     "flags": [ "BELTED", "WATERPROOF", "OVERSIZE" ],
     "armor": [ { "encumbrance": 35, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ]
-  },
-  {
-    "id": "plastic_shopping_bag",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "plastic shopping bag" },
-    "description": "A bag used to carry groceries home.",
-    "category": "container",
-    "weight": "2 g",
-    "volume": "30 ml",
-    "price": "1 cent",
-    "price_postapoc": "10 cent",
-    "to_hit": -2,
-    "material": [ "vinyl" ],
-    "symbol": "[",
-    "color": "white",
-    "sided": true,
-    "armor": [
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 4, "encumbrance": 1, "volume_encumber_modifier": 0.7 },
-      { "covers": [ "hand_l", "hand_r" ], "coverage": 4, "encumbrance": 1, "volume_encumber_modifier": 0.7 }
-    ],
-    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "5 L", "max_contains_weight": "3 kg", "moves": 150 } ],
-    "material_thickness": 0.02,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ]
   },
   {
     "id": "purse",
@@ -2287,7 +2143,7 @@
         "min_item_length": "60 cm",
         "moves": 200,
         "extra_encumbrance": 10,
-        "description": "Tucked between your back and the backpack.",
+        "description": "Tucked between you and the backpack.",
         "ripoff": 3,
         "transparent": true
       },
@@ -2420,127 +2276,6 @@
       }
     ],
     "melee_damage": { "bash": 1 }
-  },
-  {
-    "id": "straw_basket",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "straw basket" },
-    "description": "A handmade straw basket.  Carry it with you for extra storage.",
-    "weight": "100 g",
-    "volume": "10500 ml",
-    "price": "2 USD",
-    "price_postapoc": "50 cent",
-    "to_hit": -1,
-    "material": [ "paper" ],
-    "symbol": "[",
-    "looks_like": "plastic_shopping_bag",
-    "color": "light_gray",
-    "sided": true,
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "10 L",
-        "max_contains_weight": "3 kg",
-        "max_item_length": "40 cm",
-        "moves": 300
-      }
-    ],
-    "material_thickness": 2,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": 30, "coverage": 4, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r" ] } ]
-  },
-  {
-    "id": "suitcase_l",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "suitcase" },
-    "//": "You drag it along with you, so it taking a hit is Rare.",
-    "description": "A huge wheeled suitcase used mainly for transporting clothes and other possessions during trips, provides a decent amount of storage but hauling it around is neither fast nor comfortable.",
-    "weight": "5000 g",
-    "volume": "115500 ml",
-    "price": "210 USD",
-    "price_postapoc": "5 USD",
-    "material": [ "plastic" ],
-    "symbol": "[",
-    "looks_like": "suitcase_m",
-    "color": "red",
-    "sided": true,
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "110 L",
-        "max_contains_weight": "80 kg",
-        "max_item_length": "90 cm",
-        "moves": 300
-      }
-    ],
-    "material_thickness": 3,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": 70, "coverage": 5, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r" ] } ]
-  },
-  {
-    "id": "suitcase_m",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "suitcase" },
-    "description": "A mid-sized wheeled suitcase used mainly for transporting clothes and other possessions during trips, provides a decent amount of storage but hauling it around is not exactly comfortable.",
-    "weight": "3000 g",
-    "volume": "47250 ml",
-    "price": "210 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "material": [ "cotton" ],
-    "symbol": "[",
-    "looks_like": "briefcase",
-    "color": "blue",
-    "sided": true,
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "rigid": true,
-        "max_contains_volume": "45 L",
-        "max_contains_weight": "40 kg",
-        "max_item_length": "70 cm",
-        "moves": 250
-      }
-    ],
-    "material_thickness": 3,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ],
-    "armor": [ { "encumbrance": 50, "coverage": 5, "covers": [ "arm_l", "arm_r", "hand_l", "hand_r", "leg_l", "leg_r" ] } ]
-  },
-  {
-    "id": "swag_bag",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "swag bag" },
-    "description": "A large canvas sack re-purposed for makeshift storage.",
-    "weight": "415 g",
-    "volume": "1 L",
-    "price": "0 cent",
-    "price_postapoc": "50 cent",
-    "to_hit": -5,
-    "material": [ "canvas" ],
-    "symbol": "[",
-    "looks_like": "duffelbag",
-    "color": "brown",
-    "sided": true,
-    "armor": [
-      { "covers": [ "hand_l", "hand_r" ], "coverage": 5, "encumbrance": 4, "volume_encumber_modifier": 0.5 },
-      { "covers": [ "arm_l", "arm_r" ], "coverage": 5, "encumbrance": 4, "volume_encumber_modifier": 0.5 }
-    ],
-    "pocket_data": [
-      {
-        "pocket_type": "CONTAINER",
-        "max_contains_volume": "15 L",
-        "max_contains_weight": "15 kg",
-        "max_item_length": "60 cm",
-        "moves": 300
-      }
-    ],
-    "material_thickness": 1,
-    "flags": [ "OVERSIZE", "BELTED", "RESTRICT_HANDS", "WATER_FRIENDLY" ]
   },
   {
     "id": "travelpack",
@@ -3201,6 +2936,24 @@
         "coverage": 15,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      },
+      {
+        "encumbrance": 0,
+        "coverage": 10,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": 0,
+        "coverage": 18,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 0,
+        "coverage": 18,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_coxa", "crab_leg_3_coxa" ]
       }
     ]
   },

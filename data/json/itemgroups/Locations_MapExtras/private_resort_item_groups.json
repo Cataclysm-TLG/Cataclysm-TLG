@@ -168,7 +168,7 @@
       { "item": "dress_shoes", "prob": 80 },
       { "item": "tie_necktie", "prob": 66 },
       { "item": "fedora", "prob": 25 },
-      { "item": "suitcase_m", "prob": 10 }
+      { "item": "suitcase", "prob": 10 }
     ]
   },
   {

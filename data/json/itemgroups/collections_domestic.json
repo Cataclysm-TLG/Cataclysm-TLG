@@ -1406,16 +1406,17 @@
       { "item": "bucket", "prob": 3 },
       { "item": "bucket_5gal", "prob": 3 },
       { "item": "briefcase", "prob": 2 },
-      { "item": "suitcase_m", "prob": 2 },
+      { "item": "suitcase", "prob": 2 },
       { "item": "candle", "prob": 3, "charges": [ 5, 50 ] },
       {
         "collection": [
-          { "collection": [ { "item": "hammer", "prob": 100 }, { "item": "nail", "prob": 75, "charges": [ 2, 6 ] } ], "prob": 50 },
+          { "collection": [ { "item": "hammer", "prob": 60 }, { "item": "nail", "prob": 75, "charges": [ 2, 6 ] } ], "prob": 50 },
           { "item": "pliers", "prob": 33 },
           { "item": "paint_brush", "prob": 33 },
           { "item": "xacto", "prob": 10 },
+          { "item": "wrench", "prob": 10 },
           { "item": "screwdriver", "prob": 10 },
-          { "group": "duct_tape_roll_part", "prob": 100 },
+          { "group": "duct_tape_roll_part", "prob": 60 },
           { "group": "superglue", "prob": 10 },
           { "item": "splinter", "prob": 10, "count": [ 2, 3 ] },
           { "item": "toolbox_empty", "prob": 100 }
