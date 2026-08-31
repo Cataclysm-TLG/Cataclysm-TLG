@@ -2507,6 +2507,50 @@ void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,
                 int shove_moves = shove_veh_mass_moves_factor * veh_mass / 10_kilogram;
                 shove_moves = std::max( shove_moves, shove_moves_minimal );
                 this->mod_moves( -shove_moves );
+
+                // Knock over/disconnect if it is flagged for that.
+                for( const vpart_reference &vp : veh.get_all_parts() ) {
+                    const vpart_info &vpi = vp.info();
+                    // Quick failsafe in case it somehow broke or got removed already.
+                    if( vp.part().removed ) {
+                        continue;
+                    }
+                    if( vpi.has_flag( "UNMOUNT_ON_DAMAGE" ) ) {
+                        const int vp_idx = veh.index_of_part( &vp.part(), /* include_removed = */ true );
+                        monster *mon = veh.get_monster( here, vp_idx );
+                        if( mon != nullptr && mon->has_effect( effect_harnessed ) ) {
+                            mon->remove_effect( effect_harnessed );
+                        }
+                        if( vpi.has_flag( "TOW_CABLE" ) ) {
+                            veh.invalidate_towing( here, true );
+                        } else {
+                            item part_as_item = veh.part_to_item( here, vp.part() );
+                            if( vpi.has_flag( "INITIAL_PART" ) ) {
+                                add_msg_if_player_sees( nearby_destination, m_bad, _( "The %s falls over!" ), veh.name );
+                            } else {
+                                add_msg_if_player_sees( nearby_destination, m_bad, _( "The %1$s's %2$s is disconnected!" ), veh.name,
+                                                        vp.part().name() );
+                            }
+                            if( vpi.has_flag( VPFLAG_POWER_TRANSFER ) ) {
+                                veh.remove_remote_part( here, vp.part() );
+                                part_as_item.set_damage( 0 );
+                            } else {
+                                part_as_item.set_damage( vpi.base_item.obj().damage_max() - 1 );
+                            }
+                            if( !veh.magic ) {
+                                here.add_item_or_charges( nearby_destination, part_as_item );
+                            }
+                            if( !g || &reality_bubble() !=
+                                &here ) { // TODO: Refine logic to determine if this is mapgen or gameplay.
+                                MapgenRemovePartHandler handler( here );
+                                veh.remove_part( vp.part(), handler );
+                            } else {
+                                veh.remove_part( vp.part() );
+                            }
+                        }
+                    }
+                }
+
                 const tripoint_rel_ms destination_delta( remote_destination - nearby_destination );
                 const tripoint_rel_ms shove_destination( clamp( destination_delta.x(), -1, 1 ),
                         clamp( destination_delta.y(), -1, 1 ),

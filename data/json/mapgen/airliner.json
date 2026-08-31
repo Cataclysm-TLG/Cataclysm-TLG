@@ -423,7 +423,8 @@
         ",,,,,,,,,,,,,,,,,,,,,,,,"
       ],
       "palettes": [ "airliner_palette" ],
-      "items": { "L": [ { "item": "airliner_luggage", "chance": 80, "repeat": [ 2, 3 ] } ] }
+      "items": { ".": [ { "item": "airliner_luggage", "chance": 2, "repeat": [ 1, 2 ] } ] },
+      "vehicles": { "L": { "vehicle": "luggage_large", "chance": 80, "rotation": 270 } }
     }
   },
   {
@@ -435,6 +436,21 @@
       { "group": "shoes", "prob": 30 },
       { "group": "glasses", "prob": 10 },
       { "group": "magazines", "prob": 10 },
+      { "group": "civilian_laptops", "prob": 5 },
+      { "group": "civilian_eink_tablet_pcs", "prob": 1 },
+      { "group": "newspaper_recent", "prob": 5 },
+      { "item": "camera", "prob": 1, "charges": [ 0, 150 ] },
+      { "item": "camera_pro", "prob": 1, "charges": [ 0, 150 ] },
+      { "item": "portable_game", "prob": 15, "charges": [ 0, 150 ] },
+      { "group": "box_of_contact_lens_any", "prob": 2 },
+      { "item": "ear_plugs", "prob": 2 },
+      { "item": "gum", "prob": 1 },
+      { "item": "mp3", "prob": 15, "charges": [ 0, 100 ] },
+      { "item": "portable_game", "prob": 1 },
+      { "item": "flyer", "prob": 1 },
+      { "item": "novel_pulp", "prob": 2 },
+      { "group": "religious_books", "prob": 1 },
+      { "group": "kids_books", "prob": 1 },
       { "group": "bags_trip" }
     ]
   },

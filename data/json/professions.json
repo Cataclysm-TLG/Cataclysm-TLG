@@ -3802,34 +3802,6 @@
   },
   {
     "type": "profession",
-    "id": "lawyer",
-    "name": "Lawyer",
-    "description": "The jury were in the palm of your hand, but after the defendant tried to eat your brain, you were forced to flee the courtroom in disgrace.  Now nobody seems to care about your objections.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 1,
-    "skills": [ { "level": 6, "name": "speech" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "suit" },
-          { "item": "tie_necktie" },
-          { "item": "tieclip" },
-          { "item": "socks" },
-          { "item": "dress_shoes" },
-          { "item": "knit_scarf" },
-          { "item": "gold_watch" },
-          { "item": "briefcase" },
-          { "item": "money_strap_fifty" },
-          { "item": "file", "count": [ 1, 4 ] },
-          { "group": "charged_smart_phone" }
-        ]
-      },
-      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
     "id": "priest",
     "name": "Pastor",
     "description": "Armageddon has come!  You did everything you could to protect your community, but it appears that prayers were not enough.  Now that they are all dead, you should probably find something more tangible to protect you.",
@@ -4917,11 +4889,11 @@
   {
     "type": "profession",
     "id": "politician",
-    "name": "Career Politician",
+    "name": "Politician",
     "description": "You've spent your life appealing to the people, persuading many and promising much throughout your time in office.  Now that your voting base wants to eat you alive, winning hearts and minds just got that much harder.",
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "points": 2,
-    "skills": [ { "level": 8, "name": "speech" } ],
+    "skills": [ { "level": 4, "name": "speech" } ],
     "traits": [ "LIAR" ],
     "items": {
       "both": {

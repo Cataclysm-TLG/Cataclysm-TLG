@@ -8038,6 +8038,7 @@ time_duration vehicle::unfolding_time() const
 
 item vehicle::get_folded_item( map &here ) const
 {
+    // FIXME: This generic folded vehicle has no pockets. Should we fold into bespoke items sometimes, or...?
     item folded( itype_generic_folded_vehicle, calendar::turn );
     const std::vector<std::reference_wrapper<const vehicle_part>> &parts = real_parts();
     try {

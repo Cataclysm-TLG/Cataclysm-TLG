@@ -81,9 +81,9 @@
     }
   },
   {
-    "id": "folded_trashcan_large",
+    "id": "roller_bin",
     "type": "ITEM",
-    "subtypes": [ "WHEEL" ],
+    "subtypes": [ "WHEEL", "TOOL" ],
     "category": "container",
     "name": { "str": "outdoor trash bin" },
     "looks_like": "f_recycle_bin",
@@ -113,6 +113,76 @@
     "variables": {
       "vehicle_name": "Rolling Trash Bin",
       "folded_parts": "[{\"id\":\"roller_bin\",\"base\":{\"typeid\":\"roller_bin\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+    }
+  },
+  {
+    "id": "suitcase_large",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "WHEEL" ],
+    "category": "container",
+    "name": { "str": "large suitcase" },
+    "looks_like": "briefcase",
+    "description": "A hefty piece of hardshell luggage with wheels and a handle.",
+    "weight": "15 kg",
+    "volume": "85 L",
+    "longest_side": "114 cm",
+    "price": "300 USD",
+    "price_postapoc": "10 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "80 L",
+        "max_contains_weight": "60 kg",
+        "max_item_length": "75 cm",
+        "moves": 300
+      }
+    ],
+    "qualities": [ [ "CONTAIN", 2 ] ],
+    "material": [ "plastic" ],
+    "symbol": ")",
+    "color": "green",
+    "use_action": [ "UNFOLD_GENERIC" ],
+    "diameter": 4,
+    "width": 1,
+    "variables": {
+      "vehicle_name": "Large Suitcase",
+      "folded_parts": "[{\"id\":\"suitcase_large\",\"base\":{\"typeid\":\"suitcase_large\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
+    }
+  },
+  {
+    "id": "suitcase",
+    "type": "ITEM",
+    "subtypes": [ "TOOL", "WHEEL" ],
+    "category": "container",
+    "name": { "str": "suitcase" },
+    "looks_like": "briefcase",
+    "description": "A piece of hardshell luggage with wheels and a handle.  It is sized for overhead storage on a plane.",
+    "weight": "10 kg",
+    "volume": "45 L",
+    "longest_side": "55 cm",
+    "price": "250 USD",
+    "price_postapoc": "5 USD",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "42 L",
+        "max_contains_weight": "40 kg",
+        "max_item_length": "50 cm",
+        "moves": 300
+      }
+    ],
+    "qualities": [ [ "CONTAIN", 2 ] ],
+    "material": [ "plastic" ],
+    "symbol": ")",
+    "color": "green",
+    "use_action": [ "UNFOLD_GENERIC" ],
+    "diameter": 4,
+    "width": 1,
+    "variables": {
+      "vehicle_name": "Suitcase",
+      "folded_parts": "[{\"id\":\"suitcase\",\"base\":{\"typeid\":\"suitcase\",\"item_tags\":[\"VEHICLE\"]},\"mount_dx\":0,\"mount_dy\":0}]"
     }
   }
 ]

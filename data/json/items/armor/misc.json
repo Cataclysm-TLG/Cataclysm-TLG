@@ -493,7 +493,7 @@
     "symbol": "[",
     "color": "light_gray",
     "warmth": 0,
-    "flags": [ "OVERSIZE", "RESTRICT_HANDS", "ALLOWS_NATURAL_ATTACKS" ],
+    "flags": [ "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
     "material_thickness": 1.0,
     "environmental_protection": 0,
     "armor": [ { "encumbrance": 15, "coverage": 10, "covers": [ "hand_l", "arm_l" ] } ]
@@ -513,7 +513,7 @@
     "symbol": "[",
     "color": "light_gray",
     "warmth": 0,
-    "flags": [ "OVERSIZE", "RESTRICT_HANDS", "ALLOWS_NATURAL_ATTACKS" ],
+    "flags": [ "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
     "material_thickness": 1.0,
     "environmental_protection": 0,
     "armor": [ { "encumbrance": 15, "coverage": 10, "covers": [ "hand_l", "arm_l" ] } ]

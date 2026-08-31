@@ -1707,7 +1707,7 @@
     "type": "item_group",
     "id": "bags_trip",
     "subtype": "distribution",
-    "entries": [ { "item": "suitcase_l", "prob": 37 }, { "item": "suitcase_m", "prob": 55 }, { "item": "duffelbag", "prob": 8 } ]
+    "entries": [ { "item": "suitcase_large", "prob": 37 }, { "item": "suitcase", "prob": 55 }, { "item": "duffelbag", "prob": 8 } ]
   },
   {
     "type": "item_group",
@@ -3329,8 +3329,8 @@
         "distribution": [
           { "item": "basket_laundry", "prob": 60 },
           { "item": "straw_basket", "prob": 35 },
-          { "item": "suitcase_l", "prob": 15 },
-          { "item": "suitcase_m", "prob": 25 }
+          { "item": "suitcase_large", "prob": 15 },
+          { "item": "suitcase", "prob": 25 }
         ],
         "prob": 20
       },

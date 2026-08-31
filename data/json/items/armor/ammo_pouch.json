@@ -101,7 +101,7 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Stash ammo", "holster_msg": "You stash your %s." },
-    "flags": [ "BELTED", "PALS_LARGE" ],
+    "flags": [ "BELTED", "PALS_LARGE", "OVERSIZE", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": 1, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
   },
   {
@@ -387,10 +387,28 @@
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
-        "encumbrance": 3,
+        "encumbrance": 4,
         "coverage": 25,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 30,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 30,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
+      },
+      {
+        "encumbrance": 3,
+        "coverage": 15,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -415,10 +433,28 @@
     "flags": [ "BELTED", "OVERSIZE", "PALS_LARGE" ],
     "armor": [
       {
-        "encumbrance": 2,
+        "encumbrance": 4,
         "coverage": 25,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 30,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 30,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
+      },
+      {
+        "encumbrance": 3,
+        "coverage": 15,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -433,7 +469,7 @@
     "volume": "500 ml",
     "price": "65 USD",
     "price_postapoc": "7 USD 50 cent",
-    "material": [ "wood" ],
+    "material": [ "dry_plant" ],
     "symbol": "[",
     "looks_like": "quiver",
     "color": "light_gray",
@@ -443,13 +479,30 @@
     "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
-        "encumbrance": 10,
+        "encumbrance": 6,
         "coverage": 25,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ]
+      },
+      {
+        "encumbrance": 6,
+        "coverage": 30,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 6,
+        "coverage": 30,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 15,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
-    ],
-    "melee_damage": { "bash": 2 }
+    ]
   },
   {
     "id": "pipe_quiver",
@@ -471,10 +524,28 @@
     "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
-        "encumbrance": 10,
+        "encumbrance": 8,
         "coverage": 25,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ]
+      },
+      {
+        "encumbrance": 8,
+        "coverage": 30,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 8,
+        "coverage": 30,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
+      },
+      {
+        "encumbrance": 6,
+        "coverage": 15,
+        "covers": [ "gastropod_foot" ],
+        "specifically_covers": [ "gastropod_foot_upper" ]
       }
     ],
     "melee_damage": { "bash": 10 }
@@ -509,7 +580,7 @@
     "volume": "1500 ml",
     "price": "88 USD",
     "price_postapoc": "12 USD 50 cent",
-    "material": [ "wood" ],
+    "material": [ "dry_plant" ],
     "symbol": "[",
     "looks_like": "quiver_birchbark",
     "color": "light_gray",
@@ -1222,7 +1293,7 @@
       }
     ],
     "material_thickness": 0.5,
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "PALS_SMALL" ],
+    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "PALS_SMALL", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": 1, "coverage": 100, "covers": [ "torso" ], "specifically_covers": [ "torso_waist" ] } ]
   },
   {

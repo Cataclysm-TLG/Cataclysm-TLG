@@ -126,7 +126,7 @@
     "id": "glasses",
     "type": "item_group",
     "items": [
-      [ "glasses_monocle", 5 ],
+      [ "glasses_monocle", 1 ],
       [ "glasses_bal", 10 ],
       [ "sunglasses", 30 ],
       [ "glasses_bifocal", 30 ],

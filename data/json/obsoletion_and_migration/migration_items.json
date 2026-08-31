@@ -1,37 +1,5 @@
 [
   {
-    "id": "bottle_suppressor",
-    "type": "MIGRATION",
-    "replace": "filter_suppressor"
-  },
-  {
-    "id": "riv_suppressor",
-    "type": "MIGRATION",
-    "replace": "suppressor"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "2h_club_kanabo_spiked",
-    "replace": "kanabo_wood"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "2h_club_kanabo_studded",
-    "replace": "kanabo_wood"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "sinister_cane",
-    "replace": "cane_toy",
-    "variant": "cane_toy_sinister"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "wizard_cane_cheap",
-    "replace": "cane_toy",
-    "variant": "cane_toy_wizard"
-  },
-  {
     "type": "MIGRATION",
     "id": "wizard_cane_cheap_on",
     "replace": "cane_toy",
@@ -4237,5 +4205,30 @@
     "type": "vehicle_part_migration",
     "from": "engine_electric_small",
     "to": "engine_electric_medium"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "hide_tainted_bag",
+    "replace": "hide_bag"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "swag_bag",
+    "replace": "bag_canvas"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "suitcase_m",
+    "replace": "suitcase"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "suitcase_l",
+    "replace": "suitcase_large"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "folded_trashcan_large",
+    "replace": "roller_bin"
   }
 ]
