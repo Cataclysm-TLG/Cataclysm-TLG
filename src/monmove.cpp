@@ -1591,30 +1591,32 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         // Swimming monsters move very fast in water, like fish and sharks.
     } else if( swims() ) {
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+            ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) && is_underwater() ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( f );
             snow_penalty += 1;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) ) {
+            ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) &&
+            ( is_underwater() || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( t );
             snow_penalty += 1;
         }
     } else if( can_submerge() ) {
-        // No-breathe monsters have to walk underwater slowly.
+        // No-breathe monsters that can't swim have to walk underwater slowly.
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) ) {
+            ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, f ) && is_underwater() ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( f );
             snow_penalty += 1;
         }
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) ) {
+            ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) &&
+            ( is_underwater() || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( t );
@@ -1643,14 +1645,12 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
     if( snow_penalty > 0 ) {
         // Snow depth movement penalty (outdoor, unroofed tiles only)
         if( here.is_outside( pos_bub() ) && !here.is_roofed( pos_bub() ) ) {
-            add_msg( _( "%s is in snow" ), name() );
             const double snow_mm = get_weather().get_snow_depth_mm( pos_abs_omt() );
             if( snow_mm >= 100 ) {
                 int penalty = snow_mm >= 500 ? 100 : ( snow_mm >= 250 ? 50 : 20 );
                 if( snow_penalty == 1 ) {
                     penalty /= 2;
                 }
-                add_msg( _( "%1s is in snow and gets penalty %2s" ), name(), penalty );
                 movecost += penalty;
             }
         }
@@ -1916,7 +1916,7 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     map &here = get_map();
     const tripoint_bub_ms pos = pos_bub( here );
 
-    const bool on_ground = !digging() && !flies();
+    const bool not_flying_or_digging = !digging() && !flies();
 
     const bool z_move = p.z() != pos.z();
     const bool going_up = p.z() > pos.z();
@@ -1999,17 +1999,21 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     // the "underwater" member is always out-of-sync for monsters.
     bool was_water = is_likely_underwater( here );
     bool will_be_water =
-        on_ground && (
-            // AQUATIC monsters always swim under the vehicles, while other swimming monsters are forced to surface.
-            has_flag( mon_flag_AQUATIC ) || ( can_submerge() && !here.veh_at( destination ) ) ||
-            // If the destination terrain has SWIM_UNDER, swimmers should remain submerged there.
-            ( swims() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) )
-        ) && ( here.is_divable( destination ) ||
-               here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) ||
-               // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water).
-               ( has_flag( mon_flag_AQUATIC ) &&
-                 here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, destination ) ) );
-
+        not_flying_or_digging && (
+            // AQUATIC monsters always swim under vehicles, while other swimming monsters are forced to surface.
+            has_flag( mon_flag_AQUATIC ) ||
+            ( can_submerge() && !here.veh_at( destination ) ) ||
+            ( swims() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) &&
+              ( was_water || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos ) ) )
+        ) && (
+            here.is_divable( destination ) ||
+            // If the destination terrain has SWIM_UNDER, swimmers should remain submerged when they move there.
+            ( swims() && here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, destination ) &&
+              ( was_water || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos ) ) ) ||
+            // AQUATIC creatures stay submerged in any swimmable terrain (including shallow water).
+            ( has_flag( mon_flag_AQUATIC ) &&
+              here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, destination ) )
+        );
     if( get_option<bool>( "LOG_MONSTER_MOVEMENT" ) ) {
         // Birds and other flying creatures flying over the deep water terrain.
         Character &player_character = get_player_character();
@@ -2060,20 +2064,21 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
     }
 
     if( here.has_flag( ter_furn_flag::TFLAG_UNSTABLE, destination ) &&
-        on_ground && !here.has_vehicle_floor( destination ) ) {
+        not_flying_or_digging && !here.has_vehicle_floor( destination ) ) {
         add_effect( effect_bouldering, 1_turns, true );
     } else if( has_effect( effect_bouldering ) ) {
         remove_effect( effect_bouldering );
     }
 
-    if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_NO_SIGHT, destination ) && on_ground ) {
+    if( here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_NO_SIGHT, destination ) &&
+        not_flying_or_digging ) {
         add_effect( effect_no_sight, 1_turns, true );
     } else if( has_effect( effect_no_sight ) ) {
         remove_effect( effect_no_sight );
     }
 
     if( !here.has_vehicle_floor( destination ) ) {
-        if( type->size != creature_size::tiny && on_ground ) {
+        if( type->size != creature_size::tiny && not_flying_or_digging ) {
             const int sharp_damage = rng( 1, 10 );
             const int rough_damage = rng( 1, 2 );
             if( here.has_flag( ter_furn_flag::TFLAG_SHARP, pos ) && !one_in( 4 ) &&
