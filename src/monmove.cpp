@@ -1599,7 +1599,7 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         }
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
             ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) &&
-            ( is_underwater() || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) ) ) {
+              ( is_underwater() || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) ) ) {
             movecost += 25;
         } else {
             movecost += 50 * here.move_cost( t );
@@ -1616,7 +1616,7 @@ int monster::calc_movecost( const tripoint_bub_ms &f, const tripoint_bub_ms &t )
         }
         if( here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, t ) ||
             ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, t ) &&
-            ( is_underwater() || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) ) ) {
+              ( is_underwater() || here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, f ) ) ) ) {
             movecost += 250;
         } else {
             movecost += 50 * here.move_cost( t );
