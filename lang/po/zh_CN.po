@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-"PO-Revision-Date: 2026-08-31 23:47+0800\n"
+"PO-Revision-Date: 2026-09-01 22:46+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -35512,10 +35512,9 @@ msgstr "运行中的便携式发电机"
 #. ~ Item name
 #: data/json/furniture_and_terrain/furniture_generators.json
 #: data/json/items/appliances/appliances_generators.json
-#, fuzzy
 msgid "portable generator"
 msgid_plural "portable generator"
-msgstr[0] "传送门发生器"
+msgstr[0] "便携式发电机"
 
 #. ~ Description of furniture "M224 mortar"
 #: data/json/furniture_and_terrain/furniture_military.json
