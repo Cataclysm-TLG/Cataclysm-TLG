@@ -234,6 +234,7 @@ static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_social( "social" );
 static const skill_id skill_survival( "survival" );
 
+static const species_id species_ABERRATION( "ABERRATION" );
 static const species_id species_FERAL( "FERAL" );
 static const species_id species_HUMAN( "HUMAN" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
@@ -1498,8 +1499,8 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                                                        std::max( 1, ( corpse->size - 1 ) ) ) ) );
             }
             // Prevent organ farming.
-            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
-                one_in( corpse->size * 3 ) ) {
+            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) && corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 2 ) ) {
                 add_msg_if_player_sees( you->pos_bub(),
                                         _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
                 here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
@@ -1524,8 +1525,8 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                          translation() ).translated() );
             corpse_item.set_flag( flag_BLED );
             // Prevent blood farming.
-            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
-                one_in( corpse->size * 3 ) ) {
+            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) && corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 2 ) ) {
                 add_msg_if_player_sees( you->pos_bub(),
                                         _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
                 here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
