@@ -76,7 +76,9 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
@@ -112,7 +114,9 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
@@ -145,7 +149,8 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
@@ -178,7 +183,9 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
@@ -211,7 +218,9 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
@@ -244,7 +253,9 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
@@ -309,7 +320,9 @@
         { "not": { "u_has_effect": "electrocuted" } },
         { "not": { "u_has_effect": "grabbed" } },
         { "not": { "u_has_move_mode": "prone" } },
-        { "not": { "u_has_flag": "CANNOT_MOVE" } }
+        { "not": { "u_has_flag": "CANNOT_MOVE" } },
+        { "not": "u_is_on_liquid" },
+        { "not": "u_is_underwater" }
       ]
     },
     "effect": [
