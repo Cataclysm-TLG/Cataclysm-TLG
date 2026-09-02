@@ -1483,8 +1483,8 @@
     "id": "dry_meat",
     "name": { "str_sp": "dehydrated meat" },
     "conditional_names": [
-      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "%s, human" } },
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
+      { "type": "VITAMIN", "condition": "human_flesh_vitamin", "name": { "str_sp": "dehydrated human flesh" } },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "dehydrated foul meat" } }
     ],
     "copy-from": "meat_cooked",
     "weight": "85 g",
