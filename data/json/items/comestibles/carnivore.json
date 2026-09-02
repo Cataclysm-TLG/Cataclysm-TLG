@@ -167,7 +167,6 @@
     "name": { "str": "cooked scrap of fish", "str_pl": "cooked scraps of fish" },
     "parasites": 0,
     "spoils_in": "1 day",
-    "flags": [ "NUTRIENT_OVERRIDE" ],
     "calories": 26,
     "weight": "15 g",
     "volume": "25 ml"
@@ -325,6 +324,7 @@
     "copy-from": "human_flesh",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "FOOD",
     "name": { "str_sp": "cooked human flesh" },
     "description": "A cooked portion of human flesh.",
     "material": [ "hflesh" ],
@@ -499,7 +499,6 @@
     "spoils_in": "1 day",
     "calories": 40,
     "fun": -10,
-    "cooks_like": "meat_cooked",
     "vitamins": [ [ "iron", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "RAW", "PREDATOR_FUN" ],
     "use_action": [ "PETFOOD" ],
@@ -507,18 +506,22 @@
   },
   {
     "id": "meat_scrap_cooked",
-    "copy-from": "flesh",
+    "type": "ITEM",
+    "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "FOOD",
+    "material": [ "flesh" ],
+    "symbol": "%",
+    "color": "red",
     "weight": "21 g",
     "volume": "22 ml",
     "spoils_in": "1 day",
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
     "name": { "str": "cooked scrap of meat", "str_pl": "cooked scraps of meat" },
     "description": "A small morsel of meat, cooked until safe to eat.",
     "price": "75 cent",
     "price_postapoc": "10 cent",
     "parasites": 0,
     "calories": 40,
+    "fun": 0,
     "vitamins": [ [ "iron", 1 ], [ "meat_allergen", 1 ] ],
     "flags": [ "EATEN_HOT" ]
   },
@@ -530,7 +533,7 @@
     "looks_like": "meat_scrap",
     "name": { "str": "scrap of human flesh", "str_pl": "scraps of human flesh" },
     "description": "A tiny scrap of raw human flesh.",
-    "vitamins": [ [ "calcium", 0 ], [ "iron", 1 ], [ "human_flesh_vitamin", 1 ], [ "meat_allergen", 1 ] ],
+    "vitamins": [ [ "iron", 1 ], [ "human_flesh_vitamin", 1 ], [ "meat_allergen", 1 ] ],
     "material": [ "hflesh" ]
   },
   {
@@ -677,7 +680,7 @@
     "color": "red",
     "comestible_type": "DRINK",
     "looks_like": "hblood",
-    "calories": 210,
+    "calories": 190,
     "fun": -15,
     "symbol": "~",
     "charges": 1,
@@ -689,15 +692,14 @@
   {
     "id": "mutant_human_cooked",
     "copy-from": "mutant_human_flesh",
-    "calories": 402,
+    "calories": 201,
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "name": { "str_sp": "cooked cretin" },
+    "name": { "str_sp": "cooked foul human flesh" },
     "description": "Cooked meat from a heavily mutated humanoid.  Now that the worst bits have been picked out, it's probably digestible, if not very appetizing.",
-    "proportional": { "price": 1.5 },
     "parasites": 0,
     "fun": 0,
-    "flags": [ "EATEN_HOT", "NUTRIENT_OVERRIDE", "BAD_TASTE" ]
+    "flags": [ "EATEN_HOT", "BAD_TASTE" ]
   },
   {
     "type": "ITEM",
@@ -1504,7 +1506,7 @@
     "material": [ "flesh" ],
     "volume": "250 ml",
     "fun": -10,
-    "flags": [ "TRADER_AVOID", "SMOKABLE", "NUTRIENT_OVERRIDE", "RAW" ],
+    "flags": [ "TRADER_AVOID", "SMOKABLE", "RAW" ],
     "smoking_result": "dry_meat_tainted",
     "vitamins": [ [ "meat_allergen", 1 ] ]
   },
@@ -1528,7 +1530,7 @@
     "material": [ "hflesh" ],
     "volume": "250 ml",
     "fun": -10,
-    "flags": [ "TRADER_AVOID", "SMOKABLE", "NUTRIENT_OVERRIDE", "RAW" ],
+    "flags": [ "TRADER_AVOID", "SMOKABLE", "RAW" ],
     "smoking_result": "dry_meat_tainted",
     "vitamins": [ [ "meat_allergen", 1 ], [ "human_flesh_vitamin", 1 ] ]
   },
@@ -1553,7 +1555,7 @@
     "spoils_in": "2 days",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "flags": [ "TRADER_AVOID", "NUTRIENT_OVERRIDE", "NO_REPAIR" ]
+    "flags": [ "TRADER_AVOID", "NO_REPAIR" ]
   },
   {
     "type": "ITEM",
@@ -1576,7 +1578,7 @@
     "spoils_in": "2 days",
     "price": "0 cent",
     "price_postapoc": "0 cent",
-    "flags": [ "TRADER_AVOID", "NUTRIENT_OVERRIDE", "NO_REPAIR" ]
+    "flags": [ "TRADER_AVOID", "NO_REPAIR" ]
   },
   {
     "id": "blood_tainted",
@@ -1922,7 +1924,7 @@
     "material": [ "migo_flesh" ],
     "volume": "250 ml",
     "fun": -30,
-    "flags": [ "TRADER_AVOID", "NUTRIENT_OVERRIDE" ]
+    "flags": [ "TRADER_AVOID" ]
   },
   {
     "id": "blood_mi-go",
