@@ -8719,8 +8719,7 @@ bool item::pulpable() const
 {
     return is_corpse() && ( corpse->has_flag( mon_flag_REVIVES ) || has_var( "zombie_form" ) ) &&
            damage() < max_damage() &&
-           !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
-              has_flag( flag_QUARTERED ) ||
+           !( has_flag( flag_QUARTERED ) ||
               has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) );
 }
 
@@ -8728,8 +8727,7 @@ bool item::can_revive() const
 {
     return is_corpse() && ( corpse->has_flag( mon_flag_REVIVES ) || has_var( "zombie_form" ) ) &&
            damage() < max_damage() &&
-           !( has_flag( flag_FIELD_DRESS ) || has_flag( flag_FIELD_DRESS_FAILED ) ||
-              has_flag( flag_QUARTERED ) ||
+           !( has_flag( flag_QUARTERED ) ||
               has_flag( flag_SKINNED ) || has_flag( flag_PULPED ) ||
               ( has_flag( flag_FROZEN ) && !corpse->has_flag( mon_flag_DORMANT ) ) );
 }
