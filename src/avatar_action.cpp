@@ -214,18 +214,21 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         }
         return false;
     }
+    const bool is_riding = you.is_mounted();
+    const tripoint_bub_ms you_pos = you.pos_bub();
+    tripoint_bub_ms dest_loc = you_pos + d;
+    const bool is_swimming = here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you_pos ) &&
+                             !you.in_vehicle;
 
-    // If any leg broken without crutches and not already on the ground topple over
-    if( ( !you.enough_working_legs() && !you.is_prone() &&
-          !( you.get_wielded_item() && you.get_wielded_item()->has_flag( flag_CRUTCHES ) ) ) ) {
+    // If you don't have crutches and you have a broken leg, fall over, unless you're in the water or riding something.
+    if( !you.enough_working_legs() && !you.is_prone() &&
+        !is_riding &&
+        !is_swimming &&
+        !( you.get_wielded_item() && you.get_wielded_item()->has_flag( flag_CRUTCHES ) ) ) {
         you.set_movement_mode( move_mode_prone );
         you.add_msg_if_player( m_bad,
                                _( "Your injured legs can't hold your weight, and you collapse in a heap." ) );
     }
-
-    const bool is_riding = you.is_mounted();
-    const tripoint_bub_ms you_pos = you.pos_bub();
-    tripoint_bub_ms dest_loc = you_pos + d;
 
     if( here.obstructed_by_vehicle_rotation( you_pos, dest_loc ) ) {
         return false;
@@ -276,8 +279,8 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         }
     }
 
-    // by this point we're either walking, running, crouching, or attacking, so update the activity level to match
-    if( !is_riding ) {
+    // By this point we're either walking, running, crouching, or attacking, so update the activity level to match.
+    if( !is_riding && !is_swimming ) {
         you.set_activity_level( you.enchantment_cache->modify_value(
                                     enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER, you.current_movement_mode()->exertion_level() ) );
     }
@@ -606,6 +609,7 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
             }
         }
     }
+    you.reset_move_mode();
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();
@@ -650,11 +654,17 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     if( m.veh_at( you.pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) ) {
         m.board_vehicle( you.pos_bub(), &you );
     }
+    bool mounted = you.is_mounted();
+    // Set activity level before modifying moves so that we get the proper exertion amount.
+    if( !mounted ) {
+        you.set_activity_level( you.enchantment_cache->modify_value(
+                                    enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER, EXTRA_EXERCISE ) );
+    }
     // 500 means we can't swim, so for now that's the cap.
     you.mod_moves( -( ( capped_movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
     you.inv->rust_iron_items();
-
-    if( !you.is_mounted() ) {
+    // Burn stamina after modifying moves so that we don't exhaust ourselves before we even go anywhere.
+    if( !mounted ) {
         you.burn_move_stamina( movecost );
     }
 }

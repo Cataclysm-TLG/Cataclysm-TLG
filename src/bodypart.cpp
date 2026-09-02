@@ -368,7 +368,7 @@ void body_part_type::load( const JsonObject &jo, std::string_view )
                 first_type = limb_type;
             }
         }
-        // set cached primary type if no weights specified
+        // Set cached primary type if no weights specified.
         if( set_first_type ) {
             _primary_limb_type = first_type;
         }

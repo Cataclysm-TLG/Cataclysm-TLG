@@ -10140,11 +10140,12 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
     const float dest_light_level = here.ambient_light_at( tripoint_bub_ms( point_bub_ms(
                                        dest_loc.xy() ), ramp_adjust ) );
 
-    // Allow players with nyctophobia to move freely through cloudy and dark tiles
+    // Allow players with nyctophobia to move freely through cloudy and dark tiles.
     const float nyctophobia_threshold = LIGHT_AMBIENT_LIT - 3.0f;
 
-    // Forbid players from moving through very dark tiles, unless they are running or took xanax
-    if( u.has_flag( json_flag_NYCTOPHOBIA ) && !u.has_effect( effect_took_xanax ) && !u.is_running() &&
+    // Forbid players from moving through very dark tiles, unless they are running or took xanax.
+    if( u.has_flag( json_flag_NYCTOPHOBIA ) && !u.has_effect( effect_took_xanax ) &&
+        ( !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, dest_loc ) && !u.is_running() ) && u.can_run() &&
         dest_light_level < nyctophobia_threshold ) {
         add_msg( m_bad,
                  _( "You're too scared to walk into the dark.  You must run in order to willingly go that way." ) );
@@ -11384,13 +11385,13 @@ bool game::grabbed_move( const tripoint_rel_ms &dp, const bool via_ramp )
 
 void game::on_move_effects()
 {
-    // TODO: Move this to a character method
+    // TODO: Move this to a character method.
     if( !u.is_mounted() ) {
         const item muscle( fuel_type_muscle );
         for( const bionic_id &bid : u.get_bionic_fueled_with_muscle() ) {
-            if( u.has_active_bionic( bid ) ) {// active power gen
+            if( u.has_active_bionic( bid ) ) { // Active power generation.
                 u.mod_power_level( muscle.fuel_energy() * bid->fuel_efficiency );
-            } else {// passive power gen
+            } else { // Passive power generation.
                 u.mod_power_level( muscle.fuel_energy() * bid->passive_fuel_efficiency );
             }
         }
@@ -11418,7 +11419,7 @@ void game::on_move_effects()
         }
     }
 
-    // apply martial art move bonuses
+    // Apply martial art move bonuses.
     u.martial_arts_data->ma_onmove_effects( u );
 
     sfx::do_ambient();

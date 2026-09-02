@@ -168,7 +168,7 @@ void character_modifier::load( const JsonObject &jo, std::string_view )
 
 // Scores
 
-// the total of the manipulator score in the best limb group
+// The total of the manipulator score in the best limb group.
 float Character::manipulator_score( const std::map<bodypart_str_id, bodypart> &body,
                                     body_part_type::type type, int override_encumb, int override_wounds ) const
 {
