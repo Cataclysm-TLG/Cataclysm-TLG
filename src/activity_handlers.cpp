@@ -1497,6 +1497,15 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                                          random_entry( here.points_in_radius( you->pos_bub(),
                                                        std::max( 1, ( corpse->size - 1 ) ) ) ) );
             }
+            // Prevent organ farming.
+            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 3 ) ) {
+                add_msg_if_player_sees( you->pos_bub(),
+                                        _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
+                here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
+                corpse_item.set_damage( 4000 );
+                corpse_item.set_flag( flag_PULPED );
+            }
             if( !act->targets.empty() ) {
                 act->targets.pop_back();
             }
@@ -1520,6 +1529,7 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                 add_msg_if_player_sees( you->pos_bub(),
                                         _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
                 here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
+                corpse_item.set_damage( 4000 );
                 corpse_item.set_flag( flag_PULPED );
             }
             if( !act->targets.empty() ) {
