@@ -1583,7 +1583,7 @@ class Character : public Creature, public visitable
           */
         bool enough_working_legs() const;
         /** Returns the number of functioning legs */
-        int get_working_leg_count() const;
+        int get_working_leg_count( bool quadruped_allowed = true ) const;
         /** Returns true if the limb is broken */
         bool is_limb_broken( const bodypart_id &limb ) const;
         /** source of truth of whether a Character can run */

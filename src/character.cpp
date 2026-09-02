@@ -268,6 +268,7 @@ static const efftype_id effect_paincysts( "paincysts" );
 static const efftype_id effect_pre_conjunctivitis_bacterial( "pre_conjunctivitis_bacterial" );
 static const efftype_id effect_pre_conjunctivitis_viral( "pre_conjunctivitis_viral" );
 static const efftype_id effect_quadruped_full( "quadruped_full" );
+static const efftype_id effect_quadruped_half( "quadruped_half" );
 static const efftype_id effect_recover( "recover" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -2456,7 +2457,8 @@ bool Character::enough_working_legs() const
 {
     int limb_count = 0;
     int broken_limb_count = 0;
-    const bool quadruped = is_crouching() ||
+    const bool quadruped = ( ( has_effect( effect_quadruped_half ) ||
+                               ( has_effect( effect_quadruped_full ) ) ) && is_crouching() ) ||
                            ( has_effect( effect_quadruped_full ) && is_running() );
     for( const bodypart_id &part : get_all_body_parts() ) {
         const bool is_leg = part->limbtypes.find( body_part_type::type::leg ) != part->limbtypes.end();
@@ -2473,11 +2475,12 @@ bool Character::enough_working_legs() const
 }
 
 // Working is defined here as not broken.  Quadrupeds get to use their arms here.
-int Character::get_working_leg_count() const
+int Character::get_working_leg_count( bool quadruped_allowed ) const
 {
     int working_limb_count = 0;
-    const bool quadruped = is_crouching() ||
-                           ( has_effect( effect_quadruped_full ) && is_running() );
+    const bool quadruped = quadruped_allowed && ( ( ( has_effect( effect_quadruped_half ) ||
+                           ( has_effect( effect_quadruped_full ) ) ) && is_crouching() ) ||
+                           ( has_effect( effect_quadruped_full ) && is_running() ) );
 
     for( const bodypart_id &part : get_all_body_parts() ) {
         const bool is_leg = part->limbtypes.find( body_part_type::type::leg ) != part->limbtypes.end();
