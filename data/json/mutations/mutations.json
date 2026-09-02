@@ -4101,25 +4101,49 @@
     ],
     "enchantments": [
       {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "crouch" },
+            { "not": "u_can_drop_weapon" },
+            { "u_has_trait": "WINGS_BAT" }
+          ]
+        },
         "values": [ { "value": "MOVE_COST", "multiply": -0.7 }, { "value": "FOOTSTEP_NOISE", "multiply": 0 } ],
         "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "run" },
+            { "not": "u_can_drop_weapon" },
+            { "u_has_trait": "WINGS_BAT" }
+          ]
+        },
         "values": [ { "value": "MOVE_COST", "multiply": -0.2 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.6 } ],
         "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "crouch" },
+            { "not": "u_can_drop_weapon" },
+            { "u_has_trait": "WINGS_BAT" }
+          ]
+        },
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" }, { "u_has_trait": "WINGS_BAT" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "run" },
+            { "not": "u_can_drop_weapon" },
+            { "u_has_trait": "WINGS_BAT" }
+          ]
+        },
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
       {
-        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "condition": { "and": [ { "not": { "u_has_move_mode": "prone" } }, { "not": "u_is_on_liquid" }, { "not": "u_is_underwater" } ] },
         "values": [ { "value": "MOVE_COST", "multiply": 0.38 } ]
       }
     ]
@@ -7116,7 +7140,11 @@
       [
         {
           "condition": {
-            "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "not": { "u_has_flag": "QUADRUPED_RUN" } } ]
+            "and": [
+              { "u_has_move_mode": "crouch" },
+              { "not": "u_can_drop_weapon" },
+              { "not": { "u_has_flag": "QUADRUPED_RUN" } }
+            ]
           },
           "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }
@@ -7906,33 +7934,63 @@
     "enchantments": [
       { "condition": "ALWAYS", "values": [ { "value": "WEIGHT", "multiply": 0.12 } ] },
       {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "crouch" },
+            { "not": "u_can_drop_weapon" }
+          ]
+        },
         "values": [ { "value": "MOVE_COST", "multiply": -0.85 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.5 } ],
         "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "run" },
+            { "not": "u_can_drop_weapon" }
+          ]
+        },
         "values": [ { "value": "MOVE_COST", "multiply": -0.3 }, { "value": "FOOTSTEP_NOISE", "multiply": -0.5 } ],
         "ench_effects": [ { "effect": "quadruped_full", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "crouch" },
+            { "not": "u_can_drop_weapon" }
+          ]
+        },
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "run" },
+            { "not": "u_can_drop_weapon" }
+          ]
+        },
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "crouch" },
+            { "not": "u_can_drop_weapon" }
+          ]
+        },
         "ench_effects": [ { "effect": "wall_crawl", "intensity": 1 } ]
       },
       {
-        "condition": { "and": [ { "u_has_move_mode": "run" }, { "not": "u_can_drop_weapon" } ] },
+        "condition": {
+          "and": [
+            { "u_has_move_mode": "run" },
+            { "not": "u_can_drop_weapon" }
+          ]
+        },
         "ench_effects": [ { "effect": "wall_crawl", "intensity": 1 } ]
       },
       {
-        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "condition": { "and": [ { "not": { "u_has_move_mode": "prone" } }, { "not": "u_is_on_liquid" }, { "not": "u_is_underwater" } ] },
         "values": [ { "value": "MOVE_COST", "multiply": 0.4 }, { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.5 } ]
       }
     ]
@@ -9146,8 +9204,7 @@
     "enchantments": [
       "ench_quadruped_movement_bipedal",
       "ench_quadruped_movement_full_crouch",
-      "ench_quadruped_movement_full_run",
-      { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] }
+      "ench_quadruped_movement_full_run"
     ]
   },
   {
@@ -9179,7 +9236,11 @@
       [
         {
           "condition": {
-            "and": [ { "u_has_move_mode": "crouch" }, { "not": "u_can_drop_weapon" }, { "not": { "u_has_flag": "QUADRUPED_RUN" } } ]
+            "and": [
+              { "u_has_move_mode": "crouch" },
+              { "not": "u_can_drop_weapon" },
+              { "not": { "u_has_flag": "QUADRUPED_RUN" } }
+            ]
           },
           "msg_on": { "text": "Your paws make it easier to crawl on all fours." }
         }

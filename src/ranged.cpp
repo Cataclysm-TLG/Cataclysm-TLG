@@ -1687,12 +1687,12 @@ void practice_archery_proficiency( Character &p, const item &relevant )
             p.practice_proficiency( proficiency_prof_bow_basic, prof_exp );
             return;
         }
-        // We know how to handle a bow, but we are not an expert yet
+        // We know how to handle a bow, but we are not an expert yet.
         else if( !p.has_proficiency( proficiency_prof_bow_expert ) ) {
             p.practice_proficiency( proficiency_prof_bow_expert, prof_exp );
             return;
         }
-        // We are an expert, lets practice to become a master
+        // We are an expert, lets practice to become a master.
         else {
             p.practice_proficiency( proficiency_prof_bow_master, prof_exp );
             return;
@@ -1700,7 +1700,7 @@ void practice_archery_proficiency( Character &p, const item &relevant )
     }
 }
 
-// Apply stamina cost to archery which decreases due to proficiency
+// Apply stamina cost to archery which decreases due to proficiency.
 static void mod_stamina_archery( Character &you, const item &relevant )
 {
     // Set activity level to 12 * str_ratio, with 12 being max (EXPLOSIVE_EXERCISE)
@@ -1708,7 +1708,7 @@ static void mod_stamina_archery( Character &you, const item &relevant )
     const float str_ratio = static_cast<float>( relevant.get_min_str() ) / you.str_cur;
     you.set_activity_level( 12.f * std::clamp( str_ratio, 0.5f, 1.0f ) );
 
-    // Calculate stamina drain based on archery, athletics skill, and effective bow strength ratio
+    // Calculate stamina drain based on archery, athletics skill, and effective bow strength ratio.
     const float archery_skill = you.get_skill_level( skill_archery );
     const float athletics_skill = you.get_skill_level( skill_swimming );
     const float skill_modifier = ( 2.0f * archery_skill + athletics_skill ) / 3.0f;
@@ -1724,11 +1724,11 @@ static void do_aim( Character &you, const item &relevant, const double min_recoi
 {
     const double aim_amount = you.aim_per_move( relevant, you.recoil );
     if( aim_amount > 0 && you.recoil > min_recoil ) {
-        // Increase aim at the cost of moves
+        // Increase aim at the cost of moves.
         you.mod_moves( -1 );
         you.recoil = std::max( min_recoil, you.recoil - aim_amount );
 
-        // Train archery proficiencies if we are doing archery
+        // Train archery proficiencies if we are doing archery.
         if( relevant.gun_skill() == skill_archery && !relevant.has_flag( json_flag_CROSSBOW ) &&
             !relevant.has_flag( flag_WONT_TRAIN_MARKSMANSHIP ) ) {
             practice_archery_proficiency( you, relevant );

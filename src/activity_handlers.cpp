@@ -1499,7 +1499,8 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                                                        std::max( 1, ( corpse->size - 1 ) ) ) ) );
             }
             // Prevent organ farming.
-            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) && corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) &&
+                corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
                 one_in( corpse->size * 2 ) ) {
                 add_msg_if_player_sees( you->pos_bub(),
                                         _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
@@ -1525,7 +1526,8 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                          translation() ).translated() );
             corpse_item.set_flag( flag_BLED );
             // Prevent blood farming.
-            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) && corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) &&
+                corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
                 one_in( corpse->size * 2 ) ) {
                 add_msg_if_player_sees( you->pos_bub(),
                                         _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );

@@ -268,6 +268,7 @@ static const efftype_id effect_paincysts( "paincysts" );
 static const efftype_id effect_pre_conjunctivitis_bacterial( "pre_conjunctivitis_bacterial" );
 static const efftype_id effect_pre_conjunctivitis_viral( "pre_conjunctivitis_viral" );
 static const efftype_id effect_quadruped_full( "quadruped_full" );
+static const efftype_id effect_quadruped_half( "quadruped_half" );
 static const efftype_id effect_recover( "recover" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
@@ -2451,32 +2452,42 @@ int Character::get_working_arm_count() const
     return limb_count;
 }
 
-// working is defined here as not broken
+// Returns true unless half or more of our legs are broken.  Quadrupeds get to use their arms here.
 bool Character::enough_working_legs() const
 {
     int limb_count = 0;
-    int working_limb_count = 0;
+    int broken_limb_count = 0;
+    const bool quadruped = ( ( has_effect( effect_quadruped_half ) ||
+                               ( has_effect( effect_quadruped_full ) ) ) && is_crouching() ) ||
+                           ( has_effect( effect_quadruped_full ) && is_running() );
     for( const bodypart_id &part : get_all_body_parts() ) {
-        if( part->primary_limb_type() == body_part_type::type::leg ) {
+        const bool is_leg = part->limbtypes.find( body_part_type::type::leg ) != part->limbtypes.end();
+        const bool is_arm = part->limbtypes.find( body_part_type::type::arm ) != part->limbtypes.end();
+
+        if( is_leg || ( quadruped && is_arm ) ) {
             limb_count++;
-            if( !is_limb_broken( part ) ) {
-                working_limb_count++;
+            if( is_limb_broken( part ) ) {
+                broken_limb_count++;
             }
         }
     }
-
-    return working_limb_count == limb_count;
+    return broken_limb_count * 2 < limb_count;
 }
 
-// working is defined here as not broken
-int Character::get_working_leg_count() const
+// Working is defined here as not broken.  Quadrupeds get to use their arms here.
+int Character::get_working_leg_count( bool quadruped_allowed ) const
 {
     int working_limb_count = 0;
+    const bool quadruped = quadruped_allowed && ( ( ( has_effect( effect_quadruped_half ) ||
+                           ( has_effect( effect_quadruped_full ) ) ) && is_crouching() ) ||
+                           ( has_effect( effect_quadruped_full ) && is_running() ) );
+
     for( const bodypart_id &part : get_all_body_parts() ) {
-        if( part->primary_limb_type() == body_part_type::type::leg ) {
-            if( !is_limb_broken( part ) ) {
-                working_limb_count++;
-            }
+        const bool is_leg = part->limbtypes.find( body_part_type::type::leg ) != part->limbtypes.end();
+        const bool is_arm = part->limbtypes.find( body_part_type::type::arm ) != part->limbtypes.end();
+
+        if( ( is_leg || ( quadruped && is_arm ) ) && !is_limb_broken( part ) ) {
+            working_limb_count++;
         }
     }
 
@@ -2620,7 +2631,11 @@ steed_type Character::get_steed_type() const
 
 bool Character::can_switch_to( const move_mode_id &mode ) const
 {
-    // Only running modes are restricted at the moment and only when its your legs doing the running
+    map &here = get_map();
+    if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) && !in_vehicle &&
+        get_steed_type() == steed_type::NONE && mode->type() != move_mode_type::WALKING ) {
+        return false;
+    }
     return get_steed_type() != steed_type::NONE || mode->type() != move_mode_type::RUNNING || can_run();
 }
 
