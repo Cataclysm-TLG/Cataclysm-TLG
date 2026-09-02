@@ -262,23 +262,6 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         via_ramp = true;
     }
 
-    item_location weapon = you.get_wielded_item();
-    if( m.has_flag( ter_furn_flag::TFLAG_MINEABLE, dest_loc ) &&
-        !you.get_mon_visible().has_dangerous_creature_in_proximity &&
-        get_option<bool>( "AUTO_FEATURES" ) && get_option<bool>( "AUTO_MINING" ) &&
-        !m.veh_at( dest_loc ) && !you.is_underwater() && !you.has_effect( effect_stunned ) &&
-        !you.has_effect( effect_psi_stunned ) && !is_riding && !you.has_effect( effect_incorporeal ) &&
-        !m.impassable_field_at( dest_loc ) && !you.has_flag( json_flag_CANNOT_MOVE ) ) {
-        if( weapon && weapon->has_flag( flag_DIG_TOOL ) ) {
-            if( weapon->type->can_use( "PICKAXE" ) ) {
-                you.invoke_item( &*weapon, "PICKAXE", dest_loc );
-                // don't move into the tile until done mining
-                you.defer_move( dest_loc );
-                return true;
-            }
-        }
-    }
-
     // By this point we're either walking, running, crouching, or attacking, so update the activity level to match.
     if( !is_riding && !is_swimming ) {
         you.set_activity_level( you.enchantment_cache->modify_value(

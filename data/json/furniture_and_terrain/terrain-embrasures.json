@@ -17,7 +17,7 @@
       "SUPPORTS_ROOF",
       "WALL",
       "AUTO_WALL_SYMBOL",
-      "MINEABLE",
+      
       "MOUNTABLE",
       "PERMEABLE",
       "TRANSPARENT",
@@ -51,7 +51,7 @@
       "SUPPORTS_ROOF",
       "WALL",
       "AUTO_WALL_SYMBOL",
-      "MINEABLE",
+      
       "MOUNTABLE",
       "PERMEABLE",
       "TRANSPARENT",
@@ -84,7 +84,7 @@
       "SUPPORTS_ROOF",
       "AUTO_WALL_SYMBOL",
       "WALL",
-      "MINEABLE",
+      
       "MOUNTABLE",
       "PERMEABLE",
       "TRANSPARENT",
@@ -284,7 +284,7 @@
       "SUPPORTS_ROOF",
       "WALL",
       "AUTO_WALL_SYMBOL",
-      "MINEABLE",
+      
       "MOUNTABLE",
       "PERMEABLE",
       "TRANSPARENT",
@@ -317,7 +317,7 @@
       "SUPPORTS_ROOF",
       "WALL",
       "AUTO_WALL_SYMBOL",
-      "MINEABLE",
+      
       "MOUNTABLE",
       "PERMEABLE",
       "TRANSPARENT",

@@ -323,8 +323,6 @@ enum action_id : int {
     ACTION_TOGGLE_AUTO_FEATURES,
     /** Change auto pulp/butcher mode */
     ACTION_TOGGLE_AUTO_PULP_BUTCHER,
-    /** Turn auto mining on/off */
-    ACTION_TOGGLE_AUTO_MINING,
     /** Turn auto foraging on/off */
     ACTION_TOGGLE_AUTO_FORAGING,
     /** Turn auto pickup on/off */

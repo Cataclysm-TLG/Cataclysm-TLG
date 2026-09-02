@@ -35,7 +35,7 @@
     "roof": "t_resin_roof",
     "connect_groups": [ "INDOORFLOOR", "WALL" ],
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "PERMEABLE", "TRANSPARENT", "INDOORS", "MINEABLE", "SUPPORTS_ROOF" ],
+    "flags": [ "NOITEM", "WALL", "PERMEABLE", "TRANSPARENT", "INDOORS",  "SUPPORTS_ROOF" ],
     "bash": {
       "str_min": 70,
       "str_max": 300,

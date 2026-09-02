@@ -64,7 +64,7 @@
     "roof": "t_nm_floor_flesh",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL",  "BLOCK_WIND" ],
     "looks_like": "t_concrete_wall_flesh",
     "bash": {
       "str_min": 20,
@@ -79,14 +79,14 @@
     "type": "terrain",
     "id": "t_nm_wall_cartilage",
     "name": "flesh wall",
-    "description": "A thick wall of fleshy cartilage.  With the proper tools, you could smash right through it.",
+    "description": "A thick wall of fleshy cartilage.",
     "symbol": "#",
     "color": "magenta",
     "move_cost": 0,
     "roof": "t_nm_floor_flesh",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
     "looks_like": "t_nm_wall_flesh",
     "bash": { "str_min": 15, "str_max": 25, "sound": "crash!", "sound_fail": "whump!", "ter_set": "t_nm_floor_flesh" }
   },
@@ -102,7 +102,7 @@
     "roof": "t_nm_floor_flesh",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL",  "BLOCK_WIND" ],
     "looks_like": "t_concrete_wall_flesh",
     "bash": {
       "str_min": 5,
@@ -116,8 +116,8 @@
   {
     "type": "terrain",
     "id": "t_nm_ichor_sh",
-    "name": "monster hemolymph",
-    "description": "A shallow stream of glowing yellow ichor streaks through the beast.  Peering into it, you can see dark shadows moving under the surface.",
+    "name": "yellow ichor",
+    "description": "A shallow stream of glowing yellow fluid streaks through the beast.  Peering into it, you can see dark shadows moving under the surface.",
     "symbol": "~",
     "color": "yellow",
     "looks_like": "t_water_sh",
@@ -142,7 +142,7 @@
   {
     "type": "terrain",
     "id": "t_nm_brain",
-    "name": "nether brain",
+    "name": "monstrous brain",
     "description": "An oozing pile of wrinkled, decomposing flesh.",
     "symbol": "#",
     "color": "magenta_red",
@@ -150,7 +150,7 @@
     "roof": "t_nm_floor_flesh",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
     "looks_like": "t_concrete_wall_flesh",
     "bash": {
       "str_min": 10,

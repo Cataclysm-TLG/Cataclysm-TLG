@@ -11,7 +11,7 @@
     "color": "dark_gray",
     "move_cost": 2,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ],
     "bash": {
       "str_min": 70,
       "str_max": 300,
@@ -33,7 +33,7 @@
     "color": "yellow",
     "move_cost": 2,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ],
     "bash": {
       "str_min": 70,
       "str_max": 300,
@@ -53,7 +53,7 @@
     "color": "light_gray",
     "move_cost": 2,
     "coverage": 0,
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD" ],
     "bash": {
       "str_min": 70,
       "str_max": 300,

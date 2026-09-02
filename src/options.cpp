@@ -1569,13 +1569,6 @@ void options_manager::add_options_general()
 
         get_option( "AUTO_PULP_BUTCHER" ).setPrerequisite( "AUTO_FEATURES" );
 
-        add( "AUTO_MINING", page_id, to_translation( "Auto mining" ),
-             to_translation( "If true, enables automatic use of wielded pickaxes and jackhammers whenever trying to move into mineable terrain." ),
-             false
-           );
-
-        get_option( "AUTO_MINING" ).setPrerequisite( "AUTO_FEATURES" );
-
         add( "AUTO_MOPPING", page_id, to_translation( "Auto mopping" ),
              to_translation( "If true, enables automatic use of wielded mops to clean surrounding terrain." ),
              false

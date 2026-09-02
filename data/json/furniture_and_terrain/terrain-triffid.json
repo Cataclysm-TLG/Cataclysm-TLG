@@ -12,7 +12,7 @@
     "roof": "t_barkfloor",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL",  "BLOCK_WIND" ],
     "bash": {
       "str_min": 60,
       "str_max": 180,
@@ -34,7 +34,7 @@
     "concealment": 100,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL",  "BLOCK_WIND" ],
     "bash": {
       "str_min": 40,
       "str_max": 160,
@@ -77,7 +77,7 @@
     "roof": "t_barkfloor",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL",  "BLOCK_WIND" ],
     "bash": {
       "str_min": 80,
       "str_max": 180,

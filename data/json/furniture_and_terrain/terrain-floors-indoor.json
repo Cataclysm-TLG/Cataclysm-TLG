@@ -680,7 +680,7 @@
     "coverage": 0,
     "roof": "t_flat_roof",
     "light_emitted": 240,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD" ],
     "bash": {
       "sound": "SMASH!",
       "ter_set": "t_open_air",
@@ -1558,7 +1558,7 @@
     "move_cost": 2,
     "coverage": 0,
     "roof": "t_canvas_roof",
-    "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "FLAT", "ROAD", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
     "connect_groups": "CONCRETE",
     "connects_to": "CONCRETE",
     "bash": {

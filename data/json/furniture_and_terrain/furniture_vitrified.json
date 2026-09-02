@@ -11,7 +11,7 @@
     "coverage": 50,
     "concealment": 50,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -32,7 +32,7 @@
     "coverage": 50,
     "concealment": 50,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -53,7 +53,7 @@
     "coverage": 30,
     "concealment": 30,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -74,7 +74,7 @@
     "coverage": 30,
     "concealment": 30,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -95,7 +95,7 @@
     "coverage": 40,
     "concealment": 40,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -116,7 +116,7 @@
     "coverage": 40,
     "concealment": 40,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -137,7 +137,7 @@
     "coverage": 40,
     "concealment": 40,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -158,7 +158,7 @@
     "coverage": 35,
     "concealment": 35,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -179,7 +179,7 @@
     "coverage": 40,
     "concealment": 40,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -200,7 +200,7 @@
     "coverage": 40,
     "concealment": 40,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -221,7 +221,7 @@
     "coverage": 40,
     "concealment": 40,
     "required_str": 20,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -309,7 +309,7 @@
     "coverage": 70,
     "concealment": 70,
     "required_str": 10,
-    "flags": [ "BLOCKSDOOR", "MINEABLE" ],
+    "flags": [ "BLOCKSDOOR" ],
     "deconstruct": { "items": [ { "item": "black_glass_shard", "count": [ 40, 80 ] } ] },
     "max_volume": "2000 L",
     "bash": {
@@ -635,7 +635,7 @@
     "concealment": 45,
     "required_str": 12,
     "max_volume": "37500 ml",
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "MINEABLE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF" ],
     "deconstruct": { "items": [ { "item": "black_glass_shard", "count": [ 40, 80 ] } ] },
     "bash": {
       "str_min": 18,
@@ -724,7 +724,7 @@
     "color": "light_gray",
     "move_cost_mod": -1,
     "required_str": 10,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "MINEABLE", "LIQUIDCONT", "TRANSPARENT" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR",  "LIQUIDCONT", "TRANSPARENT" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -888,7 +888,7 @@
     "concealment": 50,
     "required_str": 13,
     "max_volume": "120 L",
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "MINEABLE", "NO_SELF_CONNECT" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF",  "NO_SELF_CONNECT" ],
     "bash": {
       "str_min": 18,
       "str_max": 50,
