@@ -372,7 +372,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "quiver" },
-    "description": "A leather quiver worn at the waist that can hold twelve arrows or fifteen bolts.",
+    "description": "A leather quiver worn at the waist that can hold twelve arrows or sixteen bolts.",
     "weight": "260 g",
     "volume": "500 ml",
     "price": "65 USD",
