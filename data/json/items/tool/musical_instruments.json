@@ -28,10 +28,15 @@
       "player_descriptions": [
         "You play a little tune on your banjo.",
         "You play a bluegrass tune on your banjo.",
-        "You play a quick, Southern ditty on your banjo."
+        "You play a quick ditty on your banjo."
+      ],
+      "npc_descriptions":[
+        "play a little tune on the banjo.",
+        "play a bluegrass tune on the banjo.",
+        "play a quick ditty on the banjo."
       ]
     },
-    "melee_damage": { "bash": 16 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "bone_flute",
@@ -54,14 +59,18 @@
       "type": "musical_instrument",
       "volume": 12,
       "fun": -5,
-      "fun_bonus": 2,
+      "fun_bonus": 1,
       "speed_penalty": 10,
       "description_frequency": 20,
       "player_descriptions": [
         "You play a little tune on your flute.",
-        "You play a beautiful piece on your flute.",
-        "You play a piece on your bone flute that resembles the howling wind through Aurignacian caves.",
-        "Your bone flute wails for the fallen during the hunt."
+        "You play a warbling trill on your flute.",
+        "You play a beautiful piece on your flute."
+      ],
+      "npc_descriptions":[
+        "play a little tune on the flute.",
+        "play a warbling trill on the flute.",
+        "play a beautiful piece on the flute."
       ]
     },
     "melee_damage": { "bash": 2 }
@@ -79,7 +88,7 @@
     "longest_side": "60 cm",
     "price": "55 USD",
     "price_postapoc": "2 USD 50 cent",
-    "to_hit": 1,
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "clumsy" },
     "material": [ { "type": "wood", "portion": 9 }, { "type": "silver" } ],
     "symbol": "|",
     "color": "light_gray",
@@ -95,9 +104,14 @@
         "You play a little tune on your clarinet.",
         "You play a moving, orchestral piece on your clarinet.",
         "You play an uplifting marching tune on your clarinet."
+      ],
+      "npc_descriptions": [
+        "play a little tune on the clarinet.",
+        "play a moving, orchestral piece on the clarinet.",
+        "play an uplifting marching tune on the clarinet."
       ]
     },
-    "melee_damage": { "bash": 4 }
+    "melee_damage": { "bash": 2 }
   },
   {
     "id": "kantele",
@@ -112,7 +126,7 @@
     "longest_side": "46 cm",
     "price": "55 USD",
     "price_postapoc": "2 USD 50 cent",
-    "to_hit": 1,
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "clumsy" },
     "material": [ "wood" ],
     "symbol": "(",
     "color": "brown",
@@ -128,6 +142,11 @@
         "You play a riveting tune on your kantele.",
         "You play an enchanting composition on your kantele.",
         "You play a somber piece on your kantele."
+      ],
+      "npc_descriptions": [
+        "play a riveting tune on the kantele.",
+        "play an enchanting composition on the kantele.",
+        "play a somber piece on the kantele."
       ]
     },
     "melee_damage": { "bash": 4 }
@@ -177,7 +196,7 @@
     "longest_side": "50 cm",
     "price": "75 USD",
     "price_postapoc": "3 USD",
-    "to_hit": 1,
+    "to_hit": { "grip": "none", "length": "short", "surface": "any", "balance": "clumsy" },
     "material": [ "brass" ],
     "symbol": "-",
     "color": "yellow",
@@ -195,7 +214,7 @@
         "You play a little ballad on your trumpet."
       ]
     },
-    "melee_damage": { "bash": 7 }
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "ukulele",
@@ -229,7 +248,7 @@
         "You play a small jam on your ukulele."
       ]
     },
-    "melee_damage": { "bash": 14 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "violin",
@@ -263,7 +282,7 @@
         "You play a quick, southern ditty on your fiddle."
       ]
     },
-    "melee_damage": { "bash": 12 }
+    "melee_damage": { "bash": 5 }
   },
   {
     "id": "krar",
@@ -292,7 +311,7 @@
       "description_frequency": 10,
       "player_descriptions": [ "You play a relaxed, folksy tune on your krar." ]
     },
-    "melee_damage": { "bash": 9 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "id": "drum_percussion",
@@ -399,7 +418,7 @@
     "category": "tools",
     "weight": "2200 g",
     "color": "brown",
-    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "clumsy" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "clumsy" },
     "use_action": [ { "type": "play_instrument" } ],
     "tick_action": {
       "type": "musical_instrument",
@@ -409,9 +428,11 @@
       "fun_bonus": 2,
       "description_frequency": 20,
       "player_descriptions": [
-        "You strum a few chords on the guitar.",
-        "You pluck a few notes on the guitar.",
-        "You play a slow blues-y tune on the guitar."
+        "You strum a few chords on your guitar.",
+        "You pick out a quick riff on your guitar.",
+        "You play a gentle tune on your guitar.",
+        "You play a half-remembered song on your guitar.",
+        "You improvise a little solo on your guitar."
       ],
       "npc_descriptions": [ "strum a few chords on the guitar.", "pluck a few notes on the guitar.", "play a slow blues-y tune on the guitar." ]
     },
@@ -424,9 +445,9 @@
     "longest_side": "97 cm",
     "warmth": 2,
     "flags": [ "FRAGILE_MELEE", "BELTED", "SLEEP_IGNORE" ],
-    "material_thickness": 2,
-    "armor": [ { "encumbrance": 27, "coverage": 25, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
-    "melee_damage": { "bash": 18 }
+    "material_thickness": 0.5,
+    "armor": [ { "encumbrance": 27, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
+    "melee_damage": { "bash": 4 }
   },
   {
     "type": "ITEM",
@@ -437,7 +458,7 @@
     "category": "tools",
     "weight": "3750 g",
     "color": "red",
-    "to_hit": { "grip": "solid", "length": "long", "surface": "any", "balance": "clumsy" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "any", "balance": "clumsy" },
     "use_action": [ { "type": "play_instrument" } ],
     "tick_action": {
       "type": "musical_instrument",
@@ -447,14 +468,11 @@
       "fun_bonus": 1,
       "description_frequency": 20,
       "player_descriptions": [
-        "You plink out a shredding solo on your guitar.",
-        "You play an epic classic rock riff on your guitar.",
-        "You play a furious, muted riff on your guitar.",
-        "You play a crunchy stoner tune on your guitar.",
-        "You play an old Britpop song on your guitar.",
-        "You play a tasteful classical piece on your guitar.",
-        "You play a jangly folk ditty on your guitar.",
-        "You play a melancholy melody on your guitar."
+        "You strum a few chords on your guitar.",
+        "You pick out a quick riff on your guitar.",
+        "You play a gentle tune on your guitar.",
+        "You play a half-remembered song on your guitar.",
+        "You improvise a little solo on your guitar."
       ]
     },
     "symbol": "-",
@@ -467,9 +485,9 @@
     "longest_side": "97 cm",
     "warmth": 2,
     "flags": [ "FRAGILE_MELEE", "BELTED", "SLEEP_IGNORE" ],
-    "material_thickness": 2,
-    "armor": [ { "encumbrance": 27, "coverage": 25, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
-    "melee_damage": { "bash": 26 }
+    "material_thickness": 1,
+    "armor": [ { "encumbrance": 27, "coverage": 15, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
+    "melee_damage": { "bash": 8 }
   },
   {
     "type": "ITEM",
@@ -495,22 +513,21 @@
         "You strike a lively quick step march on your pipes."
       ],
       "npc_descriptions": [
-        "pipes drone loudly as it strikes a battle hymn from the chanter.",
-        "pipes drone a slow and piercing dirge.",
-        "strike a lively quick step march on their pipes."
+        "drone a battle hymn on the bagpipes.",
+        "drone a slow and piercing dirge on the bagpipes.",
+        "strike a lively quick step march on the bagpipes."
       ]
     },
     "symbol": "-",
     "description": "A traditional musical instrument, using enclosed reeds fed from a reservoir of air contained within a leather bag.  It has a strap so you can wear it around, even when not playing.",
     "price": "100 USD",
     "price_postapoc": "5 USD",
-    "material": [ "leather", "wood" ],
+    "material": [ { "type": "leather", "portion": 9 }, { "type": "wood", "portion": 1 } ],
     "volume": "5 L",
     "longest_side": "65 cm",
     "flags": [ "BELTED", "SLEEP_IGNORE" ],
-    "material_thickness": 2,
-    "armor": [ { "encumbrance": 15, "coverage": 25, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ],
-    "melee_damage": { "bash": 4 }
+    "material_thickness": 0.3,
+    "armor": [ { "encumbrance": 15, "coverage": 25, "covers": [ "torso" ], "specifically_covers": [ "torso_hanging_front" ] } ]
   },
   {
     "type": "ITEM",
@@ -544,16 +561,16 @@
     "material": [ "brass" ],
     "volume": "12500 ml",
     "longest_side": "107 cm",
-    "material_thickness": 4,
+    "material_thickness": 0.5,
     "armor": [
       {
         "encumbrance": 30,
-        "coverage": 65,
+        "coverage": 40,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_hanging_front", "torso_hanging_back", "torso_upper" ]
       }
     ],
-    "melee_damage": { "bash": 13 }
+    "melee_damage": { "bash": 4 }
   },
   {
     "type": "ITEM",
@@ -592,15 +609,15 @@
     "material": [ "brass" ],
     "volume": "4500 ml",
     "longest_side": "70 cm",
-    "material_thickness": 4,
+    "material_thickness": 0.5,
     "armor": [
       {
         "encumbrance": 30,
-        "coverage": 65,
+        "coverage": 25,
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_hanging_front", "torso_hanging_back", "torso_upper" ]
       }
     ],
-    "melee_damage": { "bash": 12 }
+    "melee_damage": { "bash": 4 }
   }
 ]
