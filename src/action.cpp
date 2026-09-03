@@ -372,8 +372,6 @@ std::string action_ident( action_id act )
             return "toggle_auto_features";
         case ACTION_TOGGLE_AUTO_PULP_BUTCHER:
             return "toggle_auto_pulp_butcher";
-        case ACTION_TOGGLE_AUTO_MINING:
-            return "toggle_auto_mining";
         case ACTION_TOGGLE_AUTO_FORAGING:
             return "toggle_auto_foraging";
         case ACTION_TOGGLE_AUTO_PICKUP:
@@ -479,7 +477,6 @@ bool can_action_change_worldstate( const action_id act )
         case ACTION_TIMEOUT:
         case ACTION_TOGGLE_AUTO_FEATURES:
         case ACTION_TOGGLE_AUTO_PULP_BUTCHER:
-        case ACTION_TOGGLE_AUTO_MINING:
         case ACTION_TOGGLE_AUTO_FORAGING:
             return false;
         default:
@@ -977,7 +974,6 @@ action_id handle_action_menu( map &here )
             REGISTER_ACTION( ACTION_IGNORE_ENEMY );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_FEATURES );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_PULP_BUTCHER );
-            REGISTER_ACTION( ACTION_TOGGLE_AUTO_MINING );
             REGISTER_ACTION( ACTION_TOGGLE_AUTO_FORAGING );
         } else if( category == _( "Craft" ) ) {
             REGISTER_ACTION( ACTION_CRAFT );

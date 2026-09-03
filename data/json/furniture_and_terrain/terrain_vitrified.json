@@ -439,7 +439,7 @@
     "coverage": 100,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "SUPPORTS_ROOF", "WALL", "PERMEABLE", "MINEABLE" ],
+    "flags": [ "SUPPORTS_ROOF", "WALL", "PERMEABLE" ],
     "bash": {
       "str_min": 120,
       "str_max": 200,

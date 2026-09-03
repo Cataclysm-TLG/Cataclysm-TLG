@@ -26,7 +26,7 @@
     "coverage": 80,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "WALL", "PERMEABLE", "MINEABLE" ]
+    "flags": [ "WALL", "PERMEABLE" ]
   },
   {
     "type": "terrain",
@@ -43,7 +43,7 @@
     "concealment": 100,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND", "MINEABLE" ]
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ]
   },
   {
     "type": "terrain",
@@ -199,7 +199,6 @@
     "description": "A finished wall of planks and support beams, capable of supporting an upper level or roof.  Highly flammable.",
     "color": "light_red",
     "roof": "t_wood_roof",
-    "delete": { "flags": [ "MINEABLE" ] },
     "bash": {
       "str_min": 12,
       "str_max": 150,
@@ -814,7 +813,7 @@
     "move_cost": 5,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT" ],
     "bash": {
       "str_min": 30,
       "str_max": 100,
@@ -882,7 +881,7 @@
     "move_cost": 4,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "bash": {
@@ -923,7 +922,7 @@
     "move_cost": 5,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT" ],
     "bash": {
       "str_min": 20,
       "str_max": 90,
@@ -1028,7 +1027,7 @@
     "move_cost": 4,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "NOITEM", "TRANSPARENT", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "flags": [ "NOITEM", "TRANSPARENT", "MOUNTABLE", "REDUCE_SCENT" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "bash": {
@@ -1051,7 +1050,7 @@
     "move_cost": 5,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "REDUCE_SCENT" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "bash": {
@@ -1122,7 +1121,7 @@
     "move_cost": 4,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "NOITEM", "TRANSPARENT", "MOUNTABLE", "REDUCE_SCENT", "MINEABLE" ],
+    "flags": [ "NOITEM", "TRANSPARENT", "MOUNTABLE", "REDUCE_SCENT" ],
     "bash": {
       "str_min": 50,
       "str_max": 130,
@@ -1218,7 +1217,7 @@
     "move_cost": 4,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "bash": {
@@ -1320,7 +1319,7 @@
     "color": "light_red",
     "roof": "t_thatch_roof",
     "extend": { "flags": [ "FLAMMABLE_HARD" ] },
-    "delete": { "flags": [ "FLAMMABLE", "MINEABLE" ] },
+    "delete": { "flags": [ "FLAMMABLE" ] },
     "bash": {
       "str_min": 10,
       "str_max": 140,
@@ -1386,7 +1385,7 @@
     "concealment": 100,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "PERMEABLE", "SUPPORTS_ROOF", "AUTO_WALL_SYMBOL", "MINEABLE" ],
+    "flags": [ "NOITEM", "WALL", "PERMEABLE", "SUPPORTS_ROOF", "AUTO_WALL_SYMBOL" ],
     "bash": {
       "str_min": 60,
       "str_max": 200,
@@ -1462,7 +1461,7 @@
     "concealment": 38,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "PERMEABLE", "AUTO_WALL_SYMBOL", "MINEABLE" ],
+    "flags": [ "NOITEM", "WALL", "PERMEABLE", "AUTO_WALL_SYMBOL" ],
     "bash": {
       "str_min": 30,
       "str_max": 200,
@@ -1480,7 +1479,6 @@
     "looks_like": "t_window",
     "description": "A barrier made of glass, it's nothing complicated, and looks extremely fragile.",
     "rotates_to": "INDOORFLOOR",
-    "delete": { "flags": [ "MINEABLE" ] },
     "bash": {
       "str_min": 6,
       "str_max": 20,
@@ -1574,7 +1572,7 @@
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE",  "BLOCK_WIND" ],
     "open": "t_laminated_glass_shutter_open",
     "bash": {
       "str_min": 30,
@@ -1614,7 +1612,7 @@
       "NO_SCENT",
       "AUTO_WALL_SYMBOL",
       "OPENCLOSE_INSIDE",
-      "MINEABLE",
+      
       "BLOCK_WIND",
       "UNCLINGABLE"
     ],
@@ -1745,7 +1743,7 @@
     "concealment": 100,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "FLAMMABLE_HARD", "NOITEM", "MINEABLE", "WALL", "NO_SCENT" ],
+    "flags": [ "FLAMMABLE_HARD", "NOITEM",  "WALL", "NO_SCENT" ],
     "bash": {
       "str_min": 30,
       "str_max": 150,
@@ -1764,7 +1762,7 @@
     "name": "root wall",
     "looks_like": "t_rock",
     "description": "A dirt wall covered with roots.",
-    "delete": { "flags": [ "MINEABLE", "BLOCK_WIND" ] },
+    "delete": { "flags": [  "BLOCK_WIND" ] },
     "bash": {
       "str_min": 12,
       "str_max": 150,
@@ -1846,7 +1844,7 @@
     "color": "red",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
     "bash": {
       "str_min": 100,
       "str_max": 400,
@@ -1866,7 +1864,7 @@
     "color": "green",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
     "bash": {
       "str_min": 100,
       "str_max": 400,
@@ -1886,7 +1884,7 @@
     "color": "blue",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
     "bash": {
       "str_min": 100,
       "str_max": 400,
@@ -1904,7 +1902,6 @@
     "looks_like": "t_column",
     "description": "A small support column.",
     "extend": { "flags": [ "TRANSPARENT" ] },
-    "delete": { "flags": [ "MINEABLE" ] },
     "bash": {
       "str_min": 40,
       "str_max": 200,
@@ -1923,7 +1920,7 @@
     "symbol": "*",
     "color": "light_gray",
     "move_cost": 5,
-    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "PERMEABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "MOUNTABLE", "PERMEABLE" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "bash": {
@@ -1988,7 +1985,7 @@
     "roof": "t_metal_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "REDUCE_SCENT", "SUPPORTS_ROOF", "MINEABLE" ],
+    "flags": [ "NOITEM", "WALL", "REDUCE_SCENT", "SUPPORTS_ROOF" ],
     "bash": {
       "str_min": 40,
       "str_max": 200,
@@ -2025,7 +2022,7 @@
     "roof": "t_metal_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "PERMEABLE", "SUPPORTS_ROOF", "MINEABLE" ],
+    "flags": [ "NOITEM", "WALL", "PERMEABLE", "SUPPORTS_ROOF" ],
     "bash": {
       "str_min": 20,
       "str_max": 120,
@@ -2075,7 +2072,7 @@
     "move_cost": 4,
     "coverage": 50,
     "concealment": 38,
-    "flags": [ "TRANSPARENT", "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "bash": {

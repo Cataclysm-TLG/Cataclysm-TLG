@@ -14,7 +14,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM",  "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_laminated_door_glass_o",
     "bash": {
       "str_min": 12,
@@ -41,7 +41,7 @@
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD",  "SUPPORTS_ROOF" ],
     "close": "t_laminated_door_glass_c",
     "bash": {
       "str_min": 12,
@@ -69,7 +69,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM",  "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_ballistic_door_glass_o",
     "bash": {
       "str_min": 25,
@@ -101,7 +101,7 @@
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD",  "SUPPORTS_ROOF" ],
     "close": "t_ballistic_door_glass_c",
     "bash": {
       "str_min": 25,
@@ -128,7 +128,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM",  "SUPPORTS_ROOF" ],
     "open": "t_laminated_door_glass_lab_o",
     "bash": {
       "str_min": 20,
@@ -153,7 +153,7 @@
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "TRANSPARENT", "FLAT", "ROAD", "MINEABLE", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "FLAT", "ROAD",  "SUPPORTS_ROOF" ],
     "close": "t_laminated_door_glass_lab_c",
     "bash": {
       "str_min": 20,

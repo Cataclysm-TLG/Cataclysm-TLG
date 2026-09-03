@@ -402,7 +402,7 @@
     "symbol": "&",
     "color": "light_gray",
     "move_cost": 0,
-    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE" ],
     "bash": {
       "str_min": 60,
       "str_max": 210,
@@ -496,7 +496,7 @@
     "move_cost": 0,
     "coverage": 50,
     "concealment": 50,
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 30,
       "str_max": 210,
@@ -1454,34 +1454,7 @@
     "move_cost": 2,
     "coverage": 40,
     "concealment": 40,
-    "flags": [ "TRANSPARENT", "FLAT", "MINEABLE" ],
-    "bash": {
-      "str_min": 80,
-      "str_max": 300,
-      "sound": "crash!",
-      "sound_fail": "whump!",
-      "ter_set": "t_pit",
-      "items": [
-        { "item": "rock", "count": [ 8, 18 ] },
-        { "item": "2x4", "count": [ 0, 2 ] },
-        { "item": "nail", "charges": [ 1, 4 ] },
-        { "item": "splinter", "count": [ 1, 2 ] }
-      ]
-    }
-  },
-  {
-    "type": "terrain",
-    "id": "t_covered_salt_water_well",
-    "//": "After #78419 this can no longer be constructed, but is left in for old save compatibility",
-    "name": "covered salt water well",
-    "description": "A deep well, collecting salt water from a surrounding swamp.  You won't be able to get any water unless you add some mechanism for drawing it up to the surface.",
-    "symbol": "#",
-    "color": "dark_gray",
-    "looks_like": "t_covered_well",
-    "move_cost": 2,
-    "coverage": 40,
-    "concealment": 40,
-    "flags": [ "TRANSPARENT", "FLAT", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAT" ],
     "bash": {
       "str_min": 80,
       "str_max": 300,

@@ -71,7 +71,6 @@
     "coverage": 35,
     "concealment": 35,
     "required_str": -1,
-    "flags": [ "MINEABLE" ],
     "deconstruct": { "items": [ { "item": "sheet_metal", "count": 2 }, { "item": "brick", "count": 30 } ] },
     "bash": {
       "str_min": 15,

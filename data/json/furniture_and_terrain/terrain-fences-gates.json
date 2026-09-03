@@ -53,7 +53,7 @@
     "coverage": 30,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "MINEABLE", "BURROWABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE",  "BURROWABLE" ],
     "bash": {
       "str_min": 60,
       "str_max": 210,
@@ -1279,7 +1279,7 @@
       "MOUNTABLE",
       "SHORT",
       "AUTO_WALL_SYMBOL",
-      "MINEABLE",
+      
       "BURROWABLE",
       "PERMEABLE"
     ],

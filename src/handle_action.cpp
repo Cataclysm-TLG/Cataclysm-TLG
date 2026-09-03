@@ -2986,12 +2986,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             auto_features_warn();
             break;
 
-        case ACTION_TOGGLE_AUTO_MINING:
-            // Set Auto Mining to x
-            set_next_option( "AUTO_MINING" );
-            auto_features_warn();
-            break;
-
         case ACTION_TOGGLE_THIEF_MODE:
             if( player_character.get_value( "THIEF_MODE" ).str() == "THIEF_ASK" ) {
                 player_character.set_value( "THIEF_MODE", "THIEF_HONEST" );
