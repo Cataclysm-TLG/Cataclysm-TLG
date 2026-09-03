@@ -130,7 +130,7 @@
     "id": "constr_thatched_roof",
     "group": "build_thatched_roof",
     "category": "CONSTRUCT",
-    "required_skills": [ [ "fabrication", 3 ], [ "survival", 7 ] ],
+    "required_skills": [ [ "fabrication", 3 ] ],
     "time": "300 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [
