@@ -166,7 +166,7 @@
     "id": "constr_compost_empty",
     "group": "build_compost_tank",
     "category": "FURN",
-    "required_skills": [ [ "fabrication", 5 ], [ "mechanics", 2 ], [ "survival", 4 ] ],
+    "required_skills": [ [ "fabrication", 5 ], [ "mechanics", 2 ], [ "survival", 3 ] ],
     "time": "2880 m",
     "qualities": [ [ { "id": "HAMMER", "level": 2 } ], [ { "id": "SAW_M", "level": 1 } ], [ { "id": "SMOOTH", "level": 1 } ] ],
     "using": [ [ "welding_standard", 10 ] ],
