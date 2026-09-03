@@ -4230,5 +4230,10 @@
     "type": "MIGRATION",
     "id": "folded_trashcan_large",
     "replace": "roller_bin"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "long_duffelbag",
+    "replace": "duffelbag"
   }
 ]
