@@ -866,7 +866,7 @@
     "qualities": [ [ "DIG", 1 ] ],
     "flags": [ "DURABLE_MELEE", "NONCONDUCTIVE", "DIG_TOOL", "SHEATH_AXE" ],
     "weapon_category": [ "HOOKING_WEAPONRY" ],
-    "melee_damage": { "bash": 40, "stab": 8 }
+    "melee_damage": { "bash": 42, "stab": 8 }
   },
   {
     "id": "bronze_pickaxe",
@@ -888,7 +888,7 @@
     "qualities": [ [ "DIG", 1 ] ],
     "flags": [ "NONCONDUCTIVE", "DIG_TOOL", "SHEATH_AXE" ],
     "weapon_category": [ "HOOKING_WEAPONRY" ],
-    "melee_damage": { "bash": 40, "stab": 4 }
+    "melee_damage": { "bash": 42, "stab": 4 }
   },
   {
     "id": "pin_reamer",
