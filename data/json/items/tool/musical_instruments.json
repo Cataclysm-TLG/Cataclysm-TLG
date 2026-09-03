@@ -28,7 +28,12 @@
       "player_descriptions": [
         "You play a little tune on your banjo.",
         "You play a bluegrass tune on your banjo.",
-        "You play a quick, Southern ditty on your banjo."
+        "You play a quick ditty on your banjo."
+      ],
+      "npc_descriptions":[
+        "play a little tune on the banjo.",
+        "play a bluegrass tune on the banjo.",
+        "play a quick ditty on the banjo."
       ]
     },
     "melee_damage": { "bash": 4 }
@@ -59,9 +64,13 @@
       "description_frequency": 20,
       "player_descriptions": [
         "You play a little tune on your flute.",
-        "You play a beautiful piece on your flute.",
-        "You play a piece on your bone flute that resembles the howling wind through Aurignacian caves.",
-        "Your bone flute wails for the fallen during the hunt."
+        "You play a warbling trill on your flute.",
+        "You play a beautiful piece on your flute."
+      ],
+      "npc_descriptions":[
+        "play a little tune on the flute.",
+        "play a warbling trill on the flute.",
+        "play a beautiful piece on the flute."
       ]
     },
     "melee_damage": { "bash": 2 }
@@ -95,6 +104,11 @@
         "You play a little tune on your clarinet.",
         "You play a moving, orchestral piece on your clarinet.",
         "You play an uplifting marching tune on your clarinet."
+      ],
+      "npc_descriptions": [
+        "play a little tune on the clarinet.",
+        "play a moving, orchestral piece on the clarinet.",
+        "play an uplifting marching tune on the clarinet."
       ]
     },
     "melee_damage": { "bash": 2 }
@@ -128,6 +142,11 @@
         "You play a riveting tune on your kantele.",
         "You play an enchanting composition on your kantele.",
         "You play a somber piece on your kantele."
+      ],
+      "npc_descriptions": [
+        "play a riveting tune on the kantele.",
+        "play an enchanting composition on the kantele.",
+        "play a somber piece on the kantele."
       ]
     },
     "melee_damage": { "bash": 4 }
@@ -494,9 +513,9 @@
         "You strike a lively quick step march on your pipes."
       ],
       "npc_descriptions": [
-        "pipes drone loudly as it strikes a battle hymn from the chanter.",
-        "pipes drone a slow and piercing dirge.",
-        "strike a lively quick step march on their pipes."
+        "drone a battle hymn on the bagpipes.",
+        "drone a slow and piercing dirge on the bagpipes.",
+        "strike a lively quick step march on the bagpipes."
       ]
     },
     "symbol": "-",
