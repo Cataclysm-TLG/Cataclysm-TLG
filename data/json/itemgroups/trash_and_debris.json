@@ -303,26 +303,6 @@
     ]
   },
   {
-    "type": "item_group",
-    "id": "trash_junkyard",
-    "items": [
-      { "item": "glass_shard", "prob": 30, "charges": [ 1, 60 ] },
-      [ "scrap", 50 ],
-      [ "steel_chunk", 30 ],
-      [ "steel_fragment", 30 ],
-      [ "frame", 20 ],
-      [ "rigid_plastic_sheet", 2 ],
-      [ "chain", 10 ],
-      [ "spring", 10 ],
-      [ "hdframe", 10 ],
-      [ "hose", 10 ],
-      [ "wheel_mount_medium", 10 ],
-      [ "alternator_car", 10 ],
-      [ "alternator_truck", 5 ],
-      [ "alternator_motorbike", 2 ]
-    ]
-  },
-  {
     "id": "collapsed_building_rubble",
     "type": "item_group",
     "subtype": "collection",
