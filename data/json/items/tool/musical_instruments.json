@@ -59,7 +59,7 @@
       "type": "musical_instrument",
       "volume": 12,
       "fun": -5,
-      "fun_bonus": 2,
+      "fun_bonus": 1,
       "speed_penalty": 10,
       "description_frequency": 20,
       "player_descriptions": [
