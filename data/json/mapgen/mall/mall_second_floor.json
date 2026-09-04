@@ -58,7 +58,7 @@
         ],
         "K": [ { "item": "vending_food_items", "chance": 20 }, { "item": "vending_drink_items", "chance": 20 } ],
         "Y": { "item": "trash", "chance": 100, "repeat": [ 1, 2 ] },
-        "S": { "item": "trash", "chance": 30, "repeat": [ 4, 6 ] },
+        "S": { "item": "SUS_office_filing_cabinet", "chance": 30 },
         "R": { "item": "magazines", "chance": 30, "repeat": [ 1, 2 ] },
         "z": [
           { "item": "hatstore_accessories", "chance": 40, "repeat": [ 1, 2 ] },
