@@ -106,7 +106,7 @@
     "subtypes": [ "GUN" ],
     "reload_noise_volume": 10,
     "name": { "str": "M134D-H Minigun" },
-    "description": "The M134D-H Minigun is a (relatively) lightweight heavy rotary machine gun.  Its six barrels are rotated by an electric motor, powered by UPS or vehicle.  If you could find enough ammo for it, it would become a devastating weapon.  It must be mounted on a vehicle before use.",
+    "description": "The M134D-H Minigun is a (relatively) lightweight heavy rotary machine gun.  Its six barrels are rotated by an motor requiring electricity from a vehicle or power bank.  If you could find enough ammo for it, it would become a devastating weapon.  It must be mounted on a vehicle before use.",
     "weight": "19770 g",
     "volume": "8300 ml",
     "longest_side": "800 mm",

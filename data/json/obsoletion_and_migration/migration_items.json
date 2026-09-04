@@ -4230,5 +4230,15 @@
     "type": "MIGRATION",
     "id": "folded_trashcan_large",
     "replace": "roller_bin"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "UPS_OFF",
+    "replace": "UPS_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "UPS_ON",
+    "replace": "UPS_off"
   }
 ]

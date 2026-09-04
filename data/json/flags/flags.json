@@ -25,7 +25,7 @@
   {
     "id": "ACTIVE_CLOAKING",
     "type": "json_flag",
-    "info": "This gear has <info>cloaking tech</info> that will <good>make you invisible</good> when active, at the cost of <info>power from a UPS</info>."
+    "info": "This gear has <info>cloaking tech</info> that will <good>make you invisible</good> when active."
   },
   {
     "id": "ALLOWS_TAIL",
@@ -977,11 +977,6 @@
     "type": "json_flag"
   },
   {
-    "id": "POWERARMOR_COMPATIBLE",
-    "type": "json_flag",
-    "//": "Allows power armor to be worn with compatible armors like ear plugs and mouthpieces."
-  },
-  {
     "id": "ZERO_WEIGHT",
     "type": "json_flag"
   },
@@ -989,31 +984,6 @@
     "id": "ZOOM",
     "type": "json_flag",
     "info": "This item can be used to <good>better</good> see <info>things far away</info>."
-  },
-  {
-    "id": "furred",
-    "type": "json_flag",
-    "info": "This clothing has a fur lining sewn into it to <good>increase</good> its overall <info>warmth</info>."
-  },
-  {
-    "id": "kevlar_padded",
-    "type": "json_flag",
-    "info": "This gear has Kevlar inserted into strategic locations to <good>increase protection</good> with some <bad>increase to encumbrance</bad>."
-  },
-  {
-    "id": "leather_padded",
-    "type": "json_flag",
-    "info": "This gear has certain parts padded with leather to <good>increase protection</good> with moderate <bad>increase to encumbrance</bad>."
-  },
-  {
-    "id": "steel_padded",
-    "type": "json_flag",
-    "info": "This gear has certain parts padded with steel to <good>increase protection</good> with moderate <bad>increase to encumbrance</bad>."
-  },
-  {
-    "id": "wooled",
-    "type": "json_flag",
-    "info": "This clothing has a wool lining sewn into it to <good>increase</good> its overall <info>warmth</info>."
   },
   {
     "id": "WONT_TRAIN_MARKSMANSHIP",
@@ -1024,7 +994,7 @@
   {
     "id": "NANOFAB_REPAIR",
     "type": "json_flag",
-    "info": "This item has a holographic patch that reflects the light oddly.  It was constructed in a nanofabricator and can be <info>repaired in one</info>."
+    "info": "This item was constructed in a nanofabricator and can be <info>repaired in one</info>."
   },
   {
     "id": "NANOFAB_TEMPLATE",
@@ -1532,7 +1502,7 @@
   {
     "id": "IS_UPS",
     "type": "json_flag",
-    "info": "This item provides power to <info>UPS compatible items</info>.",
+    "info": "This item provides power to <info>items which can use a power bank</info>.",
     "inherit": false
   },
   {
@@ -1935,6 +1905,7 @@
   },
   {
     "id": "USE_UPS",
+    "info": "This item <info>uses a power bank to function</info>.",
     "type": "json_flag"
   },
   {

@@ -46,7 +46,7 @@
       [ "solder_wire", 70 ],
       { "item": "hotplate", "prob": 10 },
       { "item": "hotplate_induction", "prob": 3 },
-      { "item": "UPS_off", "prob": 5, "charges": [ 0, 1000 ] },
+      { "group": "ups_power", "prob": 5 },
       { "group": "new_usb_drives", "prob": 15 },
       { "group": "used_usb_drives", "prob": 10, "contents-item": "software_useless" },
       { "item": "vac_sealer", "prob": 10 },

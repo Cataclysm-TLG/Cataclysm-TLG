@@ -10,7 +10,7 @@
     "coverage": 15,
     "concealment": 15,
     "required_str": 8,
-    "flags": [ "TRANSPARENT",  "WORKOUT_ARMS" ],
+    "flags": [ "TRANSPARENT", "WORKOUT_ARMS" ],
     "crafting_pseudo_item": "pseudo_exercise_machine",
     "examine_action": "workout",
     "deconstruct": {

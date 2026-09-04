@@ -425,11 +425,7 @@
     "type": "enchantment",
     "name": { "str": "Insect Wings (Buzzing)" },
     "description": "Your rapidly buzzing wings propel you with extra speed.",
-    "condition": {
-      "and": [
-        { "not": "u_is_underwater" }
-      ]
-    },
+    "condition": { "and": [ { "not": "u_is_underwater" } ] },
     "values": [ { "value": "REGEN_STAMINA", "add": -110 }, { "value": "MOVE_COST", "multiply": -0.25 } ]
   },
   {

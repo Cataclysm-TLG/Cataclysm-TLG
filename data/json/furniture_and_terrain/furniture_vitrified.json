@@ -724,7 +724,7 @@
     "color": "light_gray",
     "move_cost_mod": -1,
     "required_str": 10,
-    "flags": [ "PLACE_ITEM", "BLOCKSDOOR",  "LIQUIDCONT", "TRANSPARENT" ],
+    "flags": [ "PLACE_ITEM", "BLOCKSDOOR", "LIQUIDCONT", "TRANSPARENT" ],
     "bash": {
       "str_min": 16,
       "str_max": 40,
@@ -888,7 +888,7 @@
     "concealment": 50,
     "required_str": 13,
     "max_volume": "120 L",
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF",  "NO_SELF_CONNECT" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "NO_SELF_CONNECT" ],
     "bash": {
       "str_min": 18,
       "str_max": 50,

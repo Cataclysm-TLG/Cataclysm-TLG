@@ -70,7 +70,7 @@
     "concealment": 65,
     "description": "A wall of stacked gravelbags, a bit taller than an average adult.",
     "required_str": -1,
-    "flags": [ "NOITEM", "BLOCKSDOOR", "EASY_DECONSTRUCT",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "BLOCKSDOOR", "EASY_DECONSTRUCT", "BLOCK_WIND" ],
     "deconstruct": { "items": [ { "group": "gravelbag", "count": 20 } ], "furn_set": "f_gravelbag_half" },
     "bash": {
       "str_min": 24,
@@ -134,7 +134,7 @@
     "concealment": 65,
     "description": "A wall of stacked earthbags, a bit taller than an average adult.",
     "required_str": -1,
-    "flags": [ "NOITEM", "BLOCKSDOOR", "EASY_DECONSTRUCT",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "BLOCKSDOOR", "EASY_DECONSTRUCT", "BLOCK_WIND" ],
     "deconstruct": { "items": [ { "group": "earthbag", "count": 20 } ], "furn_set": "f_earthbag_half" },
     "bash": {
       "str_min": 24,
@@ -215,7 +215,7 @@
     "concealment": 65,
     "description": "A wall of stacked sandbags, a bit taller than an average adult.",
     "required_str": -1,
-    "flags": [ "NOITEM", "BLOCKSDOOR", "EASY_DECONSTRUCT",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "BLOCKSDOOR", "EASY_DECONSTRUCT", "BLOCK_WIND" ],
     "deconstruct": { "items": [ { "group": "sandbag", "count": 20 } ], "furn_set": "f_sandbag_half" },
     "bash": {
       "str_min": 24,

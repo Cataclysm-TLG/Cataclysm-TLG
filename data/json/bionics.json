@@ -1520,15 +1520,15 @@
     "id": "bio_ups",
     "type": "bionic",
     "name": { "str": "Unified Power System" },
-    "description": "You have a Unified Power System wired into your power banks.  Objects that run on a UPS can now draw directly from your bionic power supply.",
+    "description": "You have a port that allows devices which can use a power bank to draw directly from your bionic power supply.",
     "occupied_bodyparts": [ [ "torso", 5 ] ],
     "flags": [ "BIONIC_TOGGLED" ]
   },
   {
     "id": "bio_voice",
     "type": "bionic",
-    "name": { "str": "Voice Remodulator" },
-    "description": "You will likely spend the rest of your days serving as a walking testament to why you don't opt for the Autodoc's 'Cyborg Identity Package'.  A remodulator unit jammed down your throat has given you a creepy robot voice.",
+    "name": { "str": "Bionic Voicebox" },
+    "description": "Rather than vocal cords, you speak through an electronic system which gives you what can best be described as a \"creepy robot voice.\"",
     "occupied_bodyparts": [ [ "torso", 2 ], [ "mouth", 1 ] ],
     "flags": [ "BIONIC_FAULTY" ],
     "social_modifiers": { "persuade": -20, "lie": 10, "intimidate": 20 },

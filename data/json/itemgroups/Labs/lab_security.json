@@ -1,13 +1,11 @@
 [
   {
-    "id": "UPS_power",
+    "id": "ups_power",
     "type": "item_group",
-    "//": "This group is for UPS spawns.",
+    "//": "This group spawns power banks with a random amount of power.",
     "subtype": "distribution",
     "entries": [
-      { "item": "UPS_off", "prob": 70 },
-      { "item": "heavy_battery_cell", "prob": 70 },
-      { "item": "heavy_plus_battery_cell", "prob": 40 }
+      { "item": "UPS_off", "prob": 100, "charges": [ 0, 600 ] }
     ]
   },
   {

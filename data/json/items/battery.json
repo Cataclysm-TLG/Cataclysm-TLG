@@ -102,8 +102,8 @@
     "longest_side": "113 mm",
     "price": "22 USD",
     "price_postapoc": "35 cent",
-    "capacity": 259,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 259 } } ]
+    "capacity": 97,
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 97 } } ]
   },
   {
     "id": "heavy_plus_battery_cell",
@@ -123,10 +123,10 @@
     "symbol": "=",
     "color": "yellow",
     "ammo_type": [ "battery" ],
-    "capacity": 503,
+    "capacity": 324,
     "looks_like": "battery",
     "flags": [ "NO_SALVAGE", "NO_UNLOAD", "NO_RELOAD", "RECHARGE", "BATTERY_HEAVY" ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 503 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 324 } } ]
   },
   {
     "id": "heavy_atomic_battery_cell",
@@ -143,10 +143,10 @@
     "symbol": "=",
     "color": "green",
     "ammo_type": [ "battery" ],
-    "count": 4800,
-    "capacity": 4800,
+    "count": 2400,
+    "capacity": 2400,
     "looks_like": "battery",
     "flags": [ "NO_SALVAGE", "NO_UNLOAD", "NO_RELOAD", "LEAK_DAM", "RADIOACTIVE", "BATTERY_HEAVY" ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 4800 } } ]
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 2400 } } ]
   }
 ]

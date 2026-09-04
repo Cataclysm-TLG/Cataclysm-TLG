@@ -744,7 +744,7 @@
       { "item": "gasfilter_sm", "prob": 5, "charges": [ 0, 100 ] },
       { "item": "mask_gas_half", "prob": 5, "charges": [ 0, 100 ] },
       [ "glasses_safety", 5 ],
-      { "item": "UPS_off", "prob": 3, "charges": [ 0, 1000 ] },
+      { "group": "ups_power", "prob": 3 },
       [ "microscope", 5 ],
       [ "microscope_dissecting", 5 ],
       [ "funnel_separation", 3 ],
@@ -813,7 +813,7 @@
     "//": "tools and equipment you might find on robotics laboratories, like LIXA or Hub01",
     "items": [
       [ "recipe_lab_elec", 4 ],
-      { "item": "UPS_off", "prob": 6, "charges": [ 0, 1000 ] },
+      { "group": "ups_power", "prob": 6 },
       [ "file", 10 ],
       [ "atomic_light", 1 ],
       { "item": "smart_lamp", "prob": 2, "charges": [ 0, 100 ] },
