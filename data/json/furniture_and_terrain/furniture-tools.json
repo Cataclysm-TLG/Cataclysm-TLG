@@ -677,7 +677,7 @@
     "concealment": 40,
     "required_str": -1,
     "crafting_pseudo_item": "fake_forge",
-    "flags": [ "SEALED", "CONTAINER", "NOITEM", "EASY_DECONSTRUCT",  "AMMOTYPE_RELOAD" ],
+    "flags": [ "SEALED", "CONTAINER", "NOITEM", "EASY_DECONSTRUCT", "AMMOTYPE_RELOAD" ],
     "deconstruct": { "items": [ { "item": "rock", "count": 40 } ] },
     "examine_action": "reload_furniture",
     "bash": {
@@ -701,7 +701,7 @@
     "concealment": 40,
     "required_str": -1,
     "crafting_pseudo_item": "fake_clay_kiln",
-    "flags": [ "SEALED", "CONTAINER", "NOITEM", "EASY_DECONSTRUCT",  "AMMOTYPE_RELOAD" ],
+    "flags": [ "SEALED", "CONTAINER", "NOITEM", "EASY_DECONSTRUCT", "AMMOTYPE_RELOAD" ],
     "deconstruct": { "items": [ { "item": "rock", "count": 40 } ] },
     "examine_action": "reload_furniture",
     "bash": {
@@ -1707,7 +1707,7 @@
     "move_cost_mod": -1,
     "coverage": 90,
     "required_str": 12,
-    "flags": [ "SEALED", "PLACE_ITEM", "CONTAINER", "BLOCKSDOOR",  "TRANSPARENT" ],
+    "flags": [ "SEALED", "PLACE_ITEM", "CONTAINER", "BLOCKSDOOR", "TRANSPARENT" ],
     "bash": {
       "str_min": 20,
       "str_max": 40,

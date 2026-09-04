@@ -37,7 +37,7 @@
     "concealment": 50,
     "connect_groups": [ "INDOORFLOOR", "LIXATUBE" ],
     "connects_to": "LIXATUBE",
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE",  "UNSTABLE", "INDOORS" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE", "UNSTABLE", "INDOORS" ],
     "bash": {
       "str_min": 30,
       "str_max": 210,

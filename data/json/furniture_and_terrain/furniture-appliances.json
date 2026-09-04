@@ -99,16 +99,7 @@
     "required_str": 13,
     "max_volume": "120 L",
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "household_dishwasher" },
-    "flags": [
-      "TRANSPARENT",
-      "CONTAINER",
-      "PLACE_ITEM",
-      "BLOCKSDOOR",
-      "FLAT_SURF",
-      
-      "EASY_DECONSTRUCT",
-      "NO_SELF_CONNECT"
-    ],
+    "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "EASY_DECONSTRUCT", "NO_SELF_CONNECT" ],
     "deconstruct": { "items": [ { "item": "household_dishwasher", "count": 1 } ] },
     "bash": {
       "str_min": 18,
@@ -141,7 +132,7 @@
     "concealment": 38,
     "required_str": 12,
     "max_volume": "37500 ml",
-    "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF",  "SMALL_HIDE" ],
+    "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "SMALL_HIDE" ],
     "deconstruct": {
       "items": [
         { "item": "scrap", "count": [ 2, 6 ] },
@@ -228,7 +219,7 @@
     "required_str": 12,
     "max_volume": "135 L",
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "household_washing_machine" },
-    "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF",  "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "TRANSPARENT", "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "FLAT_SURF", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "household_washing_machine", "count": 1 } ] },
     "bash": {
       "str_min": 18,

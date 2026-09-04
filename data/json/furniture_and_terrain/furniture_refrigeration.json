@@ -10,7 +10,7 @@
     "coverage": 75,
     "concealment": 75,
     "required_str": 10,
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "apartment_fridge", "count": 1 }, { "item": "apartment_freezer", "count": 1 } ] },
     "max_volume": "433 L",
     "bash": {
@@ -154,7 +154,7 @@
     "concealment": 35,
     "required_str": 10,
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "minifreezer" },
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "minifreezer", "count": 1 } ] },
     "max_volume": "90 L",
     "bash": {
@@ -178,7 +178,7 @@
     "concealment": 38,
     "required_str": 10,
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "chest_minifreezer" },
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "chest_minifreezer", "count": 1 } ] },
     "max_volume": "99 L",
     "bash": {
@@ -202,7 +202,7 @@
     "concealment": 70,
     "required_str": 10,
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "chest_freezer" },
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "chest_freezer", "count": 1 } ] },
     "max_volume": "350 L",
     "bash": {
@@ -226,7 +226,7 @@
     "concealment": 90,
     "required_str": 10,
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "heavy_duty_freezer" },
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "heavy_duty_freezer", "count": 1 } ] },
     "max_volume": "745 L",
     "bash": {
@@ -250,7 +250,7 @@
     "concealment": 90,
     "required_str": 10,
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "glass_freezer" },
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "glass_freezer", "count": 1 } ] },
     "max_volume": "400 L",
     "bash": {
@@ -274,7 +274,7 @@
     "concealment": 35,
     "required_str": 10,
     "examine_action": { "type": "appliance_convert", "furn_set": "f_null", "item": "display_freezer" },
-    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR",  "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
+    "flags": [ "CONTAINER", "PLACE_ITEM", "BLOCKSDOOR", "NO_SELF_CONNECT", "EASY_DECONSTRUCT", "SMALL_HIDE" ],
     "deconstruct": { "items": [ { "item": "display_freezer", "count": 1 } ] },
     "max_volume": "320 L",
     "bash": {

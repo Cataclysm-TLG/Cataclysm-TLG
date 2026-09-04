@@ -85,7 +85,7 @@
     "symbol": "[",
     "color": "yellow",
     "material_thickness": 1,
-    "flags": [ "VARSIZE", "STURDY", "WATER_FRIENDLY", "SKINTIGHT", "POWERARMOR_COMPATIBLE", "PADDED" ],
+    "flags": [ "VARSIZE", "STURDY", "WATER_FRIENDLY", "SKINTIGHT", "PADDED" ],
     "armor": [ { "coverage": 50, "covers": [ "mouth" ], "rigid_layer_only": true } ]
   },
   {

@@ -1123,10 +1123,10 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Unified Power System CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A Unified Power System that is wired into the user's bionic power banks.  Objects that run on a UPS can now directly draw power from the bionic power supply.",
+    "description": "A port that hooks up to the user's power system.  Objects that run on a power bank can now directly draw charge from the user's bionic power supply.",
     "price": "250 USD",
     "price_postapoc": "35 USD",
-    "weight": "700 g",
+    "weight": "300 g",
     "difficulty": 3
   },
   {

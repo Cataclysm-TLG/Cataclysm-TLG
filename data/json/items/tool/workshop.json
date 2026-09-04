@@ -365,7 +365,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "electric jackhammer" },
-    "description": "A construction tool for breaking horizontal surfaces.  This model has a cord compatible with a UPS.",
+    "description": "A construction tool for breaking horizontal surfaces.",
     "weight": "27 kg",
     "volume": "31 L",
     "longest_side": "82 cm",

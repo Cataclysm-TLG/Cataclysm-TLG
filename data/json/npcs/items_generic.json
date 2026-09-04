@@ -1054,7 +1054,7 @@
       [ "trappers_companion", 2 ],
       [ "triple_sec", 2 ],
       [ "two_way_radio", 10 ],
-      [ "UPS_OFF", 4 ],
+      { "group": "ups_power", "prob": 4 },
       [ "umbrella", 3 ],
       [ "usb_drive", 3 ],
       [ "V8", 3 ],

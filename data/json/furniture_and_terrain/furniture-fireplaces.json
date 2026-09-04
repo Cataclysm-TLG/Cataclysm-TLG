@@ -33,7 +33,7 @@
     "coverage": 50,
     "required_str": -1,
     "crafting_pseudo_item": "fake_fireplace",
-    "flags": [ "TRANSPARENT", "CONTAINER", "FIRE_CONTAINER", "SUPPRESS_SMOKE", "PLACE_ITEM",  "EASY_DECONSTRUCT" ],
+    "flags": [ "TRANSPARENT", "CONTAINER", "FIRE_CONTAINER", "SUPPRESS_SMOKE", "PLACE_ITEM", "EASY_DECONSTRUCT" ],
     "examine_action": "fireplace",
     "bash": {
       "str_min": 30,

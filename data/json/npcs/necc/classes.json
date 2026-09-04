@@ -1008,7 +1008,7 @@
     "//": "camping itemgroup modified to remove junk/common/lengthy items.",
     "items": [
       { "item": "rebreather", "prob": 3, "ammo-item": "rebreather_cartridge_o2" },
-      { "item": "UPS_off", "prob": 5, "charges": [ 0, 1000 ] },
+      { "group": "ups_power", "prob": 5 },
       { "item": "misc_repairkit", "prob": 20 },
       { "item": "bbgun", "prob": 15, "charges": [ 100, -1 ] },
       { "item": "bb", "prob": 10, "charges": [ 100, -1 ] },

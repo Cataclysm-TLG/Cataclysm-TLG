@@ -347,7 +347,7 @@
       { "item": "camera", "prob": 10, "charges": [ 0, 150 ] },
       [ "autoclave", 1 ],
       { "item": "geiger_off", "prob": 8, "charges": [ 0, 100 ] },
-      [ "UPS_OFF", 5 ],
+      { "group": "ups_power", "prob": 5 },
       { "item": "tazer", "prob": 3, "charges": [ 0, 100 ] },
       { "item": "mp3", "prob": 18, "charges": [ 0, 100 ] },
       { "item": "game_watch", "prob": 2, "charges": [ 0, 50 ] },
