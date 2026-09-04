@@ -122,7 +122,7 @@
     "copy-from": "sleeping_bag",
     "name": { "str": "rolled sleeping bag" },
     "description": "A large sleeping bag that covers you head to toe, with a strap for carrying it on your back when not in use.  This one is medium weight.  Activate it to unroll it so you can use it for warmth.",
-    "looks_like": "sleeping_bag",
+    "looks_like": "",
     "material_thickness": 4,
     "flags": [ "OVERSIZE", "BELTED" ],
     "use_action": { "menu_text": "Unroll", "type": "transform", "target": "sleeping_bag", "msg": "You unroll the sleeping bag." },
