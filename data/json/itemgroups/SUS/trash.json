@@ -120,18 +120,6 @@
   },
   {
     "type": "item_group",
-    "id": "trash_junkyard",
-    "items": [
-      { "item": "scrap", "prob": 50 },
-      { "item": "steel_chunk", "prob": 30 },
-      { "item": "steel_fragment", "prob": 30 },
-      { "item": "chain", "prob": 10 },
-      { "item": "spring", "prob": 10 },
-      { "item": "hose", "prob": 10 }
-    ]
-  },
-  {
-    "type": "item_group",
     "id": "SUS_trash_trashcan",
     "//1": "SUS item groups are collections that contain a reasonable realistic distribution of items that might spawn in a given spot.",
     "//2": "This group is for trash in a trashcan, contained in a trashbag",
