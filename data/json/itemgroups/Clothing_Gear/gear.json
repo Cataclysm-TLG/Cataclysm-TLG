@@ -211,7 +211,7 @@
       [ "knee_pads", 5 ],
       [ "elbow_pads", 5 ],
       [ "legrig", 5 ],
-      { "item": "UPS_OFF", "prob": 7, "charges": [ 0, 1000 ] },
+      { "item": "UPS_off", "prob": 7, "charges": [ 0, 1000 ] },
       [ "emer_blanket", 5 ],
       { "group": "ammo_pocket_batteries_full", "prob": 50 },
       [ "tool_belt", 5 ],
@@ -235,7 +235,7 @@
       { "item": "geiger_off", "prob": 20, "charges": [ 0, 100 ] },
       { "item": "oxygen_tank", "prob": 10, "charges": [ 4, -1 ] },
       { "item": "smoxygen_tank", "prob": 15, "charges": [ 2, -1 ] },
-      [ "UPS_OFF", 2 ],
+      [ "UPS_off", 2 ],
       { "prob": 25, "group": "prussian_blue_bottle_plastic_pill_supplement_1_10" },
       { "prob": 50, "group": "iodine_bottle_plastic_pill_supplement_1_10" }
     ]

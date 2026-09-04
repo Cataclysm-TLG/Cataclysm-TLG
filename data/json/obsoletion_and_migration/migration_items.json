@@ -3554,7 +3554,7 @@
   {
     "id": "gas_charger_on",
     "type": "MIGRATION",
-    "replace": "UPS_ON"
+    "replace": "UPS_off"
   },
   {
     "id": "gas_charger",
