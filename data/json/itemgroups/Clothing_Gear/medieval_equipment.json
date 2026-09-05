@@ -106,7 +106,6 @@
       { "item": "broadsword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
       { "item": "longsword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 25 },
       { "item": "cavalry_sabre", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
-      { "item": "scimitar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
       { "item": "estoc", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
       { "item": "arming_sword", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
       { "item": "zweihander", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
@@ -115,7 +114,7 @@
       { "item": "kriegsmesser", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
       { "item": "falx", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
       { "item": "kilij", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
-      { "item": "talwar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+      { "item": "talwar", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 30 },
       { "item": "sword_xiphos", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 },
       { "item": "khopesh", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 3 }
     ]
@@ -128,7 +127,6 @@
       { "item": "broadsword", "prob": 30 },
       { "item": "longsword", "prob": 25 },
       { "item": "cavalry_sabre", "prob": 30 },
-      { "item": "scimitar", "prob": 30 },
       { "item": "estoc", "prob": 15 },
       { "item": "arming_sword", "prob": 30 },
       { "item": "zweihander", "prob": 20 },
@@ -138,7 +136,7 @@
       { "item": "kriegsmesser", "prob": 20 },
       { "item": "falx", "prob": 15 },
       { "item": "kilij", "prob": 10 },
-      { "item": "talwar", "prob": 10 },
+      { "item": "talwar", "prob": 30 },
       { "item": "sword_xiphos", "prob": 3 },
       { "item": "khopesh", "prob": 3 }
     ]
