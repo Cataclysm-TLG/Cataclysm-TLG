@@ -2634,12 +2634,17 @@
   {
     "type": "MIGRATION",
     "id": "scimitar_inferior",
-    "replace": "scimitar"
+    "replace": "talwar"
   },
   {
     "type": "MIGRATION",
     "id": "scimitar_fake",
-    "replace": "scimitar"
+    "replace": "talwar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar",
+    "replace": "talwar"
   },
   {
     "type": "MIGRATION",

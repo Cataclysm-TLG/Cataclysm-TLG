@@ -179,7 +179,7 @@
       [
         [ "cavalry_sabre", -1 ],
         [ "jian", -1 ],
-        [ "scimitar", -1 ],
+        [ "talwar", -1 ],
         [ "arming_sword", -1 ],
         [ "wakizashi", -1 ],
         [ "broadsword", -1 ],
@@ -199,7 +199,6 @@
         [ "broadsword", -1 ],
         [ "cavalry_sabre", -1 ],
         [ "jian", -1 ],
-        [ "scimitar", -1 ],
         [ "arming_sword", -1 ],
         [ "dao", -1 ],
         [ "wakizashi", -1 ],
