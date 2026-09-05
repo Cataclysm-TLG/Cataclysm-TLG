@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-08-22 14:11-0700\n"
-"PO-Revision-Date: 2026-09-01 23:10+0800\n"
+"PO-Revision-Date: 2026-09-05 22:27+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -139743,7 +139743,6 @@ msgstr[0] "青铜钉头锤"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
-#, fuzzy
 msgid "bō staff"
 msgid_plural "bō staffs"
 msgstr[0] "日式木棒"
@@ -139798,7 +139797,6 @@ msgstr[0] "曲棍球棒"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
-#, fuzzy
 msgid "ironshod quarterstaff"
 msgid_plural "ironshod quarterstaffs"
 msgstr[0] "镔铁长棍"
@@ -139902,17 +139900,15 @@ msgstr[0] "台球杆"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
-#, fuzzy
 msgid "powered quarterstaff"
 msgid_plural "powered quarterstaffs"
-msgstr[0] "霹雳长棍"
+msgstr[0] "电击长棍"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
-#, fuzzy
 msgid "quarterstaff"
 msgid_plural "quarterstaffs"
-msgstr[0] "长棍"
+msgstr[0] "铁头木棒"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -177082,7 +177078,6 @@ msgstr[0] "野性疯人"
 
 #. ~ Monster name
 #: data/json/monsters/feral_humans.json
-#, fuzzy
 msgid "frenzied security guard"
 msgid_plural "frenzied security guards"
 msgstr[0] "狂乱保安"
@@ -178727,7 +178722,6 @@ msgstr[0] "绳索起重器"
 
 #. ~ Monster name
 #: data/json/monsters/fungus_zombie.json
-#, fuzzy
 msgid "spore zombie"
 msgid_plural "spore zombies"
 msgstr[0] "孢子丧尸"
@@ -182156,7 +182150,7 @@ msgstr[0] "抓取测试怪物（中）"
 #. ~ Description of monster "fursuit zombie"
 #: data/json/monsters/misc.json
 msgid "no no no no"
-msgstr ""
+msgstr "不不不不"
 
 #. ~ Monster name
 #: data/json/monsters/misc.json
@@ -189476,7 +189470,7 @@ msgstr "发型：超长发（白色）"
 #. ~ Description of mutation "Bearded Lady"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "If Natural Hair Growth is enabled, this trait will allow a female character to grow a beard."
-msgstr ""
+msgstr "如果启用了“自然毛发生长”选项，此特性将允许女性角色长出胡须。"
 
 #. ~ Mutation name
 #: data/json/mutations/appearance_hair_styles.json
@@ -189521,7 +189515,7 @@ msgstr "粉红色的头发扎成两束。"
 #. ~ Description of variant "Hair: pink, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Pink hair, short and parted on the side."
-msgstr ""
+msgstr "粉色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: purple, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -189531,7 +189525,7 @@ msgstr "紫色的头发扎成两束。"
 #. ~ Description of variant "Hair: purple, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Purple hair, short and parted on the side."
-msgstr ""
+msgstr "紫色的头发，短发且向两侧分开。"
 
 #. ~ Description of variant "Hair: red, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -189541,12 +189535,12 @@ msgstr "红色的头发扎成两束。"
 #. ~ Description of variant "Hair: red, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Red hair, short and parted on the side."
-msgstr ""
+msgstr "红色的头发，短发且向两侧分开。"
 
 #. ~ Description of mutation "Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Short and parted on the side."
-msgstr ""
+msgstr "短发，向两侧分开。"
 
 #. ~ Description of variant "Hair: brown, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
@@ -189556,7 +189550,7 @@ msgstr "棕色短发造型。"
 #. ~ Description of mutation "Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Short on top, buzzed on the sides."
-msgstr ""
+msgstr "头顶留长，两侧剃短。"
 
 #. ~ Description of variant "Hair: white, puffs" of mutation"Hair: puffs"
 #: data/json/mutations/appearance_hair_styles.json
@@ -189566,7 +189560,7 @@ msgstr "白发扎成两束。"
 #. ~ Description of variant "Hair: white, side part" of mutation"Hair: side part"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "White hair, short and parted on the side."
-msgstr ""
+msgstr "白色的头发，短发且向两侧分开。"
 
 #. ~ Description of mutation "Hair: bald"
 #: data/json/mutations/appearance_hair_styles.json
@@ -195856,7 +195850,7 @@ msgstr "光线恐惧"
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
 msgid "Light Sleeper"
-msgstr ""
+msgstr "浅眠者"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -196326,7 +196320,7 @@ msgstr "冬天没有花。  因此，这种突变不应该对玩家可见。"
 msgid ""
 "Noise, light, and other disturbances wake you up easily.  It used to be annoying, but now it might just save "
 "your life."
-msgstr ""
+msgstr "噪音、光线及其他干扰很容易把你吵醒。以前这很烦人，但现在也许能救你的命。"
 
 #. ~ Mutation name
 #: data/json/mutations/mutations.json
@@ -214693,6 +214687,10 @@ msgid ""
 "conversation or by radio or shout commands at me.\n"
 "  What do you want to know more about?"
 msgstr ""
+"我就是我自己，但大体上我愿意听从你的指挥。我可以为你做很多事：能打架、能训练你或让你训练我、能搬东西、能帮你包"
+"扎伤口、能建立据点、能做一些其他活动、能骑马、能去某些地方、能守卫东西、能使用一些生化插件、甚至能陪你闲聊或给"
+"你建议，或者聊聊我的背景。你可以在对话中、通过无线电或朝我喊话来给我下达指令。\n"
+"你想了解更多哪方面的信息？"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214760,6 +214758,11 @@ msgid ""
 "along the way, but traveling may take some time, especially if it's far.\n"
 "  I'll move faster if I'm horseback."
 msgstr ""
+"如果你用无线电呼叫我，可以让我去找你。如果我们有据点，你也可以让我去其中的某一个。我会开始走过去，等我到了目的"
+"地，就会守卫那里。\n"
+"具体要多久取决于我当前的位置和要去的地方，可能需要一些时间。路上我会避开任何危险，但长途跋涉总归是花时间的，尤"
+"其是距离很远的时候。\n"
+"如果我骑马的话，移动会更快一些。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214770,6 +214773,9 @@ msgid ""
 "  You can tell me to come to you or go to any of our settlements.  You can also give settlement work orders "
 "over the radio."
 msgstr ""
+"如果你有双向无线电，我也有，你就可以通过派系界面（按键 '#' ）来联系我。只要我不是离得太远，信号也没有被地形阻"
+"挡，我就会回应。我们可以通过无线电正常交谈，但显然无法交易物品，我也没法训练你。\n"
+"你可以让我去找你，或前往我们的任意一个据点。你也可以通过无线电下达据点工作指令。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214779,7 +214785,7 @@ msgstr "与其读给你听，不如我们谈谈？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
 msgid "Is there any way we can build a base for our group?"
-msgstr ""
+msgstr "我们有没有办法给团队建个基地？"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214843,7 +214849,7 @@ msgstr "以防万一，我还能告诉你些什么指令呢？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "Let's talk about settlements."
-msgstr ""
+msgstr "我们来聊聊据点的事吧。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214872,12 +214878,12 @@ msgstr "抱歉，我不知道我刚刚怎么想的。告诉我怎么指示你移
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
 msgid "Teach me about settlements."
-msgstr ""
+msgstr "教教我关于据点的事。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
 msgid "Tell me about settlements."
-msgstr ""
+msgstr "给我讲讲据点的事吧。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214924,6 +214930,11 @@ msgid ""
 "usually give advice relevant to the situation.\n"
 "  I can also train you, and you can read books to me in order to train me."
 msgstr ""
+"我们可以聊聊天，如果你愿意的话。轻松聊几句对心情很有好处。不过我也不想一直说个不停，所以如果我们刚聊过不久，我"
+"可能就不太想再说话了。\n"
+"你也可以问问我的背景。不过我也可能不想谈这个。\n"
+"你也可以向我寻求建议——我零零星星听说过一些可能有用的东西，但我通常不会给出与当前情况直接相关的建议。\n"
+"我还可以训练你，你也可以通过读书给我听的方式来训练我。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -214958,12 +214969,12 @@ msgstr "什么意思，你可以去某个地方？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
 msgid "What if I want you to build a settlement?"
-msgstr ""
+msgstr "如果我想让你建造一个据点呢？"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
 msgid "What's that about activities?"
-msgstr ""
+msgstr "你刚才说活动是指什么？"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_ALLY_TUTORIAL.json
@@ -215444,7 +215455,7 @@ msgstr "我有些命令要下达。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_FACTION_CAMP.json
 msgid "I want you to start a settlement here."
-msgstr ""
+msgstr "我想让你在这里建立一个据点。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_FACTION_CAMP.json
@@ -215453,11 +215464,13 @@ msgid ""
 "board or speak with me directly to handle a few types of offsite missions where I or another follower will "
 "head out to do some task without your supervision."
 msgstr ""
+"大部分工作通过划定区域或制作订单来指派，但你可以先指定一个据点并建造一块公告板，或者直接与我交谈，来处理一些远"
+"程任务——我或其他追随者会外出执行某些任务，无需你亲自监督。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_FACTION_CAMP.json
 msgid "Never mind, let's go back to talking about settlements."
-msgstr ""
+msgstr "算了，我们还是回到据点的话题吧。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_FACTION_CAMP.json
@@ -215482,12 +215495,12 @@ msgstr "没什么。我们谈点其他的事情吧。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_FACTION_CAMP.json
 msgid "Tell me about missions."
-msgstr ""
+msgstr "跟我说说任务的事吧。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_FACTION_CAMP.json
 msgid "Tell me how settlements work."
-msgstr ""
+msgstr "跟我讲讲据点是怎么运作的吧。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_FACTION_CAMP.json
@@ -215497,7 +215510,7 @@ msgstr "[营地]我们得废弃这个营地了。"
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_FACTION_CAMP.json
 msgid "What about settlements?"
-msgstr ""
+msgstr "据点呢？"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/TALK_FACTION_CAMP.json
@@ -215512,6 +215525,13 @@ msgid ""
 "  There is one special mission called 'Emergency Recall'.  You can use this to retrieve any companion on a "
 "faction camp mission, but this cancels the mission and wastes any resources used on it."
 msgstr ""
+"当你指派一名同伴去执行远程任务时，他们会消失一段时间去完成你安排的工作。当任务持续时间结束后，你会在公告板上看"
+"到一个新任务，表示他们已返回并完成任务——可能是升级你的据点、带回狩猎收获、放下他们制作的物品，或其他任务成"
+"果。\n"
+"派系营地任务种类很多：建设营地、招募新盟友、狩猎和设陷阱捕猎、搜寻物资，诸如此类。\n"
+"你可以通过和公告板互动，或者当面与我交谈，又或者通过双向无线电来指派任务。\n"
+"有一项特殊任务叫“紧急召回”。你可以用它来召回任何一个在执行派系营地任务的同伴，但这样做会取消当前任务，并浪费掉"
+"已投入的资源。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/TALK_MARLOSS_VOICE.json data/json/npcs/hub01/NPC_Cranberry_Foster.json
@@ -218516,12 +218536,12 @@ msgstr "[其他]我想设定一些其他规则。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "I want to station you at this settlement."
-msgstr ""
+msgstr "我想让你驻扎在这个据点。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "I want you to found a settlement here."
-msgstr ""
+msgstr "我想让你在这里建立一个据点。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json data/json/npcs/your_followers/luo_follower.json
@@ -218636,7 +218656,7 @@ msgstr "你可以打开门去你要去的地方。"
 #. ~ NPC dialogue line
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "Orders?"
-msgstr ""
+msgstr "有什么指令吗？"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
@@ -218875,7 +218895,7 @@ msgstr "我们还有补给。将生化能量充到75%没问题。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "We need to abandon this settlement."
-msgstr ""
+msgstr "我们得放弃这个据点。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
@@ -219489,7 +219509,7 @@ msgstr "我明白……"
 #. ~ NPC dialogue line
 #: data/json/npcs/common_chat/TALK_COMMON_OTHER.json
 msgid "I would prefer not to."
-msgstr ""
+msgstr "我宁愿不这么做。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_OTHER.json
@@ -219577,7 +219597,7 @@ msgstr "不，它是我的了。你敢把它从我身上拿下来试试。"
 #. ~ NPC dialogue line
 #: data/json/npcs/common_chat/TALK_COMMON_OTHER.json
 msgid "Not a chance, I'm going to get left behind!"
-msgstr ""
+msgstr "没门儿，我肯定会被落下的！"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_OTHER.json
@@ -230340,7 +230360,7 @@ msgstr "我的妈妈……她……她被杀害了，但后来她又复活了…
 #. ~ Dialogue line in mission "Analyze Zombie Blood"
 #: data/json/npcs/missiondef.json
 msgid "Nicely done.  I've copied the data over, talk to me again when I've had some time to look at it."
-msgstr ""
+msgstr "干得漂亮。我已经把数据复制过来了，等我有时间仔细看看之后再跟你聊。"
 
 #. ~ Dialogue line in mission "Retrieve Deposit Box"
 #: data/json/npcs/missiondef.json
@@ -232825,6 +232845,8 @@ msgid ""
 "create the framework, you'll get me two solar arrays.  The rest I can craft or repurpose from the bus.  "
 "Helena's promised us a reward if this thing lives up to her standards."
 msgstr ""
+"好极了。我们要造一个二合一的充电器和发电机。这是作战计划。扎克可以负责搭建框架，你给我弄两组太阳能板阵列来。剩"
+"下的部件我可以自己造，也可以从大巴上拆来用。海伦娜说了，只要这玩意儿能达到她的标准，她就给我们报酬。"
 
 #. ~ Dialogue line in mission "The Honeymooners"
 #: data/json/npcs/necc/godco_missions.json
@@ -233191,6 +233213,8 @@ msgid ""
 "The best place to look is probably on rooftops, and remember: we need full arrays, not just the little panels "
 "or cells.  One array is made from four panels, got it?"
 msgstr ""
+"最有可能找到的地方大概就是屋顶上了，记住：我们需要完整的阵列，而不是那些小块板子或电池片。一组阵列由四块面板组"
+"成，明白吗？"
 
 #. ~ Dialogue line in mission "Retrieve Thorazine"
 #: data/json/npcs/necc/godco_missions.json
@@ -233520,6 +233544,8 @@ msgid ""
 "Helena.  But whatever you do, don't accept their icons.  Our work is worth a lot more than their valueless "
 "currency."
 msgstr ""
+"太好了！对了，你口才怎么样？我在想，也许跟海伦娜谈判的事应该由你来。不过不管你怎么做，千万别接受他们那套图标作"
+"为报酬。我们干的活可比他们那些毫无价值的货币值钱多了。"
 
 #. ~ Dialogue line in mission "Chicken Coop Construction"
 #: data/json/npcs/necc/godco_missions.json
@@ -236966,12 +236992,12 @@ msgstr "她是一位善良的老太太，会编织很多东西。如果你好好
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Maria_Serrano.json
 msgid "T-shirts, pants, jackets, and dresses are four icons.  Longcoats and backpacks are six icons."
-msgstr ""
+msgstr "T恤、裤子、夹克和连衣裙是四个图标。长风衣和背包是六个图标。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Maria_Serrano.json
 msgid "T-shirts, pants, jackets, and dresses take me two days.  Longcoats and backpacks take four days."
-msgstr ""
+msgstr "T恤、裤子、夹克和连衣裙需要两天。长风衣和背包需要四天。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/necc/members/NPC_Maria_Serrano.json
@@ -249974,7 +250000,7 @@ msgstr "旧世守护者，哈，我去找他们谈谈！"
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_staff/NPC_free_merchant_guard1.json
 msgid "One hundred cigarettes."
-msgstr ""
+msgstr "一百支香烟。"
 
 #. ~ Dialogue line in mission "One hundred cigarettes."
 #: data/json/npcs/refugee_center/surface_staff/NPC_free_merchant_guard1.json
@@ -251071,7 +251097,7 @@ msgstr "太阳能发电"
 msgid ""
 "Solar panel arrays are fairly common on rooftops.  Remember, we need full arrays, not individual panels or "
 "cells."
-msgstr ""
+msgstr "太阳能板阵列在屋顶上相当常见。记住，我们需要的是完整的阵列，而不是单个板子或电池片。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/Smokes/free_merchant_shopkeep_missions.json
@@ -251211,6 +251237,8 @@ msgid ""
 "top, and if we had a few solar panel arrays we could use them to keep this place sustainable.  We could pay "
 "you pretty handsomely to bring us, say, ten solar panel arrays?"
 msgstr ""
+"已经有人送了些燃料过来，但我们的发电机撑不了太久。我们顶楼有块很大的平坦屋顶，如果能有几组太阳能板阵列，就可以"
+"维持这里的自给自足了。要是你能给我们带来，比如说，十组太阳能板阵列的话，我们可以付给你相当丰厚的报酬。"
 
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_staff/Smokes/free_merchant_shopkeep_missions.json
@@ -254826,6 +254854,9 @@ msgid ""
 "that need to get done, so if you could help us keep supplied I'd appreciate it.  If you have material to drop "
 "off you can just back your vehicle into here and dump it on the ground, we'll sort it."
 msgstr ""
+"我是负责把这里变成一座正常运作的农场的工程师。这将会是一场艰难的战斗，我们用了大部分初始补给才到达这里并封好了"
+"窗户。我有一大堆任务需要完成，所以如果你能帮我们维持补给，我会非常感激。如果你有物资要卸下，直接把车倒进来，把"
+"东西卸到地上就行，我们会分类处理。"
 
 #. ~ Dialogue line in mission "Gather 30lb (3888 units) of Salt"
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
@@ -254851,6 +254882,8 @@ msgid ""
 "the place, might be we could grow some food out here, there's a lot of hungry folks got bussed up a ways, and "
 "no way to feed 'em."
 msgstr ""
+"如果你想要个蠢答案，那就是个牧场。联邦应急管理局的人提议让我们几个人先来这儿开工，说不定我们能在这儿种点粮食出"
+"来，有不少挨饿的人被大巴送到这儿来了，可没法养活他们。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
@@ -254941,7 +254974,7 @@ msgstr "电力引擎将使用我们回收来的卡车电池供电，你并不需
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
 msgid "Rebuilding seems pointless to me."
-msgstr ""
+msgstr "在我看来，重建似乎毫无意义。"
 
 #. ~ Dialogue line in mission "Gather 30lb (3888 units) of Salt"
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
@@ -255139,7 +255172,7 @@ msgstr ""
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
 msgid "What is this place?."
-msgstr ""
+msgstr "这是什么地方？"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
@@ -255177,7 +255210,7 @@ msgstr "要两支电焊枪，如果其中一只坏了，可以用另一支来修
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
 msgid "Yeah, you're right."
-msgstr ""
+msgstr "是的，你说得对。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/tacoma_ranch/NPC_ranch_foreman.json
@@ -266355,7 +266388,7 @@ msgstr "NSAID维生素（已废弃）"
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Never actually existed."
-msgstr ""
+msgstr "实际上从未存在过。"
 
 #. ~ Description of mutation "Black Belt"
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -266405,7 +266438,7 @@ msgstr "废弃的熊视觉突变。  熊现在获得中视和夜视能力。"
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Obsoleted hairstyle."
-msgstr ""
+msgstr "已废弃的发型。"
 
 #. ~ Description of the "mutagen" addiction's effects as it appears in the player's status
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -266438,7 +266471,7 @@ msgstr "过时的突变。  医学突变体现在获得 TOUGH1、TOUGH2 和 TOUG
 msgid ""
 "Obsoleted proficiency.  This has been replaced with staff proficiency and exists here only to prevent error "
 "messages."
-msgstr ""
+msgstr "已废弃的技能。此技能已被长棍技能取代，保留在此仅为防止报错。"
 
 #. ~ Description of mutation "Fast Learner"
 #. ~ Description of mutation "Pack Mule"
@@ -266492,17 +266525,17 @@ msgstr "警官"
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Quarterstaff Proficiency (Familiar)"
-msgstr ""
+msgstr "长棍熟练（精通）"
 
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Quarterstaff Proficiency (Master)"
-msgstr ""
+msgstr "长棍熟练（大师）"
 
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Quarterstaff Proficiency (Pro)"
-msgstr ""
+msgstr "长棍熟练（专家）"
 
 #. ~ Description of mutation "Wayfarer"
 #. ~ Description of mutation "Brawler"
@@ -266519,52 +266552,52 @@ msgstr "重置变异"
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_afro."
-msgstr ""
+msgstr "已被 hair_afro 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_fade."
-msgstr ""
+msgstr "已被 hair_fade 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_long_feathered."
-msgstr ""
+msgstr "已被 hair_long_feathered 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_long_wavy."
-msgstr ""
+msgstr "已被 hair_long_wavy 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_medium_curls."
-msgstr ""
+msgstr "已被 hair_medium_curls 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_medium_fringe."
-msgstr ""
+msgstr "已被 hair_medium_fringe 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_short_curls."
-msgstr ""
+msgstr "已被 hair_short_curls 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_short_fringe."
-msgstr ""
+msgstr "已被 hair_short_fringe 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_side_part."
-msgstr ""
+msgstr "已被 hair_side_part 替代。"
 
 #. ~ Description of mutation "Hair: obsoleted"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Replaced with hair_side_shave."
-msgstr ""
+msgstr "已被 hair_side_shave 替代。"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -266677,7 +266710,7 @@ msgstr "酵母尚未培养完成。"
 #. ~ Description of mutation "Epicuticle (molted) (obsolete)"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "There was never a reason for this mutation to molt."
-msgstr ""
+msgstr "这种变异根本没有蜕皮的理由。"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -267008,7 +267041,7 @@ msgstr "来自已被移除的难民中心运输员的已作废任务。"
 #. ~ Description of mission "Collect 25 Magnetrons"
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
 msgid "Obsolete mission from removed scrap trader."
-msgstr ""
+msgstr "已移除的废品商人的废弃任务。"
 
 #. ~ Mission name
 #: data/json/obsoletion_and_migration/obsoletion_missions.json
@@ -267107,7 +267140,7 @@ msgstr "来自已移除的“同族”（Kindred）阵营内容的废弃职业�
 #. ~ Job description of "Scrap Merchant" NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
 msgid "Obsolete class from removed scrap merchant."
-msgstr ""
+msgstr "已移除的废品商人的废弃职业。"
 
 #. ~ Name of an NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
@@ -267117,7 +267150,7 @@ msgstr "血族叛徒"
 #. ~ Name of an NPC class
 #: data/json/obsoletion_and_migration/obsoletion_npc_classes.json
 msgid "Scrap Merchant"
-msgstr ""
+msgstr "废品商"
 
 #. ~ Verb in activity "ACT_CONSUME"
 #. ~ Verb in activity "ACT_CONSUME_FOOD_MENU"
@@ -267690,7 +267723,7 @@ msgstr "丢失的求生背包"
 #. ~ Name of map extra
 #: data/json/overmap/map_extras.json
 msgid "Many Corpses"
-msgstr ""
+msgstr "众多尸体"
 
 #. ~ Name of map extra
 #: data/json/overmap/map_extras.json
@@ -267952,7 +267985,7 @@ msgstr "茂密草丛"
 #. ~ Description of map extra "Corpses"
 #: data/json/overmap/map_extras.json
 msgid "There are a few of corpses here."
-msgstr ""
+msgstr "这里有几具尸体。"
 
 #. ~ Description of map extra "Many Corpses"
 #: data/json/overmap/map_extras.json
@@ -280742,7 +280775,7 @@ msgstr "我们应该勘测一下基地地址。注意在营地内任意处建造
 #. ~ Blueprint name of recipe crafting "faction_base_bare_bones_basecamp_0"
 #: data/json/recipes/basecamps/base/recipe_bare_bones_basecamp/recipe_bare_bones_basecamp.json
 msgid "settlement survey"
-msgstr ""
+msgstr "据点勘查"
 
 #. ~ Description for recipe group
 #: data/json/recipes/basecamps/recipe_groups.json
@@ -317261,7 +317294,7 @@ msgstr "吃力的呼吸声。"
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "meow!"
-msgstr ""
+msgstr "喵！"
 
 #. ~ Speech from speaker mon_prototype_cyborg, mon_mi_go, mon_mi_go_abductor, mon_mi_go_surgeon
 #: data/json/speech.json
@@ -317271,7 +317304,7 @@ msgstr "模糊的抽泣。"
 #. ~ Speech from speaker mon_mi_go, mon_mi_go_abductor, mon_mi_go_myrmidon
 #: data/json/speech.json
 msgid "pop!"
-msgstr ""
+msgstr "啪！"
 
 #. ~ Speech from speaker mon_memory
 #: data/json/speech.json
@@ -331202,82 +331235,82 @@ msgstr "钩爪类武器"
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Karate Weapons"
-msgstr ""
+msgstr "空手道武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Knives"
-msgstr ""
+msgstr "刀具"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Kung Fu Weapons"
-msgstr ""
+msgstr "功夫武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Long Bows"
-msgstr ""
+msgstr "长弓"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Long Swords"
-msgstr ""
+msgstr "长剑"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Long Thrusting Swords"
-msgstr ""
+msgstr "长刺剑"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Medium Swords"
-msgstr ""
+msgstr "中型剑"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Ninjutsu Weapons"
-msgstr ""
+msgstr "忍术武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Polearms"
-msgstr ""
+msgstr "长柄武器"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Shivs"
-msgstr ""
+msgstr "简易匕首"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Short Bows"
-msgstr ""
+msgstr "短弓"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Short Swords"
-msgstr ""
+msgstr "短剑"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Spears"
-msgstr ""
+msgstr "矛"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Staffs"
-msgstr ""
+msgstr "棍杖"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Unarmed"
-msgstr ""
+msgstr "空手"
 
 #. ~ Weapon category name
 #: data/json/weapon_categories.json
 msgid "Whips"
-msgstr ""
+msgstr "鞭类"
 
 #. ~ Weather type name
 #: data/json/weather_type.json
@@ -333908,7 +333941,7 @@ msgstr "枪支管制"
 msgid ""
 "WIP mod that greatly reduces the presence of guns in the game.  You might find a bit of ammo here and there, "
 "but firearms are extremely rare."
-msgstr ""
+msgstr "WIP 模组，大幅减少游戏中枪械的出现。你也许能在这里或那里找到少量弹药，但枪械本身极为罕见。"
 
 #. ~ Description of "neuroprosthetic left arm"
 #: data/mods/Limb_WIP/armor/arm_prosthetics.json
@@ -355033,11 +355066,11 @@ msgstr "%s使用了不兼容的弹药%s，无法射击。"
 
 #: src/avatar_action.cpp:788 src/turret.cpp:371
 msgid "You can't manually operate a turret while controlling a vehicle."
-msgstr ""
+msgstr "你在驾驶载具时无法手动操作炮塔。"
 
 #: src/avatar_action.cpp:795 src/turret.cpp:325 src/turret.cpp:379
 msgid "The turret is atop the vehicle.  You can't manually fire it while you are under a roof."
-msgstr ""
+msgstr "炮塔位于载具顶部。你在屋顶下方时无法手动开火。"
 
 #: src/avatar_action.cpp:808
 #, c-format
@@ -355052,7 +355085,7 @@ msgstr "%s 供能不足。"
 #: src/avatar_action.cpp:814
 #, c-format
 msgid "The %s is inoperable."
-msgstr ""
+msgstr "%s 无法使用。"
 
 #: src/avatar_action.cpp:852
 msgid "It's too dark to work on mending this."
@@ -359486,7 +359519,7 @@ msgstr "[敲钟系统 1.2]已启动。祝您有个美好的一天。"
 
 #: src/computer_session.cpp:521
 msgid "No response from pump system.  Please contact a maintenance team."
-msgstr ""
+msgstr "泵系统无响应。请联系维护团队。"
 
 #: src/computer_session.cpp:534
 msgid "Containment shields opened.  Press any key…"
@@ -368033,11 +368066,11 @@ msgstr "（可怕，但至少他们现在很平静......）"
 
 #: src/fungal_effects.cpp:201
 msgid "The young tree bulges and erupts into a fungal blossom!"
-msgstr ""
+msgstr "这棵小树膨胀开裂，化作了一朵真菌之花！"
 
 #: src/fungal_effects.cpp:221
 msgid "The tree bulges and sags, becoming a fungal blossom!"
-msgstr ""
+msgstr "树干膨胀变形，化作了一朵真菌之花！"
 
 #: src/game.cpp:416
 #, c-format
@@ -388603,17 +388636,17 @@ msgstr "%s疯狂地做着手势。"
 #: src/monattack.cpp:1217
 #, c-format
 msgid "The %s twitches and spasms."
-msgstr ""
+msgstr "%s 抽搐痉挛。"
 
 #: src/monattack.cpp:1222
 #, c-format
 msgid "The %s thrashes so violently that it nearly tears itself apart!"
-msgstr ""
+msgstr "%s 剧烈挣扎，几乎要把自己撕成碎片！"
 
 #: src/monattack.cpp:1230 src/monattack.cpp:1264
 #, c-format
 msgid "The %s bursts apart in a shower of gore!"
-msgstr ""
+msgstr "%s 砰地一声爆裂开来，血肉飞溅！"
 
 #: src/monattack.cpp:1278
 #, c-format
@@ -390555,7 +390588,7 @@ msgstr "%s 会在黑暗中自愈。"
 #: src/monster.cpp:3605
 #, c-format
 msgid "The light seems to be slowing %s regeneration."
-msgstr ""
+msgstr "光线似乎减缓了 %s 的再生速度。"
 
 #: src/monster.cpp:3699
 msgid "The shadow withers in the light!"
@@ -393923,21 +393956,21 @@ msgstr "让谁参加？"
 
 #: src/npctalk_funcs.cpp:1361
 msgid "student"
-msgstr ""
+msgstr "学生"
 
 #: src/npctalk_funcs.cpp:1361
 msgid "students"
-msgstr ""
+msgstr "学生们"
 
 #: src/npctalk_funcs.cpp:1363
 #, c-format
 msgid "This lesson for %1s %2s will cost %3s and take %4s.  Continue?"
-msgstr ""
+msgstr "这次为 %1s 名 %2s 授课将花费 %3s，耗时 %4s。是否继续？"
 
 #: src/npctalk_funcs.cpp:1368
 #, c-format
 msgid "This lesson for %1s %2s will take %3s.  Continue?"
-msgstr ""
+msgstr "这次为 %1s 名 %2s 授课将耗时 %3s。是否继续？"
 
 #: src/npctalk_funcs.cpp:1411
 msgid "Select a follower"
@@ -394462,7 +394495,7 @@ msgstr "温度单位"
 
 #: src/options.cpp:1793
 msgid "Switch between Fahrenheit and Celsius."
-msgstr ""
+msgstr "在华氏度和摄氏度之间切换。"
 
 #: src/options.cpp:1794
 msgid "Celsius"
