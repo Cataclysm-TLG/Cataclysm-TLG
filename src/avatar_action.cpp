@@ -1022,12 +1022,12 @@ void avatar_action::plthrow( avatar &you, item_location loc,
             }
             if( range <= 1 || you.get_stamina_max() < ( -1 * stamina_mod ) ||
                 their_size - your_size > you.get_arm_str() / 10 ) {
-                you.add_msg_if_player( ( "You can't muster the strength to throw %s." ),
+                you.add_msg_if_player( _( "You can't muster the strength to throw %s." ),
                                        you.grab_1.victim->disp_name() );
                 return;
             }
             if( ( you.get_stamina() ) < ( stamina_mod ) ) {
-                you.add_msg_if_player( ( "You're too exhausted to throw %s." ), you.grab_1.victim->disp_name() );
+                you.add_msg_if_player( _( "You're too exhausted to throw %s." ), you.grab_1.victim->disp_name() );
                 return;
             }
             if( ( you.grab_1.victim->has_effect_with_flag( json_flag_GRAB_FILTER ) &&
