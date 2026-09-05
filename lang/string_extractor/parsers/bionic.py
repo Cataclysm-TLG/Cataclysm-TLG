@@ -11,3 +11,8 @@ def parse_bionic(json, origin):
     if "description" in json:
         write_text(json["description"], origin, c_format=False,
                    comment="Description of bionic \"{}\"".format(name))
+
+    if "cant_remove_reason" in json:
+        write_text(json["cant_remove_reason"], origin,
+                   comment="Reason bionic \"{}\" cannot be removed"
+                   .format(name))
