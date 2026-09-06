@@ -418,8 +418,6 @@ class martialart
         int arm_block = -1;
         int leg_block = -1;
         int nonstandard_block = -1;
-        bool arm_block_with_bio_armor_arms = false;
-        bool leg_block_with_bio_armor_legs = false;
         std::set<matec_id> techniques; // all available techniques
         std::set<itype_id> weapons; // all style weapons
         std::set<weapon_category_id> weapon_category; // all style weapon categories

@@ -1572,7 +1572,7 @@
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "BLOCK_WIND" ],
     "open": "t_laminated_glass_shutter_open",
     "bash": {
       "str_min": 30,
@@ -1605,17 +1605,7 @@
     "roof": "t_flat_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [
-      "TRANSPARENT",
-      "NOITEM",
-      "WALL",
-      "NO_SCENT",
-      "AUTO_WALL_SYMBOL",
-      "OPENCLOSE_INSIDE",
-      
-      "BLOCK_WIND",
-      "UNCLINGABLE"
-    ],
+    "flags": [ "TRANSPARENT", "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "OPENCLOSE_INSIDE", "BLOCK_WIND", "UNCLINGABLE" ],
     "close": "t_laminated_glass_shutter",
     "bash": {
       "str_min": 12,
@@ -1743,7 +1733,7 @@
     "concealment": 100,
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "FLAMMABLE_HARD", "NOITEM",  "WALL", "NO_SCENT" ],
+    "flags": [ "FLAMMABLE_HARD", "NOITEM", "WALL", "NO_SCENT" ],
     "bash": {
       "str_min": 30,
       "str_max": 150,
@@ -1762,7 +1752,7 @@
     "name": "root wall",
     "looks_like": "t_rock",
     "description": "A dirt wall covered with roots.",
-    "delete": { "flags": [  "BLOCK_WIND" ] },
+    "delete": { "flags": [ "BLOCK_WIND" ] },
     "bash": {
       "str_min": 12,
       "str_max": 150,
@@ -1844,7 +1834,7 @@
     "color": "red",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "BLOCK_WIND" ],
     "bash": {
       "str_min": 100,
       "str_max": 400,
@@ -1864,7 +1854,7 @@
     "color": "green",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "BLOCK_WIND" ],
     "bash": {
       "str_min": 100,
       "str_max": 400,
@@ -1884,7 +1874,7 @@
     "color": "blue",
     "move_cost": 0,
     "coverage": 100,
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT",  "BLOCK_WIND" ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "BLOCK_WIND" ],
     "bash": {
       "str_min": 100,
       "str_max": 400,

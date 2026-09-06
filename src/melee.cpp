@@ -1768,7 +1768,7 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
                     add_msg_debug( debugmode::DF_MELEE, "Adding fallback tech %s to the tech list", tec_id->name );
                 } else {
                     add_msg_debug( debugmode::DF_MELEE, "No valid attack vector found, fallback attack %s discarded",
-                                tec_id->name );
+                                   tec_id->name );
                 }
             }
         }

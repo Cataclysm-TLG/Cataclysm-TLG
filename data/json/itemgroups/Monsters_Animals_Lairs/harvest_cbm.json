@@ -39,27 +39,24 @@
       {
         "collection": [
           { "item": "bio_armor_torso", "prob": 30 },
-          { "item": "bio_armor_legs", "prob": 100 },
-          { "item": "bio_armor_head", "prob": 10 }
+          { "item": "bio_armor_head", "prob": 20 }
         ],
         "prob": 20
       },
       {
         "collection": [
-          { "item": "bio_armor_arms", "prob": 100 },
           { "item": "bio_armor_torso", "prob": 60 },
           { "item": "bio_armor_head", "prob": 30 }
         ],
         "prob": 20
       },
       {
-        "collection": [ { "item": "bio_armor_legs", "prob": 100 }, { "item": "bio_weight", "prob": 50 } ],
+        "collection": [ { "item": "bio_weight", "prob": 50 } ],
         "prob": 60
       },
-      { "item": "bio_armor_arms", "prob": 60 },
       { "item": "bio_armor_head", "prob": 30 },
       { "item": "bio_armor_torso", "prob": 20 },
-      { "item": "bio_weight", "prob": 15 }
+      { "item": "bio_weight", "prob": 35 }
     ]
   },
   {

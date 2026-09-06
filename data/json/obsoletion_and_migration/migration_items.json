@@ -3263,6 +3263,16 @@
   },
   {
     "type": "MIGRATION",
+    "id": "bio_armor_arms",
+    "replace": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_armor_legs",
+    "replace": "bio_weight"
+  },
+  {
+    "type": "MIGRATION",
     "id": "bio_fuel_cell_gasoline",
     "replace": "bio_cable"
   },
@@ -3285,6 +3295,16 @@
     "type": "bionic_migration",
     "from": "bio_lampoil",
     "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_armor_arms",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_armor_legs",
+    "to": "bio_weight"
   },
   {
     "type": "MIGRATION",
