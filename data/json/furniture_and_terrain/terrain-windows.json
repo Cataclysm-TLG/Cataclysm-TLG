@@ -1756,7 +1756,6 @@
       "SUPPORTS_ROOF",
       "WALL",
       "BARRICADABLE_WINDOW",
-      
       "BLOCK_WIND",
       "REDUCE_SCENT",
       "WINDOW",
@@ -1788,7 +1787,6 @@
       "SUPPORTS_ROOF",
       "WALL",
       "BARRICADABLE_WINDOW",
-      
       "BLOCK_WIND",
       "REDUCE_SCENT",
       "WINDOW",
@@ -1820,7 +1818,6 @@
       "SUPPORTS_ROOF",
       "WALL",
       "BARRICADABLE_WINDOW",
-      
       "BLOCK_WIND",
       "REDUCE_SCENT",
       "WINDOW",

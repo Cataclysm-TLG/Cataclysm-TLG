@@ -12,17 +12,7 @@
     "roof": "t_brick_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [
-      "NOITEM",
-      "SUPPORTS_ROOF",
-      "WALL",
-      "AUTO_WALL_SYMBOL",
-      
-      "MOUNTABLE",
-      "PERMEABLE",
-      "TRANSPARENT",
-      "THIN_OBSTACLE"
-    ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "AUTO_WALL_SYMBOL", "MOUNTABLE", "PERMEABLE", "TRANSPARENT", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 48,
       "str_max": 80,
@@ -46,17 +36,7 @@
     "roof": "t_brick_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [
-      "NOITEM",
-      "SUPPORTS_ROOF",
-      "WALL",
-      "AUTO_WALL_SYMBOL",
-      
-      "MOUNTABLE",
-      "PERMEABLE",
-      "TRANSPARENT",
-      "THIN_OBSTACLE"
-    ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "AUTO_WALL_SYMBOL", "MOUNTABLE", "PERMEABLE", "TRANSPARENT", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 32,
       "str_max": 60,
@@ -79,17 +59,7 @@
     "roof": "t_rock_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [
-      "NOITEM",
-      "SUPPORTS_ROOF",
-      "AUTO_WALL_SYMBOL",
-      "WALL",
-      
-      "MOUNTABLE",
-      "PERMEABLE",
-      "TRANSPARENT",
-      "THIN_OBSTACLE"
-    ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "AUTO_WALL_SYMBOL", "WALL", "MOUNTABLE", "PERMEABLE", "TRANSPARENT", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 64,
       "str_max": 150,
@@ -279,17 +249,7 @@
     "roof": "t_concrete_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [
-      "NOITEM",
-      "SUPPORTS_ROOF",
-      "WALL",
-      "AUTO_WALL_SYMBOL",
-      
-      "MOUNTABLE",
-      "PERMEABLE",
-      "TRANSPARENT",
-      "THIN_OBSTACLE"
-    ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "AUTO_WALL_SYMBOL", "MOUNTABLE", "PERMEABLE", "TRANSPARENT", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 72,
       "str_max": 175,
@@ -312,17 +272,7 @@
     "roof": "t_concrete_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [
-      "NOITEM",
-      "SUPPORTS_ROOF",
-      "WALL",
-      "AUTO_WALL_SYMBOL",
-      
-      "MOUNTABLE",
-      "PERMEABLE",
-      "TRANSPARENT",
-      "THIN_OBSTACLE"
-    ],
+    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "AUTO_WALL_SYMBOL", "MOUNTABLE", "PERMEABLE", "TRANSPARENT", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 96,
       "str_max": 230,

@@ -37,8 +37,6 @@
 #include "value_ptr.h"
 #include "weighted_list.h"
 
-static const bionic_id bio_armor_arms( "bio_armor_arms" );
-static const bionic_id bio_armor_legs( "bio_armor_legs" );
 static const bionic_id bio_cqb( "bio_cqb" );
 
 static const flag_id json_flag_PROVIDES_TECHNIQUES( "PROVIDES_TECHNIQUES" );
@@ -511,8 +509,6 @@ void martialart::load( const JsonObject &jo, std::string_view src )
     optional( jo, was_loaded, "arm_block", arm_block, -1 );
     optional( jo, was_loaded, "nonstandard_block", nonstandard_block, -1 );
 
-    optional( jo, was_loaded, "arm_block_with_bio_armor_arms", arm_block_with_bio_armor_arms, false );
-    optional( jo, was_loaded, "leg_block_with_bio_armor_legs", leg_block_with_bio_armor_legs, false );
 }
 
 // Not implemented on purpose (martialart objects have no integer id)
@@ -1708,9 +1704,7 @@ bool character_martial_arts::can_leg_block( const Character &owner ) const
 
     // Before we check our legs, can we leg block at all?
     const bool block_with_skill = ma.leg_block >= 0 && unarmed_skill >= ma.leg_block;
-    const bool block_with_bio_armor = ma.leg_block_with_bio_armor_legs &&
-                                      owner.has_bionic( bio_armor_legs );
-    if( !block_with_skill && !block_with_bio_armor ) {
+    if( !block_with_skill ) {
         return false;
     }
 
@@ -1743,9 +1737,7 @@ bool character_martial_arts::can_arm_block( const Character &owner ) const
 
     // Before we check our arms, can we block at all?
     const bool block_with_skill = ma.arm_block >= 0 && unarmed_skill >= ma.arm_block;
-    const bool block_with_bio_armor = ma.arm_block_with_bio_armor_arms &&
-                                      owner.has_bionic( bio_armor_arms );
-    if( !block_with_skill && !block_with_bio_armor ) {
+    if( !block_with_skill ) {
         return false;
     }
 
@@ -2278,19 +2270,11 @@ bool ma_style_callback::key( const input_context &ctxt, const input_event &event
 
         buffer += "--\n";
 
-        if( ma.arm_block_with_bio_armor_arms || ma.arm_block >= 0 ||
-            ma.leg_block_with_bio_armor_legs || ma.leg_block >= 0 ) {
-            if( ma.arm_block_with_bio_armor_arms ) {
-                buffer += _( "You can <info>arm block</info> by installing the <info>Arms Alloy Plating CBM</info>" );
-                buffer += "\n";
-            } else if( ma.arm_block >= 0 ) {
+        if( ma.arm_block >= 0 || ma.leg_block >= 0 ) {
+            if( ma.arm_block >= 0 ) {
                 buffer += string_format(
                               _( "You can <info>arm block</info> at <info>unarmed rank:</info> <stat>%s</stat>" ),
                               ma.arm_block ) + "\n";
-            }
-            if( ma.leg_block_with_bio_armor_legs ) {
-                buffer += _( "You can <info>leg block</info> by installing the <info>Legs Alloy Plating CBM</info>" );
-                buffer += "\n";
             } else if( ma.leg_block >= 0 ) {
                 buffer += string_format(
                               _( "You can <info>leg block</info> at <info>unarmed rank:</info> <stat>%s</stat>" ),
