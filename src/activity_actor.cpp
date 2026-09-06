@@ -9159,7 +9159,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 // Mix of Isaac Clarke stomps and swinging your weapon.
-                you.burn_energy_all( -you.get_standard_stamina_cost() );
+                you.burn_energy_all( you.get_base_melee_stamina_cost() );
 
                 you.recoil = MAX_RECOIL;
 
