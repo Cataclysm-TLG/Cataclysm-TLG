@@ -664,7 +664,7 @@ static void grab()
         }
         // TODO: Dynamically calculate stamina cost.
         if( you.get_stamina() < 400 ) {
-            you.add_msg_if_player( ( "You're too exhausted to wrestle anything." ) );
+            you.add_msg_if_player( _( "You're too exhausted to wrestle anything." ) );
             return;
         }
         if( target->is_monster() && target->as_monster()->has_flag( mon_flag_GRAB_IMMUNE ) ) {

@@ -3130,14 +3130,11 @@ void game::bury_screen() const
     const int days = to_days<int>( survived );
 
     if( days > 0 ) {
-        // NOLINTNEXTLINE(cata-translate-string-literal)
-        sTemp = string_format( "%dd %dh %dm", days, hours, minutes );
+        sTemp = string_format( pgettext( "time duration", "%dd %dh %dm" ), days, hours, minutes );
     } else if( hours > 0 ) {
-        // NOLINTNEXTLINE(cata-translate-string-literal)
-        sTemp = string_format( "%dh %dm", hours, minutes );
+        sTemp = string_format( pgettext( "time duration", "%dh %dm" ), hours, minutes );
     } else {
-        // NOLINTNEXTLINE(cata-translate-string-literal)
-        sTemp = string_format( "%dm", minutes );
+        sTemp = string_format( pgettext( "time duration", "%dm" ), minutes );
     }
 
     center_print( w_rip, iInfoLine++, c_white, sTemp );
