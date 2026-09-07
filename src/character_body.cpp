@@ -915,7 +915,7 @@ void Character::update_bodytemp()
             }
         }
 
-        // Warn the player about windchill, but only on cold bodyparts
+        // Warn the player about windchill, but only on cold bodyparts.
         const units::temperature conv_temp = get_part_temp_conv( bp );
         if( conv_temp <= BODYTEMP_COLD && windchill < units::from_kelvin_delta( -30 ) &&
             now - record.last_wind_extreme > cooldown_danger ) {
@@ -925,7 +925,7 @@ void Character::update_bodytemp()
         } else if( conv_temp <= BODYTEMP_COLD && windchill < units::from_fahrenheit_delta( -20 ) &&
                    now - record.last_wind_strong > cooldown_danger ) {
             add_msg( m_bad,
-                     _( "The strong wind is chilling your unprotected %s." ),
+                     _( "The strong wind is chilling your %s." ),
                      body_part_name( bp ) );
             record.last_wind_strong = now;
         } else if( conv_temp <= BODYTEMP_COLD && windchill < units::from_fahrenheit_delta( -10 ) &&
