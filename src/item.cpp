@@ -3655,18 +3655,21 @@ bool item::armor_full_protection_info( std::vector<iteminfo> &info,
                 insert_separation_line( info );
             }
 
-            std::string coverage = "<bold>Protection for</bold>:";
+            std::vector<std::string> covered_names;
             if( !covered_subparts.empty() ) {
                 // Only show subparts explicitly listed in the item json.
                 for( const sub_bodypart_id sbp : covered_subparts ) {
-                    coverage += string_format( " The <info>%s</info>.", sbp->name );
+                    covered_names.emplace_back( string_format( "<info>%s</info>", sbp->name ) );
                 }
             } else {
                 // Show body parts only if no subparts were defined.
                 for( const bodypart_id bp : covered_main ) {
-                    coverage += string_format( " The <info>%s</info>.", bp->name );
+                    covered_names.emplace_back( string_format( "<info>%s</info>", bp->name ) );
                 }
             }
+            const std::string coverage = string_format( _( "<bold>Protection for</bold>: %s." ),
+                                         enumerate_as_string( covered_names,
+                                                 enumeration_conjunction::none ) );
             info.emplace_back( "ARMOR", coverage );
             // Pick a representative subpart to populate armor data.
             sub_bodypart_id rep;
