@@ -969,13 +969,9 @@
     "symbol": ";",
     "color": "light_gray",
     "tool_ammo": [ "battery" ],
-    "use_action": [
-      { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }
-    ],
+    "use_action": [ { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" } ],
     "flags": [ "NO_UNLOAD", "NO_RELOAD", "ELECTRONIC", "IS_UPS" ],
-    "pocket_data": [
-      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 600 } }
-    ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 600 } } ],
     "melee_damage": { "bash": 2 }
   },
   {

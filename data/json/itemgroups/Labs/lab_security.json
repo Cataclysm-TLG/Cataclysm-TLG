@@ -4,9 +4,7 @@
     "type": "item_group",
     "//": "This group spawns power banks with a random amount of power.",
     "subtype": "distribution",
-    "entries": [
-      { "item": "UPS_off", "prob": 100, "charges": [ 0, 600 ] }
-    ]
+    "entries": [ { "item": "UPS_off", "prob": 100, "charges": [ 0, 600 ] } ]
   },
   {
     "id": "SUS_rivtech_loot",

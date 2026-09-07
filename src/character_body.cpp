@@ -109,21 +109,24 @@ static const morale_type morale_pyromania_nofire( "morale_pyromania_nofire" );
 static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_survival( "survival" );
 
-static const trait_id trait_CHITIN_FUR( "CHITIN_FUR" );
-static const trait_id trait_CHITIN_FUR2( "CHITIN_FUR2" );
-static const trait_id trait_CHITIN_FUR3( "CHITIN_FUR3" );
+static const trait_id trait_CHITIN( "CHITIN" );
 static const trait_id trait_DEBUG_LS( "DEBUG_LS" );
 static const trait_id trait_DEBUG_NOTEMP( "DEBUG_NOTEMP" );
+static const trait_id trait_FEATHERS( "FEATHERS" );
 static const trait_id trait_FELINE_FUR( "FELINE_FUR" );
 static const trait_id trait_FUR( "FUR" );
 static const trait_id trait_INFRESIST( "INFRESIST" );
 static const trait_id trait_INFIMMUNE( "INFIMMUNE" );
-static const trait_id trait_LIGHTFUR( "LIGHTFUR" );
 static const trait_id trait_LUPINE_FUR( "LUPINE_FUR" );
+static const trait_id trait_LUPINE_FUR_SUMMER( "LUPINE_FUR_SUMMER" );
 static const trait_id trait_M_DEPENDENT( "M_DEPENDENT" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
+static const trait_id trait_SCALES( "SCALES" );
 static const trait_id trait_SLIMY( "SLIMY" );
+static const trait_id trait_THICK_SCALES( "THICK_SCALES" );
 static const trait_id trait_URSINE_FUR( "URSINE_FUR" );
+static const trait_id trait_URSINE_FUR_SUMMER( "URSINE_FUR_SUMMER" );
+static const trait_id trait_VISCOUS( "VISCOUS" );
 
 static const vitamin_id vitamin_blood( "blood" );
 static const vitamin_id vitamin_calcium( "calcium" );
@@ -135,29 +138,33 @@ void Character::update_body_wetness( const w_point &weather )
     // Average number of turns to go from completely soaked to fully dry
     // assuming average temperature and humidity
     constexpr time_duration average_drying = 30_minutes;
+    float trait_mult = 1.0f;
 
-    // Fur/slime retains moisture
-    float trait_mult = 1.0;
-    if( has_trait( trait_LIGHTFUR ) || has_trait( trait_FUR ) || has_trait( trait_FELINE_FUR ) ||
-        has_trait( trait_LUPINE_FUR ) || has_trait( trait_CHITIN_FUR ) || has_trait( trait_CHITIN_FUR2 ) ||
-        has_trait( trait_CHITIN_FUR3 ) ) {
-        trait_mult = 2.0;
-    }
-    if( has_trait( trait_URSINE_FUR ) || has_trait( trait_SLIMY ) ) {
-        trait_mult = 4.0;
+    // Some fur retains water.
+    if( has_trait( trait_FUR ) || has_trait( trait_FELINE_FUR ) ||
+        has_trait( trait_LUPINE_FUR_SUMMER ) || has_trait( trait_URSINE_FUR_SUMMER ) ) {
+        trait_mult = 1.5f;
+        // Winter coats are better at shedding water.
+    } else if( has_trait( trait_LUPINE_FUR ) || has_trait( trait_URSINE_FUR ) ) {
+        trait_mult = 1.25f;
+        // Slimy characters stay wet much longer.
+    } else if( has_trait( trait_SLIMY ) || has_trait( trait_VISCOUS ) ) {
+        trait_mult = 3.0f;
+        // Scales, feathers, and chitin shed water easily.
+    } else if( has_trait( trait_SCALES ) || has_trait( trait_THICK_SCALES ) ||
+               has_trait( trait_CHITIN ) || has_trait( trait_FEATHERS ) ) {
+        trait_mult = 0.5f;
     }
 
-    // Weather slows down drying
+    // Weather slows down drying.
     float weather_mult = 1.0;
     weather_mult += ( ( weather.humidity - 66.0f ) - ( units::to_fahrenheit(
                           weather.temperature ) - 65.0f ) ) / 100.0f;
     weather_mult = std::max( 0.1f, weather_mult );
-
     for( const bodypart_id &bp : get_all_body_parts() ) {
-
         const units::temperature temp_conv = get_part_temp_conv( bp );
         const int drench_cap = get_part_drench_capacity( bp );
-        // do sweat related tests assuming not underwater
+        // Do sweat related tests, assuming we're not underwater.
         if( !is_underwater() ) {
             const int wetness = get_part_wetness( bp );
             if( wetness == 0 ) {
@@ -915,7 +922,7 @@ void Character::update_bodytemp()
             }
         }
 
-        // Warn the player about windchill, but only on cold bodyparts
+        // Warn the player about windchill, but only on cold bodyparts.
         const units::temperature conv_temp = get_part_temp_conv( bp );
         if( conv_temp <= BODYTEMP_COLD && windchill < units::from_kelvin_delta( -30 ) &&
             now - record.last_wind_extreme > cooldown_danger ) {
@@ -925,7 +932,7 @@ void Character::update_bodytemp()
         } else if( conv_temp <= BODYTEMP_COLD && windchill < units::from_fahrenheit_delta( -20 ) &&
                    now - record.last_wind_strong > cooldown_danger ) {
             add_msg( m_bad,
-                     _( "The strong wind is chilling your unprotected %s." ),
+                     _( "The strong wind is chilling your %s." ),
                      body_part_name( bp ) );
             record.last_wind_strong = now;
         } else if( conv_temp <= BODYTEMP_COLD && windchill < units::from_fahrenheit_delta( -10 ) &&

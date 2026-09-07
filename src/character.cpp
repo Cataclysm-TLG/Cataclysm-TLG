@@ -14092,16 +14092,18 @@ void Character::water_immersion()
     if( underwater || here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ||
         here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, pos_bub() ) ||
         here.has_flag( ter_furn_flag::TFLAG_SHALLOW_WATER, pos_bub() ) ) {
+        // Levitation means we're leaping or being knocked around.
+        // That keeps us out of the water unless WATER_CUBE is true, because that
+        // means our whole Z-level is underwater and levitation doesn't matter.
         if( !in_vehicle && !here.has_flag_furn( "BRIDGE", pos_bub() ) &&
-            ( !has_effect_with_flag( json_flag_LEVITATION ) && !underwater ) ) {
+            ( !has_effect_with_flag( json_flag_LEVITATION ) &&
+              !here.has_flag( ter_furn_flag::TFLAG_WATER_CUBE, pos_bub() ) ) ) {
             int drench_amount = 0;
             body_part_set drenched_parts;
             if( underwater || is_prone() ) {
-                // TODO: gain "swimming" proficiency but not "athletics" skill.
                 drench_amount = 100;
                 drenched_parts = get_drenching_body_parts();
             } else if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, pos_bub() ) ) {
-                // TODO: gain "swimming" proficiency but not "athletics" skill.
                 // Same as above, except no head/eyes/mouth.
                 drench_amount = 100;
                 drenched_parts = get_drenching_body_parts( false );
