@@ -6830,13 +6830,13 @@ void play_with_pet_activity_actor::finish( player_activity &act, Character &who 
     if( !who.has_trait( trait_PSYCHOPATH ) && !who.has_trait( trait_NUMB ) ) {
         who.add_morale( morale_play_with_pet, 10, 10, 5_hours, 25_minutes );
         if( !playstr.empty() ) {
-            who.add_msg_if_player( m_good, playstr, pet_name );
+            who.add_msg_if_player( m_good, _( playstr ), pet_name );
         }
         who.add_msg_if_player( m_good, _( "Playing with your %s has lifted your spirits a bit." ),
                                pet_name );
     } else {
         if( !playstr.empty() ) {
-            who.add_msg_if_player( m_good, playstr, pet_name );
+            who.add_msg_if_player( m_good, _( playstr ), pet_name );
         }
         who.add_msg_if_player( _( "Your %s seems to enjoy the interaction, but you feel nothing." ),
                                pet_name );

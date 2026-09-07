@@ -2894,9 +2894,11 @@ void inventory_selector::draw_footer( const catacurses::window &w ) const
             wprintz( w, c_light_gray, " >" );
         }
 
+        const std::string view_mode = _uimode == uimode::hierarchy ?
+                                      pgettext( "inventory view mode", "hierarchy" ) :
+                                      pgettext( "inventory view mode", "categories" );
         right_print( w, getmaxy( w ) - border, border + 1, c_light_gray,
-                     string_format( "< [%s] %s >", ctxt.get_desc( "VIEW_CATEGORY_MODE" ),
-                                    io::enum_to_string( _uimode ) ) );
+                     string_format( "< [%s] %s >", ctxt.get_desc( "VIEW_CATEGORY_MODE" ), view_mode ) );
         const auto footer = get_footer( mode );
         if( !footer.first.empty() ) {
             const int string_width = utf8_width( footer.first );
