@@ -17,6 +17,7 @@
 #include "input_context.h"
 #include "input_enums.h"
 #include "output.h"
+#include "translations.h"
 #include "ui_manager.h"
 #include "weather.h"
 
@@ -322,11 +323,11 @@ static void draw_medical_titlebar( const catacurses::window &window, Character &
         right_print( window, 1, right_indent, c_white, desc );
     }
 
-    const std::string TITLE_STR = "Medical";
+    const std::string title = pgettext( "medical menu title", "Medical" );
 
     // Window Title
-    if( WIDTH - details_width - utf8_width( TITLE_STR ) > WIDTH / 2 ) {
-        center_print( window, 0, c_blue, _( TITLE_STR ) );
+    if( WIDTH - details_width - utf8_width( title ) > WIDTH / 2 ) {
+        center_print( window, 0, c_blue, title );
     }
 }
 
