@@ -143,15 +143,16 @@ void Character::update_body_wetness( const w_point &weather )
     // Some fur retains water.
     if( has_trait( trait_FUR ) || has_trait( trait_FELINE_FUR ) ||
         has_trait( trait_LUPINE_FUR_SUMMER ) || has_trait( trait_URSINE_FUR_SUMMER ) ) {
-        trait_mult = 2.0f;
-    // Winter coats are better at shedding water.
-    } else if( has_trait( trait_LUPINE_FUR ) || has_trait( trait_URSINE_FUR )  ) {
-        trait_mult = 1.33f;
-    // Slimy characters stay wet much longer.
+        trait_mult = 1.5f;
+        // Winter coats are better at shedding water.
+    } else if( has_trait( trait_LUPINE_FUR ) || has_trait( trait_URSINE_FUR ) ) {
+        trait_mult = 1.25f;
+        // Slimy characters stay wet much longer.
     } else if( has_trait( trait_SLIMY ) || has_trait( trait_VISCOUS ) ) {
-        trait_mult = 4.0f;
-    // Scales, feathers, and chitin shed water easily.
-    } else if( has_trait( trait_SCALES ) || has_trait( trait_THICK_SCALES ) || has_trait( trait_CHITIN ) || has_trait( trait_FEATHERS ) ) {
+        trait_mult = 3.0f;
+        // Scales, feathers, and chitin shed water easily.
+    } else if( has_trait( trait_SCALES ) || has_trait( trait_THICK_SCALES ) ||
+               has_trait( trait_CHITIN ) || has_trait( trait_FEATHERS ) ) {
         trait_mult = 0.5f;
     }
 

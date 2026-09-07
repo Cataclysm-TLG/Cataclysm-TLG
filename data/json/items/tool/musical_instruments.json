@@ -30,11 +30,7 @@
         "You play a bluegrass tune on your banjo.",
         "You play a quick ditty on your banjo."
       ],
-      "npc_descriptions":[
-        "play a little tune on the banjo.",
-        "play a bluegrass tune on the banjo.",
-        "play a quick ditty on the banjo."
-      ]
+      "npc_descriptions": [ "play a little tune on the banjo.", "play a bluegrass tune on the banjo.", "play a quick ditty on the banjo." ]
     },
     "melee_damage": { "bash": 4 }
   },
@@ -67,11 +63,7 @@
         "You play a warbling trill on your flute.",
         "You play a beautiful piece on your flute."
       ],
-      "npc_descriptions":[
-        "play a little tune on the flute.",
-        "play a warbling trill on the flute.",
-        "play a beautiful piece on the flute."
-      ]
+      "npc_descriptions": [ "play a little tune on the flute.", "play a warbling trill on the flute.", "play a beautiful piece on the flute." ]
     },
     "melee_damage": { "bash": 2 }
   },
