@@ -252,7 +252,7 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
                                             ( wear_multiplier * enchant_multiplier ) ) );
     // STURDY items are also durable for unarmed attack purposes.
     if( shield->has_flag( flag_DURABLE_MELEE ) || ( unarmed_attack() &&
-            shield->has_flag( flag_STURDY ) ) ) {
+            shield->has_flag( flag_STURDY ) ) && !shield->has_flag( flag_REPLICA_EQUIPMENT ) ) {
         damage_chance *= 2;
     }
 
