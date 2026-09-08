@@ -102,8 +102,8 @@
     "longest_side": "113 mm",
     "price": "22 USD",
     "price_postapoc": "35 cent",
-    "capacity": 97,
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 97 } } ]
+    "capacity": 110,
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 110 } } ]
   },
   {
     "id": "heavy_plus_battery_cell",
