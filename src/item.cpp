@@ -9165,15 +9165,18 @@ float item::_resist( const damage_type_id &dmg_type, bool to_self, int resist_va
     float resist = 0.0f;
     float mod = get_clothing_mod_val_for_damage_type( dmg_type );
 
-    const float damage_scale = damage_adjusted_armor_resist( 1.0f, dmg_type );
+    float damage_scale = damage_adjusted_armor_resist( 1.0f, dmg_type );
+    if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+        damage_scale *= 0.66;
+    }
 
     if( !bp_null ) {
-        // If we have armour portion materials for this body part, use that instead
+        // If we have armour portion materials for this body part, use that instead.
         if( !armor_mats.empty() ) {
             for( const part_material *m : armor_mats ) {
-                // only count the material if it's hit
+                // Only count the material if it's hit.
 
-                // if roll is -1 each material is rolled at this point individually
+                // If roll is -1 each material is rolled at this point individually.
                 int internal_roll;
                 resist_value < 0 ? internal_roll = rng( 0, 99 ) : internal_roll = resist_value;
                 if( internal_roll < m->cover ) {
@@ -9518,7 +9521,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
             return mod_damage( itype::damage_scale ) ? armor_status::DESTROYED : armor_status::DAMAGED;
         }
         // The attack got through, but not entirely.
-        if( has_flag( flag_STURDY ) ) {
+        if( has_flag( flag_STURDY ) && !has_flag( flag_REPLICA_EQUIPMENT ) ) {
             damaged_chance *= 0.5f;
         }
         if( rng_float( 0.0f, 1.0f ) > damaged_chance ) {
@@ -9540,7 +9543,7 @@ item::armor_status item::damage_armor_durability( damage_unit &du, damage_unit &
         * weapon function. The weapon stuff works fine at the moment, so no thanks.
         */
         float adjusted_chance = base_chance / ( ( chip_res / 3.0f ) + 1.0f );
-        if( has_flag( flag_STURDY ) ) {
+        if( has_flag( flag_STURDY ) && !has_flag( flag_REPLICA_EQUIPMENT ) ) {
             adjusted_chance *= 0.5f;
         }
         // Soft items are protected from bash damage in much the same way the PLASTIC flag protects monsters.

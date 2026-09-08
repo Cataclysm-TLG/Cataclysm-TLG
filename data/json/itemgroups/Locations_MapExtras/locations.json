@@ -1108,11 +1108,11 @@
     "type": "item_group",
     "id": "museum_armor",
     "items": [
-      { "item": "junk_platemail_suit", "prob": 60, "damage": [ -1, 5 ] },
+      { "item": "platemail_suit", "prob": 60, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "platemail_suit", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "platemail_aventail", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "platemail_tasset", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_hauberk", "prob": 60, "damage": [ -1, 5 ] },
+      { "item": "chainmail_hauberk", "prob": 60, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "chainmail_hauberk", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "chainmail_aventail", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "chainmail_hauberk", "prob": 10, "damage": [ -1, 5 ] },
@@ -1142,14 +1142,19 @@
     "type": "item_group",
     "id": "museum_armor_torso",
     "items": [
-      { "item": "junk_platemail_suit", "prob": 60, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_hauberk", "prob": 60, "damage": [ -1, 5 ] },
+      { "item": "platemail_suit", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 60, "damage": [ -1, 5 ] },
+      { "item": "chainmail_hauberk", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 60, "damage": [ -1, 5 ] },
+      { "item": "chainmail_hauberk", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "platemail_cuirass", "prob": 15, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "platemail_cuirass", "prob": 15, "damage": [ -1, 5 ] },
-      { "item": "bronze_cuirass", "prob": 45, "damage": [ -1, 5 ] },
-      { "item": "armor_lorica", "prob": 25, "damage": [ -1, 5 ] },
-      { "item": "armor_samurai", "prob": 50, "damage": [ -1, 5 ] },
+      { "item": "bronze_cuirass", "prob": 40, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "bronze_cuirass", "prob": 15, "damage": [ -1, 5 ] },
+      { "item": "armor_lorica", "prob": 5, "damage": [ -1, 5 ] },
+      { "item": "armor_lorica", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ],  "damage": [ -1, 5 ] },
+      { "item": "armor_samurai", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "armor_samurai", "prob": 50, "custom-flags": [ "REPLICA_EQUIPMENT" ],  "damage": [ -1, 5 ] },
       { "item": "gambeson", "prob": 50, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_vest", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "chainmail_vest", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "chainmail_vest", "prob": 10, "damage": [ -1, 5 ] }
     ]
   },
@@ -1167,23 +1172,34 @@
     "type": "item_group",
     "id": "museum_armor_feet",
     "items": [
-      { "item": "platemail_sollerets", "prob": 20, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_chausses", "prob": 10, "damage": [ -1, 5 ] }
+      { "item": "platemail_sollerets", "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "platemail_sollerets", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },      
+      { "item": "chainmail_chausses", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10, "damage": [ -1, 5 ] },
+      { "item": "chainmail_chausses", "prob": 5, "damage": [ -1, 5 ] }
     ]
   },
   {
     "type": "item_group",
     "id": "museum_armor_head",
     "items": [
-      { "item": "helmet_barbute", "prob": 50, "damage": [ -1, 5 ] },
-      { "item": "helmet_conical", "prob": 30, "damage": [ -1, 5 ] },
-      { "item": "helmet_kabuto", "prob": 50, "damage": [ -1, 5 ] },
-      { "item": "helmet_nasal", "prob": 50, "damage": [ -1, 5 ] },
-      { "item": "helmet_galea", "prob": 40, "damage": [ -1, 5 ] },
-      { "item": "platemail_kettle_helm", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "platemail_visored_helm", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "platemail_great_helm", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_coif", "prob": 30, "damage": [ -1, 5 ] }
+      { "item": "helmet_barbute", "prob": 50, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "helmet_conical", "prob": 30, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "helmet_kabuto", "prob": 50, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "helmet_nasal", "prob": 50, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "helmet_galea", "prob": 40, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "platemail_kettle_helm", "prob": 10, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "platemail_visored_helm", "prob": 10, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "platemail_great_helm", "prob": 10, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "chainmail_coif", "prob": 30, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "helmet_barbute", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "helmet_conical", "prob": 20, "damage": [ -1, 5 ] },
+      { "item": "helmet_kabuto", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "helmet_nasal", "prob": 40, "damage": [ -1, 5 ] },
+      { "item": "helmet_galea", "prob": 30, "damage": [ -1, 5 ] },
+      { "item": "platemail_kettle_helm", "prob": 5, "damage": [ -1, 5 ] },
+      { "item": "platemail_visored_helm", "prob": 5, "damage": [ -1, 5 ] },
+      { "item": "platemail_great_helm", "prob": 5, "damage": [ -1, 5 ] },
+      { "item": "chainmail_coif", "prob": 15, "damage": [ -1, 5 ] }
     ]
   },
   {
