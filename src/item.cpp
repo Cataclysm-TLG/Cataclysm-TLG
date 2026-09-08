@@ -4692,15 +4692,19 @@ void item::tool_info( std::vector<iteminfo> &info, const iteminfo_query *parts, 
         info.emplace_back( "DESCRIPTION", feedback );
     }
 
-    std::string &eport = type->tool->e_port;
+    const std::string &eport = type->tool->e_port;
     if( !eport.empty() ) {
+        const std::string eport_name = pgettext( "electronic port type", eport.c_str() );
         std::string compat;
-        compat += _( "* This device has electronic port type: " + colorize( eport, c_light_green ) );
-        std::vector<std::string> &eport_banned = type->tool->e_ports_banned;
+        compat += string_format( pgettext( "electronic port information",
+                                           "* This device has electronic port type: %s" ),
+                                 colorize( eport_name, c_light_green ) );
+        const std::vector<std::string> &eport_banned = type->tool->e_ports_banned;
         if( !eport_banned.empty() ) {
             compat += _( "\n* This device does not support transfer to e-port types: " );
-            for( std::string &s : eport_banned ) {
-                compat += colorize( _( s ), c_yellow );
+            for( const std::string &port : eport_banned ) {
+                const std::string port_name = pgettext( "electronic port type", port.c_str() );
+                compat += colorize( port_name, c_yellow );
             }
         }
         info.emplace_back( "DESCRIPTION", compat );
