@@ -12,7 +12,7 @@
     "items": [
       { "group": "western_medieval_weapon" },
       {
-        "distribution": [ { "item": "junk_platemail_suit", "prob": 40 }, { "item": "chainmail_junk_hauberk", "prob": 60 } ]
+        "distribution": [ { "item": "platemail_suit", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 36 }, { "item": "chainmail_hauberk", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 54 }, { "item": "platemail_suit", "prob": 4 }, { "item": "chainmail_hauberk", "prob": 6 } ]
       },
       { "item": "platemail_visored_helm", "prob": 80 }
     ]
@@ -21,7 +21,25 @@
     "id": "soa_samurai",
     "type": "item_group",
     "subtype": "collection",
-    "items": [ { "group": "samurai_weapon" }, [ "armor_samurai", 80 ], [ "helmet_kabuto", 80 ] ]
+    "items": [ { "group": "samurai_weapon" }, { "group": "o-yoroi_real_or_fake", "prob": 70 }, { "group": "kabuto_real_or_fake", "prob": 70 } ]
+  },
+  {
+    "id": "o-yoroi_real_or_fake",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "armor_samurai", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
+      { "item": "armor_samurai", "prob": 1 }
+    ]
+  },
+  {
+    "id": "kabuto_real_or_fake",
+    "type": "item_group",
+    "subtype": "distribution",
+    "items": [
+      { "item": "helmet_kabuto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 15 },
+      { "item": "helmet_kabuto", "prob": 1 }
+    ]
   },
   {
     "id": "western_sword_with_scabbard",

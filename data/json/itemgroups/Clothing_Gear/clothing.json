@@ -2572,11 +2572,11 @@
       [ "plated_leather_armor_suit", 3 ],
       [ "armor_chitin", 4 ],
       [ "armor_acidchitin", 1 ],
-      [ "junk_platemail_suit", 1 ],
+      { "item": "platemail_suit", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       [ "chainmail_hauberk_loose", 1 ],
       [ "chainmail_hauberk", 1 ],
-      { "item": "chainmail_junk_hauberk_loose", "prob": 1 },
-      { "item": "chainmail_junk_hauberk", "prob": 1 }
+      { "item": "chainmail_hauberk_loose", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
+      { "item": "chainmail_hauberk", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 }
     ]
   },
   {

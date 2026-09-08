@@ -502,9 +502,13 @@
     "type": "item_group",
     "subtype": "collection",
     "items": [
+      { "item": "platemail_great_helm", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 6 },
       [ "platemail_great_helm", 6 ],
+      { "item": "platemail_visored_helm", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 4 },
       [ "platemail_visored_helm", 4 ],
+      { "item": "platemail_aventail", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       [ "platemail_aventail", 1 ],
+      { "item": "platemail_tasset", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 6 },
       [ "platemail_tasset", 1 ],
       [ "platemail_sollerets", 1 ],
       [ "platemail_arm_guards", 1 ],
@@ -517,8 +521,8 @@
       [ "chainmail_chausses", 1 ],
       [ "chainmail_coif", 2 ],
       [ "chainmail_vest", 3 ],
-      [ "junk_platemail_suit", 10 ],
-      [ "chainmail_junk_hauberk", 6 ]
+      { "item": "platemail_suit", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+      { "item": "chainmail_hauberk", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 6 }
     ]
   },
   {
