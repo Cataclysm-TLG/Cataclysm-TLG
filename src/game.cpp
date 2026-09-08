@@ -3925,7 +3925,7 @@ void game::display_faction_epilogues()
                                                point( std::max( 0, ( TERMX - FULL_SCREEN_WIDTH ) / 2 ),
                                                       std::max( 0, ( TERMY - FULL_SCREEN_HEIGHT ) / 2 ) ) );
                 };
-                scrollable_text( new_win, elem.second.name,
+                scrollable_text( new_win, _( elem.second.name ),
                                  std::accumulate( epilogue.begin() + 1, epilogue.end(), epilogue.front(),
                 []( std::string lhs, const std::string & rhs ) -> std::string {
                     return std::move( lhs ) + "\n" + rhs;
