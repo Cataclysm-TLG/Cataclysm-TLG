@@ -131,6 +131,7 @@
     "material": [ "sugar" ],
     "volume": "6 ml",
     "calories": 19,
+    "fun": -5,
     "vitamins": [ [ "junk_allergen", 1 ] ],
     "flags": [ "NO_TEMP", "NUTRIENT_OVERRIDE", "WATER_DISSOLVE" ]
   },
@@ -219,13 +220,21 @@
     "color": "yellow"
   },
   {
-    "id": "artificial_sweetener",
-    "copy-from": "sugar",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
+    "id": "artificial_sweetener",
     "name": { "str_sp": "artificial sweetener" },
+    "weight": "5 g",
+    "color": "white",
+    "comestible_type": "FOOD",
+    "symbol": "%",
     "description": "Sweet, sweet sugar?  No, it is bitter-sweet artificial sweetener.  No calories, no worries.",
-    "material": [ "powder" ],
-    "calories": 0
+    "price": "5 cent",
+    "price_postapoc": "4 cent",
+    "material": [ "sugar" ],
+    "volume": "6 ml",
+    "calories": 0,
+    "fun": -8,
+    "flags": [ "NO_TEMP", "NUTRIENT_OVERRIDE", "WATER_DISSOLVE" ]
   }
 ]
