@@ -96,6 +96,7 @@ static const ammo_effect_str_id ammo_effect_PLASMA( "PLASMA" );
 static const ammo_effect_str_id ammo_effect_SHATTER_SELF( "SHATTER_SELF" );
 static const ammo_effect_str_id ammo_effect_SHOT( "SHOT" );
 static const ammo_effect_str_id ammo_effect_TANGLE( "TANGLE" );
+static const ammo_effect_str_id ammo_effect_THROWN_ITEM( "THROWN_ITEM" );
 static const ammo_effect_str_id ammo_effect_TRIP( "TRIP" );
 static const ammo_effect_str_id ammo_effect_WHIP( "WHIP" );
 static const ammo_effect_str_id ammo_effect_WIDE( "WIDE" );
@@ -1531,9 +1532,14 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
                        ( thrown.total_contained_volume().value() ) / thrown.get_total_capacity().value() *
                        100;
 
-    // Add some flags to the projectile
+    // Add some ammo_effects to the projectile
     if( weight > 500_gram ) {
         proj_effects.insert( ammo_effect_HEAVY_HIT );
+    }
+
+    // This effect just controls breaking lights and stuff.
+    if( !thrown.is_soft() ) {
+        proj_effects.insert( ammo_effect_THROWN_ITEM );
     }
 
     proj_effects.insert( ammo_effect_NO_ITEM_DAMAGE );

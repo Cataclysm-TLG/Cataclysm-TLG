@@ -378,7 +378,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         trajectory.reserve( trajectory.size() + trajectory_extension.size() );
         trajectory.insert( trajectory.end(), trajectory_extension.begin(), trajectory_extension.end() );
     }
-
+    bool target_killed = false;
     bool first = true;
     bool multishot = false;
     tripoint_bub_ms first_p = trajectory[1];
@@ -561,6 +561,10 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                     critter->as_npc()->on_attacked( *origin );
                 }
 
+                if( critter == target_critter && critter->is_dead_state() ) {
+                    target_killed = true;
+                }
+
                 // Critter can still dodge the projectile
                 // In this case hit_critter won't be set
                 if( attack.last_hit_critter != nullptr ) {
@@ -584,7 +588,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
                 }
             } else if( in_veh != nullptr && veh_pointer_or_null( here->veh_at( tp ) ) == in_veh ) {
                 // Don't do anything, especially don't call map::shoot as this would damage the vehicle
-            } else if( !did_shoot ) {
+            } else if( !did_shoot && !( target_killed && tp == target_arg ) ) {
                 if( proj.count > 1 && distance > 1 ) {
                     multishot = true;
                     proj.multishot = true;

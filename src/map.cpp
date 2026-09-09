@@ -123,6 +123,7 @@ static const ammo_effect_str_id ammo_effect_INCENDIARY( "INCENDIARY" );
 static const ammo_effect_str_id ammo_effect_LASER( "LASER" );
 static const ammo_effect_str_id ammo_effect_LIGHTNING( "LIGHTNING" );
 static const ammo_effect_str_id ammo_effect_PLASMA( "PLASMA" );
+static const ammo_effect_str_id ammo_effect_THROWN_ITEM( "THROWN_ITEM" );
 
 static const ammotype ammo_battery( "battery" );
 
@@ -4680,8 +4681,16 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
     tripoint_bub_ms below = p + tripoint_rel_ms::below;
 
     bool success = false;
-
-    if( has_furn( p ) && furnid.bash ) {
+    bool furn_there = has_furn( p );
+    if( furn_there && furnid.bash && has_flag_furn( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER, p ) ) {
+        furn_bash = *furnid.bash;
+        bash = static_cast<map_common_bash_info &>( furn_bash );
+        smash_furn = true;
+    } else if( ter( p ).obj().bash && has_flag_ter( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER, p ) ) {
+        ter_bash = *ter( p ).obj().bash;
+        bash = static_cast<map_common_bash_info &>( ter_bash );
+        smash_ter = true;
+    } else if( furn_there && furnid.bash ) {
         furn_bash = *furnid.bash;
         bash = static_cast<map_common_bash_info &>( furn_bash );
         smash_furn = true;
@@ -4962,7 +4971,7 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
         return bsh;
     }
     bool smash_furn = false;
-    bool smashed_sealed = false;
+    bool smashed_early = false;
     bool smash_noitem = false;
 
     // Start with fields, e.g. webs.  Assume the player wants to remove these without
@@ -4975,9 +4984,10 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
 
     // Smash early because we don't want to smash the item that's stored here,
     // and a vehicle almost certainly can't be here if it's a sealed tile.
-    if( has_flag( ter_furn_flag::TFLAG_SEALED, p ) && !bsh.did_bash ) {
+    if( ( has_flag( ter_furn_flag::TFLAG_SEALED, p ) ||
+          has_flag( ter_furn_flag::TFLAG_HIT_WITHOUT_COVER, p ) ) && !bsh.did_bash ) {
         bash_ter_furn( p, bsh );
-        smashed_sealed = true;
+        smashed_early = true;
     }
 
     const furn_t &furnid = furn( p ).obj();
@@ -4993,12 +5003,12 @@ bash_params map::bash( const tripoint_bub_ms &p, const int str,
     }
 
     // Don't smash items if there's smashable furniture here. Don't smash items in SEALED or NOITEM tiles.
-    if( !smashed_sealed && !smash_furn && !smash_noitem && !bsh.did_bash ) {
+    if( !smashed_early && !smash_furn && !smash_noitem && !bsh.did_bash ) {
         manually_smash_items( p, str, false, bsh, crystalline_only );
     }
 
     // If we still didn't bash anything solid (a vehicle) or a tile with SEALED flag, bash ter/furn
-    if( !bsh.bashed_solid && !smashed_sealed && !bsh.did_bash ) {
+    if( !bsh.bashed_solid && !smashed_early && !bsh.did_bash ) {
         bash_ter_furn( p, bsh );
     }
 
@@ -5263,7 +5273,7 @@ void map::crush( const tripoint_bub_ms &p )
     }
 
     if( const optional_vpart_position vp = veh_at( p ) ) {
-        // Arbitrary number is better than collapsing house roof crushing APCs
+        // Arbitrary number is better than collapsing house roof crushing APCs.
         vp->vehicle().damage( *this, vp->part_index(), rng( 100, 1000 ), damage_bash, false );
     }
 }
@@ -5419,15 +5429,18 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
     bool veh_hit = false;
     bool furn_hit = false;
     bool ter_hit = false;
+    const bool thrown_item = proj.proj_effects.count( ammo_effect_THROWN_ITEM );
     if( veh_coverage == coverage && coverage != 0 ) {
         veh_hit = true;
-    } else if( furn_hit_without_cover || ( furn_coverage == coverage && coverage != 0 ) ) {
+    } else if( ( furn_hit_without_cover && ( hit_items || thrown_item ) ) ||
+               ( furn_coverage == coverage && coverage != 0 ) ) {
         furn_hit = true;
-    } else if( ter_hit_without_cover || ( ter_coverage == coverage && coverage != 0 ) ) {
+    } else if( ( ter_hit_without_cover && ( hit_items || thrown_item ) ) ||
+               ( ter_coverage == coverage && coverage != 0 ) ) {
         ter_hit = true;
     }
 
-    /** hit_items is true if we specifically targeted this tile and our ammo is a type that can
+    /** hit_items is true if the projectile's terminal point was this tile and our ammo is a type that can
     * damage items. Checking it here means we can intentionally shoot a piece of cover point blank
     * and actually hit it if we want to do so for some reason.
     */
@@ -5453,10 +5466,12 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
     }
     bool hit_something = false;
     // Check again so we can skip if the result was zero.
-    if( coverage > 0 || furn_hit_without_cover || ter_hit_without_cover ) {
+    if( coverage > 0 || ( furn_hit_without_cover && ( hit_items || thrown_item ) ) ||
+        ( ter_hit_without_cover && ( hit_items || thrown_item ) ) ) {
         int coverage_roll = rng( 1, 100 );
-        if( furn_hit_without_cover || ter_hit_without_cover || ( coverage > 0 &&
-                coverage_roll <= coverage ) ) {
+        if( ( furn_hit_without_cover && ( hit_items || thrown_item ) ) ||
+            ( ter_hit_without_cover && ( hit_items || thrown_item ) ) ||
+            ( coverage > 0 && coverage_roll <= coverage ) ) {
             furn_id furniture = furn( p );
             ter_id terrain = ter( p );
             // Did we hit the ter/furn/veh?
@@ -5555,7 +5570,7 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         }
     }
 
-    // Rescale the damage
+    // Rescale the damage.
     if( dam <= 0 ) {
         impact.clear();
         return;
@@ -5563,8 +5578,9 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
         impact.mult_damage( dam / static_cast<double>( initial_damage ) );
     }
 
-    // for now, shooting furniture or terrain protects any items.
-    if( !hit_items || hit_something ) {
+    // A single projectile cannot (at least for now) hit both an item and furniture/terrain. TODO: Overpenetration, ricochet, etc.
+    // Thrown items do not damage items in the tile, just terrain/furniture if applicable.
+    if( !hit_items || thrown_item || hit_something ) {
         return;
     }
 
@@ -5600,57 +5616,6 @@ void map::shoot( tripoint_bub_ms &p, const tripoint_bub_ms &source, projectile &
     }
 }
 
-bool map::hit_with_acid( const tripoint_bub_ms &p )
-{
-    if( passable( p ) ) {
-        return false;    // Didn't hit the tile!
-    }
-    const ter_id &t = ter( p );
-    if( t == ter_t_wall_glass || t == ter_t_wall_glass_alarm ||
-        t == ter_t_vat ) {
-        ter_set( p, ter_t_floor );
-    } else if( t == ter_t_door_c || t == ter_t_door_locked || t == ter_t_door_locked_peep ||
-               t == ter_t_door_locked_alarm ) {
-        if( one_in( 3 ) ) {
-            ter_set( p, ter_t_door_b );
-        }
-    } else if( t == ter_t_door_bar_c || t == ter_t_door_bar_o || t == ter_t_door_bar_locked ||
-               t == ter_t_bars ||
-               t == ter_t_reb_cage ) {
-        ter_set( p, ter_t_floor );
-        add_msg_if_player_sees( p, m_warning, _( "The metal bars melt!" ) );
-    } else if( t == ter_t_door_b ) {
-        if( one_in( 4 ) ) {
-            ter_set( p, ter_t_door_frame );
-        } else {
-            return false;
-        }
-    } else if( t == ter_t_window || t == ter_t_window_alarm || t == ter_t_window_no_curtains ) {
-        ter_set( p, ter_t_window_empty );
-    } else if( t == ter_t_wax ) {
-        ter_set( p, ter_t_floor_wax );
-    } else if( t == ter_t_gas_pump || t == ter_t_gas_pump_smashed ) {
-        return false;
-    } else if( t == ter_t_card_science || t == ter_t_card_military || t == ter_t_card_industrial ) {
-        ter_set( p, ter_t_card_reader_broken );
-    }
-    return true;
-}
-
-// returns true if terrain stops fire
-bool map::hit_with_fire( const tripoint_bub_ms &p )
-{
-    if( passable( p ) ) {
-        return false;    // Didn't hit the tile!
-    }
-
-    // non passable but flammable terrain, set it on fire
-    if( has_flag( ter_furn_flag::TFLAG_FLAMMABLE, p ) ||
-        has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ) {
-        add_field( p, fd_fire, rng( 1, 3 ) );
-    }
-    return true;
-}
 
 bool map::open_door( Creature const &u, const tripoint_bub_ms &p, const bool inside,
                      const bool check_only )

@@ -29,6 +29,11 @@
     "//": "Prevents a projectile from going through a tile with obstacles, such as chainlink fences or dressers. Hardcoded"
   },
   {
+    "id": "THROWN_ITEM",
+    "type": "ammo_effect",
+    "//": "Automatically applied to non-soft thrown items.  Ensures they can damage terrain or furniture (including overhead lights) but not items on the ground."
+  },
+  {
     "id": "BEANBAG",
     "type": "ammo_effect",
     "//": "Stuns the target. Hardcoded"
@@ -81,7 +86,7 @@
   {
     "id": "HEAVY_HIT",
     "type": "ammo_effect",
-    "//": "Automatically applied to any projectile, heavier than 500g, to increase it's noise (currently used only when projectile fall into water). Hardcoded"
+    "//": "Automatically applied to any projectile, heavier than 500g, to increase its noise (currently used only when projectile falls into water). Hardcoded"
   },
   {
     "id": "INCENDIARY",
