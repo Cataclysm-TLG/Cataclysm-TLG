@@ -1055,6 +1055,9 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         dealt_projectile_attack dp = dealt_projectile_attack();
         t.as_character()->on_hit( &here, this, bodypart_str_id::NULL_ID().id(), 0.0f, &dp );
     }
+    if( reach_attacking ) {
+        t.react_to_ranged( *this );
+    }
     if( drop_weapon && !cur_weap.is_null() && !cur_weap.has_flag( flag_INTEGRATED ) ) {
         map &here = get_map();
         item your_weapon = remove_weapon();
