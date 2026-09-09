@@ -532,7 +532,7 @@ class Creature : public viewer
         // Creatures temporarily detect unseen creatures when bumping into them.
         bool stumble_invis( const Creature &attacker, bool stumblemsg = true );
         // Use stumble_invis's system to try and find creatures throwing stuff at us from hiding.
-        bool react_to_ranged( const Creature &player );
+        bool react_to_ranged( const Creature &attacker );
         // Attack an empty location
         bool attack_air( const tripoint_bub_ms &p );
 
