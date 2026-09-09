@@ -1249,10 +1249,6 @@ class map
                           bool destroy = false, bool bash_floor = false, bool fire = false,
                           const vehicle *bashing_vehicle = nullptr, bool crystalline_only = false );
 
-        // Effects of attacks/items
-        bool hit_with_acid( const tripoint_bub_ms &p );
-        bool hit_with_fire( const tripoint_bub_ms &p );
-
         /**
          * Returns true if there is furniture for which filter returns true in a 1 tile radius of p.
          * Pass return_true<furn_t> to detect all adjacent furniture.

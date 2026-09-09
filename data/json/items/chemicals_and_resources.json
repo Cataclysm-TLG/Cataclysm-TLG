@@ -107,6 +107,7 @@
     "weight": "8 g",
     "ammo_type": "gravel",
     "damage": { "damage_type": "bash", "amount": 1 },
+    "effects": [ "NEVER_MISFIRES", "NON_FOULING", "NOGIB" ],
     "range": 4,
     "dispersion": 30,
     "loudness": 0,
