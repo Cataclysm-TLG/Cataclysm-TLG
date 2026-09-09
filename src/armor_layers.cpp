@@ -403,7 +403,7 @@ std::vector<std::string> clothing_flags_description( const item &worn_item, cons
     std::vector<std::string> description_stack;
     std::vector<std::string> current_description;
 
-    //Handle flag_FIT and flag_VARSIZE as a special case
+    // Handle flag_FIT and flag_VARSIZE as a special case.
     if( worn_item.has_flag( flag_FIT ) ) {
         current_description = foldstring( _( "It fits you well." ), width );
         description_stack.insert( description_stack.end(), current_description.begin(),
@@ -412,29 +412,6 @@ std::vector<std::string> clothing_flags_description( const item &worn_item, cons
         current_description = foldstring( _( "It could be refitted." ), width );
         description_stack.insert( description_stack.end(), current_description.begin(),
                                   current_description.end() );
-    }
-
-    //Handle all other flags:
-    const std::vector<std::pair<flag_id, std::string>> flag_descriptions = {
-        { flag_HOOD, translate_marker( "It has a hood." ) },
-        { flag_POCKETS, translate_marker( "It has pockets." ) },
-        { flag_SUN_GLASSES, translate_marker( "It keeps the sun out of your eyes." ) },
-        { flag_WATERPROOF, translate_marker( "It is waterproof." ) },
-        { flag_WATER_FRIENDLY, translate_marker( "It is water friendly." ) },
-        { flag_FANCY, translate_marker( "It looks fancy." ) },
-        { flag_SUPER_FANCY, translate_marker( "It looks really fancy." ) },
-        { flag_FLOTATION, translate_marker( "You will not drown today." ) },
-        { flag_OVERSIZE, translate_marker( "It is very bulky." ) },
-        { flag_SWIM_GOGGLES, translate_marker( "It helps you to see clearly underwater." ) },
-        { flag_SEMITANGIBLE, translate_marker( "It can occupy the same space as other things." ) }
-    };
-
-    for( const std::pair<flag_id, std::string> &flag_pair : flag_descriptions ) {
-        if( worn_item.has_flag( std::get<0>( flag_pair ) ) ) {
-            current_description = foldstring( _( std::get<1>( flag_pair ) ), width );
-            description_stack.insert( description_stack.end(), current_description.begin(),
-                                      current_description.end() );
-        }
     }
 
     return description_stack;

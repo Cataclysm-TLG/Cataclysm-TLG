@@ -1150,9 +1150,9 @@
       { "item": "bronze_cuirass", "prob": 40, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "bronze_cuirass", "prob": 15, "damage": [ -1, 5 ] },
       { "item": "armor_lorica", "prob": 5, "damage": [ -1, 5 ] },
-      { "item": "armor_lorica", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ],  "damage": [ -1, 5 ] },
+      { "item": "armor_lorica", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "armor_samurai", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "armor_samurai", "prob": 50, "custom-flags": [ "REPLICA_EQUIPMENT" ],  "damage": [ -1, 5 ] },
+      { "item": "armor_samurai", "prob": 50, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "gambeson", "prob": 50, "damage": [ -1, 5 ] },
       { "item": "chainmail_vest", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "chainmail_vest", "prob": 10, "damage": [ -1, 5 ] }
@@ -1173,7 +1173,7 @@
     "id": "museum_armor_feet",
     "items": [
       { "item": "platemail_sollerets", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "platemail_sollerets", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },      
+      { "item": "platemail_sollerets", "prob": 20, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
       { "item": "chainmail_chausses", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10, "damage": [ -1, 5 ] },
       { "item": "chainmail_chausses", "prob": 5, "damage": [ -1, 5 ] }
     ]

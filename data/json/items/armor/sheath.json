@@ -153,7 +153,7 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath knife", "holster_msg": "You sheath your %s" },
-    "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
+    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
     "armor": [
       {
         "coverage": 15,
@@ -161,13 +161,6 @@
         "encumbrance": 4,
         "volume_encumber_modifier": 0.25,
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
-      },
-      {
-        "coverage": 8,
-        "encumbrance": 4,
-        "volume_encumber_modifier": 0.25,
-        "covers": [ "gastropod_foot" ],
-        "specifically_covers": [ "gastropod_foot_upper" ]
       },
       {
         "encumbrance": 4,
@@ -213,7 +206,7 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath knife", "holster_msg": "You sheath your %s" },
-    "flags": [ "SKINTIGHT", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
+    "flags": [ "SKINTIGHT", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],

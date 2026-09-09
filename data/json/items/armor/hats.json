@@ -906,7 +906,7 @@
     "warmth": 20,
     "material_thickness": 0.3,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "OVERSIZE", "ALLOWS_NATURAL_ATTACKS" ],
+    "flags": [ "VARSIZE", "ALLOWS_NATURAL_ATTACKS" ],
     "armor": [
       {
         "encumbrance_modifiers": [ "NONE" ],
