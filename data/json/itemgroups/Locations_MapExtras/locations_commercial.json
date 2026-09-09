@@ -612,7 +612,7 @@
       [ "fedora", 5 ],
       [ "straw_hat", 5 ],
       [ "straw_fedora", 5 ],
-      [ "shark_suit", 1 ],  
+      [ "shark_suit", 1 ],
       { "item": "chainmail_hauberk", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "chainmail_coif", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "chainmail_vest", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },

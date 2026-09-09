@@ -128,7 +128,7 @@
     "color": "red",
     "warmth": 10,
     "material_thickness": 3,
-    "flags": [ "VARSIZE", "OVERSIZE", "STURDY", "OUTER" ],
+    "flags": [ "STURDY", "OUTER" ],
     "armor": [
       {
         "encumbrance": 40,

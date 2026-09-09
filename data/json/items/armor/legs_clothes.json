@@ -1803,7 +1803,7 @@
     "color": "yellow",
     "warmth": 3,
     "material_thickness": 1,
-    "flags": [ "VARSIZE", "OVERSIZE", "WATER_FRIENDLY" ],
+    "flags": [ "OVERSIZE", "WATER_FRIENDLY" ],
     "armor": [
       {
         "encumbrance": 4,
