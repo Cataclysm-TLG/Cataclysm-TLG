@@ -236,5 +236,5 @@
     "calories": 0,
     "fun": -8,
     "flags": [ "NO_TEMP", "NUTRIENT_OVERRIDE", "WATER_DISSOLVE" ]
-  },
+  }
 ]
