@@ -33,6 +33,8 @@
     "precip": "none",
     "rains": false,
     "sound_category": "cloudy",
+    "tint_color": [ 100, 0, 200 ],
+    "tint_strength": 0.5,
     "priority": 20,
     "condition": { "and": [ { "math": [ "weather('humidity') >= 40" ] }, { "math": [ "weather('pressure') < 1010" ] } ] }
   },
@@ -55,6 +57,8 @@
     "weather_animation": { "factor": 0.01, "color": "light_blue", "sym": "," },
     "sound_category": "drizzle",
     "required_weathers": [ "cloudy" ],
+    "tint_color": [ 0, 100, 200 ],
+    "tint_strength": 0.5,
     "priority": 30,
     "condition": { "or": [ { "math": [ "weather('humidity') >= 96" ] }, { "math": [ "weather('pressure') < 1003" ] } ] }
   },
@@ -77,6 +81,8 @@
     "weather_animation": { "factor": 0.01, "color": "light_blue", "sym": "." },
     "sound_category": "drizzle",
     "required_weathers": [ "light_drizzle" ],
+    "tint_color": [ 0, 100, 200 ],
+    "tint_strength": 0.5,
     "priority": 40,
     "condition": { "or": [ { "math": [ "weather('humidity') >= 97" ] }, { "math": [ "weather('pressure') < 1000" ] } ] }
   },
@@ -99,6 +105,8 @@
     "weather_animation": { "factor": 0.02, "color": "light_blue", "sym": "," },
     "sound_category": "rainy",
     "required_weathers": [ "light_drizzle", "drizzle" ],
+    "tint_color": [ 0, 100, 200 ],
+    "tint_strength": 0.5,
     "priority": 50,
     "condition": { "or": [ { "math": [ "weather('humidity') >= 98" ] }, { "math": [ "weather('pressure') < 993" ] } ] }
   },
@@ -121,6 +129,8 @@
     "weather_animation": { "factor": 0.04, "color": "blue", "sym": ";" },
     "sound_category": "rainstorm",
     "required_weathers": [ "rain" ],
+    "tint_color": [ 0, 100, 200 ],
+    "tint_strength": 0.5,
     "priority": 60,
     "condition": {
       "and": [ { "math": [ "weather('temperature') >= from_fahrenheit( 33 )" ] }, { "math": [ "weather('windpower') >= 15" ] } ]
@@ -145,6 +155,8 @@
     "weather_animation": { "factor": 0.02, "color": "light_blue", "sym": "." },
     "sound_category": "thunder",
     "required_weathers": [ "rain" ],
+    "tint_color": [ 0, 100, 200 ],
+    "tint_strength": 0.5,
     "priority": 70,
     "condition": { "math": [ "weather('pressure') < 996" ] }
   },
@@ -167,6 +179,8 @@
     "weather_animation": { "factor": 0.04, "color": "light_blue", "sym": "," },
     "sound_category": "thunder",
     "required_weathers": [ "thunder" ],
+    "tint_color": [ 0, 100, 200 ],
+    "tint_strength": 0.5,
     "priority": 80,
     "condition": { "math": [ "weather('pressure') < 990" ] }
   },
@@ -189,6 +203,8 @@
     "weather_animation": { "factor": 0.01, "color": "white", "sym": "." },
     "sound_category": "flurries",
     "required_weathers": [ "drizzle" ],
+    "tint_color": [ 225, 225, 255 ],
+    "tint_strength": 0.5,
     "priority": 90,
     "condition": { "math": [ "weather('temperature') < from_fahrenheit( 33 )" ] }
   },
@@ -211,6 +227,8 @@
     "weather_animation": { "factor": 0.02, "color": "white", "sym": "," },
     "sound_category": "snow",
     "required_weathers": [ "rain", "thunder", "lightning" ],
+    "tint_color": [ 225, 225, 255 ],
+    "tint_strength": 0.5,
     "priority": 100,
     "condition": { "math": [ "weather('temperature') < from_fahrenheit( 33 )" ] }
   },
@@ -233,6 +251,8 @@
     "weather_animation": { "factor": 0.04, "color": "white", "sym": "*" },
     "sound_category": "snowstorm",
     "required_weathers": [ "thunder", "lightning" ],
+    "tint_color": [ 225, 225, 255 ],
+    "tint_strength": 0.5,
     "priority": 110,
     "condition": {
       "and": [ { "math": [ "weather('temperature') < from_fahrenheit( 33 )" ] }, { "math": [ "weather('windpower') >= 15" ] } ]
@@ -258,6 +278,8 @@
     "tiles_animation": "weather_fallout",
     "weather_animation": { "factor": 0.01, "color": "red", "sym": "*" },
     "required_weathers": [ "clear", "sunny", "fog", "mist", "cloudy" ],
+    "tint_color": [ 200, 50, 0 ],
+    "tint_strength": 0.5,
     "sound_category": "snow",
     "priority": 120,
     "condition": { "and": [ { "or": [ { "math": [ "cause_fallout == 1" ] }, { "math": [ "cause_fallout_always == 1" ] } ] } ] }
@@ -281,6 +303,8 @@
     "priority": 15,
     "required_weathers": [ "clear", "sunny", "fog" ],
     "tiles_animation": "weather_mist",
+    "tint_color": [ 0, 0, 100 ],
+    "tint_strength": 0.1,
     "weather_animation": { "factor": 1.0, "color": "white", "sym": " ", "static_overlay": true },
     "condition": {
       "and": [
@@ -310,6 +334,8 @@
     "priority": 15,
     "required_weathers": [ "clear", "sunny", "mist" ],
     "tiles_animation": "weather_fog",
+    "tint_color": [ 0, 0, 100 ],
+    "tint_strength": 0.3,
     "weather_animation": { "factor": 1.0, "color": "white", "sym": " ", "static_overlay": true },
     "condition": {
       "and": [
