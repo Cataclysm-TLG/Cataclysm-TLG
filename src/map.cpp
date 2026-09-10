@@ -6137,7 +6137,7 @@ std::pair<item *, tripoint_bub_ms> map::_add_item_or_charges( const tripoint_bub
 
     std::optional<std::pair<item *, tripoint_bub_ms>> first_added;
     int copies_to_add_here = how_many_copies_fit( pos );
-    // force is used by mapgen to place items in SEALED spots intentionally.
+    // Force is used by mapgen to place items in SEALED spots intentionally.
     if( ( ( !has_flag( ter_furn_flag::TFLAG_NOITEM, pos ) &&
             ( !has_flag( ter_furn_flag::TFLAG_SEALED, pos ) || force ) ) ||
           ( has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) && obj.made_of( phase_id::LIQUID ) ) ) &&
