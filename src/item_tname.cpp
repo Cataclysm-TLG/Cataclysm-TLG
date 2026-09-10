@@ -376,9 +376,7 @@ std::string food_status( item const &it, unsigned int /* quantity */,
 {
     std::string tagtext;
     if( it.goes_bad() || it.is_food() ) {
-        if( it.has_own_flag( flag_DIRTY ) ) {
-            tagtext += _( " (dirty)" );
-        } else if( it.rotten() ) {
+        if( it.rotten() ) {
             tagtext += _( " (rotten)" );
         } else if( it.has_flag( flag_MUSHY ) ) {
             tagtext += _( " (mushy)" );

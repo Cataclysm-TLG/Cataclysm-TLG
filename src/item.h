@@ -1184,9 +1184,12 @@ class item : public visitable
             return goes_bad() && get_relative_rot() < 0.1;
         }
 
-        /** an item is about to become rotten when shelf life has nearly elapsed */
+        /** An item is about to become rotten when shelf life has nearly elapsed. */
         bool is_going_bad() const {
-            return goes_bad() && get_shelf_life() - rot < 12_hours;
+            if( !goes_bad() ) {
+                return false;
+            }
+            return get_relative_rot() >= 0.5 && get_shelf_life() - rot < 12_hours;
         }
 
         /** returns true if item is now rotten after all shelf life has elapsed */

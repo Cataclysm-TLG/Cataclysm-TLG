@@ -2173,8 +2173,8 @@ void item_pocket::leak( map &here, Character *carrier, const tripoint_bub_ms &po
                 here.add_item_or_charges( pos, *iter );
                 if( carrier != nullptr ) {
                     carrier->invalidate_weight_carried_cache();
-                    carrier->add_msg_if_player( _( "Liquid leaked out from the %s and dripped onto the ground!" ),
-                                                this->get_name() );
+                    carrier->add_msg_if_player( _( "%S leaks from the %s." ),
+                                                iter->tname(), this->get_name() );
                 }
             }
             iter = contents.erase( iter );

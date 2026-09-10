@@ -1589,17 +1589,10 @@ bool _stacks_rot( item const &lhs, item const &rhs, bool combine_liquid )
            lhs.rotten() == rhs.rotten();
 }
 
-bool _stacks_mushy_dirty( item const &lhs, item const &rhs )
-{
-    return lhs.has_flag( flag_MUSHY ) == rhs.has_flag( flag_MUSHY ) &&
-           lhs.has_own_flag( flag_DIRTY ) == rhs.has_own_flag( flag_DIRTY );
-}
-
 bool _stacks_food_status( item const &lhs, item const &rhs )
 {
     return ( lhs.is_fresh() == rhs.is_fresh() || lhs.is_going_bad() == rhs.is_going_bad() ||
-             lhs.rotten() == rhs.rotten() ) &&
-           _stacks_mushy_dirty( lhs, rhs );
+             lhs.rotten() == rhs.rotten() );
 }
 
 bool _stacks_food_traits( item const &lhs, item const &rhs )
@@ -1782,7 +1775,7 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     if( this_goes_bad && that_goes_bad ) {
         if( same_type ) {
             bits.set( tname::segments::FOOD_STATUS,
-                      _stacks_rot( *this, rhs, combine_liquid ) && _stacks_mushy_dirty( *this, rhs ) );
+                      _stacks_rot( *this, rhs, combine_liquid ) );
 
         } else {
             bits.set( tname::segments::FOOD_STATUS, _stacks_food_status( *this, rhs ) );
@@ -6196,7 +6189,7 @@ nc_color item::color_in_inventory( const Character *const ch ) const
     } else if( is_armor() && player_character.has_trait( trait_WOOLALLERGY ) &&
                ( made_of( material_wool ) || has_own_flag( flag_wooled ) ) ) {
         ret = c_red;
-    } else if( is_filthy() || has_own_flag( flag_DIRTY ) ) {
+    } else if( is_filthy() ) {
         ret = c_brown;
     } else if( is_relic() && !has_flag( flag_MUNDANE ) ) {
         ret = c_pink;
@@ -15777,15 +15770,13 @@ bool item::on_drop( const tripoint_bub_ms &pos )
 
 bool item::on_drop( const tripoint_bub_ms &pos, map &m )
 {
-    // dropping liquids, even currently frozen ones, on the ground makes them
-    // dirty
-    if( made_of_from_type( phase_id::LIQUID ) && !m.has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) &&
-        !has_own_flag( flag_DIRTY ) ) {
-        set_flag( flag_DIRTY );
+    // Spilled liquids aren't recoverable, so just remove them from the game.
+    // TODO: Maybe place a field here for certain kinds of liquid (blood, fuel).
+    if( made_of_from_type( phase_id::LIQUID ) &&
+        !m.has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) ) {
+        return true;
     }
-
     avatar &player_character = get_avatar();
-
     return type->drop_action && type->drop_action.call( &player_character, *this, &m, pos );
 }
 
