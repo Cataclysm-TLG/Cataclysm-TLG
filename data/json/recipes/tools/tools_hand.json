@@ -84,16 +84,10 @@
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
+    "skill_used": "survival",
     "difficulty": 4,
-    "time": "2 h",
+    "time": "1 m",
     "autolearn": true,
-    "using": [ [ "blacksmithing_basic", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_toolsmithing" }
-    ],
     "components": [ [ [ "steel_fragment", 1 ] ], [ [ "flint", 1 ] ] ]
   },
   {
