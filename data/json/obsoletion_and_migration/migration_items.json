@@ -4265,5 +4265,60 @@
     "type": "MIGRATION",
     "id": "UPS_ON",
     "replace": "UPS_off"
+  },
+  {
+    "id": "junk_platemail_suit",
+    "type": "MIGRATION",
+    "replace": "platemail_suit"
+  },
+  {
+    "id": "chainmail_junk_sleeves",
+    "type": "MIGRATION",
+    "replace": "chainmail_sleeves"
+  },
+  {
+    "id": "chainmail_junk_sleeves_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_sleeves_loose"
+  },
+  {
+    "id": "chainmail_junk_gloves",
+    "type": "MIGRATION",
+    "replace": "chainmail_gloves"
+  },
+  {
+    "id": "chainmail_junk_coif",
+    "type": "MIGRATION",
+    "replace": "chainmail_coif"
+  },
+  {
+    "id": "chainmail_junk_chausses",
+    "type": "MIGRATION",
+    "replace": "chainmail_chausses"
+  },
+  {
+    "id": "chainmail_junk_aventail",
+    "type": "MIGRATION",
+    "replace": "chainmail_aventail"
+  },
+  {
+    "id": "chainmail_junk_hauberk",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk"
+  },
+  {
+    "id": "chainmail_junk_hauberk_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_loose"
+  },
+  {
+    "id": "chainmail_junk_vest",
+    "type": "MIGRATION",
+    "replace": "chainmail_vest"
+  },
+  {
+    "id": "chainmail_junk_vest_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_vest_loose"
   }
 ]

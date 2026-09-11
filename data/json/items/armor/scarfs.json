@@ -559,14 +559,5 @@
     "name": { "str": "XS plate aventail" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE" ] }
-  },
-  {
-    "id": "chainmail_junk_aventail",
-    "copy-from": "chainmail_aventail",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "chainmail aventail" },
-    "description": "Poor-quality armor made from a sheet of interlocking steel rings which secures around the neck."
   }
 ]

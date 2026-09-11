@@ -852,22 +852,6 @@
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
-    "id": "chainmail_junk_sleeves",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_sleeves",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "description": "Protective sleeves made of interlocking links of low-quality steel wire.  The fit can be adjusted to allow them to serve as outerwear.",
-    "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
-    "use_action": {
-      "type": "transform",
-      "msg": "You adjust your mail for a looser fit.",
-      "target": "chainmail_junk_sleeves_loose",
-      "menu_text": "Loosen"
-    },
-    "delete": { "flags": [ "STURDY" ] }
-  },
-  {
     "id": "chainmail_sleeves_loose",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -877,7 +861,7 @@
     "use_action": {
       "type": "transform",
       "msg": "You adjust your mail for a closer fit.",
-      "target": "chainmail_junk_sleeves",
+      "target": "chainmail_sleeves",
       "menu_text": "Tighten"
     },
     "delete": { "flags": [ "NORMAL" ] },
@@ -910,21 +894,6 @@
       "type": "transform",
       "msg": "You adjust your mail for a closer fit.",
       "target": "chainmail_sleeves_xl",
-      "menu_text": "Tighten"
-    },
-    "delete": { "flags": [ "NORMAL" ] },
-    "extend": { "flags": [ "OUTER" ] }
-  },
-  {
-    "id": "chainmail_junk_sleeves_loose",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_junk_sleeves",
-    "name": { "str": "chainmail sleeves", "str_pl": "pairs of chainmail sleeves" },
-    "use_action": {
-      "type": "transform",
-      "msg": "You adjust your mail for a closer fit.",
-      "target": "chainmail_junk_sleeves",
       "menu_text": "Tighten"
     },
     "delete": { "flags": [ "NORMAL" ] },

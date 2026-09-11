@@ -304,16 +304,6 @@
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
-    "id": "chainmail_junk_chausses",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_chausses",
-    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
-    "description": "Protective leggings made of interlocking links of low-quality steel wire, covering from the thighs to the tops of the feet.",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "delete": { "flags": [ "STURDY" ] }
-  },
-  {
     "id": "chainmail_skirt",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
