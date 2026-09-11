@@ -405,6 +405,21 @@
     "looks_like": "fd_sap"
   },
   {
+    "id": "fd_fuel",
+    "type": "field_type",
+    "substance_name": "fuel",
+    "mopsafe": true,
+    "intensity_levels": [ { "name": "fuel", "sym": "#", "color": "dark_gray" } ],
+    "description_affix": "covered_in",
+    "is_splattering": true,
+    "priority": 2,
+    "half_life": "30 minutes",
+    "phase": "liquid",
+    "underwater_age_speedup": "4 seconds",
+    "display_field": true,
+    "looks_like": "fd_sap"
+  },
+  {
     "id": "fd_fire",
     "type": "field_type",
     "substance_name": "flames",
@@ -537,20 +552,6 @@
     "percent_spread": 90,
     "dirty_transparency_cache": true,
     "immunity_data": { "body_part_env_resistance": [ [ "mouth", 8 ] ] }
-  },
-  {
-    "id": "fd_rubble",
-    "type": "field_type",
-    "substance_name": "rubble",
-    "legacy_enum_id": 11,
-    "intensity_levels": [ { "name": "legacy rubble", "sym": "#", "color": "dark_gray" } ],
-    "description_affix": "covered_in",
-    "half_life": "1 turns",
-    "phase": "solid",
-    "display_items": false,
-    "display_field": true,
-    "looks_like": "f_rubble",
-    "legacy_make_rubble": true
   },
   {
     "id": "fd_biolum",
