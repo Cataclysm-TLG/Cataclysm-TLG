@@ -2158,27 +2158,6 @@ bool monster::move_to( const tripoint_bub_ms &p, bool force, bool step_on_critte
         }
     }
 
-    // Don't leave any kind of liquids on water tiles
-    if( !here.has_flag( ter_furn_flag::TFLAG_SWIMMABLE, destination ) ) {
-        if( has_flag( mon_flag_DRIPS_NAPALM ) ) {
-            if( one_in( 10 ) ) {
-                // if it has more napalm, drop some and reduce ammo in tank
-                if( ammo[itype_pressurized_tank] > 0 ) {
-                    here.add_item_or_charges( pos_bub(), item( itype_napalm, calendar::turn, 50 ) );
-                    ammo[itype_pressurized_tank] -= 50;
-                } else {
-                    // TODO: remove mon_flag_DRIPS_NAPALM flag since no more napalm in tank
-                    // Not possible for now since flag check is done on type, not individual monster
-                }
-            }
-        }
-        if( has_flag( mon_flag_DRIPS_GASOLINE ) ) {
-            if( one_in( 5 ) ) {
-                // TODO: use same idea that limits napalm dripping
-                here.add_item_or_charges( pos_bub(), item( itype_gasoline ) );
-            }
-        }
-    }
     return true;
 }
 

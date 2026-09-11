@@ -490,16 +490,6 @@
     "//": "This monster won't follow the player automatically when tamed"
   },
   {
-    "id": "DRIPS_NAPALM",
-    "type": "monster_flag",
-    "//": "This monster occasionally drips napalm on move"
-  },
-  {
-    "id": "DRIPS_GASOLINE",
-    "type": "monster_flag",
-    "//": "This monster occasionally drips gasoline on move"
-  },
-  {
     "id": "ELECTRIC_FIELD",
     "type": "monster_flag",
     "//": "This monster is surrounded by an electrical field that ignites flammable liquids near it"
