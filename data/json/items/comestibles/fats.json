@@ -6,7 +6,7 @@
     "name": { "str_sp": "vegetable cooking oil" },
     "weight": "15 g",
     "color": "yellow",
-    "container": "jug_plastic",
+    "container": "bottle_plastic",
     "sealed": false,
     "comestible_type": "DRINK",
     "symbol": "~",

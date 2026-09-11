@@ -394,15 +394,23 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
         }
     }
 
+    const bool was_replica = it.has_flag( flag_REPLICA_EQUIPMENT );
+
     if( transform.target_group.is_empty() &&
         it.count_by_charges() != transform.target->count_by_charges() &&
         it.count() > 1 ) {
         item take_one = it.split( 1 );
         transform.transform( p, take_one );
+        if( was_replica ) {
+            take_one.set_flag( flag_REPLICA_EQUIPMENT );
+        }
         // TODO: Change to map aware operation when available
         p->i_add_or_drop( take_one );
     } else {
         transform.transform( p, it, true );
+        if( was_replica ) {
+            it.set_flag( flag_REPLICA_EQUIPMENT );
+        }
     }
 
     if( set_timer ) {
