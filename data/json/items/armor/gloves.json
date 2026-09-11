@@ -89,15 +89,6 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-    "id": "chainmail_junk_gloves",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_gloves",
-    "name": { "str": "chainmail gloves", "str_pl": "pairs of chainmail gloves" },
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "description": "A pair of gloves made of interlocking rings of low-quality steel wire."
-  },
-  {
     "id": "fire_gauntlets",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],

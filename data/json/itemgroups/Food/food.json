@@ -267,11 +267,7 @@
       { "group": "pepper_various", "prob": 20 },
       { "group": "seasoning_salt_various", "prob": 25 },
       { "item": "vinegar", "prob": 15 },
-      { "item": "shortening_vegetable", "prob": 3 },
-      { "item": "cooking_oil_coconut", "prob": 3 },
-      { "item": "tallow", "prob": 2 },
-      { "item": "cooking_oil", "prob": 30 },
-      { "item": "ghee", "prob": 1, "charges": [ 1, 30 ], "container-item": "jar_glass_sealed", "sealed": false },
+      { "group": "oil_shortening_unused", "prob": 30 },
       { "group": "vegetable_pickled_jar_glass_sealed_2", "prob": 8 },
       { "group": "sauerkraut_jar_glass_sealed_2", "prob": 5 },
       { "item": "sports_drink", "prob": 10 },
@@ -378,6 +374,42 @@
   },
   {
     "type": "item_group",
+    "id": "oil_shortening_used",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "cooking_oil", "prob": 40, "charges": [ 1, 16 ], "container-item": "bottle_plastic", "sealed": false },
+      { "item": "tallow", "prob": 2, "count": [ 1, 16 ], "container-item": "jar_glass_sealed", "sealed": false },
+      {
+        "item": "cooking_oil_coconut",
+        "prob": 2,
+        "count": [ 1, 16 ],
+        "container-item": "jar_glass_sealed",
+        "sealed": false
+      },
+      {
+        "item": "shortening_vegetable",
+        "prob": 2,
+        "count": [ 1, 16 ],
+        "container-item": "jar_glass_sealed",
+        "sealed": false
+      },
+      { "item": "ghee", "prob": 3, "count": [ 1, 16 ], "container-item": "jar_glass_sealed", "sealed": false }
+    ]
+  },
+  {
+    "type": "item_group",
+    "id": "oil_shortening_unused",
+    "subtype": "distribution",
+    "entries": [
+      { "item": "cooking_oil", "prob": 40, "charges": 16, "container-item": "bottle_plastic", "sealed": true },
+      { "item": "tallow", "prob": 2, "count": 16, "container-item": "jar_glass_sealed", "sealed": true },
+      { "item": "cooking_oil_coconut", "prob": 2, "count": 16, "container-item": "jar_glass_sealed", "sealed": true },
+      { "item": "shortening_vegetable", "prob": 2, "count": 16, "container-item": "jar_glass_sealed", "sealed": true },
+      { "item": "ghee", "prob": 3, "count": 16, "container-item": "jar_glass_sealed", "sealed": true }
+    ]
+  },
+  {
+    "type": "item_group",
     "id": "pantry_liquids",
     "ammo": 75,
     "magazine": 100,
@@ -385,13 +417,10 @@
     "entries": [
       { "item": "syrup", "prob": 20 },
       { "item": "molasses", "prob": 15 },
-      { "item": "cooking_oil", "prob": 40 },
-      { "item": "shortening_vegetable", "prob": 5 },
-      { "item": "cooking_oil_coconut", "prob": 3 },
-      { "item": "ghee", "prob": 1, "charges": [ 1, 30 ], "container-item": "jar_glass_sealed", "sealed": false },
-      { "item": "ghee", "prob": 1, "charges": 30, "container-item": "jar_glass_sealed", "sealed": true },
-      { "item": "honey_bottled", "prob": 15 },
-      { "group": "honey_glassed_jar_glass_sealed_5", "prob": 5 },
+      { "group": "oil_shortening_used", "prob": 40 },
+      { "group": "oil_shortening_unused", "prob": 5 },
+      { "item": "honey_bottled", "prob": 10 },
+      { "group": "honey_glassed_jar_glass_sealed_5", "prob": 2 },
       { "item": "sauce_red", "prob": 10, "charges": 8, "container-item": "jar_glass_sealed" },
       { "item": "jar_glass_sealed", "prob": 20 },
       { "item": "jar_3l_glass_sealed", "prob": 5 },

@@ -549,7 +549,13 @@
       [ "boxer_shorts", 30 ],
       [ "mag_porn", 20 ],
       [ "briefs", 30 ],
-      { "item": "cooking_oil", "prob": 20, "container-item": "bottle_plastic", "sealed": false },
+      {
+        "item": "cooking_oil_coconut",
+        "prob": 20,
+        "count": [ 1, 16 ],
+        "container-item": "jar_glass_sealed",
+        "sealed": false
+      },
       [ "bikini_top_leather", 25 ],
       [ "skirt_leather", 25 ],
       [ "honey_bottled", 20 ],

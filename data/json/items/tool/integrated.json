@@ -115,7 +115,6 @@
         "item_action_type": "repair_metal",
         "materials": [
           "iron",
-          "budget_steel",
           "steel",
           "steel_chain",
           "aluminum",

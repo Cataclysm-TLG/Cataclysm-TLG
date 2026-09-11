@@ -2631,8 +2631,8 @@
       [ "tire_cuirass", 12 ],
       { "item": "chainmail_vest_loose", "prob": 1 },
       { "item": "chainmail_vest", "prob": 1 },
-      { "item": "chainmail_junk_vest_loose", "prob": 1 },
-      { "item": "chainmail_junk_vest", "prob": 1 }
+      { "item": "chainmail_vest", "prob": 1, "custom-flags": [ "REPLICA_EQUIPMENT" ] },
+      { "item": "chainmail_vest_loose", "prob": 1, "custom-flags": [ "REPLICA_EQUIPMENT" ] }
     ]
   },
   {

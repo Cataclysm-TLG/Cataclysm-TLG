@@ -344,7 +344,8 @@
       { "group": "hat_hard_flashlight", "prob": 9 },
       [ "firehelmet", 10 ],
       [ "headgear", 4 ],
-      [ "chainmail_junk_coif", 1 ],
+      { "item": "chainmail_coif", "prob": 1, "custom-flags": [ "REPLICA_EQUIPMENT" ] },
+      { "item": "chainmail_coif", "prob": 1 },
       [ "pickelhaube", 1 ]
     ]
   },
@@ -384,7 +385,8 @@
       [ "armor_riot_arm", 8 ],
       [ "sheet_metal_bracers", 8 ],
       [ "elbow_pads", 20 ],
-      [ "chainmail_junk_sleeves", 1 ]
+      { "item": "chainmail_sleeves", "prob": 1, "custom-flags": [ "REPLICA_EQUIPMENT" ] },
+      { "item": "chainmail_sleeves", "prob": 1 }
     ]
   },
   {
@@ -398,8 +400,8 @@
       [ "stab_vest", 8 ],
       [ "soft_3a_vest", 5 ],
       [ "ballistic_vest_concealable", 10 ],
-      [ "chainmail_junk_vest", 1 ],
-      [ "chainmail_vest", 1 ],
+      { "item": "chainmail_vest", "prob": 1, "custom-flags": [ "REPLICA_EQUIPMENT" ] },
+      { "item": "chainmail_vest", "prob": 1 },
       [ "chestguard_hard", 10 ],
       [ "armor_riot_torso", 10 ],
       [ "carpet_cuirass", 7 ],
@@ -466,7 +468,8 @@
       [ "gloves_work", 20 ],
       [ "gloves_fur", 8 ],
       [ "gloves_wool", 8 ],
-      [ "chainmail_junk_gloves", 1 ],
+      { "item": "chainmail_gloves", "prob": 1, "custom-flags": [ "REPLICA_EQUIPMENT" ] },
+      { "item": "chainmail_gloves", "prob": 1 },
       [ "gloves_winter", 10 ],
       [ "gloves_rubber", 10 ],
       [ "gloves_leather", 25 ],

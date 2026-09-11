@@ -49,7 +49,7 @@
     "id": "commercial_oil_vinegar",
     "type": "item_group",
     "subtype": "distribution",
-    "items": [ [ "cooking_oil", 1 ], [ "vinegar", 1 ] ]
+    "items": [ { "group": "oil_shortening_unused", "prob": 1 }, [ "vinegar", 1 ] ]
   },
   {
     "id": "SUS_shelf_commercial_oil_vinegar",

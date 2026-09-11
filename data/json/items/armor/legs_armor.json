@@ -304,16 +304,6 @@
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
-    "id": "chainmail_junk_chausses",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_chausses",
-    "name": { "str": "chainmail chausses", "str_pl": "pairs of chainmail chausses" },
-    "description": "Protective leggings made of interlocking links of low-quality steel wire, covering from the thighs to the tops of the feet.",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "delete": { "flags": [ "STURDY" ] }
-  },
-  {
     "id": "chainmail_skirt",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -434,21 +424,6 @@
     "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
   },
   {
-    "id": "chainmail_skirt_budget",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_skirt",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "name": { "str": "chainmail skirt" },
-    "use_action": {
-      "type": "transform",
-      "msg": "You adjust your mail for a looser fit.",
-      "target": "chainmail_skirt_budget_loose",
-      "menu_text": "Loosen"
-    },
-    "delete": { "flags": [ "STURDY" ] }
-  },
-  {
     "id": "chainmail_skirt_loose",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -491,21 +466,6 @@
       "type": "transform",
       "msg": "You adjust your mail for a closer fit.",
       "target": "chainmail_skirt_xl",
-      "menu_text": "Tighten"
-    },
-    "delete": { "flags": [ "NORMAL" ] },
-    "extend": { "flags": [ "OUTER" ] }
-  },
-  {
-    "id": "chainmail_skirt_budget_loose",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_skirt_budget",
-    "name": { "str": "chainmail skirt (loose)" },
-    "use_action": {
-      "type": "transform",
-      "msg": "You adjust your mail for a closer fit.",
-      "target": "chainmail_skirt_budget",
       "menu_text": "Tighten"
     },
     "delete": { "flags": [ "NORMAL" ] },

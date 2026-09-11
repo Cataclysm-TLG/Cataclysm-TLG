@@ -638,7 +638,7 @@
     "volume": "2500 ml",
     "price": "30 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ "cotton", "budget_steel" ],
+    "material": [ "cotton", "steel_chain" ],
     "symbol": "[",
     "color": "light_gray",
     "warmth": 10,
@@ -1086,34 +1086,5 @@
       "menu_text": "Tighten"
     },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
-    "id": "chainmail_junk_vest",
-    "copy-from": "chainmail_vest",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "chainmail vest" },
-    "description": "A vest made of countless links of low-quality steel chain.  It's lightweight enough to fit under outerwear, and can be adjusted for a closer fit.",
-    "use_action": {
-      "type": "transform",
-      "msg": "You adjust your mail for a looser fit.",
-      "target": "chainmail_junk_vest_loose",
-      "menu_text": "Loosen"
-    },
-    "delete": { "flags": [ "STURDY" ] }
-  },
-  {
-    "id": "chainmail_junk_vest_loose",
-    "copy-from": "chainmail_junk_vest",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "chainmail vest (loose)" },
-    "use_action": {
-      "type": "transform",
-      "msg": "You adjust your mail for a closer fit.",
-      "target": "chainmail_junk_vest",
-      "menu_text": "Tighten"
-    }
   }
 ]

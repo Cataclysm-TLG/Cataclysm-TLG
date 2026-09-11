@@ -31,7 +31,7 @@
     "subtype": "distribution",
     "entries": [
       { "group": "costume_accessories", "prob": 20 },
-      { "group": "costume_cloacks", "prob": 10 },
+      { "group": "costume_cloaks", "prob": 10 },
       { "group": "costume_coats", "prob": 10 },
       { "group": "costume_dresses", "prob": 10 },
       { "group": "costume_gloves", "prob": 5 },
@@ -69,7 +69,7 @@
   },
   {
     "type": "item_group",
-    "id": "costume_cloacks",
+    "id": "costume_cloaks",
     "//": "cloaks for costumes, cosplay and costume parties",
     "subtype": "distribution",
     "entries": [
@@ -79,6 +79,7 @@
       { "item": "cloak_leather", "prob": 10 },
       { "item": "cloak_wool", "prob": 10 },
       { "item": "pride_flag", "prob": 2 },
+      { "item": "protest_flag", "prob": 1 },
       { "item": "national_flag", "prob": 1 },
       { "item": "state_flag", "prob": 1 }
     ]

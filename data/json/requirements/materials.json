@@ -399,15 +399,7 @@
     "id": "mixed_steel",
     "type": "requirement",
     "//": "Materials for use in scrap armor",
-    "components": [
-      [
-        [ "scrap", 50 ],
-        [ "budget_steel_fragment", 4 ],
-        [ "budget_steel_chunk", 1 ],
-        [ "steel_fragment", 4 ],
-        [ "steel_chunk", 1 ]
-      ]
-    ]
+    "components": [ [ [ "scrap", 50 ], [ "steel_fragment", 4 ], [ "steel_chunk", 1 ] ] ]
   },
   {
     "id": "steel_tiny",

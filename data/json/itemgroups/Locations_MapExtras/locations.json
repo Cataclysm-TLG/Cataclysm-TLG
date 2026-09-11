@@ -1209,8 +1209,9 @@
       { "item": "platemail_arm_guards", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "platemail_gauntlets", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "chainmail_sleeves", "prob": 10, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_sleeves", "prob": 30, "damage": [ -1, 5 ] },
-      { "item": "chainmail_junk_gloves", "prob": 30, "damage": [ -1, 5 ] }
+      { "item": "chainmail_sleeves", "prob": 30, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "chainmail_gloves", "prob": 30, "custom-flags": [ "REPLICA_EQUIPMENT" ], "damage": [ -1, 5 ] },
+      { "item": "chainmail_gloves", "prob": 30, "damage": [ -1, 5 ] }
     ]
   },
   {
@@ -1376,7 +1377,8 @@
     "id": "museum_security",
     "items": [
       [ "television", 90 ],
-      [ "tonfa", 20 ],
+      [ "tonfa", 8 ],
+      [ "baton", 12 ],
       { "item": "tazer", "prob": 20, "charges": [ 0, 500 ] },
       { "item": "flashlight", "prob": 40, "charges": [ 0, 300 ] },
       { "item": "two_way_radio", "prob": 10, "charges": [ 0, 100 ] },
