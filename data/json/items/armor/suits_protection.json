@@ -202,36 +202,6 @@
     "flags": [ "UNDERSIZE", "PREFIX_XS" ]
   },
   {
-    "id": "junk_platemail_suit",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "full plate armor" },
-    "description": "A suit of medieval plate armor, covering everything but the head and neck.  It's made of low-quality steel that doesn't look like it'll hold together long.  This would likely be uncomfortable without something soft underneath.",
-    "weight": "11 kg",
-    "volume": "17500 ml",
-    "price": "600 USD",
-    "price_postapoc": "120 USD",
-    "to_hit": -5,
-    "material": [ "budget_steel" ],
-    "looks_like": "platemail_suit",
-    "symbol": "[",
-    "color": "light_gray",
-    "warmth": 25,
-    "longest_side": "60 cm",
-    "material_thickness": 1.6,
-    "flags": [ "VARSIZE", "OUTER", "ALLOWS_TAIL" ],
-    "armor": [
-      {
-        "encumbrance": 34,
-        "coverage": 95,
-        "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "rigid_layer_only": true
-      }
-    ],
-    "melee_damage": { "bash": 5 }
-  },
-  {
     "id": "platemail_suit",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],

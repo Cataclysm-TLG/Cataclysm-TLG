@@ -4320,5 +4320,35 @@
     "id": "chainmail_junk_vest_loose",
     "type": "MIGRATION",
     "replace": "chainmail_vest_loose"
+  },
+  {
+    "id": "chainmail_skirt_budget",
+    "type": "MIGRATION",
+    "replace": "chainmail_skirt"
+  },
+  {
+    "id": "chainmail_skirt_budget_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_skirt_loose"
+  },
+  {
+    "id": "5l_budget_steel",
+    "type": "MIGRATION",
+    "replace": "5l_steel"
+  },
+  {
+    "id": "10l_budget_steel",
+    "type": "MIGRATION",
+    "replace": "10l_steel"
+  },
+  {
+    "id": "budget_steel_fragment",
+    "type": "MIGRATION",
+    "replace": "steel_fragment"
+  },
+  {
+    "id": "budget_steel_chunk",
+    "type": "MIGRATION",
+    "replace": "steel_chunk"
   }
 ]

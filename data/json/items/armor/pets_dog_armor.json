@@ -57,7 +57,7 @@
     "description": "Chainmail armor, for dogs!  You could put this on a friendly animal.",
     "price": "250 USD",
     "price_postapoc": "35 USD",
-    "material": [ "iron", "budget_steel" ],
+    "material": [ "steel_chain" ],
     "weight": "6434 g",
     "material_thickness": 0.5
   },

@@ -1305,19 +1305,7 @@
       {
         "type": "repair_item",
         "item_action_type": "repair_metal",
-        "materials": [
-          "iron",
-          "budget_steel",
-          "steel",
-          "steel_chain",
-          "aluminum",
-          "copper",
-          "bronze",
-          "silver",
-          "gold",
-          "platinum",
-          "superalloy"
-        ],
+        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum", "superalloy" ],
         "skill": "fabrication",
         "tool_quality": 10,
         "cost_scaling": 0.1,
