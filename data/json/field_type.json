@@ -405,6 +405,20 @@
     "looks_like": "fd_sap"
   },
   {
+    "id": "fd_fuel",
+    "type": "field_type",
+    "substance_name": "fuel",
+    "mopsafe": true,
+    "description_affix": "covered_in",
+    "is_splattering": true,
+    "priority": 2,
+    "half_life": "30 minutes",
+    "phase": "liquid",
+    "underwater_age_speedup": "4 seconds",
+    "display_field": true,
+    "looks_like": "fd_sap"
+  },
+  {
     "id": "fd_fire",
     "type": "field_type",
     "substance_name": "flames",

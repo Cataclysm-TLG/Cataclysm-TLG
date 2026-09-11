@@ -3124,7 +3124,10 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
         const time_duration base_age = ( fd_fire->half_life / 2 ) - target_duration;
         for( const tripoint_bub_ms &pt : here.points_in_radius( pos, 2, 0 ) ) {
             if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 2 ) ) {
-                here.add_field( pt, fd_fire, rng( 1, 2 ), base_age );
+                here.add_field( pt, fd_fuel );
+            }
+            if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 2 ) ) {
+                here.add_field( pt, fd_fire, one_in( 3 ) ? 2 : 1, base_age );
             }
         }
         avatar &player = get_avatar();

@@ -1341,9 +1341,9 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                 continue;
             }
 
-            field_entry *nearwebfld = dst.find_field( fd_web );
+            field_entry *nearflammablefld = ( dst.find_field( fd_web ) || dst.find_field( fd_fuel ) );
             int spread_chance = std::max( 0, 25 * ( cur.get_field_intensity() - 1 ) );
-            if( nearwebfld ) {
+            if( nearflammablefld ) {
                 spread_chance = 50 + spread_chance / 2;
             }
 
@@ -1360,7 +1360,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                                       one_in( 2 ) ) ) ||
                     ( power >= 3 && ( ter_furn_has_flag( dster, dsfrn, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) &&
                                       one_in( 5 ) ) ) ||
-                    nearwebfld ||
+                    nearflammablefld ||
                     ( one_in( 5 ) && dst.get_item_count() > 0 &&
                       here.flammable_items_at( p + eight_horizontal_neighbors[i] ) )
                 ) ) {
@@ -1370,8 +1370,8 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                     // Consume a bit of our fuel
                     cur.set_field_age( cur.get_field_age() + 1_minutes );
                 }
-                if( nearwebfld ) {
-                    nearwebfld->set_field_intensity( 0 );
+                if( nearflammablefld ) {
+                    nearflammablefld->set_field_intensity( 0 );
                 }
             }
         }
@@ -1401,9 +1401,9 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                 continue;
             }
 
-            field_entry *nearwebfld = dst.find_field( fd_web );
+            field_entry *nearflammablefld = ( dst.find_field( fd_web ) || dst.find_field( fd_fuel ) );
             int spread_chance = 25 * ( cur.get_field_intensity() - 1 );
-            if( nearwebfld ) {
+            if( nearflammablefld ) {
                 spread_chance = 50 + spread_chance / 2;
             }
 
@@ -1420,7 +1420,7 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                                       one_in( 2 ) ) ) ||
                     ( power >= 3 && ( ter_furn_has_flag( dster, dsfrn, ter_furn_flag::TFLAG_FLAMMABLE_HARD ) &&
                                       one_in( 5 ) ) ) ||
-                    nearwebfld ||
+                    nearflammablefld ||
                     ( one_in( 5 ) && dst.get_item_count() > 0 &&
                       here.flammable_items_at( p + eight_horizontal_neighbors[i] ) )
                 ) ) {
@@ -1430,8 +1430,8 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                     // Consume a bit of our fuel
                     cur.set_field_age( cur.get_field_age() + 1_minutes );
                 }
-                if( nearwebfld ) {
-                    nearwebfld->set_field_intensity( 0 );
+                if( nearflammablefld ) {
+                    nearflammablefld->set_field_intensity( 0 );
                 }
             }
         }

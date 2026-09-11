@@ -15771,9 +15771,12 @@ bool item::on_drop( const tripoint_bub_ms &pos )
 bool item::on_drop( const tripoint_bub_ms &pos, map &m )
 {
     // Spilled liquids aren't recoverable, so just remove them from the game.
-    // TODO: Maybe place a field here for certain kinds of liquid (blood, fuel).
     if( made_of_from_type( phase_id::LIQUID ) &&
         !m.has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, pos ) ) {
+        // The only liquids with TINDER are things like gasoline and napalm, represented by fd_fuel.
+        if( has_flag( flag_TINDER ) ) {
+            m.add_field( pos, field_type_id( "fd_fuel" ) );
+        }
         return true;
     }
     avatar &player_character = get_avatar();

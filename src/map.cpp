@@ -3835,6 +3835,10 @@ bool map::is_tinder( const tripoint_bub_ms &p )
         return true;
     }
 
+    if( has_field_at( p, fd_fuel ) ) {
+        return true;
+    }
+    
     if( get_field_intensity( p, fd_web ) > 0 ) {
         return true;
     }
@@ -3879,6 +3883,10 @@ bool map::is_flammable( const tripoint_bub_ms &p )
     }
 
     if( has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH, p ) ) {
+        return true;
+    }
+
+    if( has_field_at( p, fd_fuel ) ) {
         return true;
     }
 
