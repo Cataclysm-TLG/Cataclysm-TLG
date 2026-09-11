@@ -1341,7 +1341,10 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                 continue;
             }
 
-            field_entry *nearflammablefld = ( dst.find_field( fd_web ) || dst.find_field( fd_fuel ) );
+            field_entry *nearflammablefld = dst.find_field( fd_web );
+            if( nearflammablefld == nullptr ) {
+                nearflammablefld = dst.find_field( fd_fuel );
+            }
             int spread_chance = std::max( 0, 25 * ( cur.get_field_intensity() - 1 ) );
             if( nearflammablefld ) {
                 spread_chance = 50 + spread_chance / 2;
@@ -1401,7 +1404,10 @@ void field_processor_fd_fire( const tripoint_bub_ms &p, field_entry &cur, field_
                 continue;
             }
 
-            field_entry *nearflammablefld = ( dst.find_field( fd_web ) || dst.find_field( fd_fuel ) );
+            field_entry *nearflammablefld = dst.find_field( fd_web );
+            if( nearflammablefld == nullptr ) {
+                nearflammablefld = dst.find_field( fd_fuel );
+            }
             int spread_chance = 25 * ( cur.get_field_intensity() - 1 );
             if( nearflammablefld ) {
                 spread_chance = 50 + spread_chance / 2;
