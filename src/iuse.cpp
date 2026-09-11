@@ -3127,7 +3127,7 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
                 here.add_field( pt, fd_fuel );
             }
             if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 2 ) ) {
-                here.add_field( pt, fd_fire, one_in( 3 ) ? 2 : 1, base_age );
+                here.add_field( pt, fd_fire, rng( 1, 2 ), base_age );
             }
         }
         avatar &player = get_avatar();
