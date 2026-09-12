@@ -31,7 +31,7 @@
 10 - Legendary.  (If you are not literaly Miyamoto Musashi, then you are pretty sure you could take him in a duel.)
 
 # Experience required for skill levels:
-The formula is level² * 100. Characters who gain xp pass that xp through factors like focus and enchantment-based learning modifiers. These numbers aren't shown to the player, they see skill rank progress as a percentage.
+The formula is level² * 100. Characters who gain xp pass that xp through factors like focus and enchantment-based learning modifiers. These numbers aren't shown to the player, they see skill rank progress as a percentage. Numbers below assume no traits and 100 focus, and indicate the value as passed by practice().
 
 1          100
 2          400
