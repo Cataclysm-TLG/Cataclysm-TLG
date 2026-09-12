@@ -33,7 +33,7 @@
   },
   {
     "id": "ALLOWS_TALONS",
-    "//": "Makes footwear compatable with the TOE_TALONS mutation.",
+    "//": "Makes footwear compatable with the RAP_TALONS mutation.",
     "type": "json_flag"
   },
   {
