@@ -30,6 +30,19 @@
 9 - Phenom.  (If the world hadn't ended, your contributions to the field of medicine could have been considered invaluable for decades to come.)<br><br>
 10 - Legendary.  (If you are not literaly Miyamoto Musashi, then you are pretty sure you could take him in a duel.)
 
+# Experience required for skill levels:
+The formula is level² * 100. Characters who gain xp pass that xp through factors like focus and enchantment-based learning modifiers. These numbers aren't shown to the player, they see skill rank progress as a percentage. Numbers below assume no traits and 100 focus, and indicate the value as passed by practice().
+
+1          100
+2          400
+3          900
+4        1,600
+5        2,500
+6        3,600
+7        4,900
+8        6,400
+9        8,100
+10      10,000
 
 # Monster melee skill scaling:
 Minimum skill: 0 (no melee potential; turret, fungal wall)
