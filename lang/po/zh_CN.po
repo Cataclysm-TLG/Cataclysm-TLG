@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-07 18:55-0700\n"
-"PO-Revision-Date: 2026-09-09 15:12+0800\n"
+"PO-Revision-Date: 2026-09-12 14:38+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -8024,7 +8024,7 @@ msgstr "生化弱视"
 #. ~ Name of a bionic
 #: data/json/bionics.json
 msgid "Bionic Voicebox"
-msgstr ""
+msgstr "生化声匣"
 
 #. ~ Name of a bionic
 #: data/json/bionics.json
@@ -8398,6 +8398,8 @@ msgid ""
 "Lying just beneath your skin is a thin armor made of carbon nanotubes.  This has no impact on blunt trauma but "
 "offers a small amount of protection against cutting, stabbing, and even ballistic damage."
 msgstr ""
+"就在你的皮肤之下，是一层由碳纳米管构成的薄薄护甲。它对钝击伤害毫无作用，但能提供少量针对切割、穿刺乃至弹道伤害"
+"的防护。"
 
 #. ~ Name of a bionic
 #: data/json/bionics.json
@@ -8546,7 +8548,7 @@ msgstr "辐射泄漏"
 msgid ""
 "Rather than vocal cords, you speak through an electronic system which gives you what can best be described as "
 "a \"creepy robot voice.\""
-msgstr ""
+msgstr "你并非通过声带发声，而是通过一套电子系统说话，这赋予了你一种最恰当的描述就是“诡异的机器人嗓音”的声音。"
 
 #. ~ Description of bionic "Recoil Compensators"
 #: data/json/bionics.json
@@ -8571,7 +8573,7 @@ msgstr "载具遥控"
 #. ~ Reason bionic "Enhanced Memory Banks" cannot be removed
 #: data/json/bionics.json
 msgid "Removing this CBM would cause severe amnesia and neurological issues."
-msgstr ""
+msgstr "移除该CBM会导致严重的失忆和神经问题。"
 
 #. ~ Name of a bionic
 #: data/json/bionics.json
@@ -8719,23 +8721,23 @@ msgstr "丘脑缓冲区"
 #: data/json/bionics.json
 #, c-format
 msgid "The CBM has completely replaced %1$s eyes now.  Removing them would leave %2$s blind."
-msgstr ""
+msgstr "该CBM现已完全取代了%1$s的双眼。移除它会导致%2$s失明。"
 
 #. ~ Reason bionic "Expanded Digestive System" cannot be removed
 #: data/json/bionics.json
 msgid "The CBM has replaced the patient's digestive organs and cannot be removed."
-msgstr ""
+msgstr "该CBM已取代患者的消化器官，无法移除。"
 
 #. ~ Reason bionic "Synthetic Lungs" cannot be removed
 #: data/json/bionics.json
 msgid "The CBM has replaced the patient's lungs and cannot be removed."
-msgstr ""
+msgstr "该CBM已取代患者的肺部，无法移除。"
 
 #. ~ Reason bionic "Thalamic Buffer" cannot be removed
 #. ~ Reason bionic "Cerebral Booster" cannot be removed
 #: data/json/bionics.json
 msgid "The bionic is now critical to the continued functionality of the user's brain."
-msgstr ""
+msgstr "该生化插件对于使用者大脑的持续运作已变得至关重要。"
 
 #. ~ Description of bionic "Bionic Eyes"
 #: data/json/bionics.json
@@ -9040,7 +9042,7 @@ msgstr "你的臀部上方通过手术安装了一个复杂的接口，启动后
 #: data/json/bionics.json
 msgid ""
 "You have a port that allows devices which can use a power bank to draw directly from your bionic power supply."
-msgstr ""
+msgstr "您有一个端口，允许使用移动电源的设备直接从您的仿生电源中取电。"
 
 #. ~ Description of bionic "Implanted Stun Gun"
 #: data/json/bionics.json
@@ -14873,7 +14875,7 @@ msgstr "晚期缺铁症"
 #. ~ Blood analysis description of effect type "Conjunctivitis"
 #: data/json/effects.json
 msgid "Adenovirus Infection"
-msgstr ""
+msgstr "腺病毒感染"
 
 #. ~ Name of effect type id "adrenaline"
 #: data/json/effects.json
@@ -14893,12 +14895,12 @@ msgstr "重度失血性休克"
 #. ~ Blood analysis description of effect type "anticoagulant_alboserpin"
 #: data/json/effects.json
 msgid "Alboserpin"
-msgstr ""
+msgstr "Alboserpin"
 
 #. ~ Blood analysis description of effect type "Took Antiasthmatic Drugs"
 #: data/json/effects.json
 msgid "Albuterol"
-msgstr ""
+msgstr "沙丁胺醇"
 
 #. ~ Blood analysis description of effect type "Buzzed, Tipsy, Drunk, Wasted, Dead Drunk"
 #. ~ Name of material
@@ -14946,7 +14948,7 @@ msgstr "新人类变形"
 #. ~ Blood analysis description of effect type "took_xanax"
 #: data/json/effects.json
 msgid "Alprazolam"
-msgstr ""
+msgstr "阿普唑仑"
 
 #. ~ Name of effect type id "VITRIFYING"
 #: data/json/effects.json
@@ -14961,7 +14963,7 @@ msgstr "安非他命上头"
 #. ~ Blood analysis description of effect type "Focused, Amphetamine Buzz, Tweaking, Spun"
 #: data/json/effects.json
 msgid "Amphetamines"
-msgstr ""
+msgstr "安非他命类"
 
 #. ~ Description of effect type "Aranean Transformation"
 #: data/json/effects.json
@@ -15002,22 +15004,22 @@ msgstr "心烦意乱"
 #. ~ Blood analysis description of effect type "strong_antibiotic"
 #: data/json/effects.json
 msgid "Antibiotics"
-msgstr ""
+msgstr "抗生素"
 
 #. ~ Blood analysis description of effect type "Experiencing Datura"
 #: data/json/effects.json
 msgid "Anticholinergic Tropane Alkaloids"
-msgstr ""
+msgstr "抗胆碱能托烷生物碱"
 
 #. ~ Blood analysis description of effect type "Took Anticonvulsant Drugs"
 #: data/json/effects.json
 msgid "Anticonvulsants"
-msgstr ""
+msgstr "抗惊厥药"
 
 #. ~ Blood analysis description of effect type "took_prozac"
 #: data/json/effects.json
 msgid "Antidepressants"
-msgstr ""
+msgstr "抗抑郁药"
 
 #. ~ Name of effect type id "antifungal"
 #. ~ Blood analysis description of effect type "Antifungals"
@@ -15035,7 +15037,7 @@ msgstr "植物诱变引物"
 #. ~ Blood analysis description of effect type "took_thorazine"
 #: data/json/effects.json
 msgid "Antipsychotics"
-msgstr ""
+msgstr "抗精神病药"
 
 #. ~ Name of effect type id "prophylactic_antivenom"
 #: data/json/effects.json
@@ -15091,7 +15093,7 @@ msgstr "意识时断时续，麻木的黑暗之外，世界如同一场别人正
 #. ~ Blood analysis description of effect type "Infected, Badly Infected, Pus Filled"
 #: data/json/effects.json
 msgid "Bacterial Infection"
-msgstr ""
+msgstr "细菌感染"
 
 #. ~ Name of effect type id "bleed"
 #: data/json/effects.json
@@ -15177,7 +15179,7 @@ msgstr "独自一人的感觉真不赖。"
 #. ~ Blood analysis description of effect type "valium"
 #: data/json/effects.json
 msgid "Benzodiazepines"
-msgstr ""
+msgstr "苯二氮䓬类"
 
 #. ~ Description of effect type "Ursine Transformation"
 #: data/json/effects.json
@@ -15187,7 +15189,7 @@ msgstr "浆果、鱼苗、蜂蜜还是肉？今天会是什么？"
 #. ~ Blood analysis description of effect type "Beta blocker"
 #: data/json/effects.json
 msgid "Beta Blocker"
-msgstr ""
+msgstr "β受体阻滞剂"
 
 #. ~ Name of effect type id "betablock"
 #: data/json/effects.json
@@ -15212,7 +15214,7 @@ msgstr "鸟人变身"
 #. ~ Blood analysis description of effect type "Bird Mutation, Bird Transformation, Bird Metamorphosis"
 #: data/json/effects.json
 msgid "Bird Mutagen"
-msgstr ""
+msgstr "鸟类诱变剂"
 
 #. ~ Name of effect type id "mutagen_bird"
 #: data/json/effects.json
@@ -15263,7 +15265,7 @@ msgstr "猫人变身"
 #. ~ Blood analysis description of effect type "Bovine Mutation, Bovine Transformation, Bovine Metamorphosis"
 #: data/json/effects.json
 msgid "Bovine Mutagen"
-msgstr ""
+msgstr "牛类诱变剂"
 
 #. ~ Name of effect type id "mutagen_cattle"
 #: data/json/effects.json
@@ -15407,7 +15409,7 @@ msgstr "章鱼人变形"
 #. ~ Name of effect type id "chafing"
 #: data/json/effects.json
 msgid "Chafing"
-msgstr ""
+msgstr "擦伤"
 
 #. ~ Name of effect type id "acid_charged"
 #: data/json/effects.json
@@ -15475,7 +15477,7 @@ msgstr "噩"
 #. ~ Blood analysis description of effect type "Muscle Cramps"
 #: data/json/effects.json
 msgid "Clostridium tetani Infection"
-msgstr ""
+msgstr "破伤风梭菌感染"
 
 #. ~ Blood analysis description of effect type "Cocaine Buzz, Coked Up, Geeked, Whiteout"
 #. ~ Vitamin name
@@ -15833,7 +15835,7 @@ msgstr "被击倒"
 #. ~ Blood analysis description of effect type "anticoagulant_draculin"
 #: data/json/effects.json
 msgid "Draculin"
-msgstr ""
+msgstr "德拉库林"
 
 #. ~ Name of effect type id "dragging"
 #: data/json/effects.json
@@ -15898,12 +15900,12 @@ msgstr "触电"
 #. ~ Blood analysis description of effect type "Adrenaline Comedown, Adrenaline Rush"
 #: data/json/effects.json
 msgid "Elevated Epinephrine Levels"
-msgstr ""
+msgstr "肾上腺素水平升高"
 
 #. ~ Blood analysis description of effect type "Sylvan Mutation, Sylvan Transformation, Sylvan Metamorphosis"
 #: data/json/effects.json
 msgid "Elf-A Mutagen"
-msgstr ""
+msgstr "精灵-A诱变剂"
 
 #. ~ Name of effect type id "hunger_engorged"
 #. ~ Clause text "engorged" of UI widget "hunger_desc_label"
@@ -15993,7 +15995,7 @@ msgstr "猫人变形"
 #. ~ Blood analysis description of effect type "Piscine Mutation, Piscine Transformation, Piscine Metamorphosis"
 #: data/json/effects.json
 msgid "Fish Mutagen"
-msgstr ""
+msgstr "鱼类诱变剂"
 
 #. ~ Name of effect type id "amphetamine_eff"
 #: data/json/effects.json
@@ -16048,7 +16050,7 @@ msgstr "蛙人变身"
 #. ~ Blood analysis description of effect type "Frog Mutation, Frog Transformation, Frog Metamorphosis"
 #: data/json/effects.json
 msgid "Frog Mutagen"
-msgstr ""
+msgstr "蛙类诱变剂"
 
 #. ~ Name of effect type id "mutagen_batrachian"
 #: data/json/effects.json
@@ -16083,7 +16085,7 @@ msgstr "充足"
 #. ~ Blood analysis description of effect type "fungus"
 #: data/json/effects.json
 msgid "Fungal Infection"
-msgstr ""
+msgstr "真菌感染"
 
 #. ~ Name of effect type id "fungalpoison"
 #: data/json/effects.json
@@ -16317,12 +16319,12 @@ msgstr "重度阿片类药物上头"
 #. ~ Blood analysis description of effect type "pkill3"
 #: data/json/effects.json
 msgid "Heavy Painkiller"
-msgstr ""
+msgstr "强效止痛药"
 
 #. ~ Blood analysis description of effect type "Unidentified Illness"
 #: data/json/effects.json
 msgid "Hemolytic Parasites"
-msgstr ""
+msgstr "溶血性寄生虫"
 
 #. ~ Name of effect type id "high"
 #: data/json/effects.json
@@ -16426,7 +16428,7 @@ msgstr "流感"
 #. ~ Blood analysis description of effect type "Influenza"
 #: data/json/effects.json
 msgid "Influenza Infection"
-msgstr ""
+msgstr "流感感染"
 
 #. ~ Name of effect type id "maimed_tongue"
 #: data/json/effects.json
@@ -16462,22 +16464,22 @@ msgstr "虫人变形"
 #. ~ Blood analysis description of effect type "Unidentified Illness"
 #: data/json/effects.json
 msgid "Intestinal Parasite"
-msgstr ""
+msgstr "肠道寄生虫"
 
 #. ~ Blood analysis description of effect type "High"
 #: data/json/effects.json
 msgid "Intoxicant: Other"
-msgstr ""
+msgstr "麻醉剂：其他"
 
 #. ~ Blood analysis description of effect type "Unidentified Illness"
 #: data/json/effects.json
 msgid "Intracranial Parasites"
-msgstr ""
+msgstr "颅内寄生虫"
 
 #. ~ Blood analysis description of effect type "Unidentified Illness"
 #: data/json/effects.json
 msgid "Intramuscular Parasites"
-msgstr ""
+msgstr "肌内寄生虫"
 
 #. ~ Name of effect type id "invisibility"
 #: data/json/effects.json
@@ -16492,7 +16494,7 @@ msgstr "缺铁症"
 #. ~ Blood analysis description of effect type "Weakness"
 #: data/json/effects.json
 msgid "Irradiated"
-msgstr ""
+msgstr "辐照的"
 
 #. ~ Name of effect type id "asocial_dissatisfied"
 #: data/json/effects.json
@@ -16708,7 +16710,7 @@ msgstr "药物让你越来越昏昏欲睡。"
 #. ~ Blood analysis description of effect type "Melatonin Supplements"
 #: data/json/effects.json
 msgid "Melatonin"
-msgstr ""
+msgstr "褪黑素"
 
 #. ~ Name of effect type id "melatonin"
 #: data/json/effects.json
@@ -16718,7 +16720,7 @@ msgstr "褪黑素补充剂"
 #. ~ Blood analysis description of effect type "wintergreen_analgesic"
 #: data/json/effects.json
 msgid "Methyl Salicylate"
-msgstr ""
+msgstr "水杨酸甲酯"
 
 #. ~ Name of effect type id "withdrawal_alcohol"
 #: data/json/effects.json
@@ -16768,7 +16770,7 @@ msgstr "轻度出血"
 #. ~ Blood analysis description of effect type "pkill1_generic"
 #: data/json/effects.json
 msgid "Minor Painkiller"
-msgstr ""
+msgstr "轻度止痛药"
 
 #. ~ Name of effect type id "withdrawal_alcohol"
 #: data/json/effects.json
@@ -16788,7 +16790,7 @@ msgstr "中度阿片类戒断"
 #. ~ Blood analysis description of effect type "pkill2"
 #: data/json/effects.json
 msgid "Moderate Painkiller"
-msgstr ""
+msgstr "中度止痛药"
 
 #. ~ Name of effect type id "weary_2"
 #: data/json/effects.json
@@ -16865,7 +16867,7 @@ msgstr "诱变剂"
 #. ~ Blood analysis description of effect type "Human Purification, Human Reversion, Human Regression"
 #: data/json/effects.json
 msgid "Mutagenic Purifier"
-msgstr ""
+msgstr "诱变净化剂"
 
 #. ~ Name of effect type id "mute"
 #. ~ Mutation name
@@ -16891,12 +16893,12 @@ msgstr "马卡斯之怒"
 #. ~ Blood analysis description of effect type "nsaid_bp"
 #: data/json/effects.json
 msgid "NSAID-associated Renal Prostaglandin Suppression"
-msgstr ""
+msgstr "非甾体抗炎药相关肾前列腺素抑制"
 
 #. ~ Blood analysis description of effect type "narcosis"
 #: data/json/effects.json
 msgid "Narcosis"
-msgstr ""
+msgstr "麻醉状态"
 
 #. ~ Name of effect type id "narrow_viewpoint"
 #: data/json/effects.json
@@ -16921,7 +16923,7 @@ msgstr "坏死毒素"
 #. ~ Blood analysis description of effect type "Poisoned Wound"
 #: data/json/effects.json
 msgid "Necrotizing Venom"
-msgstr ""
+msgstr "坏死性毒液"
 
 #. ~ Blood analysis description of effect type "Nicotine Buzz, Nicotine Overdose"
 #. ~ Vitamin name
@@ -17014,7 +17016,7 @@ msgstr "阿片类止痛"
 #. ~ Blood analysis description of effect type "Opioid Painkillers, Opioid Buzz, Opioid High, Heavy Opioid High, Nodding Out, Opioid Overdose, Severe Opioid Overdose"
 #: data/json/effects.json
 msgid "Opioids"
-msgstr ""
+msgstr "阿片类"
 
 #. ~ Name of effect type id "pd_per_bad"
 #: data/json/effects.json
@@ -17069,7 +17071,7 @@ msgstr "万能药"
 #. ~ Blood analysis description of effect type "Slowed, Sluggish, Partially Paralyzed, Totally Paralyzed"
 #: data/json/effects.json
 msgid "Paralyzing Poison"
-msgstr ""
+msgstr "麻痹性毒药"
 
 #. ~ Name of effect type id "paralyzepoison"
 #: data/json/effects.json
@@ -17120,7 +17122,7 @@ msgstr "树人变形"
 #. ~ Blood analysis description of effect type "anticoagulant"
 #: data/json/effects.json
 msgid "Platelet Thromboxane Synthesis Suppressed"
-msgstr ""
+msgstr "血小板血栓素合成受抑"
 
 #. ~ Name of effect type id "playing_instrument"
 #: data/json/effects.json
@@ -17137,7 +17139,7 @@ msgstr "扑通。"
 #. ~ Blood analysis description of effect type "Fungal Toxin"
 #: data/json/effects.json
 msgid "Poison"
-msgstr ""
+msgstr "中毒"
 
 #. ~ Name of effect type id "poison"
 #. ~ Speed name of effect type "Weakening Poison"
@@ -17158,12 +17160,12 @@ msgstr "视力不良"
 #. ~ Blood analysis description of effect type "pblue"
 #: data/json/effects.json
 msgid "Potassium Ferric Hexacyanoferrate"
-msgstr ""
+msgstr "亚铁氰化铁钾"
 
 #. ~ Blood analysis description of effect type "iodine"
 #: data/json/effects.json
 msgid "Potassium Iodide"
-msgstr ""
+msgstr "碘化钾"
 
 #. ~ Description of effect type "Beast Metamorphosis"
 #: data/json/effects.json
@@ -17179,7 +17181,7 @@ msgstr "你的饮食中铁的长期缺乏损害了红细胞的输氧效率和再
 #. ~ Blood analysis description of effect type "Antivenom Resistance"
 #: data/json/effects.json
 msgid "Prophylactic Antivenom"
-msgstr ""
+msgstr "预防性抗蛇毒血清"
 
 #. ~ Name of effect type id "rat_bite_fever"
 #: data/json/effects.json
@@ -17241,7 +17243,7 @@ msgstr "视野为0。你什么都看不见。照理说你也应该看不见这�
 #. ~ Blood analysis description of effect type "Theropod Mutation, Theropod Transformation, Theropod Metamorphosis"
 #: data/json/effects.json
 msgid "Raptor Mutagen"
-msgstr ""
+msgstr "猛禽诱变剂"
 
 #. ~ Name of effect type id "mutagen_rat"
 #: data/json/effects.json
@@ -17376,12 +17378,12 @@ msgstr "显形"
 #. ~ Blood analysis description of effect type "Common Cold Antibodies"
 #: data/json/effects.json
 msgid "Rhinovirus Antibodies"
-msgstr ""
+msgstr "鼻病毒抗体"
 
 #. ~ Blood analysis description of effect type "Common Cold"
 #: data/json/effects.json
 msgid "Rhinovirus Infection"
-msgstr ""
+msgstr "鼻病毒感染"
 
 #. ~ Name of effect type id "ridden"
 #: data/json/effects.json
@@ -17398,7 +17400,7 @@ msgstr "骑"
 #, c-format
 msgid ""
 "Rigid equipment worn over your %s is causing discomfort.  Wearing something soft underneath it would help."
-msgstr ""
+msgstr "穿戴在%s上的刚性装备正造成不适。在它下面穿些柔软的东西会有所帮助。"
 
 #. ~ Name of effect type id "deaf"
 #: data/json/effects.json
@@ -17454,7 +17456,7 @@ msgstr "重度眼部刺激"
 #. ~ Blood analysis description of effect type "Short of Breath"
 #: data/json/effects.json
 msgid "Severe Histamine Reaction"
-msgstr ""
+msgstr "严重组胺反应"
 
 #. ~ Name of effect type id "hypovolemia"
 #: data/json/effects.json
@@ -17581,7 +17583,7 @@ msgstr "慢而稳者胜。"
 #. ~ Blood analysis description of effect type "pkill_l"
 #: data/json/effects.json
 msgid "Slow-Release Painkiller"
-msgstr ""
+msgstr "缓释止痛药"
 
 #. ~ Name of effect type id "paralyzepoison"
 #: data/json/effects.json
@@ -17702,7 +17704,7 @@ msgstr "火花在你周围涌动，你的身体疼痛，甚至连空气都似乎
 #. ~ Blood analysis description of effect type "Aranean Mutation, Aranean Transformation, Aranean Metamorphosis"
 #: data/json/effects.json
 msgid "Spider Mutagen"
-msgstr ""
+msgstr "蜘蛛诱变剂"
 
 #. ~ Name of effect type id "spores"
 #: data/json/effects.json
@@ -17735,7 +17737,7 @@ msgstr "踉跄"
 #. ~ Blood analysis description of effect type "Conjunctivitis"
 #: data/json/effects.json
 msgid "Staphylococcus Aureus Infection"
-msgstr ""
+msgstr "金黄色葡萄球菌感染"
 
 #. ~ Name of effect type id "mending"
 #: data/json/effects.json
@@ -17762,12 +17764,12 @@ msgstr "兴奋剂过量"
 #. ~ Blood analysis description of effect type "RX11 Stimulant Comedown, RX11 Stimulant Rush"
 #: data/json/effects.json
 msgid "Stimulant RX11"
-msgstr ""
+msgstr "RX11兴奋剂"
 
 #. ~ Blood analysis description of effect type "RX12 Healing Comedown, RX12 Healing Rush"
 #: data/json/effects.json
 msgid "Stimulant RX12"
-msgstr ""
+msgstr "RX12兴奋剂"
 
 #. ~ Blood analysis description of effect type "Stimulant Overdose"
 #: data/json/effects.json
@@ -17802,7 +17804,7 @@ msgstr "强重力"
 #. ~ Blood analysis description of effect type "Puckered Scratches"
 #: data/json/effects.json
 msgid "Streptobacillus moniliformis Infection"
-msgstr ""
+msgstr "念珠状链杆菌感染"
 
 #. ~ Name of effect type id "venom_player2"
 #: data/json/effects.json
@@ -17867,12 +17869,12 @@ msgstr "树人变形"
 #. ~ Blood analysis description of effect type "Weakening Poison"
 #: data/json/effects.json
 msgid "Systemic Inflammatory Agents"
-msgstr ""
+msgstr "全身性炎症因子"
 
 #. ~ Blood analysis description of effect type "Necrotic Poison"
 #: data/json/effects.json
 msgid "Systemic Necrosis"
-msgstr ""
+msgstr "全身性坏死"
 
 #. ~ Speed name of effect type "Touched Mind, Tainted Mind, Badly Tainted Mind"
 #: data/json/effects.json
@@ -17897,7 +17899,7 @@ msgstr "瘙痒难耐"
 #. ~ Blood analysis description of effect type "Stoned, Baked, Blazed, Zooted"
 #: data/json/effects.json
 msgid "Tetrahydrocannabinol"
-msgstr ""
+msgstr "四氢大麻酚"
 
 #. ~ Apply message of effect type "Stinking Air, Disorienting Air, Smothering Air"
 #: data/json/effects.json
@@ -18368,7 +18370,7 @@ msgstr "不明疾病"
 #. ~ Blood analysis description of effect type "Mycus Respite, Mycus Wrath"
 #: data/json/effects.json
 msgid "Unknown Fungal Stimulants"
-msgstr ""
+msgstr "未知的真菌刺激物"
 
 #. ~ Name of effect type id "toxin_buildup"
 #: data/json/effects.json
@@ -21860,7 +21862,7 @@ msgstr "你喷出了一团生物发光物质！"
 #. ~ value of variable 'message_success' in effect in EoC "EOC_INSECT_LEAP"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
 msgid "You launch yourself forward, wings buzzing."
-msgstr ""
+msgstr "你向前冲去，翅膀嗡嗡作响。"
 
 #. ~ value of variable 'message_success' in effect in EoC "EOC_AVIAN_LEAP"
 #. ~ value of variable 'message_success' in effect in EoC "EOC_RAPTOR_LEAP"
@@ -23991,7 +23993,7 @@ msgstr ""
 #. ~ Radiation damage message of field thick radioactive gas
 #: data/json/field_type.json
 msgid "This radioactive gas burns!"
-msgstr ""
+msgstr "这种放射性气体在燃烧！"
 
 #. ~ Name of effect type id "LIXA_unfolded_eff"
 #: data/json/field_type.json
@@ -24947,22 +24949,22 @@ msgstr "这件物品 <good>制作精良</good>，在战斗中作为武器使用�
 #. ~ Name of JSON flag "BARRICADABLE_DOOR"
 #: data/json/flags/flags.json
 msgid "Barricadable Door"
-msgstr ""
+msgstr "可加固的门"
 
 #. ~ Name of JSON flag "BARRICADABLE_DOOR_REINFORCED"
 #: data/json/flags/flags.json
 msgid "Barricadable Reinforced Door"
-msgstr ""
+msgstr "可加固的强化门"
 
 #. ~ Name of JSON flag "BARRICADABLE_WINDOW"
 #: data/json/flags/flags.json
 msgid "Barricadable Window"
-msgstr ""
+msgstr "可加固的窗户"
 
 #. ~ Name of JSON flag "BARRICADABLE_WINDOW_CURTAINS"
 #: data/json/flags/flags.json
 msgid "Barricadable Window with Curtains"
-msgstr ""
+msgstr "可加固的带窗帘窗户"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "CASELESS_ROUNDS"
@@ -24979,7 +24981,7 @@ msgstr "可用来为其他设备 <info>存储数据</info>。"
 #. ~ Name of JSON flag "CHIP"
 #: data/json/flags/flags.json
 msgid "Chip"
-msgstr ""
+msgstr "可刮漆"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "COLLAPSE_CONTENTS"
@@ -25004,27 +25006,27 @@ msgstr "持续射击将会使武器 <bad>过热</bad>，并且可能使其 <info
 #. ~ Name of JSON flag "BARRICADABLE_DOOR_DAMAGED"
 #: data/json/flags/flags.json
 msgid "Damaged Barricadable Door"
-msgstr ""
+msgstr "受损的可加固门"
 
 #. ~ Name of JSON flag "BARRICADABLE_DOOR_REINFORCED_DAMAGED"
 #: data/json/flags/flags.json
 msgid "Damaged Barricadable Reinforced Door"
-msgstr ""
+msgstr "受损的可加固强化门"
 
 #. ~ Name of JSON flag "DIGGABLE"
 #: data/json/flags/flags.json
 msgid "Diggable"
-msgstr ""
+msgstr "可挖掘"
 
 #. ~ Name of JSON flag "PIT_FILLABLE"
 #: data/json/flags/flags.json
 msgid "Fillable pit"
-msgstr ""
+msgstr "可填埋的坑"
 
 #. ~ Name of JSON flag "FLAT"
 #: data/json/flags/flags.json
 msgid "Flat"
-msgstr ""
+msgstr "平坦"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "COOP_CARD"
@@ -25215,22 +25217,22 @@ msgstr "当瞄准目标<bad>太远</bad>或<bad>太亮</bad>时，激光镭射�
 #. ~ Name of JSON flag "PHASE_BACK"
 #: data/json/flags/flags.json
 msgid "Phase back"
-msgstr ""
+msgstr "恢复原状"
 
 #. ~ Name of JSON flag "PLOWABLE"
 #: data/json/flags/flags.json
 msgid "Plowable"
-msgstr ""
+msgstr "可犁耕"
 
 #. ~ Name of JSON flag "RUBBLE"
 #: data/json/flags/flags.json
 msgid "Rubble"
-msgstr ""
+msgstr "碎石"
 
 #. ~ Name of JSON flag "EASY_DECONSTRUCT"
 #: data/json/flags/flags.json
 msgid "Simple"
-msgstr ""
+msgstr "易于拆解"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "MC_HAS_DATA"
@@ -25253,7 +25255,7 @@ msgstr "经过辐照消毒，可 <good>安全食用</good>。"
 #. ~ Name of JSON flag "SUPPORTS_ROOF"
 #: data/json/flags/flags.json
 msgid "Supports roof"
-msgstr ""
+msgstr "可支撑屋顶"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "SWIM_UNDER"
@@ -25609,7 +25611,7 @@ msgstr "这件装备能 <good>完全保护</good> 你 <info>不受寒钢伤害</
 #. ~ Description of JSON flag "ACTIVE_CLOAKING"
 #: data/json/flags/flags.json
 msgid "This gear has <info>cloaking tech</info> that will <good>make you invisible</good> when active."
-msgstr ""
+msgstr "此装备带有<info>隐形技术</info>，激活后可<good>使你隐形</good>。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "ALARMCLOCK"
@@ -25784,7 +25786,7 @@ msgstr "这件物品<info>提供了</info>生化插件的安装说明和其他�
 #. ~ Description of JSON flag "USE_UPS"
 #: data/json/flags/flags.json
 msgid "This item <info>uses a power bank to function</info>."
-msgstr ""
+msgstr "此物品<info>使用移动电源供电</info>。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "RAD_DETECT"
@@ -26161,7 +26163,7 @@ msgstr "这件物品为你提供更舒适的睡眠条件。"
 #. ~ Description of JSON flag "IS_UPS"
 #: data/json/flags/flags.json
 msgid "This item provides power to <info>items which can use a power bank</info>."
-msgstr ""
+msgstr "此物品可为<info>可使用移动电源的物品</info>供电。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "OLD_CURRENCY"
@@ -26179,7 +26181,7 @@ msgstr "这件物品已损坏，<bad>无法激活</bad>。"
 #. ~ Description of JSON flag "NANOFAB_REPAIR"
 #: data/json/flags/flags.json
 msgid "This item was constructed in a nanofabricator and can be <info>repaired in one</info>."
-msgstr ""
+msgstr "此物品由纳米制造机建造，可在其中<info>进行修复</info>。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "PALS_LARGE"
@@ -26332,7 +26334,7 @@ msgstr "这最终会<bad>变坏</bad>。"
 #. ~ Name of JSON flag "TREE"
 #: data/json/flags/flags.json
 msgid "Tree"
-msgstr ""
+msgstr "树"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "MUTAGEN_SAMPLE"
@@ -26343,7 +26345,7 @@ msgstr "可用于制造 <neutral>诱变药剂</neutral>。"
 #. ~ Name of JSON flag "WALL"
 #: data/json/flags/flags.json
 msgid "Wall"
-msgstr ""
+msgstr "墙"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "DIG_TOOL"
@@ -26356,7 +26358,7 @@ msgstr "这件物品在手持时能够让你在朝坚岩等障碍物所在位置
 #. ~ Name of JSON flag "WIRED_WALL"
 #: data/json/flags/flags.json
 msgid "Wired Wall"
-msgstr ""
+msgstr "有线墙"
 
 #. ~ This is custom prefix added to item name. "PREFIX_XL"
 #: data/json/flags/flags.json
@@ -26491,12 +26493,12 @@ msgstr[0] "防毒面具滤芯"
 #. ~ Name of JSON flag "GAS_TANK"
 #: data/json/flags/flags.json
 msgid "gas tank"
-msgstr ""
+msgstr "油箱"
 
 #. ~ Name of JSON flag "LASER_SIGHT"
 #: data/json/flags/flags.json
 msgid "laser sight"
-msgstr ""
+msgstr "激光瞄准器"
 
 #. ~ Name of JSON flag "BATTERY_MEDIUM"
 #. ~ Item name
@@ -26511,12 +26513,12 @@ msgstr[0] "电池（轻型）"
 #: data/json/flags/flags.json data/json/items/tool/electronics.json
 msgid "methanol fuel cell"
 msgid_plural "methanol fuel cell"
-msgstr[0] ""
+msgstr[0] "甲醇燃料电池"
 
 #. ~ Name of JSON flag "REBREATHER_CART"
 #: data/json/flags/flags.json
 msgid "rebreather cartridge"
-msgstr ""
+msgstr "循环呼吸器滤芯"
 
 #. ~ This is custom prefix added to item name. "REPLICA_EQUIPMENT"
 #: data/json/flags/flags.json
@@ -29678,7 +29680,7 @@ msgstr "烘干机"
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-appliances.json
 msgid "electric oven"
-msgstr ""
+msgstr "电烤箱"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-appliances.json
@@ -46038,12 +46040,12 @@ msgstr[0] "怪兽之牙"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain_nether_monster.json
 msgid "monstrous brain"
-msgstr ""
+msgstr "畸形大脑"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain_nether_monster.json
 msgid "yellow ichor"
-msgstr ""
+msgstr "黄色的血"
 
 #. ~ Description of terrain "black glass floor"
 #: data/json/furniture_and_terrain/terrain_vitrified.json
@@ -48475,7 +48477,7 @@ msgstr[0] "电池"
 #: data/json/items/ammo.json
 msgid "bearing ball"
 msgid_plural "bearing balls"
-msgstr[0] ""
+msgstr[0] "轴承钢珠"
 
 #. ~ Item name
 #: data/json/items/ammo.json
@@ -54298,7 +54300,7 @@ msgstr[0] "钻床（未连接）"
 #: data/json/items/appliances.json
 msgid "disconnected electric oven"
 msgid_plural "disconnected electric ovens"
-msgstr[0] ""
+msgstr[0] "断电的电烤箱"
 
 #. ~ Item name
 #: data/json/items/appliances.json
@@ -60914,7 +60916,7 @@ msgstr[0] "也门国旗"
 #: data/json/items/armor/cloaks.json
 #, c-format
 msgid "You need a charged power bank to turn on the %s."
-msgstr ""
+msgstr "需要充满电的移动电源才能开启 %s。"
 
 #. ~ "msg" action message of item "FB51 optical cloak"
 #: data/json/items/armor/cloaks.json
@@ -61569,7 +61571,7 @@ msgstr "由牛仔布制成的背心。"
 msgid ""
 "A vintage piece of a military uniform from the 20th century, or possibly a newer reproduction of one.  It's a "
 "comfortable jacket made of lightweight poplin."
-msgstr ""
+msgstr "一件20世纪军用制服的复古部件，也可能是较新的复刻品。它是一件用轻质府绸制成的舒适夹克。"
 
 #. ~ Description of "rain coat"
 #: data/json/items/armor/coats.json
@@ -61611,7 +61613,7 @@ msgstr "一件及膝的白色棉制长袍，是犹太人在特殊场合穿着的
 msgid ""
 "An elegant waistcoat, ideal for those occasions when wearing only a shirt would be too casual and a suit would "
 "be overdoing it."
-msgstr ""
+msgstr "一件优雅的马甲，非常适合那些只穿衬衫过于随意、穿整套西装又太过隆重的场合。"
 
 #. ~ Description of "ski jacket"
 #: data/json/items/armor/coats.json
@@ -61918,7 +61920,7 @@ msgstr[0] "长外套"
 #: data/json/items/armor/coats.json
 msgid "military parka"
 msgid_plural "military parkas"
-msgstr[0] ""
+msgstr[0] "军用派克大衣"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -68788,7 +68790,7 @@ msgstr "一个只露出眼睛，非常暖和的棉制头部面罩。"
 #. ~ Description of variant "plastic ghost mask" of item "skull mask"
 #: data/json/items/armor/masks.json
 msgid "A white plastic mask molded in an eternal howl of terror."
-msgstr ""
+msgstr "一个白色塑料面具，凝固成永恒的恐惧嚎叫。"
 
 #. ~ Description of variant "horse mask" of item "zombie mask"
 #: data/json/items/armor/masks.json
@@ -68815,7 +68817,7 @@ msgstr[0] "V字仇杀队面具"
 #. ~ Description of variant "plastic zombie mask" of item "skull mask"
 #: data/json/items/armor/masks.json
 msgid "It's a cheesy plastic zombie mask.  You have a feeling this wouldn't fool the undead."
-msgstr ""
+msgstr "这是一个廉价的塑料丧尸面具。你感觉这骗不过那些亡灵。"
 
 #. ~ Description of variant "plastic skull mask" of item "skull mask"
 #: data/json/items/armor/masks.json
@@ -68943,7 +68945,7 @@ msgstr[0] "瘟疫面具"
 #: data/json/items/armor/masks.json
 msgid "plastic ghost mask"
 msgid_plural "plastic ghost masks"
-msgstr[0] ""
+msgstr[0] "塑料幽灵面具"
 
 #. ~ Variant name of item "skull mask"
 #: data/json/items/armor/masks.json
@@ -68955,7 +68957,7 @@ msgstr[0] "哥布林面具（塑料）"
 #: data/json/items/armor/masks.json
 msgid "plastic president mask"
 msgid_plural "plastic president masks"
-msgstr[0] ""
+msgstr[0] "塑料总统面具"
 
 #. ~ Variant name of item "skull mask"
 #: data/json/items/armor/masks.json
@@ -69015,7 +69017,7 @@ msgstr[0] "白色假胡子"
 #: data/json/items/armor/masks.json
 msgid "white plastic mask"
 msgid_plural "white plastic masks"
-msgstr[0] ""
+msgstr[0] "白色塑料面具"
 
 #. ~ Item name
 #. ~ Variant name of item "zombie mask"
@@ -70659,7 +70661,7 @@ msgstr ""
 #. ~ Description of a pocket in item "military rucksack"
 #: data/json/items/armor/storage.json
 msgid "Tucked between you and the backpack."
-msgstr ""
+msgstr "塞在你和背包之间。"
 
 #. ~ "msg" action message of item "small leg purse"
 #: data/json/items/armor/storage.json
@@ -88784,7 +88786,7 @@ msgstr[0] "三氯化锑"
 #: data/json/items/chemicals_and_resources.json
 msgid "ash"
 msgid_plural "ash"
-msgstr[0] ""
+msgstr[0] "灰烬 "
 
 #. ~ Item name
 #: data/json/items/chemicals_and_resources.json
@@ -89357,7 +89359,7 @@ msgstr[0] "白磷"
 #: data/json/items/chemicals_and_resources.json
 msgid "wood ash"
 msgid_plural "wood ash"
-msgstr[0] ""
+msgstr[0] "木灰"
 
 #. ~ Item name
 #: data/json/items/chemicals_and_resources.json
@@ -91964,14 +91966,14 @@ msgstr "一小片煮熟的变异动物肉。闻起来依然让人提不起食欲
 msgid ""
 "A tiny scrap of edible fish.  The risk of foodborne illness from saltwater species is very low, but it's still "
 "safer to cook it."
-msgstr ""
+msgstr "一小片可食用的鱼肉。海水鱼类引发食源性疾病的风险非常低，但煮熟后食用仍然更安全。"
 
 #. ~ Description of "scrap of freshwater fish"
 #: data/json/items/comestibles/carnivore.json
 msgid ""
 "A tiny scrap of edible fish.  Unlike the meat of ocean fish, the risk of foodborne illness is high if it isn't "
 "cooked."
-msgstr ""
+msgstr "一小片可食用的鱼肉。与海鱼不同，如果不煮熟，引发食源性疾病的风险很高。"
 
 #. ~ Description of "scrap of human flesh"
 #: data/json/items/comestibles/carnivore.json
@@ -92004,21 +92006,21 @@ msgstr "潮湿的绿色海绵状黏液，从腐烂的骨头中提取得来。你
 msgid ""
 "An extremely fatty cut of meat from the underside of a pig.  It can be cooked as-is or cured and processed "
 "into bacon."
-msgstr ""
+msgstr "一块取自猪腹部的极肥肉块。可直接烹饪，也可腌制加工成培根。"
 
 #. ~ Description of "fillet of freshwater fish"
 #: data/json/items/comestibles/carnivore.json
 msgid ""
 "An uncooked fillet of fish from a freshwater species.  Unlike the meat of ocean fish, the risk of foodborne "
 "illness is high if it isn't cooked."
-msgstr ""
+msgstr "一块未烹饪的淡水鱼片。与海鱼不同，如果不煮熟，引发食源性疾病的风险很高。"
 
 #. ~ Description of "fillet of fish"
 #: data/json/items/comestibles/carnivore.json
 msgid ""
 "An uncooked fillet of fish.  The risk of foodborne illness from saltwater species is very low, but it's still "
 "safer to cook it."
-msgstr ""
+msgstr "一块未烹饪的鱼片。海水鱼类引发食源性疾病的风险非常低，但煮熟后食用仍然更安全。"
 
 #. ~ Description of "tainted innards"
 #. ~ Description of "tainted human innards"
@@ -92125,7 +92127,7 @@ msgstr "为长期保存而经过重度熏制的龙虾。可以进一步熏制使
 #. ~ Description of "frog legs"
 #: data/json/items/comestibles/carnivore.json
 msgid "Meat from a pair of frog legs that has been smoked for preservation."
-msgstr ""
+msgstr "从一对蛙腿上取下的肉，经过熏制以延长保存时间。"
 
 #. ~ Description of "smoked meat"
 #: data/json/items/comestibles/carnivore.json
@@ -92276,14 +92278,14 @@ msgstr "一个林地生物的胃囊，十分的耐磨，经过加工后可以用
 msgid ""
 "This is a mess of dirt, excreta, connective tissue, and bits of matter like hair and claws, leftover from the "
 "butchering process.  Eating it isn't even worth thinking about."
-msgstr ""
+msgstr "这是屠宰过程中留下的杂物，由泥土、排泄物、结缔组织以及毛发和爪子之类的碎屑混杂而成。根本不值得考虑食用。"
 
 #. ~ Description of "raw frog legs"
 #: data/json/items/comestibles/carnivore.json
 msgid ""
 "Two frog legs, stripped of their skin, pretty much the only usable meat on a frog.  They look and supposedly "
 "taste like chicken once they're cooked."
-msgstr ""
+msgstr "两只剥了皮的蛙腿，几乎是青蛙身上唯一能吃的肉。煮熟后，它们看起来——据说尝起来也——像鸡肉。"
 
 #. ~ Description of "tainted limb"
 #. ~ Snippet in category "leg_zed_desc"
@@ -92387,7 +92389,7 @@ msgstr[0] "熟鱼肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "cooked foul human flesh"
 msgid_plural "cooked foul human flesh"
-msgstr[0] ""
+msgstr[0] "煮熟的恶臭人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -92507,7 +92509,7 @@ msgstr[0] "熟异形杂碎"
 #: data/json/items/comestibles/carnivore.json
 msgid "cooked porkbelly"
 msgid_plural "cooked porkbelly"
-msgstr[0] ""
+msgstr[0] "煮熟的猪五花"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -92537,7 +92539,7 @@ msgstr[0] "被感染的变异熟肉"
 #: data/json/items/comestibles/carnivore.json
 msgid "cured porkbelly"
 msgid_plural "cured porkbelly"
-msgstr[0] ""
+msgstr[0] "腌制猪五花"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -92555,7 +92557,7 @@ msgstr[0] "生鱼片"
 #: data/json/items/comestibles/carnivore.json
 msgid "fillet of freshwater fish"
 msgid_plural "fillets of freshwater fish"
-msgstr[0] ""
+msgstr[0] "淡水鱼片"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -92849,7 +92851,7 @@ msgstr[0] "腐化之心"
 #: data/json/items/comestibles/carnivore.json
 msgid "raw frog legs"
 msgid_plural "pairs of raw frog legs"
-msgstr[0] ""
+msgstr[0] "生蛙腿"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -92909,7 +92911,7 @@ msgstr[0] "一块恶臭的肉屑"
 #: data/json/items/comestibles/carnivore.json
 msgid "scrap of freshwater fish"
 msgid_plural "scraps of freshwater fish"
-msgstr[0] ""
+msgstr[0] "淡水鱼碎肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/carnivore.json
@@ -93035,7 +93037,7 @@ msgstr[0] "被感染的生皮碎片"
 #: data/json/items/comestibles/carnivore.json
 msgid "uncut bacon"
 msgid_plural "uncut bacon"
-msgstr[0] ""
+msgstr[0] "未切片的培根"
 
 #. ~ Description of "lazy lobster casserole"
 #: data/json/items/comestibles/casseroles.json
@@ -99548,7 +99550,7 @@ msgstr "软糯的口感，美味的肉汁，让你欲罢不能。"
 msgid ""
 "The meat from pair of dehydrated frog legs.  With proper storage, this dried food will remain edible for an "
 "incredibly long time."
-msgstr ""
+msgstr "一对脱水蛙腿上的肉。在妥善储存的情况下，这种干燥食品能保持可食用状态相当长的时间。"
 
 #. ~ Description of "haggis"
 #: data/json/items/comestibles/meat_dishes.json
@@ -99563,7 +99565,7 @@ msgstr ""
 #. ~ Description of "bacon"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "Three big strips of cured and pre-cooked bacon loaded with fat, salt, and preservatives."
-msgstr ""
+msgstr "三大条腌制预熟的培根，富含脂肪、盐和防腐剂。"
 
 #. ~ Description of "kiymali pide"
 #: data/json/items/comestibles/meat_dishes.json
@@ -99839,7 +99841,7 @@ msgstr[0] "脱水鱼肉"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "dehydrated foul meat"
 msgid_plural "dehydrated foul meat"
-msgstr[0] ""
+msgstr[0] "脱水恶臭肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
@@ -99851,7 +99853,7 @@ msgstr[0] "水发蛙后腿"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "dehydrated human flesh"
 msgid_plural "dehydrated human flesh"
-msgstr[0] ""
+msgstr[0] "脱水人肉"
 
 #. ~ Item name
 #: data/json/items/comestibles/meat_dishes.json
@@ -125682,6 +125684,8 @@ msgid ""
 "motor requiring electricity from a vehicle or power bank.  If you could find enough ammo for it, it would "
 "become a devastating weapon.  It must be mounted on a vehicle before use."
 msgstr ""
+"M134D-H 米尼岗是一挺（相对）轻量化的重型旋转机枪。它的六根枪管由一台需要载具或移动电源供电的电动机驱动旋转。如"
+"果你能找到足够的弹药，它将成为一件毁灭性的武器。使用前必须将其安装在载具上。"
 
 #. ~ Description of gun "M24 rifle"
 #. ~ Description of "M24 rifle"
@@ -130892,17 +130896,17 @@ msgstr "一个装在握柄上的小小扩件，在你瞄准时将弓箭固定在
 #. ~ "need_charges_msg" action message of item "electric spanner"
 #: data/json/items/gunmod/accessories.json
 msgid "The electric spanner's batteries are dead."
-msgstr ""
+msgstr "电动扳手的电池没电了。"
 
 #. ~ "msg" action message of item "electric spanner (on)"
 #: data/json/items/gunmod/accessories.json
 msgid "You turn the electric spanner off."
-msgstr ""
+msgstr "你关掉电扳手。"
 
 #. ~ "msg" action message of item "electric spanner"
 #: data/json/items/gunmod/accessories.json
 msgid "You turn the electric spanner on."
-msgstr ""
+msgstr "你打开电扳手。"
 
 #. ~ Item name
 #. ~ Gun mod name
@@ -130969,14 +130973,14 @@ msgstr "降噪"
 #: data/json/items/gunmod/accessories.json
 msgid "electric spanner"
 msgid_plural "electric spanners"
-msgstr[0] ""
+msgstr[0] "电动扳手"
 
 #. ~ Item name
 #. ~ Gun mod name
 #: data/json/items/gunmod/accessories.json
 msgid "electric spanner (on)"
 msgid_plural "electric spanners (on)"
-msgstr[0] ""
+msgstr[0] "电动扳手（开启）"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/accessories.json
@@ -131051,7 +131055,7 @@ msgstr "锯短枪管会导致射击精度明显降低，并略微增加噪声，
 msgid ""
 "Test mod for power bank drain on mods, this should never spawn, if you see this, it's a bug.  50x more power "
 "bank drain."
-msgstr ""
+msgstr "用于测试模组移动电源耗电的测试模组，本不应生成，如果你看到了它，那就是个bug。移动电源耗电增加50倍。"
 
 #. ~ Item name
 #. ~ Gun mod name
@@ -136635,7 +136639,7 @@ msgstr "一个扩容的22发弹匣，可用于格洛克手枪。使用 .40 S&W �
 msgid ""
 "An improvised magazine that is mostly compatible with a homemade 'Luty' submachine gun, with a simplified feed "
 "system.  It looks like it might feed 20 rounds of .40 S&W."
-msgstr ""
+msgstr "一种简易弹匣，基本兼容自制的“Luty”冲锋枪，供弹系统经过简化。看起来可装填 20 发 .40 S&W 子弹。"
 
 #. ~ Item name
 #. ~ Magazine name
@@ -142675,37 +142679,37 @@ msgstr "一块取自某些不幸的有蹄类动物内脏深处的厚组织样本
 msgid ""
 "A thinly sliced collection of tissue samples from deep within the vitals of some unlucky bird.  Somehow, the "
 "sample appears to be alive."
-msgstr ""
+msgstr "一个由某些不幸的鸟类内脏深处提取的、切成薄片的组织样本集合。不知为何，样本似乎还活着。"
 
 #. ~ Description of "murine sample"
 #: data/json/items/mutagen_ingredients.json
 msgid ""
 "A tiny clump of tissue samples from deep within the vitals of some unlucky rodent.  Somehow, the sample "
 "appears to be alive."
-msgstr ""
+msgstr "一个由某些不幸的啮齿动物内脏深处提取的微小组织样本团块。不知为何，样本似乎还活着。"
 
 #. ~ Description of "slime sample"
 #: data/json/items/mutagen_ingredients.json
 msgid "A weird little blob.  It looks almost alive."
-msgstr ""
+msgstr "一个古怪的小团块。它看起来几乎像是活的。"
 
 #. ~ Description of "batrachian sample"
 #: data/json/items/mutagen_ingredients.json
 msgid ""
 "A wet clump of tissue samples from deep within the vitals of some unlucky amphibian.  Somehow, the sample "
 "appears to be alive."
-msgstr ""
+msgstr "一个由某些不幸的两栖动物内脏深处提取的、湿漉漉的组织样本团块。不知为何，样本似乎还活着。"
 
 #. ~ Description of "plant sample"
 #: data/json/items/mutagen_ingredients.json
 msgid ""
 "A woody mat of tissue samples from deep within some unlucky plant.  Somehow, the sample appears to be alive."
-msgstr ""
+msgstr "一个由某些不幸的植物深处提取的、木质化垫状组织样本。不知为何，样本似乎还活着。"
 
 #. ~ Description of "abstract mutagen sample"
 #: data/json/items/mutagen_ingredients.json
 msgid "Carefully collected tissue samples from deep within the vitals of some unlucky organism."
-msgstr ""
+msgstr "从某种不幸生物内脏深处精心采集的组织样本。"
 
 #. ~ Item name
 #: data/json/items/mutagen_ingredients.json
@@ -143890,6 +143894,8 @@ msgid ""
 "prototype stage.  It heats solid hydrogen to create plasma and envelops it with polymers to reduce blooming.  "
 "While powerful, it suffers from short range."
 msgstr ""
+"波音公司与DARPA联合研发了这款聚焦等离子武器，但始终未超越原型阶段。它将固态氢加热以产生等离子体，并用聚合物包裹"
+"以减少光束发散。虽然威力强大，但射程较短。"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -149688,7 +149694,7 @@ msgstr[0] "便携柴炉"
 #: data/json/items/tool/electronics.json
 msgid "power bank"
 msgid_plural "power banks"
-msgstr[0] ""
+msgstr[0] "移动电源"
 
 #. ~ Item name
 #: data/json/items/tool/electronics.json
@@ -152845,7 +152851,7 @@ msgstr[0] "小型生理盐水输液袋"
 #: data/json/items/tool/med.json
 msgid "synthetic fluff"
 msgid_plural "synthetic fluff"
-msgstr[0] ""
+msgstr[0] "合成棉絮"
 
 #. ~ Item name
 #: data/json/items/tool/med.json
@@ -156706,7 +156712,7 @@ msgstr[0] "折叠充气船"
 #: data/json/items/tool/unfoldable.json data/json/vehicleparts/frames.json
 msgid "large suitcase"
 msgid_plural "large suitcases"
-msgstr[0] ""
+msgstr[0] "大号手提箱"
 
 #. ~ Item name
 #. ~ Vehicle part name
@@ -157476,6 +157482,8 @@ msgid ""
 "lug nut, and this tool's unusual shape makes turning these fast and easy.  Unfortunately, this also makes it "
 "rather awkward as a weapon."
 msgstr ""
+"两根钢杆以直角焊接在一起，形成一个 X 形。两端各有一个与车轮螺母匹配的套筒，这种工具的独特形状使得拧动螺母变得快"
+"速而轻松。可惜的是，这也让它作为武器使用时相当笨拙。"
 
 #. ~ Item name
 #: data/json/items/tool/workshop.json
@@ -159621,7 +159629,7 @@ msgstr[0] "电池模组（中型）"
 #: data/json/items/toolmod.json
 msgid "power bank conversion mod"
 msgid_plural "power bank conversion mods"
-msgstr[0] ""
+msgstr[0] "移动电源转换模块"
 
 #. ~ Item name
 #: data/json/items/toolmod.json
@@ -160470,7 +160478,7 @@ msgstr "一个精巧的骨架机器人模型，有着红色的眼睛，手里拿
 msgid ""
 "Also known as a raccoon dog, this canid is surprisingly adept at climbing trees.  It is prominent in Japanese "
 "folklore and art."
-msgstr ""
+msgstr "又名貉，这种犬科动物出人意料地擅长爬树。它在日本民间传说和艺术中占有重要地位。"
 
 #. ~ Description of variant "crab plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -160505,6 +160513,8 @@ msgid ""
 "Despite being friend shaped, black bears are wild animals and should not be approached or fed.  This one, "
 "however, is a stuffed toy for children and you can do whatever you like with it."
 msgstr ""
+"尽管黑熊看起来毛茸茸很友好，但它们是野生动物，不应接近或投喂。不过这一个只是给孩子们玩的毛绒玩具，你可以随意摆"
+"弄它。"
 
 #. ~ Description of variant "remora plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -160512,6 +160522,8 @@ msgid ""
 "For some reason, someone at some point decided to manufacture a plush toy designed to resemble one of those "
 "fish that sticks to sharks.  The modified dorsal fin it uses as a suction cup is a patch of Velcro."
 msgstr ""
+"不知为何，某人在某个时候决定制造一款毛绒玩具，模仿那种吸附在鲨鱼身上的鱼。它用来当吸盘的变异背鳍，其实是一块魔"
+"术贴。"
 
 #. ~ "description" action message of item "imperfect doll"
 #: data/json/items/toy.json
@@ -160536,7 +160548,7 @@ msgstr[0] "日本猕猴玩偶"
 msgid ""
 "Named for the white feathers on its head, the bald eagle is a symbol of the United States of America.  This "
 "one is not quite as majestic because it is a toy for children."
-msgstr ""
+msgstr "白头海雕因其头部的白色羽毛而得名，是美国的象征。这一只就没那么威武了，因为它只是个给孩子玩的玩具。"
 
 #. ~ Description of variant "sanctacaris plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -160544,6 +160556,8 @@ msgid ""
 "Somewhat resembling a trilobite with its segmented body and bulky head, sanctataris was the great great "
 "grandfather of all arthropods.  What would it think if it could see them now?"
 msgstr ""
+"它有着分节的身体和粗壮的头部，外形有些像三叶虫。圣塔卡里斯是所有节肢动物的曾曾祖父。要是它能看看它们现在的样"
+"子，会作何感想？"
 
 #. ~ "menu_text" action message of item "fidget spinner"
 #: data/json/items/toy.json
@@ -160567,7 +160581,7 @@ msgstr[0] "霸王龙玩偶"
 msgid ""
 "The elusive gray fox, one of only two canids (the other being the Asian raccoon dog) that has adapted to climb "
 "trees."
-msgstr ""
+msgstr "行踪隐秘的灰狐，是仅有的两种（另一种为亚洲貉）适应了爬树的犬科动物之一。"
 
 #. ~ Description of "threadbare cotton arms"
 #: data/json/items/toy.json
@@ -160697,7 +160711,7 @@ msgstr ""
 #. ~ Description of variant "arctic fox plushie" of item "plush toy"
 #: data/json/items/toy.json
 msgid "This plush fox doll is pure white except for its shiny black eyes and nose."
-msgstr ""
+msgstr "这只毛绒狐狸玩偶通体纯白，只有眼睛和鼻子是闪亮的黑色。"
 
 #. ~ Description of variant "marmoset plushie" of item "plush toy"
 #: data/json/items/toy.json
@@ -160778,7 +160792,7 @@ msgstr[0] "始祖鸟玩偶"
 #: data/json/items/toy.json
 msgid "arctic fox plushie"
 msgid_plural "arctic fox plushies"
-msgstr[0] ""
+msgstr[0] "北极狐毛绒玩具"
 
 #. ~ Variant name of item "figurine"
 #: data/json/items/toy.json
@@ -161078,7 +161092,7 @@ msgstr[0] "大猩猩玩偶"
 #: data/json/items/toy.json
 msgid "gray fox plushie"
 msgid_plural "gray fox plushies"
-msgstr[0] ""
+msgstr[0] "灰狐毛绒玩具"
 
 #. ~ Variant name of item "plush toy"
 #: data/json/items/toy.json
@@ -161348,7 +161362,7 @@ msgstr[0] "死神手办"
 #: data/json/items/toy.json
 msgid "red fox plushie"
 msgid_plural "red fox plushies"
-msgstr[0] ""
+msgstr[0] "红狐毛绒玩具"
 
 #. ~ Variant name of item "plush toy"
 #: data/json/items/toy.json
@@ -161480,7 +161494,7 @@ msgstr[0] "剑客手办"
 #: data/json/items/toy.json
 msgid "tanuki plushie"
 msgid_plural "tanuki plushies"
-msgstr[0] ""
+msgstr[0] "貉毛绒玩具"
 
 #. ~ Variant name of item "plush toy"
 #: data/json/items/toy.json
@@ -163129,7 +163143,7 @@ msgstr[0] "大型电力引擎"
 #: data/json/items/vehicle/motors.json data/json/vehicleparts/motor.json
 msgid "medium electric motor"
 msgid_plural "medium electric motors"
-msgstr[0] ""
+msgstr[0] "中型电动机"
 
 #. ~ Item name
 #: data/json/items/vehicle/motors.json
@@ -170606,7 +170620,7 @@ msgstr "铜"
 #. ~ Name of material
 #: data/json/materials.json
 msgid "Cotton Fluff"
-msgstr ""
+msgstr "棉絮"
 
 #. ~ Name of material
 #: data/json/materials.json
@@ -171154,7 +171168,7 @@ msgstr "化纤织物"
 #. ~ Name of material
 #: data/json/materials.json
 msgid "Synthetic Fluff"
-msgstr ""
+msgstr "合成棉絮"
 
 #. ~ Name of material
 #: data/json/materials.json
@@ -171376,7 +171390,7 @@ msgstr "划痕"
 #. ~ acid damage verb of material Fibercloth
 #: data/json/materials.json data/mods/innawood/materials.json
 msgid "burned"
-msgstr ""
+msgstr "烧毁的"
 
 #. ~ Damage adjective of material Monolith
 #. ~ Damage adjective of material Ballistic Barrier
@@ -171431,7 +171445,7 @@ msgstr "缺口"
 #. ~ acid damage verb of material Carbon Lattice
 #: data/json/materials.json
 msgid "corroded"
-msgstr ""
+msgstr "腐蚀的"
 
 #. ~ Damage adjective of material Polymer Resin
 #. ~ Damage adjective of material Pseudo Fuel
@@ -171739,7 +171753,7 @@ msgstr "毁坏"
 #. ~ Damage adjective of material Tin
 #: data/json/materials.json
 msgid "dinged"
-msgstr ""
+msgstr "磕碰的"
 
 #. ~ Damage adjective of material Non-Newtonian Fluid
 #. ~ Damage adjective of material Gas
@@ -171754,7 +171768,7 @@ msgstr "根除"
 #. ~ acid damage verb of material Crystal
 #: data/json/materials.json
 msgid "etched"
-msgstr ""
+msgstr "蚀刻的"
 
 #. ~ Damage adjective of material Monolith
 #. ~ Damage adjective of material Ballistic Barrier
@@ -171843,7 +171857,7 @@ msgstr "捣碎的"
 #. ~ acid damage verb of material Ice Cream
 #: data/json/materials.json
 msgid "melted"
-msgstr ""
+msgstr "熔化的"
 
 #. ~ Damage adjective of material Feces
 #: data/json/materials.json
@@ -172065,12 +172079,12 @@ msgstr "碎裂"
 #. ~ acid damage verb of material Feathers
 #: data/json/materials.json
 msgid "singed"
-msgstr ""
+msgstr "烧焦的"
 
 #. ~ acid damage verb of material Non-Newtonian Fluid
 #: data/json/materials.json
 msgid "sizzled"
-msgstr ""
+msgstr "烤焦的"
 
 #. ~ Cut damage verb of material Rubber
 #. ~ Cut damage verb of material Soft Rubber
@@ -180351,6 +180365,8 @@ msgid ""
 "filled abdomen.  Its wings appear to give it some ability to steer, and corrosive slime drips from its bulging "
 "proboscis."
 msgstr ""
+"这只变异怪物几乎已看不出是一只苍蝇了，它变成了一个巨大的气球，靠着充满气体的腹部飘浮在空中。翅膀似乎能让它稍微"
+"控制方向，鼓胀的喙部滴落着腐蚀性黏液。"
 
 #. ~ Description of monster "unstable fire ant"
 #: data/json/monsters/insect_spider.json
@@ -180457,7 +180473,7 @@ msgstr "%s 挣脱了！"
 #: data/json/monsters/zed_soldiers.json
 #, c-format
 msgid "The %s vomits acid!"
-msgstr ""
+msgstr "%s 喷吐出酸液！"
 
 #. ~ Death message of monster "giant fire ant"
 #: data/json/monsters/insect_spider.json
@@ -180685,7 +180701,7 @@ msgstr[0] "甲壳蜈蚣"
 #: data/json/monsters/insect_spider.json
 msgid "balloon fly"
 msgid_plural "balloon flies"
-msgstr[0] ""
+msgstr[0] "气球蝇"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -190379,282 +190395,282 @@ msgstr "你是光头。"
 #. ~ Description of mutation "Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You hair is shaved on both sides."
-msgstr ""
+msgstr "你的头发两侧都剃了。"
 
 #. ~ Description of variant "Hair: black, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long black hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头乌黑的长发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: black, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long black hair cut short on top."
-msgstr ""
+msgstr "你头顶留着长长的黑发，剪得短一些。"
 
 #. ~ Description of variant "Hair: black, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long black hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的黑发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: black, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long black hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的黑发，随意地扎成马尾辫。"
 
 #. ~ Description of variant "Hair: blond, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blond hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的金发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: blond, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blond hair cut short on top."
-msgstr ""
+msgstr "你头顶留着短发，是金黄色的。"
 
 #. ~ Description of variant "Hair: blond, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blond hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的金发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: blond, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blond hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的金发，随意地梳理着，毫无拘束。"
 
 #. ~ Description of variant "Hair: blue, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blue hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的蓝色头发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: blue, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blue hair cut short on top."
-msgstr ""
+msgstr "你头顶的长发已经剪短了。"
 
 #. ~ Description of variant "Hair: blue, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blue hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的蓝色头发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: blue, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long blue hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的蓝发，随意而无忧地梳理着。"
 
 #. ~ Description of variant "Hair: brown, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long brown hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头乌黑的长发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: brown, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long brown hair cut short on top."
-msgstr ""
+msgstr "你头顶的头发是长棕色的，剪得很短。"
 
 #. ~ Description of variant "Hair: brown, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long brown hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的棕色头发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: brown, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long brown hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的棕色头发，随意地梳理着，毫无拘束。"
 
 #. ~ Description of variant "Hair: gray, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long gray hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的灰发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: gray, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long gray hair cut short on top."
-msgstr ""
+msgstr "你头顶的头发是长长的，剪得短了。"
 
 #. ~ Description of variant "Hair: gray, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long gray hair tied back in a ponytail."
-msgstr ""
+msgstr "你留着一头长长的灰发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: gray, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long gray hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的灰发，随意地梳理着，毫无拘束。"
 
 #. ~ Description of variant "Hair: green, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long green hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的绿色头发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: green, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long green hair cut short on top."
-msgstr ""
+msgstr "你头顶留着长长的绿色短发。"
 
 #. ~ Description of variant "Hair: green, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long green hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的绿色头发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: green, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long green hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的绿色头发，随意地梳理着，无忧无虑。"
 
 #. ~ Description of mutation "Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头整洁简约的长发。"
 
 #. ~ Description of mutation "Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long hair cut short on top."
-msgstr ""
+msgstr "你把头发顶部剪短了。"
 
 #. ~ Description of mutation "Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long hair tied back in a ponytail."
-msgstr ""
+msgstr "你留着长发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: pink, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long pink hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的粉色头发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: pink, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long pink hair cut short on top."
-msgstr ""
+msgstr "你头顶留着长长的粉色短发。"
 
 #. ~ Description of variant "Hair: pink, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long pink hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的粉色头发，扎成了马尾辫。"
 
 #. ~ Description of variant "Hair: pink, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long pink hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的粉色头发，随意地梳理着，无忧无虑。"
 
 #. ~ Description of variant "Hair: purple, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long purple hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的紫色头发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: purple, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long purple hair cut short on top."
-msgstr ""
+msgstr "你头顶留着短发，发色是深紫色。"
 
 #. ~ Description of variant "Hair: purple, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long purple hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的紫色头发，扎成了马尾辫。"
 
 #. ~ Description of variant "Hair: purple, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long purple hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的紫色头发，随意地梳理着，无忧无虑。"
 
 #. ~ Description of variant "Hair: red, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long red hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的红发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: red, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long red hair cut short on top."
-msgstr ""
+msgstr "你头顶的长发已经剪短了。"
 
 #. ~ Description of variant "Hair: red, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long red hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的红发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: red, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long red hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的红发，随意而无忧地穿着。"
 
 #. ~ Description of variant "Hair: white, long" of mutation"Hair: long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long white hair cut in a neat, simple style."
-msgstr ""
+msgstr "你留着一头长长的白发，剪得整齐简洁。"
 
 #. ~ Description of variant "Hair: white, mullet" of mutation"Hair: mullet"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long white hair cut short on top."
-msgstr ""
+msgstr "你头顶留着长长的白发，剪得短一些。"
 
 #. ~ Description of variant "Hair: white, ponytail" of mutation"Hair: ponytail"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long white hair tied back in a ponytail."
-msgstr ""
+msgstr "你有一头长长的白发，扎成马尾辫。"
 
 #. ~ Description of variant "Hair: white, long messy" of mutation"Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long white hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头长长的白发，随意地梳理着，无忧无虑。"
 
 #. ~ Description of mutation "Hair: long messy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have long, messy hair, worn loose and carefree."
-msgstr ""
+msgstr "你有一头又长又乱的头发，随意地梳理着，毫无拘束。"
 
 #. ~ Description of variant "Hair: black, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length black hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: blond, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length blond hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: blue, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length blue hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: brown, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length brown hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长棕色头发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: gray, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length gray hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中等长度的灰发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: green, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length green hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of mutation "Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛下方。"
 
 #. ~ Description of variant "Hair: pink, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length pink hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: purple, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length purple hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: red, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length red hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中长发，垂在一只眼睛上方。"
 
 #. ~ Description of variant "Hair: white, medium fringe" of mutation"Hair: medium fringe"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have mid-length white hair that hangs down over one eye."
-msgstr ""
+msgstr "你有一头中等长度的白发，垂在一只眼睛下方。"
 
 #. ~ Description of mutation "Natural hair color: black"
 #: data/json/mutations/appearance_hair_styles.json
@@ -190744,1031 +190760,1031 @@ msgstr "你有一头白色短发，面前的刘海遮住了一只眼睛。"
 #. ~ Description of variant "Hair: black, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long black hair."
-msgstr ""
+msgstr "你有一头非常长的黑发。"
 
 #. ~ Description of variant "Hair: blond, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long blond hair."
-msgstr ""
+msgstr "你有一头非常长的金发。"
 
 #. ~ Description of variant "Hair: blue, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long blue hair."
-msgstr ""
+msgstr "你有一头非常长的蓝色头发。"
 
 #. ~ Description of variant "Hair: brown, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long brown hair."
-msgstr ""
+msgstr "你有一头非常长的棕色头发。"
 
 #. ~ Description of variant "Hair: gray, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long gray hair."
-msgstr ""
+msgstr "你有一头非常长的灰发。"
 
 #. ~ Description of variant "Hair: green, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long green hair."
-msgstr ""
+msgstr "你有一头非常长的绿色头发。"
 
 #. ~ Description of mutation "Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long hair."
-msgstr ""
+msgstr "你头发很长。"
 
 #. ~ Description of variant "Hair: pink, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long pink hair."
-msgstr ""
+msgstr "你有一头非常长的粉色头发。"
 
 #. ~ Description of variant "Hair: purple, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long purple hair."
-msgstr ""
+msgstr "你有一头非常长的紫色头发。"
 
 #. ~ Description of variant "Hair: red, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long red hair."
-msgstr ""
+msgstr "你有一头非常长的红发。"
 
 #. ~ Description of variant "Hair: white, very long" of mutation"Hair: very long"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "You have very long white hair."
-msgstr ""
+msgstr "你有一头非常长的白发。"
 
 #. ~ Description of variant "Hair: black, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的黑发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: black, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的黑发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: black, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is cut short."
-msgstr ""
+msgstr "你的黑发被剪短了。"
 
 #. ~ Description of variant "Hair: black, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is long and wavy."
-msgstr ""
+msgstr "你的黑发又长又卷。"
 
 #. ~ Description of variant "Hair: black, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is shaved on both sides."
-msgstr ""
+msgstr "你的黑发两侧都剃了。"
 
 #. ~ Description of variant "Hair: black, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的黑发顶部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: black, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is threaded with beads."
-msgstr ""
+msgstr "你的黑发上串着珠子。"
 
 #. ~ Description of variant "Hair: black, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你的黑发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: black, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你的黑发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: black, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair is worn in tousled layers."
-msgstr ""
+msgstr "你的黑发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: black, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your black hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的黑发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: blond, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的金发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: blond, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的金发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: blond, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is cut short."
-msgstr ""
+msgstr "你的金发被剪短了。"
 
 #. ~ Description of variant "Hair: blond, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is long and wavy."
-msgstr ""
+msgstr "你的金发又长又卷。"
 
 #. ~ Description of variant "Hair: blond, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is shaved on both sides."
-msgstr ""
+msgstr "你的金发两侧都剃了。"
 
 #. ~ Description of variant "Hair: blond, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的金发顶部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: blond, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is threaded with beads."
-msgstr ""
+msgstr "你的金发上点缀着珠光。"
 
 #. ~ Description of variant "Hair: blond, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你金发的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: blond, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你金发的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: blond, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair is worn in tousled layers."
-msgstr ""
+msgstr "你的金发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: blond, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blond hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的金发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: blue, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的蓝色头发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: blue, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的蓝色头发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: blue, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is cut short."
-msgstr ""
+msgstr "你的蓝色头发被剪短了。"
 
 #. ~ Description of variant "Hair: blue, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is long and wavy."
-msgstr ""
+msgstr "你的蓝色头发又长又卷。"
 
 #. ~ Description of variant "Hair: blue, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is shaved on both sides."
-msgstr ""
+msgstr "你的蓝色头发两侧都剃了。"
 
 #. ~ Description of variant "Hair: blue, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你蓝色的头发顶部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: blue, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is threaded with beads."
-msgstr ""
+msgstr "你的蓝色头发上串着珠子。"
 
 #. ~ Description of variant "Hair: blue, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你蓝色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: blue, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你蓝色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: blue, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair is worn in tousled layers."
-msgstr ""
+msgstr "你蓝色的头发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: blue, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your blue hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的蓝色头发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: brown, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的棕色头发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: brown, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的棕色头发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: brown, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is long and wavy."
-msgstr ""
+msgstr "你的棕色头发又长又卷。"
 
 #. ~ Description of variant "Hair: brown, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is shaved on both sides."
-msgstr ""
+msgstr "你把棕色的头发两边都剃了。"
 
 #. ~ Description of variant "Hair: brown, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的棕色头发顶部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: brown, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is threaded with beads."
-msgstr ""
+msgstr "你棕色的头发上串着珠子。"
 
 #. ~ Description of variant "Hair: brown, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你用两条长长的辫子扎起了棕色的头发。"
 
 #. ~ Description of variant "Hair: brown, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你用两条长长的辫子扎成了棕色的头发。"
 
 #. ~ Description of variant "Hair: brown, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair is worn in tousled layers."
-msgstr ""
+msgstr "你棕色的头发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: brown, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your brown hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的棕色头发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: black, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly black hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的黑发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: blond, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly blond hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的金发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: blue, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly blue hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的蓝发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: brown, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly brown hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的棕色头发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: gray, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly gray hair is cut short and neat."
-msgstr ""
+msgstr "你那卷曲的灰发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: green, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly green hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的绿色头发被剪得短而整齐。"
 
 #. ~ Description of mutation "Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly hair is cut short and neat."
-msgstr ""
+msgstr "你的卷发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: pink, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly pink hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的粉色头发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: purple, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly purple hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的紫色头发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: red, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly red hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的红发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: white, short curls" of mutation"Hair: short curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your curly white hair is cut short and neat."
-msgstr ""
+msgstr "你卷曲的白发被剪得短而整齐。"
 
 #. ~ Description of variant "Hair: black, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by black curls."
-msgstr ""
+msgstr "你的脸被乌黑的卷发勾勒出轮廓。"
 
 #. ~ Description of variant "Hair: blond, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by blond curls."
-msgstr ""
+msgstr "你的脸被金色的卷发环绕着。"
 
 #. ~ Description of variant "Hair: blue, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by blue curls."
-msgstr ""
+msgstr "你的脸被蓝色的卷发环绕着。"
 
 #. ~ Description of variant "Hair: brown, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by brown curls."
-msgstr ""
+msgstr "你的脸被棕色的卷发环绕着。"
 
 #. ~ Description of mutation "Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by curls."
-msgstr ""
+msgstr "你的脸被卷发勾勒出轮廓。"
 
 #. ~ Description of variant "Hair: gray, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by gray curls."
-msgstr ""
+msgstr "你的脸被灰白色的卷发环绕着。"
 
 #. ~ Description of variant "Hair: green, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by green curls."
-msgstr ""
+msgstr "你的脸被绿色的卷发环绕着。"
 
 #. ~ Description of variant "Hair: pink, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by pink curls."
-msgstr ""
+msgstr "你的脸被粉色的卷发勾勒出轮廓。"
 
 #. ~ Description of variant "Hair: purple, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by purple curls."
-msgstr ""
+msgstr "你的脸被紫色的卷发环绕着。"
 
 #. ~ Description of variant "Hair: red, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by red curls."
-msgstr ""
+msgstr "你的脸被红发的卷发环绕着。"
 
 #. ~ Description of variant "Hair: white, medium curls" of mutation"Hair: medium curls"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your face is framed by white curls."
-msgstr ""
+msgstr "你的脸被白色的卷发勾勒出轮廓。"
 
 #. ~ Description of variant "Hair: gray, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的灰发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: gray, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的灰发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: gray, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is cut short."
-msgstr ""
+msgstr "你的灰发被剪短了。"
 
 #. ~ Description of variant "Hair: gray, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is long and wavy."
-msgstr ""
+msgstr "你的灰色长发呈波浪状。"
 
 #. ~ Description of variant "Hair: gray, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is shaved on both sides."
-msgstr ""
+msgstr "你的灰色头发两侧都剃短了。"
 
 #. ~ Description of variant "Hair: gray, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的灰色头发头顶留长，两侧剃短。"
 
 #. ~ Description of variant "Hair: gray, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is threaded with beads."
-msgstr ""
+msgstr "你的灰色头发中串着珠子。"
 
 #. ~ Description of variant "Hair: gray, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你灰白色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: gray, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你灰白色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: gray, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair is worn in tousled layers."
-msgstr ""
+msgstr "你的灰发凌乱地分层着。"
 
 #. ~ Description of variant "Hair: gray, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your gray hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的灰发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: green, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的绿色头发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: green, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的绿色头发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: green, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is cut short."
-msgstr ""
+msgstr "你的绿发被剪短了。"
 
 #. ~ Description of variant "Hair: green, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is long and wavy."
-msgstr ""
+msgstr "你的头发又长又卷。"
 
 #. ~ Description of variant "Hair: green, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is shaved on both sides."
-msgstr ""
+msgstr "你的绿色头发两侧都剃了。"
 
 #. ~ Description of variant "Hair: green, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你头发上部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: green, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is threaded with beads."
-msgstr ""
+msgstr "你绿色的头发上串着珠子。"
 
 #. ~ Description of variant "Hair: green, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你绿色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: green, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你绿色的头发扎成了两条非常长的辫子。"
 
 #. ~ Description of variant "Hair: green, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair is worn in tousled layers."
-msgstr ""
+msgstr "你绿色的头发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: green, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your green hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的绿发几乎垂到肩膀。"
 
 #. ~ Description of mutation "Natural Hair Growth"
 #: data/json/mutations/appearance_hair_styles.json
 msgid ""
 "Your hair (and if applicable, beard) will naturally get longer over time.  Turning this off will prevent "
 "further growth."
-msgstr ""
+msgstr "你的头发（以及如有胡须）会随着时间的推移自然变长。关闭此功能将阻止其进一步生长。"
 
 #. ~ Description of mutation "Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的头发被剃到了接近头皮的位置。"
 
 #. ~ Description of mutation "Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的头发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of mutation "Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is cut short."
-msgstr ""
+msgstr "你的头发被剪短了。"
 
 #. ~ Description of mutation "Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is long and wavy."
-msgstr ""
+msgstr "你的头发又长又卷。"
 
 #. ~ Description of mutation "Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is threaded with beads."
-msgstr ""
+msgstr "你的头发上串着珠子。"
 
 #. ~ Description of mutation "Hair: pigtails"
 #. ~ Description of variant "Hair: white, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你的头发扎成了两条长长的辫子。"
 
 #. ~ Description of mutation "Hair: twin tails"
 #. ~ Description of variant "Hair: white, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你的头发扎成了两条很长的辫子。"
 
 #. ~ Description of mutation "Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair is worn in tousled layers."
-msgstr ""
+msgstr "你的头发凌乱地分层着。"
 
 #. ~ Description of mutation "Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的头发几乎长到肩膀。"
 
 #. ~ Description of variant "Hair: black, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long black hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的黑发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: black, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long black hair is shaved on one side."
-msgstr ""
+msgstr "你的一侧长发被剃了。"
 
 #. ~ Description of variant "Hair: black, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long black hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的黑发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: black, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long black hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的黑发扎成一缕辫子。"
 
 #. ~ Description of variant "Hair: blond, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blond hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的金发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: blond, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blond hair is shaved on one side."
-msgstr ""
+msgstr "你的一侧长发被剃了。"
 
 #. ~ Description of variant "Hair: blond, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blond hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的金发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: blond, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blond hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的金发扎成了一条单辫。"
 
 #. ~ Description of variant "Hair: blue, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blue hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的蓝色头发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: blue, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blue hair is shaved on one side."
-msgstr ""
+msgstr "你长长的蓝色头发只在一边剃了。"
 
 #. ~ Description of variant "Hair: blue, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blue hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的蓝发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: blue, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long blue hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的蓝发被编成了一条单辫。"
 
 #. ~ Description of variant "Hair: brown, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long brown hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的棕色头发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: brown, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long brown hair is shaved on one side."
-msgstr ""
+msgstr "你的一侧长棕色头发被剃了。"
 
 #. ~ Description of variant "Hair: brown, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long brown hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的棕色头发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: brown, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long brown hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的棕色头发扎成一缕辫子。"
 
 #. ~ Description of variant "Hair: gray, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long gray hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的灰发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: gray, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long gray hair is shaved on one side."
-msgstr ""
+msgstr "你一侧的长灰发被剃了。"
 
 #. ~ Description of variant "Hair: gray, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long gray hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的灰发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: gray, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long gray hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的灰发编成了一缕单辫。"
 
 #. ~ Description of variant "Hair: green, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long green hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的绿发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: green, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long green hair is shaved on one side."
-msgstr ""
+msgstr "你长长的绿色头发只在一边剃了。"
 
 #. ~ Description of variant "Hair: green, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long green hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的绿发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: green, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long green hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的绿发被编成了一条单辫。"
 
 #. ~ Description of mutation "Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long hair is cut in a feathered style."
-msgstr ""
+msgstr "你的长发剪成了蓬松的羽状造型。"
 
 #. ~ Description of mutation "Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long hair is shaved on one side."
-msgstr ""
+msgstr "你的长发只在一边剃了。"
 
 #. ~ Description of mutation "Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long hair is tied up in a bun."
-msgstr ""
+msgstr "你的长发扎成了一个辫子。"
 
 #. ~ Description of mutation "Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long hair is worn in a single braid."
-msgstr ""
+msgstr "你的长发扎成一条单辫。"
 
 #. ~ Description of variant "Hair: pink, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long pink hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的粉色头发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: pink, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long pink hair is shaved on one side."
-msgstr ""
+msgstr "你长长的粉色头发只在一边剃了。"
 
 #. ~ Description of variant "Hair: pink, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long pink hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的粉色头发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: pink, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long pink hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的粉色头发扎成了一条单辫。"
 
 #. ~ Description of variant "Hair: purple, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long purple hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的紫色头发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: purple, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long purple hair is shaved on one side."
-msgstr ""
+msgstr "你长长的紫色头发只在一边剃了。"
 
 #. ~ Description of variant "Hair: purple, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long purple hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的紫色头发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: purple, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long purple hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的紫色头发扎成一缕辫子。"
 
 #. ~ Description of variant "Hair: red, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long red hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的红发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: red, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long red hair is shaved on one side."
-msgstr ""
+msgstr "你长长的红发只在一边剃了。"
 
 #. ~ Description of variant "Hair: red, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long red hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的红发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: red, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long red hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的红发扎成一缕辫子。"
 
 #. ~ Description of variant "Hair: white, long feathered" of mutation"Hair: long feathered"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long white hair is cut in a feathered style."
-msgstr ""
+msgstr "你长长的白发被剪成了羽毛状的造型。"
 
 #. ~ Description of variant "Hair: white, side shave" of mutation"Hair: side shave"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long white hair is shaved on one side."
-msgstr ""
+msgstr "你的一侧长发被剃了。"
 
 #. ~ Description of variant "Hair: white, bun" of mutation"Hair: bun"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long white hair is tied up in a bun."
-msgstr ""
+msgstr "你长长的白发扎成了一个辫子。"
 
 #. ~ Description of variant "Hair: white, long braid" of mutation"Hair: long braid"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your long white hair is worn in a single braid."
-msgstr ""
+msgstr "你长长的白发编成了一条单辫。"
 
 #. ~ Description of variant "Hair: pink, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的粉色头发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: pink, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你粉色的头发顶部剪得短，两侧则以经典的军旅风格整齐地剃净。"
 
 #. ~ Description of variant "Hair: pink, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is cut short."
-msgstr ""
+msgstr "你的粉色头发被剪短了。"
 
 #. ~ Description of variant "Hair: pink, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is long and wavy."
-msgstr ""
+msgstr "你的粉色头发又长又卷。"
 
 #. ~ Description of variant "Hair: pink, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is shaved on both sides."
-msgstr ""
+msgstr "你的粉色头发两侧都剪了。我们的粉色头发又长又卷。"
 
 #. ~ Description of variant "Hair: pink, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你粉色的头发顶部短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: pink, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is threaded with beads."
-msgstr ""
+msgstr "你粉红色的头发上串着珠子。"
 
 #. ~ Description of variant "Hair: pink, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你粉红色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: pink, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你粉红色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: pink, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair is worn in tousled layers."
-msgstr ""
+msgstr "你粉红色的头发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: pink, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your pink hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的粉色长发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: purple, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的紫色头发被剃得几乎贴到头皮。"
 
 #. ~ Description of variant "Hair: purple, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的紫色头发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: purple, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is cut short."
-msgstr ""
+msgstr "你的紫色头发被剪短了。"
 
 #. ~ Description of variant "Hair: purple, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is long and wavy."
-msgstr ""
+msgstr "你的紫色头发又长又卷。"
 
 #. ~ Description of variant "Hair: purple, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is shaved on both sides."
-msgstr ""
+msgstr "你紫色的头发两侧都剃了。"
 
 #. ~ Description of variant "Hair: purple, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的紫色头发顶部短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: purple, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is threaded with beads."
-msgstr ""
+msgstr "你紫色的头发上串着珠子。"
 
 #. ~ Description of variant "Hair: purple, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你紫色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: purple, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你紫色的头发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: purple, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair is worn in tousled layers."
-msgstr ""
+msgstr "你紫色的头发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: purple, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your purple hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的紫色长发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: red, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的红发被剃到了接近头皮的位置。"
 
 #. ~ Description of variant "Hair: red, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的红发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: red, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is cut short."
-msgstr ""
+msgstr "你的红发被剪短了。"
 
 #. ~ Description of variant "Hair: red, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is long and wavy."
-msgstr ""
+msgstr "你的红发又长又卷。"
 
 #. ~ Description of variant "Hair: red, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is shaved on both sides."
-msgstr ""
+msgstr "你的红发两侧都剃了。"
 
 #. ~ Description of variant "Hair: red, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的红发顶部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: red, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is threaded with beads."
-msgstr ""
+msgstr "你的红发上串着珠子。"
 
 #. ~ Description of variant "Hair: red, pigtails" of mutation"Hair: pigtails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is tied up in two long pigtails."
-msgstr ""
+msgstr "你红发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: red, twin tails" of mutation"Hair: twin tails"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is tied up in two very long pigtails."
-msgstr ""
+msgstr "你红发扎成了两条长长的辫子。"
 
 #. ~ Description of variant "Hair: red, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair is worn in tousled layers."
-msgstr ""
+msgstr "你的红发凌乱地分层着。"
 
 #. ~ Description of variant "Hair: red, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your red hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的红发几乎垂到肩膀。"
 
 #. ~ Description of variant "Hair: black, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of black curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的黑色卷发。"
 
 #. ~ Description of variant "Hair: blond, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of blond curls."
-msgstr ""
+msgstr "你的卷发被梳成蓬松的金色卷云。"
 
 #. ~ Description of variant "Hair: blue, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of blue curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的蓝色卷发。"
 
 #. ~ Description of variant "Hair: brown, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of brown curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的棕色卷发。"
 
 #. ~ Description of mutation "Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of curls."
-msgstr ""
+msgstr "你的卷发被梳理成蓬松的卷云。"
 
 #. ~ Description of variant "Hair: gray, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of gray curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的灰白色卷发。"
 
 #. ~ Description of variant "Hair: green, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of green curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的绿色卷发。"
 
 #. ~ Description of variant "Hair: pink, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of pink curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的粉红色卷发。"
 
 #. ~ Description of variant "Hair: purple, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of purple curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的紫色卷发。"
 
 #. ~ Description of variant "Hair: red, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of red curls."
-msgstr ""
+msgstr "你那有质感的头发被梳成一团蓬松的红色卷发。"
 
 #. ~ Description of variant "Hair: white, afro" of mutation"Hair: afro"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your textured hair is combed out into a voluminous cloud of white curls."
-msgstr ""
+msgstr "你的卷发被梳成蓬松的白色卷云。"
 
 #. ~ Description of variant "Hair: white, buzz cut" of mutation"Hair: buzzcut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair has been shaved close to the scalp."
-msgstr ""
+msgstr "你的白发被剃到了接近头皮的位置。"
 
 #. ~ Description of variant "Hair: white, crew cut" of mutation"Hair: crew cut"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is cropped short on top and shaved clean on the sides in classic military style."
-msgstr ""
+msgstr "你的白发顶部剪得短，两侧则以经典的军旅风格剃得干净利落。"
 
 #. ~ Description of variant "Hair: white, short" of mutation"Hair: short"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is cut short."
-msgstr ""
+msgstr "你的白发被剪短了。"
 
 #. ~ Description of variant "Hair: white, long wavy" of mutation"Hair: long wavy"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is long and wavy."
-msgstr ""
+msgstr "你的白发又长又卷。"
 
 #. ~ Description of variant "Hair: white, mohawk" of mutation"Hair: mohawk"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is shaved on both sides."
-msgstr ""
+msgstr "你的白发两侧都剃了。"
 
 #. ~ Description of variant "Hair: white, fade" of mutation"Hair: fade"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is short on top, buzzed on the sides."
-msgstr ""
+msgstr "你的头发顶部较短，两侧留了刘海。"
 
 #. ~ Description of variant "Hair: white, beaded" of mutation"Hair: beaded hair"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is threaded with beads."
-msgstr ""
+msgstr "你的白发上串着珠子。"
 
 #. ~ Description of variant "Hair: white, shag" of mutation"Hair: shag"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair is worn in tousled layers."
-msgstr ""
+msgstr "你的白发被随意地梳理成凌乱的层次。"
 
 #. ~ Description of variant "Hair: white, medium-length" of mutation"Hair: medium length"
 #: data/json/mutations/appearance_hair_styles.json
 msgid "Your white hair reaches almost to your shoulders."
-msgstr ""
+msgstr "你的白发几乎垂到肩膀。"
 
 #. ~ Mutation name
 #: data/json/mutations/cybernetic_traits.json
@@ -191994,7 +192010,7 @@ msgstr "肤色：浅棕"
 #. ~ Mutation name
 #: data/json/mutations/mutation_appearance.json
 msgid "Skin tone: pale"
-msgstr ""
+msgstr "肤色：苍白"
 
 #. ~ Mutation name
 #: data/json/mutations/mutation_appearance.json
@@ -192046,7 +192062,7 @@ msgstr "浅棕肤色。"
 #. ~ Description of mutation "Skin tone: light"
 #: data/json/mutations/mutation_appearance.json
 msgid "You have a light skin tone."
-msgstr ""
+msgstr "你肤色较浅。"
 
 #. ~ Description of mutation "Facial hair: soul patch"
 #: data/json/mutations/mutation_appearance.json
@@ -192204,7 +192220,7 @@ msgstr "你的耳朵前面有些鬓角毛发，一般来说，它会让你的头
 #. ~ Description of mutation "Skin tone: pale"
 #: data/json/mutations/mutation_appearance.json
 msgid "You have very pale skin."
-msgstr ""
+msgstr "你的皮肤非常白皙。"
 
 #. ~ Memorial message of mutation class "Sylvan" for female
 #: data/json/mutations/mutation_category.json
@@ -193924,7 +193940,7 @@ msgstr "翅膀"
 msgid ""
 "A wing-assisted jump that requires a great deal of clearance, meaning you may only select points at the "
 "maximum range."
-msgstr ""
+msgstr "一种需要大量净空的翼助跳跃，这意味着你只能选择最大射程处的目标点。"
 
 #. ~ Spell name
 #. ~ Mutation name
@@ -193983,7 +193999,7 @@ msgstr "叉舌"
 #. ~ Mutation name
 #: data/json/mutations/mutation_spells.json data/json/mutations/mutations.json
 msgid "Insect Flight"
-msgstr ""
+msgstr "昆虫飞行"
 
 #. ~ Description of spell "Bioluminescent Flare"
 #: data/json/mutations/mutation_spells.json
@@ -198796,7 +198812,7 @@ msgstr "鼠须"
 msgid ""
 "With powerful legs and buzzing wings, you can leap and fly a fair distance, provided you have enough room to "
 "do so."
-msgstr ""
+msgstr "凭借强健的双腿和嗡嗡作响的翅膀，只要你有足够的空间，就能跳跃并飞得相当远。"
 
 #. ~ Description of mutation "Rope Webs"
 #: data/json/mutations/mutations.json
@@ -199884,7 +199900,7 @@ msgstr "在这个新世界里，你的治愈速度和大多数人一样快。"
 msgid ""
 "You hiss when speaking, and your voice is a bit quieter.  Persuading people will be more difficult, but lying "
 "to or threatening them will be easier."
-msgstr ""
+msgstr "你说话时会发出嘶嘶声，声音也稍微低了。说服别人会更困难，但欺骗或威胁他们则更容易。"
 
 #. ~ Description of mutation "Tunnel Fighter"
 #: data/json/mutations/mutations.json
@@ -229078,6 +229094,12 @@ msgid ""
 "task of deactivation, please review the provided documentation, and pay special attention to the procedures "
 "detailed in subsections IV and VII."
 msgstr ""
+"好的。请稍等；我们将传送 hm12 及其操作程序，其中包括它最后记录位置的信息。”\n"
+"\n"
+"对讲机托盘砰地响了几下，有东西被放了进去。大约一分钟后，托盘滑开，露出一件细长的武器，看起来有点像雷达测速枪，"
+"一块沉重的电池，一个活页夹里的一沓文件，还有一个移动电源。“hm12 通过移动电源供电，使用前请确保电量充足。请记"
+"住，将样本*完好无损*地带回来——损坏的回收品对我们毫无用处。为了安全地完成失能任务，请仔细阅读所提供的文档，并特"
+"别注意第四节和第七节中详述的操作步骤。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/hub01/robofac_intercom/robofac_intercom_missions.json
@@ -267328,7 +267350,7 @@ msgstr "已废弃任务"
 #. ~ Description of mutation "Pale Skin"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Obsoleted trait.  It is now Skin tone: pale"
-msgstr ""
+msgstr "已废弃的特性。现为肤色：苍白"
 
 #. ~ Mutation name
 #: data/json/obsoletion_and_migration/obsoletion.json
@@ -279846,7 +279868,7 @@ msgstr "你已经可以熟练运用各种短棍类武器了，只要手上有一
 #. ~ Description of proficiency "Quarterstaff Mastery"
 #: data/json/proficiencies/melee_weapons.json
 msgid "You've mastered the use of staffs.  Donatello would be proud."
-msgstr ""
+msgstr "你已经掌握了使用竖琴的技巧，多纳泰罗一定会感到自豪。"
 
 #. ~ Description of proficiency "Short Sword Proficiency"
 #: data/json/proficiencies/melee_weapons.json
@@ -281599,7 +281621,7 @@ msgstr "如果你看到这个，说明游戏出bug了。"
 #. ~ Unattended message for recipe step 2
 #: data/json/recipes/food/bread.json
 msgid "The dough has finished rising."
-msgstr ""
+msgstr "面团已经发酵好了。"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -282257,7 +282279,7 @@ msgstr "各种用于在战斗中喷洒出去的化学药剂的配方。"
 #. ~ Description of the category "slingshot ammunition"
 #: data/json/recipes/nested.json
 msgid "Recipes related to creating gravel and other tiny ammunition for slingshots."
-msgstr ""
+msgstr "与制作砾石及其他弹弓用微型弹药相关的配方。"
 
 #. ~ Description of the category "belts"
 #: data/json/recipes/nested.json
@@ -329576,7 +329598,7 @@ msgstr "一片厚金属车顶。"
 msgid ""
 "A tiny electric motor.  Installed on the same frame as a door or curtain, it will allow you to remotely open "
 "the door or curtain from the vehicle controls."
-msgstr ""
+msgstr "一个小型电动机。安装在门或帘幕的同一框架上，可以让你通过载具控制装置远程打开门或帘幕。"
 
 #. ~ Description of vehicle part "water faucet"
 #: data/json/vehicleparts/vehicle_parts.json
@@ -331199,7 +331221,7 @@ msgstr "大型动物运输车"
 #. ~ Vehicle name
 #: data/json/vehicles/carts.json
 msgid "Large Suitcase"
-msgstr ""
+msgstr "大号手提箱"
 
 #. ~ Vehicle name
 #: data/json/vehicles/carts.json
@@ -331229,7 +331251,7 @@ msgstr "购物车"
 #. ~ Vehicle name
 #: data/json/vehicles/carts.json
 msgid "Suitcase"
-msgstr ""
+msgstr "手提箱"
 
 #. ~ Vehicle name
 #: data/json/vehicles/carts.json
@@ -344605,7 +344627,7 @@ msgstr "一种不祥的刺痛感在你的身体里回荡。"
 #. ~ Blood analysis description of effect type "antivirals"
 #: data/mods/deadly_bites/effects.json
 msgid "Antivirals"
-msgstr ""
+msgstr "抗病毒药"
 
 #. ~ Female memorial apply log of effect type "Pallor, Itchy pale skin, Necrotic skin"
 #: data/mods/deadly_bites/effects.json
@@ -352033,22 +352055,22 @@ msgstr "%s（方向键）"
 #: src/activity_actor.cpp:368
 #, c-format
 msgid "Your %s is completely ruined.  It will never fire again."
-msgstr ""
+msgstr "你的%s已经彻底毁了，再也无法触发了。"
 
 #: src/activity_actor.cpp:383
 #, c-format
 msgid "You quickly fix your malfunctioning %s."
-msgstr ""
+msgstr "您迅速修复了故障的 %s。"
 
 #: src/activity_actor.cpp:389
 #, c-format
 msgid "Your %s has a mechanical malfunction.  You try to quickly fix it, but fail!"
-msgstr ""
+msgstr "你的 %s 出现了机械故障。你试图快速修复，但失败了！"
 
 #: src/activity_actor.cpp:398
 #, c-format
 msgid "Your %s is too hot and will not fire until it has cooled."
-msgstr ""
+msgstr "你的%s太烫了，需要冷却后才能触发。"
 
 #: src/activity_actor.cpp:687
 msgid "Auto drive canceled."
@@ -355746,7 +355768,7 @@ msgstr "你目光如铁，你举起了你的武器！"
 
 #: src/avatar_action.cpp:722
 msgid "You can't bring yourself to fire your weaponZ…"
-msgstr ""
+msgstr "你无法让自己开枪……"
 
 #: src/avatar_action.cpp:753
 #, c-format
@@ -355839,12 +355861,12 @@ msgstr "你无法提起力气投掷任何东西……"
 #: src/avatar_action.cpp:1025
 #, c-format
 msgid "You can't muster the strength to throw %s."
-msgstr ""
+msgstr "你没有力气扔出 %s。"
 
 #: src/avatar_action.cpp:1030
 #, c-format
 msgid "You're too exhausted to throw %s."
-msgstr ""
+msgstr "你太累了，无法扔掉 %s。"
 
 #: src/avatar_action.cpp:1061 src/iuse.cpp:1910 src/iuse.cpp:1941 src/iuse.cpp:4642
 #, c-format
@@ -357800,12 +357822,12 @@ msgstr "你太累了，无法保持你的 %s 继续运行。"
 #: src/character.cpp:3208
 #, c-format
 msgid "Your skill in %s has increased to %d!"
-msgstr ""
+msgstr "你在 %s 的技能已提升至 %d！"
 
 #: src/character.cpp:3213
 #, c-format
 msgid "Your knowledge of %s has increased to %d!"
-msgstr ""
+msgstr "你对 %s 的了解已提升至 %d！"
 
 #: src/character.cpp:3218
 #, c-format
@@ -358179,7 +358201,7 @@ msgstr "一声响亮的尖叫！"
 
 #: src/character.cpp:7822
 msgid "yourself screech loudly!"
-msgstr ""
+msgstr "大声尖叫！"
 
 #: src/character.cpp:7824
 #, c-format
@@ -358193,16 +358215,16 @@ msgstr "一声响亮的尖啸！"
 #: src/character.cpp:7840
 #, c-format
 msgid "Your %s is significantly muffled!"
-msgstr ""
+msgstr "你的 %s 声音明显被压低了！"
 
 #: src/character.cpp:7843
 #, c-format
 msgid "Your %s is barely audible!"
-msgstr ""
+msgstr "你的 %s 基本听不到！"
 
 #: src/character.cpp:7846
 msgid "your own faint voice."
-msgstr ""
+msgstr "你那微弱的声音。"
 
 #: src/character.cpp:7848
 #, c-format
@@ -359513,7 +359535,7 @@ msgstr "尖刺刺穿了你的 %s！"
 #: src/character_body.cpp:935
 #, c-format
 msgid "The strong wind is chilling your %s."
-msgstr ""
+msgstr "强风正让你的%s感到寒冷。"
 
 #: src/character_body.cpp:940
 #, c-format
@@ -362060,7 +362082,7 @@ msgstr "如果你的技能够高，下一次你就会学会它的制造方法了
 
 #: src/crafting.cpp:4539 src/crafting.cpp:4551
 msgid "Craft what?"
-msgstr ""
+msgstr "制作什么？"
 
 #: src/crafting.cpp:4540
 msgid "Craft new item"
@@ -362068,7 +362090,7 @@ msgstr "制造新物品"
 
 #: src/crafting.cpp:4553
 msgid "Start crafting"
-msgstr ""
+msgstr "开始制作"
 
 #: src/crafting_gui.cpp:83
 msgid "too dark to craft"
@@ -370111,7 +370133,7 @@ msgstr "已选择%s作为%s的默认弹药。"
 
 #: src/game.cpp:9593
 msgid "That ammo must be in your inventory to be selected as default."
-msgstr ""
+msgstr "该弹药必须在你的物品栏中才能被选为默认弹药。"
 
 #: src/game.cpp:9602
 #, c-format
@@ -372118,7 +372140,7 @@ msgstr "你控制住了自己。"
 
 #: src/handle_action.cpp:653
 msgid "You can't grab through the floor."
-msgstr ""
+msgstr "你不能穿过地板。"
 
 #: src/handle_action.cpp:658
 msgid "You'll need your hands free for grappling."
@@ -372130,7 +372152,7 @@ msgstr "你在目前的状态下无法起飞。"
 
 #: src/handle_action.cpp:667
 msgid "You're too exhausted to wrestle anything."
-msgstr ""
+msgstr "你太累了，根本没力气打斗了。"
 
 #: src/handle_action.cpp:671
 #, c-format
@@ -382110,7 +382132,7 @@ msgstr "%1$s 显示为 %2$s。"
 #: src/iuse.cpp:7202
 #, c-format
 msgid "Sun altitude %.1f°, azimuth %.1f°"
-msgstr ""
+msgstr "太阳高度角 %.1f°，方位角 %.1f°"
 
 #: src/iuse.cpp:7204
 msgid "You can't see the Sun from here."
@@ -384957,7 +384979,7 @@ msgstr "液体无害地分散到周围的水中。"
 
 #: src/magic_spell_effect.cpp:656
 msgid "You dodge out of the way!"
-msgstr ""
+msgstr "你闪开了！"
 
 #: src/magic_spell_effect.cpp:657
 msgid "<npcname> dodges out of the way!"
@@ -385405,7 +385427,7 @@ msgstr "对轮胎安全。"
 
 #: src/map.cpp:2945
 msgid "You need the use of at least one hand to climb."
-msgstr ""
+msgstr "攀爬时至少需要使用一只手。"
 
 #: src/map.cpp:2984 src/map.cpp:2994
 #, c-format
@@ -390649,7 +390671,7 @@ msgstr "%s 体型太小了，承受不了你的重量"
 
 #: src/monexamine.cpp:713
 msgid "You require 1 rank of ecology to ride"
-msgstr ""
+msgstr "你需要1级生态学等级才能骑乘"
 
 #: src/monexamine.cpp:715
 #, c-format
@@ -390658,7 +390680,7 @@ msgstr "你太重了，无法骑上 %s"
 
 #: src/monexamine.cpp:718
 msgid "You require 4 ranks of ecology to ride without a saddle"
-msgstr ""
+msgstr "你需要4个生态等级才能不骑马鞍骑行"
 
 #: src/monexamine.cpp:759
 #, c-format
@@ -398850,7 +398872,7 @@ msgstr "你感到太热了，无法睡眠。"
 
 #: src/player_hardcoded_effects.cpp:1243
 msgid "You can't sleep, you are in desperate need of water!"
-msgstr ""
+msgstr "你睡不着了，急需喝水！"
 
 #: src/player_hardcoded_effects.cpp:1307
 #, c-format
@@ -400308,7 +400330,7 @@ msgstr "你的闹钟响了，而你却还没能睡着过。"
 
 #: src/sounds.cpp:745
 msgid "You turn off your alarm clock."
-msgstr ""
+msgstr "你关掉了闹钟。"
 
 #: src/sounds.cpp:858
 msgid "a sound"
@@ -400390,15 +400412,15 @@ msgstr "你突然被睡眠的冲动给压倒了，你昏了过去。"
 
 #: src/suffer.cpp:583
 msgid "You shout loudly!"
-msgstr ""
+msgstr "你大声喊叫！"
 
 #: src/suffer.cpp:587
 msgid "You scream loudly!"
-msgstr ""
+msgstr "你大声尖叫！"
 
 #: src/suffer.cpp:591
 msgid "You let out a piercing howl!"
-msgstr ""
+msgstr "你发出一声刺耳的嚎叫！"
 
 #: src/suffer.cpp:610
 msgid "You feel dizzy for a moment."
@@ -401726,7 +401748,7 @@ msgstr "所有炮塔均已离线或设置为自动瞄准模式。"
 
 #: src/turret.cpp:393
 msgid "You cannot take full control of a turret while operating a vehicle."
-msgstr ""
+msgstr "驾驶车辆时，无法完全控制炮塔。"
 
 #: src/turret.cpp:398
 msgid "All turrets are offline or set to manual targeting mode."
@@ -401908,11 +401930,11 @@ msgstr "确定要拆下 %s 吗？"
 
 #: src/veh_appliance.cpp:550
 msgid "Also hide all the wiring on this floor?"
-msgstr ""
+msgstr "还要隐藏这一层的所有线路吗？"
 
 #: src/veh_appliance.cpp:551
 msgid "Also unhide all the wiring on this floor?"
-msgstr ""
+msgstr "还要取消隐藏这一层的所有线路吗？"
 
 #. ~ An addendum to Plug In's description, as in: Plug in appliance / merge power grid".
 #: src/veh_appliance.cpp:610
@@ -401921,11 +401943,11 @@ msgstr "能源并网"
 
 #: src/veh_appliance.cpp:617
 msgid "Hide wiring"
-msgstr ""
+msgstr "隐藏线路"
 
 #: src/veh_appliance.cpp:617
 msgid "Unhide wiring"
-msgstr ""
+msgstr "取消隐藏线路"
 
 #: src/veh_appliance.cpp:629 src/vehicle_use.cpp:2238
 msgid "Remove other cables first"
