@@ -3815,6 +3815,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
                     GROUP_FISH, true );
         const mtype_id fish_mon = random_entry_ref( fish_group );
         caught_corpse( who, here, fish_mon.obj() );
+        who.practice( skill_survival, 10, 5 );
     } else {
         monster *chosen_fish = random_entry( fishables );
         chosen_fish->fish_population -= 1;
@@ -3826,6 +3827,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
                 caught_corpse( who, here, *( chosen_fish->type ) );
             }
         }
+        who.practice( skill_survival, 10, 5 );
     }
 }
 
@@ -3879,8 +3881,8 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
         who.add_msg_if_player( m_good, _( "You feel a tug on your line!" ) );
         rod_fish( who, fishables );
     }
-    if( calendar::once_every( 60_minutes ) ) {
-        who.practice( skill_survival, rng( 1, 3 ) );
+    if( calendar::once_every( 10_minutes ) ) {
+        who.practice( skill_survival, 10, 5 );
     }
 }
 
@@ -7527,6 +7529,7 @@ void chop_logs_activity_actor::finish( player_activity &act, Character &who )
             who.may_activity_occupancy_after_end_items_loc.push_back( loc );
         }
     }
+    who.practice( skill_survival, 5, 4 );
     here.ter_set( pos, ter_t_dirt );
     who.add_msg_if_player( m_good, _( "You finish chopping wood." ) );
 
@@ -7681,7 +7684,7 @@ void chop_tree_activity_actor::finish( player_activity &act, Character &who )
             }
         }
     }
-    who.practice( skill_survival, 3, 3 );
+    who.practice( skill_survival, 20, 4 );
     here.cut_down_tree( pos, direction.xy() );
 
     who.add_msg_if_player( m_good, _( "You finish chopping down a tree." ) );

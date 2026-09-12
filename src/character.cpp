@@ -3185,7 +3185,7 @@ bool Character::practice( const skill_id &id, int amount, int cap, bool suppress
     }
 
     if( amount > 0 &&
-        static_cast<int>( get_skill_level( id ) ) > cap ) { //blunt grinding cap implementation for crafting
+        static_cast<int>( get_skill_level( id ) ) > cap ) {
         amount = 0;
         if( !suppress_warning ) {
             handle_skill_warning( id, false );
