@@ -1,24 +1,18 @@
 {
-    "name": "ctlg-vcpkg-dependencies",
-    "version-string": "1.0",
-    "dependencies": [
-        "pdcurses"
-    ],
-    "features": {
-    "sdl3": {
-      "description": "Build against SDL3 instead of SDL2.",
-      "dependencies": [
-        "sdl3",
-        { "name": "sdl3-image", "features": [ "jpeg", "png" ] },
-        "sdl3-ttf",
-        { "name": "sdl3-mixer",
-          "features": [ "libflac", "mpg123", "wavpack", "libvorbis" ],
-          "default-features": false
-        },
-        { "name": "glslang", "features": [ "tools" ] },
-        "sdl3-shadercross"
-      ]
-    }
-  },
-  "builtin-baseline": "f6672d8e480ccdecddfad3fd1b838ba369ffe6cd"
+  "name": "ctlg-vcpkg-dependencies",
+  "version-string": "1.0",
+  "port-version": 1,
+  "dependencies": [
+    { "name": "pdcurses", "version>=": "3.9#4", "platform": "windows" },
+    "sdl3",
+    { "name": "sdl3-image", "features": [ "jpeg", "png" ] },
+    "sdl3-ttf",
+    { "name": "sdl3-mixer",
+      "features": [ "libflac", "mpg123", "wavpack", "libvorbis" ],
+      "default-features": false
+    },
+    { "name": "glslang", "features": [ "tools" ] },
+    "sdl3-shadercross"
+  ],
+  "builtin-baseline": "a1cae005c39be7b18ba319fced856b68d7276271"
 }
