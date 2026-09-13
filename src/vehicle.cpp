@@ -141,6 +141,7 @@ static const vproto_id vehicle_prototype_none( "none" );
 static const zone_type_id zone_type_VEHICLE_PATROL( "VEHICLE_PATROL" );
 
 static const std::string flag_E_COMBUSTION( "E_COMBUSTION" );
+static const std::string flag_REQUIRE_E_COMBUSTION( "REQUIRE_E_COMBUSTION" );
 
 static const std::string flag_APPLIANCE( "APPLIANCE" );
 static const std::string flag_WIRING( "WIRING" );
@@ -6185,6 +6186,23 @@ void vehicle::idle( map &here, bool on_map )
         if( pt.is_unavailable() || !pt.enabled ) {
             continue;
         }
+
+        if ( pt.info().has_flag( flag_REQUIRE_E_COMBUSTION ) ) {
+            bool require_satisfied = false;
+            for( const int p : engines ) {
+                const vehicle_part &vp = parts[p];
+                //check if car has a enabled combustion engine installed, enabled, and currently running.
+                if ( vp.info().has_flag( flag_E_COMBUSTION ) && is_engine_on( vp ) && engine_on) {
+                    require_satisfied=true;
+                    break;
+                }
+            }
+            //Run skip outside of the above for loop and skip the part from emitting a field
+            if ( !require_satisfied ) {
+                continue;
+            }
+        }
+
         for( const emit_id &e : pt.info().emissions ) {
             here.emit_field( bub_part_pos( here, pt ), e );
         }

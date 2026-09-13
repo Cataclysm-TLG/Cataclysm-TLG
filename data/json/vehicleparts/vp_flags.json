@@ -101,6 +101,12 @@
     "info": "An alternator can be attached, and it will generate electrical power while the engine is on at the cost of some motive power."
   },
   {
+    "id": "REQUIRE_E_COMBUSTION",
+    "type": "json_flag",
+    "//": "The engine can mount and power a heater core",
+    "info": "A heater core can be ran with a combustion engine producing heat, to heat up the cabin."
+  },
+  {
     "id": "EXTRA_DRAG",
     "type": "json_flag",
     "info": "When turned on, it will stop the vehicle unless it has a strong engine."
