@@ -138,7 +138,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "drive_by_wire_controls", "integrated_heater_small", "dashboard", "vehicle_alarm" ]
+        "parts": [ "drive_by_wire_controls", "integrated_heater_small_electric", "dashboard", "vehicle_alarm" ]
       },
       { "x": 0, "y": 0, "parts": [ "horn_car" ] },
       { "x": 0, "y": -1, "parts": [ "xlframe#cross", "wheel_mount_medium_steerable", "wheel" ] },
@@ -462,7 +462,7 @@
           "reclining_seat#windshield_front",
           "seatbelt",
           "controls",
-          "integrated_heater_small",
+          "integrated_heater_small_electric",
           "integrated_cooler"
         ]
       },
@@ -566,7 +566,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "integrated_heater_small", "stereo" ]
+        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "stereo" ]
       },
       { "x": 0, "y": 0, "parts": [ "dashboard", "vehicle_alarm", "horn_car" ] },
       { "x": 0, "y": 0, "parts": [ "roof" ] },
@@ -596,6 +596,7 @@
     "type": "vehicle",
     "copy-from": "car_micro_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_inline4", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "muffler" ] }
@@ -607,7 +608,7 @@
     "copy-from": "car_micro_abstract",
     "name": "Hybrid Microcar",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "smart_engine_controller" ] },
+      { "x": 0, "y": 0, "parts": [ "smart_engine_controller", "integrated_heater_small_electric" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_truck" ] },
       { "x": 1, "y": 1, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
@@ -621,6 +622,7 @@
     "copy-from": "car_micro_abstract",
     "name": "Electric Microcar",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 2, "parts": [ "storage_battery" ] }
@@ -639,7 +641,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "integrated_heater_small", "stereo" ]
+        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "stereo" ]
       },
       { "x": 0, "y": 0, "parts": [ "dashboard", "vehicle_alarm", "horn_car" ] },
       { "x": 0, "y": 0, "parts": [ "roof" ] },
@@ -666,6 +668,7 @@
     "type": "vehicle",
     "copy-from": "scompact_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "muffler" ] }
@@ -677,7 +680,7 @@
     "copy-from": "scompact_abstract",
     "name": "Hybrid Supercompact Car",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "smart_engine_controller" ] },
+      { "x": 0, "y": 0, "parts": [ "smart_engine_controller", "integrated_heater_small_electric" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_truck" ] },
       { "x": -1, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
@@ -691,6 +694,7 @@
     "copy-from": "scompact_abstract",
     "name": "Electric Supercompact Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": 1, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] }
@@ -709,7 +713,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "integrated_heater_small", "stereo" ]
+        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "stereo" ]
       },
       { "x": 0, "y": 0, "parts": [ "dashboard", "vehicle_alarm", "horn_car" ] },
       { "x": 0, "y": 0, "parts": [ "roof" ] },
@@ -735,6 +739,7 @@
     "type": "vehicle",
     "copy-from": "scompact_tandem_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": 1, "y": -1, "parts": [ "wheel_mount_medium_steerable", "wheel" ] },
@@ -750,6 +755,7 @@
     "type": "vehicle",
     "copy-from": "scompact_tandem_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": 1, "y": -1, "parts": [ "wheel_mount_medium_steerable", "wheel" ] },
@@ -766,6 +772,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Electric Supercompact Tandem Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": 1, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] },
@@ -782,6 +789,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Electric Supercompact Tandem Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": 1, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] },
@@ -798,6 +806,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Tandem Cabin Motorcycle",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": 1, "y": 0, "parts": [ "wheel_mount_light_steerable", "wheel_motorbike" ] },
@@ -813,6 +822,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Tandem Cabin Motorcycle",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": 1, "y": 0, "parts": [ "wheel_mount_light_steerable", "wheel_motorbike" ] },
@@ -828,6 +838,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Electric Tandem Cabin Motorcycle",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] },
@@ -844,6 +855,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Electric Tandem Cabin Motorcycle",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] },
@@ -860,6 +872,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Tandem Three-Wheeled Supercompact Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": 1, "y": 0, "parts": [ "wheel_mount_light_steerable", "wheel_motorbike" ] },
@@ -874,6 +887,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Tandem Three-Wheeled Supercompact Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 1, "y": 0, "parts": [ "engine_vtwin", "alternator_motorbike" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": 1, "y": 0, "parts": [ "wheel_mount_light_steerable", "wheel_motorbike" ] },
@@ -888,6 +902,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Electric Tandem Three-Wheeled Supercompact Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] },
@@ -903,6 +918,7 @@
     "copy-from": "scompact_tandem_abstract",
     "name": "Electric Tandem Three-Wheeled Supercompact Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric" ] },
       { "x": -1, "y": -1, "parts": [ "storage_battery" ] },
       { "x": -1, "y": 1, "parts": [ "storage_battery" ] },
@@ -926,7 +942,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "integrated_heater_small", "stereo" ]
+        "parts": [ "frame#cross", "seat#windshield_front", "seatbelt", "controls", "stereo" ]
       },
       { "x": 0, "y": 0, "parts": [ "dashboard", "vehicle_alarm", "horn_car" ] },
       { "x": 0, "y": 0, "parts": [ "roof" ] },
@@ -969,6 +985,7 @@
     "copy-from": "car_hatch_abstract",
     "name": "Hatchback",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_inline4", "alternator_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] },
       { "x": -2, "y": 2, "parts": [ { "part": "tank_medium", "fuel": "gasoline" } ] }
@@ -980,6 +997,7 @@
     "copy-from": "car_hatch_abstract",
     "name": "Hatchback",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "diesel_engine_inline4", "alternator_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank_medium", "fuel": "diesel" } ] },
       { "x": -2, "y": 2, "parts": [ { "part": "tank_medium", "fuel": "diesel" } ] }
@@ -1073,7 +1091,6 @@
           "seat_leather#windshield_front",
           "seatbelt",
           "controls",
-          "integrated_heater_small",
           "integrated_cooler"
         ]
       },
@@ -1114,6 +1131,7 @@
     "type": "vehicle",
     "copy-from": "car_shootingbrake_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v8", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] }
     ],
@@ -1125,6 +1143,7 @@
     "copy-from": "car_shootingbrake_abstract",
     "name": "Premium Shooting Brake",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v12", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] }
     ],
@@ -1136,6 +1155,7 @@
     "copy-from": "car_shootingbrake_abstract",
     "name": "Electric Shooting Brake",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric_enhanced" ] },
       { "x": 0, "y": 0, "parts": [ "storage_battery" ] },
       { "x": 0, "y": 1, "parts": [ "storage_battery" ] },
@@ -1163,7 +1183,6 @@
           "seat_leather#windshield_front",
           "seatbelt",
           "controls",
-          "integrated_heater_small",
           "integrated_cooler"
         ]
       },
@@ -1210,6 +1229,7 @@
     "type": "vehicle",
     "copy-from": "car_shootingbrake_long_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v8", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] }
     ],
@@ -1221,6 +1241,7 @@
     "copy-from": "car_shootingbrake_long_abstract",
     "name": "Premium Shooting Brake",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v12", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] }
     ],
@@ -1232,6 +1253,7 @@
     "copy-from": "car_shootingbrake_long_abstract",
     "name": "Electric Shooting Brake",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -3, "y": 0, "parts": [ "engine_electric_enhanced" ] },
       { "x": 0, "y": 0, "parts": [ "storage_battery" ] },
       { "x": 0, "y": 1, "parts": [ "storage_battery" ] },
@@ -1252,7 +1274,7 @@
     ],
     "parts": [
       { "x": 0, "y": 0, "parts": [ "frame#vertical_2" ] },
-      { "x": 0, "y": 0, "parts": [ "controls", "integrated_heater_small", "dashboard", "vehicle_alarm" ] },
+      { "x": 0, "y": 0, "parts": [ "controls", "dashboard", "vehicle_alarm" ] },
       { "x": 0, "y": 0, "parts": [ "stereo", "horn_car", "roof" ] },
       { "x": 0, "y": -1, "parts": [ "frame#vertical_left", "door#nw" ] },
       { "x": 0, "y": 1, "parts": [ "frame#vertical_2", "roof" ] },
@@ -1294,6 +1316,7 @@
     "type": "vehicle",
     "copy-from": "car_sedan_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_inline4", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back#left", "seatbelt" ] },
@@ -1311,6 +1334,7 @@
     "type": "vehicle",
     "copy-from": "car_sedan_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "diesel_engine_inline4", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "diesel" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back#left", "seatbelt" ] },
@@ -1325,6 +1349,7 @@
     "type": "vehicle",
     "copy-from": "car_sedan_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "diesel_engine_v6", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "diesel" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back#left", "seatbelt" ] },
@@ -1340,7 +1365,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "V8 Sports Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v8", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back_leather#left", "seatbelt" ] },
@@ -1361,7 +1386,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "V12 Sports Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v12", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back_leather#left", "seatbelt" ] },
@@ -1382,7 +1407,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "V6 Sports Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v6", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back#left", "seatbelt" ] },
@@ -1403,7 +1428,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "Luxury Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v6", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": -1, "y": 0, "parts": [ "seat_back_leather#left", "seatbelt" ] },
@@ -1419,7 +1444,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "Electric Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric_large" ] },
       { "x": -1, "y": 0, "parts": [ "seat_back#left", "seatbelt" ] },
       { "x": -1, "y": 1, "parts": [ "seat_back#right", "seatbelt" ] },
@@ -1438,7 +1463,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "Luxury Electric Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric_large" ] },
       { "x": -1, "y": 0, "parts": [ "seat_back_leather#left", "seatbelt" ] },
       { "x": -1, "y": 1, "parts": [ "seat_back_leather#right", "seatbelt" ] },
@@ -1457,7 +1482,7 @@
     "copy-from": "car_sedan_abstract",
     "name": "Electric Sports Sedan",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric_enhanced" ] },
       { "x": -1, "y": 0, "parts": [ "seat_back_leather#left", "seatbelt" ] },
       { "x": -1, "y": 1, "parts": [ "seat_back_leather#right", "seatbelt" ] },
@@ -1488,7 +1513,7 @@
     ],
     "parts": [
       { "x": 0, "y": 0, "parts": [ "frame#vertical_2" ] },
-      { "x": 0, "y": 0, "parts": [ "controls", "dashboard", "integrated_heater_small", "vehicle_alarm" ] },
+      { "x": 0, "y": 0, "parts": [ "controls", "dashboard", "vehicle_alarm" ] },
       { "x": 0, "y": 0, "parts": [ "horn_car", "roof" ] },
       { "x": 0, "y": -1, "parts": [ "frame#vertical_left", "door#nw" ] },
       { "x": 0, "y": 1, "parts": [ "frame#cross", "stereo", "box", "roof" ] },
@@ -1540,7 +1565,7 @@
     "type": "vehicle",
     "copy-from": "car_town_abstract",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small" ] },
       { "x": 2, "y": 1, "parts": [ "engine_v8", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "reclining_seat_leather#windshield_front", "seatbelt" ] },
@@ -1555,7 +1580,7 @@
     "type": "vehicle",
     "copy-from": "car_town_abstract",
     "parts": [
-      { "x": 0, "y": 0, "parts": [ "integrated_cooler" ] },
+      { "x": 0, "y": 0, "parts": [ "integrated_cooler", "integrated_heater_small" ] },
       { "x": 2, "y": 1, "parts": [ "diesel_engine_v6", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "diesel" } ] },
       { "x": 0, "y": 0, "parts": [ "reclining_seat_leather#windshield_front", "seatbelt" ] },
@@ -1571,6 +1596,7 @@
     "copy-from": "car_town_abstract",
     "name": "Budget Town Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 1, "parts": [ "engine_v6", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "reclining_seat#windshield_front", "seatbelt" ] },
@@ -1586,6 +1612,7 @@
     "copy-from": "car_town_abstract",
     "name": "Budget Town Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 1, "parts": [ "engine_v8", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "reclining_seat#windshield_front", "seatbelt" ] },
@@ -1600,6 +1627,7 @@
     "type": "vehicle",
     "copy-from": "car_town_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 1, "parts": [ "diesel_engine_v6", "alternator_car", "battery_car" ] },
       { "x": -2, "y": -1, "parts": [ { "part": "tank", "fuel": "diesel" } ] },
       { "x": 0, "y": 0, "parts": [ "reclining_seat#windshield_front", "seatbelt" ] },
@@ -1624,7 +1652,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "controls", "integrated_heater_small", "integrated_cooler", "dashboard", "vehicle_alarm" ]
+        "parts": [ "controls", "integrated_cooler", "dashboard", "vehicle_alarm" ]
       },
       { "x": 0, "y": 0, "parts": [ "stereo", "horn_car", "roof" ] },
       { "x": 0, "y": -1, "parts": [ "frame#vertical_left", "door#nw" ] },
@@ -1662,6 +1690,7 @@
     "type": "vehicle",
     "copy-from": "car_coupe_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_inline4", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "seat#windshield_front", "seatbelt" ] },
@@ -1677,6 +1706,7 @@
     "type": "vehicle",
     "copy-from": "car_coupe_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "diesel_engine_inline4", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "diesel" } ] },
       { "x": 0, "y": 0, "parts": [ "seat#windshield_front", "seatbelt" ] },
@@ -1692,6 +1722,7 @@
     "type": "vehicle",
     "copy-from": "car_coupe_abstract",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "diesel_engine_v6", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "diesel" } ] },
       { "x": 0, "y": 0, "parts": [ "seat#windshield_front", "seatbelt" ] },
@@ -1724,6 +1755,7 @@
     "copy-from": "car_coupe_abstract",
     "name": "V12 Sports Coupe",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v12", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
@@ -1740,6 +1772,7 @@
     "copy-from": "car_coupe_abstract",
     "name": "V6 Sports Coupe",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v6", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "seat#windshield_front", "seatbelt" ] },
@@ -1756,6 +1789,7 @@
     "copy-from": "car_coupe_abstract",
     "name": "Luxury Coupe",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": 2, "y": 0, "parts": [ "engine_v6", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] },
       { "x": 0, "y": 0, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
@@ -1769,6 +1803,7 @@
     "copy-from": "car_coupe_abstract",
     "name": "Electric Coupe",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -1, "y": 0, "parts": [ "engine_electric_large" ] },
       { "x": 0, "y": 0, "parts": [ "seat#windshield_front", "seatbelt" ] },
       { "x": 0, "y": 1, "parts": [ "seat#windshield_front", "seatbelt" ] },
@@ -1785,6 +1820,7 @@
     "copy-from": "car_coupe_abstract",
     "name": "Luxury Electric Coupe",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -1, "y": 0, "parts": [ "engine_electric_large" ] },
       { "x": 0, "y": 0, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
       { "x": 0, "y": 1, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
@@ -1801,6 +1837,7 @@
     "copy-from": "car_coupe_abstract",
     "name": "Electric Sports Coupe",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -1, "y": 0, "parts": [ "engine_electric_enhanced" ] },
       { "x": 0, "y": 0, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
       { "x": 0, "y": 1, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
@@ -1829,7 +1866,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "controls", "integrated_heater_small", "integrated_cooler", "dashboard", "vehicle_alarm" ]
+        "parts": [ "controls", "integrated_cooler", "dashboard", "vehicle_alarm" ]
       },
       { "x": 0, "y": 0, "parts": [ "stereo", "horn_car", "roof" ] },
       { "x": 0, "y": 0, "parts": [ "seat_leather#windshield_front", "seatbelt" ] },
@@ -1871,6 +1908,7 @@
     "copy-from": "car_super_abstract",
     "name": "V12 Super Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small" ] },
       { "x": -1, "y": 0, "parts": [ "engine_v12", "alternator_car", "battery_car" ] },
       { "x": -1, "y": -1, "parts": [ { "part": "tank", "fuel": "gasoline" } ] }
     ],
@@ -1885,6 +1923,7 @@
     "copy-from": "car_super_abstract",
     "name": "Electric Super Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric_super" ] },
       { "x": 0, "y": 0, "parts": [ "storage_battery" ] },
       { "x": 0, "y": 1, "parts": [ "storage_battery" ] },
@@ -1902,6 +1941,7 @@
     "copy-from": "car_super_abstract",
     "name": "Electric Super Car",
     "parts": [
+      { "x": 0, "y": 0, "parts": [ "integrated_heater_small_electric" ] },
       { "x": -2, "y": 0, "parts": [ "engine_electric_enhanced" ] },
       { "x": -2, "y": 1, "parts": [ "engine_electric_enhanced" ] },
       { "x": 0, "y": 0, "parts": [ "storage_battery" ] },
@@ -1929,7 +1969,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "stereo", "dashboard", "integrated_heater_small", "integrated_cooler", "vehicle_alarm", "horn_car", "roof" ]
+        "parts": [ "stereo", "dashboard", "integrated_heater_small_electric", "integrated_cooler", "vehicle_alarm", "horn_car", "roof" ]
       },
       { "x": 0, "y": -1, "parts": [ "xlframe#vertical_left", "door#nw" ] },
       { "x": 0, "y": 1, "parts": [ "xlframe#cross", "seat_leather#windshield_front", "seatbelt", "roof" ] },
@@ -1977,7 +2017,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "dashboard", "integrated_heater_small", "integrated_cooler", "vehicle_alarm", "horn_car", "roof" ]
+        "parts": [ "dashboard", "integrated_heater_small_electric", "integrated_cooler", "vehicle_alarm", "horn_car", "roof" ]
       },
       { "x": 0, "y": -1, "parts": [ "xlframe#vertical_left", "door#nw" ] },
       { "x": 0, "y": 1, "parts": [ "xlframe#cross", "seat#windshield_front", "seatbelt", "roof" ] },
@@ -2025,7 +2065,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "dashboard", "integrated_heater_small", "integrated_cooler", "vehicle_alarm", "horn_car" ]
+        "parts": [ "dashboard", "integrated_heater_small_electric", "integrated_cooler", "vehicle_alarm", "horn_car" ]
       },
       { "x": 0, "y": 0, "parts": [ "roof" ] },
       { "x": 0, "y": -1, "parts": [ "xlframe#vertical_left", "door#nw" ] },
@@ -2195,7 +2235,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "controls", "integrated_heater_small", "integrated_cooler", "dashboard", "vehicle_alarm" ]
+        "parts": [ "controls", "integrated_heater_small_electric", "integrated_cooler", "dashboard", "vehicle_alarm" ]
       },
       { "x": 0, "y": 0, "parts": [ "stereo", "horn_car", "storage_battery" ] },
       { "x": 0, "y": -1, "parts": [ "xlframe#vertical_left", "door#nw" ] },
@@ -2265,7 +2305,7 @@
       {
         "x": 0,
         "y": 0,
-        "parts": [ "controls", "integrated_heater_small", "integrated_cooler", "dashboard", "vehicle_alarm" ]
+        "parts": [ "controls", "integrated_heater_small_electric", "integrated_cooler", "dashboard", "vehicle_alarm" ]
       },
       { "x": 0, "y": 0, "parts": [ "stereo", "horn_car", "storage_battery" ] },
       { "x": 0, "y": -1, "parts": [ "xlframe#vertical_left", "door#nw" ] },

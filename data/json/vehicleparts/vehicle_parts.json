@@ -1337,15 +1337,40 @@
     "damage_reduction": { "all": 15 }
   },
   {
-    "id": "integrated_heater_small",
+    "id": "integrated_heater_small_electric",
     "copy-from": "mountable_heater_small",
-    "description": "A set of tubes that move heat from the engine into the vehicle cabin, heating it up.",
-    "item": "pipe",
+    "description": "A heater that uses electricity that heats up the cabin",
+    "item": "integrated_heater_electric",
     "type": "vehicle_part",
     "location": "",
+    "name": { "str": "small eletric integrated heater" },
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ], [ "electronics", 1 ] ], "time": "2 h", "using": [ [ "vehicle_screw", 1 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "2 h", "using": [ [ "vehicle_screw", 1 ] ] },
+      "repair": { "skills": [ [ "mechanics", 2 ], [ "electronics", 1 ] ], "time": "1 h", "using": [ [ "adhesive", 1 ], [ "soldering_standard", 4 ] ] }
+    },
+    "breaks_into": [
+      { "item": "steel_chunk", "prob": 70 },
+      { "item": "steel_fragment", "count": [ 1, 2 ] },
+      { "item": "scrap", "count": [ 1, 3 ] }
+    ]
+  },
+  {
+    "id": "integrated_heater_small",
+    "copy-from": "mountable_heater_small",
+    "description": "A set of piping, thermostat, radiator, and a fan to blow heat from the coolant into the cabin. Requires a running combustion engine to function",
+    "item": "integrated_heater_core",
+    "type": "vehicle_part",
+    "location": "",
+    "epower": "0 W",
+    "power": "-75 W",
     "name": { "str": "small integrated heater" },
-    "extend": { "flags": [ "NO_INSTALL_HIDDEN" ] },
-    "requirements": { "removal": { "skills": [ [ "mechanics", 1 ] ], "time": "5 m", "qualities": [ { "id": "SAW_M", "level": 2 } ] } },
+    "flags": [ "CTRL_ELECTRONIC", "SPACE_HEATER", "REQUIRE_E_COMBUSTION" ],
+    "requirements": {
+      "install": { "skills": [ [ "mechanics", 2 ] ], "time": "2 h", "using": [ [ "vehicle_screw", 8 ], [ "vehicle_wrench_2", 1 ] ] },
+      "removal": { "skills": [ [ "mechanics", 2 ] ], "time": "1 h", "qualities": [ { "id": "SAW_M", "level": 2 } ] },
+      "repair": { "skills": [ [ "mechanics", 3 ] ], "time": "1 h", "using": [ [ "adhesive", 2 ], [ "vehicle_wrench_2", 1 ] ] }
+    },
     "breaks_into": [
       { "item": "steel_chunk", "prob": 70 },
       { "item": "steel_fragment", "count": [ 1, 2 ] },

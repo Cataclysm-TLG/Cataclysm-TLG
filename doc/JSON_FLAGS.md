@@ -1656,6 +1656,7 @@ Note: Vehicle parts requiring other parts is defined by setting a `requires_flag
 - ```DOOR_MOTOR``` Can only be installed on a part with `OPENABLE` flag.
 - ```ENABLED_DRAINS_EPOWER``` Make vehicle part to require some energy to start it's work.  Requires `epower` field.
 - ```ENGINE``` Is an engine and contributes towards vehicle mechanical power.
+- ```REQUIRE_E_COMBUSTION``` This field emitter requires an actiive combustion engine to run and function.
 - ```EVENTURN``` Only on during even turns.
 - ```EXTRA_DRAG``` Tells the vehicle that the part exerts engine power reduction.
 - ```E_ALTERNATOR``` Is an engine that can power an alternator.
