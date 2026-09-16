@@ -928,6 +928,7 @@
     "name": "field",
     "sym": ".",
     "color": "brown",
+    "looks_like": "field",
     "vision_levels": "open_land",
     "see_cost": "medium"
   },
