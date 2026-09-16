@@ -455,10 +455,9 @@ std::string Character::get_miss_reason()
     if( wound_factor != 0.0f ) {
         add_miss_reason( _( "Your injuries make it hard to keep fighting." ), wound_factor );
     }
-    if( enc > 10 ) {
-        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>
-                             ( enc ) / 10.0f;
-        add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
+    if( enc > 19 ) {
+        const float scaled = ( static_cast<float>( enc ) - 20.0f ) / 20.0f * 0.9f + 0.1f;
+        add_miss_reason( _( "Your torso encumbrance throws you off balance." ), roll_remainder( scaled ) );
     }
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&
                                      !worn_with_flag( flag_FIX_FARSIGHT ) &&
@@ -706,7 +705,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
         if( is_avatar() ) { // Only display messages if this is the player.
 
-            if( one_in( 2 ) ) {
+            if( one_in( 3 ) ) {
                 const std::string reason_for_miss = get_miss_reason();
                 if( !reason_for_miss.empty() ) {
                     add_msg( reason_for_miss );
