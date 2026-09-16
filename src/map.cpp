@@ -3838,7 +3838,7 @@ bool map::is_tinder( const tripoint_bub_ms &p )
     if( has_field_at( p, fd_fuel ) ) {
         return true;
     }
-    
+
     if( get_field_intensity( p, fd_web ) > 0 ) {
         return true;
     }

@@ -1360,8 +1360,10 @@ void talk_function::start_training_gen( Character &teacher, std::vector<Characte
     time *= 1.0 + 0.1 * ( students.size() - 1 );
     std::string student_string = students.size() > 1 ? _( "students" ) : _( "student" );
     if( cost > 0 && !teacher.is_avatar() ) {
-        if( !query_yn( _( "This lesson for %1s %2s will cost %3s and take %4s.  Continue?" ),
-                       students.size(), student_string, static_cast<double>( cost ) / 100, to_string( time ) ) ) {
+        if( !query_yn( _( "This lesson for %1s %2s will cost $%3.2f and take %4s.  Continue?" ),
+                       students.size(), student_string,
+                       static_cast<double>( cost ) / 100,
+                       to_string( time ) ) ) {
             return;
         }
     } else {
