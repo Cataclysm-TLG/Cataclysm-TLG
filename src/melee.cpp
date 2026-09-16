@@ -705,7 +705,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
         if( is_avatar() ) { // Only display messages if this is the player.
 
-            if( one_in( 2 ) ) {
+            if( one_in( 3 ) ) {
                 const std::string reason_for_miss = get_miss_reason();
                 if( !reason_for_miss.empty() ) {
                     add_msg( reason_for_miss );
