@@ -36,10 +36,10 @@
       "farm_lot_wire_turn_v_open_west": "farmland_straight_west",
       "megastore_parking": "omt_obsolete",
       "rock": "empty_rock",
-      "slimepit_top": "slimepit_z0_north",
-      "slimepit_bottom": "slimepit_z-1_north",
-      "slimepit": "slimepit_z-2_north",
-      "slimepit_down": "slimepit_z0_north",
+      "slimepit_top": "field",
+      "slimepit_bottom": "solid_earth",
+      "slimepit": "solid_earth",
+      "slimepit_down": "field",
       "cabin_lapin": "cabin_8",
       "cabin_roof_lapin": "cabin_roof_8",
       "cabin_lapin_north": "cabin_8_north",
@@ -351,7 +351,22 @@
       "faction_wall_level_S_1": "field",
       "faction_wall_level_W_1": "field",
       "faction_base_workshop_0": "field",
-      "faction_base_workshop_2_0": "field"
+      "faction_base_workshop_2_0": "field",
+      "slimepit_z0": "field",
+      "slimepit_z-1": "solid_earth",
+      "slimepit_z-2": "solid_earth",
+      "slimepit_z-1_north": "solid_earth",
+      "slimepit_z-2_north": "solid_earth",
+      "slimepit_z0_north": "field",
+      "slimepit_z-1_east": "solid_earth",
+      "slimepit_z-2_east": "solid_earth",
+      "slimepit_z0_east": "field",
+      "slimepit_z-1_south": "solid_earth",
+      "slimepit_z-2_south": "solid_earth",
+      "slimepit_z0_south": "field",
+      "slimepit_z-1_west": "solid_earth",
+      "slimepit_z-2_west": "solid_earth",
+      "slimepit_z0_west": "field"
     }
   }
 ]

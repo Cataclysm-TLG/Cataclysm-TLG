@@ -33,5 +33,10 @@
     "type": "overmap_special_migration",
     "id": "Occupied Scrap Yard",
     "new_id": "Scrapyard 1"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "Slime Pit",
+    "new_id": "Spider Pit"
   }
 ]
