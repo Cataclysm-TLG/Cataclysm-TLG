@@ -455,9 +455,8 @@ std::string Character::get_miss_reason()
     if( wound_factor != 0.0f ) {
         add_miss_reason( _( "Your injuries make it hard to keep fighting." ), wound_factor );
     }
-    if( enc > 10 ) {
-        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>
-                             ( enc ) / 10.0f;
+    if( enc > 19 ) {
+        const float scaled = ( static_cast<float>( enc ) - 20.0f ) / 15.0f * 0.9f + 0.1f;
         add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
     }
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&
