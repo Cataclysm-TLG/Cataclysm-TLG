@@ -27,6 +27,7 @@
 #include "faction.h"
 #include "field.h"
 #include "field_type.h"
+#include "flag.h"
 #include "game.h"
 #include "game_constants.h"
 #include "harvest.h"
@@ -389,7 +390,28 @@ void monster::poly( const mtype_id &id )
     if( !no_extra_death_drops ) {
         generate_inventory();
     }
+    const creature_size old_size = type->size;
+
     type = &id.obj();
+
+    // If we change into a larger monster, destroy any clothing or armor that wouldn't fit anymore.
+    if( type->size > old_size ) {
+        inv.erase( std::remove_if( inv.begin(), inv.end(), []( const item & it ) {
+            return ( it.is_armor() || it.is_pet_armor() ) &&
+                   !it.has_flag( flag_OVERSIZE );
+        } ), inv.end() );
+    }
+
+    if( type->in_species( species_ZOMBIE ) ) {
+        for( item &it : inv ) {
+            // Gun filthiness is handles by dirt, not flag. We needn't bother with it here as
+            // at this time only ferals upgrade into zombies, and feral guns are already dirty.
+            if( ( it.is_armor() || it.is_pet_armor() ) && !it.is_gun() ) {
+                it.set_flag( STATIC( flag_id( "FILTHY" ) ) );
+            }
+        }
+    }
+
     moves = 0;
     Creature::set_speed_base( type->speed );
     anger = type->agro;
