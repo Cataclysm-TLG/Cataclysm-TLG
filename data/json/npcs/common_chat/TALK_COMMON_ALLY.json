@@ -1122,7 +1122,6 @@
         "trial": { "type": "NONE" },
         "success": { "topic": "TALK_ALLY_DEBUG", "opinion": { "favors": -10 } }
       },
-      { "text": "Train me.", "topic": "TALK_TRAIN" },
       { "text": "Do a seminar.", "topic": "TALK_TRAIN_SEMINAR" },
       { "text": "Nevermind.", "topic": "TALK_NONE" }
     ]
