@@ -640,10 +640,9 @@ void sounds::process_sound_markers( Character *you )
         // The heard volume of a sound is the player heard volume, regardless of true volume level.
         const int heard_volume = static_cast<int>( std::round( ( ( raw_volume - weather_vol ) *
                                  volume_multiplier ) - distance_to_sound ) );
-        // Player volume meter includes all sounds from their tile.
-        if( distance_to_sound < 1 && heard_volume > 0 ) {
-            // Min here because good hearing doesn't overestimate sounds, but bad will underestimate.
-            you->volume = std::min( you->volume, heard_volume );
+        // Player volume meter includes all sounds from their tile, or combat sounds from adjacent.
+        if( distance_to_sound < 2  && heard_volume > 0 ) {
+            you->volume = std::min( heard_volume, raw_volume );
         }
         if( heard_volume < 1 ) {
             continue;
@@ -653,7 +652,7 @@ void sounds::process_sound_markers( Character *you )
         if( you->controlling_vehicle ) {
             vehicle *veh = veh_pointer_or_null( here.veh_at( you->pos_abs() ) );
             const int noise = veh ? static_cast<int>( veh->vehicle_noise ) : 0;
-            you->volume = std::max( you->volume, noise );
+            you->volume = std::max( you->volume, std::min( noise, raw_volume ) );
         }
 
         // Secure the flag before wake_up() clears the effect.

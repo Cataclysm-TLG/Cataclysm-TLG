@@ -2586,7 +2586,7 @@ int Character::clatter_sound() const
     return worn.clatter_sound();
 }
 
-void Character::make_footstep_noise() const
+void Character::make_footstep_noise( const tripoint_bub_ms pos ) const
 {
     if( is_hallucination() ) {
         return;
@@ -2597,11 +2597,11 @@ void Character::make_footstep_noise() const
         return;
     }
     if( is_mounted() ) {
-        sounds::sound( pos_bub(), volume, sounds::sound_t::movement,
+        sounds::sound( pos, volume, sounds::sound_t::movement,
                        mounted_creature.get()->type->get_footsteps(),
                        false, "none", "none" );
     } else {
-        sounds::sound( pos_bub(), volume, sounds::sound_t::movement, _( "footsteps" ), true,
+        sounds::sound( pos, volume, sounds::sound_t::movement, _( "footsteps" ), true,
                        "none", "none" );    // Sound of footsteps may awaken nearby monsters
     }
     sfx::do_footstep( *this );
