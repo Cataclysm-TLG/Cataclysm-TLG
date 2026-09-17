@@ -5575,9 +5575,8 @@ void cata_tiles::draw_highlight()
 
 void cata_tiles::draw_weather_frame()
 {
-
+    const int zlev = g->ter_view_p.z();
     for( auto &vdrop : anim_weather.vdrops ) {
-        // TODO: Z-level awareness if weather ever happens on anything but z-level 0.
         point p( vdrop.first, vdrop.second );
         if( !is_isometric() ) {
             const std::optional temp = tile_to_player( p );
@@ -5586,12 +5585,9 @@ void cata_tiles::draw_weather_frame()
             }
             p = temp.value();
         }
-        const tripoint_bub_ms pos( point_bub_ms( p ), 0 );
+        const tripoint_bub_ms pos( point_bub_ms( p ), zlev );
         draw_options opts{};
         opts.category = TILE_CATEGORY::WEATHER;
-
-
-
         int height_3d = 0;
         draw_from_id_string(
             weather_name,
@@ -5600,7 +5596,7 @@ void cata_tiles::draw_weather_frame()
             0,
             lit_level::LIT,
             true,
-            height_3d,     // reference to int height
+            height_3d,
             opts
         );
     }
@@ -5694,9 +5690,6 @@ void cata_tiles::draw_async_anim()
         if( find_tile_looks_like( tile_id, TILE_CATEGORY::NONE, "" ) ) {
             draw_options opts{};
             opts.category = TILE_CATEGORY::NONE;
-
-
-
             int height_3d = 0;
             draw_from_id_string(
                 tile_id,
