@@ -3970,7 +3970,6 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                         opts.subcategory = layer_it_category;
                         opts.variant = variant;
                         opts.offset = layer_var.offset;
-
                         draw_from_id_string(
                             sprite_to_draw,
                             p,
@@ -4159,12 +4158,10 @@ bool cata_tiles::draw_field_or_item( const tripoint_bub_ms &p, const lit_level l
                 const std::string it_category = it_type->get_item_type_string();
                 const lit_level lit = it_overridden ? lit_level::LIT : ll;
                 const bool nv = !it_overridden;;
-
                 draw_options opts{};
                 opts.category = TILE_CATEGORY::ITEM;
                 opts.subcategory = it_category;
                 opts.variant = variant;
-
                 ret_draw_items = draw_from_id_string(
                                      disp_id,
                                      p,
@@ -6158,7 +6155,6 @@ void cata_tiles::do_tile_loading_report()
         items.emplace( e->get_id(), e );
     }
     tile_loading_report_map( items, TILE_CATEGORY::ITEM );
-
     tile_loading_report_count<furn_t>( furn_t::count(), TILE_CATEGORY::FURNITURE );
     tile_loading_report_count<trap>( trap::count(), TILE_CATEGORY::TRAP );
     tile_loading_report_count<field_type>( field_type::count(), TILE_CATEGORY::FIELD );
