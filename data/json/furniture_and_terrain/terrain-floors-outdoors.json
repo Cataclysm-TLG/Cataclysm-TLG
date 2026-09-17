@@ -11,7 +11,7 @@
     "connects_to": [ "DIRT", "CLAY", "SAND", "MUD", "DIRTMOUND", "CLAYMOUND", "SANDMOUND", "SANDGLASS", "CONCRETE" ],
     "move_cost": 2,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "TIRE_SAFE" ],
-    "bash": { "sound": "thump", "ter_set": "t_open_air", "str_min": 50, "str_max": 100, "bash_below": true }
+    "bash": { "sound": "thump", "ter_set": "t_open_air", "str_min": 100, "str_max": 200, "bash_below": true }
   },
   {
     "type": "terrain",
@@ -27,8 +27,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 110, "str_max": 220,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -47,8 +46,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 110, "str_max": 220,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -68,8 +66,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -90,8 +87,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -111,8 +107,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -191,8 +186,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     },
@@ -215,8 +209,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true,
       "items": [ { "item": "material_soil", "count": [ 100, 200 ] } ]
@@ -264,8 +257,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -284,8 +276,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -321,8 +312,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
@@ -696,8 +686,7 @@
     "bash": {
       "sound": "thump",
       "ter_set": "t_open_air",
-      "str_min": 50,
-      "str_max": 100,
+      "str_min": 100, "str_max": 200,
       "str_min_supported": 100,
       "bash_below": true
     }
