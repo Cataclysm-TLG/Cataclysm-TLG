@@ -28,6 +28,7 @@
 #include <type_traits>
 #include <vector>
 
+#include "atlas_bake_plan.h"
 #include "avatar.h"
 #include "cached_options.h"
 #include "cata_assert.h"
@@ -1906,6 +1907,7 @@ atlas_upload_interrupt renderer_resource_coordinator::mode2_upload_poll()
                     request_recovery( renderer_recovery_severity::device_reset );
                     break;
                 case atlas_upload_interrupt::renderer_invalidated:
+                case atlas_upload_interrupt::shader_boundary_lost:
                     request_recovery( renderer_recovery_severity::device_lost );
                     break;
                 case atlas_upload_interrupt::none:
@@ -1953,6 +1955,7 @@ recipe_result renderer_resource_coordinator::map_replay_interrupt(
         case atlas_upload_interrupt::texture_resources_invalidated:
             return { recipe_outcome::restart_required, renderer_recovery_severity::device_reset };
         case atlas_upload_interrupt::renderer_invalidated:
+        case atlas_upload_interrupt::shader_boundary_lost:
             return { recipe_outcome::restart_required, renderer_recovery_severity::device_lost };
         case atlas_upload_interrupt::none:
             break;
@@ -2218,6 +2221,7 @@ std::shared_ptr<const tileset> renderer_recovery_test_support::install_synthetic
     }
     ts->set_memory_map_mode_at_upload( memory_map_mode );
     tileset_cache::loader::upload_atlases( *ts, renderer, memory_map_mode,
+                                           compute_tileset_filter_fingerprint( memory_map_mode ), plan,
                                            ts->get_atlas_descriptors(),
                                            renderer_instance_generation,
                                            gpu_textures_generation, false );
@@ -2259,7 +2263,8 @@ atlas_replay_quarantine::gate renderer_recovery_test_support::populate_mode2_qua
                : atlas_upload_interrupt::none;
     };
     tileset_cache::loader::upload_atlases( ts, renderer, "color_pixel_sepia_light",
-                                           ts.get_atlas_descriptors(),
+                                           compute_tileset_filter_fingerprint( "color_pixel_sepia_light" ),
+                                           atlas_bake_plan{}, ts.get_atlas_descriptors(),
                                            renderer_coordinator.instance_generation(),
                                            renderer_coordinator.textures_generation(),
                                            false, poll, &quarantine );
