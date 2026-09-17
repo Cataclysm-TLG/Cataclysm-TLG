@@ -10367,7 +10367,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
         }
     }
 
-    u.make_footstep_noise();
+    u.make_footstep_noise( dest_loc );
 
     //only clatter items every so often based on activity level
     if( to_turns<int>( calendar::turn - u.last_pocket_noise ) > std::max( static_cast<int>

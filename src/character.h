@@ -1139,7 +1139,7 @@ class Character : public Creature, public visitable
         int footstep_sound() const;
         // the sound clattering items dangling off you can make
         int clatter_sound() const;
-        void make_footstep_noise() const;
+        void make_footstep_noise( const tripoint_bub_ms pos ) const;
         void make_clatter_sound() const;
 
         bool can_switch_to( const move_mode_id &mode ) const;
