@@ -7,6 +7,7 @@
 #include <atomic>
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 
 #include "cata_tiles.h"
@@ -503,6 +504,11 @@ struct renderer_recovery_test_support {
     // run refresh_display's presentation decision that refresh_display can't
     // reach under test_mode
     static bool run_present_gate();
+    // Force "shader variants available" for bake-plan resolver and present gate
+    // without touching variant_pass, so software fixture can exercise skipped
+    // bundles. nullopt restores the live pass. A sticky shader fault overrides
+    // it. Cleared by teardown_software_renderer.
+    static void override_shader_variants_available( std::optional<bool> available );
 };
 
 // RAII wrapper around setup/teardown for use as a Catch2 fixture local.

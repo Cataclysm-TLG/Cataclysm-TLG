@@ -4896,9 +4896,14 @@ atlas_upload_interrupt tileset_cache::replay_live_atlases( const SDL_Renderer_Pt
             it = tilesets_.erase( it );
             continue;
         }
+        const std::optional<atlas_bake_plan> plan = resolve_atlas_bake_plan( applied.mode );
+        if( !plan ) {
+            // probe lost the renderer boundary, so this entry keeps its old key
+            return atlas_upload_interrupt::shader_boundary_lost;
+        }
         const atlas_upload_interrupt interrupt =
             loader::upload_atlases( *ts, renderer, applied.mode, applied.fingerprint,
-                                    atlas_bake_plan{}, ts->get_atlas_descriptors(),
+                                    *plan, ts->get_atlas_descriptors(),
                                     renderer_instance_gen, gpu_textures_gen, false, poll,
                                     &quarantine );
         if( interrupt != atlas_upload_interrupt::none ) {

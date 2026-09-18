@@ -937,10 +937,17 @@ SDL_Rect get_android_render_rect( float DisplayBufferWidth, float DisplayBufferH
 
 static void draw_gamepad_radial_menu();
 
-// Whether the variant shaders can serve a skipped bake right now.
+// Whether the variant shaders can serve a skipped bake right now. A sticky
+// fault wins; the test override stands in for the probe on the software fixture.
 static bool shader_variants_available_now()
 {
     const cata_shader::variant_pass *vp = get_shared_variant_pass();
+    if( vp && vp->shader_fault() ) {
+        return false;
+    }
+    if( test_shader_variants_override ) {
+        return *test_shader_variants_override;
+    }
     return vp && vp->available();
 }
 
@@ -2202,6 +2209,7 @@ void renderer_recovery_test_support::teardown_software_renderer()
     shared_variant_pass.reset();
     cata_shader::test_reset_seams();
     cata_shader::clear_reprobe();
+    test_shader_variants_override.reset();
     display_buffer.reset();
     renderer.reset();
     window.reset();
@@ -2404,6 +2412,12 @@ int renderer_recovery_test_support::variant_probe_count()
 bool renderer_recovery_test_support::run_present_gate()
 {
     return present_gate();
+}
+
+void renderer_recovery_test_support::override_shader_variants_available(
+    const std::optional<bool> available )
+{
+    test_shader_variants_override = available;
 }
 
 bool renderer_recovery_test_support::replay_quarantine_empty()
