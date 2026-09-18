@@ -995,7 +995,6 @@
     "priority": 8,
     "half_life": "100 minutes",
     "phase": "gas",
-    "display_items": false,
     "display_field": false,
     "looks_like": "fd_smoke"
   },
