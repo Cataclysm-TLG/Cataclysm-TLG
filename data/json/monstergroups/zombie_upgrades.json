@@ -124,24 +124,14 @@
     "name": "GROUP_MEDICAL_UPGRADE",
     "//": "Masters pick from here when upgrading.  Note that 'freq' units are tenth of a percent, with default filling in the gap.",
     "monsters": [
-      { "monster": "mon_zombie_medical_brute", "weight": 200 },
-      { "monster": "mon_zombie_medical_regenerating", "weight": 300 },
+      { "monster": "mon_zombie_brute", "weight": 200 },
+      { "monster": "mon_zombie_regenerating", "weight": 300 },
       { "monster": "mon_boomer", "weight": 50 },
       { "monster": "mon_zombie_hollow", "weight": 50 },
       { "monster": "mon_skeleton_medical", "weight": 200 },
       { "monster": "mon_zombie_medical_acidic", "weight": 100 },
-      { "monster": "mon_zombie_medical_pupa", "weight": 50 },
-      { "monster": "mon_zombie_pupa_medical_decoy", "weight": 50 }
-    ]
-  },
-  {
-    "type": "monstergroup",
-    "name": "GROUP_MEDICAL_CRAWLER_UPGRADE",
-    "default": "mon_zombie_medical_pupa",
-    "//": "crawling medical zombie upgrades",
-    "monsters": [
-      { "monster": "mon_zombie_medical_pupa", "weight": 500 },
-      { "monster": "mon_zombie_pupa_medical_decoy", "weight": 500 }
+      { "monster": "mon_zombie_pupa", "weight": 50 },
+      { "monster": "mon_zombie_pupa_decoy", "weight": 50 }
     ]
   },
   {
