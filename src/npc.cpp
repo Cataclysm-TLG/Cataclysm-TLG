@@ -1591,7 +1591,7 @@ void npc::stow_item( item &it )
         if( avatar_sees ) {
             add_msg_if_npc( m_info, _( "<npcname> drops the %s." ), it.tname() );
         }
-        if( !is_hallucination() ) {
+        if( is_hallucination() ) {
             // We're a hallucination, so get rid of the item without actually placing anything on the ground.
             remove_item( it );
         } else {
