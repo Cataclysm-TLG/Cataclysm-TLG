@@ -11989,9 +11989,9 @@ void game::vertical_move( int movez, bool force, bool peeking )
         }
     }
 
-    // Find the corresponding staircase
+    // Find the corresponding staircase.
     bool rope_ladder = false;
-    // TODO: Remove the stairfinding, make the mapgen gen aligned maps
+    // FIXME: Remove the stairfinding, make the mapgen gen aligned maps.
     if( !force && !climbing && !swimming ) {
         const std::optional<tripoint_bub_ms> pnt = find_or_make_stairs( here, z_after, rope_ladder, peeking,
                 pos );
@@ -12116,7 +12116,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         here.ter_set( stairs, ter_t_manhole );
     }
 
-    if( u.is_hauling() ) {
+    if( u.is_hauling() && !climbing  ) {
         start_hauling( old_pos );
     }
 
