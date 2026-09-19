@@ -11808,8 +11808,8 @@ void game::vertical_move( int movez, bool force, bool peeking )
 
         int cost = u.climbing_cost( pos, stairs );
         add_msg_debug( debugmode::DF_GAME, "Climb cost: %d", cost );
-
-        if( cost == 0 ) {
+        bool might_wall_cling = wall_cling && here.is_clingable_wall_adjacent( pos );
+        if( cost == 0 && !might_wall_cling ) {
             return;
         }
 
@@ -11821,7 +11821,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
             }
         }
 
-        if( wall_cling && here.is_clingable_wall_adjacent( stairs ) ) {
+        if( might_wall_cling ) {
             pts.push_back( stairs );
         }
 
