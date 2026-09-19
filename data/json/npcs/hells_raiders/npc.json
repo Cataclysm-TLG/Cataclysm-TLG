@@ -92,7 +92,7 @@
     "id": "bandit_mechanic",
     "//": "Automotive specialist for the bandits.",
     "name_suffix": "Mechanic",
-    "class": "NC_SCAVENGER",
+    "class": "NC_SCAVENGER_GUARD",
     "attitude": 0,
     "mission": 8,
     "chat": "TALK_DONE",
