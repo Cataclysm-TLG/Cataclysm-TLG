@@ -220,7 +220,7 @@ static bool handle_spillable_contents( Character &c, item &it, map &m )
     return false;
 }
 
-//try to put items into_vehicle .If fail,first try to add to character bag, then character try wield  it, last drop.
+// Try to put items into_vehicle. If fail, first try to add to character bag, then character try wield  it, last drop.
 static std::vector<item_location> try_to_put_into_vehicle( Character &c, item_drop_reason reason,
         const std::list<item> &items,
         const vpart_reference &vpr )

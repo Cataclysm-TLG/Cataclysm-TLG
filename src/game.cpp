@@ -5338,19 +5338,21 @@ static bool can_place_npc( const tripoint_bub_ms &p )
     return !g->is_dangerous_tile( p );
 }
 
-static std::optional<tripoint_bub_ms> choose_where_to_place_monster( const monster &mon,
-        const tripoint_range<tripoint_bub_ms> &range )
+static std::optional<tripoint_bub_ms> choose_where_to_place_monster(
+    const monster &mon, const tripoint_range<tripoint_bub_ms> &range, bool avoid_vehicle )
 {
     return random_point( range, [&]( const tripoint_bub_ms & p ) {
-        return can_place_monster( mon, p );
+        return can_place_monster( mon, p ) &&
+               ( !avoid_vehicle || !get_map().has_vehicle_floor( p ) );
     } );
 }
 
-static std::optional<tripoint_bub_ms> choose_where_to_place_monster( const monster &mon, map *here,
-        const tripoint_range<tripoint_bub_ms> &range )
+static std::optional<tripoint_bub_ms> choose_where_to_place_monster(
+    const monster &mon, map *here, const tripoint_range<tripoint_bub_ms> &range, bool avoid_vehicle )
 {
     return random_point( range, [&]( const tripoint_bub_ms & p ) {
-        return can_place_monster( mon, here, p );
+        return can_place_monster( mon, here, p ) &&
+               ( !avoid_vehicle || !here->has_vehicle_floor( p ) );
     } );
 }
 
@@ -5387,19 +5389,20 @@ monster *game::place_critter_around( const mtype_id &id,
 monster *game::place_critter_around( const shared_ptr_fast<monster> &mon,
                                      const tripoint_bub_ms &center,
                                      const int radius,
-                                     bool forced )
+                                     bool forced, bool avoid_vehicle )
 {
     map &here = get_map();
 
     std::optional<tripoint_bub_ms> where;
-    if( forced || can_place_monster( *mon, center ) ) {
+    if( forced || ( can_place_monster( *mon, center ) &&
+                    ( !avoid_vehicle || !here.has_vehicle_floor( center ) ) ) ) {
         where = center;
     }
 
-    // This loop ensures the monster is placed as close to the center as possible,
-    // but all places that equally far from the center have the same probability.
+    /* This loop ensures the monster is placed as close to the center as possible,
+       but all places that equally far from the center have the same probability. */
     for( int r = 1; r <= radius && !where; ++r ) {
-        where = choose_where_to_place_monster( *mon, here.points_in_radius( center, r ) );
+        where = choose_where_to_place_monster( *mon, here.points_in_radius( center, r ), avoid_vehicle );
     }
 
     if( !where ) {
@@ -5428,7 +5431,7 @@ monster *game::place_critter_within( const mtype_id &id,
 monster *game::place_critter_within( const shared_ptr_fast<monster> &mon,
                                      const tripoint_range<tripoint_bub_ms> &range )
 {
-    const std::optional<tripoint_bub_ms> where = choose_where_to_place_monster( *mon, range );
+    const std::optional<tripoint_bub_ms> where = choose_where_to_place_monster( *mon, range, false );
     if( !where ) {
         return nullptr;
     }
@@ -5445,10 +5448,11 @@ monster *game::place_critter_at_or_within( const shared_ptr_fast<monster> &mon, 
 {
     tripoint_range<tripoint_bub_ms> center_range = points_in_radius( center, 0 );
 
-    std::optional<tripoint_bub_ms> where = choose_where_to_place_monster( *mon, here, center_range );
+    std::optional<tripoint_bub_ms> where = choose_where_to_place_monster( *mon, here, center_range,
+                                           false );
 
     if( !where ) {
-        where = choose_where_to_place_monster( *mon, here, range );
+        where = choose_where_to_place_monster( *mon, here, range, false );
     }
 
     if( !where ) {
@@ -5798,9 +5802,16 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
         return false;
     }
 
+    const item_location loc = get_item_location( g->u, it, &m, p );
+    const item_location::type loc_type = loc.where();
+    bool avoid_vehicle = loc_type != item_location::type::vehicle &&
+                         loc_type != item_location::type::character;
+    // If the monster is under a vehicle, it can crawl some distance to get out.
+    if( avoid_vehicle ) {
+        radius = std::max( radius, 4 );
+    }
     critter.no_extra_death_drops = true;
     critter.add_effect( effect_downed, 5_turns, true );
-
     if( it.get_var( "no_ammo" ) == "no_ammo" ) {
         for( auto &ammo : critter.ammo ) {
             ammo.second = 0;
@@ -5811,7 +5822,7 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
         critter.times_combatted_player = it.get_var( "times_combatted", 0.0 );
     }
 
-    return place_critter_around( newmon_ptr, tripoint_bub_ms( p ), radius );
+    return place_critter_around( newmon_ptr, p, radius, false, avoid_vehicle );
 }
 
 void game::assing_revive_form( item &it, tripoint_bub_ms p )

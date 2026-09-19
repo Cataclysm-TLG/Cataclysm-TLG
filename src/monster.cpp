@@ -3965,17 +3965,17 @@ void monster::init_from_item( item &itm )
 
         hp -= burnt_penalty;
 
-        // HP can be 0 or less, in this case revive_corpse will just deactivate the corpse
-        if( hp > 0 && type->has_flag( mon_flag_REVIVES_HEALTHY ) ) {
-            hp = type->hp;
-            set_speed_base( type->speed );
-        }
-        // if parent corpse is revives healthy *and* dormant, so will the monster
-        const mtype *corpse_mtype = itm.get_mtype();
-        if( hp > 0 && corpse_mtype->has_flag( mon_flag_REVIVES_HEALTHY ) &&
-            corpse_mtype->has_flag( mon_flag_DORMANT ) ) {
-            hp = type->hp;
-            set_speed_base( type->speed );
+        // HP can be 0 or less, in this case revive_corpse will just deactivate the corpse.
+        if( hp > 0 ) {
+            if( type->has_flag( mon_flag_REVIVES_HEALTHY ) ) {
+                hp = type->hp;
+                set_speed_base( type->speed );
+            }
+            // Dormant zombies don't get the speed penalty, but they don't come back healthy unless flagged.
+            const mtype *corpse_mtype = itm.get_mtype();
+            if( corpse_mtype->has_flag( mon_flag_DORMANT ) ) {
+                set_speed_base( type->speed );
+            }
         }
         upgrade_time = itm.get_var( "upgrade_time", -1 );
         for( item *it : itm.all_items_top( pocket_type::CONTAINER ) ) {
@@ -3985,7 +3985,7 @@ void monster::init_from_item( item &itm )
             inv.push_back( *it );
             itm.remove_item( *it );
         }
-        // Move dissectables (installed bionics, etc)
+        // Move dissectables (installed bionics, etc).
         for( item *dissectable : itm.all_items_top( pocket_type::CORPSE ) ) {
             // Mutagen samples do not survive this process.
             if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {

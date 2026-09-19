@@ -25,6 +25,7 @@
 #include "game.h"
 #include "harvest.h"
 #include "item_stack.h"
+#include "item_location.h"
 #include "itype.h"
 #include "kill_tracker.h"
 #include "line.h"
@@ -45,6 +46,8 @@
 #include "type_id.h"
 #include "units.h"
 #include "value_ptr.h"
+#include "veh_type.h"
+#include "vehicle_selector.h"
 #include "viewer.h"
 
 static const efftype_id effect_critter_underfed( "critter_underfed" );
@@ -320,5 +323,25 @@ item_location make_mon_corpse( map *here, monster &z, int damageLvl )
     if( z.times_combatted_player ) {
         corpse.set_var( "times_combatted", z.times_combatted_player );
     }
-    return here->add_item_or_charges_ret_loc( z.pos_bub( *here ), corpse );
+    const tripoint_bub_ms pos = z.pos_bub( *here );
+
+    if( const optional_vpart_position vp = here->veh_at( pos ) ) {
+        vehicle &veh = vp->vehicle();
+
+        for( int part = 0; part < veh.part_count(); ++part ) {
+            vehicle_part &vpart = veh.part( part );
+
+            if( veh.bub_part_pos( *here, part ) != pos ||
+                !vpart.info().has_flag( "CARGO" ) ) {
+                continue;
+            }
+
+            if( veh.add_item( *here, vpart, corpse ) ) {
+                vehicle_cursor vc( veh, part );
+                return item_location( vc, &corpse );
+            }
+        }
+    }
+
+    return here->add_item_or_charges_ret_loc( pos, corpse );
 }
