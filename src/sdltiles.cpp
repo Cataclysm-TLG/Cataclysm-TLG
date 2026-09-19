@@ -495,6 +495,68 @@ static bool SDLCALL renderer_event_watch( void *userdata, SDL_Event *event )
     return true;
 }
 
+static tile_atlas_config applied_atlas_config;
+static std::optional<bool> test_shader_variants_override;
+
+static void select_applied_memory_preset()
+{
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        vp->select_memory_preset(
+            cata_shader::memory_preset_from_option_value( applied_atlas_config.mode ) );
+    }
+}
+
+void apply_tile_atlas_options()
+{
+    // CreateTexture stamps this default on every texture, and the filter
+    // fingerprint folds SCALING_MODE. Change both together, so a replay never
+    // records a fingerprint its textures do not carry.
+    SetDefaultTextureScaleQuality( get_option<std::string>( "SCALING_MODE" ) );
+    applied_atlas_config.mode = get_option<std::string>( "MEMORY_MAP_MODE" );
+    applied_atlas_config.fingerprint =
+        compute_tileset_filter_fingerprint( applied_atlas_config.mode );
+    select_applied_memory_preset();
+}
+
+const tile_atlas_config &applied_tile_atlas_config()
+{
+    return applied_atlas_config;
+}
+
+std::optional<atlas_bake_plan> resolve_atlas_bake_plan( const std::string &memory_map_mode )
+{
+    if( std::getenv( "CATA_FORCE_ATLAS_VARIANTS" ) ) {
+        return atlas_bake_plan{};
+    }
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+    bool shader_variants = false;
+    if( vp ) {
+        switch( vp->ensure_probed() ) {
+            case cata_shader::probe_state::unsafe:
+                display_buffer_scope_signal_recovery_required();
+                return std::nullopt;
+            case cata_shader::probe_state::available:
+                shader_variants = true;
+                break;
+            case cata_shader::probe_state::unavailable:
+                break;
+        }
+        if( vp->shader_fault() ) {
+            // Faulted session bakes full whatever the test override claims
+            return atlas_bake_plan{};
+        }
+    }
+    if( test_shader_variants_override ) {
+        shader_variants = *test_shader_variants_override;
+    }
+    // override stands in for the variant probe only; tint shader is read from
+    // the live pass
+    const bool tint_shader = vp && vp->tint_available();
+    return compute_atlas_bake_plan( shader_variants,
+                                    cata_shader::memory_preset_from_option_value( memory_map_mode ),
+                                    tint_shader );
+}
+
 //Registers, creates, and shows the Window!!
 static void WinCreate()
 {
@@ -2117,6 +2179,20 @@ std::shared_ptr<const tileset> renderer_recovery_test_support::install_synthetic
     const std::string &tileset_id, const std::string &memory_map_mode,
     const uint64_t renderer_instance_generation, const uint64_t gpu_textures_generation )
 {
+    const std::optional<atlas_bake_plan> plan = resolve_atlas_bake_plan( memory_map_mode );
+    if( !plan ) {
+        renderer_coordinator.request_recovery( renderer_recovery_severity::device_lost );
+        return nullptr;
+    }
+    return install_synthetic_bundle( tileset_id, memory_map_mode, renderer_instance_generation,
+                                     gpu_textures_generation, *plan );
+}
+
+std::shared_ptr<const tileset> renderer_recovery_test_support::install_synthetic_bundle(
+    const std::string &tileset_id, const std::string &memory_map_mode,
+    const uint64_t renderer_instance_generation, const uint64_t gpu_textures_generation,
+    const atlas_bake_plan &plan, const bool with_highlight )
+{
     std::shared_ptr<tileset> ts = std::make_shared<tileset>();
     ts->tileset_id = tileset_id;
     atlas_replay_descriptor desc;
@@ -2126,6 +2202,12 @@ std::shared_ptr<const tileset> renderer_recovery_test_support::install_synthetic
     desc.atlas_offset = 0;
     desc.expected_tilecount = 1;
     ts->append_atlas_descriptor( desc );
+    if( with_highlight ) {
+        // highlight texture takes the tile size
+        ts->tile_width = 1;
+        ts->tile_height = 1;
+        ts->set_default_item_highlight_index( 1 );
+    }
     ts->set_memory_map_mode_at_upload( memory_map_mode );
     tileset_cache::loader::upload_atlases( *ts, renderer, memory_map_mode,
                                            ts->get_atlas_descriptors(),
@@ -2137,6 +2219,15 @@ std::shared_ptr<const tileset> renderer_recovery_test_support::install_synthetic
     };
     ts_cache.tilesets_.insert_or_assign( key, ts );
     return ts;
+}
+
+std::shared_ptr<const tileset>
+renderer_recovery_test_support::install_synthetic_bundle_with_highlight(
+    const std::string &tileset_id, const std::string &memory_map_mode,
+    const uint64_t renderer_instance_generation, const uint64_t gpu_textures_generation )
+{
+    return install_synthetic_bundle( tileset_id, memory_map_mode, renderer_instance_generation,
+                                     gpu_textures_generation, atlas_bake_plan{}, true );
 }
 
 atlas_replay_quarantine::gate renderer_recovery_test_support::populate_mode2_quarantine(
