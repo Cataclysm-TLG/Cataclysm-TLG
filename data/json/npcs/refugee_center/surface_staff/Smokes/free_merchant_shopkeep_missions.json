@@ -157,9 +157,9 @@
           { "item": "corpse", "x": 12, "y": 20, "chance": 100 }
         ],
         "place_npcs": [
-          { "class": "bandit", "x": 15, "y": 7 },
-          { "class": "thug", "x": 12, "y": 5 },
-          { "class": "bandit", "x": 9, "y": 8, "target": true }
+          { "class": "bandit_guard", "x": 15, "y": 7 },
+          { "class": "thug_guard", "x": 12, "y": 5 },
+          { "class": "bandit_guard", "x": 9, "y": 8, "target": true }
         ],
         "place_vehicles": [
           { "vehicle": "cube_van", "x": 12, "y": 12 },
