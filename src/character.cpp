@@ -9185,9 +9185,6 @@ void Character::rooted()
 std::vector<item *> Character::inv_dump()
 {
     std::vector<item *> ret;
-    if( is_armed() && can_drop( weapon ).success() ) {
-        ret.push_back( &weapon );
-    }
     worn.inv_dump( ret );
     inv->dump( ret );
     return ret;
@@ -10993,32 +10990,44 @@ void Character::place_corpse( map *here )
             body.put_in( cbm, pocket_type::CORPSE );
         }
     }
-
-    here->add_item_or_charges( pos_bub( *here ), body );
+    const tripoint_bub_ms pos = pos_bub( *here );
+    bool corpse_in_cargo = false;
+    bool wielded_in_cargo = false;
+    bool wielded_item = is_armed() && can_drop( weapon ).success();
+    if( const optional_vpart_position vp = here->veh_at( pos ) ) {
+        vehicle &veh = vp->vehicle();
+        for( vehicle_part *vpart : veh.get_parts_at( pos_abs(), "CARGO", part_status_flag::any ) ) {
+            if( !corpse_in_cargo && veh.add_item( *here, *vpart, body ) ) {
+                corpse_in_cargo = true;
+            }
+            if( wielded_item && !wielded_in_cargo && veh.add_item( *here, *vpart, weapon ) ) {
+                wielded_in_cargo = true;
+            }
+        }
+    }
+    if( wielded_item && !wielded_in_cargo ) {
+        here->add_item_or_charges( pos, weapon );
+    }
+    if( !corpse_in_cargo ) {
+        here->add_item_or_charges( pos, body );
+    }
 }
 
 void Character::place_corpse( const tripoint_abs_omt &om_target )
 {
     tinymap bay;
     bay.load( om_target, false );
-    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
     swap_map swap( *bay.cast_to_map() );
-    point_omt_ms fin = rng_map_point<point_omt_ms>( 1 );
-    // This makes no sense at all. It may find a random tile without furniture, but
-    // if the first try to find one fails, it will go through all tiles of the map
-    // and essentially select the last one that has no furniture.
-    // Q: Why check for furniture? (Check for passable or can-place-items seems more useful.) A: Furniture blocks revival?
-    // Q: Why not grep a random point out of all the possible points (e.g. via random_entry)?
-    // TODO: fix it, see above.
-    if( bay.furn( fin ) != furn_str_id::NULL_ID() ) {
-        for( const tripoint_omt_ms &p : bay.points_on_zlevel() ) {
-            if( bay.furn( p ) == furn_str_id::NULL_ID() ) {
-                fin.x() = p.x();
-                fin.y() = p.y();
-            }
+    std::vector<tripoint_omt_ms> valid_points;
+    for( const tripoint_omt_ms &p : bay.points_on_zlevel() ) {
+        if( bay.furn( p ) == furn_str_id::NULL_ID() ) {
+            valid_points.push_back( p );
         }
     }
-
+    if( valid_points.empty() ) {
+        return;
+    }
+    const tripoint_omt_ms pos = random_entry( valid_points );
     std::vector<item *> tmp = inv_dump();
     item body = item::make_corpse( mtype_id::NULL_ID(), calendar::turn, get_name() );
     for( item *itm : tmp ) {
@@ -11026,17 +11035,36 @@ void Character::place_corpse( const tripoint_abs_omt &om_target )
     }
     // One sample, as you would get from dissecting any other human.
     body.put_in( item( itype_human_sample ), pocket_type::CORPSE );
-
     for( const bionic &bio : *my_bionics ) {
         const itype_id &bio_itype = bio.info().itype();
         if( item::type_is_defined( bio_itype ) ) {
             body.put_in( item( bio_itype, calendar::turn ), pocket_type::CORPSE );
         }
     }
-
-    bay.add_item_or_charges( fin, body );
+    bool corpse_in_cargo = false;
+    bool wielded_in_cargo = false;
+    const bool wielded_item = is_armed() && can_drop( weapon ).success();
+    map &bay_map = *bay.cast_to_map();
+    if( const optional_vpart_position vp = bay_map.veh_at( bay.get_abs( pos ) ) ) {
+        vehicle &veh = vp->vehicle();
+        for( vehicle_part *vpart : veh.get_parts_at( bay.get_abs( pos ), "CARGO",
+                part_status_flag::any ) ) {
+            if( !corpse_in_cargo && veh.add_item( bay_map, *vpart, body ) ) {
+                corpse_in_cargo = true;
+            }
+            if( wielded_item && !wielded_in_cargo &&
+                veh.add_item( bay_map, *vpart, weapon ) ) {
+                wielded_in_cargo = true;
+            }
+        }
+    }
+    if( wielded_item && !wielded_in_cargo ) {
+        bay.add_item_or_charges( pos, weapon );
+    }
+    if( !corpse_in_cargo ) {
+        bay.add_item_or_charges( pos, body );
+    }
 }
-
 
 bool Character::is_visible_in_range( const Creature &critter, const int range ) const
 {

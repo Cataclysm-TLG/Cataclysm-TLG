@@ -367,7 +367,7 @@ struct mtype {
         */
         int starting_ammo_min = 0;
 
-        // Name of item group that is used to create item dropped upon death, or empty.
+        // Name of itemgroup that is used to generate inventory.
         item_group_id death_drops;
 
         std::set<species_id> species;
