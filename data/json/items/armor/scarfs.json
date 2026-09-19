@@ -94,7 +94,7 @@
     "description": "A warm knitted scarf, a quintessential piece of autumn fashion.",
     "price": "20 USD",
     "price_postapoc": "1 USD",
-    "material": [ "cotton" ],
+    "material": [ "wool" ],
     "weight": "96 g",
     "volume": "750 ml",
     "to_hit": -3,
