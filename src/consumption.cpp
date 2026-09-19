@@ -1832,10 +1832,7 @@ time_duration Character::get_consume_time( const item &it ) const
                                   get_modifier( character_modifier_solid_consume_mod );
     }
 
-    // Minimum consumption time, without mutations, is always 1 second.
-    time = std::max( 1_seconds, time );
-
-    return time * consume_time_modifier;
+    return std::max( 1_seconds, time * consume_time_modifier );
 }
 
 static bool query_consume_ownership( item &target, Character &p )
@@ -1888,7 +1885,7 @@ static bool consume_med( item &target, Character &you )
     // Otherwise injecting someone will give us addictions etc.
     if( target.has_flag( flag_NO_INGEST ) ) {
         const islot_comestible &comest = *target.get_comestible();
-        // Assume that parenteral meds don't spoil, so don't apply rot
+        // Assume that parenteral meds don't spoil, so don't apply rot.
         you.modify_health( comest );
         you.modify_fatigue( comest );
         you.modify_addiction( comest );
