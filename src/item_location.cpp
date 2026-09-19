@@ -1058,6 +1058,34 @@ void item_location::deserialize( const JsonObject &obj )
     }
 }
 
+item_location get_item_location( Character &p, item &it, map *here,
+                                 const tripoint_bub_ms &pos )
+{
+    // Item on a character
+    if( p.has_item( it ) ) {
+        return item_location( p, &it );
+    }
+
+    // Item in a vehicle
+    if( const optional_vpart_position &vp = here->veh_at( pos ) ) {
+        vehicle_cursor vc( vp->vehicle(), vp->part_index() );
+        bool found_in_vehicle = false;
+        vc.visit_items( [&]( const item * e, item * ) {
+            if( e == &it ) {
+                found_in_vehicle = true;
+                return VisitResponse::ABORT;
+            }
+            return VisitResponse::NEXT;
+        } );
+        if( found_in_vehicle ) {
+            return item_location( vc, &it );
+        }
+    }
+
+    // Item on the map
+    return item_location( map_cursor( here, pos ), &it );
+}
+
 item_location item_location::parent_item() const
 {
     if( where() == type::container ) {

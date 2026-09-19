@@ -42,7 +42,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie",
     "special_attacks": [
       {
@@ -63,7 +63,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie_rot",
     "special_attacks": [
       {
@@ -84,7 +84,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie_fat",
     "special_attacks": [
       {
@@ -105,7 +105,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie_tough",
     "special_attacks": [
       {
@@ -126,7 +126,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie_child",
     "special_attacks": [
       {
@@ -147,7 +147,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie_crawler",
     "special_attacks": [
       {
@@ -168,7 +168,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH" ],
     "zombify_into": "mon_zombie_brainless",
     "special_attacks": [
       {
@@ -189,7 +189,7 @@
     "copy-from": "mon_zombie",
     "looks_like": "corpse_mon_zombie",
     "speed": 1,
-    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "AQUATIC", "WATER_CAMOUFLAGE", "REVIVES_HEALTHY" ],
+    "flags": [ "FILTHY", "REVIVES", "DORMANT", "QUIETDEATH", "AQUATIC", "WATER_CAMOUFLAGE" ],
     "zombify_into": "mon_zombie_drowned",
     "special_attacks": [
       {

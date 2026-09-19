@@ -50,7 +50,6 @@ class item_location
         item_location( const map_cursor &mc, item *which );
         item_location( const vehicle_cursor &vc, item *which );
         item_location( const item_location &container, item *which );
-
         void serialize( JsonOut &js ) const;
         void deserialize( const JsonObject &obj );
 
@@ -192,6 +191,9 @@ class item_location
 
         std::shared_ptr<impl> ptr;
 };
+
+item_location get_item_location( Character &p, item &it, map *here, const tripoint_bub_ms &pos );
+
 std::unique_ptr<talker> get_talker_for( item_location &it );
 std::unique_ptr<const_talker> get_const_talker_for( const item_location &it );
 std::unique_ptr<talker> get_talker_for( item_location *it );

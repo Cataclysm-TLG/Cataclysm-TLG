@@ -386,7 +386,7 @@ class game
         monster *place_critter_at( const shared_ptr_fast<monster> &mon, const tripoint_bub_ms &p );
         monster *place_critter_around( const mtype_id &id, const tripoint_bub_ms &center, int radius );
         monster *place_critter_around( const shared_ptr_fast<monster> &mon, const tripoint_bub_ms &center,
-                                       int radius, bool forced = false );
+                                       int radius, bool forced = false, bool avoid_vehicle = false );
         monster *place_critter_within( const mtype_id &id, const tripoint_range<tripoint_bub_ms> &range );
         monster *place_critter_within( const shared_ptr_fast<monster> &mon,
                                        const tripoint_range<tripoint_bub_ms> &range );
