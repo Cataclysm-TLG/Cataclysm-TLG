@@ -3228,14 +3228,13 @@ static requirement_check_result generic_multi_activity_check_requirement(
                                       act_id, tool_pickup, src_loc ) ) {
             if( zone ) {
                 you.add_msg_player_or_npc( m_info,
-                                           _( "The required items are not available to complete the %s task at zone %s." ), act_id.c_str(),
-                                           zone->get_name(),
-                                           _( "The required items are not available to complete the %s task at zone %s." ), act_id.c_str(),
+                                           _( "The required items are not available to complete the task at zone %s." ),
+                                           _( "The required items are not available to complete the task at zone %s." ),
                                            zone->get_name() );
             } else {
                 you.add_msg_player_or_npc( m_info,
-                                           _( "The required items are not available to complete the %s task." ), act_id.c_str(),
-                                           _( "The required items are not available to complete the %s task." ), act_id.c_str() );
+                                           _( "The required items are not available to complete the task." ),
+                                           _( "The required items are not available to complete the task." ) );
             }
             if( reason == do_activity_reason::NEEDS_VEH_DECONST ||
                 reason == do_activity_reason::NEEDS_VEH_REPAIR ) {
