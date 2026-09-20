@@ -118,6 +118,7 @@ enum class debug_menu_index : int {
     TALK_TOPIC,
     VEHICLE_EFFECTS,
     RELOAD_GPU_SHADERS,
+    SHADER_TINT_SELF_TEST,
     last
 };
 
