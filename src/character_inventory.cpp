@@ -284,10 +284,10 @@ item_location Character::try_add( item it, const item *avoid, const item *origin
         ret->on_pickup( *this );
     }
     cached_info.erase( "reloadables" );
-    
+
     // This flag is no longer needed in any event.
     it.unset_flag( json_flag_no_auto_equip );
-    
+
     return ret;
 }
 

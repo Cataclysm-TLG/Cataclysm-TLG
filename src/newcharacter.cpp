@@ -599,7 +599,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
         initialize();
         add_profession_items();
         as_npc()->catchup_skills();
-        
+
     }
 }
 

@@ -2728,12 +2728,12 @@ npc_action npc::address_needs( float danger )
         case 10:
         case 11:
         case 12:
-        case 13: { // 33% chance to try reloading. 
+        case 13: { // 33% chance to try reloading.
             if( can_reload_current() ) {
                 return npc_reload;
             } else {
                 add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                            "%s decided to look into reloading items.", name );
+                               "%s decided to look into reloading items.", name );
                 item_location reloadable = find_reloadable();
                 if( reloadable ) {
                     do_reload( reloadable );

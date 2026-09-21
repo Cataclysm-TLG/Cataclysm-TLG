@@ -12117,7 +12117,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         here.ter_set( stairs, ter_t_manhole );
     }
 
-    if( u.is_hauling() && !climbing  ) {
+    if( u.is_hauling() && !climbing ) {
         start_hauling( old_pos );
     }
 
