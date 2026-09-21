@@ -307,7 +307,6 @@ static const itype_id itype_swim_fins( "swim_fins" );
 static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 
-static const json_character_flag json_flag_BIONIC_STARTS_ACTIVE( "BIONIC_STARTS_ACTIVE " );
 static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
 static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
@@ -1027,7 +1026,7 @@ bool game::start_game()
     if( !get_scenario()->has_flag( "LONE_START" ) ) {
         create_starting_npcs();
     }
-    //Load NPCs. Set nearby npcs to active.
+    // Load NPCs. Set nearby npcs to active.
     load_npcs();
     // Spawn the monsters
     // Surrounded start ones
@@ -1188,13 +1187,6 @@ bool game::start_game()
     tripoint_abs_omt abs_omt = u.pos_abs_omt();
     const oter_id &cur_ter = overmap_buffer.ter( abs_omt );
     get_event_bus().send<event_type::avatar_enters_omt>( abs_omt.raw(), cur_ter );
-
-    for( bionic bio : *u.my_bionics ) {
-        if( bio.has_flag( "BIONIC_STARTS_ACTIVE" ) && bio.has_flag( "BIONIC_TOGGLED" ) ) {
-            u.activate_bionic( bio );
-        }
-    }
-
 
     effect_on_conditions::load_new_character( u );
     return true;

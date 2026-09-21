@@ -109,6 +109,7 @@ static const activity_id ACT_MULTIPLE_READ( "ACT_MULTIPLE_READ" );
 static const bionic_id bio_ads( "bio_ads" );
 static const bionic_id bio_blade( "bio_blade" );
 static const bionic_id bio_chain_lightning( "bio_chain_lightning" );
+static const bionic_id bio_eye_optic( "bio_eye_optic" );
 static const bionic_id bio_faraday( "bio_faraday" );
 static const bionic_id bio_heat_absorb( "bio_heat_absorb" );
 static const bionic_id bio_heatsink( "bio_heatsink" );
@@ -133,6 +134,7 @@ static const efftype_id effect_asthma( "asthma" );
 static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
+static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_catch_up( "catch_up" );
 static const efftype_id effect_cramped_space( "cramped_space" );
@@ -2663,72 +2665,96 @@ npc_action npc::address_needs( float danger )
     // and swing into action with alarming alacrity.
     // no sometimes they are just looking the other way, sometimes they hestitate.
     // ( also we can get huge performance boosts )
-    if( one_in( 5 ) ) {
-        healing_options try_to_fix_me = patient_assessment( *this );
-        if( try_to_fix_me.any_true() ) {
-            if( !use_bionic_by_id( bio_nanobots ) ) {
-                ai_cache.can_heal = has_healing_options( try_to_fix_me );
-                if( ai_cache.can_heal.any_true() ) {
-                    return npc_heal;
-                }
-            }
-        } else {
-            deactivate_bionic_by_id( bio_nanobots );
-        }
-        // The danger check here is redundant, but serves as an early exit to save some cycles.
-        if( rules.has_flag( ally_rule::heal_others ) && danger < 0.01 ) {
-            if( is_player_ally() ) {
-                healing_options try_to_fix_other = patient_assessment( player_character );
-                if( try_to_fix_other.any_true() ) {
-                    ai_cache.can_heal = has_healing_options( try_to_fix_other );
+    switch( rng( 1, 15 ) ) {
+        case 1:
+        case 2:
+        case 3: { // 20% chance to try to heal ourself.
+            healing_options try_to_fix_me = patient_assessment( *this );
+            if( try_to_fix_me.any_true() ) {
+                if( !use_bionic_by_id( bio_nanobots ) ) {
+                    ai_cache.can_heal = has_healing_options( try_to_fix_me );
                     if( ai_cache.can_heal.any_true() ) {
-                        ai_cache.ally = g->shared_from( player_character );
-                        return npc_heal_player;
+                        return npc_heal;
+                    }
+                }
+            } else {
+                deactivate_bionic_by_id( bio_nanobots );
+            }
+            // The danger check here is redundant, but serves as an early exit to save some cycles.
+            if( rules.has_flag( ally_rule::heal_others ) && danger < 0.01 ) {
+                if( is_player_ally() ) {
+                    healing_options try_to_fix_other = patient_assessment( player_character );
+                    if( try_to_fix_other.any_true() ) {
+                        ai_cache.can_heal = has_healing_options( try_to_fix_other );
+                        if( ai_cache.can_heal.any_true() ) {
+                            ai_cache.ally = g->shared_from( player_character );
+                            return npc_heal_player;
+                        }
+                    }
+                }
+                for( const npc &guy : g->all_npcs() ) {
+                    if( &guy == this || !guy.is_ally( *this ) || guy.posz() != posz() ||
+                        !sees( here, guy ) ) {
+                        continue;
+                    }
+                    healing_options try_to_fix_other = patient_assessment( guy );
+                    if( try_to_fix_other.any_true() ) {
+                        ai_cache.can_heal = has_healing_options( try_to_fix_other );
+                        if( ai_cache.can_heal.any_true() ) {
+                            ai_cache.ally = g->shared_from( guy );
+                            return npc_heal_player;
+                        }
                     }
                 }
             }
-            for( const npc &guy : g->all_npcs() ) {
-                if( &guy == this || !guy.is_ally( *this ) || guy.posz() != posz() || !sees( here, guy ) ) {
-                    continue;
+            break;
+        }
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8: { // 33% chance to address our pain.
+            if( get_perceived_pain() >= 15 ) {
+                if( !activate_bionic_by_id( bio_painkiller ) && has_painkiller() &&
+                    !took_painkiller() ) {
+                    return npc_use_painkiller;
                 }
-                healing_options try_to_fix_other = patient_assessment( guy );
-                if( try_to_fix_other.any_true() ) {
-                    ai_cache.can_heal = has_healing_options( try_to_fix_other );
-                    if( ai_cache.can_heal.any_true() ) {
-                        ai_cache.ally = g->shared_from( guy );
-                        return npc_heal_player;
-                    }
+            } else {
+                deactivate_bionic_by_id( bio_painkiller );
+            }
+            break;
+        }
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13: { // 33% chance to try reloading. 
+            if( can_reload_current() ) {
+                return npc_reload;
+            } else {
+                add_msg_debug( debugmode::DF_NPC_ITEMAI,
+                            "%s decided to look into reloading items.", name );
+                item_location reloadable = find_reloadable();
+                if( reloadable ) {
+                    do_reload( reloadable );
+                    return npc_noop;
                 }
             }
+            break;
         }
-    }
 
-    if( one_in( 3 ) ) {
-        if( get_perceived_pain() >= 15 ) {
-            if( !activate_bionic_by_id( bio_painkiller ) && has_painkiller() && !took_painkiller() ) {
-                return npc_use_painkiller;
-            }
-        } else {
-            deactivate_bionic_by_id( bio_painkiller );
-        }
-    }
-
-    if( one_in( 3 ) && can_reload_current() ) {
-        return npc_reload;
-    }
-
-    if( one_in( 3 ) ) {
-        add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s decided to look into reloading items.", name );
-        item_location reloadable = find_reloadable();
-        if( reloadable ) {
-            do_reload( reloadable );
-            return npc_noop;
-        }
+        default: // 13.3% - none
+            break;
     }
 
     // Hallucinations have a chance of disappearing each turn.
     if( is_hallucination() && one_in( 25 ) ) {
         die( &here, nullptr );
+    }
+
+    // Try turning on our eyes if they're off.
+    if( has_effect( effect_blind ) && has_bionic( bio_eye_optic ) ) {
+        use_bionic_by_id( bio_eye_optic );
     }
 
     // Warmth: wearing clothes costs a turn but hypothermia is life-threatening.

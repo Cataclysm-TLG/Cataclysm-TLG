@@ -761,12 +761,6 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
         }
     }
 
-    for( bionic bio : *my_bionics ) {
-        if( bio.has_flag( "BIONIC_STARTS_ACTIVE" ) && bio.has_flag( "BIONIC_TOGGLED" ) ) {
-            activate_bionic( bio );
-        }
-    }
-
     // Add eocs
     effect_on_conditions::load_new_character( *this );
 }
