@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-12 00:27-0700\n"
-"PO-Revision-Date: 2026-09-21 00:38+0800\n"
+"PO-Revision-Date: 2026-09-21 19:49+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -162014,7 +162014,7 @@ msgstr[0] "备胎托架（有备胎）"
 #: data/json/items/vehicle/cargo.json data/json/vehicleparts/cargo.json
 msgid "nose plate"
 msgid_plural "nose plates"
-msgstr[0] "鼻板"
+msgstr[0] "车头装甲板"
 
 #. ~ Item name
 #: data/json/items/vehicle/cargo.json
@@ -265072,7 +265072,7 @@ msgstr "没门"
 #. ~ Generic terms of emphasis
 #: data/json/npcs/talk_tags.json
 msgid "highly"
-msgstr "很"
+msgstr "高速公路"
 
 #. ~ Snippet in category "<name_g>"
 #. ~ Friendly name pro-nouns and references
@@ -272628,7 +272628,7 @@ msgstr "直升机停机坪"
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_transportation.json
 msgid "highway"
-msgstr "很"
+msgstr ""
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_transportation.json
@@ -362736,7 +362736,7 @@ msgstr "更改所有技能"
 
 #: src/debug_menu.cpp:549
 msgid "Change all knowledge"
-msgstr "更改所有技能"
+msgstr "更改所有知识"
 
 #: src/debug_menu.cpp:550
 msgid "Learn all melee styles"
@@ -362748,7 +362748,7 @@ msgstr "解锁全部配方"
 
 #: src/debug_menu.cpp:552
 msgid "Forget all recipes"
-msgstr "解锁全部配方"
+msgstr "遗忘全部配方"
 
 #: src/debug_menu.cpp:553
 msgid "Edit player/NPC"
