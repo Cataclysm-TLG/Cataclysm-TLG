@@ -25,28 +25,6 @@ using Trait_group_tag = string_id<Trait_group>;
 
 } // namespace trait_group
 
-// TODO: Move to better suited file (rng.h/.cpp?)
-class distribution
-{
-    private:
-        std::function<float()> generator_function;
-        explicit distribution( const std::function<float()> &gen );
-
-    public:
-        distribution();
-        distribution( const distribution & );
-
-        float roll() const;
-
-        distribution operator+( const distribution &other ) const;
-        distribution operator*( const distribution &other ) const;
-        distribution &operator=( const distribution &other );
-
-        static distribution constant( float val );
-        static distribution rng_roll( int from, int to );
-        static distribution dice_roll( int sides, int size );
-        static distribution one_in( float in );
-};
 struct shopkeeper_item_group {
     item_group_id id = item_group_id( "EMPTY_GROUP" );
     int trust = 0;

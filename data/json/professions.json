@@ -5698,7 +5698,7 @@
     "npc_background": "BG_survival_story_TOURIST",
     "description": "You always had to have the latest and best gadgets and gizmos, so is it any wonder that you upgraded your flesh along with your smart phone?",
     "points": 5,
-    "CBMs": [ "bio_flashlight", "bio_tools", "bio_ups", "bio_watch", "bio_cable", "bio_power_storage" ],
+    "CBMs": [ "bio_power_storage", "bio_flashlight", "bio_tools", "bio_ups", "bio_watch", "bio_cable" ],
     "skills": [ { "level": 4, "name": "electronics" }, { "level": 2, "name": "fabrication" } ],
     "items": {
       "both": {
@@ -5730,6 +5730,7 @@
     "description": "The product of millions of dollars of clandestine research, you are a bionic sleeper agent capable of silently engaging your target while maintaining an innocuous appearance.  Your handler cut all contact a week ago.",
     "points": 7,
     "CBMs": [
+      "bio_power_storage_mkII",
       "bio_cqb",
       "bio_blade",
       "bio_shock",
@@ -5737,8 +5738,7 @@
       "bio_adrenaline",
       "bio_night_vision",
       "bio_face_mask",
-      "bio_torsionratchet",
-      "bio_power_storage_mkII"
+      "bio_torsionratchet"
     ],
     "skills": [ { "level": 3, "name": "dodge" } ],
     "items": {
@@ -5814,12 +5814,12 @@
     "description": "When the diagnosis came back positive, you signed up for a series of experimental bionic surgeries that saved your life.  The problem is, they needed power, and now the power's out.  Find a new place to charge your batteries or you might wind up worse off than before.",
     "points": 5,
     "CBMs": [
+      "bio_power_storage",
       "bio_leukocyte",
       "bio_blood_anal",
       "bio_blood_filter",
       "bio_nanobots",
       "bio_cable",
-      "bio_power_storage",
       "bio_sleep_shutdown"
     ],
     "items": {
@@ -5854,14 +5854,16 @@
       "prof_auto_pistols_familiar"
     ],
     "CBMs": [
+      "bio_power_storage_mkII",
       "bio_eye_enhancer",
       "bio_targeting",
       "bio_evap",
       "bio_eye_optic",
-      "bio_power_storage_mkII",
       "bio_torsionratchet",
       "bio_night_vision"
     ],
+    "bonus_aggression": { "rng": [ 1, 2 ] },
+    "bonus_bravery": { "rng": [ 2, 5 ] },
     "skills": [
       { "level": 5, "name": "gun" },
       { "level": 5, "name": "rifle" },
@@ -5878,7 +5880,7 @@
           { "item": "jacket_army_modern" },
           { "item": "gloves_tactical" },
           { "item": "rucksack" },
-          { "item": "cloak" },
+          { "item": "folding_poncho" },
           { "item": "mask_ski" },
           { "item": "socks" },
           { "item": "boots_combat" },
@@ -5890,20 +5892,19 @@
           { "item": "knife_hunting" },
           { "item": "mess_kit" },
           { "group": "charged_two_way_radio" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "hat_boonie", "custom-flags": [ "no_auto_equip" ] },
           { "item": "tank_top", "variant": "tank_top_camo" },
+          { "item": "legpouch_large" },
+          { "item": "tacvest", "contents-group": [ "army_mags_m2010" ] },
+          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
+          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           {
             "item": "m2010",
             "ammo-item": "300_winmag",
             "charges": 5,
             "contents-item": [ "shoulder_strap", "rifle_scope", "bipod" ]
           },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           { "item": "usp45mag", "ammo-item": "45_acp", "charges": 12 },
-          { "item": "usp45mag", "ammo-item": "45_acp", "charges": 12 },
-          { "item": "legpouch_large" },
-          { "item": "tacvest", "contents-group": [ "army_mags_m2010" ] }
+          { "item": "usp45mag", "ammo-item": "45_acp", "charges": 12 }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -5925,7 +5926,7 @@
       "prof_auto_rifles_familiar",
       "prof_auto_pistols_familiar"
     ],
-    "CBMs": [ "bio_targeting", "bio_carbon", "bio_cqb", "bio_metabolics", "bio_power_storage_mkII" ],
+    "CBMs": [ "bio_power_storage_mkII", "bio_targeting", "bio_carbon", "bio_cqb", "bio_metabolics" ],
     "skills": [
       { "level": 4, "name": "gun" },
       { "level": 2, "name": "melee" },
@@ -5971,13 +5972,13 @@
     "description": "Your body conceals several bionic components, worth millions of dollars in public taxes.  The government turned you into an infiltration and recon specialist: you have night vision, an alarm, lock picking capabilities and a hacking module.",
     "points": 4,
     "CBMs": [
+      "bio_power_storage_mkII",
       "bio_fingerhack",
       "bio_lockpick",
       "bio_face_mask",
       "bio_alarm",
       "bio_night_vision",
-      "bio_metabolics",
-      "bio_power_storage_mkII"
+      "bio_metabolics"
     ],
     "skills": [ { "level": 2, "name": "speech" } ],
     "items": {
@@ -6004,6 +6005,7 @@
     "description": "You were normal once.  Before the tests, before the procedures, before they stripped away every outward sign of your humanity.  You're more machine than human now, but that might prove to be an advantage against the horrors that await.",
     "points": -2,
     "CBMs": [
+      "bio_power_storage",
       "bio_dis_shock",
       "bio_dis_acid",
       "bio_drain",
@@ -6029,8 +6031,7 @@
       "bio_armor_head",
       "bio_armor_torso",
       "bio_armor_eyes",
-      "bio_razors",
-      "bio_power_storage"
+      "bio_razors"
     ],
     "items": {
       "both": { "entries": [ { "item": "subsuit_xl" }, { "item": "footrags" }, { "item": "hat_noise_cancelling" } ] },
@@ -6073,13 +6074,13 @@
     "description": "Through a series of painful and expensive surgeries, you became a walking bionic weapon, your services as a mercenary available to the highest bidder.",
     "points": 5,
     "CBMs": [
+      "bio_power_storage_mkII",
       "bio_razors",
       "bio_armor_eyes",
       "bio_dex_enhancer",
       "bio_ears",
       "bio_carbon",
-      "bio_metabolics",
-      "bio_power_storage_mkII"
+      "bio_metabolics"
     ],
     "skills": [ { "level": 2, "name": "melee" }, { "level": 2, "name": "unarmed" }, { "level": 2, "name": "dodge" } ],
     "proficiencies": [ "prof_unarmed_familiar", "prof_claws_familiar", "prof_bionics_familiar" ],

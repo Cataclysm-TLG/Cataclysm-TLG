@@ -307,6 +307,7 @@ static const itype_id itype_swim_fins( "swim_fins" );
 static const itype_id itype_towel( "towel" );
 static const itype_id itype_towel_wet( "towel_wet" );
 
+static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 static const json_character_flag json_flag_BLIND_CRAFT( "BLIND_CRAFT" );
 static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
 static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
@@ -1025,7 +1026,7 @@ bool game::start_game()
     if( !get_scenario()->has_flag( "LONE_START" ) ) {
         create_starting_npcs();
     }
-    //Load NPCs. Set nearby npcs to active.
+    // Load NPCs. Set nearby npcs to active.
     load_npcs();
     // Spawn the monsters
     // Surrounded start ones
@@ -12116,7 +12117,7 @@ void game::vertical_move( int movez, bool force, bool peeking )
         here.ter_set( stairs, ter_t_manhole );
     }
 
-    if( u.is_hauling() && !climbing  ) {
+    if( u.is_hauling() && !climbing ) {
         start_hauling( old_pos );
     }
 
