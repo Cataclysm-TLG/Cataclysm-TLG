@@ -425,6 +425,7 @@
     "act_cost": "2 J",
     "react_cost": "2 J",
     "time": "1 s",
+    "activated_on_install": true,
     "canceled_mutations": [
       "HYPEROPIC",
       "MYOPIC",

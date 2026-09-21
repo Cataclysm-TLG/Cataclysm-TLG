@@ -599,6 +599,7 @@ void Character::randomize( const bool random_scenario, bool play_now )
         initialize();
         add_profession_items();
         as_npc()->catchup_skills();
+
     }
 }
 
@@ -623,7 +624,6 @@ void Character::add_profession_items()
             item *wield_or_wear = nullptr;
             // TODO: debugmsg if food that isn't a seed is inedible
             if( it.has_flag( json_flag_no_auto_equip ) ) {
-                it.unset_flag( json_flag_no_auto_equip );
                 success = try_add( it, nullptr, nullptr, false );
             } else if( it.has_flag( json_flag_auto_wield ) ) {
                 it.unset_flag( json_flag_auto_wield );
@@ -1001,6 +1001,12 @@ void Character::initialize( bool learn_recipes )
     reset_cardio_acc();
 
     recalc_speed_bonus();
+
+    for( bionic &bio : *my_bionics ) {
+        if( bio.id->activated_on_install ) {
+            activate_bionic( bio );
+        }
+    }
 }
 
 void avatar::initialize( character_type type )

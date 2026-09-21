@@ -99,6 +99,11 @@
     "info": "A <good>follower</good> could <info>make use of this CBM</info> if installed properly."
   },
   {
+    "id": "BIONIC_STARTS_ACTIVE",
+    "type": "json_flag",
+    "//": "This bionic will be toggled on when generating a player character or NPC who starts with it."
+  },
+  {
     "id": "BLIND",
     "type": "json_flag",
     "//": "Blinds the wearer while worn, and provides nominal protection vs flashbang flashes.",

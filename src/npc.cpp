@@ -14,6 +14,7 @@
 #include "activity_type.h"
 #include "auto_pickup.h"
 #include "basecamp.h"
+#include "bionics.h"
 #include "bodypart.h"
 #include "catacharset.h"
 #include "character.h"
@@ -63,6 +64,7 @@
 #include "overmapbuffer.h"
 #include "pathfinding.h"
 #include "player_activity.h"
+#include "profession.h"
 #include "ret_val.h"
 #include "rng.h"
 #include "skill.h"
@@ -617,7 +619,7 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     male = one_in( 2 );
     pick_name();
     randomize_height();
-    // Normally 16-55, but potential violence towards *underage* NPCs is a more problematic than towards adults.
+    // Teen/kid NPCs are pending age restricted professions and stat mods for them.
     set_base_age( rng( 18, 55 ) );
     str_max = dice( 4, 3 );
     dex_max = dice( 4, 3 );
@@ -664,10 +666,17 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     int_max += myclass->roll_intelligence();
     per_max += myclass->roll_perception();
 
-    personality.aggression += myclass->roll_aggression();
-    personality.bravery += myclass->roll_bravery();
-    personality.collector += myclass->roll_collector();
-    personality.altruism += myclass->roll_altruism();
+    if( myclass.is_valid() ) {
+        personality.aggression += myclass->roll_aggression();
+        personality.bravery += myclass->roll_bravery();
+        personality.collector += myclass->roll_collector();
+        personality.altruism += myclass->roll_altruism();
+    } else {
+        personality.aggression += prof->roll_aggression();
+        personality.bravery += prof->roll_bravery();
+        personality.collector += prof->roll_collector();
+        personality.altruism += prof->roll_altruism();
+    }
 
     personality.aggression = std::clamp<int8_t>( personality.aggression,
                              NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
@@ -743,7 +752,7 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
 
     // Add martial arts
     learn_ma_styles_from_traits();
-    // Add spells for magiclysm mod
+    // Add spells for magiclysm mod.
     for( const std::pair<const spell_id, int> &spell_pair : myclass->_starting_spells ) {
         this->magic->learn_spell( spell_pair.first, *this, true );
         spell &sp = this->magic->get_spell( spell_pair.first );
