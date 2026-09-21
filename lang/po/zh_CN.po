@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-12 00:27-0700\n"
-"PO-Revision-Date: 2026-09-21 19:49+0800\n"
+"PO-Revision-Date: 2026-09-21 20:01+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -61845,7 +61845,7 @@ msgstr[0] "死神袍"
 #: data/json/items/armor/coats.json
 msgid "gutskin parka"
 msgid_plural "gutskin parkas"
-msgstr[0] "爱斯基摩肠制大衣"
+msgstr[0] "肠衣派克外套"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -61936,7 +61936,7 @@ msgstr[0] "长外套"
 #: data/json/items/armor/coats.json
 msgid "military parka"
 msgid_plural "military parkas"
-msgstr[0] "军用派克大衣"
+msgstr[0] "军用派克外套"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -65150,7 +65150,7 @@ msgstr "罩在头上，只露出脸。  它相当厚，在战斗中可能会有�
 #. ~ Description of "gutskin hood"
 #: data/json/items/armor/hoods.json
 msgid "A hood sewn from treated and split intestines, the perfect companion for a gutskin parka."
-msgstr "一件用处理过的割开的动物肠衣制成的兜帽，是爱斯基摩肠制大衣的完美伴侣。"
+msgstr "一个由经过处理和剖开的肠子缝制而成的兜帽，是肠衣派克外套的完美搭配。"
 
 #. ~ Description of "chainmail coif"
 #: data/json/items/armor/hoods.json
