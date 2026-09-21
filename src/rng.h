@@ -11,6 +11,7 @@
 #include <type_traits>
 
 #include "coords_fwd.h"
+#include "json.h"
 #include "units_fwd.h"
 
 class map;
@@ -142,6 +143,33 @@ inline V random_entry( const C &container )
     std::advance( iter, rng( 0, container.size() - 1 ) );
     return *iter;
 }
+
+class distribution
+{
+    private:
+        std::function<float()> generator_function;
+        explicit distribution( const std::function<float()> &gen );
+
+    public:
+        distribution();
+        distribution( const distribution & );
+
+        float roll() const;
+
+        distribution operator+( const distribution &other ) const;
+        distribution operator*( const distribution &other ) const;
+        distribution &operator=( const distribution &other );
+
+        static distribution constant( float val );
+        static distribution rng_roll( int from, int to );
+        static distribution dice_roll( int sides, int size );
+        static distribution one_in( float in );
+};
+
+
+distribution load_distribution( const JsonObject &jo );
+distribution load_distribution( const JsonObject &jo, std::string_view name );
+
 
 template<typename ...T>
 class is_std_array_helper : public std::false_type

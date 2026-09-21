@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "ret_val.h"
+#include "rng.h"
 #include "translations.h"
 #include "type_id.h"
 
@@ -89,6 +90,12 @@ class profession
         StartingSkillList  _starting_skills;
         std::vector<mission_type_id> _missions; // starting missions for profession
 
+        // These are only used for NPCs.
+        distribution bonus_aggression;
+        distribution bonus_bravery;
+        distribution bonus_collector;
+        distribution bonus_altruism;
+
         std::string _subtype;
 
         void check_item_definitions( const itypedecvec &items ) const;
@@ -96,7 +103,7 @@ class profession
         void load( const JsonObject &jo, std::string_view src );
 
     public:
-        //these three aren't meant for external use, but had to be made public regardless
+        // These three aren't meant for external use, but had to be made public regardless.
         profession();
 
         static void load_profession( const JsonObject &jo, const std::string &src );
@@ -136,6 +143,11 @@ class profession
         const std::vector<mission_type_id> &missions() const;
         int age_lower = 21;
         int age_upper = 55;
+
+        int roll_aggression() const;
+        int roll_bravery() const;
+        int roll_collector() const;
+        int roll_altruism() const;
 
         std::vector<std::pair<string_id<profession>, mod_id>> src;
 

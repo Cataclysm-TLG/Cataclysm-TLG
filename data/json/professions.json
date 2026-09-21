@@ -5862,6 +5862,8 @@
       "bio_torsionratchet",
       "bio_night_vision"
     ],
+    "bonus_aggression": { "rng": [ 1, 2 ] },
+    "bonus_bravery": { "rng": [ 2, 5 ] },
     "skills": [
       { "level": 5, "name": "gun" },
       { "level": 5, "name": "rifle" },
