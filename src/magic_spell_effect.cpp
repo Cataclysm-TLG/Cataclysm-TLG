@@ -759,8 +759,12 @@ static void damage_targets( const spell &sp, Creature &caster,
             }
         } else if( sp.damage( caster ) < 0 ) {
             sp.heal( target, caster );
-            add_msg_if_player_sees( cr->pos_bub(), m_good, _( "%s wounds are closing up!" ),
-                                    cr->disp_name( true ) );
+            if( cr->is_avatar() ) {
+                add_msg_if_player_sees( cr->pos_bub(), m_good, _( "Your wounds are closing up!" ) );
+            } else {
+                add_msg_if_player_sees( cr->pos_bub(), m_good, _( "%s begins to heal!" ),
+                                        cr->disp_name( false, true ) );
+            }
         }
 
         // handling DOTs here
