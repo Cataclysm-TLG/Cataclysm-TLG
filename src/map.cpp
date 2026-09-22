@@ -9172,8 +9172,7 @@ bool map::obscured_by_vehicle_rotation( const tripoint_bub_ms &from,
 
 bool map::accessible_items( const tripoint_bub_ms &t ) const
 {
-    return !has_flag( ter_furn_flag::TFLAG_SEALED, t ) ||
-           has_flag( ter_furn_flag::TFLAG_LIQUIDCONT, t );
+    return !has_flag( ter_furn_flag::TFLAG_SEALED, t );
 }
 
 void map::for_each_reachable_item( const tripoint_bub_ms &center, int radius,
