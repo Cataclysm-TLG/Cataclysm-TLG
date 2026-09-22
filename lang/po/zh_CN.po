@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-12 00:27-0700\n"
-"PO-Revision-Date: 2026-09-21 20:01+0800\n"
+"PO-Revision-Date: 2026-09-22 22:05+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -280535,7 +280535,7 @@ msgstr "越野驾驶"
 #. ~ Description of proficiency "Helicopter Piloting"
 #: data/json/proficiencies/vehicles.json
 msgid "You are able to operate helicopters of all shapes and sizes."
-msgstr "你对各种形状大小的蜘蛛有所了解。"
+msgstr "你能够操作各种形状和尺寸的直升机。"
 
 #. ~ Description of proficiency "Boat Piloting"
 #: data/json/proficiencies/vehicles.json
