@@ -1603,7 +1603,11 @@
     "id": "RESET_CALENDAR",
     "category": "NEW_CHAR_DESCRIPTION",
     "name": "Reset scenario calendar",
-    "bindings": [ { "input_method": "keyboard_char", "key": "$" }, { "input_method": "keyboard_code", "key": "4", "mod": [ "shift" ] } ]
+    "bindings": [
+      { "input_method": "keyboard_any", "key": "r" },
+      { "input_method": "keyboard_char", "key": "R" },
+      { "input_method": "keyboard_code", "key": "r", "mod": [ "shift" ] }
+    ]
   },
   {
     "type": "keybinding",
@@ -1682,7 +1686,11 @@
     "id": "RESET_CALENDAR",
     "category": "NEW_CHAR_SCENARIOS",
     "name": "Reset scenario calendar",
-    "bindings": [ { "input_method": "keyboard_char", "key": "$" }, { "input_method": "keyboard_code", "key": "4", "mod": [ "shift" ] } ]
+    "bindings": [
+      { "input_method": "keyboard_any", "key": "r" },
+      { "input_method": "keyboard_char", "key": "R" },
+      { "input_method": "keyboard_code", "key": "r", "mod": [ "shift" ] }
+    ]
   },
   {
     "type": "keybinding",
