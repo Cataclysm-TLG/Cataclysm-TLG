@@ -1003,7 +1003,7 @@ void npc::pretend_fire( npc *source, int shots, item &gun )
         }
 
         item *weapon = &gun;
-        const item::sound_data data = weapon->gun_noise( shots > 1 );
+        const item::sound_data data = weapon->gun_noise( shots > 2 );
 
         add_msg_if_player_sees( *source, m_warning, _( "You hear %s." ), data.sound );
         curshot++;
@@ -1102,7 +1102,7 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
                                     pos_bub( here ) ) ) : nullptr;
 
         // Add gunshot noise
-        make_gun_sound_effect( *this, shots > 1, &gun );
+        make_gun_sound_effect( *this, shots > 2, &gun );
         sfx::generate_gun_sound( *this, gun );
 
         weakpoint_attack wp_attack;
@@ -2561,7 +2561,7 @@ item::sound_data item::gun_noise( const bool burst ) const
         if( noise < 20 ) {
             return { noise, _( "Fzzt!" ) };
         } else if( noise < 40 ) {
-            return { noise, _( "Pew!" ) };
+            return { noise, _( "Fshh!" ) };
         } else if( noise < 60 ) {
             return { noise, _( "Tsewww!" ) };
         } else {
