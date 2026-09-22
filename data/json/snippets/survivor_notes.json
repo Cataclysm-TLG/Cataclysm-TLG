@@ -246,11 +246,7 @@
         "id": "note_101",
         "text": "\"They said a walking cane was a useless weapon… but then I hit one of them with it.\""
       },
-      {
-        "id": "note_102",
-        "text": "\"River water around these parts is extremely safe.  Probably more safe than the damn tap water at this point.\""
-      },
-      { "id": "note_103", "text": "\"DON't bomB THe PORtals it MAKES iT WORSE\"" },
+      { "id": "note_103", "text": "\"went through a portal and came out GAY\"" },
       {
         "id": "note_104",
         "text": "\"No wonder all the camps got overrun, they kept a goddamn zombie test subject!  Each and every one of 'em!\""
@@ -266,10 +262,6 @@
       },
       { "id": "note_111", "text": "\"STAY AWAY FROM THE BIG ONES IN THE FOREST\"" },
       {
-        "id": "note_112",
-        "text": "\"got into a prison with a halligan bar.  makes me wonder how they kept prisoners inside\""
-      },
-      {
         "id": "note_113",
         "text": "\"This thing isn't a car any more.  It's just a fucking mountain of metal on wheels, which I live in.\""
       },
@@ -282,10 +274,6 @@
         "text": "\"big z threw me on top of the building, legs broken but at least im safe for a few more minutes\""
       },
       {
-        "id": "note_116",
-        "text": "\"I'm starting to feel bad about disabling all these turrets and stealing their ammunition.\""
-      },
-      {
         "id": "note_117",
         "text": "\"Make sure you strip the house for all available resources-- tubes, pipes, ceramics, sheets, strings, and more\""
       },
@@ -296,20 +284,12 @@
       },
       { "id": "note_121", "text": "\"CHINA DID THIS\"" },
       { "id": "note_122", "text": "\"RUSSIA DID THIS\"" },
-      {
-        "id": "note_123",
-        "text": "\"Thank You RivTech.  Thank You For Good Coffee.  Will Always Stay Awake For You Rivtech.\""
-      },
       { "id": "note_125", "text": "\"dont try to leave they will shoot you\"" },
-      { "id": "note_127", "text": "\"Makayla Sanchez burned down my fucking house\"" },
+      { "id": "note_127", "text": "\"Makayla burned down my fucking house\"" },
       { "id": "note_128", "text": "\"he calls himself the 'man with the hands', don't approach\"" },
       {
-        "id": "note_129",
-        "text": "\"So… what happens if the military rescues us?  We're all freaks by now, right?  How the fuck are we gonna go back to real life?\""
-      },
-      {
         "id": "note_130",
-        "text": "\"Not sure if my companion WANTED to turn into a bird, but I was the one giving her the serum, and I saved her life!  That's fair, right?\""
+        "text": "\"I don't know if anyone will ever read this, but I swear to God there are chuds in the sewer.  Like actual albino cannibal guys.\""
       },
       { "id": "note_131", "text": "\"I've never been very confident, is that why my shots keep missing?\"" },
       { "id": "note_132", "text": "\"FIRE BAD.  NOW NAKED.  PLEASE HELP.\"" },
@@ -332,11 +312,7 @@
       },
       {
         "id": "note_138",
-        "text": "\"if anyones reading this, please tell my mom i was right about insects being superior\""
-      },
-      {
-        "id": "note_139",
-        "text": "\"Diamond coated sword!  Diamond coated hammer!  Diamond coated clothes!  Diamond coated hands help\""
+        "text": "\"if anyones reading this, please tell my mom i was right about the bugs\""
       },
       { "id": "note_140", "text": "\"waded through 14 miles of sewage for playboy magazine, wasn't worth it\"" },
       {
@@ -353,13 +329,6 @@
         "text": "\"This is all just a dream, right??!  I'M GOING TO WAKE UP, SHE'S GOING TO BE OK\""
       },
       { "id": "note_145", "text": "\"wek ik spak\"" },
-      { "id": "note_146", "text": "\"IT'S BURIED!  THE TEMPLE IS BURIED!\"" },
-      {
-        "id": "note_147",
-        "text": "\"If I had a dollar for every cash card I've found, I'd have more money than is on these stupid things!\""
-      },
-      { "id": "note_148", "text": "\"can never have enough Kevlar.  basically just live in a Kevlar turtle shell.\"" },
-      { "id": "note_149", "text": "\"MY GLITTERING SNAKE COMPELS YOU!  OBEY!\"" },
       {
         "id": "note_150",
         "text": "\"can sunstasin self frorever off fof my funggnaloid babiues oout fo yme arms eat themm up eatbtb my chidlldren\""
@@ -376,14 +345,6 @@
       {
         "id": "note_155",
         "text": "\"riddle.  what's 1/4 feathers, 1/4 scales, 1/4 metal, and 1/4 flesh?  answer: sorry, but you should know this one.\""
-      },
-      {
-        "id": "note_156",
-        "text": "\"For anyone that's reading this, I just want to confirm (FROM AN UNBIASED SOURCE) that it was NOT the scientists' fault.\""
-      },
-      {
-        "id": "note_157",
-        "text": "\"We're the eagle-eyes in the sky!  Just two mutant avians in our helicopter!  Filming the Cataclysm!  Check us out on any working electronics!\""
       },
       { "id": "note_158", "text": "\"WE'RE GOING TO SAIL TO CANADA, BITCHES!\"" },
       {
@@ -405,7 +366,7 @@
       { "id": "note_166", "text": "\"these hulks aint so incredible when ya got .50\"" },
       {
         "id": "note_167",
-        "text": "\"WBLF 970 went off-air three days ago.  There's nobody left on the radio.  Might as well throw this thing away…\""
+        "text": "\"There's nobody left on the radio, but I can't bring myself to throw it away.\""
       },
       {
         "id": "note_168",
@@ -416,27 +377,15 @@
         "id": "note_171",
         "text": "\"Last one standing.  It's good feeling.  I win.  I win I win I win I win I win\""
       },
-      { "id": "note_172", "text": "\"Adderall cures weakness, tramadol cures death\"" },
-      { "id": "note_173", "text": "\"These turrets keep dodging my FUCKING BULLETS!\"" },
-      { "id": "note_174", "text": "\"Best way to train is by throwing pebbles at birds.  You'll be a legend.\"" },
       { "id": "note_175", "text": "\"new bedford is overrun.  i'm sorry.  we tried.\"" },
       {
         "id": "note_176",
-        "text": "\"Check out my cooking show on The Television!  Making Mannwurst sausages out of some of those assholes who tried to raid my kitchen earlier…\""
-      },
-      {
-        "id": "note_177",
-        "text": "\"Renting out my rat tunnels for 50 9mm rounds a night.  I dug them with my own claws, so you know they're the best.\""
+        "text": "\"I have tasted what was once forbidden.\""
       },
       {
         "id": "note_178",
-        "text": "\"Anyone wanna listen to some music at full volume and shoot the Zs that approach?  You pick the tunes if I get some ammo.\""
+        "text": "\"Anyone wanna listen to some music at full volume and shoot the zeds that approach?  You pick the tunes if I get some ammo.\""
       },
-      {
-        "id": "note_179",
-        "text": "\"Lots of new easy ways to burn calories now.  Fighting animata, managing the fields, running with my wings buzzing, and more.\""
-      },
-      { "id": "note_180", "text": "\"FLAMING SWORD HUMANE.  CAUTERIZES WOUNDS.  SURGICAL.\"" },
       { "id": "note_181", "text": "\"knife screams it screams i cant breathe so scared help me please help\"" },
       { "id": "note_182", "text": "\"when it started, we could still hope The Man was gonna save us…\"" },
       {
@@ -460,17 +409,13 @@
         "text": "\"Hahahahaa stupid fuck in his mansion, with his plate armor and big axe.  Guy never swung the thing in his life.  Can't block bullets, dipshit\""
       },
       {
-        "id": "note_188",
-        "text": "\"I woke up with a dozen bears in a tribe outside the vault.  One was covered in red markings, glowing-- speaking.\""
-      },
-      {
         "id": "note_189",
         "text": "\"poor guy.  watched him from afar with my binocs for months and months.  today he died fighting.  feels like i knew him even though i never approached.\""
       },
       { "id": "note_190", "text": "\"ENGLAND DID THIS\"" },
       {
         "id": "note_191",
-        "text": "\"That little fakkin rat din say anythin till we whacked him with a steel chain!  Then 'e just wanted to know if he could buy the chain!\""
+        "text": "\"That little fukkin rat din say anythin till we whacked him with a steel chain!  Then he just wanted to know if he could buy the chain!\""
       },
       { "id": "note_192", "text": "\"tom, adorned with fluid sacs three layers deep, crawls to safety like a slug\"" },
       {
@@ -478,7 +423,7 @@
         "text": "\"my friend turned fuckin insane and ate his arms and then his sister's arms!  he looked rather cross\""
       },
       { "id": "note_194", "text": "\"Starting today, the hallucinations are my only friends.\"" },
-      { "id": "note_195", "text": "\"For sale: zombaby shoes, very filthy\"" },
+      { "id": "note_195", "text": "\"For sale: zombaby shoes (filthy)\"" },
       {
         "id": "note_196",
         "text": "\"Started my own brewery recently.  I just need some glass bottles, now!  Several thousand!  I'm planning way ahead.\""
@@ -507,7 +452,7 @@
         "id": "note_209",
         "text": "\"my rabbi follows a new god now.  asks us to call him a local guide.  i dont mind, he keeps us fed\""
       },
-      { "id": "note_210", "text": "\"Fungus are helping us.  Help them and they will unite us\"" },
+      { "id": "note_210", "text": "\"i tried eadtign the mold\"" },
       {
         "id": "note_211",
         "text": "\"Saw a boy couldnt be older than 16.  Walked straight through the mushroom tower.  THROUGH IT\""
@@ -521,7 +466,6 @@
         "text": "\"saw the girl again.  she looked dead exhausted and walked right into the fungus.  30 mins later and she walked out good as new\""
       },
       { "id": "note_214", "text": "\"HADENSBROOK REBUILT AROUND FUNGUS.  THEY EAT GRAY APPLES AND SPREAD IT\"" },
-      { "id": "note_215", "text": "\"mycus must grow\"" },
       {
         "id": "note_216",
         "text": "\"School bus with solar panels = TRUST.  Gave us berries and seeds, we were out of food\""
@@ -549,7 +493,7 @@
       },
       {
         "id": "note_223",
-        "text": "\"followed what toby wrote down.  shells looked like theyd hold more, I put in some more.  traded most to h raiders for crank.  shot my 38 today and it fuckn exploded.  low on crank, good as dead, no gun, no toby.  headed to montreal real sorry bout the bullets\""
+        "text": "\"followed what toby wrote down.  shells looked like theyd hold more, I put in some more.  traded most to a gang for crank.  shot my 38 today and it fuckn exploded.  low on crank, good as dead, no gun, no toby.  headed to montreal real sorry bout the bullets\""
       },
       {
         "id": "note_224",
