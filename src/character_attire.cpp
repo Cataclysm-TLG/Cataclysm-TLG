@@ -2096,8 +2096,8 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
     if( sp.damage( caster ) < 0 ) {
         map &here = get_map();
         sp.heal( guy.pos_bub( here ), caster );
-        add_msg_if_player_sees( guy, m_good, _( "%s wounds are closing up!" ),
-                                guy.disp_name( true ) );
+        guy.add_msg_player_or_npc( m_good, _( "Your wounds are closing up!" ),
+                                   _( "<npcname> begins to heal!" ) );
     }
     // Acid uses the corroding effect, but damage_over_time exists so we may as well run it here.
     guy.add_damage_over_time( sp.damage_over_time( { bp.id() }, caster ) );

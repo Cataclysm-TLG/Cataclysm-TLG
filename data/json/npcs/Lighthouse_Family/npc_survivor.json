@@ -41,7 +41,7 @@
             "relevant_genders": [ "npc" ]
           },
           {
-            "gendered_line": "  I sailed here a few days ago.  Mikhail and his family are very hospitable.  Unfortunately, during our joint fishing, we were attacked by a swarm of underwater <monster>'s, and my boat was smashed to pieces.  It was <very> scary, we could barely sail away on Mikhail's ship.",
+            "gendered_line": "  I sailed here a few days ago.  Mikhail and his family are very hospitable.  Unfortunately, during our joint fishing, we were attacked by a swarm of underwater monsters, and my boat was smashed to pieces.  It was <very> scary, we could barely sail away on Mikhail's ship.",
             "relevant_genders": [ "npc" ]
           }
         ]
