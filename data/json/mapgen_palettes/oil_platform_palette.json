@@ -208,8 +208,8 @@
       ],
       "z": { "item": "trash", "chance": 90, "repeat": [ 0, 8 ] },
       "µ": [
-        { "item": "trash", "chance": 90, "repeat": [ 5, 15 ] },
-        { "item": "rolling_trash", "chance": 90, "repeat": [ 2, 10 ] }
+        { "item": "trash", "chance": 90, "repeat": [ 1, 10 ] },
+        { "item": "rolling_trash", "chance": 90, "repeat": [ 1, 5 ] }
       ],
       "S": { "item": "SUS_bathroom_sink", "chance": 80, "repeat": [ 0, 2 ] },
       "d": [
