@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-12 00:27-0700\n"
-"PO-Revision-Date: 2026-09-21 20:01+0800\n"
+"PO-Revision-Date: 2026-09-23 09:56+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -32487,7 +32487,7 @@ msgstr "跳舞管"
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-recreation.json
 msgid "diving block"
-msgstr "跳水台"
+msgstr "跳台"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-recreation.json
@@ -48103,7 +48103,7 @@ msgstr ""
 #. ~ Description of "chainmail link"
 #: data/json/items/ammo.json
 msgid "A set of small metal rings, suitable for constructing chainmail."
-msgstr "一串小型金属锁链，可以用来制造锁环甲。"
+msgstr "一组用于制作链甲的小型金属环。"
 
 #. ~ Description of "aluminum foil"
 #: data/json/items/ammo.json
@@ -48553,7 +48553,7 @@ msgstr[0] "美分"
 #: data/json/items/ammo.json
 msgid "chainmail link"
 msgid_plural "chainmail links"
-msgstr[0] "锁子甲环"
+msgstr[0] "链甲环"
 
 #. ~ Item name
 #. ~ Name of an ammunition type
@@ -55285,14 +55285,14 @@ msgstr "搭接的钢板固定在上臂和下臂上。它们不覆盖肩膀。"
 msgid ""
 "Protective sleeves made of interlocking links of steel wire.  The fit can be adjusted to allow them to serve "
 "as outerwear."
-msgstr "保护套由钢丝互锁环制成。  可以调整合身性，使其可以用作外套。"
+msgstr "由互锁钢丝环制成的防护袖甲。可通过调整松紧，使其可作为外穿护甲使用。"
 
 #. ~ Description of "chainmail sleeves (loose)"
 #: data/json/items/armor/arms_armor.json
 msgid ""
 "Protective sleeves made of interlocking links of steel wire.  The fit can be adjusted to fit closer to the "
 "body."
-msgstr "保护套由钢丝互锁环制成。  可以调整贴合度以更贴合身体。"
+msgstr "由互锁钢丝环制成的防护袖甲。可调整松紧，使其更贴合身体。"
 
 #. ~ Description of "leather pauldrons"
 #: data/json/items/armor/arms_armor.json
@@ -55342,7 +55342,7 @@ msgstr[0] "轮胎胸甲（XL）"
 #: data/json/items/armor/arms_armor.json
 msgid "XS chainmail sleeves (loose)"
 msgid_plural "pairs of XS chainmail sleeves"
-msgstr[0] "无袖连体锁环衣（XS）"
+msgstr[0] "链甲袖甲（XS，宽松）"
 
 #. ~ Item name
 #: data/json/items/armor/arms_armor.json
@@ -55385,7 +55385,7 @@ msgstr "你收紧你的%s。"
 #: data/json/items/armor/arms_armor.json
 msgid "biosilicified chitin arm guards"
 msgid_plural "pairs of biosilicified chitin arm guards"
-msgstr[0] "硅化甲壳护臂"
+msgstr[0] "生物硅化甲壳护臂"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -55411,13 +55411,13 @@ msgstr[0] "地毯护腕"
 #: data/json/items/armor/arms_armor.json data/json/recipes/nested.json
 msgid "chainmail sleeves"
 msgid_plural "pairs of chainmail sleeves"
-msgstr[0] "锁环护臂模板"
+msgstr[0] "链甲袖甲"
 
 #. ~ Item name
 #: data/json/items/armor/arms_armor.json
 msgid "chainmail sleeves (loose)"
 msgid_plural "pairs of chainmail sleeves (loose)"
-msgstr[0] "锁环护臂模板"
+msgstr[0] "链甲袖甲（宽松）"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -57444,7 +57444,7 @@ msgstr[0] "塑袋袜子"
 #: data/json/items/armor/boots.json
 msgid "biosilicified chitin sollerets"
 msgid_plural "pairs of biosilicified chitin sollerets"
-msgstr[0] "硅化甲壳头盔"
+msgstr[0] "生物硅化甲壳护足"
 
 #. ~ Item name
 #: data/json/items/armor/boots.json
@@ -57739,7 +57739,7 @@ msgstr[0] "过膝高筒靴"
 #: data/json/items/armor/boots.json
 msgid "turnout boots"
 msgid_plural "pairs of turnout boots"
-msgstr[0] "消防外套"
+msgstr[0] "消防靴"
 
 #. ~ Item name
 #: data/json/items/armor/boots.json
@@ -57751,7 +57751,7 @@ msgstr[0] "西部长靴"
 #: data/json/items/armor/boots.json
 msgid "winter boots"
 msgid_plural "pairs of winter boots"
-msgstr[0] "防寒大衣"
+msgstr[0] "冬靴"
 
 #. ~ Item name
 #: data/json/items/armor/boots.json
@@ -57799,7 +57799,7 @@ msgstr "防弹衣由坚韧的织物制成，内部铆有钢板。"
 #: data/json/items/armor/brigandine.json
 msgid "brigandine gloves"
 msgid_plural "pairs of brigandine gloves"
-msgstr[0] "布面甲大衣"
+msgstr[0] "布面甲手套"
 
 #. ~ Item name
 #: data/json/items/armor/brigandine.json
@@ -62050,7 +62050,7 @@ msgstr[0] "束腰外衣"
 #: data/json/items/armor/coats.json
 msgid "turnout coat"
 msgid_plural "turnout coats"
-msgstr[0] "消防外套"
+msgstr[0] "消防防护服"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -63151,7 +63151,7 @@ msgstr[0] "防蜂手套"
 #: data/json/items/armor/gloves.json
 msgid "biosilicified chitin gauntlets"
 msgid_plural "pairs of biosilicified chitin gauntlets"
-msgstr[0] "硅化甲壳护手"
+msgstr[0] "生物硅化甲壳护手"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63170,7 +63170,7 @@ msgstr[0] "拳击手套"
 #: data/json/items/armor/gloves.json data/json/recipes/nested.json
 msgid "chainmail gloves"
 msgid_plural "pairs of chainmail gloves"
-msgstr[0] "锁环胸甲"
+msgstr[0] "链甲手套"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -64657,7 +64657,7 @@ msgstr[0] "骑行头盔"
 #: data/json/items/armor/helmets.json
 msgid "biosilicified chitin helmet"
 msgid_plural "biosilicified chitin helmets"
-msgstr[0] "硅化甲壳头盔"
+msgstr[0] "生物硅化甲壳头盔"
 
 #. ~ Item name
 #: data/json/items/armor/helmets.json
@@ -65173,13 +65173,13 @@ msgstr "一件天气不好时穿戴的防水兜帽。"
 #: data/json/items/armor/hoods.json
 msgid "XL chainmail coif"
 msgid_plural "XL chainmail coifs"
-msgstr[0] "锁环罩盔"
+msgstr[0] "链甲头巾（XL）"
 
 #. ~ Item name
 #: data/json/items/armor/hoods.json
 msgid "XS chainmail coif"
 msgid_plural "XS chainmail coifs"
-msgstr[0] "锁环罩盔"
+msgstr[0] "链甲头巾（XS）"
 
 #. ~ Item name
 #: data/json/items/armor/hoods.json
@@ -65191,7 +65191,7 @@ msgstr[0] "防蜂头罩"
 #: data/json/items/armor/hoods.json
 msgid "chainmail coif"
 msgid_plural "chainmail coifs"
-msgstr[0] "锁环罩盔"
+msgstr[0] "链甲头巾"
 
 #. ~ Item name
 #: data/json/items/armor/hoods.json
@@ -67925,7 +67925,7 @@ msgstr[0] "装甲牛仔裤"
 #: data/json/items/armor/legs_armor.json
 msgid "biosilicified chitin greaves"
 msgid_plural "pairs of biosilicified chitin greaves"
-msgstr[0] "硅化甲壳护胫"
+msgstr[0] "生物硅化甲壳护"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -67950,25 +67950,25 @@ msgstr[0] "地毯护腿"
 #: data/json/items/armor/legs_armor.json
 msgid "chainmail chausses"
 msgid_plural "pairs of chainmail chausses"
-msgstr[0] "锁环镫靴"
+msgstr[0] "链甲护腿"
 
 #. ~ Item name
 #: data/json/items/armor/legs_armor.json
 msgid "chainmail skirt"
 msgid_plural "chainmail skirts"
-msgstr[0] "锁子甲裙"
+msgstr[0] "链甲裙甲"
 
 #. ~ Item name
 #: data/json/items/armor/legs_armor.json
 msgid "chainmail skirt (loose)"
 msgid_plural "chainmail skirt (loose)s"
-msgstr[0] "锁子甲裙 (宽松)"
+msgstr[0] "链甲裙甲（宽松）"
 
 #. ~ Item name
 #: data/json/items/armor/legs_armor.json
 msgid "chainsaw chaps"
 msgid_plural "chainsaw chaps"
-msgstr[0] "链锯防护裹腿"
+msgstr[0] "链锯护腿"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -69411,7 +69411,7 @@ msgstr[0] "凯夫拉内衬牛铠"
 #: data/json/items/armor/pets_cow_armor.json
 msgid "biosilicified chitin cow armor"
 msgid_plural "biosilicified chitin cow armors"
-msgstr[0] "硅化甲壳牛铠"
+msgstr[0] "生物硅化甲壳牛用护甲"
 
 #. ~ Item name
 #: data/json/items/armor/pets_cow_armor.json
@@ -69429,7 +69429,7 @@ msgstr[0] "青铜牛铠"
 #: data/json/items/armor/pets_cow_armor.json
 msgid "chainmail cow armor"
 msgid_plural "chainmail cow armors"
-msgstr[0] "锁环牛铠"
+msgstr[0] "链甲牛用护甲"
 
 #. ~ Item name
 #: data/json/items/armor/pets_cow_armor.json
@@ -69514,13 +69514,13 @@ msgstr[0] "凯夫拉犬具"
 #: data/json/items/armor/pets_dog_armor.json
 msgid "biosilicified chitin dog mesh harness"
 msgid_plural "biosilicified chitin dog mesh harnesses"
-msgstr[0] "硅化甲壳犬具"
+msgstr[0] "生物硅化甲壳犬用网式胸背带"
 
 #. ~ Item name
 #: data/json/items/armor/pets_dog_armor.json
 msgid "chainmail dog coat"
 msgid_plural "chainmail dog coats"
-msgstr[0] "锁环犬具"
+msgstr[0] "链甲犬用护甲"
 
 #. ~ Item name
 #: data/json/items/armor/pets_dog_armor.json
@@ -69623,7 +69623,7 @@ msgstr[0] "凯夫拉内衬马铠"
 #: data/json/items/armor/pets_horse_armor.json
 msgid "biosilicified chitin horse armor"
 msgid_plural "biosilicified chitin horse armors"
-msgstr[0] "硅化甲壳马铠"
+msgstr[0] "生物硅化甲壳马用护甲"
 
 #. ~ Item name
 #: data/json/items/armor/pets_horse_armor.json
@@ -69641,7 +69641,7 @@ msgstr[0] "青铜马铠"
 #: data/json/items/armor/pets_horse_armor.json
 msgid "chainmail horse armor"
 msgid_plural "chainmail horse armors"
-msgstr[0] "锁环马铠"
+msgstr[0] "链甲马用护甲"
 
 #. ~ Item name
 #: data/json/items/armor/pets_horse_armor.json
@@ -69807,7 +69807,7 @@ msgstr "说到底，它只是一条长方形的布料，但可以有很多种不
 #: data/json/items/armor/scarfs.json
 msgid "XL chainmail aventail"
 msgid_plural "XL chainmail aventails"
-msgstr[0] "锁环护颈（XL）"
+msgstr[0] "护颈链甲（XL）"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -69819,7 +69819,7 @@ msgstr[0] "板式护颈（XL）"
 #: data/json/items/armor/scarfs.json
 msgid "XS chainmail aventail"
 msgid_plural "XS chainmail aventails"
-msgstr[0] "锁环护颈（XS）"
+msgstr[0] "护颈链甲（XS）"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -69881,7 +69881,7 @@ msgstr "你把颈套往上拉，戴到脸上。"
 #: data/json/items/armor/scarfs.json
 msgid "chainmail aventail"
 msgid_plural "chainmail aventails"
-msgstr[0] "锁环护颈"
+msgstr[0] "链甲护颈"
 
 #. ~ Item name
 #: data/json/items/armor/scarfs.json
@@ -71784,7 +71784,7 @@ msgstr ""
 #: data/json/items/armor/suits_protection.json
 msgid "Faraday chainmail"
 msgid_plural "Faraday chainmails"
-msgstr[0] "法拉第锁环服"
+msgstr[0] "法拉第链甲"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
@@ -71855,7 +71855,7 @@ msgstr "穿好"
 #: data/json/items/armor/suits_protection.json
 msgid "XL Faraday platemail"
 msgid_plural "XL Faraday platemails"
-msgstr[0] "法拉第锁环服（XL）"
+msgstr[0] "法拉第板甲（XL）"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
@@ -71867,7 +71867,7 @@ msgstr[0] "钢甲套装（XL）"
 #: data/json/items/armor/suits_protection.json
 msgid "XS Faraday platemail"
 msgid_plural "XS Faraday platemails"
-msgstr[0] "法拉第锁环服（XS）"
+msgstr[0] "法拉第板甲（XS）"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
@@ -71913,7 +71913,7 @@ msgstr[0] "防蜂服"
 #: data/json/items/armor/suits_protection.json
 msgid "biosilicified chitin armor"
 msgid_plural "biosilicified chitin armors"
-msgstr[0] "硅化甲壳护甲"
+msgstr[0] "生物硅化甲壳护甲"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
@@ -71925,19 +71925,19 @@ msgstr[0] "犬咬防护服"
 #: data/json/items/armor/suits_protection.json
 msgid "chainmail hauberk"
 msgid_plural "chainmail hauberks"
-msgstr[0] "锁环甲"
+msgstr[0] "链甲长袍"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
 msgid "chainmail hauberk (loose)"
 msgid_plural "chainmail hauberk (loose)s"
-msgstr[0] "锁环甲(松)"
+msgstr[0] "链甲长袍（宽松）"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
 msgid "chainmail suit"
 msgid_plural "chainmail suits"
-msgstr[0] "锁环连体衣"
+msgstr[0] "链甲套装"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -72267,7 +72267,7 @@ msgstr[0] "比基尼文胸"
 #: data/json/items/armor/swimming.json
 msgid "diving boots"
 msgid_plural "pairs of diving boots"
-msgstr[0] "跳水台"
+msgstr[0] "潜水靴"
 
 #. ~ Item name
 #: data/json/items/armor/swimming.json
@@ -72627,13 +72627,13 @@ msgstr[0] "地毯胸甲"
 #: data/json/items/armor/torso_armor.json
 msgid "chainmail vest"
 msgid_plural "chainmail vests"
-msgstr[0] "锁环胸甲"
+msgstr[0] "链甲背心"
 
 #. ~ Item name
 #: data/json/items/armor/torso_armor.json
 msgid "chainmail vest (loose)"
 msgid_plural "chainmail vest (loose)s"
-msgstr[0] "锁环胸甲"
+msgstr[0] "链甲背心（宽松）"
 
 #. ~ Item name
 #: data/json/items/armor/torso_armor.json
@@ -152945,7 +152945,7 @@ msgstr "一块圆形的脚踏式砂轮，用于磨削金属。"
 msgid ""
 "A sheet of riveted chainmail.  With some skill, several of these sheets could be connected to make effective "
 "armor."
-msgstr "一片铆接而成的锁环网。稍有技巧的人能够将几片锁环网拼接成可用的护甲。"
+msgstr "一片铆接链甲。若具备一定技艺，可将数片这样的链甲连接起来，制成有效的护甲。"
 
 #. ~ Description of "sandpaper"
 #: data/json/items/tool/metalworking.json
@@ -153070,7 +153070,7 @@ msgstr[0] "青铜凿子"
 #: data/json/items/tool/metalworking.json
 msgid "chainmail sheet"
 msgid_plural "chainmail sheets"
-msgstr[0] "锁环网"
+msgstr[0] "链甲片"
 
 #. ~ Item name
 #: data/json/items/tool/metalworking.json
@@ -163210,7 +163210,7 @@ msgstr "薄薄的一片金属板。"
 #: data/json/items/vehicle/plating.json
 msgid "biosilicified chitin armor kit"
 msgid_plural "biosilicified chitin armor kits"
-msgstr[0] "硅化甲壳装甲片"
+msgstr[0] "生物硅化甲壳护甲套装"
 
 #. ~ Item name
 #: data/json/items/vehicle/plating.json
@@ -170426,7 +170426,7 @@ msgstr "生物柴油"
 #. ~ Name of material
 #: data/json/materials.json
 msgid "Biosilicified Chitin"
-msgstr "硅化甲壳"
+msgstr "生物硅化甲壳质"
 
 #. ~ Name of material
 #. ~ Vitamin name
@@ -272628,7 +272628,7 @@ msgstr "直升机停机坪"
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_transportation.json
 msgid "highway"
-msgstr ""
+msgstr "公路"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_transportation.json
@@ -280535,7 +280535,7 @@ msgstr "越野驾驶"
 #. ~ Description of proficiency "Helicopter Piloting"
 #: data/json/proficiencies/vehicles.json
 msgid "You are able to operate helicopters of all shapes and sizes."
-msgstr "你对各种形状大小的蜘蛛有所了解。"
+msgstr "你能够操作各种形状和尺寸的直升机。"
 
 #. ~ Description of proficiency "Boat Piloting"
 #: data/json/proficiencies/vehicles.json
@@ -281524,12 +281524,12 @@ msgstr "科林斯盔"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "Faraday chain suits"
-msgstr "法拉第锁环服"
+msgstr "法拉第链甲套装"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "Faraday platemail suits"
-msgstr "法拉第锁环服"
+msgstr "法拉第板甲套装"
 
 #. ~ Description of the category "wool arming gloves"
 #: data/json/recipes/nested.json
@@ -281554,7 +281554,7 @@ msgstr "各种用胶带将已折叠的纸板箱重新组装并展开的配方。
 #. ~ Description of the category "chainmail suit assembly"
 #: data/json/recipes/nested.json
 msgid "Recipes related to combining chainmail items into suits."
-msgstr "各种尺寸的锁环甲的配方。"
+msgstr "将链甲部件组合成套装的配方。"
 
 #. ~ Description of the category "platemail suit assembly"
 #: data/json/recipes/nested.json
@@ -281649,7 +281649,7 @@ msgstr "各种制作弹壳的配方。"
 #. ~ Description of the category "chain hauberks"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing chainmail hauberks in various sizes."
-msgstr "各种尺寸和形状的锁环长衣的配方。"
+msgstr "各种尺寸链甲长袍的制作配方。"
 
 #. ~ Description of the category "chairs"
 #: data/json/recipes/nested.json
@@ -281777,7 +281777,7 @@ msgstr "各种燧发步枪、手枪和霰弹枪的配方。"
 #. ~ Description of the category "mild steel chain suits"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing full-body chainmail suits in various sizes."
-msgstr "各种尺寸的锁环甲的配方。"
+msgstr "各种尺寸全身链甲套装的制作配方。"
 
 #. ~ Description of the category "Faraday chain suits"
 #: data/json/recipes/nested.json
@@ -281974,7 +281974,7 @@ msgstr "各种尺寸和变种的幸存者长靴的配方。"
 #. ~ Description of the category "chainmail skirts"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes chainmail skirts."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸链甲裙甲相关的配方。"
 
 #. ~ Description of the category "bronze vambraces"
 #: data/json/recipes/nested.json
@@ -281990,7 +281990,7 @@ msgstr "各种阿拉伯风格低碳钢面罩的制造配方。"
 #. ~ Description of the category "survivor winter boots"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of boots custom-made for staying warm in the Cataclysm."
-msgstr "各种尺寸的布面甲大衣的配方。"
+msgstr "各种尺寸定制保暖靴的制作配方，助你在大灾变中御寒。"
 
 #. ~ Description of the category "survivor boots"
 #: data/json/recipes/nested.json
@@ -282000,76 +282000,76 @@ msgstr "各种尺寸的标准幸存者长靴的配方。"
 #. ~ Description of the category "chainmail gloves"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of chain gloves."
-msgstr "各种尺寸的锁环手套的配方。"
+msgstr "各种尺寸链甲手套的制作配方。"
 
 #. ~ Description of the category "chainmail sleeves"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of chain sleeves."
-msgstr "各种尺寸的锁环护臂的配方。"
+msgstr "各种尺寸链甲袖甲的制作配方。"
 
 #. ~ Description of the category "steel chain coifs"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of chainmail hoods."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸链甲兜帽的制作配方。"
 
 #. ~ Description of the category "steel chain chausses"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of chainmail leggings."
-msgstr "各种尺寸的锁环护胫的配方。"
+msgstr "各种尺寸链甲护腿的制作配方。"
 
 #. ~ Description of the category "chainmail aventails"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of chainmail neck protectors."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸护颈链甲的制作配方。"
 
 #. ~ Description of the category "steel chain vest"
 #. ~ Description of the category "steel chain vests"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of chainmail vests."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸链甲背心的制作配方。"
 
 #. ~ Description of the category "survivor divemasks"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of custom diving masks that will fit even unusual anatomy."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸、可适配特殊解剖结构的定制潜水面罩的制作配方。"
 
 #. ~ Description of the category "survivor masks"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of custom gas masks that will finish even unusual anatomy."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸、可适配特殊解剖结构的定制防毒面具的制作配方。"
 
 #. ~ Description of the category "half survivor masks"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of custom gas masks that will fit even unusual anatomy."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "适配各种尺寸、甚至适合特殊解剖结构的定制防毒面具制作配方。"
 
 #. ~ Description of the category "survivor firehoods"
 #: data/json/recipes/nested.json
 msgid ""
 "Recipes related to constructing various sizes of custom-built flame-resistant hoods for surviving the "
 "Cataclysm."
-msgstr "各种尺寸和标准的幸存者面具的配方。"
+msgstr "用于在大灾变中生存的各种尺寸定制阻燃兜帽的制作配方。"
 
 #. ~ Description of the category "winter survivor hoods"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of custom-built hoods for staying warm in the Cataclysm."
-msgstr "各种尺寸的防寒幸存者长靴的配方。"
+msgstr "各种尺寸定制保暖兜帽的制作配方，助你在大灾变中御寒。"
 
 #. ~ Description of the category "survivor hoods"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of custom-built hoods for surviving the Cataclysm."
-msgstr "各种尺寸和标准的幸存者面具的配方。"
+msgstr "各种尺寸定制兜帽的制作配方，助你在大灾变中生存。"
 
 #. ~ Description of the category "survivor firemasks"
 #: data/json/recipes/nested.json
 msgid ""
 "Recipes related to constructing various sizes of flame-resistant gas masks that will fit even unusual anatomy."
-msgstr "各种尺寸的锁环胸甲的配方。"
+msgstr "各种尺寸、可适配特殊解剖结构的阻燃防毒面具的制作配方。"
 
 #. ~ Description of the category "bronze greaves"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes of greaves made out of bronze."
-msgstr "各种尺寸的青铜胫甲的配方。"
+msgstr "各种尺寸青铜护胫的制作配方。"
 
 #. ~ Description of the category "Corinthian helms"
 #: data/json/recipes/nested.json
@@ -282106,18 +282106,18 @@ msgstr "各种尺寸的防寒幸存者手套的配方。"
 #. ~ Description of the category "chainmail headwear"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various types and sizes of chainmail head armor."
-msgstr "各种类型和尺寸的锁环镫靴的配方。"
+msgstr "各种类型和尺寸链甲头部护具的制作配方。"
 
 #. ~ Description of the category "chainmail legwear"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various types and sizes of chainmail leg armor."
-msgstr "各种类型和尺寸的锁环镫靴的配方。"
+msgstr "各种类型和尺寸链甲腿部护具的制作配方。"
 
 #. ~ Description of the category "survivor hoods"
 #: data/json/recipes/nested.json
 msgid ""
 "Recipes related to constructing various types and sizes of custom-built hoods for surviving the Cataclysm."
-msgstr "各种类型和尺寸的锁环镫靴的配方。"
+msgstr "各种类型和尺寸定制兜帽的制作配方，助你在大灾变中求生。"
 
 #. ~ Description of the category "wooden boxes"
 #: data/json/recipes/nested.json
@@ -282542,32 +282542,32 @@ msgstr "纸板盒"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chain hauberks"
-msgstr "锁环长衣"
+msgstr "链甲长袍"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chainmail aventails"
-msgstr "锁环胸甲"
+msgstr "链甲护颈"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chainmail headwear"
-msgstr "锁环长衣"
+msgstr "链甲头饰"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chainmail legwear"
-msgstr "锁环甲"
+msgstr "链甲腿甲"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chainmail skirts"
-msgstr "锁环网"
+msgstr "链甲裙甲"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chainmail suit assembly"
-msgstr "锁环连体衣"
+msgstr "链甲套装组件"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -282772,7 +282772,7 @@ msgstr "装填甲醇容器"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "mild steel chain suits"
-msgstr "锁环甲（低碳钢）"
+msgstr "低碳钢链甲套装"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -282982,22 +282982,22 @@ msgstr "基本电池"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "steel chain chausses"
-msgstr "锁环镫靴"
+msgstr "钢制链甲护腿"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "steel chain coifs"
-msgstr "锁环罩盔"
+msgstr "钢制链甲头巾"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "steel chain vest"
-msgstr "锁环胸甲"
+msgstr "钢制链甲背心"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "steel chain vests"
-msgstr "锁环胸甲"
+msgstr "钢制链甲背心"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -327276,7 +327276,7 @@ msgstr "一套弹簧和垫片组合而成的缓冲系统，用于吸收碰撞对
 #. ~ Vehicle part name
 #: data/json/vehicleparts/armor.json
 msgid "biosilicified chitin plating"
-msgstr "硅化甲壳装甲板"
+msgstr "生物硅化甲壳护板"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/armor.json
@@ -328612,7 +328612,7 @@ msgstr "一个木钉固定在车辆上，用来在撞东西时增加伤害。"
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
 msgid "biosilicified chitin ram"
-msgstr "硅化甲壳撞锤"
+msgstr "生物硅化甲壳撞角"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/rams.json
@@ -385038,27 +385038,27 @@ msgstr "直接开始游戏，随机选择起始场景，角色职业、属性、
 #: src/main_menu.cpp:493
 msgctxt "Main Menu|World"
 msgid "Sh<o|O>w World Mods"
-msgstr "<O>显示世界模组"
+msgstr "显示世界模组"
 
 #: src/main_menu.cpp:494
 msgctxt "Main Menu|World"
 msgid "Copy World Sett<i|I>ngs"
-msgstr "<I>复制世界设置"
+msgstr "复制世界设置"
 
 #: src/main_menu.cpp:495
 msgctxt "Main Menu|World"
 msgid "Character to Tem<p|P>late"
-msgstr "<P>角色转为模板"
+msgstr "角色转为模板"
 
 #: src/main_menu.cpp:496
 msgctxt "Main Menu|World"
 msgid "<D|d>elete World"
-msgstr "<D>删除世界"
+msgstr "删除世界"
 
 #: src/main_menu.cpp:497
 msgctxt "Main Menu|World"
 msgid "<R|r>eset World"
-msgstr "<R>重置世界"
+msgstr "重置世界"
 
 #: src/main_menu.cpp:505
 msgctxt "Main Menu|Settings"
