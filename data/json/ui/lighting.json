@@ -19,7 +19,7 @@
       },
       {
         "id": "full",
-        "text": "Full",
+        "text": { "str": "Full", "ctxt": "vision level" },
         "color": "white",
         "condition": { "math": [ "u_val('fine_detail_vision_mod')", "<=", "1" ] }
       },
