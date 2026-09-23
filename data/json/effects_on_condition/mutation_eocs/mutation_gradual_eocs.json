@@ -346,7 +346,8 @@
           "EOC_MUTATING_GRADUAL_RATTINE",
           "EOC_MUTATING_GRADUAL_REPTILIAN",
           "EOC_MUTATING_GRADUAL_TROGLOBITE",
-          "EOC_MUTATING_GRADUAL_URSINE"
+          "EOC_MUTATING_GRADUAL_URSINE",
+          "EOC_MUTATING_GRADUAL_RANDOM"
         ],
         "names": [
           "Aranean",
@@ -367,9 +368,10 @@
           "Rattine",
           "Reptilian",
           "Troglobite",
-          "Ursine"
+          "Ursine",
+          "Random"
         ],
-        "keys": [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i" ],
+        "keys": [ "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j" ],
         "descriptions": [
           "Something ancient lurks behind your eyes, a patient and deadly hunter.",
           "Your heart hammers at the thrill of a foreign thought, the thrill of taking wing,",
@@ -389,7 +391,8 @@
           "No matter what it takes, what you become, you must survive.",
           "Your skin itches.  Something grips you by the brain stem.  It's time.",
           "The dull scavengers of earth wax crafty to vex it and swell monstrous to plague it.  Things have learnt to walk that ought to crawl.",
-          "Something is devouring you, and in turn you must devour."
+          "Something is devouring you, and in turn you must devour.",
+          "Fate is a fickle mistress."
         ]
       }
     ]
@@ -488,5 +491,38 @@
     "type": "effect_on_condition",
     "id": "EOC_MUTATING_GRADUAL_URSINE",
     "effect": [ { "u_add_trait": "MUTATING_GRADUAL_URSINE" }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } ]
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_MUTATING_GRADUAL_RANDOM",
+    "effect": [ 
+      { "set_string_var": "<random_gradual_mutation>", "target_var": { "context_val": "random_evolution" }, "parse_tags": true },
+      { "u_add_trait": { "context_val": "random_evolution" } }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } 
+    ]
+  },
+  {
+    "type": "snippet",
+    "category": "<random_gradual_mutation>",
+    "text": [
+      { "text": "MUTATING_GRADUAL_ARANEAN" },
+      { "text": "MUTATING_GRADUAL_AVIAN" },
+      { "text": "MUTATING_GRADUAL_BATRACHIAN" },
+      { "text": "MUTATING_GRADUAL_BOVOID" },
+      { "text": "MUTATING_GRADUAL_CANINE" },
+      { "text": "MUTATING_GRADUAL_CEPHALOPOD" },
+      { "text": "MUTATING_GRADUAL_CHIROPTERAN" },
+      { "text": "MUTATING_GRADUAL_CRUSTACEAN" },
+      { "text": "MUTATING_GRADUAL_FELINE" },
+      { "text": "MUTATING_GRADUAL_INSECT" },
+      { "text": "MUTATING_GRADUAL_LAGOMORPH" },
+      { "text": "MUTATING_GRADUAL_PISCINE" },
+      { "text": "MUTATING_GRADUAL_PLANT" },
+      { "text": "MUTATING_GRADUAL_GASTROPOD" },
+      { "text": "MUTATING_GRADUAL_MURINE" },
+      { "text": "MUTATING_GRADUAL_RATTINE" },
+      { "text": "MUTATING_GRADUAL_REPTILIAN" },
+      { "text": "MUTATING_GRADUAL_TROGLOBITE" },
+      { "text": "MUTATING_GRADUAL_URSINE" }
+    ]
   }
 ]
