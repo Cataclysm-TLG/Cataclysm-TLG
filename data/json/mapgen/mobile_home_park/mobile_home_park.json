@@ -98,7 +98,6 @@
       "É": "f_street_light",
       "Á": "f_utility_pole",
       "p": "f_mailbox",
-      "a": "f_trashcan",
       "@": "f_hedge_short",
       "D": "f_dumpster",
       "R": "f_recycle_bin",
@@ -106,7 +105,7 @@
       "/": "f_flagpole"
     },
     "items": {
-      "a": { "item": "trash", "chance": 50, "repeat": [ 1, 3 ] },
+      "a": [ { "item": "rolling_trash", "chance": 50, "repeat": [ 1, 3 ] }, { "item": "trash", "chance": 50, "repeat": [ 1, 2 ] } ],
       "D": { "item": "trash", "chance": 75, "repeat": [ 1, 5 ] },
       "R": { "item": "trash", "chance": 50, "repeat": [ 1, 3 ] }
     }
@@ -296,6 +295,7 @@
         "W": "f_washer",
         "Z": "f_dryer",
         "g": "f_water_heater",
+        "a": "f_trashcan",
         "A": "f_stool",
         "c": "f_counter",
         "m": "f_glass_fridge",
@@ -414,7 +414,8 @@
       "place_loot": [
         { "group": "tools_plumbing", "x": 17, "y": 15, "chance": 80, "repeat": [ 1, 4 ] },
         { "group": "tools_common_small", "x": 18, "y": 15, "chance": 80, "repeat": [ 1, 4 ] }
-      ]
+      ],
+      "place_nested": [ { "chunks": [ "rolling_trash_can_1x1" ], "x": 31, "y": 11 } ]
     }
   },
   {
@@ -521,7 +522,7 @@
         "       .________.       "
       ],
       "palettes": [ "trailer_road" ],
-      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ] ], "x": [ 1, 4 ], "y": [ 2, 13 ] } ]
+      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ] ], "x": [ 1, 4 ], "y": [ 2, 13 ] }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 5, "y": 16 }  ]
     }
   },
   {
@@ -558,7 +559,7 @@
       ],
       "palettes": [ "trailer_road" ],
       "place_vehicles": [ { "vehicle": "suburban_home", "x": [ 16, 17 ], "y": [ 16, 19 ], "chance": 10, "rotation": [ 90, 270 ] } ],
-      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 19, 22 ], "y": [ 2, 8 ] } ]
+      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 19, 22 ], "y": [ 2, 8 ] }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 8, "y": 11 }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 8, "y": 12 } ]
     }
   },
   {
@@ -595,7 +596,7 @@
       ],
       "palettes": [ "trailer_road" ],
       "place_vehicles": [ { "vehicle": "suburban_home", "x": [ 16, 17 ], "y": [ 4, 7 ], "chance": 10, "rotation": [ 90, 270 ] } ],
-      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 1, 3 ], "y": [ 12, 20 ] } ]
+      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 1, 3 ], "y": [ 12, 20 ] }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 6, "y": 11 }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 6, "y": 12 }  ]
     }
   },
   {
@@ -631,7 +632,7 @@
         "       .________.       "
       ],
       "palettes": [ "trailer_road" ],
-      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 19, 22 ], "y": [ 6, 12 ] } ]
+      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 19, 22 ], "y": [ 6, 12 ] }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 20, "y": 21 }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 21, "y": 21 } ]
     }
   },
   {
@@ -667,7 +668,7 @@
         "       .________.       "
       ],
       "palettes": [ "trailer_road" ],
-      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 2, 8 ], "y": [ 1, 4 ] } ]
+      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 2, 8 ], "y": [ 1, 4 ] }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 13, "y": 4 } ]
     }
   },
   {
@@ -703,7 +704,7 @@
         "   ||||.________.       "
       ],
       "palettes": [ "trailer_road" ],
-      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 2, 8 ], "y": [ 1, 4 ] } ]
+      "place_nested": [ { "chunks": [ [ "1x1_tree", 1 ], [ "null", 1 ] ], "x": [ 2, 8 ], "y": [ 1, 4 ] }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 13, "y": 4 }, { "chunks": [ "rolling_trash_can_1x1" ], "x": 13, "y": 5 } ]
     }
   }
 ]
