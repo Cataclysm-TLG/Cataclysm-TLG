@@ -495,9 +495,14 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_MUTATING_GRADUAL_RANDOM",
-    "effect": [ 
-      { "set_string_var": "<random_gradual_mutation>", "target_var": { "context_val": "random_evolution" }, "parse_tags": true },
-      { "u_add_trait": { "context_val": "random_evolution" } }, { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" } 
+    "effect": [
+      {
+        "set_string_var": "<random_gradual_mutation>",
+        "target_var": { "context_val": "random_evolution" },
+        "parse_tags": true
+      },
+      { "u_add_trait": { "context_val": "random_evolution" } },
+      { "u_lose_trait": "MUTATING_GRADUAL_SELECTOR" }
     ]
   },
   {
