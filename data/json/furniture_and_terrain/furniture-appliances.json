@@ -244,7 +244,7 @@
     "id": "f_oven",
     "name": "electric oven",
     "symbol": "#",
-    "description": "A standard electric convection-based oven, commonly used for heating and cooking food.  It can safely contain a fire, although it's not adequately ventilated.  You could disconnect it and plug it into a working power grid, or power it with a UPS.",
+    "description": "A standard electric convection-based oven, commonly used for heating and cooking food.  It can safely contain a fire, although it's not adequately ventilated.  You could disconnect it and plug it into a working power grid.",
     "color": "dark_gray",
     "move_cost_mod": 2,
     "coverage": 38,
