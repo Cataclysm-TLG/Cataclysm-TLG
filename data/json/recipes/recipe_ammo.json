@@ -196,6 +196,7 @@
     "difficulty": 5,
     "time": "40 m",
     "autolearn": true,
+    "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
@@ -219,6 +220,7 @@
     "difficulty": 5,
     "time": "40 m",
     "autolearn": true,
+    "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
     "qualities": [
@@ -322,7 +324,7 @@
     "skills_required": [ [ "archery", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "time": "30 m",
+    "time": "10 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
@@ -345,8 +347,9 @@
     "skills_required": [ [ "archery", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "time": "30 m",
+    "time": "40 m",
     "autolearn": true,
+    "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
@@ -368,7 +371,7 @@
     "skills_required": [ [ "archery", 1 ] ],
     "using": [ [ "forging_standard", 1 ] ],
     "difficulty": 5,
-    "time": "30 m",
+    "time": "10 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
@@ -376,6 +379,28 @@
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
       [ [ "nm_teeth", 1 ] ],
+      [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
+      [ [ "fletching", 1, "LIST" ] ]
+    ]
+  },
+    {
+    "type": "recipe",
+    "activity_level": "MODERATE_EXERCISE",
+    "result": "bolt_wood_horn",
+    "category": "CC_AMMO",
+    "subcategory": "CSC_AMMO_ARROWS",
+    "skill_used": "fabrication",
+    "skills_required": [ [ "archery", 1 ] ],
+    "using": [ [ "forging_standard", 1 ] ],
+    "difficulty": 5,
+    "time": "14 m",
+    "autolearn": true,
+    "book_learn": [ [ "recipe_arrows", 3 ] ],
+    "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
+    "qualities": [ { "id": "CUT", "level": 2 }, { "id": "HAMMER", "level": 1 }, { "id": "FILE", "level": 1 } ],
+    "components": [
+      [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
+      [ [ "antler_piece", 1 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "mop", 1 ] ],
       [ [ "fletching", 1, "LIST" ] ]
     ]
