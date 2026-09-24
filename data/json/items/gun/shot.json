@@ -101,7 +101,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Kel-Tec KSG shotgun" },
-    "description": "This pump-action shotgun uses a system of twin magazines to carry 14 total rounds of 12-gauge shotgun shells.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, the firearm's notably more compact than its peers despite having a higher capacity when compared against more classically designed shotguns.",
+    "description": "This pump-action shotgun features two magazines side by side to carry 14 total rounds of 12-gauge shotgun shells.  Each tube must be loaded separately, but this offers the option of loading different ammunition for different situations.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, it is notably more compact than a typical shotgun despite its higher capacity.",
     "weight": "1550 g",
     "volume": "3371 ml",
     "longest_side": "672 mm",
@@ -114,6 +114,7 @@
     "sight_dispersion": 500,
     "durability": 7,
     "clip_size": 7,
+    "built_in_mods": [ "ksg_aux_shotgun" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
@@ -125,7 +126,7 @@
       [ "sling", 1 ],
       [ "underbarrel", 2 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 14 } } ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 7 } } ],
     "melee_damage": { "bash": 9 }
   },
   {
@@ -135,7 +136,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Kel-Tec KSG-25 shotgun" },
-    "description": "This pump-action shotgun uses a system of twin magazines to carry 24 total rounds of 12-gauge shotgun shells.  Each tube must be loaded separately, but this offers the option of loading different ammunition for different situations.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, the firearm's still only as long as conventional shotguns despite having a comparatively far higher capacity.",
+    "description": "This pump-action shotgun uses a system of twin magazines to carry 24 total rounds of 12-gauge shotgun shells.  Each tube must be loaded separately, but this offers the option of loading different ammunition for different situations.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, the firearm isn't much longer than a typical shotgun despite its high capacity.",
     "weight": "2100 g",
     "volume": "4495 ml",
     "longest_side": "971 mm",
