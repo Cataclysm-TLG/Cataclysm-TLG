@@ -184,10 +184,10 @@ std::string mods( item const &it, unsigned int /* quantity */,
     }
     if( ( ( it.is_gun() || it.is_tool() || it.is_magazine() ) ) ||
         it.get_contents().has_additional_pockets() ) {
-
         for( const item *mod : it.is_gun() ? it.gunmods() : it.toolmods() ) {
-            if( !it.type->gun || !it.type->gun->built_in_mods.count( mod->typeId() ) ||
-                !it.type->gun->default_mods.count( mod->typeId() ) ) {
+            if( !mod->has_flag( flag_IRREMOVABLE ) &&
+                ( !it.type->gun || !it.type->gun->built_in_mods.count( mod->typeId() ) ||
+                !it.type->gun->default_mods.count( mod->typeId() ) ) ) {
                 amt++;
             }
         }
