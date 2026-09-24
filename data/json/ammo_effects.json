@@ -262,7 +262,7 @@
     "type": "ammo_effect",
     "//": "Creates a trail of lightning and a burst at the end.",
     "aoe": { "field_type": "fd_electricity", "intensity_min": 6, "intensity_max": 10, "chance": 25 },
-    "trail": { "field_type": "fd_electricity", "intensity_min": 6, "intensity_max": 10, "chance": 45 }
+    "trail": { "field_type": "fd_electricity", "intensity_min": 6, "intensity_max": 10, "chance": 40 }
 
   },
   {
