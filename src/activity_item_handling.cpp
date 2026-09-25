@@ -3030,7 +3030,7 @@ static requirement_check_result generic_multi_activity_check_requirement(
             } else if( reason == do_activity_reason::NO_ZONE ) {
                 return requirement_check_result::SKIP_LOCATION_NO_ZONE;
             } else if( reason == do_activity_reason::NO_VEHICLE ) {
-                return requirement_check_result::SKIP_LOCATION;
+                return requirement_check_result::SKIP_LOCATION_NO_MATCH;
             } else if( reason == do_activity_reason::ALREADY_DONE ) {
                 return requirement_check_result::SKIP_LOCATION;
             } else if( reason == do_activity_reason::BLOCKING_TILE ) {
@@ -3734,7 +3734,7 @@ bool generic_multi_activity_handler( player_activity &act, Character &you, bool 
                      you.disp_name(), activity_to_restore.c_str() );
         } else if( reason.skip_location_no_match ) {
             add_msg( m_neutral,
-                     _( "%1$s failed to perform the %2$s activity because no criteria could be matched." ),
+                     _( "%1$s failed to perform the %2$s activity because there is nothing further that can be worked on." ),
                      you.disp_name(), activity_to_restore.c_str() );
         } else if( reason.skip_location ) {
             // Assumed to have been reported already.
