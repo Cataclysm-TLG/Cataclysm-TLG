@@ -187,7 +187,7 @@ std::string mods( item const &it, unsigned int /* quantity */,
         for( const item *mod : it.is_gun() ? it.gunmods() : it.toolmods() ) {
             if( !mod->has_flag( flag_IRREMOVABLE ) &&
                 ( !it.type->gun || !it.type->gun->built_in_mods.count( mod->typeId() ) ||
-                !it.type->gun->default_mods.count( mod->typeId() ) ) ) {
+                  !it.type->gun->default_mods.count( mod->typeId() ) ) ) {
                 amt++;
             }
         }

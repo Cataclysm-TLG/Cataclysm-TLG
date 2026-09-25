@@ -4094,6 +4094,7 @@ void Character::complete_disassemble( item_location target )
         } else {
             // No more targets
             activity.set_to_null();
+            activity_handlers::resume_for_multi_activities( *this );
             return;
         }
     }

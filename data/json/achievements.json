@@ -1554,7 +1554,7 @@
         "event_statistic": "num_gains_chemistry_level_4",
         "is": ">=",
         "target": 1,
-        "description": "Gain applied science skill level 4"
+        "description": "Gain science skill level 4"
       }
     ]
   },
@@ -1568,7 +1568,7 @@
         "event_statistic": "num_gains_chemistry_level_7",
         "is": ">=",
         "target": 1,
-        "description": "Gain applied science skill level 7"
+        "description": "Gain science skill level 7"
       }
     ],
     "hidden_by": [ "achievement_lvl_4_chemistry" ]
@@ -1583,7 +1583,7 @@
         "event_statistic": "num_gains_chemistry_level_10",
         "is": ">=",
         "target": 1,
-        "description": "Gain applied science skill level 10"
+        "description": "Gain science skill level 10"
       }
     ],
     "hidden_by": [ "achievement_lvl_7_chemistry" ]
