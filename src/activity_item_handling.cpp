@@ -2623,7 +2623,7 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
     }
 
     // If we got here without restarting the activity, it means we're done
-    add_msg( m_info, _( "%s sorted out every item possible." ), you.disp_name( false, true ) );
+    add_msg( m_info, _( "%s sorted out every item possible." ), you.disp_name( true ) );
     if( you.is_npc() ) {
         npc *guy = dynamic_cast<npc *>( &you );
         guy->revert_after_activity();

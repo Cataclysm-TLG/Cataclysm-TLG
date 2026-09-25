@@ -160,7 +160,7 @@ void Character::check_and_recover_morale()
 
     if( !morale->consistent_with( test_morale ) ) {
         *morale = player_morale( test_morale ); // Recover consistency
-        add_msg_debug( debugmode::DF_CHARACTER, "%s morale was recovered.", disp_name( true ) );
+        add_msg_debug( debugmode::DF_CHARACTER, "%s's morale was recovered.", disp_name() );
     }
 }
 

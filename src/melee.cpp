@@ -2912,8 +2912,8 @@ double Character::weapon_value( const item &weap, int ammo, bool prompt ) const
             auto cached_value = cached_info.find( "weapon_value" );
             if( cached_value != cached_info.end() ) {
                 add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                               "<color_magenta>weapon_value</color>%s returned cached weapon value of <color_light_cyan>%1.2f</color>.",
-                               disp_name( true ), cached_value->second );
+                               "<color_magenta>weapon_value</color> for %s returned cached weapon value of <color_light_cyan>%1.2f</color>.",
+                               disp_name(), cached_value->second );
                 return cached_value->second;
             }
         }
@@ -2922,11 +2922,11 @@ double Character::weapon_value( const item &weap, int ammo, bool prompt ) const
     val_gun = val_gun /
               4.0; // This is an emergency patch to get melee and ranged in approximate parity.
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                   "<color_magenta>weapon_value</color>%s %s valued at <color_light_cyan>%1.2f as a ranged weapon</color>.",
-                   disp_name( true ), weap.type->get_id().str(), val_gun );
+                   "<color_magenta>weapon_value</color>%s's %s valued at <color_light_cyan>%1.2f as a ranged weapon</color>.",
+                   disp_name(), weap.type->get_id().str(), val_gun );
     double val_melee = melee_value( weap );
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                   "%s %s valued at <color_light_cyan>%1.2f as a melee weapon</color>.", disp_name( true ),
+                   "%s's %s valued at <color_light_cyan>%1.2f as a melee weapon</color>.", disp_name(),
                    weap.type->get_id().str(), val_melee );
     const double more = std::max( val_gun, val_melee );
     const double less = std::min( val_gun, val_melee );

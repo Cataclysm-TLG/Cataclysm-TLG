@@ -2496,7 +2496,7 @@ void monster::shove_vehicle( const tripoint_bub_ms &remote_destination,
                 //~ %1$s - monster name, %2$s - vehicle name
                 std::string monster_name = "Something";
                 if( !this->has_effect( effect_invisibility ) ) {
-                    monster_name = this->disp_name( false, true );
+                    monster_name = this->disp_name( true );
                 }
                 add_msg_if_player_sees( this->pos_bub(), m_bad, _( "%1$s shoves %2$s out of the way!" ),
                                         monster_name,

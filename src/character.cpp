@@ -948,10 +948,9 @@ creature_size Character::get_size() const
     return size_class;
 }
 
-std::string Character::disp_name( bool possessive, bool capitalize_first ) const
+std::string Character::disp_name( bool capitalize_first ) const
 {
-    return is_avatar() ? as_avatar()->display_name( possessive,
-            capitalize_first ) : as_npc()->display_name( possessive );
+    return is_avatar() ? as_avatar()->display_name( capitalize_first ) : as_npc()->display_name();
 }
 
 std::string Character::disp_profession() const
@@ -972,7 +971,7 @@ std::string Character::disp_profession() const
 
 std::string Character::name_and_maybe_activity() const
 {
-    return disp_name( false, true );
+    return disp_name( true );
 }
 
 std::string Character::skin_name() const
@@ -7799,7 +7798,7 @@ void Character::shout( std::string msg, bool order )
             if( is_avatar() ) {
                 msg = _( "yourself let out a piercing howl!" );
             } else if( get_player_character().sees( get_map(), *this ) ) {
-                msg = string_format( _( "%s let out a piercing howl!" ), disp_name( false, true ) );
+                msg = string_format( _( "%s let out a piercing howl!" ), disp_name( true ) );
             } else {
                 msg = _( "a piercing howl!" );
             }
@@ -7810,7 +7809,7 @@ void Character::shout( std::string msg, bool order )
             if( is_avatar() ) {
                 msg = _( "yourself scream loudly!" );
             } else if( get_player_character().sees( get_map(), *this ) ) {
-                msg = string_format( _( "%s scream loudly!" ), disp_name( false, true ) );
+                msg = string_format( _( "%s scream loudly!" ), disp_name( true ) );
             } else {
                 msg = _( "a loud scream!" );
             }
@@ -7821,7 +7820,7 @@ void Character::shout( std::string msg, bool order )
             if( is_avatar() ) {
                 msg = _( "yourself screech loudly!" );
             } else if( get_player_character().sees( get_map(), *this ) ) {
-                msg = string_format( _( "%s screech loudly!" ), disp_name( false, true ) );
+                msg = string_format( _( "%s screech loudly!" ), disp_name( true ) );
             } else {
                 msg = _( "a loud screech!" );
             }
@@ -7845,7 +7844,7 @@ void Character::shout( std::string msg, bool order )
             if( is_avatar() ) {
                 msg = _( "your own faint voice." );
             } else if( get_player_character().sees( get_map(), *this ) ) {
-                msg = string_format( _( "%s indistinct voice." ), disp_name( true, true ) );
+                msg = string_format( _( "The indistinct voice of %s." ), disp_name() );
             } else {
                 msg = _( "an indistinct voice." );
             }
@@ -7856,7 +7855,7 @@ void Character::shout( std::string msg, bool order )
             if( is_avatar() ) {
                 msg = _( "yourself shout loudly!" );
             } else if( get_player_character().sees( get_map(), *this ) ) {
-                msg = string_format( _( "%s shout loudly!" ), disp_name( false, true ) );
+                msg = string_format( _( "%s shout loudly!" ), disp_name( true ) );
             } else {
                 msg = _( "a loud shout!" );
             }
@@ -12944,7 +12943,8 @@ const Character *Character::get_book_reader( const item &book,
                                               elem->disp_name() ) );
         } else if( condition & read_condition_result::MORALE_LOW ) {
             // Low morale still permits skimming
-            reasons.push_back( string_format( _( "%s morale is too low!" ), elem->disp_name( true ) ) );
+            reasons.push_back( string_format( _( "%s has morale that is too low!" ),
+                                              elem->disp_name( true ) ) );
         } else if( condition & read_condition_result::BLIND ) {
             reasons.push_back( string_format( _( "%s is blind." ), elem->disp_name() ) );
         } else {

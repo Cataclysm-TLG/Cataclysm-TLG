@@ -2017,9 +2017,9 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                     !armor.has_flag( flag_SEMITANGIBLE ) && !armor.has_flag( flag_PERSONAL ) &&
                     !armor.has_flag( flag_AURA ) && (
                         ( rng( 1, 2000 ) - ( ( 100 - breathability ) * 10 ) ) < liquid_remaining ) ) {
-                    add_msg_if_player_sees( guy, m_warning, _( "Filth covers %1s %2s!" ), guy.disp_name( true,
-                                            true ),
-                                            pre_damage_name );
+                    guy.add_msg_player_or_npc( m_warning,
+                                               _( "Filth covers your %s!" ),
+                                               _( "Filth covers <npcname>'s %s!" ), pre_damage_name );
                     armor.set_flag( json_flag_FILTHY );
                     guy.on_worn_item_soiled( armor );
                 }

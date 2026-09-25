@@ -645,8 +645,8 @@ float npc::evaluate_character( const Character &candidate, bool my_gun, bool ene
     threat += my_gun && enemy ? candidate.get_dodge() / 2.0f : candidate.get_dodge();
     threat += armour;
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_cyan>evaluate_character </color><color_light_gray>%s assesses %s defense value as %1.2f.</color>",
-                   name, candidate.disp_name( true ), threat );
+                   "<color_cyan>evaluate_character </color><color_light_gray>%s assesses %s's defense value as %1.2f.</color>",
+                   name, candidate.disp_name(), threat );
 
     if( enemy && candidate_gun && !my_gun ) {
         add_msg_debug( debugmode::DF_NPC_COMBATAI,
@@ -656,12 +656,12 @@ float npc::evaluate_character( const Character &candidate, bool my_gun, bool ene
     }
     threat += candidate_weap_val;
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_light_gray>%s assesses %s weapon value as %1.2f.</color>",
-                   name, candidate.disp_name( true ), candidate_weap_val );
+                   "<color_light_gray>%s assesses %s's weapon value as %1.2f.</color>",
+                   name, candidate.disp_name(), candidate_weap_val );
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_light_gray>%s assesses</color> %s threat: %1.2f <color_light_gray>before personality and situation changes.</color>",
+                   "<color_light_gray>%s assesses</color> %s's threat: %1.2f <color_light_gray>before personality and situation changes.</color>",
                    name,
-                   candidate.disp_name( true ), threat );
+                   candidate.disp_name(), threat );
     if( enemy ) {
         threat -= static_cast<float>( personality.aggression );
     } else {
@@ -670,23 +670,23 @@ float npc::evaluate_character( const Character &candidate, bool my_gun, bool ene
 
     threat *= speed;
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_light_gray>%s scales %s threat by %1.0f%% based on speed.</color>",
-                   name, candidate.disp_name( true ), speed * 100.0f );
+                   "<color_light_gray>%s scales %s's threat by %1.0f%% based on speed.</color>",
+                   name, candidate.disp_name(), speed * 100.0f );
     threat *= candidate_health;
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_light_gray>%s scales %s threat by %1.0f%% based on remaining health.</color>", name,
-                   candidate.disp_name( true ), candidate_health * 100.0f );
+                   "<color_light_gray>%s scales %s's threat by %1.0f%% based on remaining health.</color>", name,
+                   candidate.disp_name(), candidate_health * 100.0f );
 
     if( is_fleeing ) {
         threat *= 0.5f;
         add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                       "<color_light_gray>%s scales %s threat by 50%% because they're running away.</color>", name,
-                       candidate.disp_name( true ) );
+                       "<color_light_gray>%s scales %s's threat by 50%% because they're running away.</color>", name,
+                       candidate.disp_name() );
     }
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_light_gray>%s sets </color>%s threat: %1.2f <color_light_gray>before perception randomization.</color>",
+                   "<color_light_gray>%s sets </color>%s's threat: %1.2f <color_light_gray>before perception randomization.</color>",
                    name,
-                   candidate.disp_name( true ), threat );
+                   candidate.disp_name(), threat );
     // the math for perception fuzz is this way to make it more human readable because I kept making silly errors.
     // I hope this helps you too. If not, well, sorry bud.
     // Anyway the higher your perception gets the more accurate and predictable your rating is.
@@ -695,14 +695,14 @@ float npc::evaluate_character( const Character &candidate, bool my_gun, bool ene
     int perception_factor = rng( -10, 10 ) * perception_inverted;
 
     add_msg_debug( debugmode::DF_NPC_COMBATAI,
-                   "<color_light_gray>%s randomizes %s threat by %1.1f%% based on perception factor %i.</color>  Final threat %1.2f",
-                   name, candidate.disp_name( true ), threat * perception_factor / 1000.0f, perception_factor,
+                   "<color_light_gray>%s randomizes %s's threat by %1.1f%% based on perception factor %i.</color>  Final threat %1.2f",
+                   name, candidate.disp_name(), threat * perception_factor / 1000.0f, perception_factor,
                    threat +  threat * perception_factor / 1000.0f );
     threat += threat * perception_factor / 1000.0f;
 
-    add_msg_debug( debugmode::DF_NPC, "<color_light_gray>%s assesses </color>%s final threat: %1.2f",
+    add_msg_debug( debugmode::DF_NPC, "<color_light_gray>%s assesses </color>%s's final threat: %1.2f",
                    name,
-                   candidate.disp_name( true ),
+                   candidate.disp_name(),
                    threat );
     return std::min( threat, NPC_CHARACTER_DANGER_MAX );
 }
@@ -782,8 +782,8 @@ float npc::estimate_armour( const Character &candidate ) const
         armour_step += candidate.get_armor_type( damage_stab, part_id );
         armour_step += candidate.get_armor_type( damage_bullet, part_id );
         add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                       "<color_light_gray>%s: %s armour value for %s rated as %i.</color>", name,
-                       candidate.disp_name( true ), body_part_name( part_id ), armour_step );
+                       "<color_light_gray>%s: %s's armour value for %s rated as %i.</color>", name,
+                       candidate.disp_name(), body_part_name( part_id ), armour_step );
         if( part_id == bodypart_id( "head" ) || part_id == bodypart_id( "torso" ) ) {
             armour_step *= 4;
             number_of_parts += 3;
@@ -794,8 +794,8 @@ float npc::estimate_armour( const Character &candidate ) const
     armour /= number_of_parts;
 
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                   "<color_light_gray>%s rates </color>%s total armour value: %1.2f.", name,
-                   candidate.disp_name( true ), armour );
+                   "<color_light_gray>%s rates </color>%s's total armour value: %1.2f.", name,
+                   candidate.disp_name(), armour );
     // this is a value we could easily cache.
     // I don't know how to do that, I'm supposed to be a writer.
     return armour;
@@ -4506,12 +4506,12 @@ double npc::evaluate_weapon( item &maybe_weapon, bool can_use_gun, bool use_sile
     }
     double val_gun = allowed ? gun_value( maybe_weapon, shots ) : 0;
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                   "%s %s valued at <color_light_cyan>%1.2f as a ranged weapon to wield</color>.",
-                   disp_name( true ), maybe_weapon.type->get_id().str(), val_gun );
+                   "%s's %s valued at <color_light_cyan>%1.2f as a ranged weapon to wield</color>.",
+                   disp_name(), maybe_weapon.type->get_id().str(), val_gun );
     double val_melee = allowed ? melee_value( maybe_weapon ) : 0;
     add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                   "%s %s valued at <color_light_cyan>%1.2f as a melee weapon to wield</color>.",
-                   disp_name( true ), maybe_weapon.type->get_id().str(), val_melee );
+                   "%s's %s valued at <color_light_cyan>%1.2f as a melee weapon to wield</color>.",
+                   disp_name(), maybe_weapon.type->get_id().str(), val_melee );
     return std::max( val_gun, val_melee );
 }
 
