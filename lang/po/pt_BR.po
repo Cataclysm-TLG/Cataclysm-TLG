@@ -187478,9 +187478,7 @@ msgstr ""
 #. ~ Description of "folding wire basket"
 #: data/json/items/vehicle/cargo.json
 msgid "A large wire basket from a shopping cart, modified to be foldable."
-msgstr ""
-" cesto de arame dobrávelUm cesto de arame grande de um carrinho decompras, "
-"modificado para ser dobrável."
+msgstr "Um cesto de arame grande de um carrinho decompras, modificado para ser dobrável."
 
 #. ~ Description of "wire basket"
 #: data/json/items/vehicle/cargo.json

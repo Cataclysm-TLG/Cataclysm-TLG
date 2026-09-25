@@ -607,8 +607,9 @@ static bool vehicle_activity( Character &you, const tripoint_bub_ms &src_loc, in
     }
     time_duration time_to_take = 0_seconds;
     if( vpindex >= veh->part_count() ) {
-        // if parts got removed during our work, we can't just carry on removing, we want to repair parts!
-        // so just bail out, as we don't know if the next shifted part is suitable for repair.
+        // The vehicle may have changed since the part index was stored.
+        // Repair cannot safely continue with an invalid index, while removal
+        // can try to find the corresponding shifted part.
         if( type == 'r' ) {
             return false;
         } else if( type == 'o' ) {
@@ -1067,7 +1068,7 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
         if( std::abs( veh->velocity ) > 100 || veh->player_in_control( here, player_character ) ) {
             return activity_reason_info::fail( do_activity_reason::NO_VEHICLE );
         }
-        do_activity_reason result = do_activity_reason::NO_ZONE;
+        do_activity_reason result = do_activity_reason::ALREADY_DONE;
 
         for( const npc &guy : g->all_npcs() ) {
             if( &guy == &you ) {
@@ -1134,16 +1135,15 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 }
                 const requirement_data &reqs = vpinfo.removal_requirements();
                 const inventory &inv = you.crafting_inventory( false );
-
                 const bool can_make = reqs.can_make_with_inventory( inv, is_crafting_component );
-                you.set_value( "veh_index_type", vpinfo.name() );
-                // temporarily store the intended index, we do this so two NPCs don't try and work on the same part at same time.
-                you.activity_vehicle_part_index = vpindex;
+                // Continue here so that we don't give up the first time we find a part we can't remove.
                 if( !can_make ) {
-                    return activity_reason_info::fail( do_activity_reason::NEEDS_VEH_DECONST );
-                } else {
-                    return activity_reason_info::ok( do_activity_reason::NEEDS_VEH_DECONST );
+                    continue;
                 }
+                you.set_value( "veh_index_type", vpinfo.name() );
+                // Temporarily store the intended index, we do this so two NPCs don't try and work on the same part at same time.
+                you.activity_vehicle_part_index = vpindex;
+                return activity_reason_info::ok( do_activity_reason::NEEDS_VEH_DECONST );
             }
         } else if( act == ACT_VEHICLE_REPAIR ) {
             // find out if there is a vehicle part here we can repair.
@@ -1530,7 +1530,7 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 return activity_reason_info::ok( do_activity_reason::NEEDS_DISASSEMBLE );
             }
         }
-        if( !req.is_null() || !req.is_empty() ) {
+        if( !req.is_null() && !req.is_empty() ) {
             // need tools
             return activity_reason_info( do_activity_reason::NEEDS_DISASSEMBLE, false, req );
         } else {
@@ -3030,7 +3030,7 @@ static requirement_check_result generic_multi_activity_check_requirement(
             } else if( reason == do_activity_reason::NO_ZONE ) {
                 return requirement_check_result::SKIP_LOCATION_NO_ZONE;
             } else if( reason == do_activity_reason::NO_VEHICLE ) {
-                return requirement_check_result::SKIP_LOCATION_NO_MATCH;
+                return requirement_check_result::SKIP_LOCATION;
             } else if( reason == do_activity_reason::ALREADY_DONE ) {
                 return requirement_check_result::SKIP_LOCATION;
             } else if( reason == do_activity_reason::BLOCKING_TILE ) {
@@ -3059,13 +3059,17 @@ static requirement_check_result generic_multi_activity_check_requirement(
         if( you.is_npc() ) {
             if( zone ) {
                 add_msg_if_player_sees( you, m_info,
-                                        _( "%s is trying to find necessary items to do the %s job on zone %s, reason %s" ),
-                                        you.disp_name(), act_id.c_str(), zone->get_name(), do_activity_reason_string[int( reason )] );
+                                        _( "%s is unable to find necessary items to do the %s job in the %s zone." ),
+                                        you.disp_name(), act_id.c_str(), zone->get_name() );
             } else {
                 add_msg_if_player_sees( you, m_info,
-                                        _( "%s is trying to find necessary items to do the %s job, reason %s" ),
-                                        you.disp_name(), act_id.c_str(), do_activity_reason_string[int( reason )] );
+                                        _( "%s is unable to find necessary items to do the %s job." ),
+                                        you.disp_name(), act_id.c_str() );
             }
+        }
+        if( reason == do_activity_reason::NO_COMPONENTS &&
+            act_id == ACT_MULTIPLE_DIS ) {
+            return requirement_check_result::SKIP_LOCATION;
         }
         requirement_id what_we_need;
         std::vector<tripoint_bub_ms> loot_zone_spots;
@@ -3094,11 +3098,11 @@ static requirement_check_result generic_multi_activity_check_requirement(
             const vehicle *veh = veh_pointer_or_null( here.veh_at( src_loc ) );
             // we already checked this in can_do_activity() but check again just incase.
             if( !veh ) {
-                you.activity_vehicle_part_index = 1;
-                return requirement_check_result::SKIP_LOCATION;
-            }
-            requirement_data reqs;
-            if( you.activity_vehicle_part_index >= 0 &&
+            you.activity_vehicle_part_index = 1;
+            return requirement_check_result::SKIP_LOCATION;
+        }
+        requirement_data reqs;
+        if( you.activity_vehicle_part_index >= 0 &&
                 you.activity_vehicle_part_index < static_cast<int>( veh->part_count() ) ) {
                 const vpart_info &vpi = veh->part( you.activity_vehicle_part_index ).info();
                 if( reason == do_activity_reason::NEEDS_VEH_DECONST ) {

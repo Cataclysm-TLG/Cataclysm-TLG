@@ -2199,12 +2199,17 @@ void activity_handlers::vehicle_finish( player_activity *act, Character *you )
     // is to be examined again.
     if( act->is_null() ) {
         if( npc *guy = dynamic_cast<npc *>( you ) ) {
-            guy->revert_after_activity();
-            guy->set_moves( 0 );
+            if( !resume_for_multi_activities( *you ) ) {
+                guy->revert_after_activity();
+                guy->set_moves( 0 );
+            }
         }
         return;
     }
     act->set_to_null();
+    if( resume_for_multi_activities( *you ) ) {
+        return;
+    }
     if( !you->is_npc() ) {
         if( act->values.size() < 7 ) {
             dbg( D_ERROR ) << "game:process_activity: invalid ACT_VEHICLE values: "
