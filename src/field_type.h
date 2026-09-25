@@ -212,7 +212,7 @@ struct field_type {
         std::optional<map_fd_bash_info> bash_info;
 
         // Name of whatever substance makes up the field, can be used in splash attacks or other messaging.
-        std::string substance_name = "liquid";
+        translation substance_name = to_translation( "liquid" );
         fake_spell spell_data;
 
         // chance, issue, duration, speech
