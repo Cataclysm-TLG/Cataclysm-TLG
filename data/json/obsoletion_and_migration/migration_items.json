@@ -4099,32 +4099,32 @@
   {
     "type": "MIGRATION",
     "id": "armor_farmor",
-    "replace": "leather_armor_suit"
+    "replace": "leather_cuirass"
   },
   {
     "type": "MIGRATION",
     "id": "xl_armor_farmor",
-    "replace": "leather_armor_suit_xl"
+    "replace": "leather_cuirass_xl"
   },
   {
     "type": "MIGRATION",
     "id": "armor_farmor_xs",
-    "replace": "leather_armor_suit_xs"
+    "replace": "leather_cuirass_xs"
   },
   {
     "type": "MIGRATION",
     "id": "armor_faux_farmor",
-    "replace": "leather_armor_suit"
+    "replace": "leather_cuirass"
   },
   {
     "type": "MIGRATION",
     "id": "xl_armor_faux_farmor",
-    "replace": "leather_armor_suit_xl"
+    "replace": "leather_cuirass_xl"
   },
   {
     "type": "MIGRATION",
     "id": "armor_faux_farmor_xs",
-    "replace": "leather_armor_suit_xs"
+    "replace": "leather_cuirass_xs"
   },
   {
     "type": "MIGRATION",
@@ -4269,7 +4269,37 @@
   {
     "id": "junk_platemail_suit",
     "type": "MIGRATION",
-    "replace": "platemail_suit"
+    "replace": "platemail_cuirass"
+  },
+  {
+    "id": "platemail_suit",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass"
+  },
+  {
+    "id": "platemail_suit_xl",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass_xl"
+  },
+  {
+    "id": "platemail_suit_xs",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass_xs"
+  },
+  {
+    "id": "chainmail_suit",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk"
+  },
+  {
+    "id": "chainmail_suit_xl",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_xl"
+  },
+  {
+    "id": "chainmail_suit_xs",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_xs"
   },
   {
     "id": "chainmail_junk_sleeves",
@@ -4350,5 +4380,15 @@
     "id": "budget_steel_chunk",
     "type": "MIGRATION",
     "replace": "steel_chunk"
+  },
+  {
+    "id": "armor_riot",
+    "type": "MIGRATION",
+    "replace": "armor_riot_torso"
+  },
+  {
+    "id": "armor_tiresuit",
+    "type": "MIGRATION",
+    "replace": "tire_cuirass"
   }
 ]

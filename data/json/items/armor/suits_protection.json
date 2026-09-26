@@ -14,7 +14,6 @@
     "material": [ "leather_boiled" ],
     "symbol": "[",
     "longest_side": "60 cm",
-    "looks_like": "leather_armor_suit",
     "color": "brown",
     "armor": [
       {
@@ -58,7 +57,6 @@
     "to_hit": -5,
     "material": [ "chitin" ],
     "symbol": "[",
-    "looks_like": "leather_armor_suit",
     "color": "brown",
     "warmth": 10,
     "longest_side": "60 cm",
@@ -138,166 +136,6 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-    "id": "leather_armor_suit",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "suit of leather armor", "str_pl": "suts of leather armor" },
-    "description": "A full suit of thick leather armor.  It's fairly heavy, but could be deconstructed into its constituent parts if desired.",
-    "weight": "5890 g",
-    "volume": "6200 ml",
-    "price": "120 USD",
-    "price_postapoc": "25 USD",
-    "to_hit": -5,
-    "material": [ "leather" ],
-    "symbol": "[",
-    "longest_side": "60 cm",
-    "looks_like": "touring_suit",
-    "color": "brown",
-    "armor": [
-      {
-        "covers": [ "torso" ],
-        "coverage": 95,
-        "encumbrance": 24,
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ]
-      },
-      {
-        "covers": [ "arm_l", "arm_r" ],
-        "encumbrance": 18,
-        "coverage": 90,
-        "specifically_covers": [ "arm_lower_r", "arm_lower_l", "arm_elbow_r", "arm_elbow_l", "arm_upper_l", "arm_upper_r" ]
-      },
-      {
-        "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
-        "coverage": 100,
-        "encumbrance": 8,
-        "rigid_layer_only": true
-      },
-      { "covers": [ "leg_l", "leg_r" ], "coverage": 90, "encumbrance": 14 }
-    ],
-    "warmth": 25,
-    "material_thickness": 4,
-    "flags": [ "VARSIZE", "STURDY", "OUTER", "ALLOWS_TAIL" ],
-    "melee_damage": { "bash": 2 }
-  },
-  {
-    "id": "leather_armor_suit_xl",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "suit of leather armor", "str_pl": "suits of leather armor" },
-    "copy-from": "leather_armor_suit",
-    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "leather_armor_suit_xs",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "leather_armor_suit",
-    "looks_like": "leather_armor_suit",
-    "name": { "str": "suit of leather armor", "str_pl": "suits of leather armor" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "flags": [ "UNDERSIZE", "PREFIX_XS" ]
-  },
-  {
-    "id": "platemail_suit",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "full plate armor" },
-    "description": "A suit of medieval plate armor, covering everything but the head and neck.  This would likely be uncomfortable without something soft underneath.",
-    "weight": "15 kg",
-    "volume": "17500 ml",
-    "price": "600 USD",
-    "price_postapoc": "120 USD",
-    "to_hit": -5,
-    "material": [ "steel" ],
-    "symbol": "[",
-    "color": "light_gray",
-    "warmth": 20,
-    "longest_side": "60 cm",
-    "material_thickness": 2,
-    "flags": [ "OUTER", "STURDY", "CONDUCTIVE", "ONLY_ONE", "ALLOWS_TAIL" ],
-    "armor": [
-      {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "covers": [ "torso" ],
-        "coverage": 95,
-        "encumbrance": 16,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "covers": [ "arm_l", "arm_r" ],
-        "coverage": 85,
-        "encumbrance": 16,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
-        "covers": [ "leg_l", "leg_r" ],
-        "coverage": 85,
-        "encumbrance": 16,
-        "rigid_layer_only": true
-      },
-      {
-        "encumbrance": 7,
-        "coverage": 100,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ],
-        "rigid_layer_only": true
-      },
-      {
-        "encumbrance": 6,
-        "coverage": 70,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
-      },
-      {
-        "covers": [ "foot_l", "foot_r" ],
-        "specifically_covers": [
-          "foot_toes_r",
-          "foot_toes_l",
-          "foot_ankle_r",
-          "foot_ankle_l",
-          "foot_heel_r",
-          "foot_heel_l",
-          "foot_arch_r",
-          "foot_arch_l"
-        ],
-        "layers": [ "BELTED" ],
-        "material": [
-          { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 },
-          { "type": "leather", "covered_by_mat": 1, "thickness": 2.0 }
-        ],
-        "encumbrance": 5,
-        "coverage": 90
-      }
-    ],
-    "melee_damage": { "bash": 6 }
-  },
-  {
-    "id": "platemail_suit_xl",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "XL full plate armor" },
-    "copy-from": "platemail_suit",
-    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE" ] }
-  },
-  {
-    "id": "platemail_suit_xs",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "XS full plate armor" },
-    "copy-from": "platemail_suit",
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE" ] }
-  },
-  {
     "id": "platemail_suit_faraday",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -311,7 +149,6 @@
     "to_hit": -5,
     "material": [ "steel", "steel_chain", "soft_rubber" ],
     "symbol": "[",
-    "looks_like": "platemail_suit",
     "color": "light_gray",
     "warmth": 20,
     "longest_side": "60 cm",
@@ -526,125 +363,6 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-    "id": "armor_riot",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "riot armor suit" },
-    "description": "A full suit of black plastic body armor plates used by riot police.  Cleverly placed velcro straps secure each piece, resulting in slightly less encumbrance then its constituent parts.  MOLLE webbing is attached to the torso and the word POLICE is emblazoned across the front.",
-    "weight": "5 kg",
-    "volume": "15000 ml",
-    "price": "600 USD",
-    "price_postapoc": "40 USD",
-    "to_hit": -3,
-    "material": [ "thermo_resin", "plastic_pad" ],
-    "symbol": "[",
-    "looks_like": "ballistic_vest_concealable",
-    "color": "dark_gray",
-    "warmth": 20,
-    "longest_side": "60 cm",
-    "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "PADDED", "ALLOWS_TAIL" ],
-    "use_action": [ { "type": "attach_molle", "size": 6 }, { "type": "detach_molle" } ],
-    "armor": [
-      {
-        "encumbrance": 14,
-        "coverage": 75,
-        "covers": [ "torso" ],
-        "volume_encumber_modifier": 0.3,
-        "material": [
-          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 2 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 7 }
-        ],
-        "rigid_layer_only": true
-      },
-      {
-        "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
-        "volume_encumber_modifier": 0,
-        "encumbrance": 4,
-        "coverage": 65,
-        "material": [
-          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.5 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 6 }
-        ],
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r", "leg_upper_l", "leg_upper_r" ],
-        "rigid_layer_only": true
-      },
-      {
-        "covers": [ "leg_l", "leg_r" ],
-        "volume_encumber_modifier": 0,
-        "coverage": 30,
-        "material": [ { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 7 } ],
-        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
-        "rigid_layer_only": true
-      },
-      {
-        "covers": [ "leg_l", "leg_r" ],
-        "volume_encumber_modifier": 0,
-        "encumbrance": 3,
-        "coverage": 90,
-        "material": [
-          { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.75 },
-          { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 5 }
-        ],
-        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r" ],
-        "rigid_layer_only": true
-      },
-      {
-        "covers": [ "foot_l", "foot_r" ],
-        "volume_encumber_modifier": 0,
-        "encumbrance": 2,
-        "coverage": 75,
-        "material": [ { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.5 } ],
-        "specifically_covers": [ "foot_arch_l", "foot_arch_r", "foot_ankle_r", "foot_ankle_l" ],
-        "layers": [ "BELTED" ],
-        "rigid_layer_only": true
-      },
-      {
-        "covers": [ "arm_l", "arm_r" ],
-        "volume_encumber_modifier": 0,
-        "encumbrance": 3,
-        "coverage": 90,
-        "material": [
-          { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.75 },
-          { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 5 }
-        ],
-        "specifically_covers": [ "arm_lower_l", "arm_lower_r", "arm_elbow_l", "arm_elbow_r" ],
-        "rigid_layer_only": true
-      }
-    ],
-    "melee_damage": { "bash": 4 }
-  },
-  {
-    "id": "armor_tiresuit",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "tire suit" },
-    "description": "A suit of armor made from thick chunks of rubber tire secured by simple strings; the loose collection of rubber plates provides decent but not the most convenient protection.",
-    "weight": "14400 g",
-    "volume": "15500 ml",
-    "price": "500 USD",
-    "price_postapoc": "2 USD",
-    "to_hit": -5,
-    "material": [ "rubber" ],
-    "symbol": "[",
-    "looks_like": "platemail_suit",
-    "color": "light_gray",
-    "warmth": 10,
-    "longest_side": "40 cm",
-    "material_thickness": 4,
-    "flags": [ "OUTER", "NONCONDUCTIVE", "ALLOWS_TAIL" ],
-    "armor": [
-      {
-        "encumbrance": 21,
-        "coverage": 80,
-        "covers": [ "torso", "leg_l", "leg_r", "arm_l", "arm_r" ],
-        "rigid_layer_only": true
-      }
-    ],
-    "melee_damage": { "bash": 2 }
-  },
-  {
     "id": "beekeeping_suit",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -755,6 +473,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail hauberk" },
     "copy-from": "chainmail_hauberk",
+    "looks_like": "chainmail_hauberk",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -769,6 +488,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_hauberk",
+    "looks_like": "chainmail_hauberk",
     "name": { "str": "chainmail hauberk" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "use_action": {
@@ -786,6 +506,7 @@
     "name": { "str": "chainmail hauberk (loose)" },
     "description": "A knee-length long-sleeved tunic made of interlocking steel rings.  It can be adjusted to fit closer to the body.",
     "copy-from": "chainmail_hauberk",
+    "looks_like": "chainmail_hauberk",
     "extend": { "flags": [ "OUTER" ] },
     "delete": { "flags": [ "NORMAL" ] },
     "use_action": {
@@ -801,6 +522,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail hauberk (loose)" },
     "copy-from": "chainmail_hauberk_loose",
+    "looks_like": "chainmail_hauberk",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -815,6 +537,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_hauberk_loose",
+    "looks_like": "chainmail_hauberk",
     "name": { "str": "chainmail hauberk (loose)" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "use_action": {
@@ -823,113 +546,6 @@
       "target": "chainmail_hauberk_xs",
       "menu_text": "Tighten"
     },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
-    "id": "chainmail_suit",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "armor",
-    "name": { "str": "chainmail suit" },
-    "description": "A full-body suit of medieval chain armor, complete with a hood, gloves, and chausses.",
-    "weight": "19018 g",
-    "volume": "3900 ml",
-    "longest_side": "20 cm",
-    "price": "450 USD",
-    "price_postapoc": "80 USD",
-    "to_hit": -1,
-    "material": [ "steel_chain" ],
-    "symbol": "[",
-    "looks_like": "touring_suit",
-    "color": "light_red",
-    "warmth": 15,
-    "flags": [ "STURDY", "ALLOWS_TAIL" ],
-    "armor": [
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "hand_l", "hand_r" ],
-        "coverage": 95,
-        "encumbrance": 10,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "head" ],
-        "specifically_covers": [ "head_throat" ],
-        "coverage": 95,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "head" ],
-        "specifically_covers": [ "head_nape" ],
-        "coverage": 95,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "head" ],
-        "specifically_covers": [ "head_crown", "head_ear_r", "head_ear_l" ],
-        "coverage": 100,
-        "encumbrance": 10,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "head" ],
-        "specifically_covers": [ "head_forehead" ],
-        "coverage": 95,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "coverage": 95,
-        "encumbrance": 10,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "coverage": 100,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "arm_r", "arm_l" ],
-        "coverage": 95,
-        "encumbrance": 10,
-        "rigid_layer_only": true
-      },
-      {
-        "material": [ { "type": "steel_chain", "covered_by_mat": 100, "thickness": 1.2 } ],
-        "covers": [ "leg_l", "leg_r" ],
-        "//": "Combining the skirt and chausses here still leaves us with a few small gaps.",
-        "coverage": 98,
-        "encumbrance": 10,
-        "rigid_layer_only": true
-      }
-    ],
-    "melee_damage": { "bash": 2 }
-  },
-  {
-    "id": "chainmail_suit_xl",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "chainmail suit" },
-    "copy-from": "chainmail_suit",
-    "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
-    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
-  },
-  {
-    "id": "chainmail_suit_xs",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_suit",
-    "name": { "str": "chainmail suit" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
@@ -943,7 +559,6 @@
     "longest_side": "35 cm",
     "material": [ "steel_chain", "soft_rubber" ],
     "symbol": "[",
-    "looks_like": "chainmail_suit",
     "color": "light_red",
     "warmth": 30,
     "armor": [

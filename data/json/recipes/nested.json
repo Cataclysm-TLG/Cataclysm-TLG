@@ -822,18 +822,6 @@
     "difficulty": 5
   },
   {
-    "id": "nested_platemail_suit",
-    "type": "nested_category",
-    "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
-    "name": "platemail armor suits",
-    "description": "Recipes related to constructing suits of steel plate armor.",
-    "skill_used": "fabrication",
-    "nested_category_data": [ "platemail_suit", "platemail_suit_xl", "platemail_suit_xs" ],
-    "difficulty": 1
-  },
-  {
     "id": "nested_platemail_suit_faraday",
     "type": "nested_category",
     "activity_level": "MODERATE_EXERCISE",
@@ -846,15 +834,15 @@
     "difficulty": 6
   },
   {
-    "id": "nested_all_platemail_suit",
+    "id": "nested_all_faraday_armor",
     "type": "nested_category",
     "activity_level": "MODERATE_EXERCISE",
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_SUIT",
     "name": "platemail suit assembly",
-    "description": "Recipes related to combining steel plate armor into suits.",
+    "description": "Recipes related to making suits of armor that resist electricity.",
     "skill_used": "fabrication",
-    "nested_category_data": [ "nested_platemail_suit", "nested_platemail_suit_faraday" ],
+    "nested_category_data": [ "nested_chainmail_suit_faraday", "nested_platemail_suit_faraday", "shark_suit_faraday" ],
     "difficulty": 1
   },
   {

@@ -35,10 +35,9 @@
     "type": "item_group",
     "id": "cop_armor",
     "items": [
-      [ "armor_riot", 45 ],
-      [ "armor_riot_arm", 10 ],
-      [ "armor_riot_leg", 10 ],
-      [ "armor_riot_torso", 10 ],
+      [ "armor_riot_arm", 40 ],
+      [ "armor_riot_leg", 40 ],
+      [ "armor_riot_torso", 40 ],
       [ "kevlar", 70 ],
       [ "soft_3a_vest", 70 ],
       [ "stab_vest", 20 ]
@@ -286,11 +285,7 @@
     "subtype": "collection",
     "entries": [
       {
-        "distribution": [
-          { "item": "armor_riot", "prob": 30 },
-          { "item": "armor_riot_torso", "prob": 15 },
-          { "group": "swat_ballistic_vest", "prob": 80 }
-        ],
+        "distribution": [ { "item": "armor_riot_torso", "prob": 45 }, { "group": "swat_ballistic_vest", "prob": 80 } ],
         "prob": 65
       },
       {

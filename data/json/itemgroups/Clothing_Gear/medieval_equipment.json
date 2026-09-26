@@ -13,13 +13,68 @@
       { "group": "western_medieval_weapon" },
       {
         "distribution": [
-          { "item": "platemail_suit", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 36 },
+          { "item": "bronze_cuirass", "prob": 1 },
+          { "item": "bronze_cuirass", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+          { "item": "platemail_cuirass", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 36 },
           { "item": "chainmail_hauberk", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 54 },
-          { "item": "platemail_suit", "prob": 4 },
-          { "item": "chainmail_hauberk", "prob": 6 }
-        ]
+          { "item": "platemail_cuirass", "prob": 4 },
+          { "item": "chainmail_hauberk", "prob": 6 },
+          { "item": "armor_lorica", "prob": 1 },
+          { "item": "armor_lorica", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 }
+        ],
+        "prob": 70
       },
-      { "item": "platemail_visored_helm", "prob": 80 }
+      {
+        "distribution": [
+          { "item": "platemail_arm_guards", "prob": 1 },
+          { "item": "platemail_arm_guards", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 }
+        ],
+        "prob": 20
+      },
+      {
+        "distribution": [
+          { "item": "platemail_pauldrons", "prob": 1 },
+          { "item": "platemail_pauldrons", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 }
+        ],
+        "prob": 20
+      },
+      {
+        "distribution": [
+          { "item": "platemail_tasset", "prob": 1 },
+          { "item": "chainmail_skirt", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+          { "item": "chainmail_skirt", "prob": 1 },
+          { "item": "platemail_tasset", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 }
+        ],
+        "prob": 20
+      },
+      {
+        "distribution": [
+          { "item": "platemail_aventail", "prob": 1 },
+          { "item": "platemail_aventail", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 }
+        ],
+        "prob": 20
+      },
+      {
+        "distribution": [
+          { "item": "platemail_kettle_helm", "prob": 2 },
+          { "item": "platemail_kettle_helm", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+          { "item": "platemail_visored_helm", "prob": 2 },
+          { "item": "platemail_visored_helm", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+          { "item": "platemail_great_helm", "prob": 2 },
+          { "item": "platemail_great_helm", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 20 },
+          { "item": "helmet_nasal", "prob": 1 },
+          { "item": "helmet_nasal", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+          { "item": "helmet_corinthian", "prob": 1 },
+          { "item": "helmet_corinthian", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+          { "item": "helmet_galea", "prob": 1 },
+          { "item": "helmet_galea", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+          { "item": "helmet_sallet", "prob": 1 },
+          { "item": "helmet_sallet", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 },
+          { "item": "helmet_barbute", "prob": 1 },
+          { "item": "helmet_barbute", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 10 }
+        ],
+        "prob": 70
+      }
     ]
   },
   {

@@ -1220,7 +1220,6 @@
     "to_hit": -1,
     "material": [ "steel_chain" ],
     "symbol": "[",
-    "looks_like": "chainmail_suit",
     "color": "light_red",
     "warmth": 15,
     "material_thickness": 3,

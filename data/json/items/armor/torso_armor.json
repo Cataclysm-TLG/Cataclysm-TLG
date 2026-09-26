@@ -161,7 +161,7 @@
     "price": "500 USD",
     "price_postapoc": "35 USD",
     "to_hit": -5,
-    "material": [ "iron", "leather" ],
+    "material": [ "steel", "leather" ],
     "symbol": "[",
     "longest_side": "60 cm",
     "looks_like": "platemail_cuirass",
@@ -1017,6 +1017,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail vest" },
     "copy-from": "chainmail_vest",
+    "looks_like": "chainmail_vest",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -1031,6 +1032,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_vest",
+    "looks_like": "chainmail_vest",
     "name": { "str": "chainmail vest" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "use_action": {
@@ -1046,6 +1048,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_vest",
+    "looks_like": "chainmail_vest",
     "name": { "str": "chainmail vest (loose)" },
     "description": "Armor made of countless links of steel wire woven into the shape of a vest.  It's lightweight enough to fit under outerwear, and can be adjusted for a closer fit.",
     "use_action": {
@@ -1063,6 +1066,7 @@
     "subtypes": [ "ARMOR" ],
     "name": { "str": "chainmail vest (loose)" },
     "copy-from": "chainmail_vest_loose",
+    "looks_like": "chainmail_vest",
     "proportional": { "weight": 1.125, "volume": 1.13, "price": 1.25 },
     "use_action": {
       "type": "transform",
@@ -1077,6 +1081,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "chainmail_vest_loose",
+    "looks_like": "chainmail_vest",
     "name": { "str": "chainmail vest (loose)" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "use_action": {
