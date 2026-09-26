@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-24 02:24-0700\n"
-"PO-Revision-Date: 2026-09-24 18:58+0800\n"
+"PO-Revision-Date: 2026-09-25 19:43+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -30934,7 +30934,7 @@ msgstr[0] "流浪汉火炉"
 #: data/json/furniture_and_terrain/furniture-fireplaces.json data/json/items/tool/deployable.json
 msgid "makeshift brazier"
 msgid_plural "makeshift braziers"
-msgstr[0] "简易床"
+msgstr[0] "简易火盆"
 
 #. ~ Furniture name
 #. ~ Item name
@@ -34179,7 +34179,7 @@ msgstr "邦当！"
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-storage.json
 msgid "wooden chest"
-msgstr "木箱"
+msgstr "木质宝箱"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-storage.json
@@ -36115,7 +36115,7 @@ msgstr[0] "螺旋压榨机"
 #: data/json/furniture_and_terrain/furniture-tools.json data/json/items/tool/metalworking.json
 msgid "small anvil"
 msgid_plural "small anvils"
-msgstr[0] "小型植物"
+msgstr[0] "小铁砧"
 
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/furniture-tools.json
@@ -46169,7 +46169,7 @@ msgstr[0] "肉山"
 #: data/json/furniture_and_terrain/terrain_nether_monster.json data/json/items/tool/misc.json
 msgid "monster teeth"
 msgid_plural "monster teeth"
-msgstr[0] "怪兽之牙"
+msgstr[0] "怪物牙齿"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain_nether_monster.json
@@ -52806,7 +52806,7 @@ msgstr[0] "角尖弩箭"
 #: data/json/items/ammo/bolts.json
 msgid "monster tooth bolt"
 msgid_plural "monster tooth bolts"
-msgstr[0] "怪兽之牙"
+msgstr[0] "怪物牙弩箭"
 
 #. ~ Item name
 #: data/json/items/ammo/bolts.json
@@ -52920,12 +52920,12 @@ msgstr "一对匹配的螺母和螺栓。用于将物品固定在一起。"
 #. ~ Description of "bronze nail"
 #: data/json/items/ammo/nail.json
 msgid "A pin-shaped piece of bronze.  It can be used to construct various things with a hammer."
-msgstr "一枚青铜钉子，配合锤子可以建造各种各样的东西。"
+msgstr "一根针状的青铜件。可以用锤子将其用于建造各种物品。"
 
 #. ~ Description of "nail"
 #: data/json/items/ammo/nail.json
 msgid "A pin-shaped piece of steel.  It can be used to construct various things with a hammer."
-msgstr "一枚青铜钉子，配合锤子可以建造各种各样的东西。"
+msgstr "一根针状的钢件。可以用锤子将其用于建造各种物品。"
 
 #. ~ Description of "flechette"
 #: data/json/items/ammo/nail.json
@@ -57033,7 +57033,7 @@ msgstr "夹在提把下"
 #. ~ Description of a pocket in item "survivor distributed rigging"
 #: data/json/items/armor/bespoke_armor/custom_storage.json
 msgid "Upper leg pouch."
-msgstr "大腿小袋"
+msgstr "腿部上侧袋。"
 
 #. ~ Item name
 #: data/json/items/armor/bespoke_armor/custom_storage.json
@@ -65329,7 +65329,7 @@ msgstr[0] "肠衣兜帽"
 #: data/json/items/armor/hoods.json
 msgid "leather hood"
 msgid_plural "leather hoods"
-msgstr[0] "皮软管"
+msgstr[0] "皮革兜帽"
 
 #. ~ Item name
 #: data/json/items/armor/hoods.json
@@ -66963,7 +66963,7 @@ msgstr ""
 #. ~ Description of "silver ring"
 #: data/json/items/armor/jewelry.json
 msgid "A simple, silver ring."
-msgstr "一只简单的银戒指。"
+msgstr "一枚简单的银戒指。"
 
 #. ~ Description of "small relic"
 #: data/json/items/armor/jewelry.json
@@ -67433,7 +67433,7 @@ msgstr[0] "铜手镯"
 #: data/json/items/armor/jewelry.json
 msgid "copper earrings"
 msgid_plural "pairs of copper earrings"
-msgstr[0] "铜戒指"
+msgstr[0] "铜耳环"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
@@ -67583,7 +67583,7 @@ msgstr[0] "金假牙"
 #: data/json/items/armor/jewelry.json
 msgid "gold earrings"
 msgid_plural "pairs of gold earrings"
-msgstr[0] "金戒指"
+msgstr[0] "金耳环"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
@@ -67655,13 +67655,13 @@ msgstr[0] "翡翠胸针"
 #: data/json/items/armor/jewelry.json
 msgid "leather cat ears"
 msgid_plural "pairs of leather cat ears"
-msgstr[0] "皮猫尾"
+msgstr[0] "皮革猫耳"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
 msgid "leather cat tail"
 msgid_plural "leather cat tails"
-msgstr[0] "皮猫尾"
+msgstr[0] "皮革猫尾"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
@@ -67727,7 +67727,7 @@ msgstr[0] "银手镯"
 #: data/json/items/armor/jewelry.json
 msgid "silver earrings"
 msgid_plural "pairs of silver earrings"
-msgstr[0] "银戒指"
+msgstr[0] "银耳环"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
@@ -68125,7 +68125,7 @@ msgstr[0] "护膝"
 #: data/json/items/armor/legs_armor.json
 msgid "leather chaps"
 msgid_plural "leather chaps"
-msgstr[0] "皮护腿"
+msgstr[0] "皮革护腿"
 
 #. ~ Item name
 #: data/json/items/armor/legs_armor.json
@@ -73010,7 +73010,7 @@ msgstr "一件装饰着白色人造毛皮的红色短裙。看起来像是圣诞
 #. ~ Description of "halter top"
 #: data/json/items/armor/torso_clothes.json
 msgid "A short top made from cotton."
-msgstr "一件棉制吊带背心。"
+msgstr "一件棉质短上衣。"
 
 #. ~ Description of "polo shirt"
 #: data/json/items/armor/torso_clothes.json
@@ -73358,7 +73358,7 @@ msgstr[0] "简易救生衣"
 #: data/json/items/armor/torso_clothes.json
 msgid "nurse costume"
 msgid_plural "nurse costumes"
-msgstr[0] "护士机器人"
+msgstr[0] "护士服"
 
 #. ~ Item name
 #: data/json/items/armor/torso_clothes.json
@@ -74077,7 +74077,7 @@ msgstr[0] "营地炉具"
 #: data/json/items/basecamp.json
 msgid "small anaerobic digester tank"
 msgid_plural "small anaerobic digester tanks"
-msgstr[0] "小型焊接气瓶"
+msgstr[0] "小型厌氧消化罐"
 
 #. ~ Description of magazine "heavy plutonium tool battery"
 #. ~ Description of "heavy plutonium tool battery"
@@ -100064,7 +100064,7 @@ msgstr[0] "调试用午餐肉"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "homemade burrito"
 msgid_plural "homemade burritos"
-msgstr[0] "自制玉米卷饼"
+msgstr[0] "自制墨西哥卷饼"
 
 #. ~ Conditional name for "hamburger" when COMPONENT_ID_SUBSTRING matches mutant
 #: data/json/items/comestibles/meat_dishes.json
@@ -113444,7 +113444,7 @@ msgstr[0] "小型弹药罐"
 #: data/json/items/containers/military.json
 msgid "wooden crate"
 msgid_plural "wooden crates"
-msgstr[0] "木箱"
+msgstr[0] "木条箱"
 
 #. ~ Description of "plastic shopping bag"
 #: data/json/items/containers/totes.json
@@ -123939,8 +123939,8 @@ msgid ""
 "A Ruger 10/22 modified post-Cataclysm to selective fire.  While the .22 round isn't very powerful, full auto "
 "makes it a lot more effective, and still easily controllable in full auto."
 msgstr ""
-"鲁格 10/22 改装为大灾变后选择性射击。  虽然 0.22 子弹威力不是很大，但全自动使其更加有效，并且在全自动模式下仍然"
-"易于控制。"
+"一把在大灾变后被改装为可切换射击模式的鲁格 10/22。虽然 .22 弹威力不大，但全自动射击让它有效得多，而且在全自动模"
+"式下也依然容易控制。"
 
 #. ~ Description of variant "full-auto varmint pistol" of gun "full-auto Ruger 22 Charger pistol"
 #. ~ Description of variant "full-auto Ruger 22 Charger pistol" of item "full-auto varmint pistol"
@@ -123949,8 +123949,8 @@ msgid ""
 "A Ruger 22 Charger modified post-Cataclysm to selective fire.  While the .22 round isn't very powerful, full "
 "auto makes it a lot more effective, and still easily controllable in full auto even with the lack of a stock."
 msgstr ""
-"Ruger 22 Charger 在大灾变后进行了选择性射击改造。  虽然 0.22 子弹威力不是很大，但全自动射击使其更加有效，并且即"
-"使在缺乏枪托的情况下仍然可以轻松控制全自动射击。"
+"一把在大灾变后被改装为可切换射击模式的鲁格 22 Charger。虽然 .22 弹威力不大，但全自动射击让它有效得多，而且即使"
+"没有枪托，在全自动模式下也依然容易控制。"
 
 #. ~ Description of variant "large .22 six-shooter" of gun "Heritage Rough Rider 9" revolver"
 #. ~ Description of variant "Heritage Rough Rider 9" revolver" of item "large .22 six-shooter"
@@ -124293,7 +124293,7 @@ msgstr[0] "鲁格 10/22 步枪"
 #: data/json/items/gun/22.json
 msgid "Ruger 22 Charger pistol"
 msgid_plural "Ruger 22 Charger pistols"
-msgstr[0] "鲁格 LCP 手枪"
+msgstr[0] "鲁格 22 Charger 手枪"
 
 #. ~ Variant name of gun ".22 caliber revolver"
 #. ~ Variant name of item ".22 caliber revolver"
@@ -124491,21 +124491,21 @@ msgstr[0] "鲁格 10/22 步枪"
 #: data/json/items/gun/22.json
 msgid "full-auto Ruger 22 Charger pistol"
 msgid_plural "full-auto Ruger 22 Charger pistols"
-msgstr[0] "全自动 Ruger 22 Charger 手枪"
+msgstr[0] "全自动鲁格 22 Charger 手枪"
 
 #. ~ Item name
 #. ~ Name of a gun
 #: data/json/items/gun/22.json
 msgid "full-auto varmint pistol"
 msgid_plural "full-auto varmint pistols"
-msgstr[0] "Hi-Point 手枪"
+msgstr[0] "全自动害虫手枪"
 
 #. ~ Item name
 #. ~ Name of a gun
 #: data/json/items/gun/22.json
 msgid "full-auto varmint rifle"
 msgid_plural "full-auto varmint rifles"
-msgstr[0] "全自动步枪"
+msgstr[0] "全自动害兽步枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -127638,7 +127638,7 @@ msgstr[0] "USP 手枪"
 #: data/json/items/gun/45.json
 msgid "homemade pistol"
 msgid_plural "homemade pistols"
-msgstr[0] "自制玉米卷饼"
+msgstr[0] "自制手枪"
 
 #. ~ Description of gun "Ruger American Ranch Rifle"
 #. ~ Description of "Ruger American Ranch Rifle"
@@ -139747,7 +139747,7 @@ msgstr "一个紧凑的摩托用尺寸乙炔罐，可以加压存储最多10立�
 #: data/json/items/magazine/weldgas.json
 msgid "small welding tank"
 msgid_plural "small welding tanks"
-msgstr[0] "小型焊接气瓶"
+msgstr[0] "小型焊接气罐"
 
 #. ~ Item name
 #. ~ Magazine name
@@ -140625,7 +140625,7 @@ msgstr[0] "浸泡木战棒"
 #: data/json/items/melee/bludgeons.json
 msgid "spiked cudgel"
 msgid_plural "spiked cudgels"
-msgstr[0] "钉板"
+msgstr[0] "尖刺棍棒"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -140685,13 +140685,13 @@ msgstr[0] "战锤"
 #: data/json/items/melee/bludgeons.json
 msgid "wooden crutch"
 msgid_plural "wooden crutches"
-msgstr[0] "木箱"
+msgstr[0] "木拐杖"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
 msgid "wooden crutches"
 msgid_plural "pairs of wooden crutches"
-msgstr[0] "木箱"
+msgstr[0] "木拐杖"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -145780,7 +145780,7 @@ msgstr "一块体积十升的实心青铜锭。"
 #. ~ Description of "copper ingot"
 #: data/json/items/resources/metal.json
 msgid "A bar of solid copper."
-msgstr "一堵坚实的土墙。"
+msgstr "一块实心铜条。"
 
 #. ~ Description of "gold ingot"
 #: data/json/items/resources/metal.json
@@ -145790,12 +145790,12 @@ msgstr "一块体积一升的实心金锭。"
 #. ~ Description of "iron ingot"
 #: data/json/items/resources/metal.json
 msgid "A bar of solid iron."
-msgstr "一堵坚实的土墙。"
+msgstr "一块实心铁条。"
 
 #. ~ Description of "lead ingot"
 #: data/json/items/resources/metal.json
 msgid "A bar of solid lead."
-msgstr "一堵坚实的土墙。"
+msgstr "一块实心铅条。"
 
 #. ~ Description of "platinum ingot"
 #: data/json/items/resources/metal.json
@@ -145805,7 +145805,7 @@ msgstr "一块体积一升的实心铂金锭。"
 #. ~ Description of "silver ingot"
 #: data/json/items/resources/metal.json
 msgid "A bar of solid silver."
-msgstr "一堵坚实的土墙。"
+msgstr "一块实心银条。"
 
 #. ~ Description of "steel ingot"
 #: data/json/items/resources/metal.json
@@ -145815,7 +145815,7 @@ msgstr "一块体积十升的实心钢锭。"
 #. ~ Description of "tin ingot"
 #: data/json/items/resources/metal.json
 msgid "A bar of solid tin."
-msgstr "一堵坚实的土墙。"
+msgstr "一块实心锡条。"
 
 #. ~ Description of "zinc ingot"
 #: data/json/items/resources/metal.json
@@ -145978,27 +145978,27 @@ msgstr "一块体积十升的实心铝锭。"
 #. ~ Description of "small brass ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid brass."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心黄铜条。"
 
 #. ~ Description of "small bronze ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid bronze."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心青铜条。"
 
 #. ~ Description of "copper ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid copper."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心铜条。"
 
 #. ~ Description of "small gold ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid gold."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心金条。"
 
 #. ~ Description of "small lead ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid lead."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心铅条。"
 
 #. ~ Description of "small platinum ingot"
 #: data/json/items/resources/metal.json
@@ -146008,17 +146008,17 @@ msgstr "一块体积一升的实心铂金锭。"
 #. ~ Description of "small silver ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid silver."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心银条。"
 
 #. ~ Description of "small tin ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid tin."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心锡条。"
 
 #. ~ Description of "small zinc ingot"
 #: data/json/items/resources/metal.json
 msgid "A small bar of solid zinc."
-msgstr "一堵坚实的土墙。"
+msgstr "一小块实心锌条。"
 
 #. ~ Description of "hinge"
 #: data/json/items/resources/metal.json
@@ -146143,7 +146143,7 @@ msgstr[0] "铋块"
 #: data/json/items/resources/metal.json
 msgid "brass ingot"
 msgid_plural "brass ingots"
-msgstr[0] "浮梦锭"
+msgstr[0] "黄铜锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146173,7 +146173,7 @@ msgstr[0] "铜碎片"
 #: data/json/items/resources/metal.json
 msgid "copper ingot"
 msgid_plural "copper ingots"
-msgstr[0] "铜戒指"
+msgstr[0] "铜锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146197,7 +146197,7 @@ msgstr[0] "金块"
 #: data/json/items/resources/metal.json
 msgid "gold ingot"
 msgid_plural "gold ingots"
-msgstr[0] "金戒指"
+msgstr[0] "金锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146245,13 +146245,13 @@ msgstr[0] "毛皮碎片"
 #: data/json/items/resources/metal.json
 msgid "large aluminum ingot"
 msgid_plural "large aluminum ingots"
-msgstr[0] "巨型铝铸件"
+msgstr[0] "大号铝锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
 msgid "large brass ingot"
 msgid_plural "large brass ingots"
-msgstr[0] "浮梦锭"
+msgstr[0] "大号黄铜锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146263,7 +146263,7 @@ msgstr[0] "大骨头"
 #: data/json/items/resources/metal.json
 msgid "large copper ingot"
 msgid_plural "large copper ingots"
-msgstr[0] "巨型铜铸件"
+msgstr[0] "大号铜锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146323,7 +146323,7 @@ msgstr[0] "铅块"
 #: data/json/items/resources/metal.json
 msgid "lead ingot"
 msgid_plural "lead ingots"
-msgstr[0] "浮梦锭"
+msgstr[0] "铅锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146377,7 +146377,7 @@ msgstr[0] "银块"
 #: data/json/items/resources/metal.json
 msgid "silver ingot"
 msgid_plural "silver ingots"
-msgstr[0] "银戒指"
+msgstr[0] "银锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146389,7 +146389,7 @@ msgstr[0] "熔渣"
 #: data/json/items/resources/metal.json
 msgid "small aluminum ingot"
 msgid_plural "small aluminum ingots"
-msgstr[0] "巨型铝铸件"
+msgstr[0] "小号铝锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146407,13 +146407,13 @@ msgstr[0] "小型丙烷罐"
 #: data/json/items/resources/metal.json
 msgid "small gold ingot"
 msgid_plural "small gold ingots"
-msgstr[0] "小型焊接气瓶"
+msgstr[0] "小号金锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
 msgid "small lead ingot"
 msgid_plural "small lead ingots"
-msgstr[0] "小型植物"
+msgstr[0] "小号铅锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146431,7 +146431,7 @@ msgstr[0] "铂金戒指"
 #: data/json/items/resources/metal.json
 msgid "small silver ingot"
 msgid_plural "small silver ingots"
-msgstr[0] "一只简单的银戒指。"
+msgstr[0] "小号银锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146480,7 +146480,7 @@ msgstr[0] "钢制装甲板"
 #: data/json/items/resources/metal.json
 msgid "tin ingot"
 msgid_plural "tin ingots"
-msgstr[0] "秘银锭"
+msgstr[0] "锡锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146504,7 +146504,7 @@ msgstr[0] "锌"
 #: data/json/items/resources/metal.json
 msgid "zinc ingot"
 msgid_plural "zinc ingots"
-msgstr[0] "红锌矿"
+msgstr[0] "锌锭"
 
 #. ~ Description of "sharp rock"
 #: data/json/items/resources/misc.json
@@ -147042,7 +147042,7 @@ msgstr "由棉花或亚麻等植物制成的织物。  可以用来止血，不�
 #. ~ Description of "felt sheet"
 #: data/json/items/resources/tailoring.json
 msgid "A sheet of fabric made from combed wool."
-msgstr "一件棉制吊带背心。"
+msgstr "一种由精梳羊毛制成的织物片。"
 
 #. ~ Description of "Kevlar sheet"
 #: data/json/items/resources/tailoring.json
@@ -147269,7 +147269,7 @@ msgstr[0] "毛毡片"
 #: data/json/items/resources/tailoring.json
 msgid "felt sheet"
 msgid_plural "felt sheets"
-msgstr[0] "毛毡面料"
+msgstr[0] "毛毡片"
 
 #. ~ Item name
 #: data/json/items/resources/tailoring.json
@@ -156599,7 +156599,7 @@ msgstr "你设置了捕熊陷阱。"
 #: data/json/items/tool/traps.json
 #, c-format
 msgid "You set the board trap on the %s, nails facing up."
-msgstr "你成功在%s上安装了钉板陷阱，当然钉子朝上。"
+msgstr "你在%s上设置了钉板陷阱，钉子朝上。"
 
 #. ~ "done_message" action message of item "booby trap"
 #: data/json/items/tool/traps.json
@@ -157751,7 +157751,7 @@ msgstr[0] "冲击钻"
 #: data/json/items/tool/workshop.json
 msgid "leather hose"
 msgid_plural "leather hoses"
-msgstr[0] "皮软管"
+msgstr[0] "皮革腿套"
 
 #. ~ Item name
 #: data/json/items/tool/workshop.json
@@ -336419,7 +336419,7 @@ msgstr "仿生上臂"
 #. ~ Name of sub body part
 #: data/mods/Limb_WIP/mutations/mutation_limbs.json
 msgid "upper wings"
-msgstr "铜戒指"
+msgstr "上翼"
 
 #. ~ Name of sub body part
 #: data/mods/Limb_WIP/mutations/mutation_limbs.json
