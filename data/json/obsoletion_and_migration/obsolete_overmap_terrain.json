@@ -366,7 +366,31 @@
       "slimepit_z0_south": "field",
       "slimepit_z-1_west": "solid_earth",
       "slimepit_z-2_west": "empty_rock",
-      "slimepit_z0_west": "field"
+      "slimepit_z0_west": "field",
+      "GMLODGE1_1": "field",
+      "GMLODGE1_2": "field",
+      "GMLODGE1_3": "field",
+      "GMLODGE1_4": "field",
+      "GMLODGE2_1": "field",
+      "GMLODGE2_2": "field",
+      "GMLODGE2_3": "field",
+      "GMLODGE2_4": "field",
+      "GMLODGE3_1": "field",
+      "GMLODGE3_2": "field",
+      "GMLODGE3_3": "field",
+      "GMLODGE3_4": "field",
+      "GMLODGE4_1": "field",
+      "GMLODGE4_2": "field",
+      "GMLODGE4_3": "field",
+      "GMLODGE4_4": "field",
+      "GMLODGE2_2_2": "open_air",
+      "GMLODGE2_3_2": "open_air",
+      "GMLODGE3_2_2": "open_air",
+      "GMLODGE3_3_2": "open_air",
+      "GMLODGE2_roof_2": "open_air",
+      "GMLODGE2_roof_3": "open_air",
+      "GMLODGE3_roof_2": "open_air",
+      "GMLODGE3_roof_3": "open_air"
     }
   }
 ]

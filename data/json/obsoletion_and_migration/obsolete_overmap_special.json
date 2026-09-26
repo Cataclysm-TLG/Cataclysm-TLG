@@ -38,5 +38,10 @@
     "type": "overmap_special_migration",
     "id": "Slime Pit",
     "new_id": "Spider Pit"
+  },
+  {
+    "type": "overmap_special_migration",
+    "id": "militia lodge",
+    "new_id": "Hunting Lodge - Ferals"
   }
 ]
