@@ -34,7 +34,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 30,
+        "dmg_scale_increment": 10,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -43,7 +52,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1.5,
         "duration": 60,
@@ -51,7 +60,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1,
         "duration": 60,
@@ -153,7 +162,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 10,
+        "dmg_scale_increment": 5,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -162,7 +180,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1.5,
         "duration": 60,
@@ -171,7 +189,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1,
         "duration": 60,
@@ -246,7 +264,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 10,
+        "dmg_scale_increment": 5,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -255,7 +282,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1.5,
         "duration": 60,
@@ -264,7 +291,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1,
         "duration": 60,
@@ -400,7 +427,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 15,
+        "dmg_scale_increment": 8,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -409,7 +445,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -418,7 +454,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 1,
         "duration": 60,
@@ -485,7 +521,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 15,
+        "dmg_scale_increment": 8,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -494,7 +539,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -503,7 +548,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 1,
         "duration": 60,
@@ -635,7 +680,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 15,
+        "dmg_scale_increment": 8,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2.5,
         "duration": 60,
@@ -644,7 +698,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -653,7 +707,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -733,7 +787,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 15,
+        "dmg_scale_increment": 8,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 960
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2.5,
         "duration": 60,
@@ -742,7 +805,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -751,7 +814,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 2,
         "duration": 60,
