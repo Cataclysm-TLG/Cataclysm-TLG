@@ -2363,7 +2363,11 @@ void monster::deal_damage_handle_type( const effect_source &source, const damage
         }
     }
     if( ( du.type == damage_bullet || du.type->edged ) && adjusted_damage >= 1 ) {
-        make_bleed( source, 1_minutes * rng( 0, adjusted_damage ) );
+        int bleed_damage = adjusted_damage;
+        if( du.type != damage_cut ) {
+            bleed_damage = static_cast<int>( std::round( bleed_damage * 0.75f ) );
+        }
+            make_bleed( source, 1_minutes * rng( 0, bleed_damage ) );
     }
 
     Creature::deal_damage_handle_type( source, du,  bp, damage, pain );
