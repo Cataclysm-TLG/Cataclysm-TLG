@@ -526,6 +526,34 @@
   },
   {
     "type": "npc_class",
+    "id": "NC_DESERTER",
+    "name": { "str": "Deserter" },
+    "job_description": "I am done taking orders.",
+    "traits": [
+      { "group": "BG_survival_story_SOLDIER" },
+      { "group": "NPC_starting_traits" },
+      { "group": "Appearance_demographics" },
+      { "trait": "RETURN_TO_START_POS" }
+    ],
+    "proficiencies": [ "prof_gunsmithing_basic", "prof_spotting" ],
+    "bonus_str": { "rng": [ 1, 3 ] },
+    "bonus_dex": { "rng": [ -1, 2 ] },
+    "bonus_int": { "rng": [ -2, 2 ] },
+    "bonus_per": { "rng": [ 1, 3 ] },
+    "bonus_aggression": { "rng": [ 4, 6 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
+    "skills": [
+      { "skill": "ALL", "level": { "sum": [ { "dice": [ 3, 2 ] }, { "constant": -3 } ] } },
+      { "skill": "dodge", "bonus": { "rng": [ 1, 3 ] } },
+      { "skill": "melee", "bonus": { "rng": [ 1, 5 ] } },
+      { "skill": "unarmed", "bonus": { "rng": [ 1, 3 ] } },
+      { "skill": "rifle", "bonus": { "rng": [ 3, 5 ] } },
+      { "skill": "pistol", "bonus": { "rng": [ 1, 2 ] } },
+      { "skill": "gun", "bonus": { "rng": [ 2, 6 ] } }
+    ]
+  },
+  {
+    "type": "npc_class",
     "id": "NC_SOLDIER",
     "name": { "str": "Soldier" },
     "job_description": "I'm just here for the paycheck.",
@@ -549,7 +577,7 @@
     "type": "npc_class",
     "id": "NC_BARTENDER",
     "name": { "str": "Bartender" },
-    "job_description": "I'm looking for new drink recipes.",
+    "job_description": "I serve drinks.",
     "traits": [ { "group": "NPC_starting_traits" }, { "group": "Appearance_demographics" } ],
     "common": false,
     "bonus_per": { "one_in": 4 },
