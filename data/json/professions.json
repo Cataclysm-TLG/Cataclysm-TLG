@@ -1849,7 +1849,10 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "leather_armor_suit" },
+          { "item": "leather_cuirass" },
+          { "item": "leather_arm_guards" },
+          { "item": "leather_leg_guards" },
+          { "item": "leather_pauldrons" },
           { "item": "socks" },
           { "item": "boots_fur" },
           { "item": "hat_fur" },
@@ -2525,7 +2528,9 @@
           { "item": "longshirt" },
           { "item": "boots_combat" },
           { "item": "gloves_tactical" },
-          { "item": "armor_riot" },
+          { "item": "armor_riot_torso" },
+          { "item": "armor_riot_arm" },
+          { "item": "armor_riot_leg" },
           { "item": "helmet_riot" },
           { "item": "badge_deputy" },
           { "item": "wristwatch" },
@@ -6047,7 +6052,12 @@
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "description": "You've been stomping, gassing, and baiting bugs since before they started eating people's pets.  Now the world's gone to hell, but you still have a job to do.",
     "points": 4,
-    "skills": [ { "level": 2, "name": "chemistry" }, { "level": 1, "name": "traps" }, { "level": 1, "name": "survival" }, { "level": 2, "name": "launcher" } ],
+    "skills": [
+      { "level": 2, "name": "chemistry" },
+      { "level": 1, "name": "traps" },
+      { "level": 1, "name": "survival" },
+      { "level": 2, "name": "launcher" }
+    ],
     "vehicle": "van_cargo",
     "items": {
       "both": {
@@ -6064,7 +6074,12 @@
           { "item": "hat_ball" },
           { "item": "bug_spray_can", "ammo-item": "bug_spray", "charges": 5 },
           { "item": "pressurized_tank_chem", "ammo-item": "gas_insecticidal", "charges": 800 },
-          { "item": "pressurized_tank_chem", "ammo-item": "gas_insecticidal", "charges": 800, "container-item": "chemical_thrower" },
+          {
+            "item": "pressurized_tank_chem",
+            "ammo-item": "gas_insecticidal",
+            "charges": 800,
+            "container-item": "chemical_thrower"
+          },
           { "group": "charged_smart_phone" }
         ]
       },
