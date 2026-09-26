@@ -890,8 +890,8 @@
     "id": "ammo_heavy_batteries",
     "subtype": "distribution",
     "entries": [
-      { "item": "heavy_battery_cell", "prob": 40, "charges": [ 0, 1000 ] },
-      { "item": "heavy_plus_battery_cell", "prob": 80, "charges": [ 0, -1 ] }
+      { "item": "heavy_battery_cell", "prob": 40, "charges": [ 0, 110 ] },
+      { "item": "heavy_plus_battery_cell", "prob": 80, "charges": [ 0, 324 ] }
     ]
   },
   {
@@ -899,8 +899,8 @@
     "id": "ammo_heavy_batteries_full",
     "subtype": "distribution",
     "entries": [
-      { "item": "heavy_battery_cell", "prob": 40, "charges": 1000 },
-      { "item": "heavy_plus_battery_cell", "prob": 80, "charges": 2500 }
+      { "item": "heavy_battery_cell", "prob": 40, "charges": 110 },
+      { "item": "heavy_plus_battery_cell", "prob": 80, "charges": 324 }
     ]
   },
   {
