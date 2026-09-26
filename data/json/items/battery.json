@@ -111,7 +111,7 @@
     "subtypes": [ "MAGAZINE" ],
     "category": "tool_magazine",
     "name": { "str": "heavy tool battery", "str_pl": "heavy tool batteries" },
-    "description": "A heavy battery pack, universally compatible with all kinds of industrial-grade equipment and portable tools.",
+    "description": "A heavy battery pack, appropriate for running an electric chainsaw or other high-power tool.",
     "//": "Li-ion 18V LXT BL1850B by Makita",
     "weight": "680 g",
     "volume": "525 ml",

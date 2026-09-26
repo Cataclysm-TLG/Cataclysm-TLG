@@ -77,11 +77,11 @@
     "color": "yellow",
     "charged_qualities": [ [ "GRIND", 2 ], [ "SAW_M", 10 ] ],
     "charges_per_use": 1,
-    "power_draw": "800 W",
+    "power_draw": "400 W",
     "flags": [ "NONCONDUCTIVE", "WATER_BREAK" ],
     "use_action": { "type": "link_up", "cable_length": 30, "charge_rate": "800 W" },
     "pocket_data": [
-      { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "BATTERY_HEAVY" ], "default_magazine": "heavy_battery_cell" }
+      { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "BATTERY_HEAVY" ], "default_magazine": "heavy_plus_battery_cell" }
     ],
     "melee_damage": { "bash": 2, "cut": 2 },
     "tool_ammo": [ "battery" ]
@@ -1022,7 +1022,7 @@
     "color": "yellow",
     "charged_qualities": [ [ "SAW_M", 2 ], [ "SAW_W", 2 ] ],
     "charges_per_use": 1,
-    "power_draw": "800 W",
+    "power_draw": "200 W",
     "flags": [ "NONCONDUCTIVE", "WATER_BREAK" ],
     "use_action": [ { "type": "link_up", "cable_length": 2, "charge_rate": "800 W" } ],
     "pocket_data": [
