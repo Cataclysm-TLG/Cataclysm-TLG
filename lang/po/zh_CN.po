@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-24 02:24-0700\n"
-"PO-Revision-Date: 2026-09-25 19:43+0800\n"
+"PO-Revision-Date: 2026-09-27 21:22+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -43853,7 +43853,7 @@ msgstr "一堵被漆成蓝色的混凝土墙。"
 #. ~ Description of terrain "brown concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A concrete wall, painted brown."
-msgstr "一堵被漆成棕色的混凝土墙。"
+msgstr "一堵涂成棕色的混凝土墙。"
 
 #. ~ Description of terrain "cyan concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -43993,7 +43993,7 @@ msgstr "一堵被漆成蓝色的强化混凝土墙。"
 #. ~ Description of terrain "reinforced cyan concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A reinforced concrete wall, painted cyan."
-msgstr "一堵被漆成棕色的强化混凝土墙。"
+msgstr "一堵涂成青色的钢筋混凝土墙。"
 
 #. ~ Description of terrain "reinforced gray concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -44076,7 +44076,7 @@ msgstr "一堵被漆成蓝色的简易混凝土墙。"
 #. ~ Description of terrain "simple brown concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A simple concrete wall, painted brown."
-msgstr "一堵被漆成棕色的简易混凝土墙。"
+msgstr "一堵涂成棕色的简易混凝土墙。"
 
 #. ~ Description of terrain "simple cyan concrete wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -44283,7 +44283,7 @@ msgstr "一堵被漆成蓝色的墙。"
 #. ~ Description of terrain "brown wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wall, painted brown."
-msgstr "一堵被漆成棕色的墙。"
+msgstr "一堵涂成棕色的墙。"
 
 #. ~ Description of terrain "cyan wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -44350,52 +44350,52 @@ msgstr "一堵被漆成蓝色的木墙。"
 #. ~ Description of terrain "brown wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted brown."
-msgstr "一堵被漆成棕色的木墙。"
+msgstr "一堵涂成棕色的木墙。"
 
 #. ~ Description of terrain "cyan wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted cyan."
-msgstr "一堵被漆成青色的木墙"
+msgstr "一堵涂成青色的木墙。"
 
 #. ~ Description of terrain "gray wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted gray."
-msgstr "一堵被漆成灰色的木墙。"
+msgstr "一堵涂成灰色的木墙。"
 
 #. ~ Description of terrain "green wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted green."
-msgstr "一堵被漆成绿色的木墙。"
+msgstr "一堵涂成绿色的木墙。"
 
 #. ~ Description of terrain "orange wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted orange."
-msgstr "一堵被漆成橙色的木墙。"
+msgstr "一堵涂成橙色的木墙。"
 
 #. ~ Description of terrain "pink wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted pink."
-msgstr "一堵被漆成粉色的木墙。"
+msgstr "一堵涂成粉色的木墙。"
 
 #. ~ Description of terrain "purple wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted purple."
-msgstr "一堵被漆成紫色的木墙。"
+msgstr "一堵涂成紫色的木墙。"
 
 #. ~ Description of terrain "red wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted red."
-msgstr "一堵被漆成红色的木墙。"
+msgstr "一堵涂成红色的木墙。"
 
 #. ~ Description of terrain "white wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted white."
-msgstr "一堵被漆成白色的木墙。"
+msgstr "一堵涂成白色的木墙。"
 
 #. ~ Description of terrain "yellow wood wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
 msgid "A wooden wall, painted yellow."
-msgstr "一堵被漆成黄色的木墙。"
+msgstr "一堵涂成黄色的木墙。"
 
 #. ~ Description of terrain "abstract colored wall"
 #: data/json/furniture_and_terrain/terrain-walls.json
@@ -52548,7 +52548,7 @@ msgstr "一根装着自制磨尖箭头的简易木制羽箭。"
 #. ~ Description of "monster tooth arrow"
 #: data/json/items/ammo/arrows.json
 msgid "A fletched wooden arrow tipped with the impossibly sharp fang of some otherworldly monster."
-msgstr "一根装着锋利箭头的木制羽箭。"
+msgstr "一支带羽的木箭，箭头是某种异界怪物那超乎寻常锋利的尖牙。"
 
 #. ~ Description of "wooden arrow"
 #: data/json/items/ammo/arrows.json
@@ -52558,12 +52558,12 @@ msgstr "一根装着宽刃箭头的木制羽箭。"
 #. ~ Description of "wooden bodkin arrow"
 #: data/json/items/ammo/arrows.json
 msgid "A fletched wooden arrow with a needle-sharp steel head, the perfect shape for penetrating armor."
-msgstr "一根装着锋利箭头的木制弩矢，能有效穿透护甲。"
+msgstr "一支带羽的木箭，配有针尖般锋利的钢制箭头，能非常有效的穿透护甲。"
 
 #. ~ Description of "stone-tipped arrow"
 #: data/json/items/ammo/arrows.json
 msgid "A fletched wooden arrow with a stone head.  It's quite sharp, but easily broken."
-msgstr "一根装着锋利箭头的木制羽箭。"
+msgstr "一支带羽的木箭，装有石制箭头。它相当锋利，但容易折断。"
 
 #. ~ Description of "wooden broadhead arrow"
 #: data/json/items/ammo/arrows.json
@@ -52748,7 +52748,7 @@ msgstr "一支带羽的木制弩箭，箭尖是削尖的角或鹿角。"
 #. ~ Description of "monster tooth bolt"
 #: data/json/items/ammo/bolts.json
 msgid "A fletched wooden crossbow bolt tipped with the impossibly sharp fang of some otherworldly monster."
-msgstr "一根装着锋利箭头的木制弩矢，能有效穿透护甲。"
+msgstr "一支带羽的木制弩箭，箭头是某种异界怪物那超乎寻常锋利的尖牙。"
 
 #. ~ Description of "wooden broadhead bolt"
 #: data/json/items/ammo/bolts.json
@@ -52758,7 +52758,7 @@ msgstr "一根装着宽刃箭头的木制弩矢，能对目标造成最大化的
 #. ~ Description of "wooden bodkin bolt"
 #: data/json/items/ammo/bolts.json
 msgid "A fletched wooden crossbow bolt with a pointed steel tip designed to penetrate armor."
-msgstr "一根装着锋利箭头的木制弩矢，能有效穿透护甲。"
+msgstr "一支带羽的木制弩箭，配有旨在穿透护甲的尖钢箭头。"
 
 #. ~ Description of "simple wooden bolt"
 #: data/json/items/ammo/bolts.json
@@ -55288,7 +55288,7 @@ msgstr "一对由经过精心清理并裁剪过的酸蚁硅化甲壳制成的护
 #. ~ Description of "chitin arm guards"
 #: data/json/items/armor/arms_armor.json
 msgid "A pair of arm guards made from the exoskeletons of insects.  Light and durable."
-msgstr "一对由昆虫甲壳制成的护臂，轻便耐用。"
+msgstr "一对由昆虫外骨骼制成的护臂。轻便且耐用。"
 
 #. ~ Description of "tire arm guards"
 #: data/json/items/armor/arms_armor.json
@@ -55634,7 +55634,7 @@ msgstr[0] "束身皮衣（松）"
 #: data/json/items/armor/arms_armor.json
 msgid "riot bracers"
 msgid_plural "pairs of riot bracers"
-msgstr[0] "钢制护腕"
+msgstr[0] "防暴护臂"
 
 #. ~ Item name
 #: data/json/items/armor/arms_armor.json
@@ -55652,7 +55652,7 @@ msgstr[0] "钢护臂"
 #: data/json/items/armor/arms_armor.json
 msgid "tire bracers"
 msgid_plural "pairs of tire bracers"
-msgstr[0] "钢制护腕"
+msgstr[0] "轮胎护臂"
 
 #. ~ Description of "dragon skin vest"
 #: data/json/items/armor/ballistic_armor.json
@@ -57901,7 +57901,7 @@ msgstr "一对由坚韧织物制成的护臂，夹在交替的钢条之间。"
 msgid ""
 "A pair of gloves made of tough fabric, with steel plates of various size and shape riveted for additional "
 "protection, while still remaining relatively unhindering"
-msgstr "一副由坚韧织物制成的手套，铆接有各种尺寸和形状的钢板以提供额外的保护，同时仍然保持相对无障碍"
+msgstr "一副由坚韧织物制成的手套，上面铆接着大小形状各异的钢板以提供额外防护，同时仍保持相对灵活。"
 
 #. ~ Description of "splint leg guards"
 #: data/json/items/armor/brigandine.json
@@ -57919,7 +57919,7 @@ msgstr "防弹衣由坚韧的织物制成，内部铆有钢板。"
 #: data/json/items/armor/brigandine.json
 msgid "brigandine gloves"
 msgid_plural "pairs of brigandine gloves"
-msgstr[0] "布面甲手套"
+msgstr[0] "布覆甲手套"
 
 #. ~ Item name
 #: data/json/items/armor/brigandine.json
@@ -63023,7 +63023,7 @@ msgstr ""
 #. ~ Description of "chainmail gloves"
 #: data/json/items/armor/gloves.json
 msgid "A pair of gloves made of interlocking rings of steel wire."
-msgstr "一对由昆虫甲壳制成的护手。"
+msgstr "一副由互锁钢丝环制成的手套。"
 
 #. ~ Description of "leather gauntlets"
 #: data/json/items/armor/gloves.json
@@ -63045,12 +63045,12 @@ msgstr "一对无指皮革装甲手套。手背部位用钢片加强了防护。
 #. ~ Description of "mittens"
 #: data/json/items/armor/gloves.json
 msgid "A pair of mittens sized for a preschooler."
-msgstr "一副轮椅的轮毂。"
+msgstr "一副学前儿童尺寸的连指手套。"
 
 #. ~ Description of "snow mittens"
 #: data/json/items/armor/gloves.json
 msgid "A pair of mittens with a water-resistant nylon shell, perfect for skiing."
-msgstr "一双带有防水尼龙外壳的连指手套，非常适合滑雪。"
+msgstr "一副带有防水尼龙外壳的连指手套，非常适合滑雪。"
 
 #. ~ Description of "Nomex wrist warmers"
 #: data/json/items/armor/gloves.json
@@ -63094,7 +63094,7 @@ msgstr "一双轻薄的橡胶手套，能够隔绝病原体，降低疾病传染
 #. ~ Description of "mittens"
 #: data/json/items/armor/gloves.json
 msgid "A pair of warm but cumbersome mittens."
-msgstr "一双相当保暖的但十分累赘的连指手套。"
+msgstr "一副保暖但笨重的连指手套。"
 
 #. ~ Description of "faux fur gloves"
 #: data/json/items/armor/gloves.json
@@ -63435,7 +63435,7 @@ msgstr[0] "塑袋手套"
 #: data/json/items/armor/gloves.json
 msgid "plate gauntlets"
 msgid_plural "pairs of plate gauntlets"
-msgstr[0] "消防手套"
+msgstr[0] "板甲护手"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63489,7 +63489,7 @@ msgstr[0] "羊毛绑手带"
 #: data/json/items/armor/gloves.json
 msgid "wool wrist warmers"
 msgid_plural "pairs of wool wrist warmers"
-msgstr[0] "羊毛纤维"
+msgstr[0] "羊毛护腕"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -67523,7 +67523,7 @@ msgstr[0] "名贵手表"
 #: data/json/items/armor/jewelry.json
 msgid "faux fur cat ears"
 msgid_plural "pairs of faux fur cat ears"
-msgstr[0] "人造毛皮猫尾"
+msgstr[0] "人造毛皮猫耳"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
@@ -67837,19 +67837,19 @@ msgstr "一对有着简易皮内衬的青铜护胫。"
 #. ~ Description of "chitin greaves"
 #: data/json/items/armor/legs_armor.json
 msgid "A pair of guards for the lower legs and knees made from the exoskeletons of insects."
-msgstr "一对由昆虫甲壳制成的护腿。"
+msgstr "一对由昆虫外骨骼制成的小腿和膝盖护具。"
 
 #. ~ Description of "2-by-shin guards"
 #: data/json/items/armor/legs_armor.json
 msgid ""
 "A pair of improvised shin guards made from broken pieces of a plank that are tied to your shins with rags and "
 "string."
-msgstr "一对用碎布和绳子将木板碎片绑在小腿上做成的简易护腿。"
+msgstr "一副简易护胫，由断裂的木板碎片制成，用破布和绳子绑在小腿上。"
 
 #. ~ Description of "tire greaves"
 #: data/json/items/armor/legs_armor.json
 msgid "A pair of improvised shin guards made from thick chunks of rubber strung together and tied over the legs."
-msgstr "一对用碎布和绳子将木板碎片绑在小腿上做成的简易护腿。"
+msgstr "一副简易护胫，由厚实的橡胶块串在一起，绑在腿上。"
 
 #. ~ Description of "armored jeans"
 #: data/json/items/armor/legs_armor.json
@@ -126679,8 +126679,8 @@ msgid ""
 "hand tools; likely one of the most complex guns that is feasible to make outside of a machine shop, but still "
 "very unreliable.  This one is chambered for .40 S&W cartridges and accepts custom-made makeshift magazines."
 msgstr ""
-"Luty式自制无膛线冲锋枪，使用具有更先进动力的手动工具，由各种钢制零件拼凑而成。也许是能够在工厂车间外制造出的最"
-"复杂的枪支之一，但仍然很不可靠。这一款专为.40 S&W 弹设计，同时能够兼容自制弹匣。"
+"一支 Luty 式简易滑膛冲锋枪，用各种钢制零件借助高级电动工具粗略拼凑而成；这可能是没有机械车间的情况下能造出的最"
+"复杂的枪械之一，但仍然非常不可靠。这一支使用 .40 S&W 弹药，可适配定制的简易弹匣。"
 
 #. ~ Description of gun "handmade revolver"
 #. ~ Description of "handmade revolver"
@@ -126752,7 +126752,7 @@ msgstr ""
 #: data/json/items/gun/40.json data/json/items/gun/45.json data/json/items/gun/9mm.json
 msgid "Luty SMG"
 msgid_plural "Luty SMGs"
-msgstr[0] "Luty冲锋枪：.40 S&W弹"
+msgstr[0] "Luty 冲锋枪"
 
 #. ~ Description of gun "SIG Pro pistol"
 #. ~ Description of "SIG Pro pistol"
@@ -127275,8 +127275,8 @@ msgid ""
 "hand tools; likely one of the most complex guns that is feasible to make outside of a machine shop, but still "
 "very unreliable.  This one is chambered for .45 ACP cartridges and accepts MAC-10 compatible magazines."
 msgstr ""
-"Luty式自制无膛线冲锋枪，使用具有更先进动力的手动工具，由各种钢制零件拼凑而成。也许是能够在工厂车间外制造出的最"
-"复杂的枪支之一，但仍然很不可靠。这一款专为.45 ACP弹设计，同时能够兼容 MAC-10 冲锋枪弹匣。"
+"一支 Luty 式简易滑膛冲锋枪，用各种钢制零件借助高级电动工具粗略拼凑而成；这可能是没有机械车间的情况下能造出的最"
+"复杂的枪械之一，但仍然非常不可靠。这一支使用 .45 ACP 弹药，可适配 MAC-10 兼容弹匣。"
 
 #. ~ Description of gun ".45 WWII submachine gun"
 #. ~ Description of ".45 WWII submachine gun"
@@ -129081,8 +129081,8 @@ msgid ""
 "hand tools; likely one of the most complex guns that is feasible to make outside of a machine shop, but still "
 "very unreliable.  This one is chambered for 9x19mm cartridges and accepts STEN-compatible magazines."
 msgstr ""
-"Luty式自制无膛线冲锋枪，使用具有更先进动力的手动工具，由各种钢制零件拼凑而成。也许是能够在工厂车间外制造出的最"
-"复杂的枪支之一，但仍然很不可靠。这一款专为9x19mm弹设计，同时能够兼容斯登冲锋枪弹匣。"
+"一支 Luty 式简易滑膛冲锋枪，用各种钢制零件借助高级电动工具粗略拼凑而成；这可能是没有机械车间的情况下能造出的最"
+"复杂的枪械之一，但仍然非常不可靠。这一支使用 9x19mm 弹药，可适配 STEN 兼容弹匣。"
 
 #. ~ Description of gun "Glock 19 pistol"
 #. ~ Description of "Glock 19 pistol"
@@ -132291,7 +132291,7 @@ msgstr ""
 #: data/json/items/gunmod/mechanism.json
 msgid "TEC-9 full auto sear"
 msgid_plural "TEC-9 full auto sears"
-msgstr[0] "TEC-9自动阻铁"
+msgstr[0] "TEC-9全自动阻铁"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/mechanism.json
@@ -132311,7 +132311,7 @@ msgstr[0] "后坐力平衡系统"
 #: data/json/items/gunmod/mechanism.json
 msgid "drop-in auto sear"
 msgid_plural "drop-in auto sears"
-msgstr[0] "插入式自动阻铁"
+msgstr[0] "插入式全自动阻铁"
 
 #. ~ Target of gun mod
 #: data/json/items/gunmod/mechanism.json
@@ -134184,7 +134184,7 @@ msgstr "一颗装好的火铳弹，装着许多金属或石子废料。"
 #: data/json/items/handloaded_bullets.json
 msgid "blunderbuss flechettes"
 msgid_plural "blunderbuss flechettes"
-msgstr[0] "喇叭枪"
+msgstr[0] "喇叭口霰弹枪用箭形弹"
 
 #. ~ Item name
 #: data/json/items/handloaded_bullets.json
@@ -140871,7 +140871,7 @@ msgstr "一把短而锋利的双刃匕首，可以紧握在手心，刀刃从指
 #. ~ Description of "bronze sword"
 #: data/json/items/melee/long_blades.json
 msgid "A simple short sword made of bronze."
-msgstr "一堵被漆成棕色的简易混凝土墙。"
+msgstr "一把简易的青铜短剑。"
 
 #. ~ Description of "kriegsmesser"
 #: data/json/items/melee/long_blades.json
@@ -141429,7 +141429,7 @@ msgstr "一把铸造成型的青铜小刀，刀柄用绳索和皮革包裹，刃
 #. ~ Description of "kirpan"
 #: data/json/items/melee/short_blades.json
 msgid "A ceremonial dagger carried by Sikh men.  This one is sharp and could be an effective weapon."
-msgstr "锡克教徒使用的礼仪匕首，它十分锋利，也许是一种有效的武器。"
+msgstr "锡克教徒佩戴的礼仪匕首。十分锋利，可以作为有效的武器。"
 
 #. ~ Description of "bone shiv"
 #: data/json/items/melee/short_blades.json
@@ -141870,7 +141870,7 @@ msgstr[0] "爪刀"
 #: data/json/items/melee/short_blades.json
 msgid "kirpan"
 msgid_plural "kirpans"
-msgstr[0] "吉尔班弯刀"
+msgstr[0] "锡克短刀"
 
 #. ~ Item name
 #: data/json/items/melee/short_blades.json
@@ -142164,7 +142164,7 @@ msgstr ""
 #: data/json/items/melee/spears_and_polearms.json
 msgid "bronze bush hook"
 msgid_plural "bronze bush hooks"
-msgstr[0] "青铜锄头"
+msgstr[0] "青铜灌木钩"
 
 #. ~ Item name
 #: data/json/items/melee/spears_and_polearms.json
@@ -145372,12 +145372,12 @@ msgstr[0] "白色非洲发型。"
 #. ~ Description of "bronze button"
 #: data/json/items/resources/fasteners.json
 msgid "A bronze clothing button."
-msgstr "青铜纽扣"
+msgstr "一枚青铜衣扣。"
 
 #. ~ Description of "bone button"
 #: data/json/items/resources/fasteners.json
 msgid "A clothing button carved from bone."
-msgstr "一个由木头或骨头制成的简易鱼钩。"
+msgstr "一枚由骨头雕刻而成的衣扣。"
 
 #. ~ Description of "wooden button"
 #: data/json/items/resources/fasteners.json
@@ -145426,7 +145426,7 @@ msgstr "一颗钢制按扣，就是在一般衣物上缝着的那些。"
 #: data/json/items/resources/fasteners.json
 msgid "bone button"
 msgid_plural "bone buttons"
-msgstr[0] "青铜纽扣"
+msgstr[0] "骨制纽扣"
 
 #. ~ Item name
 #: data/json/items/resources/fasteners.json
@@ -145775,7 +145775,7 @@ msgstr "一块体积十升的实心黄铜锭。"
 #. ~ Description of "bronze ingot"
 #: data/json/items/resources/metal.json
 msgid "A bar of solid bronze."
-msgstr "一块体积十升的实心青铜锭。"
+msgstr "一块实心青铜条。"
 
 #. ~ Description of "copper ingot"
 #: data/json/items/resources/metal.json
@@ -145898,7 +145898,7 @@ msgstr "一块体积十升的实心黄铜锭。"
 #. ~ Description of "large bronze ingot"
 #: data/json/items/resources/metal.json
 msgid "A large bar of solid bronze."
-msgstr "一块体积十升的实心青铜锭。"
+msgstr "一大块实心青铜条。"
 
 #. ~ Description of "large copper ingot"
 #: data/json/items/resources/metal.json
@@ -146155,7 +146155,7 @@ msgstr[0] "青铜碎片"
 #: data/json/items/resources/metal.json
 msgid "bronze ingot"
 msgid_plural "bronze ingots"
-msgstr[0] "青铜锄头"
+msgstr[0] "青铜锭"
 
 #. ~ Item name
 #: data/json/items/resources/metal.json
@@ -146948,7 +146948,7 @@ msgstr "层状凯夫拉纤维织物的压缩面板，浸有环氧树脂或其他
 #. ~ Description of "wool staple"
 #: data/json/items/resources/tailoring.json
 msgid "A natural cluster of wool fibers.  It could be processed into felt patches or spun into yarn."
-msgstr "一簇天然羊毛纤维。可以加工成毛毡补丁或毛纱。"
+msgstr "一簇天然。可以加工成毛毡片，也可以纺成纱线。"
 
 #. ~ Description of "fur patch"
 #: data/json/items/resources/tailoring.json
@@ -147589,7 +147589,7 @@ msgstr[0] "浸泡长杆"
 #: data/json/items/resources/wood.json
 msgid "soaking spear shaft"
 msgid_plural "soaking spear shaft"
-msgstr[0] "浸泡矛轴"
+msgstr[0] "浸水矛杆"
 
 #. ~ Item name
 #: data/json/items/resources/wood.json
@@ -150302,7 +150302,7 @@ msgstr[0] "高爆桶装炸弹"
 #: data/json/items/tool/explosives.json
 msgid "HE keg bomb"
 msgid_plural "HE keg bombs"
-msgstr[0] "高爆凯格炸弹"
+msgstr[0] "高爆桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -150686,7 +150686,7 @@ msgstr[0] "燃烧手雷"
 #: data/json/items/tool/explosives.json
 msgid "keg bomb"
 msgid_plural "keg bombs"
-msgstr[0] "凯格炸弹"
+msgstr[0] "桶装炸弹"
 
 #. ~ Item name
 #: data/json/items/tool/explosives.json
@@ -151122,7 +151122,7 @@ msgstr[0] "简易玻璃透镜"
 #: data/json/items/tool/fire.json
 msgid "electric firestarter"
 msgid_plural "electric firestarters"
-msgstr[0] "电子生火工具"
+msgstr[0] "电动点火器"
 
 #. ~ Item name
 #: data/json/items/tool/fire.json
@@ -151277,7 +151277,7 @@ msgstr[0] "消防破拆棍"
 #: data/json/items/tool/firefighting.json
 msgid "New York hook"
 msgid_plural "New York hooks"
-msgstr[0] "纽约钩"
+msgstr[0] "消防钩"
 
 #. ~ "menu_text" action message of item "throwable fire extinguisher"
 #: data/json/items/tool/firefighting.json
@@ -151398,7 +151398,7 @@ msgstr "一个简易金属鱼钩。"
 #. ~ Description of "improvised fishing hook"
 #: data/json/items/tool/fishing.json
 msgid "An improvised fishing hook carved from wood or bone."
-msgstr "一个由木头或骨头制成的简易鱼钩。"
+msgstr "一种用木头或骨头雕刻而成的简易鱼钩。"
 
 #. ~ "menu_text" action message of item "two-piece fishing rod (packed)"
 #: data/json/items/tool/fishing.json
@@ -151741,7 +151741,7 @@ msgstr "你猛拉动力线，可什么也没发生。"
 #: data/json/items/tool/landscaping.json
 msgid "bronze hoe"
 msgid_plural "bronze hoes"
-msgstr[0] "青铜锄头"
+msgstr[0] "青铜锄"
 
 #. ~ Item name
 #: data/json/items/tool/landscaping.json
@@ -152958,7 +152958,7 @@ msgstr "一只完成燃烧的炭窑。拆解它以回收木炭。"
 #. ~ Description of "crude bronze nail"
 #: data/json/items/tool/metalworking.json
 msgid "A crude bronze nail.  Probably not useful for many things due to its size and shape."
-msgstr "粗制的青铜钉。  由于其尺寸和形状，可能对很多事情没有用处。"
+msgstr "一枚粗制青铜钉。由于尺寸和形状的限制，可能用途有限。"
 
 #. ~ Description of "gas forge"
 #: data/json/items/tool/metalworking.json
@@ -153230,7 +153230,7 @@ msgstr[0] "坩埚"
 #: data/json/items/tool/metalworking.json
 msgid "crude bronze nail"
 msgid_plural "crude bronze nails"
-msgstr[0] "青铜砧"
+msgstr[0] "粗制青铜钉"
 
 #. ~ Item name
 #: data/json/items/tool/metalworking.json
@@ -153905,7 +153905,7 @@ msgstr[0] "花园软管"
 #: data/json/items/tool/misc.json
 msgid "grip hook"
 msgid_plural "grip hooks"
-msgstr[0] "挂肉钩"
+msgstr[0] "握柄钩"
 
 #. ~ Item name
 #: data/json/items/tool/misc.json
@@ -164111,7 +164111,7 @@ msgstr "一对窄轨火车车轮。它适合用在游乐园等地的观光窄轨
 #. ~ Description of "wheelchair wheels"
 #: data/json/items/vehicle/wheel.json
 msgid "A pair of wheels for a wheelchair."
-msgstr "一副轮椅的轮毂。"
+msgstr "一对轮椅车轮。"
 
 #. ~ Description of "light wheel mount"
 #. ~ Description of vehicle part "light wheel mount"
@@ -271322,7 +271322,7 @@ msgstr "实验室（安防区）"
 #: data/json/overmap/overmap_terrain/overmap_terrain_lab.json
 #: data/json/overmap/overmap_terrain/overmap_terrain_special.json
 msgid "Lab access shaft"
-msgstr "交通井"
+msgstr "实验室通道竖井"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_lab.json
@@ -272993,7 +272993,7 @@ msgstr "洼地"
 #. ~ Overmap terrain vision level name
 #: data/json/overmap/vision_levels.json
 msgid "electrical infrastructure"
-msgstr "电子生火工具"
+msgstr "电力设施"
 
 #. ~ Overmap terrain vision level name
 #: data/json/overmap/vision_levels.json
@@ -282863,7 +282863,7 @@ msgstr "板甲鞋"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "platemail suit assembly"
-msgstr "轮毂"
+msgstr "板甲套装组件"
 
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
@@ -290893,8 +290893,8 @@ msgid ""
 "     Died of an infected bite a few weeks later.  Before she passed she told those present, 'I've outlived "
 "everyone that I have ever loved.  If anything death is a few months late'."
 msgstr ""
-"    在数周之后死于咬伤感染。在她临终前他告诉周围的人：\"我已经活得比我所爱过的所有人都要长的了。这一切对我来说"
-"不过是死亡晚来了几个月罢了。\""
+"    几周后因被咬伤感染而死。临终前她对在场的人说：“我爱过的所有人都已经先我而去了。真要说的话，死亡还迟到了几个"
+"月。”"
 
 #. ~ Snippet in category "epilogue_npc_male"
 #: data/json/snippets/epilogue_npc.json
@@ -291449,9 +291449,9 @@ msgid ""
 "his drugs of choice.  He died from complications due to a seizure.  In his last moments he saw Porkey the pig "
 "exclaim, 'That's all folks!' before an animated audience."
 msgstr ""
-"    将自己的生命都投入于偷偷吸食各类令人上瘾的毒品上。在你死后不久后加入了一个幸存者避难营地做短工，但由于吸食"
-"毒品的副作用，他渐渐的和现实脱钩了。死于癫痫以及其引发的并发症。在他生命的最后一刻，他觉得自己看到了猪小弟向一"
-"位复苏的观众喊道：\"就到这儿吧……\""
+"    他一生都在暗中对某种或另一种物质上瘾。在你死后，他曾短暂地在幸存者营地做过劳工，随后因所吸食毒品带来的各种"
+"副作用而逐渐丧失了对现实的掌控。他最终死于癫痫发作引发的并发症。在生命的最后时刻，他看到猪小弟高喊“演出结束"
+"啦！”，面前是一片动画观众。"
 
 #. ~ Snippet in category "epilogue_npc_female"
 #: data/json/snippets/epilogue_npc.json
@@ -307920,7 +307920,7 @@ msgstr "这本《偷走这本书》是从书店偷来的。"
 #. ~ Original items from 1997 DOS version of robotfindskitten
 #: data/json/snippets/robot_finds_kitten.json
 msgid "This corroded robot is clutching a mitten."
-msgstr "这个锈蚀的机器人带着连指手套。"
+msgstr "这个锈蚀的机器人带着。"
 
 #. ~ Snippet in category "non_kitten_items"
 #. ~ Original items from 1997 DOS version of robotfindskitten
@@ -326687,22 +326687,22 @@ msgstr ""
 #. ~ Clause text "one_left" of UI widget "zenfs_sky_island_expedition_timer"
 #: data/json/ui/zenfs/mod_SI.json
 msgid "         +"
-msgstr "      "
+msgstr "               +"
 
 #. ~ Clause text "two_left" of UI widget "zenfs_sky_island_expedition_timer"
 #: data/json/ui/zenfs/mod_SI.json
 msgid "        +-+"
-msgstr "      "
+msgstr "              +-+"
 
 #. ~ Clause text "three_left" of UI widget "zenfs_sky_island_expedition_timer"
 #: data/json/ui/zenfs/mod_SI.json
 msgid "       +-+-+"
-msgstr "      "
+msgstr "             +-+-+"
 
 #. ~ Clause text "over_deadline" of UI widget "zenfs_sky_island_expedition_timer"
 #: data/json/ui/zenfs/mod_SI.json
 msgid "       DANGER"
-msgstr "危险！"
+msgstr "       危险"
 
 #. ~ Clause text "four_left" of UI widget "zenfs_sky_island_expedition_timer"
 #: data/json/ui/zenfs/mod_SI.json
@@ -330220,7 +330220,7 @@ msgstr "坚固的窄轨铁路车轮。在窄轨铁路上性能很好，但如果
 #. ~ Description of vehicle part "wheelchair wheels (pair)"
 #: data/json/vehicleparts/wheel.json
 msgid "A pair of wheelchair wheels."
-msgstr "一副轮椅的轮毂。"
+msgstr "一对轮椅轮毂。"
 
 #. ~ Description of vehicle part "wooden wheel mount"
 #: data/json/vehicleparts/wheel.json
@@ -330346,7 +330346,7 @@ msgstr "独轮车轮"
 #. ~ Vehicle part name
 #: data/json/vehicleparts/wheel.json
 msgid "wheel hub assembly"
-msgstr "轮毂"
+msgstr "轮毂总成"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/wheel.json
@@ -400706,7 +400706,7 @@ msgid ""
 "Normal person - <npc_name> seems to be pretty normal."
 msgstr ""
 "\n"
-"正常人-<npc_name>看起来很正常"
+"普通人——<npc_name> 看起来相当正常。"
 
 #: src/talker_npc.cpp:723
 msgid "&You're blind and can't make anything out."
