@@ -14,7 +14,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "rows": [ "#" ],
-      "sealed_item": { "#": { "item": { "item": "seed_wheat" }, "furniture": "f_plant_seedling", "chance": 5 } }
+      "sealed_item": { "#": { "item": { "item": "seed_wheat" }, "furniture": "f_plant_seedling", "chance": 1 } }
     }
   },
   {
@@ -23,16 +23,18 @@
     "parameters": {
       "variant": { "type": "nested_mapgen_id", "default": { "distribution": [ [ "seedling_corn", 70 ], [ "seedling_wheat", 30 ] ] } }
     },
-    "nested": { "#": { "chunks": [ { "param": "variant", "fallback": "seedling_corn" } ] } },
+    "nested": { "#": { "chunks": [ { "param": "variant", "fallback": "seedling_corn" }, [ "null", 10 ] ] } },
     "terrain": {
       ",": "t_dirtfloor",
       ":": "t_metal_floor",
       "#": [
-        [ "t_dirtmound", 2000 ],
+        [ "t_dirtmound", 1700 ],
+        [ "t_dirt", 100 ],
+        [ "t_mud", 100 ],
         [ "t_region_grass", 310 ],
         [ "t_region_soil", 280 ],
-        [ "t_puddle", 1 ],
-        [ "t_shrub", 2 ],
+        [ "t_puddle", 2 ],
+        [ "t_shrub", 3 ],
         [ "t_pit_shallow", 1 ]
       ],
       "%": "t_fence_wire",
