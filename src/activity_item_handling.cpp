@@ -3098,11 +3098,11 @@ static requirement_check_result generic_multi_activity_check_requirement(
             const vehicle *veh = veh_pointer_or_null( here.veh_at( src_loc ) );
             // we already checked this in can_do_activity() but check again just incase.
             if( !veh ) {
-            you.activity_vehicle_part_index = 1;
-            return requirement_check_result::SKIP_LOCATION;
-        }
-        requirement_data reqs;
-        if( you.activity_vehicle_part_index >= 0 &&
+                you.activity_vehicle_part_index = 1;
+                return requirement_check_result::SKIP_LOCATION;
+            }
+            requirement_data reqs;
+            if( you.activity_vehicle_part_index >= 0 &&
                 you.activity_vehicle_part_index < static_cast<int>( veh->part_count() ) ) {
                 const vpart_info &vpi = veh->part( you.activity_vehicle_part_index ).info();
                 if( reason == do_activity_reason::NEEDS_VEH_DECONST ) {
