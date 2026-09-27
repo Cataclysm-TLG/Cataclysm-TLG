@@ -13974,9 +13974,16 @@ void item::update_frozen_timer()
             set_var( "frozen_start_turn", to_turn<int>( calendar::turn ) );
         }
     } else if( has_var( "frozen_start_turn" ) ) {
-        const int frozen_start = std::stoi( get_var( "frozen_start_turn", "0" ) );
-        const int frozen_time = std::stoi( get_var( "frozen_time_turns", "0" ) ) +
-                                to_turn<int>( calendar::turn ) - frozen_start;
+        int frozen_start = 0;
+        int frozen_time = 0;
+        try {
+            frozen_start = std::stoi( get_var( "frozen_start_turn", "0" ) );
+            frozen_time = std::stoi( get_var( "frozen_time_turns", "0" ) );
+        } catch( const std::exception & ) {
+            erase_var( "frozen_start_turn" );
+            return;
+        }
+        frozen_time += to_turn<int>( calendar::turn ) - frozen_start;
         set_var( "frozen_time_turns", frozen_time );
         erase_var( "frozen_start_turn" );
     }
