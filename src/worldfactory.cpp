@@ -287,8 +287,6 @@ WORLD *worldfactory::make_new_world( special_game_type special_type )
     std::unique_ptr<WORLD> special_world = std::make_unique<WORLD>();
     special_world->world_name = worldname;
 
-    special_world->WORLD_OPTIONS["WORLD_END"].setValue( "delete" );
-
     special_world->create_timestamp();
 
     if( !special_world->save() ) {
@@ -402,7 +400,6 @@ void worldfactory::init()
         // load options into the world
         if( !all_worlds[worldname]->load_options() ) {
             all_worlds[worldname]->WORLD_OPTIONS = get_options().get_world_defaults();
-            all_worlds[worldname]->WORLD_OPTIONS["WORLD_END"].setValue( "delete" );
             save = true;
         }
 

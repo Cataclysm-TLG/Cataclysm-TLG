@@ -199,7 +199,6 @@ static const std::map<std::string, std::pair<std::string, std::map<std::string, 
 {
     static const std::map<std::string, std::pair<std::string, std::map<std::string, std::string>>> opt
     = {
-        {"DELETE_WORLD", { "WORLD_END", { {"no", "keep" }, {"yes", "delete"} } } },
         {"MONSTER_UPGRADE_FACTOR", { "EVOLUTION_INVERSE_MULTIPLIER", {} }} //TODO: Remove after stable after world option reserialising is added, value migration done in migrateOptionValue instead
     };
     return opt;
@@ -2656,13 +2655,6 @@ void options_manager::add_options_world_default()
     const auto add_empty_line = [&]() {
         this->add_empty_line( "world_default" );
     };
-
-    add( "WORLD_END", "world_default", to_translation( "World end handling" ),
-    to_translation( "Handling of game world when last character dies." ), {
-        { "reset", to_translation( "Reset" ) }, { "delete", to_translation( "Delete" ) },
-        { "query", to_translation( "Query" ) }, { "keep", to_translation( "Keep" ) }
-    }, "reset"
-       );
 
     add_empty_line();
 
