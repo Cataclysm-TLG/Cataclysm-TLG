@@ -3870,8 +3870,6 @@ class Character : public Creature, public visitable
         const std::function<int( int )> &charges_required_modifier = []( int i ) {
             return i;
         } );
-        /** Consume tools for the next multiplier * 5% progress of the craft */
-        bool craft_consume_tools( item &craft, int multiplier, bool start_craft );
         /** Advance per-step tool consumption so each step's allocations match its
          *  current progress.  Returns false (consuming nothing) if charges are short.
          *  When cost_ctx is supplied, it is reused for step budgets instead of
