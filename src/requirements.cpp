@@ -975,7 +975,7 @@ bool tool_comp::has(
         // The `type->tool` check excludes items counted by charge used as tools,
         // such as water purification tablets.
         if( ( flags & craft_flags::start_only ) != craft_flags::none && type->tool ) {
-            // See Character::craft_consume_tools. In theory only
+            // See Character::craft_consume_step_tools. In theory only
             // `charges_required / 20 + charges_required % 20` charges are
             // consumed during the first 5% progress, however that equation
             // sometimes decreases when the batch size increases, so we take
