@@ -842,7 +842,7 @@ static void eff_fun_datura( Character &u, effect &it )
             u.add_msg_if_player(
                 _( "You dissolve into beautiful paroxysms of energy.  Life fades from your nebulae and you are no more." ) );
         }
-        get_event_bus().send<event_type::dies_from_drug_overdose>( u.getID(), it.get_id() );
+        get_event_bus().send<event_type::dies_from_drug_overdose>( u.getID() );
         u.set_part_hp_cur( bodypart_id( "torso" ), 0 );
     }
 }

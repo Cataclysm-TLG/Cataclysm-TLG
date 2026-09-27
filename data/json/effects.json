@@ -3510,6 +3510,7 @@
     ],
     "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 25000 ] ],
     "death_msg": "You have a heart attack!",
+    "death_event": "dies_from_drug_overdose",
     "max_intensity": 4,
     "base_mods": {
       "focus_min": [ 1 ],
@@ -3693,6 +3694,7 @@
     "miss_messages": [ [ "You feel woozy.", 1 ] ],
     "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 25000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
+    "death_event": "dies_from_drug_overdose",
     "base_mods": {
       "vomit_chance": [ -20 ],
       "vomit_chance_bot": [ 1000 ],
@@ -4506,6 +4508,7 @@
     "miss_messages": [ [ "You feel numb.", 1 ] ],
     "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 500000 ], [ 1, 100000 ], [ 1, 5000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
+    "death_event": "dies_from_drug_overdose",
     "pkill_addict_reduces": true,
     "base_mods": {
       "vomit_chance": [ 2500 ],

@@ -14,9 +14,9 @@
       "deserter_city_office_roofb"
     ],
     "vision_levels": "large_city_building",
-    "name": "barricaded office building",
-    "sym": "D",
-    "color": "brown",
+    "name": "office tower",
+    "sym": "T",
+    "color": "white",
     "see_cost": "full_high",
     "flags": [ "SIDEWALK" ]
   }

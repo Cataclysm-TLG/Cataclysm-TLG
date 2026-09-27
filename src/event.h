@@ -578,13 +578,7 @@ template<>
 struct event_spec<event_type::dies_from_asthma_attack> : event_spec_character {};
 
 template<>
-struct event_spec<event_type::dies_from_drug_overdose> {
-    static constexpr std::array<std::pair<const char *, cata_variant_type>, 2> fields = {{
-            { "character", cata_variant_type::character_id },
-            { "effect", cata_variant_type::efftype_id },
-        }
-    };
-};
+struct event_spec<event_type::dies_from_drug_overdose> : event_spec_character {};
 
 template<>
 struct event_spec<event_type::dies_from_bleeding> : event_spec_character {};
