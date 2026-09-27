@@ -2350,8 +2350,8 @@
     "id": "carpet_pile",
     "name": "Carpet Pile",
     "copy-from": "nylon",
-    "repaired_with": "carpet_patch",
-    "salvaged_into": "carpet_patch",
+    "repaired_with": "carpet_scrap",
+    "salvaged_into": "carpet_scrap",
     "//1": "Carpet, on the other hand, burns pretty well.",
     "burn_data": [
       { "fuel": 1, "smoke": 1, "burn": 0.02 },
