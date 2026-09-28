@@ -849,10 +849,10 @@
     "id": "nested_chainmail_hauberk",
     "type": "nested_category",
     "activity_level": "MODERATE_EXERCISE",
-    "category": "CC_*",
-    "subcategory": "CSC_*_NESTED",
+    "category": "CC_ARMOR",
+    "subcategory": "CSC_ARMOR_TORSO",
     "name": "chain hauberks",
-    "description": "Recipes related to constructing chainmail hauberks in various sizes.",
+    "description": "Recipes related to constructing long-sleeved chainmail shirts in various sizes.",
     "skill_used": "fabrication",
     "nested_category_data": [ "chainmail_hauberk", "chainmail_hauberk_xs", "chainmail_hauberk_xl" ],
     "difficulty": 1

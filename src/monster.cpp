@@ -2415,7 +2415,7 @@ void monster::apply_damage( Creature *source, bodypart_id /*bp*/, int dam,
         die( &here, source );
     } else if( dam > 0 ) {
         process_trigger( mon_trigger::HURT, 1 + static_cast<int>( dam / 3 ) );
-        // Get angry at characters if hurt by one
+        // Get angry at characters if hurt by one.
         if( source != nullptr && !aggro_character && !source->is_monster() && !source->is_fake() ) {
             aggro_character = true;
         }
