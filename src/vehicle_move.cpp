@@ -1149,7 +1149,16 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             }
 
             if( ph != nullptr ) {
-                ph->hitall( dam, 40, driver );
+                const int damage_taken = ph->hitall( dam, 40, driver );
+                if( driver && ph->is_npc() ) {
+                    int tolerance = 0;
+                    if( ph->as_npc()->is_player_ally() ) {
+                        tolerance = 25;
+                    }
+                    if( damage_taken > tolerance ) {
+                        ph->as_npc()->on_attacked( *driver );
+                    }
+                }
             } else {
                 const int armor = vpi.has_flag( "SHARP" ) ?
                                   critter->get_armor_type( damage_cut, bodypart_id( "torso" ) ) :
