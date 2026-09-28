@@ -576,7 +576,7 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "stick_long", "count": [ 3, 10 ] }, { "item": "splinter", "count": [ 15, 30 ] } ]
+      "items": [ { "item": "stick_long", "count": [ 3, 5 ] }, { "item": "stick", "count": [ 3, 10 ] }, { "item": "splinter", "count": [ 15, 30 ] } ]
     }
   },
   {
@@ -598,7 +598,7 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "stick_long", "count": [ 2, 6 ] }, { "item": "splinter", "count": [ 10, 20 ] } ]
+      "items": [ { "item": "stick_long", "count": [ 1, 2 ] }, { "item": "stick", "count": [ 1, 4 ] }, { "item": "splinter", "count": [ 20, 50 ] } ]
     }
   },
   {
@@ -614,9 +614,9 @@
   {
     "type": "terrain",
     "id": "t_tree_young",
-    "name": "young tree",
+    "name": "sapling",
     "looks_like": "t_tree",
-    "description": "A relatively young sapling of an indeterminate species.  It could take decades before reaching maturity, so there's no use waiting around.",
+    "description": "A relatively young tree of indeterminate species.  It could take decades before reaching maturity, so there's no use waiting around.  Smashing it might yield a long stick or two.",
     "symbol": "1",
     "color": [ "green", "green", "green", "brown" ],
     "//": "barren in winter",
@@ -2012,20 +2012,22 @@
     "id": "t_tree_hickory_dead",
     "name": "dead hickory tree",
     "looks_like": "t_tree_dead",
-    "description": "The dead remnants of a tall deciduous tree of the 'Carya' genus.  Nothing useful can be foraged from this poor, dead tree.",
+    "description": "The remains of a tall deciduous tree of the 'Carya' genus.",
     "symbol": "7",
     "color": "brown",
-    "//": "dead, not usable at all",
     "move_cost": 0,
     "roof": "t_treetop",
-    "flags": [ "FLAMMABLE_HARD", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
+    "examine_action": "harvest_ter",
+    "harvest_by_season": [ { "seasons": [ "spring", "summer", "autumn", "winter" ], "id": "tree_dead_harv" } ],
+    "transforms_into": "t_tree_very_dead",
+    "flags": [ "FLAMMABLE", "NOITEM", "SUPPORTS_ROOF", "TREE", "CLIMB_ADJACENT" ],
     "bash": {
-      "str_min": 60,
-      "str_max": 120,
+      "str_min": 70,
+      "str_max": 140,
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "stick_long", "count": [ 3, 10 ] }, { "item": "splinter", "count": [ 10, 25 ] } ]
+      "items": [ { "item": "stick_long", "count": [ 3, 5 ] }, { "item": "stick", "count": [ 3, 10 ] }, { "item": "splinter", "count": [ 15, 30 ] } ]
     }
   },
   {
@@ -3318,52 +3320,52 @@
   {
     "type": "terrain",
     "id": "t_bamboo_harvested",
-    "name": "young bamboo shoots",
+    "name": "bamboo shoots",
     "description": "An area of young bamboo shoots about ankle high.  The smallest shoots have already been harvested.",
     "looks_like": "t_grass",
     "symbol": ".",
     "color": "green",
     "move_cost": 2,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "FLAMMABLE_HARD" ],
     "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 2, "str_max": 6 }
   },
   {
     "type": "terrain",
     "id": "t_bamboo_long",
-    "name": "long bamboo shoots",
-    "description": "An area of long bamboo shoots about shin high.",
+    "name": "bamboo",
+    "description": "An area of bamboo about shin high.",
     "looks_like": "t_grass",
     "symbol": ",",
     "color": "green",
     "move_cost": 5,
-    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE", "FLAMMABLE_HARD" ],
     "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 10, "str_max": 20 }
   },
   {
     "type": "terrain",
     "id": "t_bamboo_tall",
     "name": "tall bamboo",
-    "description": "A tall bamboo thicket about head high.",
+    "description": "A dense patch of tall bamboo.",
     "looks_like": "t_shrub",
     "symbol": "'",
     "color": "green",
     "move_cost": 10,
-    "coverage": 50,
+    "coverage": 40,
     "concealment": 50,
     "flags": [ "TRANSPARENT", "DIGGABLE", "PLOWABLE", "SMALL_HIDE", "SMALL_HIDE", "FLAMMABLE_HARD" ],
-    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 30 }
+    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "items": [ { "item": "stick_long", "count": [ 1, 4 ] }, { "item": "stick", "count": [ 1, 4 ] }, { "item": "leaves", "count": [ 5, 20 ] } ] }
   },
   {
     "type": "terrain",
     "id": "t_bamboo_dead",
     "name": "dead bamboo",
-    "description": "An area of long, brown, dead bamboo shoots covered in white fungus.",
+    "description": "A patch of bamboo, now dead and sagging.",
     "looks_like": "t_dirt",
     "symbol": ".",
     "color": "brown",
     "move_cost": 10,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE", "FLAMMABLE_ASH" ],
-    "bash": { "ter_set": "t_dirt", "str_min": 10, "str_max": 30 }
+    "bash": { "ter_set": "t_dirt", "str_min": 10, "str_max": 30, "items": [ { "item": "withered", "prob": 50, "count": [ 1, 2 ] }, { "item": "leaves", "count": [ 1, 2 ] } ] }
   },
   {
     "type": "terrain",
