@@ -198,33 +198,6 @@
     "max_aoe": 1
   },
   {
-    "id": "death_blobsplit_brain",
-    "type": "SPELL",
-    "name": { "str": "Blob Brain Death - Split" },
-    "description": "A blob brain splits in half.",
-    "valid_targets": [ "ground", "self" ],
-    "flags": [ "SILENT", "HOSTILE_SUMMON", "PERMANENT", "SPAWN_WITH_DEATH_DROPS", "NO_EXPLOSION_SFX" ],
-    "shape": "blast",
-    "effect": "slime_split",
-    "min_aoe": 1,
-    "max_aoe": 1
-  },
-  {
-    "id": "death_blob_brain",
-    "type": "SPELL",
-    "name": { "str": "Blob Brain Death" },
-    "description": "A blob brain dies.",
-    "valid_targets": [ "ally" ],
-    "min_aoe": 48,
-    "max_aoe": 48,
-    "flags": [ "SILENT", "NO_EXPLOSION_SFX" ],
-    "shape": "blast",
-    "effect": "remove_effect",
-    "effect_str": "controlled",
-    "targeted_monster_ids": [ "mon_blob_small", "mon_blob", "mon_blob_large" ],
-    "extra_effects": [ { "id": "death_blobsplit_brain", "hit_self": true } ]
-  },
-  {
     "id": "death_explosion",
     "type": "SPELL",
     "name": { "str": "Death Explosion Sound" },

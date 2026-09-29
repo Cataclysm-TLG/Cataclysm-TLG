@@ -19,7 +19,7 @@
       { "monster": "mon_zombie_medical", "weight": 5 },
       { "monster": "mon_zombie_hazmat", "weight": 5 },
       { "monster": "mon_zombie_fireman", "weight": 5 },
-      { "monster": "mon_zombie_swimmer_base", "weight": 5 },
+      { "monster": "mon_zombie_drowned", "weight": 5 },
       { "monster": "mon_zombie_static", "weight": 15 },
       { "monster": "mon_beekeeper", "weight": 5 },
       { "monster": "mon_feral_human_tool", "weight": 25 },

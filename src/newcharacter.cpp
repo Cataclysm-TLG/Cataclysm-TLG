@@ -3729,34 +3729,54 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
             cur_id = rng( 0, scens_length - 1 );
         } else if( action == "CHANGE_START_OF_CATACLYSM" ) {
             const scenario *scen = sorted_scens[cur_id];
+
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 scen = get_scenario();
             }
             scen->change_start_of_cataclysm( calendar_ui::select_time_point( scen->start_of_cataclysm(),
                                              _( "Cataclysm start date (affects items)" ), calendar_ui::granularity::day ) );
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         } else if( action == "CHANGE_FALL_OF_CIVILIZATION" ) {
             const scenario *scen = sorted_scens[cur_id];
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 scen = get_scenario();
             }
             scen->change_fall_of_civilization( calendar_ui::select_time_point( scen->fall_of_civilization(),
                                                _( "Fall of civilization date (affects monsters)" ), calendar_ui::granularity::day ) );
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         } else if( action == "CHANGE_START_OF_GAME" ) {
             const scenario *scen = sorted_scens[cur_id];
+
+
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 scen = get_scenario();
             }
             scen->change_start_of_game( calendar_ui::select_time_point( scen->start_of_game(),
                                         _( "Select game start date" ), calendar_ui::granularity::hour ) );
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         } else if( action == "RESET_CALENDAR" ) {
             const scenario *scen = sorted_scens[cur_id];
+
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 get_scenario()->reset_calendar();
             }
             scen->reset_calendar();
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         }
 
