@@ -2658,8 +2658,6 @@ void options_manager::add_options_world_default()
 
     add_empty_line();
 
-    // These optiosn are purposefully and permanently hidden. It can only be modified through the sliders when creating a new world.
-    // As such there is no name or description to show, those are blanked.
     add( "CITY_SIZE", "world_default", translation(), translation(), 0, 16, 8, COPT_ALWAYS_HIDE
        );
 
@@ -2670,8 +2668,10 @@ void options_manager::add_options_world_default()
          COPT_ALWAYS_HIDE
        );
 
-    add( "NPC_SPAWNTIME", "world_default", translation(), translation(), 0.0, 100.0, 4.0, 0.01,
-         COPT_ALWAYS_HIDE
+    add( "NPC_SPAWNTIME", "world_default", to_translation( "NPC spawn rate" ),
+         to_translation( "The rate at which random NPCs will spawn in the world over time.  Setting this higher means they will show up more frequently." ),
+         0.0, 100.0, 4.0, 0.01,
+         COPT_NO_HIDE
        );
 
     add( "EVOLUTION_INVERSE_MULTIPLIER", "world_default",
@@ -2687,7 +2687,7 @@ void options_manager::add_options_world_default()
     [&]( const std::string & page_id ) {
 
         add( "ETERNAL_SEASON", page_id, to_translation( "Eternal season" ),
-             to_translation( "If true, keep the initial season forever.  Warning: currently bugged and may not work properly." ),
+             to_translation( "If set to true, the current season (or the one selected at game start) will never change." ),
              false
            );
 

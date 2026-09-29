@@ -8,6 +8,7 @@
 
 #include "color.h"
 #include "input_context.h"
+#include "options.h"
 #include "output.h"
 #include "string_formatter.h"
 #include "translation.h"
@@ -45,6 +46,7 @@ time_point calendar_ui::select_time_point( time_point initial_value, std::string
                                      colorize( to_string( return_value ), c_light_cyan ) );
         smenu.desc_enabled = true;
         smenu.allow_additional = true;
+        bool eternal = calendar::eternal_season();
         smenu.input_category = "CALENDAR_UI";
         smenu.additional_actions = {
             { "LEFT", to_translation( "Decrease value" ) },
@@ -61,6 +63,7 @@ time_point calendar_ui::select_time_point( time_point initial_value, std::string
                                  _( "Press <color_light_green>%s</color> when done selecting time point." ),
                                  input_context( smenu.input_category ).get_desc( "UILIST.QUIT" ) );
 
+        calendar::set_eternal_season( false );
         smenu.addentry( static_cast<int>( calendar_ui::granularity::year ), true,
                         'y', "%s: %d", _( "year" ), years( return_value ) + 1 );
         smenu.addentry( static_cast<int>( calendar_ui::granularity::season ), true,
@@ -74,6 +77,7 @@ time_point calendar_ui::select_time_point( time_point initial_value, std::string
         smenu.addentry( static_cast<int>( calendar_ui::granularity::turn ), true,
                         't', "%s: %d", _( "turn" ), to_turns<int>( return_value - calendar::turn_zero ) );
 
+        calendar::set_eternal_season( eternal );
         for( uilist_entry &entry : smenu.entries ) {
             if( entry.retval > static_cast<int>( granularity_level ) ) {
                 entry.enabled = false;
@@ -85,24 +89,39 @@ time_point calendar_ui::select_time_point( time_point initial_value, std::string
         int auto_value = 0;
         switch( smenu.ret ) {
             case static_cast<int>( calendar_ui::granularity::year ):
+                calendar::set_eternal_season( false );
                 set_turn( years( return_value ) + 1, calendar::year_length(), _( "Set year to?" ) );
+                calendar::set_eternal_season( eternal );
                 break;
             case static_cast<int>( calendar_ui::granularity::season ):
+                calendar::set_eternal_season( false );
                 set_turn( static_cast<int>( season_of_year( return_value ) ), calendar::season_length(),
                           _( "Set season to?  (0 = spring)" ) );
+                calendar::set_eternal_season( eternal );
                 break;
             case static_cast<int>( calendar_ui::granularity::day ):
+                calendar::set_eternal_season( false );
                 set_turn( day_of_season<int>( return_value ) + 1, 1_days, _( "Set days to?" ) );
+                calendar::set_eternal_season( eternal );
                 break;
             case static_cast<int>( calendar_ui::granularity::hour ):
+                calendar::set_eternal_season( false );
                 set_turn( hour_of_day<int>( return_value ), 1_hours, _( "Set hour to?" ) );
+
+                calendar::set_eternal_season( eternal );
                 break;
             case static_cast<int>( calendar_ui::granularity::minute ):
+                calendar::set_eternal_season( false );
                 set_turn( minute_of_hour<int>( return_value ), 1_minutes, _( "Set minute to?" ) );
+
+                calendar::set_eternal_season( eternal );
                 break;
             case static_cast<int>( calendar_ui::granularity::turn ):
+                calendar::set_eternal_season( false );
                 set_turn( to_turns<int>( return_value - calendar::turn_zero ), 1_turns,
                           string_format( _( "Set turn to?  (One day is %i turns)" ), to_turns<int>( 1_days ) ).c_str() );
+
+                calendar::set_eternal_season( eternal );
                 break;
             case UILIST_ADDITIONAL:
                 if( smenu.ret_act == "LEFT" ) {
@@ -119,20 +138,30 @@ time_point calendar_ui::select_time_point( time_point initial_value, std::string
                             set_turn( years( return_value ) + 1, calendar::year_length(), "", auto_value );
                             break;
                         case static_cast<int>( calendar_ui::granularity::season ):
+                            calendar::set_eternal_season( false );
                             set_turn( static_cast<int>( season_of_year( return_value ) ), calendar::season_length(), "",
                                       auto_value );
+                            calendar::set_eternal_season( eternal );
                             break;
                         case static_cast<int>( calendar_ui::granularity::day ):
+                            calendar::set_eternal_season( false );
                             set_turn( day_of_season<int>( return_value ) + 1, 1_days, "", auto_value );
+                            calendar::set_eternal_season( eternal );
                             break;
                         case static_cast<int>( calendar_ui::granularity::hour ):
+                            calendar::set_eternal_season( false );
                             set_turn( hour_of_day<int>( return_value ), 1_hours, "", auto_value );
+                            calendar::set_eternal_season( eternal );
                             break;
                         case static_cast<int>( calendar_ui::granularity::minute ):
+                            calendar::set_eternal_season( false );
                             set_turn( minute_of_hour<int>( return_value ), 1_minutes, "", auto_value );
+                            calendar::set_eternal_season( eternal );
                             break;
                         case static_cast<int>( calendar_ui::granularity::turn ):
+                            calendar::set_eternal_season( false );
                             set_turn( to_turns<int>( return_value - calendar::turn_zero ), 1_turns, "", auto_value );
+                            calendar::set_eternal_season( eternal );
                             break;
                         default:
                             break;
