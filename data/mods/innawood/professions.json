@@ -481,7 +481,10 @@
       "both": {
         "entries": [
           { "item": "leather_helmet" },
-          { "item": "leather_armor_suit" },
+          { "item": "leather_pauldrons" },
+          { "item": "leather_cuirass" },
+          { "item": "leather_arm_guards" },
+          { "item": "leather_leg_guards" },
           { "item": "socks" },
           { "item": "boots" },
           { "item": "leather_gauntlets" },
@@ -513,7 +516,10 @@
       "both": {
         "entries": [
           { "item": "leather_helmet" },
-          { "item": "leather_armor_suit" },
+          { "item": "leather_pauldrons" },
+          { "item": "leather_cuirass" },
+          { "item": "leather_arm_guards" },
+          { "item": "leather_leg_guards" },
           { "item": "socks" },
           { "item": "boots" },
           { "item": "leather_gauntlets" },

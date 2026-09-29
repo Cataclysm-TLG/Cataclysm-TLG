@@ -513,7 +513,7 @@
     "autolearn": false,
     "flags": [ "SECRET" ],
     "tools": [  ],
-    "components": [ [ [ "bone_edible", 1, "LIST" ] ] ]
+    "components": [ [ [ "bone_edible", 1, "LIST" ], [ "antler", 1 ] ] ]
   },
   {
     "//": "For use by mills, so the only entries used are the charges and components.",
@@ -633,7 +633,7 @@
     "autolearn": false,
     "flags": [ "SECRET" ],
     "tools": [  ],
-    "components": [ [ [ "skull_medium", 1, "LIST" ] ] ]
+    "components": [ [ [ "skull_medium", 1, "LIST" ], [ "antler_piece", 1 ] ] ]
   },
   {
     "//": "For use by mills, so the only entries used are the charges and components.",

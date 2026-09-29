@@ -481,7 +481,8 @@
         { "item": "sheet_metal", "count": [ 1, 2 ] },
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "lock", "count": [ 0, 1 ] },
-        { "item": "pipe", "count": [ 4, 8 ] }
+        { "item": "nuts_bolts", "count": [ 2, 6 ] },
+        { "item": "pipe", "count": [ 2, 4 ] }
       ]
     },
     "max_volume": "500 L",
@@ -493,7 +494,9 @@
       "items": [
         { "item": "scrap", "count": [ 2, 8 ] },
         { "item": "steel_fragment", "count": [ 2, 4 ] },
-        { "item": "sheet_metal_small", "count": [ 6, 10 ] },
+        { "item": "sheet_metal_small", "count": [ 3, 5 ] },
+        { "item": "nuts_bolts", "count": [ 0, 3 ] },
+        { "item": "sheet_metal", "count": [ 0, 1 ] },
         { "item": "pipe", "count": [ 0, 1 ] }
       ]
     }
