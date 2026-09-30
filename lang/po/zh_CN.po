@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-24 02:24-0700\n"
-"PO-Revision-Date: 2026-09-29 19:58+0800\n"
+"PO-Revision-Date: 2026-09-30 19:03+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -6074,7 +6074,7 @@ msgstr[0] "古代皮靴"
 #: data/json/artifact/artifact_item_types.json
 msgid "pair of ornate leather gloves"
 msgid_plural "pairs of ornate leather gloves"
-msgstr[0] "华丽皮手套"
+msgstr[0] "一副华丽皮革手套"
 
 #. ~ Item name
 #: data/json/artifact/artifact_item_types.json
@@ -23257,7 +23257,7 @@ msgstr "用于在电子电路中存储电荷。"
 #. ~ Name of a fault
 #: data/json/faults/faults_electronic.json
 msgid "Shorted electronic circuit"
-msgstr "光子电路元件"
+msgstr "短路的电子电路"
 
 #. ~ Description of fault "rebooting"
 #: data/json/faults/faults_electronic.json
@@ -27616,7 +27616,7 @@ msgstr "无"
 #. ~ Furniture name
 #: data/json/furniture_and_terrain/LIXA_furniture_and_terrain.json
 msgid "photonic conduit"
-msgstr "光子电路元件"
+msgstr "光子导管"
 
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/LIXA_furniture_and_terrain.json
@@ -55312,9 +55312,7 @@ msgstr "一对由坚固的塑料和氨纶制成的护肘。"
 msgid ""
 "A pair of improvised arm guards made from broken pieces of a plank that are tied to your arms with rags and "
 "string.  They offer good protection, but are really uncomfortable to wear."
-msgstr ""
-"一对用布条绑上了木板的强化双臂护手，能够提供良好的防护，但穿起来很累赘。\n"
-"\"看起来和骨折用的夹板没什么区别，但是请遵医嘱。\""
+msgstr "一副简易护臂，由断裂的木板碎片制成，用破布和绳子绑在手臂上。防护效果不错，但穿戴起来非常不舒服。"
 
 #. ~ Description of "leather vambraces"
 #: data/json/items/armor/arms_armor.json
@@ -56788,7 +56786,7 @@ msgstr "这是一对手工制作的手套，由凯夫拉纤维和皮革制成，
 #: data/json/items/armor/bespoke_armor/custom_gloves.json
 msgid "XS faux fur winter survivor gloves"
 msgid_plural "pairs of XS faux fur winter survivor gloves"
-msgstr[0] "幸存者人造毛皮手套（防寒XS）"
+msgstr[0] "人造毛皮冬季幸存者手套（XS）"
 
 #. ~ Item name
 #: data/json/items/armor/bespoke_armor/custom_gloves.json
@@ -57901,7 +57899,7 @@ msgstr "一对由坚韧织物制成的护臂，夹在交替的钢条之间。"
 msgid ""
 "A pair of gloves made of tough fabric, with steel plates of various size and shape riveted for additional "
 "protection, while still remaining relatively unhindering"
-msgstr "一副由坚韧织物制成的手套，上面铆接着大小形状各异的钢板以提供额外防护，同时仍保持相对灵活。"
+msgstr "一副由坚韧织物制成的手套，铆接着大小形状各异的钢板以提供额外防护，同时仍保持相对灵活"
 
 #. ~ Description of "splint leg guards"
 #: data/json/items/armor/brigandine.json
@@ -62928,7 +62926,7 @@ msgstr[0] "羊毛衬铠背心"
 #: data/json/items/armor/gambesons.json data/json/recipes/nested.json
 msgid "wool arming gloves"
 msgid_plural "pairs of wool arming gloves"
-msgstr[0] "羊毛绗缝手套"
+msgstr[0] "羊毛衬垫手套"
 
 #. ~ Item name
 #. ~ name of the nested group
@@ -63028,7 +63026,7 @@ msgstr "一副由互锁钢丝环制成的手套。"
 #. ~ Description of "leather gauntlets"
 #: data/json/items/armor/gloves.json
 msgid "A pair of heavy fingerless leather gloves."
-msgstr "一双厚重的露指皮手套"
+msgstr "一副厚重的露指皮革手套。"
 
 #. ~ Description of "fingerless leather gloves"
 #: data/json/items/armor/gloves.json
@@ -63099,7 +63097,7 @@ msgstr "一副保暖但笨重的连指手套。"
 #. ~ Description of "faux fur gloves"
 #: data/json/items/armor/gloves.json
 msgid "A pair of warm faux fur gloves."
-msgstr "人造毛皮保暖手套"
+msgstr "一副保暖的人造毛皮手套。"
 
 #. ~ Description of "fur gloves"
 #: data/json/items/armor/gloves.json
@@ -63247,19 +63245,19 @@ msgstr[0] "软弹枪背心"
 #: data/json/items/armor/gloves.json
 msgid "armored fingerless leather gloves"
 msgid_plural "pairs of armored fingerless leather gloves"
-msgstr[0] "无指皮革装甲手套"
+msgstr[0] "装甲皮革手套（露指）"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
 msgid "army winter gloves"
 msgid_plural "pairs of army winter gloves"
-msgstr[0] "防寒手套"
+msgstr[0] "军用防寒手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
 msgid "bag mitts"
 msgid_plural "pairs of bag mitts"
-msgstr[0] "塑料袋手套"
+msgstr[0] "袋状手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63339,13 +63337,13 @@ msgstr[0] "击剑护手（左）"
 #: data/json/items/armor/gloves.json
 msgid "fingerless leather gloves"
 msgid_plural "pairs of fingerless leather gloves"
-msgstr[0] "无指皮革手套"
+msgstr[0] "皮革手套（露指）"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
 msgid "fingerless wool gloves"
 msgid_plural "pairs of fingerless wool gloves"
-msgstr[0] "幸存者手套（露指）"
+msgstr[0] "羊毛手套（露指）"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63363,7 +63361,7 @@ msgstr[0] "防火手套"
 #: data/json/items/armor/gloves.json
 msgid "fur gloves"
 msgid_plural "pairs of fur gloves"
-msgstr[0] "幸存者手套"
+msgstr[0] "毛皮手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63393,7 +63391,7 @@ msgstr[0] "绑手带"
 #: data/json/items/armor/gloves.json
 msgid "leather gauntlets"
 msgid_plural "pairs of leather gauntlets"
-msgstr[0] "皮质长手套"
+msgstr[0] "皮革护手"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63411,7 +63409,7 @@ msgstr[0] "皮革绑手带"
 #: data/json/items/armor/gloves.json
 msgid "light gloves"
 msgid_plural "pairs of light gloves"
-msgstr[0] "棉手套"
+msgstr[0] "轻便手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63429,7 +63427,7 @@ msgstr[0] "连指手套"
 #: data/json/items/armor/gloves.json
 msgid "opera gloves"
 msgid_plural "pairs of opera gloves"
-msgstr[0] "塑袋手套"
+msgstr[0] "晚礼服手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63453,7 +63451,7 @@ msgstr[0] "骷髅手套"
 #: data/json/items/armor/gloves.json
 msgid "snow mittens"
 msgid_plural "pairs of snow mittens"
-msgstr[0] "连指羊毛手套"
+msgstr[0] "雪地连指手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63477,7 +63475,7 @@ msgstr[0] "白手套"
 #: data/json/items/armor/gloves.json
 msgid "wool gloves"
 msgid_plural "pairs of wool gloves"
-msgstr[0] "羊毛绗缝手套"
+msgstr[0] "羊毛手套"
 
 #. ~ Item name
 #: data/json/items/armor/gloves.json
@@ -63501,7 +63499,7 @@ msgstr[0] "劳保手套"
 #: data/json/items/armor/gloves.json
 msgid "wrist warmers"
 msgid_plural "pairs of wrist warmers"
-msgstr[0] "布质半指手套"
+msgstr[0] "护腕"
 
 #. ~ Description of "kufi cap"
 #: data/json/items/armor/hats.json
@@ -63680,7 +63678,7 @@ msgstr "一顶塑料帽檐上方印着美国邮政服务标志、传统样式的
 #. ~ Description of "beanie"
 #: data/json/items/armor/hats.json
 msgid "A warm knit hat."
-msgstr "针织帽"
+msgstr "一顶保暖的针织帽。"
 
 #. ~ Description of "chaplet"
 #: data/json/items/armor/hats.json
@@ -88428,9 +88426,9 @@ msgid ""
 "of plastics and polymers, it can be an antiseptic, it can strip paint and break down epoxy, and it can burn "
 "your skin away like tissue paper under a heat gun.  Wear gloves."
 msgstr ""
-"一种用处广泛、效果良好的溶剂，可用于许多化学反应。它可以用来制造大量的塑料和化纤产品，同时还有抗菌效果，可以去"
-"除油漆、分解环氧树脂，还可以像烧纸一样烧掉你的皮肤。\n"
-"\"碰触前请戴手套。\""
+"一种用途广泛、效果良好的溶剂，可用于许多化学反应。它可以用来制造大量塑料和化纤产品，同时还具有抗菌效果，可以去"
+"除油漆、分解环氧树脂，还能像烧纸一样灼烧你的皮肤。\n"
+"“接触前请戴手套。”"
 
 #. ~ Description of "ether"
 #: data/json/items/chemicals_and_resources.json
@@ -127520,7 +127518,7 @@ msgstr[0] "M45A1 手枪"
 #: data/json/items/gun/45.json
 msgid "MAC-10 SMG"
 msgid_plural "MAC-10 SMGs"
-msgstr[0] "M3 冲锋枪"
+msgstr[0] "MAC-10 冲锋枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -129043,7 +129041,7 @@ msgstr[0] "M1A 步枪"
 #: data/json/items/gun/8x40mm.json
 msgid "RM2000 SMG"
 msgid_plural "RM2000 SMGs"
-msgstr[0] "M3 冲锋枪"
+msgstr[0] "RM2000 冲锋枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -129684,7 +129682,7 @@ msgstr ""
 #: data/json/items/gun/9mm.json
 msgid "Uzi SMG"
 msgid_plural "Uzi SMGs"
-msgstr[0] "M3 冲锋枪"
+msgstr[0] "乌兹冲锋枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -142461,7 +142459,7 @@ msgstr[0] "钢指虎"
 #: data/json/items/melee/unarmed_weapons.json
 msgid "studded gloves"
 msgid_plural "pairs of studded gloves"
-msgstr[0] "镶钉手套"
+msgstr[0] "铆钉手套"
 
 #. ~ Description of "chain whip"
 #: data/json/items/melee/whips_and_flails.json
@@ -144502,7 +144500,7 @@ msgstr[0] "金纹奇梳"
 #: data/json/items/relics/altered_items.json
 msgid "shifting keyring"
 msgid_plural "shifting keyrings"
-msgstr[0] "无定形钥匙环"
+msgstr[0] "变幻钥匙环"
 
 #. ~ Item name
 #: data/json/items/relics/altered_items.json
@@ -157751,7 +157749,7 @@ msgstr[0] "冲击钻"
 #: data/json/items/tool/workshop.json
 msgid "leather hose"
 msgid_plural "leather hoses"
-msgstr[0] "皮革腿套"
+msgstr[0] "皮革软管"
 
 #. ~ Item name
 #: data/json/items/tool/workshop.json
@@ -176715,13 +176713,13 @@ msgstr[0] "坐标旋转截击"
 #: data/json/monsters/LIXA_monsters.json
 msgid "eigenspectre"
 msgid_plural "eigenspectres"
-msgstr[0] "尊敬"
+msgstr[0] "幽灵"
 
 #. ~ Monster name
 #: data/json/monsters/LIXA_monsters.json
 msgid "photonic eigenspectre"
 msgid_plural "photonic eigenspectres"
-msgstr[0] "光子电路元件"
+msgstr[0] "光子幽灵"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -176734,7 +176732,7 @@ msgstr[0] "声波枪"
 #: data/json/monsters/LIXA_monsters.json
 msgid "shifting eigenspectre"
 msgid_plural "shifting eigenspectres"
-msgstr[0] "无定形钥匙环"
+msgstr[0] "变幻幽灵"
 
 #. ~ Sound description of spell "an arc of coordinate reassignment"
 #: data/json/monsters/LIXA_monsters.json
@@ -176751,7 +176749,7 @@ msgstr[0] "泰坦幽灵"
 #: data/json/monsters/LIXA_monsters.json
 msgid "unfolded impossibility"
 msgid_plural "unfolded impossibilities"
-msgstr[0] "强化移动"
+msgstr[0] "悖论体"
 
 #. ~ Description of monster "moorhen"
 #: data/json/monsters/bird.json
@@ -281980,7 +281978,7 @@ msgstr "各种尺寸的青铜头盔的配方。"
 #. ~ Description of the category "survivor gloves"
 #: data/json/recipes/nested.json
 msgid "Recipes related to constructing various sizes and types of survivor gloves."
-msgstr "各种尺寸和种类的幸存者手套的配方。"
+msgstr "各种尺寸和类型的幸存者手套的制作配方。"
 
 #. ~ Description of the category "survivor boots"
 #: data/json/recipes/nested.json
@@ -363143,7 +363141,7 @@ msgstr "生成NPC"
 
 #: src/debug_menu.cpp:999
 msgid "Spawn Named NPC"
-msgstr "生成NPC"
+msgstr "生成具名NPC"
 
 #: src/debug_menu.cpp:1000
 msgid "Spawn random NPC on overmap"
