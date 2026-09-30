@@ -1454,7 +1454,8 @@ void Creature::print_proj_avoid_msg( Creature *source, viewer &player_view ) con
         add_msg_player_or_npc(
             m_warning,
             _( "You avoid the projectile from %s!" ),
-            get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? _( "<npcname> avoids the projectile from %s." ) : "",
+            get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ? _( "<npcname> avoids the projectile from %s." ) :
+            "",
             source->disp_name() );
     } else {
         add_msg_player_or_npc(

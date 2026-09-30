@@ -2040,7 +2040,7 @@ bool read_activity_actor::player_readma( avatar &you )
     skill_id skill_used = style_to_learn->primary_skill;
 
     int difficulty = std::max( 1, style_to_learn->learn_difficulty );
-    difficulty = std::max( 1, 20 + difficulty * 2 - you.get_knowledge_level( skill_used ) * 2 );
+    difficulty = std::max( 1, 20 + difficulty * 2 - static_cast<int>( you.get_greater_skill_or_knowledge_level( skill_used ) ) * 2 );
     add_msg_debug( debugmode::DF_ACT_READ, "Chance to learn one in: %d", difficulty );
 
     if( one_in( difficulty ) ) {
