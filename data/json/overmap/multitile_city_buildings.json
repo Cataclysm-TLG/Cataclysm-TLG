@@ -1331,6 +1331,7 @@
     "locations": [ "land" ],
     "overmaps": [
       { "point": [ 0, 0, 0 ], "overmap": "house_31_north" },
+      { "point": [ 0, 0, 1 ], "overmap": "house_31_roof_north" },
       { "point": [ 0, 0, -1 ], "overmap": "basement_hidden_lab_stairs" }
     ],
     "flags": [ "LAB", "GLOBALLY_UNIQUE", "MAN_MADE" ]
