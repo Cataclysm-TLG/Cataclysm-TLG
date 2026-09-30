@@ -241,7 +241,7 @@
   {
     "id": "fd_acid",
     "type": "field_type",
-    "substance_name": "acid",
+    "substance_name": { "str": "acid", "ctxt": "field splash substance" },
     "legacy_enum_id": 7,
     "mopsafe": false,
     "intensity_levels": [
