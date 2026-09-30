@@ -464,7 +464,7 @@ std::wstring utf8_to_wstr( const std::string &utf8 )
     return utf8_to_wstr_android( utf8 );
 
 #else
-    // Replace invalid UTF-8 sequences with U+FFFD instead of aborting.
+    // Replace invalid UTF-8 sequences with ? instead of aborting.
     std::string sanitized;
     sanitized.reserve( utf8.size() );
     for( size_t i = 0; i < utf8.size(); ) {
@@ -511,8 +511,8 @@ std::wstring utf8_to_wstr( const std::string &utf8 )
             sanitized.append( utf8, i, len );
             i += len;
         } else {
-            // U+FFFD, encoded as UTF-8.
-            sanitized += "\xEF\xBF\xBD";
+            // Replace invalid UTF-8 with a visible ASCII fallback.
+            sanitized += '?';
             ++i;
         }
     }
