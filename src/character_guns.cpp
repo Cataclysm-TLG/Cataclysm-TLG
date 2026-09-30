@@ -144,7 +144,7 @@ std::pair<int, int> Character::gunmod_installation_odds( const item_location &gu
     float chances = 1.0f; // start with 1 in 6 (~17% chance)
 
     for( const auto &e : mod.type->min_skills ) {
-        // gain an additional chance for every level above the minimum requirement
+        // Gain an additional chance for every level above the minimum requirement.
         skill_id sk = e.first.str() == "weapon" ? gun->gun_skill() : e.first;
         chances += std::max( get_greater_skill_or_knowledge_level( sk )  - e.second, 0.0f );
     }
@@ -159,9 +159,9 @@ std::pair<int, int> Character::gunmod_installation_odds( const item_location &gu
     roll -= gun->damage_level() * 10;
     roll = std::min( std::max( roll, 0 ), 100 );
 
-    // Manipulation helps, conferring a small bonus if it's high enough.
-    roll *= static_cast<float>( std::round( ( get_limb_score( limb_score_manip ) + 0.1f ) ) );
-    // risk of causing damage on failure increases with less durable guns
+    // Manipulation can help (to a point) or hurt here.
+    roll *= std::clamp( ( get_limb_score( limb_score_manip ) + 0.1f ), 0.1f, 1.5f );
+    // Risk of causing damage on failure increases with less durable guns.
     risk = ( 100 - roll ) * ( ( 10.0 - std::min( gun->type->gun->durability, 9 ) ) / 10.0 );
 
     return std::make_pair( roll, risk );
