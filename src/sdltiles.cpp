@@ -207,6 +207,10 @@ static void InitSDL()
     }
 #endif
 
+#if defined(_WIN32) && defined(SDL_HINT_WINDOWS_DPI_AWARENESS)
+    SDL_SetHint( SDL_HINT_WINDOWS_DPI_AWARENESS, "permonitorv2" );
+#endif
+
     ret = SDL_Init( init_flags );
     throwErrorIf( ret != 0, "SDL_Init failed" );
 
