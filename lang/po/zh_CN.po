@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-24 02:24-0700\n"
-"PO-Revision-Date: 2026-09-27 21:22+0800\n"
+"PO-Revision-Date: 2026-09-29 19:58+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -39727,7 +39727,7 @@ msgstr "厚重头骨"
 #. ~ Terrain name
 #: data/json/furniture_and_terrain/terrain-floors-indoor.json
 msgid "thin slag"
-msgstr "怪形"
+msgstr "薄渣"
 
 #. ~ Bashing sound of terrain "metal floor"
 #. ~ Bashing sound of terrain "broken metal floor"
@@ -55604,7 +55604,7 @@ msgstr[0] "橡胶护臂"
 #: data/json/items/armor/arms_armor.json
 msgid "paper vambraces"
 msgid_plural "pairs of paper vambraces"
-msgstr[0] "青铜前护臂"
+msgstr[0] "纸质护臂"
 
 #. ~ Item name
 #: data/json/items/armor/arms_armor.json
@@ -55640,7 +55640,7 @@ msgstr[0] "防暴护臂"
 #: data/json/items/armor/arms_armor.json
 msgid "sheet metal bracers"
 msgid_plural "pairs of sheet metal bracers"
-msgstr[0] "钢板护甲"
+msgstr[0] "金属板护臂"
 
 #. ~ Item name
 #: data/json/items/armor/arms_armor.json
@@ -57301,7 +57301,7 @@ msgstr "一双用钢材和芳纶纤维制成的装甲防护靴，供爆炸物处
 #. ~ Description of "sneakers"
 #: data/json/items/armor/boots.json
 msgid "Athletic shoes, designed for running."
-msgstr "一双样式时髦的皮鞋。但它并不是为跑步而设计的。"
+msgstr "运动鞋，专为跑步设计。"
 
 #. ~ Description of "faux fur boots"
 #: data/json/items/armor/boots.json
@@ -57341,7 +57341,7 @@ msgstr "放下滑轮"
 #. ~ Description of "dress shoes"
 #: data/json/items/armor/boots.json
 msgid "Fancy leather shoes, not designed for running."
-msgstr "一双样式时髦的皮鞋。但它并不是为跑步而设计的。"
+msgstr "精致的皮鞋，并非为跑步设计。"
 
 #. ~ Description of "faux fur foot wraps"
 #: data/json/items/armor/boots.json
@@ -57769,7 +57769,7 @@ msgstr[0] "摩托警靴"
 #: data/json/items/armor/boots.json
 msgid "plastic cephalopod sleeves"
 msgid_plural "sets of plastic cephalopod sleeves"
-msgstr[0] "塑料章鱼护臂"
+msgstr[0] "塑料头足类护套"
 
 #. ~ Item name
 #: data/json/items/armor/boots.json
@@ -72076,7 +72076,7 @@ msgstr[0] "无尘衣"
 #: data/json/items/armor/suits_protection.json
 msgid "conductive NBC suit"
 msgid_plural "conductive NBC suits"
-msgstr[0] "超导线圈"
+msgstr[0] "导电防生化服"
 
 #. ~ Item name
 #: data/json/items/armor/suits_protection.json
@@ -73551,7 +73551,7 @@ msgstr "一条长的、用来保持体温的贴身内衣长裤。"
 #. ~ Description of "tights"
 #: data/json/items/armor/undergarment.json
 msgid "A pair of thin, stretchy hose that cover the legs and feet."
-msgstr "一双覆盖腿部和脚部的薄而有弹性的软管。"
+msgstr "一双薄而有弹性的袜子，覆盖腿部和脚部。"
 
 #. ~ Description of variant "cheerleader tank top" of item "tank top"
 #: data/json/items/armor/undergarment.json
@@ -73960,7 +73960,7 @@ msgstr[0] "保暖衬衫"
 #: data/json/items/armor/undergarment.json
 msgid "tights"
 msgid_plural "pairs of tights"
-msgstr[0] "紧身裤"
+msgstr[0] "连裤袜"
 
 #. ~ Item name
 #: data/json/items/armor/undergarment.json
@@ -75798,7 +75798,7 @@ msgstr[0] "恶臭黏液"
 #: data/json/items/biosignatures.json
 msgid "insect droppings"
 msgid_plural "insect droppings"
-msgstr[0] "恐龙粪"
+msgstr[0] "昆虫粪便"
 
 #. ~ Item name
 #: data/json/items/biosignatures.json
@@ -101964,7 +101964,7 @@ msgstr[0] "锂盐药片"
 #: data/json/items/comestibles/med.json
 msgid "makeshift antiseptic"
 msgid_plural "makeshift antiseptic"
-msgstr[0] "简易抗菌剂"
+msgstr[0] "简易消毒剂"
 
 #. ~ Item name
 #: data/json/items/comestibles/med.json
@@ -124505,7 +124505,7 @@ msgstr[0] "全自动害虫手枪"
 #: data/json/items/gun/22.json
 msgid "full-auto varmint rifle"
 msgid_plural "full-auto varmint rifles"
-msgstr[0] "全自动害兽步枪"
+msgstr[0] "全自动猎枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -140384,7 +140384,7 @@ msgstr[0] "铝罐"
 #: data/json/items/melee/bludgeons.json
 msgid "aluminum crutches"
 msgid_plural "pairs of aluminum crutches"
-msgstr[0] "硫酸铝"
+msgstr[0] "铝制拐杖"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -142597,7 +142597,7 @@ msgstr[0] "袜装石锤"
 #: data/json/items/melee/whips_and_flails.json
 msgid "rope dart"
 msgid_plural "rope darts"
-msgstr[0] "青铜飞镖"
+msgstr[0] "绳镖"
 
 #. ~ Item name
 #: data/json/items/melee/whips_and_flails.json
@@ -147317,19 +147317,19 @@ msgstr[0] "氯丁橡胶片"
 #: data/json/items/resources/tailoring.json
 msgid "neoprene sheet"
 msgid_plural "neoprene sheets"
-msgstr[0] "氯丁橡胶面料"
+msgstr[0] "氯丁橡胶布"
 
 #. ~ Item name
 #: data/json/items/resources/tailoring.json
 msgid "nylon patch"
 msgid_plural "nylon patches"
-msgstr[0] "氯丁橡胶片"
+msgstr[0] "尼龙片"
 
 #. ~ Item name
 #: data/json/items/resources/tailoring.json
 msgid "nylon sheet"
 msgid_plural "nylon sheets"
-msgstr[0] "氯丁橡胶面料"
+msgstr[0] "尼龙布"
 
 #. ~ Item name
 #: data/json/items/resources/tailoring.json
@@ -147341,7 +147341,7 @@ msgstr[0] "氨纶布片"
 #: data/json/items/resources/tailoring.json
 msgid "spandex sheet"
 msgid_plural "spandex sheets"
-msgstr[0] "芳纶面料"
+msgstr[0] "氨纶布"
 
 #. ~ Item name
 #: data/json/items/resources/tailoring.json
@@ -152868,7 +152868,7 @@ msgstr[0] "简易绷带"
 #: data/json/items/tool/med.json
 msgid "makeshift gauze patch"
 msgid_plural "makeshift gauze patches"
-msgstr[0] "简易抗菌剂"
+msgstr[0] "简易纱布片"
 
 #. ~ Item name
 #: data/json/items/tool/med.json
@@ -170895,7 +170895,7 @@ msgstr "垃圾食品"
 #. ~ Name of material
 #: data/json/materials.json
 msgid "Keratin"
-msgstr "进餐"
+msgstr "角蛋白"
 
 #. ~ Name of material
 #: data/json/materials.json
@@ -174640,7 +174640,7 @@ msgstr "召唤时空裂痕，强度取决于法术等级。"
 #. ~ Description of spell "Thing Death"
 #: data/json/monster_special_attacks/monster_deaths.json
 msgid "Spawns a thing."
-msgstr "召唤出一只怪形。"
+msgstr "生成一个异物。"
 
 #. ~ Description of spell "Pregnant Roach Death"
 #: data/json/monster_special_attacks/monster_deaths.json
@@ -174660,7 +174660,7 @@ msgstr "蝶冠死亡？"
 #. ~ Spell name
 #: data/json/monster_special_attacks/monster_deaths.json
 msgid "Thing Death"
-msgstr "怪形死亡"
+msgstr "“异物”死了"
 
 #. ~ Description of spell "Death Explosion - Tiny"
 #: data/json/monster_special_attacks/monster_deaths.json
@@ -176745,7 +176745,7 @@ msgstr "啮龟"
 #: data/json/monsters/LIXA_monsters.json
 msgid "titanic eigenspectre"
 msgid_plural "titanic eigenspectres"
-msgstr[0] "钛制背心"
+msgstr[0] "泰坦幽灵"
 
 #. ~ Monster name
 #: data/json/monsters/LIXA_monsters.json
@@ -184349,7 +184349,7 @@ msgstr[0] "触手变异犬"
 #: data/json/monsters/nether.json
 msgid "thing"
 msgid_plural "things"
-msgstr[0] "怪形"
+msgstr[0] "异物"
 
 #. ~ Monster name
 #: data/json/monsters/nether.json
@@ -188516,7 +188516,7 @@ msgstr "阅读 %s"
 #. ~ Morale text
 #: data/json/morale_types.json
 msgid "Saw something that hurts to remember"
-msgstr "看到难以回忆的怪形"
+msgstr "看到了某些回想起来就痛苦的事"
 
 #. ~ Morale text
 #: data/json/morale_types.json
@@ -219586,7 +219586,7 @@ msgstr "请依次看你身上的书学习。"
 #. ~ Affirmative response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "Save your medical supplies for yourself."
-msgstr "告诉我怎么给你医疗用品。"
+msgstr "把你的医疗用品留给自己用。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
@@ -219687,7 +219687,7 @@ msgstr "使用生化插件武器。但将75%能量留给防御型或实用型生
 #. ~ Negative response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
 msgid "Use your medical supplies to heal others."
-msgstr "使用一些魔法草药来治疗自己。"
+msgstr "使用你的医疗用品来治疗他人。"
 
 #. ~ Response to NPC dialogue
 #: data/json/npcs/common_chat/TALK_COMMON_ALLY.json
@@ -257521,7 +257521,7 @@ msgstr "<mypronoun>将不会拾取物品。"
 #. ~ Snippet in category "<ally_rule_avoid_locks_true_text>"
 #: data/json/npcs/talk_tags.json
 msgid "<mypronoun> will not try to unlock doors."
-msgstr "<mypronoun>不会试图打开锁上的门。"
+msgstr "<mypronoun> 不会尝试开锁。"
 
 #. ~ Snippet in category "<ally_rule_use_grenades_false_text>"
 #: data/json/npcs/talk_tags.json
@@ -257586,7 +257586,7 @@ msgstr "<mypronoun>会尽可能保持清醒。"
 #. ~ Snippet in category "<ally_rule_avoid_locks_false_text>"
 #: data/json/npcs/talk_tags.json
 msgid "<mypronoun> will unlock doors to open them."
-msgstr "<mypronoun>会试图打开锁上的门。"
+msgstr "<mypronoun> 会打开锁上的门。"
 
 #. ~ Snippet in category "<ally_rule_use_silent_false_text>"
 #: data/json/npcs/talk_tags.json
@@ -323930,7 +323930,7 @@ msgstr "明亮"
 #: data/json/ui/lighting.json
 msgctxt "vision level"
 msgid "Full"
-msgstr "完好"
+msgstr "充足"
 
 #. ~ Clause text "moderate" of UI widget "lighting_desc"
 #: data/json/ui/lighting.json
@@ -330361,7 +330361,7 @@ msgstr "轮椅轮子（一对）"
 #. ~ Vehicle part name
 #: data/json/vehicleparts/wheel.json
 msgid "wheels"
-msgstr "车轮"
+msgstr "车轮组"
 
 #. ~ Vehicle part name
 #: data/json/vehicleparts/wheel.json
@@ -393779,7 +393779,7 @@ msgstr "让所有队员暂时……"
 
 #: src/npctalk.cpp:1141 src/npctalk.cpp:1758
 msgid "yell"
-msgstr "黄色"
+msgstr "喊道"
 
 #: src/npctalk.cpp:1143 src/npctalk.cpp:1760
 msgid "hiss"
