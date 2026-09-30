@@ -4,6 +4,10 @@ from ..write_text import write_text
 def parse_field_type(json, origin):
     field_names = []
 
+    if "substance_name" in json:
+        write_text(json["substance_name"], origin,
+                   comment="Name of the substance comprising this field")
+
     for fd in json.get("intensity_levels", []):
         if "name" in fd:
             write_text(fd["name"], origin, comment="Field intensity level")

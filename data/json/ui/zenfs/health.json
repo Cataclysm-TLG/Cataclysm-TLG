@@ -244,7 +244,7 @@
     "id": "zenfs_fatigue_label_F",
     "type": "widget",
     "style": "text",
-    "string": "F",
+    "string": { "str": "F", "ctxt": "Label for fatigue" },
     "width": 1,
     "padding": 0,
     "flags": [ "W_NO_PADDING" ]

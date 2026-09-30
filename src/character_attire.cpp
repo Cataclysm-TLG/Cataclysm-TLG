@@ -1986,7 +1986,7 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
     const int dur_moves = sp.duration( caster );
     const efftype_id spell_effect = efftype_id( sp.effect_data() );
     const time_duration dur_td = time_duration::from_moves( dur_moves );
-    const std::string liquid_name = sp.field()->obj().substance_name;
+    const std::string liquid_name = sp.field()->obj().substance_name.translated();
     std::list<item> worn_remains;
     // Liquid will splash on the outermost items first.
     int liquid_remaining = liquid_amount;
@@ -2002,9 +2002,10 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
         if( rng( 1, 100 ) <= coverage && liquid_remaining > 0 ) {
             // The item has intercepted the splash to protect its wearer,
             // now we roll to see if it's affected.
-            add_msg_if_player_sees( guy, m_warning, _( "%1s %2s gets on %3s %4s." ),
-                                    get_liquid_descriptor( liquid_remaining ), liquid_name, guy.disp_name( true ),
-                                    pre_damage_name );
+            guy.add_msg_player_or_npc( m_warning,
+                                       _( "%1$s %2$s gets on your %3$s." ),
+                                       _( "%1$s %2$s gets on <npcname>'s %3$s." ),
+                                       get_liquid_descriptor( liquid_remaining ), liquid_name, pre_damage_name );
             // A droplet of acid or bile are less likely to ruin a shirt than a whole bucket.
             // Breathability works against the item as it means the liquid is soaking in or getting through
             // gaps or holes.
@@ -2016,9 +2017,9 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
                     !armor.has_flag( flag_SEMITANGIBLE ) && !armor.has_flag( flag_PERSONAL ) &&
                     !armor.has_flag( flag_AURA ) && (
                         ( rng( 1, 2000 ) - ( ( 100 - breathability ) * 10 ) ) < liquid_remaining ) ) {
-                    add_msg_if_player_sees( guy, m_warning, _( "Filth covers %1s %2s!" ), guy.disp_name( true,
-                                            true ),
-                                            pre_damage_name );
+                    guy.add_msg_player_or_npc( m_warning,
+                                               _( "Filth covers your %s!" ),
+                                               _( "Filth covers <npcname>'s %s!" ), pre_damage_name );
                     armor.set_flag( json_flag_FILTHY );
                     guy.on_worn_item_soiled( armor );
                 }
@@ -2083,8 +2084,10 @@ void outfit::splash_attack( Character &guy, const spell &sp, Creature &caster, b
     }
     if( liquid_remaining == liquid_amount ) {
         // You took the whole attack without any being blocked!
-        add_msg_if_player_sees( guy, m_warning, _( "%1s %2s splashes onto %3s!" ),
-                                get_liquid_descriptor( liquid_remaining ), liquid_name, guy.disp_name() );
+        guy.add_msg_player_or_npc( m_warning,
+                                   _( "%1$s %2$s splashes onto you!" ),
+                                   _( "%1$s %2$s splashes onto <npcname>!" ),
+                                   get_liquid_descriptor( liquid_remaining ), liquid_name );
     }
     // If any containers were destroyed, dump the contents on the ground
     guy.drop_invalid_inventory();

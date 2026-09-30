@@ -1494,7 +1494,7 @@ void complete_construction( Character *you )
                           calendar::turn ) );
     }
 
-    add_msg( m_info, _( "%s finished construction: %s." ), you->disp_name( false, true ),
+    add_msg( m_info, _( "%s finished construction: %s." ), you->disp_name( true ),
              built.group->name() );
     // clear the activity
     you->activity.set_to_null();

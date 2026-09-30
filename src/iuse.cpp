@@ -3285,9 +3285,9 @@ std::optional<int> iuse::tazer( Character *p, item *it, const tripoint_bub_ms &p
             // Remove orphan grabs by running try_remove_grab() with attacking set to true.
             p->try_remove_grab( true );
             p->add_msg_player_or_npc( m_good,
-                                      _( "You are released from %s grasp!" ),
-                                      _( "<npcname> is released from %s grasp!" ),
-                                      target->disp_name( true ) );
+                                      _( "You escape the grasp of %s!" ),
+                                      _( "<npcname> escapes the grasp of %s!" ),
+                                      target->disp_name() );
         }
         if( target_size < 4 && one_in( target_size ) ) {
             target->add_effect( effect_downed, 1_turns );

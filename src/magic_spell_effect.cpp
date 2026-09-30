@@ -658,7 +658,7 @@ static void damage_targets( const spell &sp, Creature &caster,
                 } else {
                     if( !cr->has_effect( effect_invisibility ) ) {
                         add_msg_if_player_sees( cr->pos_bub(), m_bad, _( "%1$s dodges out of the way!" ),
-                                                cr->disp_name( false, true ) );
+                                                cr->disp_name( true ) );
                     }
                 }
                 cr->on_dodge( &caster, spell_accuracy, dodge_training );
@@ -763,7 +763,7 @@ static void damage_targets( const spell &sp, Creature &caster,
                 add_msg_if_player_sees( cr->pos_bub(), m_good, _( "Your wounds are closing up!" ) );
             } else {
                 add_msg_if_player_sees( cr->pos_bub(), m_good, _( "%s begins to heal!" ),
-                                        cr->disp_name( false, true ) );
+                                        cr->disp_name( true ) );
             }
         }
 

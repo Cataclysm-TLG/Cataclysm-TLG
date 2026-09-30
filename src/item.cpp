@@ -14622,7 +14622,7 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
             if( carrier != nullptr ) {
                 if( carrier->is_npc() ) {
                     add_msg_if_player_sees( *carrier, m_bad, _( "%s's %s breaks loose!" ),
-                                            carrier->disp_name( true, true ), cable_name );
+                                            carrier->disp_name( true ), cable_name );
                 } else {
                     carrier->add_msg_if_player( m_bad, _( "Your %s breaks loose!" ), cable_name );
                 }
@@ -14633,7 +14633,7 @@ bool item::process_link( map &here, Character *carrier, const tripoint_bub_ms &p
         } else if( link().length + M_SQRT2 >= link().max_length + 1 && carrier != nullptr ) {
             if( carrier->is_npc() ) {
                 add_msg_if_player_sees( *carrier, m_warning, _( "%s's %s is stretched to its limit!" ),
-                                        carrier->disp_name( true, true ), link_name() );
+                                        carrier->disp_name( true ), link_name() );
             } else {
                 carrier->add_msg_if_player( m_warning, _( "Your %s is stretched to its limit!" ),
                                             link_name() );

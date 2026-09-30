@@ -852,13 +852,9 @@ std::string monster::name_with_armor() const
     return ret;
 }
 
-std::string monster::disp_name( bool possessive, bool capitalize_first ) const
+std::string monster::disp_name( bool capitalize_first ) const
 {
-    if( !possessive ) {
-        return string_format( capitalize_first ? _( "The %s" ) : _( "the %s" ), name() );
-    } else {
-        return string_format( capitalize_first ? _( "The %s's" ) : _( "the %s's" ), name() );
-    }
+    return string_format( capitalize_first ? _( "The %s" ) : _( "the %s" ), name() );
 }
 
 std::string monster::skin_name() const
@@ -2194,14 +2190,14 @@ bool monster::melee_attack( Creature &target, float accuracy )
         if( u_see_my_spot && !target.in_sleep_state() ) {
             if( target.is_avatar() ) {
                 if( monster_missed ) {
-                    add_msg( _( "%s misses you." ), u_see_me ? disp_name( false, true ) : _( "Something" ) );
+                    add_msg( _( "%s misses you." ), u_see_me ? disp_name( true ) : _( "Something" ) );
                 } else {
                     add_msg( _( "You dodge %s." ), u_see_me ? disp_name() : _( "something" ) );
                 }
             } else if( target.is_npc() ) {
                 if( monster_missed ) {
                     add_msg( _( "%1$s misses %2$s!" ),
-                             u_see_me ? disp_name( false, true ) : _( "Something" ), target.disp_name() );
+                             u_see_me ? disp_name( true ) : _( "Something" ), target.disp_name() );
                 } else {
                     add_msg( _( "%1$s dodges %2$s attack." ),
                              target.disp_name(), u_see_me ? name() : _( "something" ) );
@@ -2221,12 +2217,12 @@ bool monster::melee_attack( Creature &target, float accuracy )
                     sfx::do_player_death_hurt( dynamic_cast<Character &>( target ), false );
                 }
                 //~ 1$s is attacker name, 2$s is bodypart name in accusative.
-                add_msg( m_bad, _( "%1$s hits your %2$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
+                add_msg( m_bad, _( "%1$s hits your %2$s." ), u_see_me ? disp_name( true ) : _( "Something" ),
                          body_part_name_accusative( dealt_dam.bp_hit ) );
             } else if( target.is_npc() ) {
                 //~ %1$s: attacker name, %2$s: target NPC name, %3$s: bodypart name in accusative
-                add_msg( _( "%1$s hits %2$s %3$s." ), u_see_me ? disp_name( false, true ) : _( "Something" ),
-                         target.disp_name( true ),
+                add_msg( _( "%1$s hits %2$s in the %3$s." ),
+                         u_see_me ? disp_name( true ) : _( "Something" ), target.disp_name(),
                          body_part_name_accusative( dealt_dam.bp_hit ) );
             } else {
                 if( get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ) {
@@ -2250,24 +2246,21 @@ bool monster::melee_attack( Creature &target, float accuracy )
         if( u_see_my_spot ) {
             if( target.is_avatar() ) {
                 //~ 1$s is attacker name, 2$s is bodypart name in accusative, 3$s is armor name.
-                add_msg( _( "%1$s hits your %2$s, but your %3$s protects you." ), u_see_me ? disp_name( false,
-                         true ) : _( "Something" ),
+                add_msg( _( "%1$s hits your %2$s, but your %3$s protects you." ),
+                         u_see_me ? disp_name( true ) : _( "Something" ),
                          body_part_name_accusative( dealt_dam.bp_hit ), target.skin_name() );
             } else if( target.is_npc() ) {
-                //~ $1s is monster name, %2$s is that monster target name,
-                //~ $3s is target bodypart name in accusative, $4s is the monster target name,
-                //~ 5$s is target armor name.
-                add_msg( _( "%1$s hits %2$s %3$s but is stopped by %4$s %5$s." ), u_see_me ? disp_name( false,
-                         true ) : _( "Something" ),
-                         target.disp_name( true ),
+                //~ $1s is monster name, %2$s is target NPC name,
+                //~ $3s is target bodypart name in accusative, $4s is target armor name.
+                add_msg( _( "%1$s hits %2$s in the %3$s but is stopped by the %4$s." ),
+                         u_see_me ? disp_name( true ) : _( "Something" ), target.disp_name(),
                          body_part_name_accusative( dealt_dam.bp_hit ),
-                         target.disp_name( true ),
                          target.skin_name() );
             } else if( get_option<bool>( "LOG_MONSTER_ATTACK_MONSTER" ) ) {
                 //~ $1s is monster name, %2$s is that monster target name,
                 //~ $3s is target armor name.
                 add_msg( _( "%1$s hits %2$s but is stopped by its %3$s." ),
-                         u_see_me ? disp_name( false, true ) : _( "Something" ),
+                         u_see_me ? disp_name( true ) : _( "Something" ),
                          target.disp_name(),
                          target.skin_name() );
             }
@@ -2658,11 +2651,11 @@ bool monster::move_effects( bool, tripoint_bub_ms dest_loc )
             } else {
                 if( grabber ) {
                     if( grabber->is_avatar() ) {
-                        add_msg( _( "%1s breaks free from %2s grab!" ), disp_name( false, true ),
-                                 grabber->disp_name( true ) );
+                        add_msg( _( "%1$s breaks the grab by %2$s!" ), disp_name( true ),
+                                 grabber->disp_name() );
                     } else if( u_see_me && get_option<bool>( "LOG_MONSTER_MOVE_EFFECTS" ) ) {
-                        add_msg( _( "%1s breaks free from %2s grab!" ), disp_name( false, true ),
-                                 grabber->disp_name( true ) );
+                        add_msg( _( "%1$s breaks the grab by %2$s!" ), disp_name( true ),
+                                 grabber->disp_name() );
                     }
                     if( !grabber->is_monster() ) {
                         for( const effect &eff : grabber->get_effects_with_flag( json_flag_GRAB_FILTER ) ) {
@@ -3637,8 +3630,8 @@ void monster::process_effects()
             if( heal( dark_regen_amount ) > 20 && one_in( 31 - dark_regen_amount ) ) {
                 add_msg_if_player_sees( *this, m_warning, _( "The %s uses the darkness to regenerate." ), name() );
             } else if( heal( dark_regen_amount ) > 0 && one_in( 31 - dark_regen_amount ) ) {
-                add_msg_if_player_sees( *this, m_warning, _( "The light seems to be slowing %s regeneration." ),
-                                        disp_name( true ) );
+                add_msg_if_player_sees( *this, m_warning,
+                                        _( "The light seems to be slowing the regeneration of %s." ), disp_name() );
             }
         }
 

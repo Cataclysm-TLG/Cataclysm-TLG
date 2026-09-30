@@ -1044,9 +1044,9 @@ bool Character::activate_bionic( bionic &bio, bool eff_only, bool *close_bionics
                     // Remove orphan grabs by running try_remove_grab() with attacking set to true.
                     try_remove_grab( true );
                     add_msg_player_or_npc( m_good,
-                                           _( "You are released from %s grasp!" ),
-                                           _( "<npcname> is released from %s grasp!" ),
-                                           target->disp_name( true ) );
+                                           _( "You escape the grasp of %s!" ),
+                                           _( "<npcname> escapes the grasp of %s!" ),
+                                           target->disp_name() );
                 }
                 if( target_size < 4 && one_in( target_size ) ) {
                     target->add_effect( effect_downed, 1_turns );
@@ -2255,7 +2255,7 @@ bool Character::can_uninstall_bionic( const bionic &bio, Character &installer, b
     }
 
     if( bio.id->cant_remove_reason.has_value() ) {
-        popup( string_format( bio.id->cant_remove_reason.value(), disp_name( true ), disp_name() ) );
+        popup( bio.id->cant_remove_reason.value().translated() );
         return false;
     }
 
@@ -2629,7 +2629,7 @@ bool Character::install_bionics( const itype &type, Character &installer, bool a
         ( ( installer.has_proficiency( proficiency_prof_wp_cyborg ) ||
             installer.has_proficiency( proficiency_prof_intro_biology ) ) &&
           installer.has_proficiency( proficiency_prof_dissect_humans ) ) ) {
-        activity.str_values.push_back( installer.disp_name( true ) );
+        activity.str_values.push_back( installer.disp_name() );
     } else {
         activity.str_values.emplace_back( "NOT_MED" );
     }
@@ -2712,8 +2712,7 @@ void Character::bionics_install_failure( const bionic_id &bid, const std::string
 
     if( installer != "NOT_MED" ) {
         //~"Complications" is USian medical-speak for "unintended damage from a medical procedure".
-        add_msg( m_neutral, _( "%s training helps to minimize the complications." ),
-                 installer );
+        add_msg( m_neutral, _( "Medical training helps to minimize the complications." ) );
         // In addition to the bonus, medical residents know enough OR protocol to avoid botching.
         // Take MD and be immune to faulty bionics.
         if( fail_type > 3 ) {
