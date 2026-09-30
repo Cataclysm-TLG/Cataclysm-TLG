@@ -1024,9 +1024,9 @@
       { "group": "glass_of_wine", "prob": 40 },
       [ "glass", 40 ],
       { "prob": 30, "group": "cig_box_cigarette_1_20" },
-      { "item": "cigar", "prob": 20, "count": [ 1, 10 ] },
-      { "item": "case_cigar", "prob": 10, "count": [ 1, 2 ] },
-      { "group": "cigar_box_unopened", "prob": 25, "count": [ 1, 5 ] },
+      { "item": "cigar", "prob": 20, "count": [ 1, 5 ] },
+      { "item": "case_cigar", "prob": 10 },
+      { "group": "cigar_box_unopened", "prob": 10 },
       [ "towel", 5 ]
     ]
   },
