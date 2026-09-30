@@ -576,7 +576,11 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "stick_long", "count": [ 3, 5 ] }, { "item": "stick", "count": [ 3, 10 ] }, { "item": "splinter", "count": [ 15, 30 ] } ]
+      "items": [
+        { "item": "stick_long", "count": [ 3, 5 ] },
+        { "item": "stick", "count": [ 3, 10 ] },
+        { "item": "splinter", "count": [ 15, 30 ] }
+      ]
     }
   },
   {
@@ -598,7 +602,11 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "stick_long", "count": [ 1, 2 ] }, { "item": "stick", "count": [ 1, 4 ] }, { "item": "splinter", "count": [ 20, 50 ] } ]
+      "items": [
+        { "item": "stick_long", "count": [ 1, 2 ] },
+        { "item": "stick", "count": [ 1, 4 ] },
+        { "item": "splinter", "count": [ 20, 50 ] }
+      ]
     }
   },
   {
@@ -2027,7 +2035,11 @@
       "sound": "crunch!",
       "sound_fail": "whack!",
       "ter_set": "t_dirt",
-      "items": [ { "item": "stick_long", "count": [ 3, 5 ] }, { "item": "stick", "count": [ 3, 10 ] }, { "item": "splinter", "count": [ 15, 30 ] } ]
+      "items": [
+        { "item": "stick_long", "count": [ 3, 5 ] },
+        { "item": "stick", "count": [ 3, 10 ] },
+        { "item": "splinter", "count": [ 15, 30 ] }
+      ]
     }
   },
   {
@@ -3353,7 +3365,17 @@
     "coverage": 40,
     "concealment": 50,
     "flags": [ "TRANSPARENT", "DIGGABLE", "PLOWABLE", "SMALL_HIDE", "SMALL_HIDE", "FLAMMABLE_HARD" ],
-    "bash": { "sound": "thump", "ter_set": "t_dirt", "str_min": 15, "str_max": 40, "items": [ { "item": "stick_long", "count": [ 1, 4 ] }, { "item": "stick", "count": [ 1, 4 ] }, { "item": "leaves", "count": [ 5, 20 ] } ] }
+    "bash": {
+      "sound": "thump",
+      "ter_set": "t_dirt",
+      "str_min": 15,
+      "str_max": 40,
+      "items": [
+        { "item": "stick_long", "count": [ 1, 4 ] },
+        { "item": "stick", "count": [ 1, 4 ] },
+        { "item": "leaves", "count": [ 5, 20 ] }
+      ]
+    }
   },
   {
     "type": "terrain",
@@ -3365,7 +3387,12 @@
     "color": "brown",
     "move_cost": 10,
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "PLOWABLE", "SMALL_HIDE", "FLAMMABLE_ASH" ],
-    "bash": { "ter_set": "t_dirt", "str_min": 10, "str_max": 30, "items": [ { "item": "withered", "prob": 50, "count": [ 1, 2 ] }, { "item": "leaves", "count": [ 1, 2 ] } ] }
+    "bash": {
+      "ter_set": "t_dirt",
+      "str_min": 10,
+      "str_max": 30,
+      "items": [ { "item": "withered", "prob": 50, "count": [ 1, 2 ] }, { "item": "leaves", "count": [ 1, 2 ] } ]
+    }
   },
   {
     "type": "terrain",
