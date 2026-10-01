@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-09-24 02:24-0700\n"
-"PO-Revision-Date: 2026-09-30 19:03+0800\n"
+"PO-Revision-Date: 2026-10-01 09:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -125,7 +125,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #. ~ Help message in menu "Description of map symbols"
 #. ~ Help message in menu "<2>: Description of map symbols"
@@ -61926,7 +61926,7 @@ msgstr[0] "毛皮大衣"
 #: data/json/items/armor/coats.json
 msgid "fur longcoat"
 msgid_plural "fur longcoats"
-msgstr[0] "毛绒兜裆布"
+msgstr[0] "毛绒长外套"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -62023,7 +62023,7 @@ msgstr[0] "皮革夹克"
 #: data/json/items/armor/coats.json
 msgid "leather longcoat"
 msgid_plural "leather longcoats"
-msgstr[0] "皮兜裆布"
+msgstr[0] "皮革长外套"
 
 #. ~ Item name
 #: data/json/items/armor/coats.json
@@ -73897,7 +73897,7 @@ msgstr[0] "束身皮衣（松）"
 #: data/json/items/armor/undergarment.json
 msgid "leather waist cincher"
 msgid_plural "leather waist cinchers"
-msgstr[0] "皮革片"
+msgstr[0] "皮革束腰"
 
 #. ~ Item name
 #: data/json/items/armor/undergarment.json
