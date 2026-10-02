@@ -745,8 +745,26 @@ void variant_pass::probe()
     probed_ok_ = true;
 }
 
+bool variant_pass::lit_takes( const variant_kind v ) const
+{
+    if( !lit_active_ || lit_suspended_ ) {
+        return false;
+    }
+    // memory blends back toward the lit look near the edge of sight
+    return v == variant_kind::NORMAL || v == variant_kind::SHADOW || v == variant_kind::NIGHT ||
+           v == variant_kind::OVEREXPOSED ||
+           ( v == variant_kind::MEMORY && lit_params_.mode[0] >= 0 );
+}
+
 SDL_GPURenderState *variant_pass::state_for( variant_kind v, const bool tinted ) const
 {
+    if( lit_takes( v ) ) {
+        // light carries the tint, so tinted doesn't matter
+        const bool night = v == variant_kind::NIGHT || v == variant_kind::OVEREXPOSED ||
+                           ( v == variant_kind::MEMORY && lit_night_vision_ );
+        return night ? nv_lit_state_.get() :
+               lit_state_.get();
+    }
     if( v == variant_kind::NORMAL && tinted ) {
         return tint_state_.get();
     }
@@ -842,6 +860,114 @@ bool variant_pass::flush()
 void variant_pass::select_memory_preset( std::optional<memory_preset> preset )
 {
     active_memory_preset_ = preset;
+}
+
+void variant_pass::release_lit( const bool abandon_handles )
+{
+    if( abandon_handles ) {
+        lit_state_.abandon();
+        nv_lit_state_.abandon();
+        lit_shader_.abandon();
+        nv_lit_shader_.abandon();
+    }
+    lit_state_ = {};
+    nv_lit_state_ = {};
+    lit_shader_ = {};
+    nv_lit_shader_ = {};
+    if( lit_sampler_ && lit_device_ && !abandon_handles ) {
+        SDL_ReleaseGPUSampler( lit_device_, lit_sampler_ );
+    }
+    lit_sampler_ = nullptr;
+    lit_device_ = nullptr;
+    lit_texture_ = nullptr;
+    lit_params_ = lit_params();
+    lit_active_ = false;
+}
+
+bool variant_pass::begin_lit( SDL_Texture *lightmap, const std::array<float, 2> &texel,
+                              const std::optional<memory_preset> blend_into, const bool per_tile, const bool iso,
+                              const bool night_vision )
+{
+    lit_active_ = false;
+    if( !available() || !lightmap || lit_failed_ || abandoned_pending_rebind_ || boundary_lost_ ) {
+        return false;
+    }
+    const bool fresh = !lit_state_.is_valid() || lightmap != lit_texture_;
+    if( fresh ) {
+        drop_lit();
+        if( boundary_lost_ ) {
+            return false;
+        }
+        lit_failed_ = true;
+        SDL_GPUDevice *const device = SDL_GetGPURendererDevice( renderer_ );
+        SDL_GPUTexture *const gpu_texture = static_cast<SDL_GPUTexture *>( SDL_GetPointerProperty(
+                                                SDL_GetTextureProperties( lightmap ), SDL_PROP_TEXTURE_GPU_TEXTURE_POINTER, nullptr ) );
+        if( !device || !gpu_texture ) {
+            DebugLog( D_ERROR, DC_ALL ) << "cata_shader::variant_pass: lightmap has no GPU texture";
+            return false;
+        }
+        SDL_GPUSamplerCreateInfo sampler_info{};
+        sampler_info.min_filter = SDL_GPU_FILTER_LINEAR;
+        sampler_info.mag_filter = SDL_GPU_FILTER_LINEAR;
+        sampler_info.mipmap_mode = SDL_GPU_SAMPLERMIPMAPMODE_NEAREST;
+        sampler_info.address_mode_u = SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
+        sampler_info.address_mode_v = SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
+        sampler_info.address_mode_w = SDL_GPU_SAMPLERADDRESSMODE_CLAMP_TO_EDGE;
+        lit_sampler_ = SDL_CreateGPUSampler( device, &sampler_info );
+        if( !lit_sampler_ ) {
+            DebugLog( D_ERROR, DC_ALL )
+                    << "cata_shader::variant_pass: SDL_CreateGPUSampler failed: " << SDL_GetError();
+            return false;
+        }
+        lit_device_ = device;
+        lit_shader_ = shader::load_fragment( device, "lit.frag", 2, 1 );
+        nv_lit_shader_ = shader::load_fragment( device, "nightvision_lit.frag", 2, 1 );
+        SDL_GPUTextureSamplerBinding binding{};
+        binding.texture = gpu_texture;
+        binding.sampler = lit_sampler_;
+        lit_state_ = render_state::create( renderer_, lit_shader_, &binding, 1 );
+        nv_lit_state_ = render_state::create( renderer_, nv_lit_shader_, &binding, 1 );
+        if( !lit_state_.is_valid() || !nv_lit_state_.is_valid() ) {
+            release_lit( false );
+            return false;
+        }
+        lit_texture_ = lightmap;
+        lit_failed_ = false;
+    }
+    lit_params params;
+    params.texel = { texel[0], texel[1], 0.0f, 0.0f };
+    params.mode = { blend_into ? static_cast<int32_t>( *blend_into ) : -1, per_tile ? 1 : 0, 0, iso ? 1 : 0 };
+    if( fresh || !( params == lit_params_ ) ) {
+        std::array < Uint8, sizeof( params.texel ) + sizeof( params.mode ) > block;
+        std::memcpy( block.data(), params.texel.data(), sizeof( params.texel ) );
+        std::memcpy( block.data() + sizeof( params.texel ), params.mode.data(), sizeof( params.mode ) );
+        if( !SDL_SetGPURenderStateFragmentUniforms( lit_state_.get(), 0, block.data(), block.size() ) ||
+            !SDL_SetGPURenderStateFragmentUniforms( nv_lit_state_.get(), 0, block.data(),
+                    block.size() ) ) {
+            DebugLog( D_ERROR, DC_ALL )
+                    << "cata_shader::variant_pass: lit uniforms failed: " << SDL_GetError();
+            return false;
+        }
+        lit_params_ = params;
+    }
+    lit_night_vision_ = night_vision;
+    lit_active_ = true;
+    return true;
+}
+
+void variant_pass::end_lit()
+{
+    lit_active_ = false;
+    lit_suspended_ = false;
+}
+
+void variant_pass::drop_lit()
+{
+    if( !lit_state_.is_valid() && !lit_sampler_ ) {
+        return;
+    }
+    const bool flushed = flush();
+    release_lit( !flushed );
 }
 
 void variant_pass::release_gpu_resources()

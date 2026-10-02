@@ -261,6 +261,37 @@ class variant_pass
 
         void select_memory_preset( std::optional<memory_preset> preset );
 
+        // smooth lighting. when active, NORMAL and SHADOW draws run lit.frag,
+        // and NIGHT and OVEREXPOSED run nightvision_lit.frag. all shade each pixel from
+        // `lightmap` at the map coordinates provided by the caller in the
+        // vertex colors; see lit_sample.glsl. `texel` is one lightmap texel in
+        // texture coordinates. with `blend_into`, MEMORY draws also run
+        // lit.frag and every lit draw blends out-of-sight light into that
+        // memory preset. `per_tile` gives each tile its own light instead of
+        // blending across tiles; `iso` picks the base line standing sprites
+        // take their light from; `night_vision` blends MEMORY draws toward the
+        // night vision look. false when no lit state could be made, and the
+        // caller draws the classic variants.
+        bool begin_lit( SDL_Texture *lightmap, const std::array<float, 2> &texel,
+                        std::optional<memory_preset> blend_into, bool per_tile, bool iso,
+                        bool night_vision );
+        // back to classic variants, lit states stay for the next frame
+        void end_lit();
+        // drop lit states before the lightmap texture is destroyed: the states
+        // hold it, and destroying them flushes queued draws
+        void drop_lit();
+        bool lit_active() const {
+            return lit_active_;
+        }
+        // whether a draw of `v` runs a lit state now, and so wants map
+        // coordinates in its vertex colors
+        bool lit_takes( variant_kind v ) const;
+        // while set, draws use the classic variants even though lighting is
+        // active; for sprites that show whatever the light at their tile
+        void set_lit_suspended( bool suspended ) {
+            lit_suspended_ = suspended;
+        }
+
         // Drop all GPU resources, flushing held state first; idempotent. On
         // flush failure the handles are abandoned and the embargo raised (see
         // abandoned_pending_rebind_). Run before the owning renderer dies.
@@ -298,6 +329,29 @@ class variant_pass
         shader tint_shader_;
         render_state tint_state_;
         std::optional<memory_preset> active_memory_preset_;
+        shader lit_shader_;
+        shader nv_lit_shader_;
+        render_state lit_state_;
+        render_state nv_lit_state_;
+        SDL_GPUDevice *lit_device_ = nullptr;
+        SDL_GPUSampler *lit_sampler_ = nullptr;
+        SDL_Texture *lit_texture_ = nullptr;
+        // lit_params block of lit_sample.glsl, std140: vec4 u_texel, ivec4 u_mode
+        struct lit_params {
+            std::array<float, 4> texel = {};
+            std::array<int32_t, 4> mode = { -1, 0, 0, 0 };
+            bool operator==( const lit_params &o ) const {
+                return texel == o.texel && mode == o.mode;
+            }
+        };
+        lit_params lit_params_;
+        bool lit_active_ = false;
+        bool lit_suspended_ = false;
+        // memory blends toward the night vision look, not the lit look
+        bool lit_night_vision_ = false;
+        // set when making lit states failed, so later frames don't retry and
+        // log again until the GPU resources are rebuilt
+        bool lit_failed_ = false;
         SDL_GPURenderState *bound_state_ = nullptr;
         // Set after an unsafe bind transition (failed SDL_SetGPURenderState or
         // a probe boundary loss): next flush() must call null-state regardless
