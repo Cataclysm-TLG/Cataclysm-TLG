@@ -25,8 +25,70 @@ class vehicle;
 struct diagonal_blocks {
     bool nw;
     bool ne;
-};
+    };
 enum class lit_level : uint8_t;
+
+// process wide count: equal generations mean the same cache state, even
+// across map instances. 64 bits do not wrap in practice
+uint64_t next_cache_generation();
+
+// level_cache is a huge struct and some compilers need help to zero these
+// members efficiently. Break them into a separate struct which can be memset
+// in a single call instead of a bunch of fill_n which don't optimize well.
+struct level_cache_default_zero_members {
+    cata::mdarray<four_quadrants, point_bub_ms> lm;
+    cata::mdarray<float, point_bub_ms> sm;
+    // Accumulated colored light energy per tile. Populated during generate_lightmap
+    // alongside lm/sm. Zero = uncolored (white) light only.
+    cata::mdarray<light_color_rgb, point_bub_ms> light_color_cache;
+    // Bulk light source buffer. Scalar luminance uses max() for dedup;
+    // color accumulates additively. Only valid during generate_lightmap.
+    struct buffered_light_source {
+        buffered_light_source() = default;
+        float luminance;
+        light_color_rgb color;
+    };
+    cata::mdarray<buffered_light_source, point_bub_ms> light_source_buffer;
+    // if false, means tile is under the roof ("inside"), true means tile is "outside"
+    // "inside" tiles are protected from sun, rain, etc. (see ter_furn_flag::TFLAG_INDOORS flag)
+    cata::mdarray<bool, point_bub_ms> outside_cache;
+
+    // true when vehicle below has "ROOF" or "OPAQUE" part, furniture below has ter_furn_flag::TFLAG_SUN_ROOF_ABOVE
+    //      or terrain doesn't have ter_furn_flag::TFLAG_NO_FLOOR flag
+    // false otherwise
+    // i.e. true == has floor
+    cata::mdarray<bool, point_bub_ms> floor_cache;
+
+    // stores cached transparency of the tiles
+    // units: "transparency" (see LIGHT_TRANSPARENCY_OPEN_AIR)
+    cata::mdarray<float, point_bub_ms>transparency_cache;
+
+    // materialized  (transparency_cache[i][j] > LIGHT_TRANSPARENCY_SOLID)
+    // doesn't consider fields (i.e. if tile is covered in thick smoke, it's still
+    // considered transparent for the purpuses of this cache)
+    // true, if tile is not opaque
+    std::array<std::bitset<MAPSIZE_Y>, MAPSIZE_X> transparent_cache_wo_fields;
+
+    // stores "adjusted transparency" of the tiles
+    // initial values derived from transparency_cache, uses same units
+    // examples of adjustment: changed transparency on player's tile and special case for crouching
+    cata::mdarray<float, point_bub_ms> vision_transparency_cache;
+
+    // stores "visibility" of the tiles to the player
+    // values range from 1 (fully visible to player) to 0 (not visible)
+    cata::mdarray<float, point_bub_ms> seen_cache;
+
+    // same as `seen_cache` (same units) but contains values for cameras and mirrors
+    // effective "visibility_cache" is calculated as "max(seen_cache, camera_cache)"
+    cata::mdarray<float, point_bub_ms> camera_cache;
+
+    // stores resulting apparent brightness to player, calculated by map::apparent_light_at
+    cata::mdarray<lit_level, point_bub_ms> visibility_cache;
+    std::bitset<MAPSIZE_X *MAPSIZE_Y> map_memory_cache_dec;
+    std::bitset<MAPSIZE_X *MAPSIZE_Y> map_memory_cache_ter;
+    std::bitset<MAPSIZE *MAPSIZE> field_cache;
+};
+
 
 struct level_cache {
     public:
@@ -39,6 +101,12 @@ struct level_cache {
         bool floor_cache_dirty = false;
         bool seen_cache_dirty = false;
         bool lightmap_dirty = true;
+        // set from next_cache_generation each time generate_lightmap rebuilds
+        // lm and sm; a reader compares it to tell the light changed
+        uint64_t lightmap_generation = 0;
+        // set from next_cache_generation each time update_visibility_cache
+        // recomputes visibility_cache
+        uint64_t visibility_generation = 0;
         // set by any write that dirties map_memory_cache_dec or _ter on this
         // level; a tiles memorize sweep of this level is due while set
         bool map_memory_sweep_pending = true;
@@ -130,4 +198,3 @@ struct level_cache {
         std::bitset<MAPSIZE_X *MAPSIZE_Y> veh_exists_at;
         std::unordered_map<tripoint_bub_ms, std::pair<vehicle *, int>> veh_cached_parts;
 };
-#endif // CATA_SRC_LEVEL_CACHE_H

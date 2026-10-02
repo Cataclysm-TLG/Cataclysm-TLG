@@ -4,6 +4,28 @@
 
 level_cache::level_cache()
 {
+    clear();
+}
+
+uint64_t next_cache_generation()
+{
+    static uint64_t last = 0;
+    return ++last;
+}
+
+void level_cache::clear()
+{
+    // Blast zeroes over the entire region. Some compilers, looking at you msvc, aren't smart enough
+    // to turn this into a single fused memset. Sometimes it doesn't even optimize fill_n into memset
+    // but emits scalar loops. This murders map test performance.
+#pragma GCC diagnostic push
+    // It's safe to disable this because we static_assert that level_cache_default_zero_members is
+    // trivially copyable, and we know all zeros bit pattern is a legal representation for the type.
+#pragma GCC diagnostic ignored "-Wclass-memaccess"
+    std::memset( static_cast<level_cache_default_zero_members *>( this ), 0,
+                 sizeof( level_cache_default_zero_members ) );
+#pragma GCC diagnostic pop
+
     transparency_cache_dirty.set();
     outside_cache_dirty = true;
     floor_cache_dirty = false;
