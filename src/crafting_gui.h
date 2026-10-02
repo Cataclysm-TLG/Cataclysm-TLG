@@ -23,8 +23,7 @@ class recipe_subset;
  * Return: if recipe * is not nullptr, then Character * is not nullptr either.
  */
 std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &batch_size_out,
-        const recipe_id &goto_recipe, Character *crafter, std::string filterstring = "",
-        bool camp_crafting = false, inventory *inventory_override = nullptr );
+        const recipe_id &goto_recipe, Character *crafter, std::string filterstring = "", inventory *inventory_override = nullptr );
 std::pair<std::vector<const recipe *>, bool> recipes_from_cat( const recipe_subset
         &available_recipes, const crafting_category_id &cat, const std::string &subcat );
 

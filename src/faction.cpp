@@ -727,12 +727,12 @@ int npc::faction_display( const catacurses::window &fac_w, const int width ) con
                         }
                         if( camp_to_camp ||
                             square_dist( i.abs_sm_pos, pos_abs_sm() ) <= recv_range * radio_tower_boost ) {
-                            //one radio tower relay
+                            // One radio tower relay.
                             camp_to_npc = true;
                             break;
                         }
                         for( const camp_reference &j : camps_near_npc ) {
-                            //two radio tower relays
+                            // Two radio tower relays.
                             if( ( j.camp )->has_provides( "radio" ) &&
                                 ( square_dist( i.abs_sm_pos, j.abs_sm_pos ) <= base_range * radio_tower_boost *
                                   radio_tower_boost ) ) {

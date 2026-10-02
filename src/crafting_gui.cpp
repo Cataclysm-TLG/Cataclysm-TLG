@@ -361,8 +361,7 @@ static bool selection_ok( const std::vector<const recipe *> &list, const int cur
 }
 
 std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &batch_size_out,
-        const recipe_id &goto_recipe, Character *crafter, std::string filterstring, bool camp_crafting,
-        inventory *inventory_override )
+        const recipe_id &goto_recipe, Character *crafter, std::string filterstring, inventory *inventory_override )
 {
     if( crafter == nullptr ) {
         return {nullptr, nullptr};
@@ -735,7 +734,7 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
                 current.clear();
                 for( int i = 1; i <= 50; i++ ) {
                     current.push_back( chosen );
-                    available.emplace_back( *crafter, chosen, i, camp_crafting, inventory_override );
+                    available.emplace_back( *crafter, chosen, i, inventory_override );
                 }
                 indent.assign( current.size(), 0 );
             } else {
@@ -775,7 +774,7 @@ std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &
                 num_recipe = picking.size();
                 recipe_list_data list_result = build_recipe_list(
                                                    std::move( picking ), skip_hidden, skip_sort,
-                                                   *crafter, camp_crafting, inventory_override,
+                                                   *crafter, inventory_override,
                                                    highlight_unread_recipes, unread_recipes_first,
                                                    *availability_cache, available_recipes );
                 current = std::move( list_result.entries );
