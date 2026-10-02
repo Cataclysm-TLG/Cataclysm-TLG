@@ -954,9 +954,19 @@ void worldfactory::show_active_world_mods( const std::vector<mod_id> &world_mods
     }
 }
 
-int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win, WORLD *world,
+int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*parent_win*/, WORLD *world,
         bool with_tabs )
 {
+    // Draw a new window because the main one is too small.
+    const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
+    const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ?
+                         ( TERMX - iMinScreenWidth ) / 2 : 0;
+
+    catacurses::window win = catacurses::newwin(
+                                 TERMY,
+                                 iMinScreenWidth,
+                                 point( iOffsetX, 0 )
+                             );
     // Use active_mod_order of the world,
     // saves us from writing 'world->active_mod_order' all the time.
     std::vector<mod_id> &active_mod_order = world->active_mod_order;
@@ -1648,7 +1658,8 @@ void worldfactory::draw_modselection_borders( const catacurses::window &win,
     std::array<bool, 5> hv = {{true, true, true, false, false}}; // horizontal line = true, vertical line = false
 
     wattron( win, BORDER_COLOR );
-
+    mvwhline( win, point( 1, 0 ), LINE_OXOX, iMinScreenWidth - 2 );
+    mvwhline( win, point( 1, getmaxy( win ) - 1 ), LINE_OXOX, iMinScreenWidth - 2 );
     for( int i = 0; i < 5; ++i ) {
         const point p( xs[i], ys[i] );
         if( hv[i] ) {
