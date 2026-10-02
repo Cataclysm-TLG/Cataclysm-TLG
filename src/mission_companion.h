@@ -27,13 +27,7 @@ using comp_list = std::vector<npc_ptr>;
 
 //  The different missions that are supported by the code. New missions have to get a new value entered to
 //  this enum (and added as appropriate in all places the enum is used). Note that there are currently
-//  two missions that take parameters based on (ultimately) JSON data, namely Camp_Crafting, that takes
-//  a recipe from a recipe group added as a "provides" in faction camp hubs/expansions, and Camp_Upgrade,
-//  that take a blueprint provided by a hub/expansion construction recipe.
-//  Camp_Survey_Expansion allows base camps to expand into surrounding tiles based on JSON definitions,
-//  but this selection is done directly as part of the finalization of the mission, rather than provided
-//  as a goal at the outset, and so only counts partially.
-//
+//  two missions that take parameters based on (ultimately) JSON data.
 enum mission_kind : int {
     No_Mission,  //  Null value
 
@@ -49,28 +43,20 @@ enum mission_kind : int {
     //  Faction camp tasks
     Camp_Distribute_Food,        //  Direct action, not serialized
     Camp_Determine_Leadership,   //  Direct action, not serialized
-    // Camp_Have_Meal,              //  Direct action, not serialized
-    Camp_Hide_Mission,           //  Direct action, not serialized
-    Camp_Reveal_Mission,         //  Direct action, not serialized
     Camp_Assign_Jobs,
     Camp_Assign_Workers,
     Camp_Abandon,
     Camp_Upgrade,
     Camp_Emergency_Recall,
-    Camp_Crafting,
     Camp_Gather_Materials,
     Camp_Collect_Firewood,
     Camp_Menial,
     Camp_Survey_Field,
-    Camp_Survey_Expansion,
     Camp_Cut_Logs,
     Camp_Clearcut,
-    Camp_Setup_Hide_Site,
-    Camp_Relay_Hide_Site,
     Camp_Foraging,
     Camp_Trapping,
     Camp_Hunting,
-    Camp_OM_Fortifications,
     Camp_Recruiting,
     Camp_Scouting,
     Camp_Combat_Patrol,

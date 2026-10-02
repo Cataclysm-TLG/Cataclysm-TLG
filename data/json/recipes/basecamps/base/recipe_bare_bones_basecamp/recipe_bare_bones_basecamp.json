@@ -13,10 +13,6 @@
     "construction_blueprint": "fbbb",
     "blueprint_provides": [
       { "id": "gathering" },
-      { "id": "fbbb_crafting_recipes_basic" },
-      { "id": "fbbb_crafting_recipes_cooking" },
-      { "id": "fbbb_crafting_recipes_crafting" },
-      { "id": "fbbb_crafting_recipes_custom" },
       { "id": "fbbb" },
       { "id": "firewood" },
       { "id": "foraging" },

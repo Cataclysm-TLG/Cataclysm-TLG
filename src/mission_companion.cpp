@@ -192,28 +192,20 @@ std::string enum_to_string<mission_kind>( mission_kind data )
         case mission_kind::Caravan_Commune_Center_Job: return "Caravan_Commune_Center_Job";
         case mission_kind::Camp_Distribute_Food: return "Camp_Distribute_Food";
 		case mission_kind::Camp_Determine_Leadership: return "Camp_Determine_Leadership";
-		// case mission_kind::Camp_Have_Meal: return "Camp_Have_Meal";
-        case mission_kind::Camp_Hide_Mission: return "Camp_Hide_Mission";
-        case mission_kind::Camp_Reveal_Mission: return "Camp_Reveal_Mission";
         case mission_kind::Camp_Assign_Jobs: return "Camp_Assign_Jobs";
         case mission_kind::Camp_Assign_Workers: return "Camp_Assign_Workers";
         case mission_kind::Camp_Abandon: return "Camp_Abandon";
         case mission_kind::Camp_Upgrade: return "Camp_Upgrade";
         case mission_kind::Camp_Emergency_Recall: return "Camp_Emergency_Recall";
-        case mission_kind::Camp_Crafting: return "Camp_Crafting";
         case mission_kind::Camp_Gather_Materials: return "Camp_Gather_Materials";
         case mission_kind::Camp_Collect_Firewood: return "Camp_Collect_Firewood";
         case mission_kind::Camp_Menial: return "Camp_Menial";
         case mission_kind::Camp_Survey_Field: return "Camp_Survey_Field";
-        case mission_kind::Camp_Survey_Expansion: return "Camp_Survey_Expansion";
         case mission_kind::Camp_Cut_Logs: return "Camp_Cut_Logs";
         case mission_kind::Camp_Clearcut: return "Camp_Clearcut";
-        case mission_kind::Camp_Setup_Hide_Site: return "Camp_Setup_Hide_Site";
-        case mission_kind::Camp_Relay_Hide_Site: return "Camp_Relay_Hide_Site";
         case mission_kind::Camp_Foraging: return "Camp_Foraging";
         case mission_kind::Camp_Trapping: return "Camp_Trapping";
         case mission_kind::Camp_Hunting: return "Camp_Hunting";
-        case mission_kind::Camp_OM_Fortifications: return "Camp_OM_Fortifications";
         case mission_kind::Camp_Recruiting: return "Camp_Recruiting";
         case mission_kind::Camp_Scouting: return "Camp_Scouting";
         case mission_kind::Camp_Combat_Patrol: return "Camp_Combat_Patrol";
@@ -272,18 +264,6 @@ static const std::array < miss_data, Camp_Harvest + 1 > miss_info = { {
             "Camp_Determine_Leadership",
             no_translation( "" )
         },
-        // {
-        //     "Camp_Have_Meal",
-        //     no_translation( "" )
-        // },
-        {
-            "Hide_Mission",
-            no_translation( "" )
-        },
-        {
-            "Reveal_Mission",
-            no_translation( "" )
-        },
         {
             "Camp_Assign_Jobs",
             no_translation( "" )
@@ -305,10 +285,6 @@ static const std::array < miss_data, Camp_Harvest + 1 > miss_info = { {
             to_translation( "Lost in the ether!\n" )
         },
         {
-            "Camp_Crafting ",  //  Want to add the recipe after the space
-            to_translation( "Busy crafting!\n" )
-        },
-        {
             "Camp_Gather_Materials",
             to_translation( "Searching for materials to upgrade the camp.\n" )
         },
@@ -325,24 +301,12 @@ static const std::array < miss_data, Camp_Harvest + 1 > miss_info = { {
             to_translation( "Surveying for suitable fields…\n" )
         },
         {
-            "Camp_Survey_Expansion",
-            to_translation( "Surveying for expansion…\n" )
-        },
-        {
             "Camp_Cut_Logs",
             to_translation( "Cutting logs in the woods…\n" )
         },
         {
             "Camp_Clearcut",
             to_translation( "Clearing a forest…\n" )
-        },
-        {
-            "Camp_Setup_Hide_Site",
-            to_translation( "Setting up a hide site…\n" )
-        },
-        {
-            "Camp_Relay_Hide_Site",
-            to_translation( "Transferring gear to a hide site…\n" )
         },
         {
             "Camp Foraging",
@@ -355,10 +319,6 @@ static const std::array < miss_data, Camp_Harvest + 1 > miss_info = { {
         {
             "Camp_Hunting",
             to_translation( "Hunting large animals.\n" )
-        },
-        {
-            "Camp_OM_Fortifications",
-            to_translation( "Constructing fortifications…\n" )
         },
         {
             "Camp_Recruiting",
@@ -480,10 +440,7 @@ void mission_id::deserialize( const JsonValue &val )
             dir = base_camps::base_dir;
         }  //  Camp_Emergency_Recall is an immediate action, and so isn't serialized
 
-        else if( st == "_faction_camp_crafting_" ) { //  id + dir
-            id = Camp_Crafting;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_gathering" ) {
+        else if( str == "_faction_camp_gathering" ) {
             id = Camp_Gather_Materials;
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_firewood" ) {
@@ -495,20 +452,11 @@ void mission_id::deserialize( const JsonValue &val )
         } else if( str == "_faction_camp_field" ) {
             id = Camp_Survey_Field;
             dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_expansion" ) {
-            id = Camp_Survey_Expansion;
-            dir = base_camps::base_dir;
         } else if( str == "_faction_camp_cut_log" ) {
             id = Camp_Cut_Logs;
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_clearcut" ) {
             id = Camp_Clearcut;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_hide_site" ) {
-            id = Camp_Setup_Hide_Site;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_hide_trans" ) {
-            id = Camp_Relay_Hide_Site;
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_foraging" ) {
             id = Camp_Foraging;
@@ -518,10 +466,6 @@ void mission_id::deserialize( const JsonValue &val )
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_hunting" ) {
             id = Camp_Hunting;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_om_fortifications" ) {
-            //  This legacy mission version hides the blueprint as a mission role rather than a string component
-            id = Camp_OM_Fortifications;
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_recruit_0" ) {
             id = Camp_Recruiting;
@@ -537,10 +481,6 @@ void mission_id::deserialize( const JsonValue &val )
                    camp_upgrade_expansion_npc_string ) { // blueprint + id + dir
             id = Camp_Upgrade;
             parameters = st.substr( 0, id_size - camp_upgrade_expansion_npc_string.length() );
-        } else if( st == "_faction_exp_kitchen_cooking_" ||   // id + dir
-                   st == "_faction_exp_blacksmith_crafting_" ||
-                   st == "_faction_exp_farm_crafting_" ) {
-            id = Camp_Crafting;
         } else if( st == "_faction_exp_plow_" ) {             // id + dir
             id = Camp_Plow;
         } else if( st == "_faction_exp_plant_" ) {            // id + dir
@@ -1249,28 +1189,20 @@ bool talk_function::handle_outpost_mission( const mission_entry &cur_key, npc &p
 
         case Camp_Distribute_Food:
         case Camp_Determine_Leadership:
-        // case Camp_Have_Meal:
-        case Camp_Hide_Mission:
-        case Camp_Reveal_Mission:
         case Camp_Assign_Jobs:
         case Camp_Assign_Workers:
         case Camp_Abandon:
         case Camp_Upgrade:
         case Camp_Emergency_Recall:
-        case Camp_Crafting:
         case Camp_Gather_Materials:
         case Camp_Collect_Firewood:
         case Camp_Menial:
         case Camp_Survey_Field:
-        case Camp_Survey_Expansion:
         case Camp_Cut_Logs:
         case Camp_Clearcut:
-        case Camp_Setup_Hide_Site:
-        case Camp_Relay_Hide_Site:
         case Camp_Foraging:
         case Camp_Trapping:
         case Camp_Hunting:
-        case Camp_OM_Fortifications:
         case Camp_Recruiting:
         case Camp_Scouting:
         case Camp_Combat_Patrol:

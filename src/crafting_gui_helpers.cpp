@@ -104,12 +104,12 @@ float availability::get_max_proficiency_skill_maluses() const
 }
 
 availability::availability( Character &_crafter, const recipe *r, int batch_size,
-                            bool camp_crafting, inventory *inventory_override ) :
+                            inventory *inventory_override ) :
     crafter( _crafter )
 {
     rec = r;
     inv_override = inventory_override;
-    const inventory &inv = camp_crafting ? *inv_override : crafter.crafting_inventory();
+    const inventory &inv = crafter.crafting_inventory();
     auto all_items_filter = r->get_component_filter( recipe_filter_flags::none );
     auto no_rotten_filter = r->get_component_filter( recipe_filter_flags::no_rotten );
     auto no_favorite_filter = r->get_component_filter( recipe_filter_flags::no_favorite );
@@ -121,9 +121,9 @@ availability::availability( Character &_crafter, const recipe *r, int batch_size
                                 >= static_cast<int>( rec->get_difficulty( crafter ) * 0.8f );
     has_proficiencies = r->character_has_required_proficiencies( crafter );
     std::string reason;
-    craft_flags flag = camp_crafting ? craft_flags::none : craft_flags::start_only;
+    craft_flags flag = craft_flags::start_only;
 
-    if( crafter.is_npc() && !r->npc_can_craft( reason ) && !camp_crafting ) {
+    if( crafter.is_npc() && !r->npc_can_craft( reason ) ) {
         can_craft = false;
     } else if( r->is_nested() ) {
         can_craft = check_can_craft_nested( _crafter, *r );
@@ -837,7 +837,7 @@ static void recursively_expand_recipes( std::vector<const recipe *> &current,
                                         std::map<const recipe *, availability> &availability_cache, int i,
                                         Character &crafter, bool unread_recipes_first, bool highlight_unread_recipes,
                                         const recipe_subset &available_recipes, const std::set<recipe_id> &hidden_recipes,
-                                        bool camp_crafting, inventory *inventory_override )
+                                        inventory *inventory_override )
 {
     std::vector<const recipe *> tmp;
     for( const recipe_id &nested : current[i]->nested_category_data ) {
@@ -850,7 +850,7 @@ static void recursively_expand_recipes( std::vector<const recipe *> &current,
             if( !availability_cache.count( &nested.obj() ) ) {
                 availability_cache.emplace( &nested.obj(),
                                             availability( crafter, &nested.obj(), 1,
-                                                    camp_crafting, inventory_override ) );
+                                                    inventory_override ) );
             }
         }
     }
@@ -876,7 +876,7 @@ static void expand_recipes( std::vector<const recipe *> &current,
                             std::map<const recipe *, availability> &availability_cache,
                             Character &crafter, bool unread_recipes_first, bool highlight_unread_recipes,
                             const recipe_subset &available_recipes, const std::set<recipe_id> &hidden_recipes,
-                            bool camp_crafting, inventory *inventory_override )
+                            inventory *inventory_override )
 {
     for( size_t i = 0; i < current.size(); ++i ) {
         if( current[i]->is_nested()
@@ -884,7 +884,7 @@ static void expand_recipes( std::vector<const recipe *> &current,
           ) {
             recursively_expand_recipes( current, indent, availability_cache, i, crafter,
                                         unread_recipes_first, highlight_unread_recipes, available_recipes,
-                                        hidden_recipes, camp_crafting, inventory_override );
+                                        hidden_recipes, inventory_override );
         }
     }
 }
@@ -914,7 +914,6 @@ recipe_list_data build_recipe_list(
     bool skip_hidden_filter,
     bool skip_sort,
     Character &crafter,
-    bool camp_crafting,
     inventory *inventory_override,
     bool highlight_unread,
     bool unread_first,
@@ -938,7 +937,7 @@ recipe_list_data build_recipe_list(
     for( const recipe *e : result.entries ) {
         if( !availability_cache.count( e ) ) {
             availability_cache.emplace( e,
-                                        availability( crafter, e, 1, camp_crafting, inventory_override ) );
+                                        availability( crafter, e, 1, inventory_override ) );
         }
     }
 
@@ -960,7 +959,7 @@ recipe_list_data build_recipe_list(
     result.indent.assign( result.entries.size(), 0 );
     expand_recipes( result.entries, result.indent, availability_cache, crafter,
                     unread_first, highlight_unread, available_recipes, uistate.hidden_recipes,
-                    camp_crafting, inventory_override );
+                    inventory_override );
 
     // Build the parallel availability vector
     result.available.reserve( result.entries.size() );
