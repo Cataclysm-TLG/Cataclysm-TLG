@@ -7,7 +7,7 @@
     "occurrences": [ 1, 2 ],
     "flags": [ "OCEAN", "WILDERNESS" ],
     "check_for_locations": [ [ [ 0, 0, 0 ], [ "ocean_surface" ] ], [ [ 0, 0, 1 ], [ "open_air" ] ] ],
-    "check_for_locations_area": [ { "type": [ "ocean_bed" ], "from": [ 2, 2, -9 ], "to": [ -2, -2, -9 ] } ],
+    "check_for_locations_area": [ { "type": [ "ocean_bed" ], "from": [ -10, -10, -9 ], "to": [ 10, 10, -9 ] }, { "type": [ "ocean_surface" ], "from": [ -10, -10, 0 ], "to": [ 10, 10, 0 ] } ],
     "joins": [ "root_to_column", "column_to_column", "column_to_kelp", "kelp_to_kelp" ],
     "overmaps": {
       "root": { "overmap": "ocean_surface", "below": "root_to_column", "locations": [ "ocean_surface" ] },
