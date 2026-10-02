@@ -2431,6 +2431,13 @@ void options_manager::add_options_graphics()
         }, "color_pixel_darken", COPT_CURSES_HIDE
            );
 
+        add( "LIGHTING_MEMORY_BLEND", page_id, to_translation( "Blend light into memory" ),
+             to_translation( "If true, Smooth filtered lighting fades the edge of sight into the memory map overlay, and remembered tiles next to it blend back toward what you see.  If false, the edge of sight fades into darkness." ),
+             true, COPT_CURSES_HIDE
+           );
+
+        get_option( "LIGHTING_MEMORY_BLEND" ).setPrerequisite( "LIGHTING_MODE", "smooth_filtered" );
+
         add( "MEMORY_RGB_DARK_RED", page_id, to_translation( "Custom dark color RGB overlay - RED" ),
              to_translation( "Specify RGB value for color RED for dark color overlay." ),
              0, 255, 39, COPT_CURSES_HIDE );
