@@ -1159,7 +1159,7 @@
     "calories": 11,
     "name": { "str_sp": "fried earthworms" },
     "spoils_in": "1 day",
-    "description": "A handful of fried earthworms, cooked in salt.",
+    "description": "A handful of earthworms, fried crispy.",
     "fun": -2,
     "vitamins": [ [ "calcium", 3 ], [ "iron", 8 ] ]
   },
