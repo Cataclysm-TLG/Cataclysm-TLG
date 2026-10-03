@@ -237,29 +237,32 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
-    "time": "30 m",
+    "time": "5 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "cotton_patch", 24 ] ] ],
+    "components": [
+      [ [ "bandages_makeshift", 2 ], [ "cotton_sheet", 2 ] ],
+      [ [ "bandages_makeshift", 1 ], [ "cotton_sheet", 1 ], [ "cordage", 2, "LIST" ] ]
+    ],
     "flags": [ "BLIND_HARD" ]
   },
   {
     "result": "bellywrap_fur",
     "type": "recipe",
     "copy-from": "bellywrap",
-    "components": [ [ [ "fur_patch", 24 ] ] ]
+    "components": [ [ [ "fur_sheet", 2 ] ], [ [ "fur_sheet", 1 ], [ "cordage", 2, "LIST" ] ] ]
   },
   {
     "result": "bellywrap_leather",
     "type": "recipe",
     "copy-from": "bellywrap",
-    "components": [ [ [ "leather_patch", 24 ] ] ]
+    "components": [ [ [ "leather_sheet", 2 ] ], [ [ "leather_sheet", 1 ], [ "cordage", 2, "LIST" ] ] ]
   },
   {
     "result": "bellywrap_wool",
     "type": "recipe",
     "copy-from": "bellywrap",
-    "components": [ [ [ "felt_patch", 40 ] ] ]
+    "components": [ [ [ "felt_sheet", 2 ] ], [ [ "felt_sheet", 1 ], [ "cordage", 2, "LIST" ] ] ]
   },
   {
     "result": "chestwrap",
@@ -268,11 +271,11 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
-    "time": "20 m",
+    "time": "5 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "cotton_sheet", 3 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "bandages_makeshift", 2 ], [ "cotton_sheet", 2 ] ], [ [ "bandages_makeshift", 1 ], [ "cordage", 2, "LIST" ] ] ],
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "chestwrap_fur",
@@ -281,11 +284,11 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
-    "time": "20 m",
+    "time": "5 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "fur_sheet", 1 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "fur_sheet", 2 ] ], [ [ "fur_sheet", 1 ], [ "cordage", 2, "LIST" ] ] ],
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "chestwrap_leather",
@@ -294,11 +297,11 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
-    "time": "20 m",
+    "time": "5 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "leather_sheet", 1 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "leather_sheet", 2 ] ], [ [ "leather_sheet", 1 ], [ "cordage", 2, "LIST" ] ] ],
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "chestwrap_wool",
@@ -307,12 +310,11 @@
     "category": "CC_ARMOR",
     "subcategory": "CSC_ARMOR_TORSO",
     "skill_used": "tailor",
-    "time": "20 m",
+    "time": "5 m",
     "reversible": true,
     "autolearn": true,
-    "components": [ [ [ "felt_sheet", 4 ] ] ],
-    "using": [ [ "fabric_felt", 9 ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "felt_sheet", 2 ] ], [ [ "felt_sheet", 1 ], [ "cordage", 2, "LIST" ] ] ],
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "coat_gut",
