@@ -954,7 +954,8 @@ void worldfactory::show_active_world_mods( const std::vector<mod_id> &world_mods
     }
 }
 
-int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*parent_win*/, WORLD *world,
+int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*parent_win*/,
+        WORLD *world,
         bool with_tabs )
 {
     // Draw a new window because the main one is too small.
