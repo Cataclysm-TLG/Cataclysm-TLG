@@ -361,7 +361,8 @@ static bool selection_ok( const std::vector<const recipe *> &list, const int cur
 }
 
 std::pair<Character *, const recipe *> select_crafter_and_crafting_recipe( int &batch_size_out,
-        const recipe_id &goto_recipe, Character *crafter, std::string filterstring, inventory *inventory_override )
+        const recipe_id &goto_recipe, Character *crafter, std::string filterstring,
+        inventory *inventory_override )
 {
     if( crafter == nullptr ) {
         return {nullptr, nullptr};
