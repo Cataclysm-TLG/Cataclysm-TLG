@@ -547,7 +547,7 @@ void debug_menu::wisheffect( Creature &p )
                 }
             }
 
-            entry.desc = effect_description( eff );
+            entry.desc = effect_description( eff, p );
             efmenu.entries.emplace_back( entry );
         }
     };
@@ -638,7 +638,7 @@ void debug_menu::wisheffect( Creature &p )
                 }
             }
 
-            entry.desc += effect_description( eff );
+            entry.desc += effect_description( eff, p );
 
         }
     } while( efmenu.ret != UILIST_CANCEL );

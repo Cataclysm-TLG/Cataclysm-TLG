@@ -660,7 +660,7 @@ void sounds::process_sound_markers( Character *you )
         // See if we need to wake someone up.
         if( you->in_sleep_state() ) {
             // Bail immediately if we're insensate.
-            if( you->has_effect( effect_narcosis ) && you->has_active_bionic( bio_sleep_shutdown ) ) {
+            if( you->has_effect( effect_narcosis ) || you->has_active_bionic( bio_sleep_shutdown ) ) {
                 continue;
             }
             int sound_insensitivity = 0;

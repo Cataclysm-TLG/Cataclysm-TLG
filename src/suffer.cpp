@@ -678,7 +678,7 @@ void suffer::from_asthma( Character &you )
         bool nearby_use = auto_use || map_inv.has_charges( itype_inhaler, 1 ) ||
                           map_inv.has_charges( itype_oxygen_tank, 1 ) ||
                           map_inv.has_charges( itype_smoxygen_tank, 1 );
-        if( auto_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
+        if( auto_use  && !you.has_active_bionic( bio_sleep_shutdown ) ) {
             if( you.use_charges_if_avail( itype_inhaler, 1 ) ) {
                 you.add_msg_if_player( m_info, _( "You use your inhaler and go back to sleep." ) );
                 you.add_effect( effect_took_antiasthmatic, rng( 6_hours, 12_hours ) );
@@ -687,7 +687,7 @@ void suffer::from_asthma( Character &you )
                 you.add_msg_if_player( m_info, _( "You take a deep breath from your oxygen tank "
                                                   "and go back to sleep." ) );
             }
-        } else if( nearby_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
+        } else if( nearby_use  && !you.has_active_bionic( bio_sleep_shutdown ) ) {
             // create new variable to resolve a reference issue
             int amount = 1;
             if( !here.use_charges( you.pos_bub(), 2, itype_inhaler, amount ).empty() ) {
@@ -701,7 +701,7 @@ void suffer::from_asthma( Character &you )
         } else {
             you.add_effect( effect_asthma, rng( 5_minutes, 20_minutes ) );
             if( you.has_effect( effect_sleep ) ) {
-                if( !you.has_bionic( bio_sleep_shutdown ) ) {
+                if( !you.has_active_bionic( bio_sleep_shutdown ) ) {
                     you.wake_up();
                 }
             } else {
