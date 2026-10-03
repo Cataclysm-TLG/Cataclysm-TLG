@@ -1383,7 +1383,7 @@ void Creature::messaging_projectile_attack( const Creature *source,
             if( source != nullptr ) {
                 add_msg( m_bad, source->is_avatar() ? _( "You miss!" ) : _( "The shot misses!" ) );
             }
-        } else if( total_damage == 0 ) {
+        } else if( total_damage == 0 && hit_selection.max_damage > 0 ) {
             if( hit_selection.wp_hit.empty() ) {
                 //~ 1$ - creature name, 2$ - character's bodypart or monster's skin/armor
                 add_msg( m_bad, _( "The shot reflects off the %2$s of %1$s!" ), disp_name(),
@@ -1832,11 +1832,14 @@ bool Creature::stumble_invis( const Creature &attacker, const bool stumblemsg )
     return true;
 }
 
-bool Creature::react_to_ranged( const Creature &attacker )
+bool Creature::react_to_ranged( const Creature *attacker, bool low_velocity )
 {
+    if( !attacker ) {
+        return false;
+    }
     map &here = get_map();
     // If we're blind or stunned we can't track throws, and we don't need to if we see the attacker.
-    if( sees( here, attacker ) || has_effect( effect_blind ) || has_effect( effect_stunned ) ) {
+    if( sees( here, *attacker ) || has_effect( effect_blind ) || has_effect( effect_stunned ) ) {
         return false;
     }
     // Zombies are dumb. Robots are REALLY dumb.
@@ -1845,11 +1848,17 @@ bool Creature::react_to_ranged( const Creature &attacker )
         return false;
     }
     add_effect( effect_stumbled_into_invisible, 2_seconds );
-    // Mark last known location, or extend duration if exists
-    if( here.has_field_at( attacker.pos_bub( here ), field_fd_last_known ) ) {
-        here.set_field_age( attacker.pos_bub( here ), field_fd_last_known, 0_seconds );
+    // Mark last known location, or extend duration if exists.
+    tripoint_bub_ms shotfrom = attacker->pos_bub( here );
+    if( !low_velocity ) {
+        int offset = square_dist( pos_bub(), attacker->pos_bub() ) / 2;
+        shotfrom.x() += rng( 0, offset );
+        shotfrom.y() += rng( 0, offset );
+    }
+    if( here.has_field_at( shotfrom, field_fd_last_known ) ) {
+        here.set_field_age( shotfrom, field_fd_last_known, 0_seconds );
     } else {
-        here.add_field( attacker.pos_bub( here ), field_fd_last_known );
+        here.add_field( shotfrom, field_fd_last_known );
     }
     return true;
 }

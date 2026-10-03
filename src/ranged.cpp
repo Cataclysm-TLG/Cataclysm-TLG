@@ -1148,6 +1148,9 @@ int Character::fire_gun( map &here, const tripoint_bub_ms &target, int shots, it
                 multi_projectile_hit_message( hit_entry.first, hit_entry.second.first, hit_entry.second.second,
                                               n_gettext( "projectile", "projectiles", hit_entry.second.first ) );
             }
+            // Todo: Maybe treat stuff like blowgun darts (which do not currently exist) as high velocity for stealth?
+            bool low_velocity = gun.has_flag( flag_PRIMITIVE_RANGED_WEAPON );
+            hit_entry.first->react_to_ranged( this, low_velocity );
         }
         if( shot.headshot ) {
             get_event_bus().send<event_type::character_gets_headshot>( getID() );
@@ -1625,7 +1628,7 @@ dealt_projectile_attack Character::throw_item( const tripoint_bub_ms &target, co
         }
         // Low-velocity projectiles are easy to source, unless the target is blind or senseless.
         // TODO: Stealth projectiles?
-        hit_entry.first->react_to_ranged( *this );
+        hit_entry.first->react_to_ranged( this );
         if( monster *const m = hit_entry.first->as_monster() ) {
             cata::event e = cata::event::make<event_type::character_ranged_attacks_monster>( getID(),
                             itype_id::NULL_ID(),

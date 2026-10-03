@@ -403,6 +403,7 @@
         "u_lose_effect": [
           "corroding",
           "onfire",
+          "crushed",
           "dazed",
           "stunned",
           "venom_blind",
