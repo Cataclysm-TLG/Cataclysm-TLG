@@ -1895,7 +1895,7 @@ void construct::done_deconstruct( const tripoint_bub_ms &p, Character &player_ch
     if( here.has_furn( p ) ) {
         const furn_t &f = here.furn( p ).obj();
         if( !f.deconstruct ) {
-            add_msg( m_info, _( "That %s can not be disassembled!" ), f.name() );
+            add_msg( m_info, _( "That %s can not be deconstructed!" ), f.name() );
             return;
         }
         if( f.deconstruct->furn_set.str().empty() ) {
@@ -1903,7 +1903,7 @@ void construct::done_deconstruct( const tripoint_bub_ms &p, Character &player_ch
         } else {
             here.furn_set( p, f.deconstruct->furn_set );
         }
-        add_msg( _( "The %s is disassembled." ), f.name() );
+        add_msg( _( "The %s is deconstructed." ), f.name() );
         item &item_here = here.i_at( p ).size() != 1 ? null_item_reference() : here.i_at( p ).only_item();
         const std::vector<item *> drop = here.spawn_items( p,
                                          item_group::items_from( f.deconstruct->drop_group, calendar::turn ) );

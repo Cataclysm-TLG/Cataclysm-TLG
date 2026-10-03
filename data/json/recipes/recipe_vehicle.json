@@ -1480,7 +1480,7 @@
     "time": "1 s",
     "components": [ [ [ "wood_block", 2 ] ] ],
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",

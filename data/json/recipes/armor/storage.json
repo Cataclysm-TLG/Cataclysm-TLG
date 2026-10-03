@@ -579,7 +579,7 @@
       [ [ "cotton_sheet", 1 ], [ "fur_sheet", 1 ], [ "leather_sheet", 1 ] ],
       [ [ "stick", 1 ], [ "broom", 1 ], [ "2x4", 1 ], [ "pool_cue", 1 ], [ "pointy_stick", 1 ], [ "mop", 1 ] ]
     ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bootsheath",
@@ -838,7 +838,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "raw_leather", 6 ], [ "raw_hleather", 6 ], [ "raw_fur", 6 ], [ "raw_hfur", 6 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "hide_tainted_bag",
@@ -851,7 +851,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "raw_tainted_leather", 6 ], [ "raw_tainted_fur", 6 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "holster",
@@ -1358,7 +1358,7 @@
         [ "sheet", 1 ]
       ]
     ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "net_backpack",
@@ -2018,7 +2018,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "bag_canvas", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "tool_belt",

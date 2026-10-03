@@ -285,6 +285,9 @@ static const skill_id skill_traps( "traps" );
 
 static const species_id species_ZOMBIE( "ZOMBIE" );
 
+static const std::string flag_NO_FAIL( "NO_FAIL" );
+static const std::string flag_NO_TRAIN( "NO_TRAIN" );
+
 static const ter_str_id ter_t_card_reader_broken( "t_card_reader_broken" );
 static const ter_str_id ter_t_dirt( "t_dirt" );
 static const ter_str_id ter_t_dirtmound( "t_dirtmound" );
@@ -4487,6 +4490,8 @@ void craft_activity_actor::start( player_activity &act, Character &crafter )
     cached_crafting_speed = 0;
     cached_workbench_multiplier = 0;
     use_cached_workbench_multiplier = false;
+    craft_trains = !craft_item.get_item()->get_making().has_flag( flag_NO_TRAIN );
+    can_fail = !craft_item.get_item()->get_making().has_flag( flag_NO_FAIL );
     act.targets.clear();
     act.targets.push_back( craft_item );
 }
@@ -4720,29 +4725,31 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
         rewind_turn();
         return;
     }
-
-    // This nominal craft time is also how many practice ticks to perform
-    // spread out evenly across the actual duration.
-    const double total_practice_ticks = rec.time_to_craft_moves( crafter, {},
-                                        recipe_time_flag::ignore_proficiencies ) / 100.0;
-
-    const int ticks_per_practice = 10000000.0 / total_practice_ticks;
-    int num_practice_ticks = craft.item_counter / ticks_per_practice -
-                             old_counter / ticks_per_practice;
     bool level_up = false;
-    if( num_practice_ticks > 0 ) {
-        level_up |= crafter.craft_skill_gain( craft, num_practice_ticks );
-    }
-    // Proficiencies and tools are gained/consumed after every 5% progress
-    int five_percent_steps = craft.item_counter / 500000 - old_counter / 500000;
-    if( five_percent_steps > 0 ) {
-        // Divide by 100 for seconds, 20 for 5%
-        const time_duration pct_time = time_duration::from_seconds( base_total_moves / 2000 );
-        level_up |= crafter.craft_proficiency_gain( craft, pct_time * five_percent_steps );
-        // Invalidate the crafting time cache because proficiencies may have changed
-        cached_crafting_speed = 0;
-        // Also reset the multiplier
-        use_cached_workbench_multiplier = false;
+
+    if( craft_trains ) {
+        // This nominal craft time is also how many practice ticks to perform
+        // spread out evenly across the actual duration.
+        const double total_practice_ticks = rec.time_to_craft_moves( crafter, {},
+                                            recipe_time_flag::ignore_proficiencies ) / 100.0;
+
+        const int ticks_per_practice = 10000000.0 / total_practice_ticks;
+        int num_practice_ticks = craft.item_counter / ticks_per_practice -
+                                 old_counter / ticks_per_practice;
+        if( num_practice_ticks > 0 ) {
+            level_up |= crafter.craft_skill_gain( craft, num_practice_ticks );
+        }
+        // Proficiencies and tools are gained/consumed after every 5% progress
+        int five_percent_steps = craft.item_counter / 500000 - old_counter / 500000;
+        if( five_percent_steps > 0 ) {
+            // Divide by 100 for seconds, 20 for 5%
+            const time_duration pct_time = time_duration::from_seconds( base_total_moves / 2000 );
+            level_up |= crafter.craft_proficiency_gain( craft, pct_time * five_percent_steps );
+            // Invalidate the crafting time cache because proficiencies may have changed
+            cached_crafting_speed = 0;
+            // Also reset the multiplier
+            use_cached_workbench_multiplier = false;
+        }
     }
 
 
@@ -4778,14 +4785,16 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             }
         }
 
-        if( craft.item_counter >= craft.get_next_failure_point() ) {
-            bool destroy = craft.handle_craft_failure( crafter );
-            // If the craft needs to be destroyed, do it and stop crafting.
-            if( destroy ) {
-                crafter.add_msg_player_or_npc( _( "There is nothing left of the %s to craft from." ),
-                                               _( "There is nothing left of the %s <npcname> was crafting." ), craft.tname() );
-                craft_item.remove_item();
-                crafter.cancel_activity();
+        if( can_fail ) {
+            if( craft.item_counter >= craft.get_next_failure_point() ) {
+                bool destroy = craft.handle_craft_failure( crafter );
+                // If the craft needs to be destroyed, do it and stop crafting.
+                if( destroy ) {
+                    crafter.add_msg_player_or_npc( _( "There is nothing left of the %s to craft from." ),
+                                                   _( "There is nothing left of the %s <npcname> was crafting." ), craft.tname() );
+                    craft_item.remove_item();
+                    crafter.cancel_activity();
+                }
             }
         }
     }

@@ -4390,5 +4390,10 @@
     "id": "armor_tiresuit",
     "type": "MIGRATION",
     "replace": "tire_cuirass"
+  },
+  {
+    "id": "wrapper_foil_roll",
+    "type": "MIGRATION",
+    "replace": "aluminum_foil_roll"
   }
 ]

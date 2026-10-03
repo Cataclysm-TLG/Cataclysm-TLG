@@ -136,6 +136,7 @@ static const std::string flag_BLIND_HARD( "BLIND_HARD" );
 static const std::string flag_FULL_MAGAZINE( "FULL_MAGAZINE" );
 static const std::string flag_NO_BENCH( "NO_BENCH" );
 static const std::string flag_NO_ENCHANTMENT( "NO_ENCHANTMENT" );
+static const std::string flag_NO_FAIL( "NO_FAIL" );
 static const std::string flag_NO_MANIP( "NO_MANIP" );
 static const std::string flag_NO_MORALE_OK( "NO_MORALE_OK" );
 static const std::string flag_NO_RESIZE( "NO_RESIZE" );
@@ -2212,6 +2213,9 @@ float Character::crafting_failure_roll( const recipe &making ) const
 
 float Character::recipe_success_chance( const recipe &making ) const
 {
+    if( making.has_flag( flag_NO_FAIL ) ) {
+        return 1.0f;
+    }
     // We calculate the failure chance of a recipe by performing a normal roll with a given
     // standard deviation and center, then subtracting a "final difficulty" score from that.
     // If that result is above 1, there is no chance of failure.

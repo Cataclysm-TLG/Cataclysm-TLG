@@ -647,7 +647,7 @@
       { "group": "literature", "prob": 20, "damage": [ -1, 5 ] },
       { "group": "religious_books", "prob": 10, "damage": [ -1, 5 ] },
       { "group": "kids_books", "prob": 20, "damage": [ -1, 5 ] },
-      { "item": "wrapper_foil_roll", "prob": 25 },
+      { "item": "aluminum_foil_roll", "prob": 25 },
       { "item": "recipe_bows", "prob": 15, "damage": [ -1, 5 ] },
       { "item": "manual_stabbing", "prob": 15, "damage": [ -1, 5 ] },
       { "item": "manual_dodge", "prob": 15, "damage": [ -1, 5 ] },

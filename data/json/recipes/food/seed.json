@@ -19,7 +19,8 @@
     "subcategory": "CSC_FOOD_SEEDS",
     "skill_used": "survival",
     "time": "1 s",
-    "autolearn": true
+    "autolearn": true,
+    "flags": [ "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "abstract": "seed_extraction_cutting",

@@ -355,7 +355,7 @@
     "proficiencies": [ { "proficiency": "prof_metalworking" }, { "proficiency": "prof_redsmithing" } ],
     "tools": [ [ [ "crucible", -1 ], [ "crucible_clay", -1 ] ] ],
     "components": [
-      [ [ "tin", 12 ], [ "aluminum_foil", 371 ], [ "aluminum_powder", 29 ], [ "can_drink", 2 ], [ "scrap_aluminum", 1 ] ],
+      [ [ "tin", 12 ], [ "aluminum_foil", 74 ], [ "aluminum_powder", 29 ], [ "can_drink", 2 ], [ "scrap_aluminum", 1 ] ],
       [ [ "copper_scrap_equivalent", 1, "LIST" ] ]
     ]
   },
@@ -516,7 +516,7 @@
     "//": "TODO: inputs not balanced to 176g output",
     "//2": "TODO: water / sand amounts excessive; also can recover some of it as byproducts",
     "components": [
-      [ [ "aluminum_chunk", 1 ], [ "can_drink", 6 ], [ "scrap_aluminum", 2 ], [ "aluminum_foil", 400 ] ],
+      [ [ "aluminum_chunk", 1 ], [ "can_drink", 6 ], [ "scrap_aluminum", 2 ], [ "aluminum_foil", 80 ] ],
       [ [ "water", 5 ], [ "water_clean", 5 ] ],
       [ [ "material_sand", 25 ] ]
     ]
@@ -1685,7 +1685,7 @@
     "batch_time_factors": [ 90, 4 ],
     "autolearn": true,
     "tools": [ [ [ "surface_heat", 10, "LIST" ] ] ],
-    "components": [ [ [ "aluminum_foil", 371 ] ] ]
+    "components": [ [ [ "aluminum_foil", 74 ] ] ]
   },
   {
     "result": "scrap_aluminum",

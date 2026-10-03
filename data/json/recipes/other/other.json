@@ -128,8 +128,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_one", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -141,8 +142,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_two", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -154,8 +156,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_five", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -167,8 +170,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_ten", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -180,8 +184,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_twenty", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -193,8 +198,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_fifty", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -206,8 +212,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "money_hundred", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -219,8 +226,9 @@
     "time": "60 s",
     "autolearn": true,
     "reversible": { "time": "4 s" },
+    "using": [ [ "adhesive", 1 ] ],
     "components": [ [ [ "FMCNote", 100 ] ], [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "type": "recipe",
@@ -233,7 +241,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_one", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -246,7 +254,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_two", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -259,7 +267,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_five", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -272,7 +280,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_ten", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -285,7 +293,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_twenty", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -298,7 +306,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_fifty", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -311,7 +319,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_hundred", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -324,7 +332,7 @@
     "autolearn": true,
     "reversible": { "time": "4 s" },
     "components": [ [ [ "money_strap_FMCNote", 10 ] ], [ [ "rubber_band", 2 ], [ "cordage_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -333,10 +341,10 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_OTHER",
     "skill_used": "fabrication",
-    "time": "1 s",
+    "time": "1 m",
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "paper", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   }
 ]

@@ -42,6 +42,7 @@ static const std::string flag_AFFECTED_BY_PAIN( "AFFECTED_BY_PAIN" );
 static const std::string flag_NO_ENCHANTMENT( "NO_ENCHANTMENT" );
 static const std::string flag_NO_MANIP( "NO_MANIP" );
 static const std::string flag_NO_MORALE_OK( "NO_MORALE_OK" );
+static const std::string flag_NO_TRAIN( "NO_TRAIN" );
 
 bool cannot_gain_skill_or_prof( const Character &crafter, const recipe &recp )
 {
@@ -346,7 +347,10 @@ std::vector<std::string> recipe_info(
                           _( "Impossible" ) );
 
     if( recp.has_flag( flag_NO_MORALE_OK ) && !guy.has_morale_to_craft() ) {
-        oss << string_format( _( "<color_light_blue>Low morale</color> will not prevent this craft.\n" ) );
+        oss << string_format( _( "<color_light_blue>Low morale OK</color>\n" ) );
+    }
+    if( recp.has_flag( flag_NO_TRAIN ) ) {
+        oss << string_format( _( "<color_light_gray>Recipe gives no experience</color>\n" ) );
     }
 
     const inventory &crafting_inv = avail.inv_override ? *avail.inv_override : guy.crafting_inventory();
@@ -355,9 +359,6 @@ std::vector<std::string> recipe_info(
         std::string nearby_string;
         if( nearby_amount == 0 ) {
             nearby_string = "<color_light_gray>0</color>";
-        } else if( nearby_amount > 9000 ) {
-            // at some point you get too many to count at a glance and just know you have a lot
-            nearby_string = _( "<color_red>It's Over 9000!!!</color>" );
         } else {
             nearby_string = string_format( "<color_yellow>%d</color>", nearby_amount );
         }

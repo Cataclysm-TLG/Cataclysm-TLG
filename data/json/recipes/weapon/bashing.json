@@ -676,7 +676,7 @@
     "time": "5 s",
     "reversible": true,
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "components": [ [ [ "rock", 1 ] ], [ [ "socks", 1 ], [ "socks_wool", 1 ] ] ]
   },
   {
@@ -807,8 +807,8 @@
     "time": "2 m",
     "reversible": true,
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ],
-    "components": [ [ [ "pipe", 3 ] ], [ [ "pipe_fittings", 1 ] ] ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
+    "components": [ [ [ "pipe", 2 ] ], [ [ "pipe_fittings", 1 ] ] ]
   },
   {
     "type": "recipe",

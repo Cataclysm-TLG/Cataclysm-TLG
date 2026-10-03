@@ -17,7 +17,7 @@
     "//": "Setting battery volume to 0 causes weirdness in vehicle tests.  Please don't do that.",
     "ammo_type": "battery",
     "count": 100,
-    "//2": "1 battery is 1 kJ of energy. 40 batteries is an alkaline C-cell."
+    "//2": "1 battery is 1 kJ of energy. 40 battery is an alkaline C-cell."
   },
   {
     "type": "ITEM",
@@ -214,18 +214,17 @@
     "subtypes": [ "AMMO" ],
     "id": "aluminum_foil",
     "category": "spare_parts",
-    "price": "6 USD 48 cent",
-    "price_postapoc": "1 cent",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
     "name": { "str_sp": "aluminum foil" },
     "symbol": "=",
     "color": "light_gray",
     "description": "A sheet of thin foil made of aluminum.  Sometimes called 'tin foil' due to being made of tin in the past.",
     "material": [ "aluminum" ],
-    "volume": "10 ml",
-    "weight": "135 mg",
-    "//": "Density of 2.7 g/cm3",
+    "volume": "480 ml",
+    "weight": "8 g",
     "ammo_type": "components",
-    "count": 200
+    "count": 40
   },
   {
     "type": "ITEM",

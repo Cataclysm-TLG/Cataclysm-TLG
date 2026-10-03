@@ -576,7 +576,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "cotton_sheet", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "footrags_nomex",
@@ -589,7 +589,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "nomex_sheet", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "footrags_fur",
@@ -602,7 +602,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "fur_sheet", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "footrags_faux_fur",
@@ -614,7 +614,7 @@
     "time": "1 m 30 s",
     "autolearn": true,
     "components": [ [ [ "faux_fur_sheet", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "footrags_leather",
@@ -627,7 +627,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "leather_sheet", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "footrags_wool",
@@ -640,7 +640,7 @@
     "reversible": true,
     "autolearn": true,
     "components": [ [ [ "felt_sheet", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "leathersandals",
