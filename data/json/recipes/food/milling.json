@@ -184,7 +184,7 @@
     "charges": 15,
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "wheat", 1 ], [ "barley", 1 ] ] ]
   },
@@ -217,7 +217,7 @@
     "time": "1 h 7 m 30 s",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
     "components": [ [ [ "wheat", 1 ], [ "barley", 1 ] ] ]
   },
@@ -359,7 +359,7 @@
     "charges": 15,
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [
       [
@@ -414,7 +414,7 @@
     "time": "1 h 7 m 30 s",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
     "components": [
       [
@@ -543,7 +543,7 @@
     "time": "1 h",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "bone_edible", 1, "LIST" ] ] ],
     "charges": 4
@@ -576,7 +576,7 @@
     "time": "1 h 30 m",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
     "components": [ [ [ "bone_edible", 1, "LIST" ] ] ],
     "charges": 4
@@ -664,7 +664,7 @@
     "time": "1 h",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "bone_tainted", 1 ] ] ],
     "charges": 4
@@ -697,7 +697,7 @@
     "time": "1 h 30 m",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
     "components": [ [ [ "bone_tainted", 1 ] ] ],
     "charges": 4
@@ -731,7 +731,7 @@
     "time": "1 h",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "tools": [ [ [ "rock_quern", -1 ] ] ],
     "components": [ [ [ "chitin_piece", 1 ], [ "acidchitin_piece", 1 ], [ "endochitin", 1 ], [ "insect_dust", 1 ] ] ],
     "charges": 4
@@ -748,7 +748,7 @@
     "time": "1 h 30 m",
     "autolearn": true,
     "batch_time_factors": [ 83, 3 ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "qualities": [ { "id": "FINE_GRIND", "level": 1 } ],
     "components": [ [ [ "chitin_piece", 1 ], [ "acidchitin_piece", 1 ], [ "endochitin", 1 ], [ "insect_dust", 1 ] ] ],
     "charges": 4

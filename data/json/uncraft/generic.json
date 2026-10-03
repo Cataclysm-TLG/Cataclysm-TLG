@@ -455,9 +455,10 @@
     "result": "rubber_slug",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
-    "time": "10 s",
+    "time": "1 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "chunk_rubber", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "result": "parachute_mil",

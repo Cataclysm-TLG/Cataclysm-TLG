@@ -351,7 +351,7 @@
     "decomp_learn": 3,
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 3 ] ],
     "using": [ [ "soldering_standard", 5 ] ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "//": "The tailoring kit is an expanded sewing kit, so a bone/wood needle is inappropriate.",
     "components": [
       [ [ "sewing_kit", 1 ] ],
@@ -870,7 +870,7 @@
     "time": "2 m",
     "reversible": true,
     "decomp_learn": 0,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "book_learn": [ [ "adv_chemistry", 1 ], [ "textbook_chemistry", 1 ] ],
     "components": [
       [ [ "glasses_safety", 1 ], [ "glass_goggles", 1 ] ],
@@ -885,8 +885,8 @@
     "result": "chemistry_set",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
-    "skills_required": [ "chemistry", 2 ],
+    "skill_used": "electronics",
+    "skills_required": [ [ "chemistry", 3 ] ],
     "time": "3 m",
     "reversible": true,
     "decomp_learn": 0,
@@ -906,7 +906,7 @@
     "reversible": true,
     "autolearn": true,
     "decomp_learn": 1,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "components": [
       [ [ "xacto", 1 ] ],
       [ [ "saw", 1 ], [ "bow_saw", 1 ], [ "saw_bronze", 1 ] ],
@@ -2230,7 +2230,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "cotton_patch", 100 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_cotton",
@@ -2244,7 +2244,7 @@
     "using": [ [ "filament", 16 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "cotton_sheet", 25 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_leather",
@@ -2258,7 +2258,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "leather_patch", 50 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_wool",
@@ -2272,7 +2272,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "felt_patch", 100 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_nylon",
@@ -2287,7 +2287,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 50 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_plank",
@@ -2300,7 +2300,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "2x4", 10 ] ], [ [ "rope_any_short", 1, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_rebar",
@@ -2313,7 +2313,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "rebar", 10 ] ], [ [ "rope_any_short", 1, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_pipe",
@@ -2326,7 +2326,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "pipe", 10 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_copper_pipe",
@@ -2339,7 +2339,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "cu_pipe", 10 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_branch",
@@ -2352,7 +2352,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "stick", 10 ] ], [ [ "rope_any_short", 1, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_javelin",
@@ -2365,7 +2365,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "javelin", 5 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_branch_long",
@@ -2378,7 +2378,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "stick_long", 5 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -2904,7 +2904,7 @@
     "time": "10 s",
     "autolearn": true,
     "components": [ [ [ "seaweed", 20 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "dry_seaweed_pile",
@@ -2916,7 +2916,7 @@
     "time": "10 s",
     "autolearn": true,
     "components": [ [ [ "dry_seaweed", 20 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",

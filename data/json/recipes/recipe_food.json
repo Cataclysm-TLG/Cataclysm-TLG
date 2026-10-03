@@ -269,10 +269,10 @@
     "subcategory": "CSC_FOOD_MEAT",
     "skill_used": "cooking",
     "difficulty": 1,
-    "time": "5 m",
+    "time": "2 m",
     "charges": 3,
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_HARD" ],
     "qualities": [ { "id": "CUT", "level": 2 } ],
     "proficiencies": [ { "proficiency": "prof_food_prep" }, { "proficiency": "prof_knife_skills" } ],
     "components": [ [ [ "bacon_uncut", 1 ] ] ]
@@ -6047,7 +6047,7 @@
     "time": "1 s",
     "charges": 1,
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "components": [ [ [ "hard_liquor_unmixed", 1, "LIST" ] ] ]
   },
   {
@@ -6060,7 +6060,7 @@
     "time": "1 s",
     "charges": 1,
     "autolearn": true,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "components": [ [ [ "weak_liquor_unmixed", 1, "LIST" ] ] ]
   },
   {
