@@ -586,6 +586,7 @@
       [
         [ "meat_red_cooked", 1, "LIST" ],
         [ "any_cracklins", 2, "LIST" ],
+        [ "earthworm_fried", 10 ],
         [ "earthworm_dried", 10 ],
         [ "can_chicken", 1 ],
         [ "fish_cooked", 1 ],
