@@ -283,7 +283,8 @@ static tripoint_abs_omt om_target_tile(
     const tripoint_abs_omt &omt_pos, int min_range = 1, int range = 1,
     const std::vector<std::string> &possible_om_types = {}, ot_match_type match_type =
         ot_match_type::exact, bool must_see = true,
-    const tripoint_abs_omt &source = tripoint_abs_omt::invalid, const std::optional<std::string> &message = std::nullopt );
+    const tripoint_abs_omt &source = tripoint_abs_omt::invalid,
+    const std::optional<std::string> &message = std::nullopt );
 static void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes = true,
                            const std::string &message = "Y;X: MAX RANGE" );
 static void om_line_mark(
