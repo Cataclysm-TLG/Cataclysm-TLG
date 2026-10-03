@@ -911,7 +911,7 @@ void Character::update_bodytemp()
         // AND you have frostbite, then that also prevents you from sleeping
         if( in_sleep_state() && !has_effect( effect_narcosis ) ) {
             if( temp_after <= BODYTEMP_VERY_COLD &&
-                get_fatigue() <= fatigue_levels::DEAD_TIRED && !has_bionic( bio_sleep_shutdown ) ) {
+                get_fatigue() <= fatigue_levels::DEAD_TIRED && !has_active_bionic( bio_sleep_shutdown ) ) {
                 if( bp == body_part_torso ) {
                     add_msg( m_warning, _( "You are too cold to sleep." ) );
                     wake_up();

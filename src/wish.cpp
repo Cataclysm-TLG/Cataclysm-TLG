@@ -483,7 +483,7 @@ void debug_menu::wisheffect( Creature &p )
     const size_t effect_size = get_effect_types().size();
     effects.reserve( effect_size );
 
-    auto effect_description = []( const effect & eff ) -> std::string {
+    auto effect_description = []( const effect & eff, Creature &p ) -> std::string {
         const effect_type &efft = *eff.get_effect_type();
         std::ostringstream descstr;
 
@@ -546,7 +546,7 @@ void debug_menu::wisheffect( Creature &p )
                 }
             }
 
-            entry.desc = effect_description( eff );
+            entry.desc = effect_description( eff, p );
             efmenu.entries.emplace_back( entry );
         }
     };
@@ -637,7 +637,7 @@ void debug_menu::wisheffect( Creature &p )
                 }
             }
 
-            entry.desc += effect_description( eff );
+            entry.desc += effect_description( eff, p );
 
         }
     } while( efmenu.ret != UILIST_CANCEL );
