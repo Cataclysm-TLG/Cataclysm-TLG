@@ -255,6 +255,72 @@ struct lit_sample {
 lit_sample reference_sample( const lightmap_view &view, const sample_params &params,
                              const lit_coords &coords );
 
+// smooth_filtered's filter before it turns into a lit_sample; the prefilter
+// stores this, so the GPU and the reference interpolate the same values
+struct filter_result {
+    float light = 0.0f;
+    // weighted chroma shares before chroma_hue
+    std::array<float, 3> chroma = { 1.0f / 3.0f, 1.0f / 3.0f, 1.0f / 3.0f };
+    // before the sight edge smoothstep
+    float in_sight = 0.0f;
+    // only CPU checks read it: the prefilter texture has no channel for it
+    float weight = 0.0f;
+};
+// filtered light of light map cell `own` on `level` at ( lx, ly ) inside it,
+// each 0 to 1
+filter_result reference_filter( const lightmap_view &view, const point &own, int level, float lx,
+                                float ly );
+lit_sample finish_filter( const filter_result &r );
+
+// grid steps per cell side of the prefiltered light; even, so the change of
+// anchors at a cell's middle falls on a grid line rather than between two
+constexpr int prefilter_grid = 10;
+// max per channel difference from the point filter, in 0..255 steps
+constexpr float prefilter_error_budget = 2.0f;
+
+// where the prefiltered light keeps each cell: a block of ( grid + 1 ) texels
+// a side, light at local i / grid, blocks of a level row by row, levels
+// stacked below each other
+struct prefilter_layout {
+    // cells, x, y inside their level
+    half_open_rectangle<point> area;
+    // light map level of the first block row
+    int first_level = 0;
+    int levels = 0;
+    int grid = prefilter_grid;
+
+    point size() const;
+    point block_origin( const point &cell, int level ) const;
+    bool operator==( const prefilter_layout &other ) const;
+};
+bool prefilter_fits( const prefilter_layout &layout, int max_texture_size, bool format_supported );
+
+// `x` as the nearest half float stores it, ties to even
+float half_round( float x );
+
+// texels a lookup reads, ( 0, 0 ) ( 1, 0 ) ( 0, 1 ) ( 1, 1 ), and its weights;
+// the second texel is clamped to the block, so local 1 never reads past it
+struct prefilter_lookup {
+    std::array<point, 4> texels;
+    float wx = 0.0f;
+    float wy = 0.0f;
+};
+prefilter_lookup prefilter_lookup_texels( const prefilter_layout &layout, const point &cell,
+        int level, float lx, float ly );
+
+// prefiltered light as the GPU stores it: light, two chroma shares and
+// in_sight, each a half float
+struct prefilter_table {
+    prefilter_layout layout;
+    std::vector<std::array<float, 4>> texels;
+    // round lookup weights to 1/16, the coarsest a GPU's linear filter may
+    bool quantize_weights = false;
+};
+prefilter_table build_prefilter_table( const lightmap_view &view, const prefilter_layout &layout );
+// reference_sample over the prefiltered light; per tile it reads the light map
+lit_sample reference_prefiltered_sample( const prefilter_table &table, const lightmap_view &view,
+        const sample_params &params, const lit_coords &coords );
+
 // light level from which lit sprites keep their full color
 constexpr float full_color_light = 0.75f;
 // how far a fully colored light mixes a lit pixel toward its own color, at

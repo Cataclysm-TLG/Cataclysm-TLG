@@ -468,17 +468,35 @@ std::array<lit_vertex, 4> lit_quad( const lit_quad_params &p )
              vertex( x0, y1, u0, v1 ) };
 }
 
-lit_sample reference_sample( const lightmap_view &view, const sample_params &params,
+static float mix1( const float a, const float b, const float t )
+{
+    return a + ( b - a ) * t;
+}
+
+namespace
+{
+// own cell, level and local position of a lit pixel, as sample_light finds
+// them
+struct located_pixel {
+    point own;
+    int level = 0;
+    float lx = 0.0f;
+    float ly = 0.0f;
+};
+} // namespace
+
+static located_pixel locate( const lightmap_view &view, const sample_params &params,
                              const lit_coords &coords )
 {
     const float marker_half = 0.5f * standing_marker;
     const float column = coords.column + marker_half;
-    const point own( static_cast<int>( std::floor( column ) ),
-                     static_cast<int>( std::floor( coords.row + 0.5f ) ) );
+    located_pixel p;
+    p.own = point( static_cast<int>( std::floor( column ) ),
+                   static_cast<int>( std::floor( coords.row + 0.5f ) ) );
     const bool standing = column - std::floor( column ) >= standing_marker;
-    const int level = own.y / view.rows_per_level;
-    float lx = coords.x - own.x;
-    float ly = coords.y - own.y;
+    p.level = p.own.y / view.rows_per_level;
+    float lx = coords.x - p.own.x;
+    float ly = coords.y - p.own.y;
     if( standing ) {
         // light along the sprite's base line, the same all the way up
         if( params.iso ) {
@@ -488,18 +506,28 @@ lit_sample reference_sample( const lightmap_view &view, const sample_params &par
             ly = 0.5f;
         }
     }
-    lx = std::clamp( lx, 0.0f, 1.0f );
-    ly = std::clamp( ly, 0.0f, 1.0f );
-    const decoded_texel own_texel = fetch_light( view, own, level );
+    p.lx = std::clamp( lx, 0.0f, 1.0f );
+    p.ly = std::clamp( ly, 0.0f, 1.0f );
+    return p;
+}
+
+static lit_sample per_tile_sample( const lightmap_view &view, const located_pixel &p )
+{
+    const decoded_texel own_texel = fetch_light( view, p.own, p.level );
     lit_sample s;
-    if( params.per_tile ) {
-        s.light = own_texel.light;
-        s.hue = chroma_hue( own_texel.chroma );
-        s.in_sight = own_texel.detail ? 1.0f : 0.0f;
-        s.visible = s.in_sight;
-        s.weight = s.in_sight;
-        return s;
-    }
+    s.light = own_texel.light;
+    s.hue = chroma_hue( own_texel.chroma );
+    s.in_sight = own_texel.detail ? 1.0f : 0.0f;
+    s.visible = s.in_sight;
+    s.weight = s.in_sight;
+    return s;
+}
+
+filter_result reference_filter( const lightmap_view &view, const point &own, const int level,
+                                const float lx, const float ly )
+{
+    const decoded_texel own_texel = fetch_light( view, own, level );
+    filter_result r;
     // texel space: centers at whole numbers
     const float stx = own.x + lx - 0.5f;
     const float sty = own.y + ly - 0.5f;
@@ -576,25 +604,155 @@ lit_sample reference_sample( const lightmap_view &view, const sample_params &par
                 chroma_sum[k] += bw * ch_sum[k] / w_sum;
             }
             blend_weight += bw;
-            s.weight += bw * w_sum;
+            r.weight += bw * w_sum;
         }
     }
-    s.light = blend_weight > min_weight ? light_sum / blend_weight : 0.0f;
-    std::array<float, 3> chroma = { 1.0f / 3.0f, 1.0f / 3.0f, 1.0f / 3.0f };
+    r.light = blend_weight > min_weight ? light_sum / blend_weight : 0.0f;
     if( blend_weight > min_weight ) {
         for( int k = 0; k < 3; ++k ) {
-            chroma[k] = chroma_sum[k] / blend_weight;
+            r.chroma[k] = chroma_sum[k] / blend_weight;
         }
     }
-    s.hue = chroma_hue( chroma );
-    s.in_sight = sight_weight > min_weight ? sight_sum / sight_weight : 0.0f;
-    s.visible = smooth_step( sight_edge_start, sight_edge_end, s.in_sight );
+    r.in_sight = sight_weight > min_weight ? sight_sum / sight_weight : 0.0f;
+    return r;
+}
+
+lit_sample finish_filter( const filter_result &r )
+{
+    lit_sample s;
+    s.light = r.light;
+    s.hue = chroma_hue( r.chroma );
+    s.in_sight = r.in_sight;
+    s.visible = smooth_step( sight_edge_start, sight_edge_end, r.in_sight );
+    s.weight = r.weight;
     return s;
 }
 
-static float mix1( const float a, const float b, const float t )
+lit_sample reference_sample( const lightmap_view &view, const sample_params &params,
+                             const lit_coords &coords )
 {
-    return a + ( b - a ) * t;
+    const located_pixel p = locate( view, params, coords );
+    if( params.per_tile ) {
+        return per_tile_sample( view, p );
+    }
+    return finish_filter( reference_filter( view, p.own, p.level, p.lx, p.ly ) );
+}
+
+point prefilter_layout::size() const
+{
+    const int side = grid + 1;
+    return point( ( area.p_max.x - area.p_min.x ) * side,
+                  ( area.p_max.y - area.p_min.y ) * side * levels );
+}
+
+point prefilter_layout::block_origin( const point &cell, const int level ) const
+{
+    const int side = grid + 1;
+    const int height = area.p_max.y - area.p_min.y;
+    return point( ( cell.x - area.p_min.x ) * side,
+                  ( ( level - first_level ) * height + cell.y - area.p_min.y ) * side );
+}
+
+bool prefilter_layout::operator==( const prefilter_layout &other ) const
+{
+    return area.p_min == other.area.p_min && area.p_max == other.area.p_max &&
+           first_level == other.first_level && levels == other.levels && grid == other.grid;
+}
+
+bool prefilter_fits( const prefilter_layout &layout, const int max_texture_size,
+                     const bool format_supported )
+{
+    const point s = layout.size();
+    return format_supported && s.x > 0 && s.y > 0 && s.x <= max_texture_size &&
+           s.y <= max_texture_size;
+}
+
+float half_round( const float x )
+{
+    if( x == 0.0f || !std::isfinite( x ) ) {
+        return x;
+    }
+    int exponent = 0;
+    std::frexp( x, &exponent );
+    // a half keeps 11 significant bits; below 2^-14 its steps stay 2^-24
+    const float step = std::ldexp( 1.0f, std::max( exponent - 11, -24 ) );
+    return std::nearbyint( x / step ) * step;
+}
+
+prefilter_lookup prefilter_lookup_texels( const prefilter_layout &layout, const point &cell,
+        const int level, const float lx, const float ly )
+{
+    const point origin = layout.block_origin( cell, level );
+    const float qx = static_cast<float>( origin.x ) + lx * static_cast<float>( layout.grid );
+    const float qy = static_cast<float>( origin.y ) + ly * static_cast<float>( layout.grid );
+    const point i0( static_cast<int>( std::floor( qx ) ), static_cast<int>( std::floor( qy ) ) );
+    const point i1( std::min( i0.x + 1, origin.x + layout.grid ),
+                    std::min( i0.y + 1, origin.y + layout.grid ) );
+    prefilter_lookup l;
+    l.texels = { i0, point( i1.x, i0.y ), point( i0.x, i1.y ), i1 };
+    l.wx = qx - static_cast<float>( i0.x );
+    l.wy = qy - static_cast<float>( i0.y );
+    return l;
+}
+
+prefilter_table build_prefilter_table( const lightmap_view &view, const prefilter_layout &layout )
+{
+    prefilter_table table;
+    table.layout = layout;
+    const point size = layout.size();
+    const int side = layout.grid + 1;
+    const int height = layout.area.p_max.y - layout.area.p_min.y;
+    table.texels.resize( static_cast<size_t>( size.x ) * size.y );
+    for( int ty = 0; ty < size.y; ++ty ) {
+        for( int tx = 0; tx < size.x; ++tx ) {
+            const point block( tx / side, ty / side );
+            const int level = layout.first_level + block.y / height;
+            const point own( layout.area.p_min.x + block.x,
+                             level * view.rows_per_level + layout.area.p_min.y + block.y % height );
+            const filter_result r = reference_filter( view, own, level,
+                                    static_cast<float>( tx % side ) / layout.grid,
+                                    static_cast<float>( ty % side ) / layout.grid );
+            table.texels[static_cast<size_t>( ty ) * size.x + tx] = { half_round( r.light ),
+                                                                      half_round( r.chroma[0] ), half_round( r.chroma[1] ), half_round( r.in_sight )
+                                                                    };
+        }
+    }
+    return table;
+}
+
+lit_sample reference_prefiltered_sample( const prefilter_table &table, const lightmap_view &view,
+        const sample_params &params, const lit_coords &coords )
+{
+    const located_pixel p = locate( view, params, coords );
+    if( params.per_tile ) {
+        return per_tile_sample( view, p );
+    }
+    const prefilter_layout &layout = table.layout;
+    const point cell = p.own - point( 0, p.level * view.rows_per_level );
+    cata_assert( layout.area.contains( cell ) );
+    cata_assert( p.level >= layout.first_level && p.level < layout.first_level + layout.levels );
+    const prefilter_lookup l = prefilter_lookup_texels( layout, cell, p.level, p.lx, p.ly );
+    const int width = layout.size().x;
+    const auto texel = [&]( const point & t ) {
+        return table.texels[static_cast<size_t>( t.y ) * width + t.x];
+    };
+    const auto weight = [&]( const float w ) {
+        return table.quantize_weights ? std::round( w * 16.0f ) / 16.0f : w;
+    };
+    const float wx = weight( l.wx );
+    const float wy = weight( l.wy );
+    std::array<float, 4> v = {};
+    for( int k = 0; k < 4; ++k ) {
+        const float top = mix1( texel( l.texels[0] )[k], texel( l.texels[1] )[k], wx );
+        const float bottom = mix1( texel( l.texels[2] )[k], texel( l.texels[3] )[k], wx );
+        v[k] = mix1( top, bottom, wy );
+    }
+    filter_result r;
+    r.light = v[0];
+    r.chroma = { v[1], v[2], std::max( 1.0f - v[1] - v[2], 0.0f ) };
+    r.in_sight = v[3];
+    r.weight = reference_filter( view, p.own, p.level, p.lx, p.ly ).weight;
+    return finish_filter( r );
 }
 
 static std::array<float, 3> mix3( const std::array<float, 3> &a, const std::array<float, 3> &b,
