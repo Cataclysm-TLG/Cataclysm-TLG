@@ -399544,6 +399544,19 @@ msgid ""
 "Time: Travel\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一个伙伴去未知的世界冒险。需要很高的生存技能"
+"来避免战斗，但你应该准备好遇到一两次遭遇。\n"
+"\n"
+"使用技能：生态学"
+"难度：3"
+"达到：\n"
+"> 选择检查点来自定义路径。\n"
+"> 显示路径周围的地形。\n"
+"风险：高\n"
+"强度：轻松\n"
+"时间：旅行\n"
+"位置：%d/3\n"
 
 #: src/faction_camp.cpp:994
 msgid " Recover Scout"
@@ -399567,6 +399580,20 @@ msgid ""
 "Time: Travel\n"
 "Positions: %d/3\n"
 msgstr ""
+"备注：\n"
+"派一个同伴去清理废土。他们的目标是消灭"
+"遇到的所有敌对生物，并在伤势过重或"
+"形势不利时返回。\n"
+"\n"
+"使用技能：生态学"
+"难度：4"
+"达到：\n"
+"> 将遇到的生物拉入战斗，而不是逃跑。\n"
+"> 选择检查点来自定义路径。\n"
+"风险：非常高\n"
+"强度：轻松\n"
+"时间：旅行\n"
+"位置：%d/3\n"
 
 #: src/faction_camp.cpp:1022
 msgid " Recover Combat Patrol"
@@ -423548,7 +423575,7 @@ msgstr "%1$s 击中了你的 %2$s。"
 #: src/monster.cpp:2224
 #, c-format
 msgid "%1$s hits %2$s in the %3$s."
-msgstr ""
+msgstr "%1$s 击中了在%3$s的%2$s。"
 
 #: src/monster.cpp:2230
 #, c-format
@@ -423583,7 +423610,7 @@ msgstr "%1$s 击中了你的 %2$s，但你的 %3$s 保护了你。"
 #: src/monster.cpp:2255
 #, c-format
 msgid "%1$s hits %2$s in the %3$s but is stopped by the %4$s."
-msgstr ""
+msgstr "%1$s 击中了 %2$s 的 %3$s，但是没能击穿%4$s。"
 
 #. ~ $1s is monster name, %2$s is that monster target name,
 #. ~ $3s is target armor name.
@@ -423663,7 +423690,7 @@ msgstr "%s挣脱了！"
 #: src/monster.cpp:2654 src/monster.cpp:2657
 #, c-format
 msgid "%1$s breaks the grab by %2$s!"
-msgstr ""
+msgstr "%1$s 从 %2$s 的抓取挣脱开了！"
 
 #: src/monster.cpp:3002
 msgid "hummmmm."
@@ -423735,7 +423762,7 @@ msgstr "%s 会在黑暗中自愈。"
 #: src/monster.cpp:3634
 #, c-format
 msgid "The light seems to be slowing the regeneration of %s."
-msgstr ""
+msgstr "光似乎在减缓 %s 的再生。"
 
 #: src/monster.cpp:3727
 msgid "The shadow withers in the light!"
@@ -429142,13 +429169,15 @@ msgstr "4x"
 
 #: src/options.cpp:2671
 msgid "NPC spawn rate"
-msgstr ""
+msgstr "NPC 生成速率"
 
 #: src/options.cpp:2672
 msgid ""
 "The rate at which random NPCs will spawn in the world over time.  Setting "
 "this higher means they will show up more frequently."
 msgstr ""
+"随机NPC在游戏世界中随时间出现的频率。"
+"把数值调高意味着它们会更频繁出现。"
 
 #: src/options.cpp:2678
 msgid "Monster evolution slowdown"
@@ -429180,6 +429209,8 @@ msgid ""
 "If set to true, the current season (or the one selected at game start) will "
 "never change."
 msgstr ""
+"如果设置为 true，当前的季节（或游戏开始时选择的季节）"
+"将永远不会变化。"
 
 #: src/options.cpp:2694
 msgid "Day/night cycle"
@@ -434049,7 +434080,7 @@ msgstr "你的%s踩到了一个%s！"
 #: src/trapfunc.cpp:306
 #, c-format
 msgid "%1$s's %2$s stepped on a %3$s!"
-msgstr ""
+msgstr "%1$s的%2$s踩到了%3$s！"
 
 #: src/trapfunc.cpp:332
 #, c-format
