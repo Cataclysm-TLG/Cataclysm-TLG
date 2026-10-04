@@ -28392,7 +28392,7 @@ msgstr "循环呼吸器滤芯"
 #. ~ This is custom prefix added to item name. "REPLICA_EQUIPMENT"
 #: data/json/flags/flags.json
 msgid "replica "
-msgstr "骨头模型"
+msgstr "复制品"
 
 #. ~ Name of JSON flag "BATTERY_HEAVY"
 #. ~ Item name
@@ -62318,7 +62318,7 @@ msgstr[0] "武道分趾袜"
 #: data/json/items/armor/boots.json
 msgid "golf shoes"
 msgid_plural "pairs of golf shoes"
-msgstr[0] "高尔夫球洞"
+msgstr[0] "高尔夫球鞋"
 
 #. ~ Item name
 #: data/json/items/armor/boots.json
@@ -65781,12 +65781,12 @@ msgstr "黑色和黄色的核三叶形被该旗帜上带有斜线的红色圆圈
 #. ~ Description of variant "AK-47 flag" of item "protest flag"
 #: data/json/items/armor/cloaks.json
 msgid "This is a big black flag with a white AK-47 printed on it."
-msgstr "这条黑色束胸带上画着白色的肋骨。"
+msgstr "这条黑色束胸带上画着白色的AK-47。"
 
 #. ~ Description of variant "AR-15 flag" of item "protest flag"
 #: data/json/items/armor/cloaks.json
 msgid "This is a big black flag with a white AR-15 printed on it."
-msgstr "这条黑色束胸带上画着白色的肋骨。"
+msgstr "这条黑色束胸带上画着白色的AR-15。"
 
 #. ~ Description of variant "incomprehensible flag" of item "protest flag"
 #: data/json/items/armor/cloaks.json
@@ -74203,7 +74203,7 @@ msgstr[0] "花格裤"
 #: data/json/items/armor/legs_clothes.json
 msgid "denim skirt"
 msgid_plural "denim skirts"
-msgstr[0] "牛仔布面料"
+msgstr[0] "牛仔布夹克"
 
 #. ~ Item name
 #: data/json/items/armor/legs_clothes.json
@@ -122269,7 +122269,7 @@ msgstr[0] "大塑料瓶"
 #: data/json/items/containers/containers.json
 msgid "large plastic bucket"
 msgid_plural "large plastic buckets"
-msgstr[0] "大塑料膜"
+msgstr[0] "大塑料桶"
 
 #. ~ Item name
 #: data/json/items/containers/containers.json
@@ -135548,7 +135548,7 @@ msgstr[0] "AR 手枪"
 #: data/json/items/gun/223.json
 msgid "AR-15 rifle"
 msgid_plural "AR-15 rifles"
-msgstr[0] "AR-10 步枪"
+msgstr[0] "AR-15 步枪"
 
 #. ~ Description of gun "OA-93 pistol"
 #. ~ Description of "OA-93 pistol"
@@ -137419,14 +137419,14 @@ msgstr[0] "罗西 R92 20 英寸步枪"
 #: data/json/items/gun/38.json
 msgid "Rossi RP63 revolver"
 msgid_plural "Rossi RP63 revolvers"
-msgstr[0] "警用左轮手枪"
+msgstr[0] "罗西 RP63 左轮手枪"
 
 #. ~ Item name
 #. ~ Name of a gun
 #: data/json/items/gun/38.json
 msgid "Ruger LCR revolver"
 msgid_plural "Ruger LCR revolver"
-msgstr[0] "鲁格 LCR .22 左轮手枪"
+msgstr[0] "鲁格 LCR 左轮手枪"
 
 #. ~ Item name
 #. ~ Name of a gun
@@ -186183,7 +186183,7 @@ msgstr "泥土"
 #. ~ Name of material
 #: data/json/materials.json
 msgid "Spandex"
-msgstr "展开"
+msgstr "氨纶"
 
 #. ~ Name of material
 #: data/json/materials.json
