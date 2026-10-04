@@ -498,7 +498,7 @@
       "PUSH_VEH",
       "NO_BREATHE",
       "HARDTOSHOOT",
-      "NOGIB"
+      "NOGIB", "BELLYUP"
     ],
     "armor": { "bash": 8, "electric": 3 }
   },
@@ -1420,7 +1420,8 @@
       "NO_BREATHE",
       "RANGED_ATTACKER",
       "PRIORITIZE_TARGETS",
-      "HIT_AND_RUN"
+      "HIT_AND_RUN",
+      "BELLYUP"
     ],
     "vision_day": 50,
     "vision_night": 8,
@@ -1456,7 +1457,7 @@
       }
     ],
     "death_function": { "message": "The %s fades away into nothingness.", "corpse_type": "NO_CORPSE" },
-    "flags": [ "FLIES", "HIT_AND_RUN", "NO_BREATHE", "NO_FUNG_DMG", "SEES" ]
+    "flags": [ "FLIES", "HIT_AND_RUN", "NO_BREATHE", "NO_FUNG_DMG", "SEES", "BELLYUP" ]
   },
   {
     "id": "mon_nether_unviable_root",
