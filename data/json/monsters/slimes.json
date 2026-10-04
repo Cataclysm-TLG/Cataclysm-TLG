@@ -146,8 +146,6 @@
     "melee_dice": 7,
     "melee_dice_sides": 5,
     "melee_damage": [ { "damage_type": "cut", "amount": 12 } ],
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "path_settings": { "max_dist": 5 },
     "special_attacks": [ [ "PARROT", 400 ], [ "ABSORB_ITEMS", 0 ] ],
