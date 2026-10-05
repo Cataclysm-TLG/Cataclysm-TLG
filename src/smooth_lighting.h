@@ -291,9 +291,24 @@ struct prefilter_layout {
 
     point size() const;
     point block_origin( const point &cell, int level ) const;
+    // whether `cell` on `level` has a block; any other cell's light is dark
+    bool holds( const point &cell, int level ) const;
     bool operator==( const prefilter_layout &other ) const;
 };
+// an empty layout always fits: it has nothing to store
 bool prefilter_fits( const prefilter_layout &layout, int max_texture_size, bool format_supported );
+// texture size for `requested` prefiltered texels: a quarter more as headroom,
+// never past `max_texture_size`, never under `current` or one texel
+point prefilter_texture_size( const point &requested, const point &current, int max_texture_size );
+
+// cells of one level's light texels, `stride` texels a row, seen in detail
+// inside `area`
+std::optional<half_open_rectangle<point>> seen_box( const lightmap_texel *level, int stride,
+                                       const half_open_rectangle<point> &area );
+// layout over `seen` grown by one cell, clipped to `clip`: a pixel's 2x2
+// anchors lie within one cell of its own, so past that its light is dark
+prefilter_layout prefilter_layout_for( const std::optional<half_open_rectangle<point>> &seen,
+                                       const half_open_rectangle<point> &clip, int first_level, int levels );
 
 // `x` as the nearest half float stores it, ties to even
 float half_round( float x );
@@ -365,15 +380,29 @@ enum class lit_failure : uint8_t {
     state_create,
     uniform_upload,
     probe_mismatch,
+    // prefilter pass failed but left the renderer safe
+    prefilter,
 };
 const char *to_string( lit_failure f );
+
+// which lighting a failure turns off
+enum class failure_scope : uint8_t {
+    all,
+    filtered,
+};
+// while a frame filters, failing to make, bind or fill what only filtered
+// light reads turns off filtered light alone
+failure_scope scope_of( lit_failure f, bool frame_filtered );
 
 // which smooth lighting failures are retried next frame, and which keep it
 // off until the GPU resources are rebuilt
 class failure_policy
 {
     public:
-        // consecutive frames an upload may fail before it latches
+        // `retried` gets upload_retries consecutive frames before it latches;
+        // every other failure latches at once
+        explicit failure_policy( lit_failure retried = lit_failure::upload ) : retried_( retried ) {}
+        // consecutive frames the retried failure may fail before it latches
         static constexpr int upload_retries = 3;
         // record a failure; true when this one latched
         bool fail( lit_failure f );
@@ -389,6 +418,7 @@ class failure_policy
             return latched_;
         }
     private:
+        lit_failure retried_;
         std::optional<lit_failure> latched_;
         int upload_streak_ = 0;
         uint32_t generation_ = 0;
@@ -402,8 +432,70 @@ enum class lighting_status : uint8_t {
     classic_this_frame,
     smooth,
     smooth_filtered,
+    // smooth_filtered asked for, per tile light drawn: the GPU cannot store or
+    // read the prefiltered light, or the prefilter failed
+    smooth_filtered_unavailable,
 };
 const char *to_string( lighting_status s );
+
+// how sprites read the prefiltered light: the GPU's linear filter, or four
+// texel fetches with float weights for GPUs whose filter is too coarse
+enum class lookup : uint8_t {
+    hardware,
+    manual,
+};
+
+// what a group of activation probe cases found
+enum class probe_group_result : uint8_t {
+    passed,
+    mismatch,
+    // the renderer may hold a bind or a target the probe left
+    unsafe,
+    skipped,
+};
+
+// which smooth lighting the probed shaders can draw
+struct lit_capability {
+    // a probe left the renderer unsafe: abort the frame
+    bool unsafe = false;
+    bool per_tile = false;
+    std::optional<lookup> filtered;
+};
+// `probed` as the current samplers allow: the hardware lookup reads through
+// the linear sampler, so without it filtered light is unavailable
+lit_capability with_linear_sampler( lit_capability probed, bool linear_sampler );
+// filtered cases are tried with the hardware lookup, then the manual one
+lit_capability decide_lit_capability( probe_group_result per_tile,
+                                      probe_group_result filtered_hardware, probe_group_result filtered_manual );
+
+// how a frame lights its sprites, and the status it shows
+struct lit_mode {
+    bool per_tile = true;
+    lighting_status status = lighting_status::smooth;
+};
+lit_mode choose_lit_mode( bool want_filtered, const lit_capability &capability,
+                          bool filtered_latched, bool prefilter_fits );
+
+// what the prefiltered light was made from
+struct prefilter_inputs {
+    uint64_t upload_generation = 0;
+    prefilter_layout layout;
+    lookup mode = lookup::hardware;
+    uint32_t resource_generation = 0;
+    bool operator==( const prefilter_inputs &other ) const;
+};
+
+// whether the prefiltered light is current; a pass forgets the old inputs
+// before it writes and publishes the new ones only once it finished cleanly
+class prefilter_cache
+{
+    public:
+        bool needs_run( const prefilter_inputs &in ) const;
+        void begin_write();
+        void publish( const prefilter_inputs &in );
+    private:
+        std::optional<prefilter_inputs> published_;
+};
 
 // what a frame does after asking for lit states
 enum class lit_frame_action : uint8_t {

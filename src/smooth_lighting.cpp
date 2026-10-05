@@ -653,6 +653,11 @@ point prefilter_layout::block_origin( const point &cell, const int level ) const
                   ( ( level - first_level ) * height + cell.y - area.p_min.y ) * side );
 }
 
+bool prefilter_layout::holds( const point &cell, const int level ) const
+{
+    return level >= first_level && level < first_level + levels && area.contains( cell );
+}
+
 bool prefilter_layout::operator==( const prefilter_layout &other ) const
 {
     return area.p_min == other.area.p_min && area.p_max == other.area.p_max &&
@@ -663,8 +668,57 @@ bool prefilter_fits( const prefilter_layout &layout, const int max_texture_size,
                      const bool format_supported )
 {
     const point s = layout.size();
-    return format_supported && s.x > 0 && s.y > 0 && s.x <= max_texture_size &&
-           s.y <= max_texture_size;
+    if( s.x <= 0 || s.y <= 0 ) {
+        return true;
+    }
+    return format_supported && s.x <= max_texture_size && s.y <= max_texture_size;
+}
+
+point prefilter_texture_size( const point &requested, const point &current,
+                              const int max_texture_size )
+{
+    const auto side = [&]( const int want, const int have ) {
+        const int grown = std::max( { want + want / 4, have, 1 } );
+        return std::max( std::min( grown, std::max( max_texture_size, have ) ), want );
+    };
+    return point( side( requested.x, current.x ), side( requested.y, current.y ) );
+}
+
+std::optional<half_open_rectangle<point>> seen_box( const lightmap_texel *level, const int stride,
+                                       const half_open_rectangle<point> &area )
+{
+    std::optional<half_open_rectangle<point>> box;
+    for( int y = area.p_min.y; y < area.p_max.y; ++y ) {
+        for( int x = area.p_min.x; x < area.p_max.x; ++x ) {
+            if( ( level[static_cast<size_t>( y ) * stride + x].a & texel_detail ) == 0 ) {
+                continue;
+            }
+            if( !box ) {
+                box = half_open_rectangle<point>( point( x, y ), point( x + 1, y + 1 ) );
+            } else {
+                box->p_min = point( std::min( box->p_min.x, x ), std::min( box->p_min.y, y ) );
+                box->p_max = point( std::max( box->p_max.x, x + 1 ), std::max( box->p_max.y, y + 1 ) );
+            }
+        }
+    }
+    return box;
+}
+
+prefilter_layout prefilter_layout_for( const std::optional<half_open_rectangle<point>> &seen,
+                                       const half_open_rectangle<point> &clip, const int first_level, const int levels )
+{
+    prefilter_layout layout;
+    if( !seen || levels <= 0 ) {
+        layout.area = half_open_rectangle<point>( clip.p_min, clip.p_min );
+        layout.first_level = first_level;
+        return layout;
+    }
+    layout.area = half_open_rectangle<point>(
+                      point( std::max( seen->p_min.x - 1, clip.p_min.x ), std::max( seen->p_min.y - 1, clip.p_min.y ) ),
+                      point( std::min( seen->p_max.x + 1, clip.p_max.x ), std::min( seen->p_max.y + 1, clip.p_max.y ) ) );
+    layout.first_level = first_level;
+    layout.levels = levels;
+    return layout;
 }
 
 float half_round( const float x )
@@ -729,8 +783,9 @@ lit_sample reference_prefiltered_sample( const prefilter_table &table, const lig
     }
     const prefilter_layout &layout = table.layout;
     const point cell = p.own - point( 0, p.level * view.rows_per_level );
-    cata_assert( layout.area.contains( cell ) );
-    cata_assert( p.level >= layout.first_level && p.level < layout.first_level + layout.levels );
+    if( !layout.holds( cell, p.level ) ) {
+        return finish_filter( filter_result() );
+    }
     const prefilter_lookup l = prefilter_lookup_texels( layout, cell, p.level, p.lx, p.ly );
     const int width = layout.size().x;
     const auto texel = [&]( const point & t ) {
@@ -875,13 +930,33 @@ const char *to_string( const lit_failure f )
             return "uniform_upload";
         case lit_failure::probe_mismatch:
             return "probe_mismatch";
+        case lit_failure::prefilter:
+            return "prefilter";
     }
     return "unknown";
 }
 
+failure_scope scope_of( const lit_failure f, const bool frame_filtered )
+{
+    switch( f ) {
+        case lit_failure::prefilter:
+            return failure_scope::filtered;
+        case lit_failure::texture_create:
+        case lit_failure::sampler_create:
+        case lit_failure::state_create:
+        case lit_failure::uniform_upload:
+            return frame_filtered ? failure_scope::filtered : failure_scope::all;
+        case lit_failure::upload:
+        case lit_failure::shader_load:
+        case lit_failure::probe_mismatch:
+            return failure_scope::all;
+    }
+    return failure_scope::all;
+}
+
 bool failure_policy::fail( const lit_failure f )
 {
-    if( f == lit_failure::upload && ++upload_streak_ < upload_retries ) {
+    if( f == retried_ && ++upload_streak_ < upload_retries ) {
         return false;
     }
     latched_ = f;
@@ -922,8 +997,72 @@ const char *to_string( const lighting_status s )
             return "smooth";
         case lighting_status::smooth_filtered:
             return "smooth_filtered";
+        case lighting_status::smooth_filtered_unavailable:
+            return "smooth_filtered_unavailable";
     }
     return "unknown";
+}
+
+lit_capability decide_lit_capability( const probe_group_result per_tile,
+                                      const probe_group_result filtered_hardware, const probe_group_result filtered_manual )
+{
+    lit_capability c;
+    if( per_tile == probe_group_result::unsafe || filtered_hardware == probe_group_result::unsafe ||
+        filtered_manual == probe_group_result::unsafe ) {
+        c.unsafe = true;
+        return c;
+    }
+    if( per_tile != probe_group_result::passed ) {
+        return c;
+    }
+    c.per_tile = true;
+    if( filtered_hardware == probe_group_result::passed ) {
+        c.filtered = lookup::hardware;
+    } else if( filtered_manual == probe_group_result::passed ) {
+        c.filtered = lookup::manual;
+    }
+    return c;
+}
+
+lit_capability with_linear_sampler( lit_capability probed, const bool linear_sampler )
+{
+    if( probed.filtered == lookup::hardware && !linear_sampler ) {
+        probed.filtered.reset();
+    }
+    return probed;
+}
+
+lit_mode choose_lit_mode( const bool want_filtered, const lit_capability &capability,
+                          const bool filtered_latched, const bool prefilter_fits )
+{
+    if( !want_filtered ) {
+        return { true, lighting_status::smooth };
+    }
+    if( capability.filtered && !filtered_latched && prefilter_fits ) {
+        return { false, lighting_status::smooth_filtered };
+    }
+    return { true, lighting_status::smooth_filtered_unavailable };
+}
+
+bool prefilter_inputs::operator==( const prefilter_inputs &other ) const
+{
+    return upload_generation == other.upload_generation && layout == other.layout &&
+           mode == other.mode && resource_generation == other.resource_generation;
+}
+
+bool prefilter_cache::needs_run( const prefilter_inputs &in ) const
+{
+    return !published_ || !( *published_ == in );
+}
+
+void prefilter_cache::begin_write()
+{
+    published_.reset();
+}
+
+void prefilter_cache::publish( const prefilter_inputs &in )
+{
+    published_ = in;
 }
 
 } // namespace smooth_lighting
