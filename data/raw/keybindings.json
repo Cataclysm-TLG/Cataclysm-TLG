@@ -2290,8 +2290,6 @@
     "category": "DEFAULTMODE",
     "id": "shift_n",
     "bindings": [
-      { "input_method": "keyboard_char", "key": "K" },
-      { "input_method": "keyboard_code", "key": "k", "mod": [ "shift" ] },
       { "input_method": "gamepad", "key": "JOY_21" }
     ]
   },
@@ -2301,8 +2299,6 @@
     "category": "DEFAULTMODE",
     "id": "shift_e",
     "bindings": [
-      { "input_method": "keyboard_char", "key": "L" },
-      { "input_method": "keyboard_code", "key": "l", "mod": [ "shift" ] },
       { "input_method": "gamepad", "key": "JOY_22" }
     ]
   },
@@ -2312,8 +2308,6 @@
     "category": "DEFAULTMODE",
     "id": "shift_s",
     "bindings": [
-      { "input_method": "keyboard_char", "key": "J" },
-      { "input_method": "keyboard_code", "key": "j", "mod": [ "shift" ] },
       { "input_method": "gamepad", "key": "JOY_23" }
     ]
   },
@@ -2323,8 +2317,6 @@
     "category": "DEFAULTMODE",
     "id": "shift_w",
     "bindings": [
-      { "input_method": "keyboard_char", "key": "H" },
-      { "input_method": "keyboard_code", "key": "h", "mod": [ "shift" ] },
       { "input_method": "gamepad", "key": "JOY_24" }
     ]
   },
@@ -2876,7 +2868,8 @@
     "type": "keybinding",
     "name": "Switch sidebar style",
     "category": "DEFAULTMODE",
-    "id": "toggle_sidebar_style"
+    "id": "toggle_sidebar_style",
+    "bindings": [ { "input_method": "keyboard_char", "key": "}" }, { "input_method": "keyboard_code", "key": "]", "mod": [ "shift" ] } ]
   },
   {
     "type": "keybinding",
