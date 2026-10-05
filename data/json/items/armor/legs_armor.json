@@ -23,8 +23,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 8,
         "coverage": 60,
-        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
       }
     ],
     "melee_damage": { "bash": 4 }
@@ -122,8 +121,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 4,
         "coverage": 85,
-        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
       }
     ],
     "melee_damage": { "bash": 3 }
@@ -163,8 +161,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 6,
         "coverage": 85,
-        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
       }
     ]
   },
@@ -614,8 +611,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
         "coverage": 100,
-        "encumbrance": 3,
-        "rigid_layer_only": true
+        "encumbrance": 3
       }
     ],
     "melee_damage": { "bash": 3 }
@@ -644,8 +640,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 5,
         "coverage": 90,
-        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l", "leg_knee_r", "leg_knee_l" ]
       }
     ],
     "melee_damage": { "bash": 5 }
@@ -697,8 +692,7 @@
           { "type": "plastic", "covered_by_mat": 70, "thickness": 1.5 },
           { "type": "neoprene", "covered_by_mat": 100, "thickness": 1.5 }
         ],
-        "coverage": 80,
-        "rigid_layer_only": true
+        "coverage": 80
       }
     ],
     "melee_damage": { "bash": 3 }
@@ -734,32 +728,28 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 80,
-        "encumbrance": 4,
-        "rigid_layer_only": true
+        "encumbrance": 4
       },
       {
         "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 60,
-        "encumbrance": 5,
-        "rigid_layer_only": true
+        "encumbrance": 5
       },
       {
         "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_upper" ],
         "coverage": 75,
-        "encumbrance": 3,
-        "rigid_layer_only": true
+        "encumbrance": 3
       },
       {
         "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 4 } ],
         "covers": [ "long_tail" ],
         "specifically_covers": [ "long_tail_base" ],
         "coverage": 60,
-        "encumbrance": 5,
-        "rigid_layer_only": true
+        "encumbrance": 5
       },
       {
         "encumbrance": 5,
@@ -779,8 +769,7 @@
           "cephalopod_arm_4_base",
           "cephalopod_arm_5_base",
           "cephalopod_arm_6_base"
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ]
   },
@@ -892,32 +881,28 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "coverage": 90,
-        "encumbrance": 5,
-        "rigid_layer_only": true
+        "encumbrance": 5
       },
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_l", "leg_upper_r" ],
         "coverage": 70,
-        "encumbrance": 0,
-        "rigid_layer_only": true
+        "encumbrance": 0
       },
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_upper" ],
         "coverage": 75,
-        "encumbrance": 4,
-        "rigid_layer_only": true
+        "encumbrance": 4
       },
       {
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "long_tail" ],
         "specifically_covers": [ "long_tail_base" ],
         "coverage": 70,
-        "encumbrance": 0,
-        "rigid_layer_only": true
+        "encumbrance": 0
       },
       {
         "encumbrance": 5,
@@ -937,8 +922,7 @@
           "cephalopod_arm_4_base",
           "cephalopod_arm_5_base",
           "cephalopod_arm_6_base"
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ]
   },
@@ -1103,8 +1087,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 5,
         "coverage": 80,
-        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
       }
     ],
     "melee_damage": { "bash": 1 }
@@ -1133,8 +1116,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "encumbrance": 6,
         "coverage": 80,
-        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_lower_r", "leg_lower_l" ]
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -1197,7 +1179,7 @@
         "coverage": 100,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_knee_l", "leg_knee_r" ],
-        "rigid_layer_only": true,
+        
         "layers": [ "OUTER", "NORMAL" ]
       }
     ],
@@ -1262,7 +1244,7 @@
           { "type": "steel", "covered_by_mat": 70, "thickness": 1.5 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.65 }
         ],
-        "rigid_layer_only": true,
+        
         "layers": [ "OUTER", "NORMAL" ]
       },
       {
@@ -1401,8 +1383,7 @@
           { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.75 },
           { "type": "plastic_pad", "covered_by_mat": 90, "thickness": 5 }
         ],
-        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_knee_l", "leg_knee_r", "leg_lower_l", "leg_lower_r" ]
       },
       {
         "covers": [ "foot_l", "foot_r" ],
@@ -1410,8 +1391,7 @@
         "coverage": 75,
         "material": [ { "type": "thermo_resin", "covered_by_mat": 100, "thickness": 1.5 } ],
         "specifically_covers": [ "foot_arch_l", "foot_arch_r", "foot_ankle_r", "foot_ankle_l" ],
-        "layers": [ "BELTED" ],
-        "rigid_layer_only": true
+        "layers": [ "BELTED" ]
       }
     ],
     "melee_damage": { "bash": 4 }

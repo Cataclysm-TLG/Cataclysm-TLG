@@ -3190,7 +3190,7 @@ void armor_portion_data::deserialize( const JsonObject &jo )
 
     optional( jo, false, "specifically_covers", sub_coverage );
 
-    optional( jo, false, "rigid_layer_only", rigid_layer_only, false );
+    optional( jo, false, "rigid_layer_only", rigid_layer_only, true );
 
     if( jo.has_array( "encumbrance_modifiers" ) ) {
         // Instead of reading encumbrance, calculate it by weight.

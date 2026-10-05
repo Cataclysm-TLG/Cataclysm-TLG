@@ -157,8 +157,7 @@
         "encumbrance": 0,
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -293,8 +292,7 @@
         "encumbrance": 0,
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -428,8 +426,7 @@
         "encumbrance": 0,
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -1068,8 +1065,7 @@
       {
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -1092,8 +1088,7 @@
       {
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -1116,8 +1111,7 @@
       {
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -1140,8 +1134,7 @@
       {
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "SUPER_FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]
@@ -1219,8 +1212,7 @@
       {
         "coverage": 0,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "flags": [ "FANCY", "NO_WEAR_EFFECT", "SKINTIGHT", "ALLOWS_TALONS" ]

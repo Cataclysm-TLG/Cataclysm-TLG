@@ -465,8 +465,7 @@
         "encumbrance_modifiers": [ "NONE" ],
         "coverage": 100,
         "covers": [ "head" ],
-        "specifically_covers": [ "head_crown", "head_forehead" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "head_crown", "head_forehead" ]
       }
     ],
     "pocket_data": [
@@ -560,8 +559,7 @@
         "encumbrance_modifiers": [ "NONE" ],
         "coverage": 100,
         "covers": [ "head" ],
-        "specifically_covers": [ "head_crown", "head_forehead" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "head_crown", "head_forehead" ]
       }
     ],
     "pocket_data": [
