@@ -498,7 +498,8 @@
       "PUSH_VEH",
       "NO_BREATHE",
       "HARDTOSHOOT",
-      "NOGIB", "BELLYUP"
+      "NOGIB",
+      "BELLYUP"
     ],
     "armor": { "bash": 8, "electric": 3 }
   },

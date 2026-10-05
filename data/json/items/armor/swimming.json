@@ -1283,8 +1283,7 @@
         ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 10,
-        "rigid_layer_only": true
+        "encumbrance": 10
       }
     ]
   },
@@ -1405,8 +1404,7 @@
         ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 10,
-        "rigid_layer_only": true
+        "encumbrance": 10
       },
       {
         "material": [
@@ -1416,8 +1414,7 @@
         "covers": [ "mouth" ],
         "coverage": 100,
         "encumbrance": 10,
-        "specifically_covers": [ "mouth_cheeks", "mouth_chin", "mouth_nose" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "mouth_cheeks", "mouth_chin", "mouth_nose" ]
       }
     ],
     "pocket_data": [
@@ -1462,8 +1459,7 @@
         ],
         "covers": [ "eyes" ],
         "coverage": 100,
-        "encumbrance": 10,
-        "rigid_layer_only": true
+        "encumbrance": 10
       },
       {
         "material": [

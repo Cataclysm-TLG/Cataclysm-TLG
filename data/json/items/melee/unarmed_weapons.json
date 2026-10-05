@@ -24,8 +24,7 @@
         "coverage": 100,
         "covers": [ "hand_l", "hand_r" ],
         "specifically_covers": [ "hand_wrist_l", "hand_wrist_r", "hand_palm_l", "hand_palm_r", "hand_back_l", "hand_back_r" ],
-        "layers": [ "OUTER" ],
-        "rigid_layer_only": true
+        "layers": [ "OUTER" ]
       },
       {
         "material": [
@@ -36,8 +35,7 @@
         "coverage": 50,
         "covers": [ "hand_l", "hand_r" ],
         "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "layers": [ "OUTER" ],
-        "rigid_layer_only": true
+        "layers": [ "OUTER" ]
       },
       {
         "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 1.0 } ],
@@ -87,8 +85,7 @@
         "encumbrance": 15,
         "coverage": 20,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "techniques": [ "TEC_CLAW_PALM" ],
@@ -135,8 +132,7 @@
         "encumbrance": 5,
         "coverage": 20,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "melee_damage": { "bash": 6 }
@@ -179,8 +175,7 @@
         "encumbrance": 7,
         "coverage": 40,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "melee_damage": { "bash": 4, "stab": 4 }
@@ -224,8 +219,7 @@
         "encumbrance": 7,
         "coverage": 20,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "melee_damage": { "bash": 5, "cut": 1 }
@@ -270,8 +264,7 @@
         "encumbrance": 5,
         "coverage": 20,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "melee_damage": { "bash": 7 }
@@ -322,8 +315,7 @@
         "encumbrance": 3,
         "coverage": 100,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_back_l", "hand_back_r" ]
       },
       {
         "material": [
@@ -344,8 +336,7 @@
         "encumbrance": 2,
         "coverage": 100,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "melee_damage": { "bash": 2, "stab": 4 }
@@ -390,8 +381,7 @@
         "encumbrance": 5,
         "coverage": 80,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ]
       }
     ],
     "melee_damage": { "bash": 9 }
@@ -431,7 +421,7 @@
     "warmth": 0,
     "material_thickness": 2,
     "flags": [ "WATER_FRIENDLY", "DURABLE_MELEE", "OUTER", "BELTED", "PADDED", "WORN_WEAPON", "ALLOWS_NATURAL_ATTACKS" ],
-    "armor": [ { "encumbrance": 5, "coverage": 20, "covers": [ "hand_l", "hand_r" ], "rigid_layer_only": true } ],
+    "armor": [ { "encumbrance": 5, "coverage": 20, "covers": [ "hand_l", "hand_r" ] } ],
     "melee_damage": { "bash": 3, "stab": 6 }
   },
   {

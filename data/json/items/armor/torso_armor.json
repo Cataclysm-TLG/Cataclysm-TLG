@@ -25,16 +25,14 @@
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
         "coverage": 20,
-        "encumbrance": 18,
-        "rigid_layer_only": true
+        "encumbrance": 18
       },
       {
         "material": [ { "type": "paper", "covered_by_mat": 100, "thickness": 12 } ],
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ],
         "coverage": 70,
-        "encumbrance": 18,
-        "rigid_layer_only": true
+        "encumbrance": 18
       }
     ]
   },
@@ -76,7 +74,7 @@
     "warmth": 15,
     "material_thickness": 2,
     "flags": [ "OUTER" ],
-    "armor": [ { "encumbrance": 17, "coverage": 95, "covers": [ "torso" ], "rigid_layer_only": true } ],
+    "armor": [ { "encumbrance": 17, "coverage": 95, "covers": [ "torso" ] } ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -178,8 +176,7 @@
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
         "coverage": 90,
-        "encumbrance": 17,
-        "rigid_layer_only": true
+        "encumbrance": 17
       },
       {
         "material": [
@@ -189,8 +186,7 @@
         "encumbrance": 4,
         "coverage": 90,
         "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ]
       }
     ],
     "melee_damage": { "bash": 6 }
@@ -314,7 +310,7 @@
     "material_thickness": 4,
     "environmental_protection": 1,
     "flags": [ "RAINPROOF", "STURDY", "OUTER" ],
-    "armor": [ { "encumbrance": 12, "coverage": 90, "covers": [ "torso" ], "rigid_layer_only": true } ]
+    "armor": [ { "encumbrance": 12, "coverage": 90, "covers": [ "torso" ] } ]
   },
   {
     "id": "platemail_cuirass",
@@ -340,8 +336,7 @@
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2 } ],
         "covers": [ "torso" ],
         "coverage": 95,
-        "encumbrance": 17,
-        "rigid_layer_only": true
+        "encumbrance": 17
       }
     ]
   },
@@ -383,7 +378,7 @@
     "warmth": 10,
     "material_thickness": 4,
     "flags": [ "OUTER", "NONCONDUCTIVE" ],
-    "armor": [ { "encumbrance": 21, "coverage": 80, "covers": [ "torso" ], "rigid_layer_only": true } ]
+    "armor": [ { "encumbrance": 21, "coverage": 80, "covers": [ "torso" ] } ]
   },
   {
     "id": "tire_cuirass_xl",
@@ -453,8 +448,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "covers": [ "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
@@ -463,8 +457,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ],
     "pocket_data": [
@@ -510,8 +503,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.9 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "covers": [ "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
@@ -520,8 +512,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 70, "thickness": 0.9 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.9 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ],
     "pocket_data": [
@@ -566,8 +557,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 80, "thickness": 0.9 },
           { "type": "denim", "covered_by_mat": 100, "thickness": 0.9 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ],
     "pocket_data": [
@@ -611,8 +601,7 @@
         "material": [
           { "type": "rubber", "covered_by_mat": 80, "thickness": 3.0 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "covers": [ "arm_l", "arm_r", "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
@@ -621,8 +610,7 @@
         "material": [
           { "type": "rubber", "covered_by_mat": 75, "thickness": 3.0 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ],
     "warmth": 40,
@@ -673,8 +661,7 @@
           { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.0 },
           { "type": "cotton", "covered_by_mat": 100, "thickness": 0.5 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 8.0 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "encumbrance": 3,
@@ -684,8 +671,7 @@
         "material": [
           { "type": "thermo_resin", "covered_by_mat": 80, "thickness": 2.0 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 8.0 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ]
   },
@@ -746,12 +732,11 @@
     "material_thickness": 3,
     "flags": [ "SKINTIGHT" ],
     "armor": [
-      { "coverage": 65, "covers": [ "torso" ], "rigid_layer_only": true, "encumbrance": 6 },
+      { "coverage": 65, "covers": [ "torso" ], "encumbrance": 6 },
       {
         "coverage": 85,
         "covers": [ "arm_r" ],
         "specifically_covers": [ "arm_shoulder_r", "wing_bird_shoulder_r" ],
-        "rigid_layer_only": true,
         "encumbrance": 4
       }
     ]
@@ -799,8 +784,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 90, "thickness": 0.9 },
           { "type": "leather", "covered_by_mat": 100, "thickness": 1.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ]
   },
@@ -833,8 +817,7 @@
         "material": [
           { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 2 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 7 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "covers": [ "arm_l", "arm_r", "leg_l", "leg_r" ],
@@ -845,8 +828,7 @@
           { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.5 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 6 }
         ],
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r", "leg_upper_l", "leg_upper_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r", "leg_upper_l", "leg_upper_r" ]
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
@@ -857,16 +839,14 @@
           { "type": "thermo_resin", "covered_by_mat": 90, "thickness": 1.5 },
           { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 6 }
         ],
-        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
       },
       {
         "covers": [ "leg_l", "leg_r" ],
         "volume_encumber_modifier": 0,
         "coverage": 30,
         "material": [ { "type": "plastic_pad", "covered_by_mat": 100, "thickness": 7 } ],
-        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "leg_hip_l", "leg_hip_r" ]
       }
     ]
   },
@@ -945,8 +925,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 100, "thickness": 1.5 },
           { "type": "leather", "covered_by_mat": 10, "thickness": 0.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       }
     ]
   },

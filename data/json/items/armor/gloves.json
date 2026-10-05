@@ -135,15 +135,13 @@
         "encumbrance": 7,
         "coverage": 95,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ]
       },
       {
         "encumbrance": 6,
         "coverage": 70,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "melee_damage": { "bash": 6 }
@@ -190,15 +188,13 @@
         "encumbrance": 6,
         "coverage": 95,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ]
       },
       {
         "encumbrance": 6,
         "coverage": 70,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "melee_damage": { "bash": 3 }
@@ -335,15 +331,13 @@
         "encumbrance": 6,
         "coverage": 95,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_wrist_l", "hand_wrist_r", "hand_back_l", "hand_back_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_wrist_l", "hand_wrist_r", "hand_back_l", "hand_back_r" ]
       },
       {
         "encumbrance": 6,
         "coverage": 70,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -447,8 +441,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 100, "thickness": 0.4 },
           { "type": "leather", "covered_by_mat": 80, "thickness": 0.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "encumbrance": 18,

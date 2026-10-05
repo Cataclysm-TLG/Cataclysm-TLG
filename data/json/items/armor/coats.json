@@ -1666,8 +1666,8 @@
         "min_item_length": "21 cm",
         "//": "min. length really just a hack to avoid adding a flag.",
         "moves": 800,
-        "description": "Pockets for deltoid armor plates.",
-        "flag_restriction": [ "ABLATIVE_MEDIUM" ]
+        "description": "Pockets for deltoid ballistic plates.",
+        "item_restriction": [ "iotv_shoulder_plate" ]
       }
     ],
     "warmth": 15,

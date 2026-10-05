@@ -188,7 +188,7 @@
         "max_contains_weight": "7 kg",
         "max_item_length": "46 cm",
         "moves": 1100,
-        "description": "Pocket for a huge armor plate.",
+        "description": "Pocket for a ballistic armor plate.",
         "flag_restriction": [ "ABLATIVE_LARGE" ]
       }
     ],
@@ -233,7 +233,7 @@
         "max_contains_weight": "7 kg",
         "max_item_length": "46 cm",
         "moves": 1100,
-        "description": "Pocket for a huge armor plate.",
+        "description": "Pocket for a ballistic armor plate.",
         "flag_restriction": [ "ABLATIVE_LARGE" ]
       },
       {
@@ -246,8 +246,8 @@
         "min_item_length": "21 cm",
         "//": "min. length really just a hack to avoid adding a flag.",
         "moves": 800,
-        "description": "Pockets for deltoid armor plates.",
-        "flag_restriction": [ "ABLATIVE_MEDIUM" ]
+        "description": "Pockets for deltoid ballistic plates.",
+        "item_restriction": [ "deltoid_plates" ]
       }
     ],
     "armor": [
@@ -291,8 +291,7 @@
         "encumbrance": 0,
         "coverage": 45,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper", "torso_lower" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_upper", "torso_lower" ]
       }
     ]
   },
@@ -302,7 +301,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ESAPI ballistic plate" },
-    "description": "A polygonal ballistic plate with a slightly concave profile, made of ceramic.  Its inner surface is coated with UHMW polyethylene and is labeled \"TOP\", while the outer surface is labeled \"STRIKE FACE\".  This is intended to be worn in a ballistic vest, and can withstand several high-energy rifle rounds before breaking.",
+    "description": "A polygonal ballistic plate with a slightly concave profile, made of ceramic.  Its inner surface is coated with UHMW polyethylene and is labeled \"TOP\", while the outer surface is labeled \"STRIKE FACE\".  This is intended to be worn in a ballistic vest, and can stand up to high-energy rifle rounds, though it is paradoxically fragile.",
     "weight": "2500 g",
     "volume": "1915 ml",
     "longest_side": "32 cm",
@@ -315,16 +314,8 @@
     "material_thickness": 25,
     "non_functional": "destroyed_large_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 4,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 4, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "wood_esapi_plate",
@@ -343,16 +334,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 4,
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 6,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 6, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "paper_esapi_plate",
@@ -371,16 +354,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 8,
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "fiberglass_esapi_plate",
@@ -398,16 +373,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 6,
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "wood_esapi_plate_xl",
@@ -425,16 +392,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 4,
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
-    "armor": [
-      {
-        "encumbrance": 6,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
+    "armor": [ { "encumbrance": 6, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "paper_esapi_plate_xl",
@@ -452,16 +411,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 8,
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "fiberglass_esapi_plate_xl",
@@ -479,16 +430,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 6,
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "stab_plate",
@@ -505,7 +448,7 @@
     "material": [ "kevlar", "nylon" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -515,8 +458,7 @@
         "encumbrance": 3,
         "coverage": 45,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_upper" ]
       }
     ]
   },
@@ -536,7 +478,7 @@
     "material": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -546,8 +488,7 @@
         "encumbrance": 7,
         "coverage": 45,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_upper" ]
       }
     ]
   },
@@ -567,7 +508,7 @@
     "material": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "PREFIX_XL", "OVERSIZE" ],
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -577,8 +518,7 @@
         "encumbrance": 8,
         "coverage": 45,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_upper" ]
       }
     ]
   },
@@ -599,7 +539,7 @@
     "repairs_with": [ "steel" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "STURDY", "NO_SALVAGE", "PREFIX_XL", "OVERSIZE" ],
+    "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "STURDY", "NO_SALVAGE", "PREFIX_XL", "OVERSIZE", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -609,8 +549,7 @@
         "encumbrance": 10,
         "coverage": 45,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_upper" ]
       }
     ]
   },
@@ -628,7 +567,7 @@
     "longest_side": "30 cm",
     "material": [ { "type": "steel", "portion": 4 }, { "type": "nylon" } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
+    "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "STURDY", "NO_SALVAGE", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -638,8 +577,7 @@
         "encumbrance": 8,
         "coverage": 45,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_upper" ]
       }
     ]
   },
@@ -650,7 +588,7 @@
     "category": "armor",
     "name": { "str_sp": "deltoid ballistic plates" },
     "//": "2x 20.5cm x 13.0cm x 3.0cm",
-    "description": "A pair of NIJ Level III ballistic plates with a concave profile, made of UHMW polyethylene.  \"STRIKE FACE\" is printed on its outer surface.  These plates are designed to be worn in the shoulder pockets of suitable plate carriers or combat shirts, and can resist several high-energy rifle rounds before breaking.  Deltoid plates such as these are very infrequently worn due to their marginal utility in improving survivability.",
+    "description": "A pair of NIJ Level III ballistic plates with a concave profile, made of UHMW polyethylene.  \"STRIKE FACE\" is printed on its outer surface.  These plates are designed to be worn in the shoulder pockets of EOD jackets and combat blouses.",
     "weight": "1551 g",
     "volume": "1599 ml",
     "longest_side": "21 cm",
@@ -661,14 +599,13 @@
     "color": "light_gray",
     "material_thickness": 8,
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE" ],
+    "flags": [ "CANT_WEAR", "NO_SALVAGE", "OUTER" ],
     "armor": [
       {
         "encumbrance": 4,
         "coverage": 35,
         "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ]
       }
     ]
   },
@@ -679,7 +616,7 @@
     "category": "armor",
     "name": { "str": "ESBI ballistic plate" },
     "//3": "20.32cm x 15.24cm x 2.5cm",
-    "description": "A polygonal ballistic plate with a slightly concave profile, made of ceramic.  \"STRIKE FACE\" is printed on its outer surface.  This is designed to be worn in the sides of a plate carrier, and can withstand several high-energy rifle rounds before breaking.",
+    "description": "A polygonal ballistic plate with a slightly concave profile, made of ceramic.  \"STRIKE FACE\" is printed on its outer surface.  This is designed to be worn in the sides of a plate carrier, and can stand up to high-energy rifle rounds, though it is paradoxically fragile.",
     "weight": "993 g",
     "volume": "774 ml",
     "longest_side": "20 cm",
@@ -691,16 +628,8 @@
     "material_thickness": 25,
     "non_functional": "destroyed_medium_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE" ],
-    "armor": [
-      {
-        "encumbrance": 2,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "OUTER" ],
+    "armor": [ { "encumbrance": 2, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "scrap_esbi_plate",
@@ -719,7 +648,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 3,
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR" ],
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -729,8 +658,7 @@
         "encumbrance": 4,
         "coverage": 35,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_lower" ]
       }
     ]
   },
@@ -748,7 +676,7 @@
     "longest_side": "20 cm",
     "material": [ { "type": "steel", "portion": 4 }, { "type": "nylon" } ],
     "repairs_with": [ "steel" ],
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "STURDY", "NO_SALVAGE" ],
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "STURDY", "NO_SALVAGE", "OUTER" ],
     "armor": [
       {
         "material": [
@@ -758,8 +686,7 @@
         "encumbrance": 5,
         "coverage": 35,
         "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "torso_lower" ]
       }
     ]
   },
@@ -780,16 +707,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 4,
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 3, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "paper_esbi_plate",
@@ -808,16 +727,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 8,
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 2,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 2, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "fiberglass_esbi_plate",
@@ -835,16 +746,8 @@
     "symbol": ",",
     "color": "dark_gray",
     "material_thickness": 6,
-    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR" ],
-    "armor": [
-      {
-        "encumbrance": 2,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ],
-        "rigid_layer_only": true
-      }
-    ]
+    "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
+    "armor": [ { "encumbrance": 2, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "destroyed_large_ceramic_plate",
@@ -942,7 +845,7 @@
         "max_contains_weight": "1200 kg",
         "max_item_length": "21 cm",
         "moves": 800,
-        "description": "Attachment for shoulder protectors.",
+        "description": "Attachment for ballistic shoulder protectors.",
         "item_restriction": [ "iotv_shoulder_plate" ]
       },
       {
@@ -1245,8 +1148,7 @@
         ],
         "encumbrance": 17,
         "coverage": 95,
-        "covers": [ "torso" ],
-        "rigid_layer_only": true
+        "covers": [ "torso" ]
       }
     ]
   },
@@ -1323,14 +1225,14 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "ballistic shoulder protectors", "str_pl": "pairs of ballistic shoulder protectors" },
-    "description": "Nylon pads with bulky armor inserts protecting the deltoid and upper arm.  Specifically designed to be attached to a heavy plate carrier.",
+    "description": "Nylon pads with soft Kevlar inserts protecting the deltoid and upper arm.  These are specifically designed to be attached to a heavy plate carrier.",
     "weight": "1034 g",
     "volume": "812 ml",
     "//": "Density test expects 1.275, so volume derived from this",
     "price": "600 USD",
     "price_postapoc": "1 USD",
     "symbol": ",",
-    "material": [ "kevlar_layered", "nylon" ],
+    "material": [ "nylon", "kevlar_layered" ],
     "color": "dark_gray",
     "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "CANT_WEAR" ],
     "armor": [
@@ -1343,8 +1245,7 @@
         "coverage": 80,
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r" ],
-        "volume_encumber_modifier": 0,
-        "rigid_layer_only": true
+        "volume_encumber_modifier": 0
       }
     ]
   },
@@ -1361,7 +1262,7 @@
     "price": "600 USD",
     "price_postapoc": "1 USD",
     "symbol": ",",
-    "material": [ "kevlar_layered", "nylon" ],
+    "material": [ "nylon", "kevlar_layered" ],
     "color": "dark_gray",
     "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "CANT_WEAR" ],
     "armor": [
@@ -1374,8 +1275,7 @@
         "coverage": 75,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
-        "volume_encumber_modifier": 0,
-        "rigid_layer_only": true
+        "volume_encumber_modifier": 0
       }
     ]
   },
@@ -1404,8 +1304,7 @@
         "coverage": 30,
         "covers": [ "head" ],
         "specifically_covers": [ "head_throat", "head_nape" ],
-        "volume_encumber_modifier": 0,
-        "rigid_layer_only": true
+        "volume_encumber_modifier": 0
       }
     ]
   }
