@@ -732,12 +732,11 @@
     "material_thickness": 3,
     "flags": [ "SKINTIGHT" ],
     "armor": [
-      { "coverage": 65, "covers": [ "torso" ],  "encumbrance": 6 },
+      { "coverage": 65, "covers": [ "torso" ], "encumbrance": 6 },
       {
         "coverage": 85,
         "covers": [ "arm_r" ],
         "specifically_covers": [ "arm_shoulder_r", "wing_bird_shoulder_r" ],
-        
         "encumbrance": 4
       }
     ]

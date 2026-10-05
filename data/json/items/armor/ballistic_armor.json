@@ -315,14 +315,7 @@
     "non_functional": "destroyed_large_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 4,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 4, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "wood_esapi_plate",
@@ -342,14 +335,7 @@
     "color": "dark_gray",
     "material_thickness": 4,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 6,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 6, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "paper_esapi_plate",
@@ -369,14 +355,7 @@
     "color": "dark_gray",
     "material_thickness": 8,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "fiberglass_esapi_plate",
@@ -395,14 +374,7 @@
     "color": "dark_gray",
     "material_thickness": 6,
     "flags": [ "ABLATIVE_LARGE", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "wood_esapi_plate_xl",
@@ -421,14 +393,7 @@
     "color": "dark_gray",
     "material_thickness": 4,
     "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 6,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 6, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "paper_esapi_plate_xl",
@@ -447,14 +412,7 @@
     "color": "dark_gray",
     "material_thickness": 8,
     "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "fiberglass_esapi_plate_xl",
@@ -473,14 +431,7 @@
     "color": "dark_gray",
     "material_thickness": 6,
     "flags": [ "ABLATIVE_LARGE_XL", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "PREFIX_XL", "OVERSIZE", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 45,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_upper" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 45, "covers": [ "torso" ], "specifically_covers": [ "torso_upper" ] } ]
   },
   {
     "id": "stab_plate",
@@ -678,14 +629,7 @@
     "non_functional": "destroyed_medium_ceramic_plate",
     "damage_verb": "makes a crunch, something has shifted",
     "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 2,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 2, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "scrap_esbi_plate",
@@ -764,14 +708,7 @@
     "color": "dark_gray",
     "material_thickness": 4,
     "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 3,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 3, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "paper_esbi_plate",
@@ -791,14 +728,7 @@
     "color": "dark_gray",
     "material_thickness": 8,
     "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 2,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 2, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "fiberglass_esbi_plate",
@@ -817,14 +747,7 @@
     "color": "dark_gray",
     "material_thickness": 6,
     "flags": [ "ABLATIVE_MEDIUM", "CANT_WEAR", "NO_SALVAGE", "NO_REPAIR", "OUTER" ],
-    "armor": [
-      {
-        "encumbrance": 2,
-        "coverage": 35,
-        "covers": [ "torso" ],
-        "specifically_covers": [ "torso_lower" ]
-      }
-    ]
+    "armor": [ { "encumbrance": 2, "coverage": 35, "covers": [ "torso" ], "specifically_covers": [ "torso_lower" ] } ]
   },
   {
     "id": "destroyed_large_ceramic_plate",

@@ -1485,9 +1485,7 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 1,
-    "armor": [
-      { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] }
-    ],
+    "armor": [ { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] } ],
     "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
@@ -1503,9 +1501,7 @@
     "revert_to": "rebreather",
     "use_action": { "ammo_scale": 0, "type": "transform", "menu_text": "Turn off", "msg": "Your %s deactivates.", "target": "rebreather" },
     "environmental_protection": 15,
-    "armor": [
-      { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] }
-    ]
+    "armor": [ { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] } ]
   },
   {
     "id": "rebreather_xl",
@@ -1542,9 +1538,7 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 1,
-    "armor": [
-      { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] }
-    ],
+    "armor": [ { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] } ],
     "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
@@ -1566,9 +1560,7 @@
       "target": "rebreather_xl"
     },
     "environmental_protection": 15,
-    "armor": [
-      { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] }
-    ]
+    "armor": [ { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] } ]
   },
   {
     "id": "rebreather_xs",
@@ -1606,9 +1598,7 @@
     "warmth": 10,
     "environmental_protection": 3,
     "material_thickness": 1,
-    "armor": [
-      { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] }
-    ],
+    "armor": [ { "encumbrance": 30, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] } ],
     "tool_ammo": [ "rebreather_filter", "rebreather_o2_regenerator" ]
   },
   {
@@ -1630,9 +1620,7 @@
     },
     "covers": [ "mouth" ],
     "environmental_protection": 15,
-    "armor": [
-      { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] }
-    ]
+    "armor": [ { "encumbrance": 20, "coverage": 75, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER" ] } ]
   },
   {
     "id": "mask_filter",
@@ -1665,14 +1653,7 @@
     ],
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
-    "armor": [
-      {
-        "encumbrance": 15,
-        "coverage": 100,
-        "covers": [ "mouth" ],
-        "layers": [ "NORMAL", "OUTER", "BELTED" ]
-      }
-    ],
+    "armor": [ { "encumbrance": 15, "coverage": 100, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER", "BELTED" ] } ],
     "tool_ammo": [ "gasfilter_s" ]
   },
   {
@@ -1692,14 +1673,8 @@
     "symbol": "[",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "eyes" ],  "coverage": 100, "encumbrance": 25 },
-      {
-        "covers": [ "mouth" ],
-        
-        "coverage": 100,
-        "encumbrance": 35,
-        "layers": [ "NORMAL", "OUTER", "BELTED" ]
-      }
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 25 },
+      { "covers": [ "mouth" ], "coverage": 100, "encumbrance": 35, "layers": [ "NORMAL", "OUTER", "BELTED" ] }
     ],
     "warmth": 20,
     "material_thickness": 2,
@@ -1733,14 +1708,8 @@
     "symbol": "[",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "eyes" ],  "coverage": 100, "encumbrance": 25 },
-      {
-        "covers": [ "mouth" ],
-        
-        "coverage": 100,
-        "encumbrance": 35,
-        "layers": [ "NORMAL", "OUTER", "BELTED" ]
-      }
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 25 },
+      { "covers": [ "mouth" ], "coverage": 100, "encumbrance": 35, "layers": [ "NORMAL", "OUTER", "BELTED" ] }
     ],
     "warmth": 20,
     "material_thickness": 2,
@@ -1775,14 +1744,8 @@
     "symbol": "[",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "eyes" ],  "coverage": 100, "encumbrance": 25 },
-      {
-        "covers": [ "mouth" ],
-        
-        "coverage": 100,
-        "encumbrance": 35,
-        "layers": [ "NORMAL", "OUTER", "BELTED" ]
-      }
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 25 },
+      { "covers": [ "mouth" ], "coverage": 100, "encumbrance": 35, "layers": [ "NORMAL", "OUTER", "BELTED" ] }
     ],
     "warmth": 20,
     "material_thickness": 2,
@@ -1831,15 +1794,7 @@
     ],
     "use_action": [ "GASMASK_ACTIVATE" ],
     "tick_action": [ "GASMASK" ],
-    "armor": [
-      {
-        "encumbrance": 35,
-        
-        "coverage": 100,
-        "covers": [ "mouth" ],
-        "layers": [ "NORMAL", "OUTER", "BELTED" ]
-      }
-    ],
+    "armor": [ { "encumbrance": 35, "coverage": 100, "covers": [ "mouth" ], "layers": [ "NORMAL", "OUTER", "BELTED" ] } ],
     "tool_ammo": [ "gasfilter_m" ]
   },
   {
@@ -2413,7 +2368,6 @@
           { "type": "hard_plastic_transp", "covered_by_mat": 100, "thickness": 3.0 }
         ],
         "covers": [ "eyes" ],
-        
         "coverage": 100,
         "encumbrance": 5
       },
@@ -2425,7 +2379,6 @@
           { "type": "neoprene", "covered_by_mat": 50, "thickness": 1.0 }
         ],
         "covers": [ "mouth" ],
-        
         "coverage": 100,
         "encumbrance": 30
       }
@@ -2936,7 +2889,6 @@
           { "type": "thermo_resin", "covered_by_mat": 30, "thickness": 1.0 }
         ],
         "covers": [ "eyes" ],
-        
         "coverage": 100,
         "encumbrance": 5,
         "layers": [ "OUTER" ]
@@ -2947,7 +2899,6 @@
           { "type": "thermo_resin", "covered_by_mat": 20, "thickness": 1.0 }
         ],
         "covers": [ "mouth" ],
-        
         "coverage": 100,
         "encumbrance": 2,
         "layers": [ "OUTER" ]
@@ -3411,7 +3362,7 @@
     "color": "dark_gray",
     "armor": [
       { "covers": [ "head" ], "coverage": 100, "encumbrance": 30, "layers": [ "NORMAL", "OUTER" ] },
-      { "covers": [ "eyes" ],  "coverage": 100, "encumbrance": 5, "layers": [ "NORMAL" ] }
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 5, "layers": [ "NORMAL" ] }
     ],
     "warmth": 15,
     "material_thickness": 5,
@@ -3477,7 +3428,7 @@
     "color": "dark_gray",
     "armor": [
       { "covers": [ "head" ], "coverage": 100, "encumbrance": 30, "layers": [ "NORMAL", "OUTER" ] },
-      { "covers": [ "eyes" ],  "coverage": 100, "encumbrance": 5, "layers": [ "NORMAL" ] }
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 5, "layers": [ "NORMAL" ] }
     ],
     "warmth": 15,
     "material_thickness": 5,
