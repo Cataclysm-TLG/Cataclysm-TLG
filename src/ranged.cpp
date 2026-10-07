@@ -1459,6 +1459,9 @@ projectile Character::thrown_item_projectile( const item &thrown ) const
 int Character::thrown_item_total_damage_raw( const item &thrown ) const
 {
     projectile proj = thrown_item_projectile( thrown );
+
+    // FIXME: Low-weight items with 0 melee damage, such as pebbles, always come back 0 here.
+
     proj.impact.add_damage( damage_bash, std::min( thrown.weight() / 100.0_gram,
                             static_cast<double>( thrown_item_adjusted_damage( thrown ) ) ) );
     const int glass_portion = thrown.made_of( material_glass );
