@@ -215,9 +215,9 @@
       },
       "furniture": { "}": "f_glass_fridge" },
       "items": {
-        "}": { "item": "wines_worthy", "chance": 60, "repeat": [ 0, 2 ] },
-        "0": { "item": "keg_wine_intact", "chance": 60 },
-        "?": { "item": "barrels", "chance": 100 }
+        "}": { "item": "wines_worthy", "chance": 50, "repeat": [ 1, 2 ] },
+        "0": { "item": "keg_wine_intact", "chance": 30 },
+        "?": { "item": "barrels", "chance": 80 }
       }
     }
   },
@@ -302,17 +302,17 @@
         "X": "f_wood_keg",
         "W": "f_wood_keg"
       },
-      "place_vehicles": [ { "vehicle": "bikeshop", "x": 22, "y": 19, "chance": 80, "rotation": 90 } ],
-      "liquids": { "X": { "liquid": "hb_beer", "amount": [ 50, 300 ] }, "W": { "liquid": "dandelion_wine", "amount": [ 20, 300 ] } },
+      "place_vehicles": [ { "vehicle": "bikeshop", "x": 22, "y": 19, "chance": 70, "rotation": 90 } ],
+      "liquids": { "X": { "liquid": "hb_beer", "amount": [ 10, 200 ], "chance": 70 }, "W": { "liquid": "dandelion_wine", "amount": [ 10, 200 ], "chance": 30 } },
       "items": {
-        "%": { "item": "wines_worthy", "chance": 70, "repeat": [ 1, 2 ] },
-        "0": { "item": "keg_wine_intact", "chance": 70 },
-        "3": { "item": "barrels", "chance": 100 },
-        "1": { "item": "keg_wine_intact", "chance": 70 },
-        "a": { "item": "dry_goods", "chance": 50, "repeat": [ 0, 5 ] },
-        "r": { "item": "preserved_food", "chance": 50, "repeat": [ 0, 5 ] },
-        "c": { "item": "condiments", "chance": 50, "repeat": [ 0, 5 ] },
-        "e": { "item": "pantry_liquids", "chance": 50, "repeat": [ 0, 5 ] },
+        "%": { "item": "wines_worthy", "chance": 60, "repeat": [ 1, 2 ] },
+        "0": { "item": "keg_wine_intact", "chance": 10 },
+        "3": { "item": "barrels", "chance": 90 },
+        "1": { "item": "keg_wine_intact", "chance": 20 },
+        "a": { "item": "dry_goods", "chance": 30, "repeat": [ 1, 3 ] },
+        "r": { "item": "preserved_food", "chance": 20, "repeat": [ 1, 3 ] },
+        "c": { "item": "condiments", "chance": 40, "repeat": [ 1, 3 ] },
+        "e": { "item": "pantry_liquids", "chance": 40, "repeat": [ 1, 3 ] },
         "l": { "item": "farming_seeds", "chance": 50, "repeat": [ 1, 5 ] },
         "b": [
           { "item": "supplies_farming", "chance": 30, "repeat": [ 1, 2 ] },
