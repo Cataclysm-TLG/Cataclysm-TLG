@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-10-02 06:15-0700\n"
-"PO-Revision-Date: 2026-10-08 19:02+0800\n"
+"PO-Revision-Date: 2026-10-08 20:42+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -280032,7 +280032,7 @@ msgstr "科学"
 #. ~ Proficiency category name
 #: data/json/proficiencies/proficiency_categories.json
 msgid "Vehicles"
-msgstr "驾驶"
+msgstr "载具"
 
 #. ~ Proficiency category name
 #: data/json/proficiencies/proficiency_categories.json
@@ -322875,7 +322875,7 @@ msgstr "泡菜黄瓜"
 #. ~ Clause text "excellent" of UI widget "zenfs_health_desc"
 #: data/json/ui/health.json data/json/ui/zenfs/diet.json
 msgid "Thriving"
-msgstr "驾驶"
+msgstr "极佳"
 
 #. ~ Clause text "bad" of UI widget "health_desc_template"
 #: data/json/ui/health.json
