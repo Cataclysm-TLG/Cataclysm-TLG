@@ -1354,6 +1354,11 @@ class item : public visitable
         float resist( const damage_type_id &dmg_type, bool to_self = false,
                       const bodypart_target &bp = bodypart_target(),
                       int resist_value = 0 ) const;
+        float average_resist( const damage_type_id &dmg_type, bool to_self,
+                              const bodypart_id &bp ) const;
+
+        float average_resist( const damage_type_id &dmg_type, bool to_self,
+                              const sub_bodypart_id &bp ) const;
 
     private:
         float _resist( const damage_type_id &dmg_type, bool to_self = false, int resist_value = 0,
@@ -1374,6 +1379,12 @@ class item : public visitable
                                      int resist_value = 0,
                                      bool bp_null = true,
                                      const std::vector<const part_material *> &armor_mats = {} ) const;
+        float _average_resist( const damage_type_id &dmg_type, bool to_self, int resist_value,
+                               const bool bp_null,
+                               const std::vector<const part_material *> &armor_mats,
+                               const float avg_thickness ) const;
+
+
         /*@}*/
     public:
 

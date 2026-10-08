@@ -2358,6 +2358,7 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
                                    const std::set<sub_bodypart_id> &sub_parts, const Character &person ) const
 {
     std::map<sub_bodypart_id, resistances> best_cases;
+    std::map<sub_bodypart_id, resistances> average_cases;
     std::map<sub_bodypart_id, resistances> median_cases;
     std::map<sub_bodypart_id, resistances> worst_cases;
 
@@ -2433,14 +2434,19 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
         for( const sub_bodypart_id &sbp : sub_parts ) {
             int coverage = armor.get_coverage( sbp );
 
-            // get worst case armor protection
-            // if it doesn't 100% cover it may not protect you
+            // Get worst case armor protection
+            // if it doesn't 100% cover it may not protect you.
             if( coverage == 100 ) {
                 worst_cases[sbp] += resistances( armor, false, 99, sbp );
             }
 
-            // get median case armor protection
-            // if it doesn't at least 50% cover it may not protect you
+            // Get average armor protection.
+            if( coverage >= 50 ) {
+                average_cases[sbp] += resistances( armor, false, average_resistance, sbp );
+            }
+
+            // Get median case armor protection.
+            // If it doesn't at least 50% cover it may not protect you.
             if( coverage >= 50 ) {
                 median_cases[sbp] += resistances( armor, false, 50, sbp );
             }
@@ -2454,12 +2460,14 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
     // need to average the protection values on each sublimb for full limbs
     if( sub_parts.size() == 1 ) {
         info.worst_case += worst_cases[*sub_parts.begin()];
+        info.average_case += average_cases[*sub_parts.begin()];
         info.median_case += median_cases[*sub_parts.begin()];
         info.best_case += best_cases[*sub_parts.begin()];
     } else {
         for( const sub_bodypart_id &sbp : sub_parts ) {
             float scale_factor = static_cast<float>( sbp->max_coverage ) / 100.0f;
             info.worst_case += worst_cases[sbp] * scale_factor;
+            info.average_case += average_cases[sbp] * scale_factor;
             info.median_case += median_cases[sbp] * scale_factor;
             info.best_case += best_cases[sbp] * scale_factor;
         }

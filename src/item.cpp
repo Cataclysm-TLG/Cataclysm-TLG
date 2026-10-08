@@ -3745,97 +3745,191 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
         info.emplace_back( "DESCRIPTION",
                            string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
         info.emplace_back( bp_cat,
-                           string_format( "%s%s%s", space, _( "Coverage:" ), space ),
-                           "", iteminfo::no_flags, get_coverage( sbp ) );
+                           string_format( "%s", _( "<bold>Coverage</bold>: " ) ),
+                           iteminfo::no_flags, get_coverage( sbp ) );
+
         bool printed_any = false;
+
         resistances worst_res = resistances( *this, false, 99, sbp );
         resistances best_res = resistances( *this, false, 0, sbp );
         resistances median_res = resistances( *this, false, 50, sbp );
+        resistances average_res = resistances( *this, false, average_resistance, sbp );
+
         int percent_best = 100;
         int percent_worst = 0;
+
         const armor_portion_data *portion = portion_for_bodypart( sbp );
         if( portion ) {
             percent_best = portion->best_protection_chance;
             percent_worst = portion->worst_protection_chance;
         }
-        bool display_median = percent_best < 50 && percent_worst < 50;
-        if( display_median ) {
-            info.emplace_back( "DESCRIPTION",
-                               string_format(
-                                   "<bold>%s</bold>: <bad>%d%%</bad>, <color_c_yellow>Median</color>, <good>%d%%</good>",
-                                   _( "Protection" ), percent_worst, percent_best ) );
-        } else if( percent_worst > 0 ) {
-            info.emplace_back( "DESCRIPTION",
-                               string_format(
-                                   "<bold>%s</bold>: <bad>%d%%</bad>, <good>%d%%</good>",
-                                   _( "Protection" ), percent_worst, percent_best ) );
-        } else {
-            info.emplace_back( "DESCRIPTION",
-                               string_format( "<bold>%s</bold>:", _( "Protection" ) ) );
-        }
+
+        bool display_average = percent_best < 50 && percent_worst < 50;
+
+        int max_name_length = 0;
+        int worst_width = 0;
+        int median_width = 0;
+        int average_width = 0;
+        int best_width = 0;
+
         for( const damage_info_order &dio :
              damage_info_order::get_all( damage_info_order::info_type::PROT ) ) {
             if( best_res.resist_vals.count( dio.dmg_type ) <= 0 ||
                 best_res.type_resist( dio.dmg_type ) < 1.0f ) {
                 continue;
             }
+
+            const std::string name =
+                uppercase_first_letter( dio.dmg_type->name.translated() );
+
+            max_name_length = std::max(
+                                  max_name_length,
+                                  static_cast<int>( name.size() ) );
+
+            worst_width = std::max(
+                              worst_width,
+                              static_cast<int>( std::max(
+                                                    string_format( "%d%%", percent_worst ).size(),
+                                                    string_format( "%.2f",
+                                                            worst_res.type_resist( dio.dmg_type ) ).size() ) ) );
+
+            median_width = std::max(
+                               median_width,
+
+                               //~ Med here is "Median", the mathematical term. It's shortened for better formatting.
+                               static_cast<int>( std::max(
+                                       std::string( _( "Med" ) ).size(),
+                                       string_format( "%.2f",
+                                               median_res.type_resist( dio.dmg_type ) ).size() ) ) );
+
+            //~ Avg here is "Average", the mathematical term. It's shortened for better formatting.
+            average_width = std::max(
+                                average_width,
+                                static_cast<int>( std::max(
+                                        std::string( _( "Avg" ) ).size(),
+                                        string_format( "%.2f",
+                                                average_res.type_resist( dio.dmg_type ) ).size() ) ) );
+
+            best_width = std::max(
+                             best_width,
+                             static_cast<int>( std::max(
+                                                   string_format( "%d%%", percent_best ).size(),
+                                                   string_format( "%.2f",
+                                                           best_res.type_resist( dio.dmg_type ) ).size() ) ) );
+        }
+
+        if( display_average ) {
+            info.emplace_back(
+                "DESCRIPTION",
+                string_format(
+                    "<bold>%s</bold>:%s<bad>%*s</bad>, <color_c_yellow>%*s</color>, <color_c_yellow>%*s</color>, <good>%*s</good>",
+                    _( "Protection" ), space,
+                    worst_width, string_format( "%d%%", percent_worst ),
+                    //~ Med and Avg are "Median" and "Average, the mathematical terms, shortened for better formatting.
+                    median_width, _( "Med" ),
+                    average_width, _( "Avg" ),
+                    best_width, string_format( "%d%%", percent_best ) ) );
+        } else if( percent_worst > 0 ) {
+            info.emplace_back(
+                "DESCRIPTION",
+                string_format(
+                    "<bold>%s</bold>:%s<bad>%*s</bad>, <good>%*s</good>",
+                    _( "Protection" ), space,
+                    worst_width, string_format( "%d%%", percent_worst ),
+                    best_width, string_format( "%d%%", percent_best ) ) );
+        } else {
+            info.emplace_back(
+                "DESCRIPTION",
+                string_format( "<bold>%s</bold>:", _( "Protection" ) ) );
+        }
+
+        for( const damage_info_order &dio :
+             damage_info_order::get_all( damage_info_order::info_type::PROT ) ) {
+            if( best_res.resist_vals.count( dio.dmg_type ) <= 0 ||
+                best_res.type_resist( dio.dmg_type ) < 1.0f ) {
+                continue;
+            }
+
+            const std::string damage_name =
+                uppercase_first_letter( dio.dmg_type->name.translated() );
+
+            const std::string padded_name =
+                string_format( "%-*s", max_name_length, damage_name );
+
             bool skipped_detailed = false;
+
             if( dio.info_display == damage_info_order::info_disp::DETAILED ) {
-                if( display_median ) {
-                    info.emplace_back( bp_cat,
-                                       string_format(
-                                           "%s%s:  <bad>%.2f</bad>, <color_c_yellow>%.2f</color>, <good>%.2f</good>",
-                                           space,
-                                           uppercase_first_letter(
-                                               dio.dmg_type->name.translated() ),
-                                           worst_res.type_resist( dio.dmg_type ),
-                                           median_res.type_resist( dio.dmg_type ),
-                                           best_res.type_resist( dio.dmg_type ) ),
-                                       "", iteminfo::no_flags );
+                if( display_average ) {
+                    info.emplace_back(
+                        bp_cat,
+                        string_format(
+                            "%s%s: <bad>%*.*f</bad>, <color_c_yellow>%*.*f</color>, <color_c_yellow>%*.*f</color>, <good>%*.*f</good>",
+                            space,
+                            padded_name,
+                            worst_width, 2,
+                            worst_res.type_resist( dio.dmg_type ),
+                            median_width, 2,
+                            median_res.type_resist( dio.dmg_type ),
+                            average_width, 2,
+                            average_res.type_resist( dio.dmg_type ),
+                            best_width, 2,
+                            best_res.type_resist( dio.dmg_type ) ),
+                        "",
+                        iteminfo::no_flags );
+
                     printed_any = true;
                 } else if( percent_worst > 0 ) {
-                    info.emplace_back( bp_cat,
-                                       string_format(
-                                           "%s%s:  <bad>%.2f</bad>, <good>%.2f</good>",
-                                           space,
-                                           uppercase_first_letter(
-                                               dio.dmg_type->name.translated() ),
-                                           worst_res.type_resist( dio.dmg_type ),
-                                           best_res.type_resist( dio.dmg_type ) ),
-                                       "", iteminfo::no_flags );
+                    info.emplace_back(
+                        bp_cat,
+                        string_format(
+                            "%s%s: <bad>%*.*f</bad>, <good>%*.*f</good>",
+                            space,
+                            padded_name,
+                            worst_width, 2,
+                            worst_res.type_resist( dio.dmg_type ),
+                            best_width, 2,
+                            best_res.type_resist( dio.dmg_type ) ),
+                        "",
+                        iteminfo::no_flags );
                     printed_any = true;
                 } else {
                     skipped_detailed = true;
                 }
             }
+
             if( skipped_detailed ||
                 dio.info_display == damage_info_order::info_disp::BASIC ) {
-                info.emplace_back( bp_cat,
-                                   string_format(
-                                       "%s%s: ",
-                                       space,
-                                       uppercase_first_letter(
-                                           dio.dmg_type->name.translated() ) ),
-                                   "",
-                                   iteminfo::is_decimal,
-                                   best_res.type_resist( dio.dmg_type ) );
+                info.emplace_back(
+                    bp_cat,
+                    string_format(
+                        "%s%s: ",
+                        space,
+                        padded_name ),
+                    "",
+                    iteminfo::is_decimal,
+                    best_res.type_resist( dio.dmg_type ) );
 
                 printed_any = true;
             }
         }
+
         if( get_base_env_resist( *this ) >= 1 ) {
-            info.emplace_back( bp_cat,
-                               string_format( "%s%s", space, _( "Environmental: " ) ),
-                               get_base_env_resist( *this ) );
+            info.emplace_back(
+                bp_cat,
+                string_format( "%s%s", space, _( "Environmental: " ) ),
+                get_base_env_resist( *this ) );
 
             printed_any = true;
         }
+
         if( !printed_any ) {
-            info.emplace_back( bp_cat,
-                               string_format( "%s%s",
-                                              space,
-                                              _( "Negligible Protection" ) ) );
+            info.emplace_back(
+                bp_cat,
+                string_format( "%s%s",
+                               space,
+                               _( "Negligible Protection" ) ) );
         }
+
         if( type->can_use( "GASMASK_ACTIVATE" ) ||
             type->can_use( "DIVE_TANK" ) ) {
             info.emplace_back(
@@ -3843,12 +3937,14 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
                 string_format(
                     "<bold>%s</bold>:",
                     _( "Protection when active" ) ) );
+
             info.emplace_back(
                 bp_cat,
                 space + _( "Environmental: " ),
                 get_env_resist(
                     get_base_env_resist_w_filter() ) );
         }
+
         if( sbp == sub_bodypart_id() && damage() > 0 ) {
             armor_protect_dmg_info( damage(), info );
         }
@@ -9141,6 +9237,60 @@ template float item::resist<bodypart_id>( const damage_type_id &dmg_type,
 template float item::resist<sub_bodypart_id>( const damage_type_id &dmg_type,
         const bool to_self, const sub_bodypart_id &bp, const int resist_value ) const;
 
+float item::average_resist( const damage_type_id &dmg_type, const bool to_self,
+                            const bodypart_id &bp ) const
+{
+    if( is_null() ) {
+        return 0.0f;
+    }
+
+    if( dmg_type.is_null() ) {
+        return 0.0f;
+    }
+
+    if( !dmg_type.is_valid() ) {
+        debugmsg( "Invalid damage type: %d", dmg_type.c_str() );
+        return 0.0f;
+    }
+
+    if( to_self && !damage_type_can_damage_items( dmg_type ) ) {
+        return std::numeric_limits<float>::max();
+    }
+
+    const bool bp_null = bp == bodypart_id();
+    const std::vector<const part_material *> &armor_mats = armor_made_of( bp );
+    const float avg_thickness = bp_null ? get_thickness() : get_thickness( bp );
+
+    return _average_resist( dmg_type, to_self, -1, bp_null, armor_mats, avg_thickness );
+}
+
+float item::average_resist( const damage_type_id &dmg_type, const bool to_self,
+                            const sub_bodypart_id &bp ) const
+{
+    if( is_null() ) {
+        return 0.0f;
+    }
+
+    if( dmg_type.is_null() ) {
+        return 0.0f;
+    }
+
+    if( !dmg_type.is_valid() ) {
+        debugmsg( "Invalid damage type: %d", dmg_type.c_str() );
+        return 0.0f;
+    }
+
+    if( to_self && !damage_type_can_damage_items( dmg_type ) ) {
+        return std::numeric_limits<float>::max();
+    }
+
+    const bool bp_null = bp == sub_bodypart_id();
+    const std::vector<const part_material *> &armor_mats = armor_made_of( bp );
+    const float avg_thickness = bp_null ? get_thickness() : get_thickness( bp );
+
+    return _average_resist( dmg_type, to_self, -1, bp_null, armor_mats, avg_thickness );
+}
+
 float item::_resist( const damage_type_id &dmg_type, bool to_self, int resist_value,
                      const bool bp_null,
                      const std::vector<const part_material *> &armor_mats,
@@ -9291,6 +9441,74 @@ float item::_environmental_resist( const damage_type_id &dmg_type, const bool to
     }
 
     return resist + mod;
+}
+
+float item::_average_resist( const damage_type_id &dmg_type, bool to_self, int resist_value,
+                             const bool bp_null,
+                             const std::vector<const part_material *> &armor_mats,
+                             const float avg_thickness ) const
+{
+    if( dmg_type->env ) {
+        return _environmental_resist( dmg_type, to_self, resist_value, bp_null, armor_mats );
+    }
+
+    std::optional<std::pair<damage_type_id, float>> derived;
+    if( !dmg_type->derived_from.first.is_null() ) {
+        derived = dmg_type->derived_from;
+    }
+
+    float resist = 0.0f;
+    float mod = get_clothing_mod_val_for_damage_type( dmg_type );
+
+    float damage_scale = damage_adjusted_armor_resist( 1.0f, dmg_type );
+    if( has_flag( flag_REPLICA_EQUIPMENT ) ) {
+        damage_scale *= 0.66;
+    }
+
+    if( !bp_null ) {
+        // If we have armour portion materials for this body part, use those.
+        if( !armor_mats.empty() ) {
+            for( const part_material *m : armor_mats ) {
+                float material_resist = 0.0f;
+
+                if( derived.has_value() && !m->id->has_dedicated_resist( dmg_type ) ) {
+                    material_resist = m->id->resist( derived->first ) * derived->second;
+                } else {
+                    material_resist = m->id->resist( dmg_type );
+                }
+
+                // Each material has an independent chance of being hit.
+                // This is the expected contribution of that material.
+                resist += material_resist * m->thickness *
+                          ( static_cast<float>( m->cover ) / 100.0f );
+            }
+
+            return ( resist + mod ) * damage_scale;
+        }
+    }
+
+    // Base resistance.
+    const std::map<material_id, int> mats = made_of();
+    if( !mats.empty() ) {
+        const int total = type->mat_portion_total == 0 ? 1 : type->mat_portion_total;
+
+        for( const auto &m : mats ) {
+            float tmp_add = 0.0f;
+
+            if( derived.has_value() && !m.first->has_dedicated_resist( dmg_type ) ) {
+                tmp_add = m.first->resist( derived->first ) * m.second * derived->second;
+            } else {
+                tmp_add = m.first->resist( dmg_type ) * m.second;
+            }
+
+            resist += tmp_add;
+        }
+
+        // Average by portion of materials.
+        resist /= total;
+    }
+
+    return ( resist * avg_thickness + mod ) * damage_scale;
 }
 
 #if defined(_MSC_VER)

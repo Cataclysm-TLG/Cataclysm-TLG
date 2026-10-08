@@ -716,6 +716,28 @@ resistances::resistances( const item &armor, bool to_self, int roll, const sub_b
     }
 }
 
+resistances::resistances( const item &armor, bool to_self, average_resistance_t,
+                          const bodypart_id &bp )
+{
+    // Armors protect, but all items can resist.
+    if( to_self || armor.is_armor() || armor.is_pet_armor() ) {
+        for( const damage_type &dam : damage_type::get_all() ) {
+            set_resist( dam.id, armor.average_resist( dam.id, to_self, bp ) );
+        }
+    }
+}
+
+resistances::resistances( const item &armor, bool to_self,
+                          average_resistance_t, const sub_bodypart_id &bp )
+{
+    // Armors protect, but all items can resist.
+    if( to_self || armor.is_armor() ) {
+        for( const damage_type &dam : damage_type::get_all() ) {
+            set_resist( dam.id, armor.average_resist( dam.id, to_self, bp ) );
+        }
+    }
+}
+
 resistances::resistances( monster &monster ) : resistances( monster.type->armor )
 {
 
