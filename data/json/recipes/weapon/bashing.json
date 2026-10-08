@@ -783,19 +783,18 @@
     "category": "CC_*",
     "subcategory": "CSC_*_NESTED",
     "skill_used": "fabrication",
-    "difficulty": 4,
+    "difficulty": 5,
     "time": "3 h",
-    "book_learn": [ [ "textbook_weapwest", 3 ], [ "recipe_melee", 4 ] ],
+    "book_learn": [ [ "textbook_weapwest", 4 ], [ "book_arms_india", 5 ], [ "recipe_melee", 5 ] ],
     "using": [ [ "blacksmithing_basic", 12 ], [ "steel_standard", 3 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
       { "proficiency": "prof_toolsmithing" },
-      { "proficiency": "prof_carving", "skill_penalty": 0 },
-      { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
+      { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
-    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
+    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ] ]
   },
   {
     "result": "staff_pipe",
@@ -819,7 +818,7 @@
     "skill_used": "fabrication",
     "difficulty": 5,
     "time": "3 h",
-    "book_learn": [ [ "bronze_book", 4 ], [ "bronze_mag", 4 ] ],
+    "book_learn": [ [ "bronze_book", 4 ], [ "book_arms_india", 5 ], [ "bronze_mag", 5 ] ],
     "autolearn": true,
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
@@ -840,18 +839,17 @@
     "skill_used": "fabrication",
     "difficulty": 6,
     "time": "4 h",
-    "book_learn": [ [ "textbook_weapwest", 5 ] ],
+    "book_learn": [ [ "textbook_weapwest", 5 ], [ "book_arms_india", 6 ] ],
     "using": [ [ "blacksmithing_standard", 16 ], [ "steel_standard", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
       { "proficiency": "prof_toolsmithing" },
-      { "proficiency": "prof_carving", "skill_penalty": 0 },
-      { "proficiency": "prof_leatherworking_basic", "skill_penalty": 0 }
+      { "proficiency": "prof_carving", "skill_penalty": 0 }
     ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "swage", -1 ] ] ],
-    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ], [ [ "fur_patch", 3 ], [ "leather_patch", 3 ] ] ]
+    "components": [ [ [ "2x4", 3 ], [ "stick", 6 ] ] ]
   },
   {
     "type": "recipe",

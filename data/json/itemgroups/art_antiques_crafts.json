@@ -144,6 +144,7 @@
       { "item": "helmet_kabuto", "custom-flags": [ "REPLICA_EQUIPMENT" ], "prob": 1 },
       { "item": "armor_samurai", "prob": 1 },
       { "item": "helmet_kabuto", "prob": 1 },
+      { "item": "book_arms_india", "prob": 5 },
       { "item": "textbook_weapwest", "prob": 5 },
       { "item": "textbook_weparabic", "prob": 5 },
       { "item": "textbook_weapeast", "prob": 5 },

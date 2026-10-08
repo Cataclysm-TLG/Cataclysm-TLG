@@ -931,7 +931,7 @@
     "skill_used": "fabrication",
     "difficulty": 7,
     "time": "5 h",
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
     "using": [ [ "armor_chainmail_assembling", 6 ], [ "strap_small", 6 ], [ "clasps", 6 ] ],
     "proficiencies": [ { "proficiency": "prof_chain_armour" }, { "proficiency": "prof_closures" } ]
   },
@@ -958,7 +958,7 @@
     "skill_used": "fabrication",
     "difficulty": 7,
     "time": "3 h",
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
     "using": [ [ "armor_chainmail_assembling", 3 ], [ "strap_small", 2 ], [ "clasps", 2 ] ],
     "proficiencies": [ { "proficiency": "prof_chain_armour" }, { "proficiency": "prof_closures" } ]
   },

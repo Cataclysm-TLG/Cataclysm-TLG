@@ -27,7 +27,7 @@
     "skill_used": "fabrication",
     "difficulty": 5,
     "time": "3 h",
-    "book_learn": [ [ "textbook_weapeast", 5 ] ],
+    "book_learn": [ [ "book_arms_india", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -44,9 +44,9 @@
     "category": "CC_WEAPON",
     "subcategory": "CSC_WEAPON_STABBING",
     "skill_used": "fabrication",
-    "difficulty": 7,
+    "difficulty": 8,
     "time": "10 h",
-    "book_learn": [ [ "textbook_weapwest", 6 ] ],
+    "book_learn": [ [ "book_arms_india", 7 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -56,7 +56,7 @@
     "using": [ [ "blacksmithing_standard", 2 ], [ "steel_tiny", 2 ] ],
     "qualities": [ { "id": "GRIND", "level": 2 } ],
     "tools": [ [ [ "hotcut_any", 1, "LIST" ] ] ],
-    "components": [ [ [ "2x4", 1 ], [ "stick", 2 ] ] ]
+    "components": [ [ [ "2x4", 1 ], [ "stick", 1 ] ] ]
   },
   {
     "result": "pitchfork",
@@ -88,7 +88,7 @@
     "skill_used": "fabrication",
     "difficulty": 8,
     "time": "8 h",
-    "book_learn": [ [ "textbook_weapwest", 8 ] ],
+    "book_learn": [ [ "textbook_weapwest", 7 ], [ "book_arms_india", 8 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },

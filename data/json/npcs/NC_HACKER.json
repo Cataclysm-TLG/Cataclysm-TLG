@@ -29,11 +29,6 @@
       { "item": "recipe_labchem", "prob": 1 },
       { "item": "soldering_iron_portable", "prob": 70, "charges": [ 0, 50 ] },
       { "item": "solder_wire", "prob": 70 },
-      { "item": "textbook_weapwest", "prob": 2 },
-      { "item": "textbook_weparabic", "prob": 2 },
-      { "item": "textbook_weapeast", "prob": 2 },
-      { "item": "textbook_armwest", "prob": 2 },
-      { "item": "textbook_armeast", "prob": 2 },
       { "item": "radio_book", "prob": 22 }
     ]
   }
