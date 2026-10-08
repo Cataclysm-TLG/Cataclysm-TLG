@@ -557,6 +557,26 @@
     "read_fun": -1
   },
   {
+    "id": "book_arms_india",
+    "type": "ITEM",
+    "subtypes": [ "BOOK" ],
+    "category": "manuals",
+    "name": { "str": "Ancient India's Weapons of War", "str_pl": "copies of Ancient India's Weapons of War" },
+    "description": "A comprehensive guide to weapons and armor across the Indian subcontinent, from the Indo-Scythians and Parthians up through the Brigade of Gurkhas in World War II.  The book features extensive photographs and even some helpful diagrams which should be enough for a skilled and capable blacksmith to make use of.",
+    "weight": "600 g",
+    "volume": "1200 ml",
+    "price": "64 USD",
+    "price_postapoc": "30 USD",
+    "material": [ "paper", "cardboard" ],
+    "symbol": "?",
+    "color": "blue",
+    "required_level": 4,
+    "max_level": 6,
+    "intelligence": 10,
+    "time": "45 m",
+    "read_skill": "fabrication"
+  },
+  {
     "id": "welding_book",
     "type": "ITEM",
     "subtypes": [ "BOOK" ],

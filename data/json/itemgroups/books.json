@@ -575,6 +575,7 @@
       { "item": "textbook_speech", "prob": 12 },
       { "item": "textbook_fireman", "prob": 10 },
       { "item": "textbook_armschina", "prob": 3 },
+      { "item": "book_arms_india", "prob": 3 },
       { "item": "textbook_weapwest", "prob": 3 },
       { "item": "textbook_weparabic", "prob": 3 },
       { "item": "textbook_weapeast", "prob": 3 },
@@ -696,6 +697,7 @@
     "//": "These are books that are hard to find or esoteric, mostly.",
     "subtype": "distribution",
     "entries": [
+      { "item": "book_arms_india", "prob": 15 },
       { "item": "textbook_weapwest", "prob": 15 },
       { "item": "textbook_weparabic", "prob": 15 },
       { "item": "textbook_weapeast", "prob": 15 },

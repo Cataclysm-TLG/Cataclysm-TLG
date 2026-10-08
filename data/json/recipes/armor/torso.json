@@ -2598,7 +2598,7 @@
     "subcategory": "CSC_ARMOR_TORSO",
     "difficulty": 7,
     "time": "7 h 10 m",
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
     "using": [ [ "chainmail_standard", 7 ], [ "tailoring_cotton_sheet", 6 ] ],
     "components": [ [ [ "link_sheet", 7 ] ], [ [ "chain_link", 175 ] ], [ [ "wire", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_chain_armour" } ]
@@ -2632,7 +2632,7 @@
     "subcategory": "CSC_ARMOR_TORSO",
     "difficulty": 7,
     "time": "14 h",
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
     "using": [
       [ "chainmail_standard", 7 ],
       [ "tailoring_cotton_sheet", 6 ],

@@ -394,7 +394,7 @@
     "difficulty": 7,
     "skills_required": [ [ "tailor", 2 ] ],
     "time": "7 h",
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
     "using": [ [ "armor_chainmail_assembling", 3 ], [ "strap_small", 4 ], [ "clasps", 4 ] ],
     "proficiencies": [
       { "proficiency": "prof_chain_armour", "required": false, "time_multiplier": 3 },

@@ -194,6 +194,7 @@
     "book_learn": [
       [ "textbook_fabrication", 3 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -242,6 +243,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -267,6 +269,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -292,6 +295,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -1658,6 +1662,7 @@
     "book_learn": [
       [ "textbook_fabrication", 3 ],
       [ "textbook_weapeast", 4 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 4 ],
       [ "textbook_armeast", 4 ],
       [ "textbook_armwest", 4 ],
@@ -1699,6 +1704,7 @@
     "book_learn": [
       [ "textbook_fabrication", 2 ],
       [ "textbook_weapeast", 3 ],
+      [ "book_arms_india", 4 ],
       [ "textbook_weapwest", 3 ],
       [ "textbook_armeast", 3 ],
       [ "textbook_armwest", 3 ],

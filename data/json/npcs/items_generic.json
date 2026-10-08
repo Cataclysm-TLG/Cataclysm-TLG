@@ -1031,6 +1031,7 @@
       [ "textbook_tailor", 1 ],
       [ "textbook_traps", 2 ],
       [ "textbook_weapeast", 1 ],
+      { "item": "book_arms_india", "prob": 1 },
       [ "textbook_weapwest", 1 ],
       [ "textbook_weparabic", 1 ],
       [ "thermal_socks", 3 ],
