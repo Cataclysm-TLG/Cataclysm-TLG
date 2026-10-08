@@ -44,7 +44,7 @@
     "skill_used": "fabrication",
     "difficulty": 7,
     "time": "8 h",
-    "book_learn": [ [ "textbook_arms_india", 6 ] ],
+    "book_learn": [ [ "book_arms_india", 6 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
