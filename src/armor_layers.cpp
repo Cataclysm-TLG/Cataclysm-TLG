@@ -320,14 +320,19 @@ void add_category_and_values( std::vector<std::string> &current_text, const int 
 
 std::vector<std::pair<std::string, std::string>> collect_protection_subvalues(
             const resistances &worst_res, const resistances &best_res, const resistances &median_res,
-            const bool display_median, const damage_type_id &type )
+            const resistances &average_res,
+            const bool display_average, const damage_type_id &type )
 {
     std::vector<std::pair<std::string, std::string>> subvalues;
     subvalues.emplace_back( _( "Worst:" ), string_format( "%.2f",
                             worst_res.type_resist( type ) ) );
-    if( display_median ) {
+    if( display_average ) {
         subvalues.emplace_back( _( "Median:" ), string_format( "%.2f",
                                 median_res.type_resist( type ) ) );
+    }
+    if( display_average ) {
+        subvalues.emplace_back( _( "Average:" ), string_format( "%.2f",
+                                average_res.type_resist( type ) ) );
     }
     subvalues.emplace_back( _( "Best:" ), string_format( "%.2f",
                             best_res.type_resist( type ) ) );
@@ -356,10 +361,11 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
 
     // prebuild and calc some values
     // the rolls are basically a perfect hit for protection and a
-    // worst possible and a median hit
+    // worst possible and an average hit
     resistances worst_res = resistances( worn_item, false, 99, used_bp );
     resistances best_res = resistances( worn_item, false, 0, used_bp );
     resistances median_res = resistances( worn_item, false, 50, used_bp );
+    resistances average_res = resistances( worn_item, false, average_resistance, used_bp );
 
     int percent_best = 100;
     int percent_worst = 0;
@@ -370,7 +376,7 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
         percent_worst = portion->worst_protection_chance;
     }
 
-    bool display_median = percent_best < 50 && percent_worst < 50;
+    bool display_average = percent_best < 50 && percent_worst < 50;
 
     prot.push_back( string_format( "<color_c_green>[%s]</color>", _( "Protection" ) ) );
     for( const damage_type &dt : damage_type::get_all() ) {
@@ -380,7 +386,7 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
         if( dio->info_display == damage_info_order::info_disp::DETAILED ) {
             if( percent_worst > 0 ) {
                 std::vector<std::pair<std::string, std::string>> subvalues = collect_protection_subvalues(
-                            worst_res, best_res, median_res, display_median, dt.id );
+                            worst_res, best_res, median_res, average_res, display_average, dt.id );
                 add_category_and_values( prot, width, dtname, subvalues );
             } else {
                 skipped_details = true;
