@@ -4,8 +4,8 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "category": "armor",
-    "name": { "str_sp": "attachable ear muffs" },
-    "description": "A pair of ear muffs attachable to a hard hat or helmet to reduce noise exposures to safe levels.  Activate to put ear muffs into a working position, blocking most sounds.",
+    "name": { "str_sp": "attachable earmuffs" },
+    "description": "A pair of earmuffs attachable to a hard hat or helmet to reduce noise exposures to safe levels.  Activate to put ear muffs into a working position, blocking most sounds.",
     "weight": "290 g",
     "volume": "250 ml",
     "price": "10 USD",
@@ -28,7 +28,7 @@
       "type": "transform",
       "menu_text": "Wear",
       "target": "attachable_ear_muffs_on",
-      "msg": "You move the ear muffs over your ears.",
+      "msg": "You move the earmuffs over your ears.",
       "moves": 100
     }
   },
@@ -143,7 +143,7 @@
     "material": [ "plastic" ],
     "symbol": "[",
     "color": "light_gray",
-    "flags": [ "CANT_WEAR" ]
+    "flags": [ "CANT_WEAR", "SOFT" ]
   },
   {
     "id": "shield_visor",
@@ -252,7 +252,7 @@
     "passive_effects": [ { "id": "nvg_normal" } ],
     "flags": [ "HELMET_FRONT_ATTACHMENT", "CANT_WEAR", "OUTER", "ELECTRONIC", "MUNDANE" ],
     "armor": [
-      { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0, "rigid_layer_only": true },
+      { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0 },
       { "covers": [ "head" ], "encumbrance": 8, "coverage": 70, "specifically_covers": [ "head_forehead" ] }
     ],
     "tool_ammo": "battery"
@@ -275,7 +275,7 @@
       "msg": "Your %s deactivates.",
       "target": "military_nvg"
     },
-    "armor": [ { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 30, "rigid_layer_only": true } ]
+    "armor": [ { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 30 } ]
   },
   {
     "id": "advanced_gpnvg",
@@ -312,7 +312,7 @@
     "passive_effects": [ { "id": "nvg_good" } ],
     "flags": [ "HELMET_FRONT_ATTACHMENT", "CANT_WEAR", "OUTER", "ELECTRONIC", "MUNDANE" ],
     "armor": [
-      { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0, "rigid_layer_only": true },
+      { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0 },
       {
         "covers": [ "head" ],
         "encumbrance": 12,
@@ -341,7 +341,7 @@
       "target": "advanced_gpnvg"
     },
     "armor": [
-      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 30, "rigid_layer_only": true },
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 30 },
       { "covers": [ "head" ], "encumbrance": 3, "coverage": 80, "specifically_covers": [ "head_crown" ] }
     ]
   },
@@ -380,7 +380,7 @@
     "passive_effects": [ { "id": "nvg_good" }, { "id": "THERMAL_VISION_GOOD" } ],
     "flags": [ "HELMET_FRONT_ATTACHMENT", "CANT_WEAR", "OUTER", "ELECTRONIC", "MUNDANE" ],
     "armor": [
-      { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0, "rigid_layer_only": true },
+      { "covers": [ "eyes" ], "coverage": 10, "encumbrance": 0 },
       {
         "covers": [ "head" ],
         "encumbrance": 10,
@@ -409,7 +409,7 @@
       "target": "enhanced_nvg"
     },
     "armor": [
-      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 30, "rigid_layer_only": true },
+      { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 30 },
       { "covers": [ "head" ], "encumbrance": 3, "coverage": 80, "specifically_covers": [ "head_crown" ] }
     ]
   },

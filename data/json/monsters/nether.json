@@ -55,7 +55,6 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "dodge": 1,
     "harvest": "mutant_human",
-    "families": [ "prof_wp_netherium_abomination" ],
     "weakpoint_sets": [ "wps_humanoid_body" ],
     "special_attacks": [ [ "SHRIEK", 10 ] ],
     "flags": [ "SMELLS", "HEARS", "HAS_MIND", "WARM", "ANIMAL", "PATH_AVOID_DANGER", "SUNDEATH", "NO_BREATHE", "HUMAN" ]
@@ -177,8 +176,6 @@
     "dodge": 3,
     "vision_day": 50,
     "luminance": 6,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ [ "DARKMAN", 5 ], [ "scratch", 15 ] ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away.", "effect": { "id": "death_darkman" } },
@@ -271,8 +268,6 @@
     "vision_day": 50,
     "vision_night": 40,
     "luminance": 25,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "zombie_meatslug",
     "special_attacks": [ { "type": "spell", "spell_data": { "id": "stare" }, "monster_message": "", "cooldown": 12 } ],
     "flags": [ "SEES", "WARM", "FLIES", "FIREY", "NO_BREATHE", "NOHEAD", "PACIFIST" ],
@@ -302,8 +297,6 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "dodge": 7,
     "bleed_rate": 40,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
     "flags": [
@@ -489,8 +482,6 @@
       }
     ],
     "bleed_rate": 40,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
     "flags": [
@@ -507,7 +498,8 @@
       "PUSH_VEH",
       "NO_BREATHE",
       "HARDTOSHOOT",
-      "NOGIB"
+      "NOGIB",
+      "BELLYUP"
     ],
     "armor": { "bash": 8, "electric": 3 }
   },
@@ -546,8 +538,6 @@
     ],
     "anger_triggers": [ "FIRE" ],
     "fear_triggers": [ "HURT" ],
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
     "flags": [
       "SEES",
@@ -619,8 +609,6 @@
     "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "dodge": 4,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ { "id": "tentacle" } ],
     "death_function": { "effect": { "id": "death_thing", "hit_self": true }, "corpse_type": "NO_CORPSE", "message": "The %s emerges!" },
@@ -652,8 +640,6 @@
     "bleed_rate": 20,
     "vision_day": 50,
     "vision_night": 50,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ [ "TINDALOS_TELEPORT", 5 ] ],
     "emit_fields": [ { "emit_id": "emit_tindalos_gas_leak", "delay": "1 s" } ],
@@ -700,8 +686,6 @@
     "bleed_rate": 0,
     "vision_day": 50,
     "vision_night": 50,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ [ "TINDALOS_TELEPORT", 5 ], [ "DISAPPEAR", 25 ] ],
     "emit_fields": [ { "emit_id": "emit_tindalos_gas_leak", "delay": "1 s" } ],
@@ -778,8 +762,6 @@
     "melee_dice_sides": 12,
     "melee_damage": [ { "damage_type": "cut", "amount": 6 } ],
     "dodge": 8,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "anger_triggers": [ "STALK", "PLAYER_WEAK", "PLAYER_CLOSE", "FRIEND_ATTACKED" ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
@@ -821,8 +803,6 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "dodge": 4,
     "vision_day": 50,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ [ "DISAPPEAR", 200 ] ],
     "special_when_hit": [ "ZAPBACK", 100 ],
@@ -867,8 +847,6 @@
     "melee_dice_sides": 4,
     "melee_damage": [ { "damage_type": "cut", "amount": 4 } ],
     "dodge": 1,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ [ "DISAPPEAR", 200 ] ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
@@ -898,8 +876,6 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
     "dodge": 2,
     "bleed_rate": 20,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "special_attacks": [ { "id": "tentacle" } ],
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
@@ -971,8 +947,6 @@
     "dodge": 1,
     "bleed_rate": 50,
     "starting_ammo": { "mutagenic_sting_barb": 8 },
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "exempt",
     "death_function": { "corpse_type": "NO_CORPSE", "message": "The %s melts away." },
     "special_attacks": [
@@ -1283,8 +1257,6 @@
     "melee_damage": [ { "damage_type": "stab", "amount": 6 } ],
     "grab_strength": 30,
     "special_attacks": [ { "id": "ranged_pull", "cooldown": 3 }, { "id": "grab", "cooldown": 4 }, { "type": "bite", "cooldown": 2 } ],
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "mutant_mammal_leather",
     "reproduction": { "baby_monster": "mon_carrion_grub", "baby_count": 1, "baby_timer": 330 },
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE", "FRIEND_ATTACKED" ],
@@ -1309,8 +1281,6 @@
     "melee_skill": 2,
     "melee_dice": 1,
     "upgrades": { "age_grow": 30, "into": "mon_hanging_roper" },
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "mutant_animal_large_noskin",
     "flags": [ "SMELLS" ]
   },
@@ -1334,8 +1304,6 @@
     "melee_dice_sides": 6,
     "melee_damage": [ { "damage_type": "stab", "amount": 8 } ],
     "anger_triggers": [ "FRIEND_ATTACKED" ],
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "mutant_animal_large_noskin",
     "flags": [ "SMELLS", "SEES", "HEARS", "ANIMAL", "WARM" ]
   },
@@ -1369,8 +1337,6 @@
         ]
       }
     ],
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "mutant_animal_large_noskin",
     "reproduction": { "baby_monster": "mon_nether_leech", "baby_count": 1, "baby_timer": 330 },
     "flags": [ "SMELLS" ]
@@ -1398,8 +1364,6 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 3 } ],
     "dodge": 5,
     "armor": { "bash": 0, "cut": 2, "bullet": 0 },
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "harvest": "fish_small",
     "looks_like": "mon_fish_brown_trout",
     "fear_triggers": [ "FIRE" ],
@@ -1409,7 +1373,7 @@
     "id": "mon_nuckalavee",
     "type": "MONSTER",
     "name": { "str": "nuckalavee" },
-    "description": "A four-legged monster that almost resembles a skinless rider and horse fused into one grotesque apparition.  Its arms hang nearly to the ground, and a noxious fog streams from both of its mouths.",
+    "description": "Four whiplike legs support a monster that at a distance resembles a skinless rider and horse fused into one grotesque apparition.  Arms tipped in scythelike claws hang almost to the ground, and a noxious fog constantly spews from the terrible mouth that runs the length of its body.",
     "default_faction": "nether",
     "bodytype": "horse",
     "species": [ "NETHER" ],
@@ -1428,8 +1392,6 @@
     "melee_damage": [ { "damage_type": "cut", "amount": 7 } ],
     "dodge": 2,
     "bleed_rate": 20,
-    "families": [ "prof_wp_netherium_abomination" ],
-    "weakpoint_sets": [ "wps_netherium_abomination" ],
     "emit_fields": [ { "emit_id": "emit_toxic_stream_reduced", "delay": "1 s" } ],
     "harvest": "exempt",
     "anger_triggers": [ "STALK", "HURT", "PLAYER_CLOSE", "PLAYER_WEAK" ],
@@ -1459,7 +1421,8 @@
       "NO_BREATHE",
       "RANGED_ATTACKER",
       "PRIORITIZE_TARGETS",
-      "HIT_AND_RUN"
+      "HIT_AND_RUN",
+      "BELLYUP"
     ],
     "vision_day": 50,
     "vision_night": 8,
@@ -1495,7 +1458,7 @@
       }
     ],
     "death_function": { "message": "The %s fades away into nothingness.", "corpse_type": "NO_CORPSE" },
-    "flags": [ "FLIES", "HIT_AND_RUN", "NO_BREATHE", "NO_FUNG_DMG", "SEES" ]
+    "flags": [ "FLIES", "HIT_AND_RUN", "NO_BREATHE", "NO_FUNG_DMG", "SEES", "BELLYUP" ]
   },
   {
     "id": "mon_nether_unviable_root",

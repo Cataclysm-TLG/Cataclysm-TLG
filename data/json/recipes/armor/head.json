@@ -2030,7 +2030,7 @@
     "difficulty": 7,
     "time": "3 h",
     "reversible": true,
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_fabrication", 6 ], [ "recipe_melee", 6 ] ],
     "using": [ [ "chainmail_standard", 2 ] ],
     "components": [ [ [ "link_sheet", 2 ] ], [ [ "chain_link", 50 ] ], [ [ "wire", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_chain_armour" } ]
@@ -2387,7 +2387,7 @@
     "difficulty": 7,
     "time": "3 h",
     "reversible": true,
-    "book_learn": [ [ "textbook_armwest", 6 ], [ "textbook_weparabic", 6 ] ],
+    "book_learn": [ [ "textbook_armwest", 6 ], [ "book_arms_india", 7 ], [ "textbook_weparabic", 6 ] ],
     "using": [ [ "chainmail_standard", 2 ] ],
     "components": [ [ [ "link_sheet", 2 ] ], [ [ "chain_link", 40 ] ], [ [ "wire", 1 ] ] ],
     "proficiencies": [ { "proficiency": "prof_chain_armour" } ]

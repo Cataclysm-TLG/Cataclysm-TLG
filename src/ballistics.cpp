@@ -351,7 +351,7 @@ void projectile_attack( dealt_projectile_attack &attack, const projectile &proj_
         // TODO: Z dispersion
     }
 
-    //Use find clear path to draw the trajectory with optimal initial tile offsets.
+    // Use find clear path to draw the trajectory with optimal initial tile offsets.
     trajectory = here->find_clear_path( source, target );
 
     add_msg_debug( debugmode::DF_RANGED,

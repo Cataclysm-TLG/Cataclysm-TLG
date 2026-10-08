@@ -1612,7 +1612,7 @@
     "name": [ "Reptilian Mutation", "Reptilian Transformation", "Reptilian Metamorphosis" ],
     "desc": [
       "You consumed reptilian mutagen.",
-      "Your skin feels dry and too small.  You'll have to molt soon.",
+      "You feel unusually limber.",
       "Your limbs slump, almost ready to tear right out of their sockets."
     ],
     "max_intensity": 3,

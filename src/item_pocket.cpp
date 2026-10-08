@@ -1141,16 +1141,6 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
             }
         }
     }
-    if( !no_rigid.empty() ) {
-        std::vector<sub_bodypart_id> no_rigid_vec( no_rigid.begin(), no_rigid.end() );
-        std::set<translation, localized_comparator> to_print = body_part_type::consolidate( no_rigid_vec );
-        std::string bps = enumerate_as_string( to_print.begin(),
-        to_print.end(), []( const translation & t ) {
-            return t.translated();
-        } );
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Can't put hard armor on: %s</bold>:" ),
-                           bps ) );
-    }
 }
 
 void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
@@ -1352,16 +1342,6 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
             }
         }
     }
-    if( !no_rigid.empty() ) {
-        std::vector<sub_bodypart_id> no_rigid_vec( no_rigid.begin(), no_rigid.end() );
-        std::set<translation, localized_comparator> to_print = body_part_type::consolidate( no_rigid_vec );
-        std::string bps = enumerate_as_string( to_print.begin(),
-        to_print.end(), []( const translation & t ) {
-            return t.translated();
-        } );
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Can't put hard armor on: %s</bold>:" ),
-                           bps ) );
-    }
 
     if( contents.empty() ) {
         info.emplace_back( "DESCRIPTION", _( "This pocket is empty." ) );
@@ -1375,7 +1355,7 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
     const std::string arm_type_str = string_format( "{%d}ARMOR", pocket_number );
 
     if( is_ablative() ) {
-        // if we have contents for an ablative pocket display the armor data
+        // If we have contents for an ablative pocket, display the armor data.
         if( !contents.empty() ) {
             const item &ablative_armor = contents.front();
             info.emplace_back( arm_type_str, string_format( "%s%s", _( "Coverage:" ), space ), "",
@@ -1421,7 +1401,7 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
                            colorize( _( "This pocket is over capacity and will spill if moved!" ), c_red ) );
     }
 
-    // ablative pockets have their contents displayed earlier in the UI
+    // Ablative pockets have their contents displayed earlier in the UI.
     if( !is_ablative() ) {
         std::vector<std::pair<const item *, int>> counted_contents = get_item_duplicate_counts(
                 all_items_top() );

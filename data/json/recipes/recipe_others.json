@@ -975,6 +975,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -1170,6 +1171,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -2675,6 +2677,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],

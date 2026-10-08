@@ -3911,10 +3911,10 @@ void item::armor_attribute_info( std::vector<iteminfo> &info, const iteminfo_que
             string_format( "ARMOR" );
         if( const armor_portion_data *portion_data =
                 portion_for_bodypart( sbp ) ) {
-            if( portion_data->rigid_layer_only ) {
+            if( portion_data->rigid && portion_data->rigid_layer_only ) {
                 info.emplace_back(
                     bp_cat,
-                    _( "<info>Rigid items only conflict on shared layers</info>" ),
+                    _( "<info>Rigid items conflict on shared layers</info>" ),
                     "",
                     iteminfo::no_flags );
             }
