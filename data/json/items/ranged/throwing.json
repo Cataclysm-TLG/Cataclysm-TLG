@@ -145,7 +145,7 @@
     "flags": [ "SHEATH_KNIFE" ],
     "weapon_category": [ "KNIVES" ],
     "techniques": [ "WBLOCK_0" ],
-    "thrown_damage": [  { "damage_type": "bash", "amount": 1 }, { "damage_type": "stab", "amount": 11 } ],
+    "thrown_damage": [ { "damage_type": "bash", "amount": 1 }, { "damage_type": "stab", "amount": 11 } ],
     "melee_damage": { "stab": 10 }
   },
   {
