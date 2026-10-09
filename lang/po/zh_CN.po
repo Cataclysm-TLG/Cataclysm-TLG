@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-10-02 06:15-0700\n"
-"PO-Revision-Date: 2026-10-08 20:42+0800\n"
+"PO-Revision-Date: 2026-10-09 23:23+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -19787,7 +19787,7 @@ msgstr "你醒来了。"
 #. ~ Description of effect type "Skunk Spray"
 #: data/json/effects.json
 msgid "You were sprayed by a skunk!"
-msgstr "你被 %s 攻击！"
+msgstr "你被臭鼬喷了一身！"
 
 #. ~ Description of effect type "Acid Drenched"
 #: data/json/effects.json
@@ -21903,7 +21903,7 @@ msgstr "你太饿了，无法激活你的生物闪光弹。"
 #. ~ value of variable 'message_fail' in effect in EoC "EOC_SLIME_SPRAY"
 #: data/json/effects_on_condition/mutation_eocs/mutation_activation_eocs.json
 msgid "Your body is too starved to activate your slime spray."
-msgstr "你太饿了，无法激活你的粘液喷射。"
+msgstr "你的身体饿得无法激活黏液喷射。"
 
 #. ~ value of variable 'message_success' in effect in EoC "EOC_WHIPPING_TONGUE_PULL"
 #. ~ Description of spell "Whipping Tongue"
@@ -66979,7 +66979,7 @@ msgstr ""
 #. ~ Description of "hair beads"
 #: data/json/items/armor/jewelry.json
 msgid "An assortment of beads used to decorate locs or braids."
-msgstr "一堆各式各样的小型齿轮和发条装置。"
+msgstr "一套用于装饰脏辫或辫子的珠子。"
 
 #. ~ Description of "silver watch"
 #: data/json/items/armor/jewelry.json
@@ -67580,7 +67580,7 @@ msgstr[0] "金表"
 #: data/json/items/armor/jewelry.json
 msgid "hair beads"
 msgid_plural "sets of hair beads"
-msgstr[0] "拖车床"
+msgstr[0] "发珠"
 
 #. ~ Item name
 #: data/json/items/armor/jewelry.json
@@ -104365,8 +104365,8 @@ msgid ""
 "dessert reminiscent of cake frosting.  It is a traditional food of people throughout the arctic, providing a "
 "massive amount of energy to fuel a difficult lifestyle in grueling conditions."
 msgstr ""
-"这种冰淇淋也被称为因纽特冰淇淋或阿拉斯加冰淇淋，是由固体脂肪和糖的浓稠混合物制成，吃起来像蛋糕上的糖霜一样甜。"
-"它是北极地区人们的传统食物，能为他们在艰苦的环境中艰难的生活方式提供大量能量。"
+"又称因纽特冰淇淋或阿拉斯加冰淇淋，这是一种由固体脂肪和糖混合而成的浓稠甜点，尝起来像蛋糕糖霜。它是北极地区人民"
+"的传统食物，能提供大量能量，支撑在严酷环境中艰难的生活方式。"
 
 #. ~ Description of "akutaq with fruit"
 #: data/json/items/comestibles/other.json
@@ -104375,8 +104375,8 @@ msgid ""
 "sweet dessert reminiscent of cake frosting.  It is a traditional food of people throughout the arctic, "
 "providing a massive amount of energy to fuel a difficult lifestyle in grueling conditions."
 msgstr ""
-"这种冰淇淋也被称为因纽特冰淇淋或阿拉斯加冰淇淋，是由固体脂肪、水果和糖混合而成的浓稠混合物，吃起来像蛋糕上的糖"
-"霜一样甜。它是北极地区人们的传统食物，为他们在艰苦的环境中艰难的生活方式提供了大量的能量。"
+"又称因纽特冰淇淋或阿拉斯加冰淇淋，这是一种由固体脂肪、水果和糖混合而成的浓稠甜点，尝起来像蛋糕糖霜。它是北极地"
+"区人民的传统食物，能提供大量能量，支撑在严酷环境中艰难的生活方式。"
 
 #. ~ Description of "dried soybeans"
 #: data/json/items/comestibles/other.json
@@ -104627,7 +104627,7 @@ msgstr[0] "酸洗生皮"
 #: data/json/items/comestibles/other.json
 msgid "akutaq"
 msgid_plural "akutaq"
-msgstr[0] "急性"
+msgstr[0] "爱斯基摩冰淇淋"
 
 #. ~ Item name
 #: data/json/items/comestibles/other.json
@@ -117707,7 +117707,7 @@ msgstr "一块加厚钢制装甲板，专为防弹背心而设计。"
 #. ~ Description of "clockwork"
 #: data/json/items/generic.json
 msgid "An assortment of miniscule gears and other clockwork gubbins."
-msgstr "一堆各式各样的小型齿轮和发条装置。"
+msgstr "一套微小的齿轮和其他钟表机械零件。"
 
 #. ~ Description of "cash register"
 #: data/json/items/generic.json
@@ -145102,7 +145102,7 @@ msgstr "绿色非洲发型。"
 #. ~ Description of "hair dye"
 #: data/json/items/resources/chemicals.json
 msgid "Some hair dye."
-msgstr "吹风机"
+msgstr "一些染发剂。"
 
 #. ~ Description of "pink hair dye"
 #: data/json/items/resources/chemicals.json
@@ -145177,7 +145177,7 @@ msgstr[0] "绿色非洲发型。"
 #: data/json/items/resources/chemicals.json
 msgid "hair dye"
 msgid_plural "hair dye"
-msgstr[0] "吹风机"
+msgstr[0] "染发剂"
 
 #. ~ Item name
 #: data/json/items/resources/chemicals.json
@@ -145219,7 +145219,7 @@ msgstr[0] "钾矾"
 #: data/json/items/resources/chemicals.json
 msgid "red hair dye"
 msgid_plural "red hair dye"
-msgstr[0] "吹风机"
+msgstr[0] "红色染发剂"
 
 #. ~ Item name
 #: data/json/items/resources/chemicals.json
@@ -156157,7 +156157,7 @@ msgstr "一个理发套装，包括各种自制的理发工具。"
 #: data/json/items/tool/toiletries.json
 msgid ""
 "A kit featuring all the tools needed to dye hair, including an applicator brush, combs, and plastic gloves."
-msgstr "该套件包含染发所需的所有工具，包括涂抹刷、梳子和塑料手套。"
+msgstr "一套染发所需的全部工具，包括涂抹刷、梳子和塑料手套。"
 
 #. ~ Description of "collapsible mop"
 #: data/json/items/tool/toiletries.json
@@ -156251,7 +156251,7 @@ msgstr[0] "电动理发剪"
 #: data/json/items/tool/toiletries.json
 msgid "hair dye kit"
 msgid_plural "hair dye kits"
-msgstr[0] "吹风机"
+msgstr[0] "染发剂套装"
 
 #. ~ Item name
 #: data/json/items/tool/toiletries.json
@@ -156698,7 +156698,7 @@ msgstr "一把弓锯，在户外使用起来比室内相比更施展得开。用
 msgid ""
 "A set of luthier tools in several sizes and types.  Guaranteed to have the right tools for creating musical "
 "instruments from wood."
-msgstr "一把有着多种尺寸和形状接口的螺丝刀。保证有正确的工具来进行更精细的工作"
+msgstr "一套包含多种尺寸和类型的制琴师工具。保证拥有用木材制作乐器所需的合适工具。"
 
 #. ~ Description of "stone chisel"
 #: data/json/items/tool/woodworking.json
@@ -156861,7 +156861,7 @@ msgstr[0] "电动链锯（开）"
 #: data/json/items/tool/woodworking.json
 msgid "luthier toolset"
 msgid_plural "luthier toolsets"
-msgstr[0] "比\"福赛特\"飞得更远"
+msgstr[0] "制琴师工具套装"
 
 #. ~ Item name
 #: data/json/items/tool/woodworking.json
@@ -157254,7 +157254,7 @@ msgstr "一个插着棒子的岩石，勉强构成锤子的形状。它功能类
 msgid ""
 "A set of screwdrivers in several sizes and blade types.  Guaranteed to have the right tools for more precise "
 "work."
-msgstr "一把有着多种尺寸和形状接口的螺丝刀。保证有正确的工具来进行更精细的工作"
+msgstr "一套包含多种尺寸和刀头类型的螺丝刀。保证拥有进行更精密工作所需的合适工具。"
 
 #. ~ Description of "metal fileset"
 #: data/json/items/tool/workshop.json
@@ -181041,7 +181041,7 @@ msgstr[0] "变异螳螂"
 #: data/json/monsters/insect_spider.json
 msgid "oversized acidic ant"
 msgid_plural "oversized acidic ants"
-msgstr[0] "巨型蟾蜍"
+msgstr[0] "巨型酸性蚂蚁"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -181053,13 +181053,13 @@ msgstr[0] "酸蚁士兵"
 #: data/json/monsters/insect_spider.json
 msgid "oversized ant"
 msgid_plural "oversized ants"
-msgstr[0] "巨型蟾蜍"
+msgstr[0] "巨型蚂蚁"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
 msgid "oversized aphid"
 msgid_plural "oversized aphids"
-msgstr[0] "巨型蟾蜍"
+msgstr[0] "巨型蚜虫"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -181131,7 +181131,7 @@ msgstr[0] "跳蛛"
 #: data/json/monsters/insect_spider.json
 msgid "oversized lady bug"
 msgid_plural "oversized lady bugs"
-msgstr[0] "巨型蟾蜍"
+msgstr[0] "巨型瓢虫"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -183036,7 +183036,7 @@ msgstr[0] "巨型蛞蝓"
 #: data/json/monsters/mollusk.json
 msgid "oversized snail"
 msgid_plural "oversized snails"
-msgstr[0] "巨型蟾蜍"
+msgstr[0] "巨型蜗牛"
 
 #. ~ Monster name
 #: data/json/monsters/mollusk.json
@@ -269364,7 +269364,7 @@ msgstr "废弃小屋"
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain.json
 msgid "sand pit"
-msgstr "沙坑玩具套装"
+msgstr "沙坑"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain.json
