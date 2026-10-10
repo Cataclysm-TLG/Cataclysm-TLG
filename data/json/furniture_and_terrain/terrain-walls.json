@@ -1071,17 +1071,17 @@
     "color": "dark_gray",
     "move_cost": 0,
     "hacksaw": {
-      "result": "t_pit",
-      "duration": "10 minutes",
+      "result": "t_thconc_floor",
+      "duration": "25 minutes",
       "message": "You finish cutting the metal.",
-      "byproducts": [ { "item": "spike", "count": 19 }, { "item": "scrap", "count": 8 } ]
+      "byproducts": [ { "item": "spike", "count": [ 1, 19 ] }, { "item": "scrap", "count": [ 1, 8 ] } ]
     },
     "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "THIN_OBSTACLE" ],
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "oxytorch": {
-      "result": "t_pit",
-      "duration": "9 seconds",
+      "result": "t_thconc_floor",
+      "duration": "20 seconds",
       "byproducts": [ { "item": "spike", "count": [ 1, 19 ] }, { "item": "scrap", "count": [ 1, 8 ] } ]
     },
     "bash": {
@@ -1662,7 +1662,7 @@
     "coverage": 15,
     "hacksaw": {
       "result": "t_floor",
-      "duration": "15 minutes",
+      "duration": "45 minutes",
       "message": "You finish cutting the metal.",
       "byproducts": [ { "item": "pipe", "count": 3 } ]
     },

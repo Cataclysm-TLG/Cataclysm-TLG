@@ -66,7 +66,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "angle grinder" },
-    "description": "A widespread power tool, often used for removing excess material or polishing surfaces.",
+    "description": "A power tool that spins a disc at high speed to cut or polish metal.",
     "weight": "2780 g",
     "volume": "1750 ml",
     "price": "50 USD",
