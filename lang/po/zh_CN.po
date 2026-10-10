@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-10-02 06:15-0700\n"
-"PO-Revision-Date: 2026-10-10 18:41+0800\n"
+"PO-Revision-Date: 2026-10-10 21:06+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -180362,7 +180362,7 @@ msgstr "%s 的尸体流出了酸液。"
 msgid ""
 "The horrid spawn of a giant black widow spider.  Though, given the size that it currently is, it appears "
 "relatively harmless."
-msgstr "巨型黑寡妇蜘蛛的后代，看起来就让人觉得很不爽。不过考虑到它目前的体型，应该还没什么危险。"
+msgstr "巨型黑寡妇蜘蛛的可怕后代。不过，就它目前的体型而言，似乎相对无害。"
 
 #. ~ Description of monster "giant caterpillar"
 #: data/json/monsters/insect_spider.json
@@ -180717,7 +180717,7 @@ msgstr[0] "巨型蜜蜂"
 #: data/json/monsters/insect_spider.json
 msgid "giant black widow"
 msgid_plural "giant black widows"
-msgstr[0] "巨型黑寡妇蜘蛛"
+msgstr[0] "巨型黑寡妇"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -180813,7 +180813,7 @@ msgstr[0] "巨型跳蛛"
 #: data/json/monsters/insect_spider.json
 msgid "giant lacewing"
 msgid_plural "giant lacewings"
-msgstr[0] "巨型黑寡妇蜘蛛"
+msgstr[0] "巨型草蛉"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
@@ -181071,7 +181071,7 @@ msgstr[0] "巨型蜜蜂"
 #: data/json/monsters/insect_spider.json
 msgid "oversized black widow"
 msgid_plural "oversized black widows"
-msgstr[0] "巨型黑寡妇蜘蛛"
+msgstr[0] "特大黑寡妇"
 
 #. ~ Monster name
 #: data/json/monsters/insect_spider.json
