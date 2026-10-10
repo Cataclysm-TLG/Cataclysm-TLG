@@ -353,6 +353,7 @@ static const quality_id qual_HAMMER_FINE( "HAMMER_FINE" );
 static const quality_id qual_HOTPLATE( "HOTPLATE" );
 static const quality_id qual_LOCKPICK( "LOCKPICK" );
 static const quality_id qual_PRY( "PRY" );
+static const quality_id qual_SAW_M( "SAW_M" );
 static const quality_id qual_SCREW( "SCREW" );
 static const quality_id qual_SCREW_FINE( "SCREW_FINE" );
 static const quality_id qual_VISE( "VISE" );
@@ -4516,6 +4517,13 @@ std::optional<int> iuse::hacksaw( Character *p, item *it, const tripoint_bub_ms 
     query += _( "Time to complete: " );
     int required_moves = p->activity.moves_left;
     add_msg_debug( debugmode::DF_ACTIVITY, "iuse hacksaw required_moves: %d.", required_moves );
+
+    // We must exceed 15x the number of minutes required for the terrain/furniture.
+    if( it->has_quality( qual_SAW_M ) && it->get_quality( qual_SAW_M ) * 90000 < required_moves ) {
+        p->cancel_activity();
+        p->add_msg_if_player( m_info, _( "Your %1$s isn't able to cut through that." ), it->tname() );
+        return std::nullopt;
+    }
 
     const float weary_mult = p->exertion_adjusted_move_multiplier( p->activity.exertion_level() );
     time_duration required_time = time_duration::from_turns( required_moves * weary_mult /
