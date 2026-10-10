@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-10-02 06:15-0700\n"
-"PO-Revision-Date: 2026-10-09 23:23+0800\n"
+"PO-Revision-Date: 2026-10-10 18:22+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -74527,8 +74527,8 @@ msgid ""
 "protect the organs and spine.  Functionally, this will not reduce incoming damage, but instead allow the user "
 "to withstand greater injury to the torso."
 msgstr ""
-"一组小包烧结凝胶，将安装在胸腔和腹腔内以保护器官和脊柱。  从功能上讲，这不会减少传入的伤害，而是让用户的躯干承"
-"受更大的伤害。"
+"一组小型烧结凝胶包，用于植入胸腔和腹腔，以保护器官和脊柱。功能上，它不会减少受到的伤害，而是让使用者能够承受躯"
+"干更严重的损伤。"
 
 #. ~ Description of "Directional EMP CBM"
 #: data/json/items/bionics.json
@@ -75496,7 +75496,7 @@ msgstr[0] "整合供能系统CBM"
 #: data/json/items/bionics.json
 msgid "Visceral Armorgel CBM"
 msgid_plural "Visceral Armorgel CBMs"
-msgstr[0] "内脏装甲凝胶CBM\\v"
+msgstr[0] "内脏装甲凝胶 CBM"
 
 #. ~ Item name
 #: data/json/items/bionics.json
@@ -123082,7 +123082,7 @@ msgstr ""
 #. ~ "holster_prompt" action message of item "seat belt"
 #: data/json/items/generic/string.json
 msgid "Tie what to the rope?"
-msgstr "选择用绳索捆绑的物品。"
+msgstr "把什么系到绳子上？"
 
 #. ~ "holster_msg" action message of item "short rope"
 #. ~ "holster_msg" action message of item "seat belt"
@@ -253500,7 +253500,7 @@ msgstr "你需要什么吗？"
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_visitors/NPC_rescue_pilot.json
 msgid "Get to the Chopper"
-msgstr "选择用绳索捆绑的物品。"
+msgstr "上直升机"
 
 #. ~ Dialogue line in mission "Talk to the Rescue Pilot"
 #: data/json/npcs/refugee_center/surface_visitors/NPC_rescue_pilot.json
@@ -253650,7 +253650,7 @@ msgid ""
 "The rescue pilot at the refugee center says there's probably still a working helicopter on the roof of a "
 "hospital.  If you bring them there, they'll be happy to fly you anywhere you want to go."
 msgstr ""
-"难民中心的救援飞行员表示，医院屋顶上可能还有一架正在工作的直升机。  如果你带他们去那里，他们会很乐意带你去任何"
+"难民中心的救援飞行员说，某家医院的楼顶上可能还有一架能用的直升机。如果你把他们带到那里，他们会很乐意载你去任何"
 "你想去的地方。"
 
 #. ~ Dialogue line in mission "Talk to the Rescue Pilot"
@@ -371680,7 +371680,7 @@ msgstr "使用 %s？"
 
 #: src/iexamine.cpp:545 src/iexamine.cpp:573
 msgid "There is no fuel ready to be dispensed."
-msgstr "我们需要更多的肉。"
+msgstr "没有可分配的燃料。"
 
 #: src/iexamine.cpp:552
 #, c-format
