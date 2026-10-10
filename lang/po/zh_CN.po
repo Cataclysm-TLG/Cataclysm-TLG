@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-10-02 06:15-0700\n"
-"PO-Revision-Date: 2026-10-10 18:22+0800\n"
+"PO-Revision-Date: 2026-10-10 18:41+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -139809,7 +139809,7 @@ msgstr "一根在顶部缠绕了几道带刺铁丝网的棒球棒，野蛮的近
 msgid ""
 "A curved wooden club cradling a stone head.  It is currently soaking in oil and won't be properly fit for "
 "combat for a while longer."
-msgstr "一根弯曲的木棍，上面托着一个石头头。  它目前正浸泡在油中，一段时间内无法正常战斗。"
+msgstr "一根弯曲的木棍，一端嵌有石制杖头。它目前正浸泡在油中，还需要一段时间才能完全适合战斗使用。"
 
 #. ~ Description of "stone war club"
 #: data/json/items/melee/bludgeons.json
@@ -140483,7 +140483,7 @@ msgstr[0] "浸泡希拉"
 #: data/json/items/melee/bludgeons.json
 msgid "soaking stone war club"
 msgid_plural "soaking stone war clubs"
-msgstr[0] "浸水石战棒"
+msgstr[0] "浸油石战棒"
 
 #. ~ Item name
 #: data/json/items/melee/bludgeons.json
@@ -147257,8 +147257,8 @@ msgid ""
 "currently being soaked with oil and quite slippery.  Once it's finished it will be ready for use in other "
 "projects."
 msgstr ""
-"一种长棍，雕刻并打磨成光滑的杆，具有轻微的锥度，用于制作矛。现在它已经被油浸透了，非常滑。  一旦完成，就可以在"
-"其他项目中使用。"
+"一根经过雕刻和打磨的长棍，制成表面光滑、略有锥度的杖杆，用于制作长矛。它目前正浸泡在油中，相当滑手。完成后即可"
+"用于其他制作项目。"
 
 #. ~ Description of "long plank"
 #: data/json/items/resources/wood.json
@@ -147453,7 +147453,7 @@ msgstr[0] "浸泡长杆"
 #: data/json/items/resources/wood.json
 msgid "soaking spear shaft"
 msgid_plural "soaking spear shaft"
-msgstr[0] "浸水矛杆"
+msgstr[0] "浸油矛杆"
 
 #. ~ Item name
 #: data/json/items/resources/wood.json
@@ -253500,7 +253500,7 @@ msgstr "你需要什么吗？"
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_visitors/NPC_rescue_pilot.json
 msgid "Get to the Chopper"
-msgstr "上直升机"
+msgstr "直升机速递"
 
 #. ~ Dialogue line in mission "Talk to the Rescue Pilot"
 #: data/json/npcs/refugee_center/surface_visitors/NPC_rescue_pilot.json
