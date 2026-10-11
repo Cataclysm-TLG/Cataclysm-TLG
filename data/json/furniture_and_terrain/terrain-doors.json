@@ -2455,7 +2455,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "NOITEM", "DOOR", "SUPPORTS_ROOF" ],
+    "flags": [ "NOITEM", "DOOR", "SUPPORTS_ROOF", "BLOCK_WIND" ],
     "open": "t_door_metal_lab_o",
     "bash": {
       "str_min": 80,
@@ -2911,7 +2911,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "SUPPORTS_ROOF", "BLOCK_WIND" ],
     "open": "t_door_glass_lab_o",
     "deconstruct": { "ter_set": "t_door_frame", "items": [ { "item": "glass_sheet", "count": 1 } ] },
     "bash": {
@@ -3007,7 +3007,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "DOOR", "NOITEM", "SUPPORTS_ROOF", "TRANSLUCENT" ],
+    "flags": [ "DOOR", "NOITEM", "SUPPORTS_ROOF", "TRANSLUCENT", "BLOCK_WIND" ],
     "open": "t_door_glass_frosted_lab_o",
     "copy-from": "t_door_glass_frosted_c",
     "bash": {
