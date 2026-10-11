@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cataclysm-tlg 1.0\n"
 "POT-Creation-Date: 2026-10-02 06:15-0700\n"
-"PO-Revision-Date: 2026-10-10 21:06+0800\n"
+"PO-Revision-Date: 2026-10-11 19:54+0800\n"
 "Last-Translator: \n"
 "Language-Team: Chinese(CHINA)\n"
 "Language: zh\n"
@@ -15032,7 +15032,7 @@ msgstr "抗真菌药"
 #. ~ Vitamin name
 #: data/json/effects.json data/json/vitamin.json
 msgid "Antimutagenic Purgative"
-msgstr "植物诱变引物"
+msgstr "抗突变泻剂"
 
 #. ~ Blood analysis description of effect type "took_thorazine"
 #: data/json/effects.json
@@ -102590,7 +102590,7 @@ msgstr "一种甲壳诱变剂。"
 #: data/json/items/comestibles/mutagen.json
 msgid ""
 "A dangerous infusion that binds to mutagen present in the bloodstream and allows it to be excreted.  Violently."
-msgstr "一种与血液中的诱变剂结合并使其排出体外的危险疗法。"
+msgstr "一种危险的药剂，会与血液中的诱变剂结合并使其排出体外。过程相当剧烈。"
 
 #. ~ Description of "misshapen fetus"
 #: data/json/items/comestibles/mutagen.json
@@ -102935,7 +102935,7 @@ msgstr "你喝下了大鼠诱变剂。"
 #. ~ "activation_message" action message of item "reptilian mutagen"
 #: data/json/items/comestibles/mutagen.json
 msgid "You drink the reptilian mutagen."
-msgstr "你喝下了植物诱变剂。"
+msgstr "你喝下了爬行类诱变剂。"
 
 #. ~ "activation_message" action message of item "slime mutagen"
 #: data/json/items/comestibles/mutagen.json
@@ -102945,7 +102945,7 @@ msgstr "你喝下了变形怪诱变剂。"
 #. ~ "activation_message" action message of item "sylvan mutagen"
 #: data/json/items/comestibles/mutagen.json
 msgid "You drink the sylvan mutagen."
-msgstr "你喝下了植物诱变剂。"
+msgstr "你喝下了森林诱变剂。"
 
 #. ~ "activation_message" action message of item "theropod mutagen"
 #: data/json/items/comestibles/mutagen.json
@@ -103135,7 +103135,7 @@ msgstr[0] "新人类诱变剂"
 #: data/json/items/comestibles/mutagen.json
 msgid "antimutagenic purgative"
 msgid_plural "antimutagenic purgative"
-msgstr[0] "植物诱变引物"
+msgstr[0] "抗突变泻剂"
 
 #. ~ Item name
 #: data/json/items/comestibles/mutagen.json
@@ -103429,7 +103429,7 @@ msgstr[0] "蜥蜴血清"
 #: data/json/items/comestibles/mutagen.json
 msgid "reptilian mutagen"
 msgid_plural "reptilian mutagen"
-msgstr[0] "植物诱变剂"
+msgstr[0] "爬行类诱变剂"
 
 #. ~ Item name
 #: data/json/items/comestibles/mutagen.json
@@ -103453,7 +103453,7 @@ msgstr[0] "精灵血清"
 #: data/json/items/comestibles/mutagen.json
 msgid "sylvan mutagen"
 msgid_plural "sylvan mutagen"
-msgstr[0] "植物诱变剂"
+msgstr[0] "森林诱变剂"
 
 #. ~ Item name
 #: data/json/items/comestibles/mutagen.json
@@ -201872,7 +201872,7 @@ msgstr ""
 msgid ""
 "Your tongue has lengthened and often extends far beyond your mouth.  This makes you a little worse at talking "
 "to people."
-msgstr "你的舌头拉长了，而且经常伸到嘴以外。这没有效果。"
+msgstr "你的舌头变长了，常常伸到嘴外很远。这让你与人交谈时稍显不便。"
 
 #. ~ Description of mutation "Forked Tongue"
 #: data/json/mutations/mutations.json
@@ -270807,7 +270807,7 @@ msgstr "兽医所（屋顶）"
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_commercial.json
 msgid "welding store"
-msgstr "焊丝"
+msgstr "焊接用品店"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_commercial.json
