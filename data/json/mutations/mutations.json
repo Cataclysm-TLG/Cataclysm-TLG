@@ -1530,7 +1530,6 @@
     "name": { "str": "Fiber Intolerance" },
     "points": -2,
     "description": "You have problems with eating vegetables.  It's possible for you to eat them, but you will suffer morale penalties and obtain less nutrition from them.",
-    "valid": false,
     "starting_trait": true,
     "vitamins_absorb_multi": [ [ "vegetable", [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ] ] ] ],
     "changes_to": [ "CARNIVORE" ],
