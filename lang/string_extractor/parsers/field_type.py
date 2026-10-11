@@ -6,7 +6,8 @@ def parse_field_type(json, origin):
 
     if "substance_name" in json:
         write_text(json["substance_name"], origin,
-                   comment="Name of the substance comprising this field")
+                   comment="Phrase fragment inserted after a quantity descriptor "
+                   "in liquid splash messages, such as \"Droplets of\"")
 
     for fd in json.get("intensity_levels", []):
         if "name" in fd:

@@ -477,6 +477,9 @@ static bool spell_infinite_loop_check( std::set<spell_id> spell_effects, const s
 
 void spell_type::check_consistency()
 {
+    const auto can_be_nonzero = []( const dbl_or_var & value ) {
+        return !value.is_constant() || value.constant() != 0.0;
+    };
     for( const spell_type &sp_t : get_all() ) {
         if( sp_t.effect_name == "summon_vehicle" ) {
             if( !sp_t.effect_str.empty() && !vproto_id( sp_t.effect_str ).is_valid() ) {
@@ -490,6 +493,21 @@ void spell_type::check_consistency()
         }
         if( sp_t.spell_tags[spell_flag::WONDER] && sp_t.additional_spells.empty() ) {
             debugmsg( "ERROR: %s has WONDER flag but no spells to choose from!", sp_t.id.c_str() );
+        }
+        const bool can_splash = sp_t.spell_tags[spell_flag::LIQUID] &&
+                                ( can_be_nonzero( sp_t.min_liquid_volume ) ||
+                                  can_be_nonzero( sp_t.liquid_volume_increment ) ||
+                                  can_be_nonzero( sp_t.max_liquid_volume ) );
+        if( can_splash ) {
+            if( !sp_t.field ) {
+                debugmsg( "ERROR: %s can splash a character but has no field_id for its substance_name.",
+                          sp_t.id.c_str() );
+            } else if( !sp_t.field->is_valid() ) {
+                debugmsg( "ERROR: %s can splash a character but has an invalid field_id.", sp_t.id.c_str() );
+            } else if( sp_t.field->obj().substance_name.empty() ) {
+                debugmsg( "ERROR: field %s is used by liquid spell %s but has no substance_name for splash messages.",
+                          sp_t.field->obj().id.c_str(), sp_t.id.c_str() );
+            }
         }
     }
 }
