@@ -115,7 +115,7 @@
               ]
             },
             { "npc_has_effect": "Alonso_pants_restored" },
-            { "math": [ "u_val('age')", ">=", "18" ] },
+            { "math": [ "u_val('age') >= 18" ] },
             { "u_has_item": "condom" }
           ]
         }
@@ -134,7 +134,7 @@
             { "not": { "u_has_trait": "DEFORMED2" } },
             { "not": { "u_has_trait": "DEFORMED3" } },
             { "npc_has_effect": "Alonso_pants_restored" },
-            { "math": [ "u_val('age')", ">=", "18" ] },
+            { "math": [ "u_val('age') >= 18" ] },
             { "u_has_item": "condom" }
           ]
         }
@@ -153,7 +153,7 @@
               ]
             },
             { "npc_has_effect": "Alonso_pants_restored" },
-            { "math": [ "u_val('age')", ">=", "18" ] },
+            { "math": [ "u_val('age') >= 18" ] },
             { "u_has_item": "condom" }
           ]
         }
@@ -161,7 +161,7 @@
       {
         "text": "So about those condoms.  I thought of a good use for them…",
         "topic": "TALK_REFUGEE_Alonso_Too_Young",
-        "condition": { "math": [ "u_val('age')", "<", "18" ] }
+        "condition": { "math": [ "u_val('age') < 18" ] }
       }
     ]
   },
@@ -347,7 +347,7 @@
     "end": {
       "effect": [
         { "u_add_var": "mission_flag_Alonso_pants", "value": "yes" },
-        { "math": [ "u_counter_refugee_center_refugee_happiness", "+=", "2" ] },
+        { "math": [ "u_counter_refugee_center_refugee_happiness += 2" ] },
         { "npc_add_effect": "Alonso_pants_restored", "duration": "PERMANENT" }
       ]
     },

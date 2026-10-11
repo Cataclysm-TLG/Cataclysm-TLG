@@ -15,14 +15,14 @@
       { "text": "Is there anything I can do for you?", "topic": "TALK_MISSION_LIST" },
       {
         "text": "How's the manuscript coming?",
-        "condition": { "math": [ "time_since(n_timer_trade_writing_manuscript)", "<", "time('30 d')" ] },
+        "condition": { "math": [ "time_since(n_timer_trade_writing_manuscript) < time('30 d')" ] },
         "topic": "TALK_GODCO_Felicity_Manuscript_InProgress"
       },
       {
         "text": "How's the manuscript coming?",
         "condition": {
           "and": [
-            { "math": [ "time_since(n_timer_trade_writing_manuscript)", ">=", "time('30 d')" ] },
+            { "math": [ "time_since(n_timer_trade_writing_manuscript) >= time('30 d')" ] },
             { "not": { "npc_has_var": "general_trade_gave_u_manuscript", "value": "yes" } }
           ]
         },
