@@ -21,7 +21,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -38,7 +38,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -49,7 +49,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -79,7 +79,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -96,7 +96,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -107,7 +107,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -137,7 +137,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -154,7 +154,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -165,7 +165,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -195,7 +195,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -212,7 +212,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -223,7 +223,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -253,7 +253,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -270,7 +270,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -281,7 +281,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -311,7 +311,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -328,7 +328,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -339,7 +339,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -369,7 +369,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -386,7 +386,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -397,7 +397,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -427,7 +427,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -444,7 +444,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -455,7 +455,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -485,7 +485,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -502,7 +502,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -513,7 +513,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -543,7 +543,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -560,7 +560,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -571,7 +571,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -601,7 +601,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -618,7 +618,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -629,7 +629,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -659,7 +659,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -676,7 +676,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -687,7 +687,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -717,7 +717,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -734,7 +734,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -745,7 +745,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -775,7 +775,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -792,7 +792,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -803,7 +803,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -833,7 +833,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -850,7 +850,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -861,7 +861,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -891,7 +891,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -908,7 +908,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -919,7 +919,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -949,7 +949,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -966,7 +966,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -977,7 +977,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -1007,7 +1007,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1024,7 +1024,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1035,7 +1035,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -1065,7 +1065,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1082,7 +1082,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1093,7 +1093,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -1123,7 +1123,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1140,7 +1140,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1151,7 +1151,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -1181,7 +1181,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1198,7 +1198,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1209,7 +1209,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -1239,7 +1239,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1256,7 +1256,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1267,7 +1267,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },
@@ -1297,7 +1297,7 @@
           "and": [
             { "u_has_effect": "bite" },
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1314,7 +1314,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 11 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "21" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 21" ] }
           ]
         }
       },
@@ -1325,7 +1325,7 @@
         "condition": {
           "and": [
             { "u_has_effect": "bleed", "intensity": 1 },
-            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget)", "<", "11" ] }
+            { "math": [ "u_effect_intensity('bleed', 'bodypart': _widget) < 11" ] }
           ]
         }
       },

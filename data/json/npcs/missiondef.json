@@ -874,7 +874,7 @@
     "description": "Gather <color_light_blue>20 cattail stalks</color> from the swamp and bring them back to <color_light_red>learn how to craft cattail jelly</color>.  Raise your <color_light_blue>ecology skill to at least 1</color> by harvesting cattail stalks or foraging in underbrush.",
     "goal": "MGOAL_CONDITION",
     "goal_condition": {
-      "and": [ { "u_has_items": { "item": "cattail_stalk", "count": 20 } }, { "math": [ "u_skill('survival')", ">=", "1" ] } ]
+      "and": [ { "u_has_items": { "item": "cattail_stalk", "count": 20 } }, { "math": [ "u_skill('survival') >= 1" ] } ]
     },
     "difficulty": 1,
     "value": 0,

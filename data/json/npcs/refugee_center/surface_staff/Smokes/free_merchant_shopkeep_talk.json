@@ -30,7 +30,7 @@
         "condition": { "compare_string": [ "yes", { "u_val": "general_meeting_u_met_Gavin" } ] },
         "trial": {
           "type": "CONDITION",
-          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin')", "<", "1" ] }
+          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin') < 1" ] }
         },
         "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
@@ -53,7 +53,7 @@
         "text": "Let's trade.",
         "trial": {
           "type": "CONDITION",
-          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin')", "<", "1" ] }
+          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin') < 1" ] }
         },
         "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
@@ -91,7 +91,7 @@
         "text": "Let's trade.",
         "trial": {
           "type": "CONDITION",
-          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin')", "<", "1" ] }
+          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin') < 1" ] }
         },
         "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
@@ -167,7 +167,7 @@
         "text": "Let's trade.",
         "trial": {
           "type": "CONDITION",
-          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin')", "<", "1" ] }
+          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin') < 1" ] }
         },
         "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
@@ -203,7 +203,7 @@
       {
         "text": "[Social 1] If I could look into clearing them out of here, would you be able to pay me back?",
         "topic": "TALK_FREE_MERCHANTS_MERCHANT_Beggars_Reward",
-        "condition": { "math": [ "u_skill('speech')", ">=", "1" ] },
+        "condition": { "math": [ "u_skill('speech') >= 1" ] },
         "effect": { "npc_add_var": "general_recruit_beggars_reward_agreed", "value": "yes" }
       },
       { "text": "Why haven't they gone anywhere else?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Beggars2" },
@@ -316,7 +316,7 @@
         "text": "Mind if I take a look at your stock?",
         "trial": {
           "type": "CONDITION",
-          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin')", "<", "1" ] }
+          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin') < 1" ] }
         },
         "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
         "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }

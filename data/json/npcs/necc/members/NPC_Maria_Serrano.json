@@ -216,7 +216,7 @@
         "condition": {
           "and": [
             { "npc_has_var": "general_trade_u_want_tshirt", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('2 d')" ] }
+            { "math": [ "time_since(n_timer_trade_knitting) >= time('2 d')" ] }
           ]
         },
         "effect": [
@@ -231,7 +231,7 @@
         "condition": {
           "and": [
             { "npc_has_var": "general_trade_u_want_pants", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('2 d')" ] }
+            { "math": [ "time_since(n_timer_trade_knitting) >= time('2 d')" ] }
           ]
         },
         "effect": [
@@ -246,7 +246,7 @@
         "condition": {
           "and": [
             { "npc_has_var": "general_trade_u_want_jacket", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('2 d')" ] }
+            { "math": [ "time_since(n_timer_trade_knitting) >= time('2 d')" ] }
           ]
         },
         "effect": [
@@ -261,7 +261,7 @@
         "condition": {
           "and": [
             { "npc_has_var": "general_trade_u_want_dress", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('2 d')" ] }
+            { "math": [ "time_since(n_timer_trade_knitting) >= time('2 d')" ] }
           ]
         },
         "effect": [
@@ -276,7 +276,7 @@
         "condition": {
           "and": [
             { "npc_has_var": "general_trade_u_want_longcoat", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('4 d')" ] }
+            { "math": [ "time_since(n_timer_trade_knitting) >= time('4 d')" ] }
           ]
         },
         "effect": [
@@ -291,7 +291,7 @@
         "condition": {
           "and": [
             { "npc_has_var": "general_trade_u_want_backpack", "value": "yes" },
-            { "math": [ "time_since(n_timer_trade_knitting)", ">=", "time('4 d')" ] }
+            { "math": [ "time_since(n_timer_trade_knitting) >= time('4 d')" ] }
           ]
         },
         "effect": [

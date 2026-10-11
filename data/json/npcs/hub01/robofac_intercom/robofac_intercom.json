@@ -144,7 +144,7 @@
           "run_eocs": [
             {
               "id": "EOC_INTERCOM_MAYBE_ADD_FREE_MERCHANT_CAMP",
-              "condition": { "math": [ "free_merchants_hub_trade_route", "==", "1" ] },
+              "condition": { "math": [ "free_merchants_hub_trade_route == 1" ] },
               "effect": [
                 { "mapgen_update": "nest_robofac_add_free_merchant_camp", "om_terrain": "robofachq_surface_parking" },
                 { "math": [ "free_merchants_hub_trade_route = 2" ] },
