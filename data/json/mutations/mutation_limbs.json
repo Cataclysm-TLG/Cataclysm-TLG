@@ -926,7 +926,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "left",
@@ -1056,7 +1056,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "left",
@@ -1185,7 +1185,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "left",
@@ -1314,7 +1314,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "right",
@@ -1443,7 +1443,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "right",
@@ -1572,7 +1572,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "right",
@@ -1928,7 +1928,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -2109,7 +2109,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -2289,7 +2289,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -2470,7 +2470,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
