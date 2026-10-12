@@ -83,7 +83,6 @@
   },
   {
     "id": "glock17_17",
-    "//": "Tileset whitelist for pistol magazines",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
     "name": { "str": "Glock 9x19mm 17-round magazine" },
@@ -398,7 +397,6 @@
   },
   {
     "id": "mp5mag",
-    "//": "Tileset whitelist for SMG magazines",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
     "name": { "str": "MP5 30-round magazine" },

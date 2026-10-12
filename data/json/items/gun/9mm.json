@@ -118,7 +118,6 @@
   {
     "id": "hk_mp5",
     "copy-from": "smg_base",
-    "//": "Tileset whitelist for SMGs",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "H&K MP5A2 SMG" },

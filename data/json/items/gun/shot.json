@@ -446,7 +446,6 @@
   {
     "id": "remington_1100",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Remington 1100 competition shotgun" },
@@ -482,7 +481,6 @@
   {
     "id": "browning_a5",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Browning Auto 5 shotgun" },
@@ -518,7 +516,6 @@
   {
     "id": "ithaca37",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Ithaca M37 Featherlight shotgun" },
@@ -554,7 +551,6 @@
   {
     "id": "remington_870",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Remington 870 Wingmaster shotgun" },
