@@ -395,11 +395,7 @@
     "lockpick_result": "f_gunsafe_o",
     "lockpick_message": "With a satisfying click, the lock on the gun safe door opens.",
     "examine_action": "locked_object_pickable",
-    "hacksaw": {
-      "result": "f_gunsafe_o",
-      "duration": "45 minutes",
-      "message": "You finish cutting the metal."
-    },
+    "hacksaw": { "result": "f_gunsafe_o", "duration": "45 minutes", "message": "You finish cutting the metal." },
     "oxytorch": { "result": "f_gunsafe_o", "duration": "30 seconds" },
     "bash": {
       "str_min": 50,
@@ -427,11 +423,7 @@
     "required_str": 14,
     "max_volume": "250 L",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
-    "hacksaw": {
-      "result": "f_gunsafe_o",
-      "duration": "45 minutes",
-      "message": "You finish cutting the metal."
-    },
+    "hacksaw": { "result": "f_gunsafe_o", "duration": "45 minutes", "message": "You finish cutting the metal." },
     "oxytorch": { "result": "f_gunsafe_o", "duration": "30 seconds" },
     "bash": {
       "str_min": 50,
@@ -459,11 +451,7 @@
     "required_str": 14,
     "max_volume": "250 L",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
-    "hacksaw": {
-      "result": "f_gunsafe_o",
-      "duration": "45 minutes",
-      "message": "You finish cutting the metal."
-    },
+    "hacksaw": { "result": "f_gunsafe_o", "duration": "45 minutes", "message": "You finish cutting the metal." },
     "oxytorch": { "result": "f_gunsafe_o", "duration": "30 seconds" },
     "examine_action": "gunsafe_el",
     "bash": {
@@ -776,10 +764,7 @@
     "required_str": 14,
     "max_volume": "250 L",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
-    "hacksaw": {
-      "duration": "60 minutes",
-      "message": "You finish cutting the metal."
-    },
+    "hacksaw": { "duration": "60 minutes", "message": "You finish cutting the metal." },
     "oxytorch": { "result": "f_safe_o", "duration": "40 seconds" },
     "examine_action": "safe",
     "bash": {
