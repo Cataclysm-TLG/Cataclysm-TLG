@@ -89,10 +89,7 @@
       {
         "text": "How are the chickens?",
         "condition": {
-          "and": [
-            { "math": [ "darryl_building_coop == 2" ] },
-            { "npc_has_var": "general_meeting_u_met_godco_darryl", "value": "yes" }
-          ]
+          "and": [ { "math": [ "darryl_building_coop == 2" ] }, { "npc_has_var": "general_meeting_u_met_godco_darryl", "value": "yes" } ]
         },
         "topic": "TALK_GODCO_Darryl_Trade_Eggs"
       },

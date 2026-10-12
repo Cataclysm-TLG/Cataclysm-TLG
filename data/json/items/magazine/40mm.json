@@ -2,7 +2,6 @@
   {
     "id": "belt40mm",
     "//": "Metal linkages are small, but this belt has 50 linkages, so volume and weight should still have some substance.",
-    "//2": "Tileset whitelist for explosive launchers.",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
     "name": { "str": "40x53mm grenade belt" },

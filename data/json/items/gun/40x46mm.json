@@ -64,7 +64,6 @@
   {
     "id": "m79",
     "copy-from": "launcher_base",
-    "//": "Tileset whitelist for launchers.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "M79 launcher" },

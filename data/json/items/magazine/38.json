@@ -1,7 +1,6 @@
 [
   {
     "id": "38_speedloader",
-    "//": "Tileset whitelist for speedloaders. Size scaled 20% from 38_speedloader5.",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
     "name": { "str": ".38/.357 7-round speedloader" },
