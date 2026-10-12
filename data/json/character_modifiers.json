@@ -95,7 +95,6 @@
     "type": "character_mod",
     "description": "Grab break success modifier",
     "mod_type": "x",
-    "//": "Major limb scores - grip would be nice but unless",
     "value": { "limb_score": [ "balance", [ "lift", 2 ], "move_speed", "grip" ], "limb_score_op": "x", "min": 0.1, "max": 0.9 }
   },
   {
@@ -124,14 +123,14 @@
     "id": "limb_speed_movecost_mod",
     "description": "Limb speed move cost modifier <color_dark_gray>(Movement)</color>",
     "mod_type": "x",
-    "value": { "limb_score": "move_speed", "max": "max_move_cost", "nominator": 1.0 }
+    "value": { "limb_score": [ [ "move_speed", 0.75 ] ], "limb_score_op": "*", "max": "max_move_cost", "nominator": 1.0 }
   },
   {
     "type": "character_mod",
     "id": "limb_footing_movecost_mod",
     "description": "Footing move cost modifier <color_dark_gray>(Footing)</color>",
     "mod_type": "x",
-    "value": { "limb_score": "footing", "max": "max_move_cost", "nominator": 1.0 }
+    "value": { "limb_score": [ [ "footing", 0.75 ] ], "limb_score_op": "*", "max": "max_move_cost", "nominator": 1.0 }
   },
   {
     "type": "character_mod",
