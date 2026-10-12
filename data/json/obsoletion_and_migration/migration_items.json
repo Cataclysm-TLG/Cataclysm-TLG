@@ -4395,5 +4395,10 @@
     "id": "wrapper_foil_roll",
     "type": "MIGRATION",
     "replace": "aluminum_foil_roll"
+  },
+  {
+    "id": "harmonica_holder",
+    "type": "MIGRATION",
+    "replace": "harmonica"
   }
 ]

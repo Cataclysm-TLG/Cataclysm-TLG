@@ -248,6 +248,7 @@
       [ "cane", 3 ],
       [ "teapot", 5 ],
       [ "pan", 20 ],
+      { "item": "harmonica", "prob": 1 },
       [ "dutch_oven", 5 ],
       [ "waffleiron", 25 ],
       [ "binoculars", 20 ],
@@ -463,6 +464,7 @@
       [ "pot_copper", 5 ],
       [ "teapot", 5 ],
       [ "pan", 20 ],
+      { "item": "harmonica", "prob": 1 },
       [ "binoculars", 20 ],
       { "item": "hotplate", "prob": 10 },
       { "item": "popcan_stove", "prob": 10, "charges": [ 0, 500 ] },
@@ -658,7 +660,7 @@
   },
   {
     "type": "item_group",
-    "//": "oriental games, for dojo location.",
+    "//": "Board games for dojos.",
     "id": "games_dojo",
     "items": [ [ "go", 50 ], [ "shogi", 50 ], [ "mahjong", 50 ], [ "chaturanga", 25 ] ]
   },

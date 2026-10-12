@@ -79,6 +79,7 @@
       { "group": "cannedfood", "prob": 10, "count": [ 1, 3 ] },
       { "group": "wallet_duct_tape_full", "prob": 1 },
       { "item": "ankle_wallet_pouch", "prob": 1 },
+      { "item": "harmonica", "prob": 1 },
       { "item": "drink_hobo", "prob": 1 }
     ]
   },
@@ -392,6 +393,7 @@
       [ "toothbrush_plain", 10 ],
       [ "string_floss", 10 ],
       [ "kilt", 4 ],
+      [ "harmonica", 1 ],
       [ "hobo_stove", 1 ],
       [ "tinder", 1 ],
       { "item": "tinderbox", "prob": 1, "charges": [ 0, 100 ] },

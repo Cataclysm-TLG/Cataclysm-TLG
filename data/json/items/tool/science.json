@@ -1402,10 +1402,7 @@
         {
           "id": "EOC_MIGO_BIO_TECH_FOCUS",
           "condition": { "compare_string": [ "focus", { "npc_val": "mbt_f_function" } ] },
-          "effect": [
-            { "u_message": "You feel incredibly focused!" },
-            { "math": [ "u_val('focus') += min( u_val('focus') + 30, 130)" ] }
-          ]
+          "effect": [ { "u_message": "You feel incredibly focused!" }, { "math": [ "u_val('focus') += min( u_val('focus') + 30, 130)" ] } ]
         },
         {
           "id": "EOC_MIGO_BIO_TECH_PAIN",
