@@ -4187,7 +4187,7 @@
     "components": [ [ [ "sheet_metal_small", 2 ] ], [ [ "scrap", 2 ] ] ]
   },
   {
-    "result": "harmonica_holder",
+    "result": "harmonica",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
     "time": "12 s",

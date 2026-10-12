@@ -373,10 +373,10 @@
   },
   {
     "type": "ITEM",
-    "subtypes": [ "TOOL", "ARMOR" ],
-    "id": "harmonica_holder",
+    "subtypes": [ "TOOL" ],
+    "id": "harmonica",
     "looks_like": "flute",
-    "name": { "str_pl": "harmonicas with holders", "str": "harmonica with a holder" },
+    "name": { "str": "harmonica", "str_pl": "harmonicas" },
     "category": "tools",
     "weight": "200 g",
     "color": "brown",
@@ -388,19 +388,16 @@
       "fun": -5,
       "fun_bonus": 2,
       "description_frequency": 20,
-      "player_descriptions": [ "You produce a happy tune on the harmonica.", "You whistle on the harmonica." ],
-      "npc_descriptions": [ "produce a happy tune on the harmonica.", "whistle on the harmonica." ]
+      "player_descriptions": [ "You blow a few chords on the harmonica.", "You whistle on the harmonica." ],
+      "npc_descriptions": [ "blows a few chords on the harmonica.", "whistle on the harmonica." ]
     },
     "symbol": "-",
-    "description": "A harmonica with a holder, so that you can play it without a free hand.",
+    "description": "A small rectangular wind instrument with a series of holes along its length.  This instrument is associated with the American South, but its roots go all the way back to Vienna.",
     "price": "10 USD",
     "price_postapoc": "1 USD 50 cent",
     "material": [ "steel" ],
     "volume": "250 ml",
-    "longest_side": "18 cm",
-    "flags": [ "BELTED", "SLEEP_IGNORE" ],
-    "material_thickness": 1,
-    "armor": [ { "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ]
+    "longest_side": "18 cm"
   },
   {
     "type": "ITEM",

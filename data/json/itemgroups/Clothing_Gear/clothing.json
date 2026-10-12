@@ -3783,7 +3783,7 @@
       { "item": "wearable_light", "prob": 10, "charges": [ 0, 100 ] },
       { "item": "binoculars", "prob": 2 },
       { "item": "whistle", "prob": 3 },
-      { "item": "harmonica_holder", "prob": 1 },
+      { "item": "harmonica", "prob": 1 },
       { "group": "costume_accessories", "prob": 1 }
     ]
   },

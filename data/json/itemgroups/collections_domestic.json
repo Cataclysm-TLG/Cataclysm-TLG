@@ -1083,7 +1083,7 @@
       { "item": "saxophone", "prob": 15 },
       { "item": "clarinet", "prob": 10 },
       { "item": "flute", "prob": 10 },
-      { "item": "harmonica_holder", "prob": 10 },
+      { "item": "harmonica", "prob": 10 },
       { "item": "banjo", "prob": 5 },
       { "item": "kantele", "prob": 1 },
       { "item": "ukulele", "prob": 15 },
