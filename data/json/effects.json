@@ -3596,10 +3596,10 @@
     "base_mods": {
       "int_mod": [ -1 ],
       "speed_mod": [ -10 ],
-      "fatigue_min": [ 2 ],
-      "fatigue_max": [ 60 ],
+      "fatigue_min": [ 1 ],
+      "fatigue_max": [ 15 ],
       "fatigue_chance": [ 60 ],
-      "fatigue_max_val": [ 500 ]
+      "fatigue_max_val": [ 400 ]
     },
     "blood_analysis_description": "Zolpidem"
   },
