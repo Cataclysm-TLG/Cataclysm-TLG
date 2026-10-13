@@ -116,12 +116,12 @@
     "id_suffix": "npc_fish_trap",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_MATERIALS",
-    "skill_used": "survival",
+    "skill_used": "traps",
     "difficulty": 4,
     "time": "3 h",
     "autolearn": false,
     "never_learn": true,
-    "skills_required": [ [ "survival", 4 ] ],
+    "skills_required": [ [ "survival", 2 ] ],
     "qualities": [ { "id": "FISH_TRAP", "level": 1 } ]
   },
   {

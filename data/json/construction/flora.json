@@ -16,7 +16,7 @@
     "id": "constr_apiary",
     "group": "fill_bee_hive",
     "category": "FARM_WOOD",
-    "required_skills": [ [ "ecology", 7 ] ],
+    "required_skills": [ [ "survival", 7 ] ],
     "time": "5 m",
     "components": [ [ [ "swarm_bees", 1 ] ], [ [ "sweet_water", 10 ], [ "honey_bottled", 10 ], [ "honeycomb", 10 ] ] ],
     "pre_terrain": "t_apiary_empty",
