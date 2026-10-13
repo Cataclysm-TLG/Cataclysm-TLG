@@ -2293,9 +2293,9 @@
   },
   {
     "type": "terrain",
-    "id": "t_apiary",
+    "id": "t_apiary_harvestable",
     "name": "apiary",
-    "description": "A man-made wooden box designed to hold honeybees and facilitate the care for a hive.  The modular construction allows for inspecting the bees and harvesting their bounty without destroying the hive completely.  This year's harvest should be ready by now.",
+    "description": "A man-made wooden box designed to hold honeybees and facilitate the care for a hive.  This year's harvest should be ready by now.",
     "symbol": "h",
     "color": [ "yellow" ],
     "move_cost": 0,
@@ -2304,7 +2304,7 @@
     "flags": [ "FLAMMABLE_ASH", "PERMEABLE", "NOITEM" ],
     "examine_action": "harvest_ter",
     "harvest_by_season": [ { "seasons": [ "autumn" ], "id": "beehive_harv" } ],
-    "transforms_into": "t_apiary_empty",
+    "transforms_into": "t_apiary",
     "emissions": [ "emit_bees" ],
     "bash": {
       "str_min": 10,
@@ -2322,9 +2322,9 @@
   },
   {
     "type": "terrain",
-    "id": "t_apiary_empty",
+    "id": "t_apiary",
     "name": "apiary",
-    "description": "A man-made wooden box designed to host honeybees and facilitate the care for a hive.  The modular construction allows for inspecting the bees and harvesting their bounty without destroying the hive completely.  The hive should be ready for harvest in autumn.",
+    "description": "A man-made wooden box designed to host honeybees and facilitate the care for a hive.  It's stocked with bees, and come autumn there should be plenty of honey inside.",
     "symbol": "h",
     "color": [ "light_gray" ],
     "move_cost": 0,
@@ -2332,8 +2332,34 @@
     "concealment": 30,
     "flags": [ "FLAMMABLE", "NOITEM", "PERMEABLE", "HARVESTED" ],
     "examine_action": "harvested_plant",
-    "transforms_into": "t_apiary",
+    "transforms_into": "t_apiary_harvestable",
     "emissions": [ "emit_bees" ],
+    "bash": {
+      "str_min": 10,
+      "str_max": 15,
+      "sound": "crunch!",
+      "sound_fail": "whack!",
+      "ter_set": "t_dirt",
+      "items": [
+        { "item": "wax", "count": [ 0, 2 ] },
+        { "item": "honeycomb", "count": [ 0, 1 ] },
+        { "item": "2x4", "count": [ 8, 10 ] },
+        { "item": "nail", "count": [ 12, 20 ] }
+      ]
+    }
+  },
+  {
+    "type": "terrain",
+    "id": "t_apiary_empty",
+    "name": "empty apiary",
+    "description": "A man-made wooden box designed to host honeybees and facilitate the care for a hive.  At present there are no bees and no honey.",
+    "symbol": "h",
+    "looks_like": "t_apiary",
+    "color": [ "light_gray" ],
+    "move_cost": 0,
+    "coverage": 30,
+    "concealment": 30,
+    "flags": [ "FLAMMABLE", "NOITEM", "PERMEABLE" ],
     "bash": {
       "str_min": 10,
       "str_max": 15,

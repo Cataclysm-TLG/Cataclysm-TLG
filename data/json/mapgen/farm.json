@@ -605,7 +605,7 @@
         " F  DDDDDDDDDDDDDDDD  F ",
         " F                    F "
       ],
-      "terrain": { "⬡": [ [ "t_apiary", 2 ], [ "t_apiary_empty", 98 ] ] },
+      "terrain": { "⬡": [ [ "t_apiary", 1 ], [ "t_apiary_empty", 99 ] ] },
       "items": {
         "♠": [
           { "item": "hive", "chance": 50, "repeat": [ 2, 4 ] },
@@ -618,7 +618,7 @@
       "sealed_item": { "D": { "item": { "item": "seed_corn" }, "furniture": "f_plant_seedling", "chance": 1 } },
       "palettes": [ "farm" ],
       "place_monster": [
-        { "group": "GROUP_BEEKEEPER", "x": [ 6, 21 ], "y": [ 3, 10 ], "pack_size": 1, "chance": 10 },
+        { "group": "GROUP_ZOMBIE", "x": [ 6, 21 ], "y": [ 3, 10 ], "pack_size": 1, "chance": 10 },
         { "group": "GROUP_BEE", "x": [ 6, 21 ], "y": [ 3, 10 ], "pack_size": [ 2, 4 ], "chance": 20 }
       ]
     }
