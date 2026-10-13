@@ -149,7 +149,7 @@
     "dynamic_line": "Nothing good.  Had a pal on the road with a ham radio, but she's gone like everyone else.",
     "responses": [
       { "text": "…", "topic": "TALK_ARSONIST" },
-      { "text": "Nothing good?  So you have heard something", "topic": "TALK_ARSONIST_WORLD_SOMETHING" }
+      { "text": "Nothing good?  So you have heard something.", "topic": "TALK_ARSONIST_WORLD_SOMETHING" }
     ]
   },
   {
@@ -181,7 +181,32 @@
     "type": "talk_topic",
     "id": "TALK_ARSONIST_DOING",
     "dynamic_line": "I burn down buildings and sell the materials.  Nails, rebar, wire, whatever metal I can pull out of the ashes.",
-    "responses": [ { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" } ]
+    "responses": [
+      { "text": "I'll buy.", "effect": "start_trade", "topic": "TALK_ARSONIST" },
+      { "text": "Arson?  How does that work?", "topic": "TALK_ARSONIST_ADVICE" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_ADVICE",
+    "dynamic_line": {
+      "u_has_any_trait": [ "PYROMANIAC" ],
+      "yes": "Don't look so excited.  It's more complicated than it sounds.  Buildings are made to resist burning.  What you want to do is make sure it isn't rainy or too humid.  Get inside the place and pile up a bunch of flammable stuff, clothes, wood, anything that'll go up.  Don't just use gasoline, it burns out too fast.  If you can put this stuff on a bed or sofa, that's way better, some furniture burns really well.  If there's not enough fuel, the fire will go out before it can really get going.  You also want to spread the fire out as much as possible, the bigger it is, the more it keeps itself going, that's why starting fires is easier if you use a Molotov.  If you can get a decent-sized fire that's hot enough, it'll catch the walls and whatever else and take off.  Zombies don't seem to care about the noise a fire makes, but you can still bait them into it using a noisemaker or an MP3 player or anything else that's loud enough.  Oh, and obviously not all buildings will burn.  Wood will catch fire once it gets going but not concrete or brick.",
+      "no": "It's more complicated than it sounds.  Buildings are made to resist burning.  What you want to do is make sure it isn't rainy or too humid.  Get inside the place and pile up a bunch of flammable stuff, clothes, wood, anything that'll go up.  Don't just use gasoline, it burns out too fast.  If you can put this stuff on a bed or sofa, that's way better, some furniture burns really well.  If there's not enough fuel, the fire will go out before it can really get going.  You also want to spread the fire out as much as possible, the bigger it is, the more it keeps itself going, that's why starting fires is easier if you use a Molotov.  If you can get a decent-sized fire that's hot enough, it'll catch the walls and whatever else and take off.  Zombies don't seem to care about the noise a fire makes, but you can still bait them into it using a noisemaker or music or anything else that's loud enough.  Oh, and obviously not all buildings will burn.  Wood will catch fire once it gets going but not concrete or brick."
+    },
+    "responses": [
+      {
+        "text": "What about cremation?  Does it get rid of the zombies permanently?",
+        "topic": "TALK_ARSONIST_ADVICE_CREMATION"
+      },
+      { "text": "I see.", "topic": "TALK_ARSONIST" }
+    ]
+  },
+  {
+    "type": "talk_topic",
+    "id": "TALK_ARSONIST_ADVICE_CREMATION",
+    "dynamic_line": "Sometimes.  You have to really burn them to a crisp, and that's not easy.  The weird thing is, if you don't fully burn them, they come back faster and they move different, it's like the fire gets inside them somehow.  I know that sounds crazy, but I've seen some stuff that's hard to explain, so just be careful.",
+    "responses": [ { "text": "Got it.", "topic": "TALK_ARSONIST" } ]
   },
   {
     "id": "MISSION_ARSONIST_1_AMMONIUM_NITRATE",
