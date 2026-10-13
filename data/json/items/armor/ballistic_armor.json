@@ -798,7 +798,7 @@
         "max_contains_weight": "5 kg",
         "max_item_length": "33 cm",
         "moves": 800,
-        "description": "Pocket for a large armor plate.",
+        "description": "Pocket for a ballistic plate.",
         "flag_restriction": [ "ABLATIVE_LARGE" ]
       },
       {
@@ -809,7 +809,7 @@
         "max_contains_weight": "5 kg",
         "max_item_length": "33 cm",
         "moves": 800,
-        "description": "Pocket for a large armor plate.",
+        "description": "Pocket for a ballistic plate.",
         "flag_restriction": [ "ABLATIVE_LARGE" ]
       },
       {
@@ -820,7 +820,7 @@
         "max_contains_weight": "2 kg",
         "max_item_length": "21 cm",
         "moves": 800,
-        "description": "Pocket for a medium armor plate.",
+        "description": "Pocket for a ballistic side plate.",
         "flag_restriction": [ "ABLATIVE_MEDIUM" ]
       },
       {
@@ -831,7 +831,7 @@
         "max_contains_weight": "2 kg",
         "max_item_length": "21 cm",
         "moves": 800,
-        "description": "Pocket for a medium armor plate.",
+        "description": "Pocket for a ballistic side plate.",
         "flag_restriction": [ "ABLATIVE_MEDIUM" ]
       },
       {
