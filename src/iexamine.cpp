@@ -2302,7 +2302,7 @@ void iexamine::harvest_ter( Character &you, const tripoint_bub_ms &examp )
  */
 void iexamine::harvested_plant( Character &you, const tripoint_bub_ms &examp )
 {
-    you.add_msg_if_player( m_info, _( "Nothing can be harvested from this plant in current season" ) );
+    you.add_msg_if_player( m_info, _( "Nothing can be harvested here in the current season" ) );
     iexamine::none( you, examp );
 }
 

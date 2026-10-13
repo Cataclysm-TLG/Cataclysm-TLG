@@ -1,21 +1,26 @@
 [
   {
     "type": "construction",
-    "id": "constr_apiary",
+    "id": "constr_apiary_empty",
     "group": "build_bee_hive",
     "category": "FARM_WOOD",
     "required_skills": [ [ "fabrication", 2 ] ],
     "time": "4 h",
     "qualities": [ [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_W", "level": 2 }, { "id": "DRILL", "level": 1 } ] ],
-    "components": [
-      [ [ "2x4", 14 ] ],
-      [ [ "wood_panel", 8 ] ],
-      [ [ "nails", 28, "LIST" ] ],
-      [ [ "swarm_bees", 1 ] ],
-      [ [ "sweet_water", 10 ], [ "honey_bottled", 10 ], [ "honeycomb", 10 ] ]
-    ],
+    "components": [ [ [ "2x4", 14 ] ], [ [ "wood_panel", 8 ] ], [ [ "nails", 28, "LIST" ] ] ],
     "pre_special": "check_empty",
     "post_terrain": "t_apiary_empty"
+  },
+  {
+    "type": "construction",
+    "id": "constr_apiary",
+    "group": "fill_bee_hive",
+    "category": "FARM_WOOD",
+    "required_skills": [ [ "survival", 7 ] ],
+    "time": "5 m",
+    "components": [ [ [ "swarm_bees", 1 ] ], [ [ "sweet_water", 10 ], [ "honey_bottled", 10 ], [ "honeycomb", 10 ] ] ],
+    "pre_terrain": "t_apiary_empty",
+    "post_terrain": "t_apiary"
   },
   {
     "type": "construction",

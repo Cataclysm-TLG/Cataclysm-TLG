@@ -500,7 +500,12 @@
   {
     "type": "construction_group",
     "id": "build_bee_hive",
-    "name": "Build An Apiary"
+    "name": "Build an Apiary"
+  },
+  {
+    "type": "construction_group",
+    "id": "fill_bee_hive",
+    "name": "Stock an Empty Apiary"
   },
   {
     "type": "construction_group",

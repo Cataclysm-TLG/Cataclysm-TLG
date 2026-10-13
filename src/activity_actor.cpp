@@ -5307,7 +5307,7 @@ void harvest_activity_actor::start( player_activity &act, Character &who )
     if( harvest.is_null() || harvest->empty() ) {
         if( !auto_forage ) {
             who.add_msg_if_player( m_info,
-                                   _( "Nothing can be harvested from this plant in the current season." ) );
+                                   _( "Nothing can be harvested here in the current season." ) );
         }
 
         if( who.manual_examine ) {

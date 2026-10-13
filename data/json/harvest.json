@@ -73,8 +73,13 @@
     "type": "harvest",
     "message": "You carefully crack open the hive structure and drain the liquid.",
     "entries": [
-      { "drop": "honeycomb", "base_num": [ 10, 40 ], "difficulty": 0 },
-      { "drop": "wax", "base_num": [ 4, 5 ], "difficulty": 0 }
+      { "drop": "honeycomb", "base_num": [ 4, 10 ], "difficulty": 0 },
+      { "drop": "honeycomb", "base_num": [ 1, 10 ], "difficulty": 1 },
+      { "drop": "honeycomb", "base_num": [ 1, 10 ], "difficulty": 2 },
+      { "drop": "honeycomb", "base_num": [ 1, 10 ], "difficulty": 3 },
+      { "drop": "wax", "base_num": [ 2, 4 ], "difficulty": 0 },
+      { "drop": "wax", "base_num": [ 1, 2 ], "difficulty": 1 },
+      { "drop": "wax", "base_num": [ 1, 2 ], "difficulty": 2 }
     ]
   },
   {
