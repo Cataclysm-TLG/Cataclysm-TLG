@@ -807,7 +807,6 @@
     "connect_groups": [ "CARPET", "INDOORFLOOR" ],
     "connects_to": "CARPET",
     "move_cost": 2,
-    
     "description": "Soft red carpet on a wooden floor.  Can support a roof.",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "RUG", "EASY_DECONSTRUCT" ],
     "deconstruct": { "ter_set": "t_floor", "items": [ { "item": "r_carpet", "charges": 1 }, { "item": "nail", "charges": 5 } ] }

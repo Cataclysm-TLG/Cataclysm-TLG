@@ -2174,7 +2174,7 @@ class map
 
         // Gets the roof type of the tile at p. Returns open_air if it doesn't find one, or rock floor
         // if it's below the min Z level.
-        ter_str_id get_roof( const tripoint_bub_ms &p) const;
+        ter_str_id get_roof( const tripoint_bub_ms &p ) const;
 
     public:
         void process_items();
