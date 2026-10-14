@@ -800,11 +800,11 @@
     }
   },
   {
+    "id": "t_elevator_control_no_roof",
     "copy-from": "t_elevator_control",
     "type": "terrain",
     "symbol": ".",
     "color": "dark_gray",
-    "id": "t_elevator_control_no_roof",
     "roof": "t_null",
     "flags": [ "NOITEM" ]
   },

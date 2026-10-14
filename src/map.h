@@ -2172,10 +2172,9 @@ class map
         void bash_vehicle( const tripoint_bub_ms &p, bash_params &params );
         void bash_field( const tripoint_bub_ms &p, bash_params &params );
 
-        // Gets the roof type of the tile at p
-        // Second argument refers to whether we have to get a roof (we're over an unpassable tile)
-        // or can just return air because we bashed down an entire floor tile
-        ter_str_id get_roof( const tripoint_bub_ms &p, bool allow_air ) const;
+        // Gets the roof type of the tile at p. Returns open_air if it doesn't find one, or rock floor
+        // if it's below the min Z level.
+        ter_str_id get_roof( const tripoint_bub_ms &p) const;
 
     public:
         void process_items();
