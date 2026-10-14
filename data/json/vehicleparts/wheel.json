@@ -261,7 +261,7 @@
     "durability": 800,
     "description": "A heavy-duty wheel with a reinforced run-flat tire.",
     "damage_modifier": 50,
-    "wheel_offroad_rating": 0.5,
+    "wheel_offroad_rating": 0.45,
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 2, 3 ] },
       { "item": "steel_fragment", "count": [ 2, 3 ] },
@@ -461,13 +461,13 @@
   {
     "id": "wheel_10",
     "type": "vehicle_part",
-    "name": { "str": "wheels" },
+    "name": { "str": "large casters" },
     "item": "wheel_10",
     "location": "under",
     "categories": [ "movement" ],
     "color": "dark_gray",
     "durability": 120,
-    "description": "A set of 10\" wheels with tough rubber tires.",
+    "description": "A set of little wheels with tough rubber tires.",
     "folded_volume": "2500 ml",
     "breaks_into": [
       { "item": "steel_chunk", "prob": 50 },

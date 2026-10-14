@@ -1161,7 +1161,6 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
                                 ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
                                   !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
                                   !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
-
             if( !hazard || ( vp_wheel.info().wheel_info->offroad_rating >= 0.6f && !extra_hazard ) ) {
                 continue;
             }
@@ -1169,7 +1168,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
             // Turn the big side of the clamp up if you want it safer for slow drivers.
             int chance = std::clamp( 80000 / velocity, 25, 125 );
             if( extra_hazard ) {
-                chance = chance / 2;
+                chance = static_cast<int>( std::round( chance / ( std::max( 1.f, 2.f - vp_wheel.info().wheel_info->offroad_rating ) ) ) );
             }
 
             add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to proc rough terrain: 1 / %d.", chance );
