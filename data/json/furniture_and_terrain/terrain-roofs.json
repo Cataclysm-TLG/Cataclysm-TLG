@@ -7,7 +7,6 @@
     "symbol": " ",
     "color": "i_cyan",
     "move_cost": 2,
-    "roof": "t_flat_roof",
     "flags": [ "TRANSPARENT", "NO_FLOOR", "EMPTY_SPACE", "FREE_TO_EXAMINE" ],
     "examine_action": "ledge"
   },
@@ -19,7 +18,6 @@
     "symbol": " ",
     "color": "i_cyan",
     "move_cost": 2,
-    "roof": "t_flat_roof",
     "examine_action": "ledge",
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "NO_FLOOR", "INDOORS", "EMPTY_SPACE", "FREE_TO_EXAMINE" ]
