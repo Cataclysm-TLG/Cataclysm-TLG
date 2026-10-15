@@ -22,9 +22,9 @@
     "height": 160,
     "str": 6,
     "dex": 7,
-    "int": 12,
+    "int": 15,
     "per": 10,
-    "personality": { "aggression": -10, "bravery": -10, "collector": 2, "altruism": 1 },
+    "personality": { "aggression": -10, "bravery": -8, "collector": 0, "altruism": 3 },
     "talk_friend": "TALK_FRIEND_Luo",
     "talk_friend_guard": "TALK_FRIEND_GUARD_Luo"
   },
@@ -157,23 +157,23 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "vegetable_tainted" },
+            { "or": [ { "u_has_item": "vegetable_tainted" }, { "u_has_item": "dry_vegetable_tainted" } ] },
             { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" },
             { "not": { "npc_has_effect": "insulted_luo" } }
           ]
         },
-        "text": "I found a sample of alien fungus for you.",
+        "text": "I found a sample of the fungus for you.",
         "topic": "TALK_REFUGEE_BEGGAR_3_MYCUS4_RECRUIT"
       },
       {
         "condition": {
           "and": [
-            { "u_has_item": "vegetable_tainted" },
+            { "or": [ { "u_has_item": "vegetable_tainted" }, { "u_has_item": "dry_vegetable_tainted" } ] },
             { "not": { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } },
             { "not": { "npc_has_effect": "insulted_luo" } }
           ]
         },
-        "text": "I found a sample of alien fungus for you.",
+        "text": "I found a sample of the fungus for you.",
         "topic": "TALK_REFUGEE_BEGGAR_3_MYCUS4_NOTREADY",
         "effect": { "npc_add_var": "general_recruit_luo_owed", "value": "yes" }
       },
@@ -248,7 +248,7 @@
       { "text": "What did you do before <the_cataclysm>?", "topic": "TALK_REFUGEE_BEGGAR_3_EXPERTISE" },
       {
         "condition": { "and": [ "u_has_camp", { "not": { "u_has_var": "general_recruit_luo_recruited", "value": "yes" } } ] },
-        "text": "I have a camp of my own, away from here.  No paperwork required.  Want to come?",
+        "text": "I have a settlement of my own, away from here.  No paperwork required.  Want to come?",
         "topic": "TALK_REFUGEE_BEGGAR_3_RECRUIT1"
       },
       {
@@ -266,12 +266,12 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "vegetable_tainted" },
+            { "or": [ { "u_has_item": "vegetable_tainted" }, { "u_has_item": "dry_vegetable_tainted" } ] },
             { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" },
             { "not": { "npc_has_effect": "insulted_luo" } }
           ]
         },
-        "text": "I found a sample of alien fungus for you.",
+        "text": "I found a sample of the fungus for you.",
         "topic": "TALK_REFUGEE_BEGGAR_3_MYCUS4_RECRUIT"
       },
       { "text": "Ok… see ya.", "topic": "TALK_DONE" },
@@ -413,7 +413,7 @@
     "responses": [
       {
         "condition": { "npc_has_var": "general_recruit_luo_owed", "value": "yes" },
-        "text": "Oh, come on.  I'm not a random stranger anymore, I brought you that crazy mushroom didn't I?",
+        "text": "Oh, come on.  I'm not a random stranger anymore, I brought you all that mold earlier, didn't I?",
         "topic": "TALK_REFUGEE_BEGGAR_3_RECRUITED1"
       },
       {
@@ -534,7 +534,7 @@
     "dynamic_line": "No, no I don't, and I'd appreciate you not leaving me hanging on that.  There are fungal zombies?",
     "responses": [
       {
-        "text": "Encroaching alien mushrooms, fungal towers, tough mycelium invading ground and trees, zombies taken over by aggressive mold… Yeah.  It's ugly stuff.",
+        "text": "Huge mold outbreaks with weird giant mushrooms, zombies getting mind-controlled by the stuff… Yeah.  It's pretty bad.",
         "topic": "TALK_REFUGEE_BEGGAR_3_MYCUS2"
       },
       { "text": "What was it you were saying before?", "topic": "TALK_NONE" },
@@ -560,14 +560,17 @@
     "dynamic_line": {
       "npc_has_var": "general_recruit_luo_attempt_recruit",
       "value": "yes",
-      "yes": "If you get me a sample, I'll join your crazy camp expedition.  Hell, if you bring me a sample maybe I'll help you set up a lab to study this stuff.  Almost anything could work, but if this stuff is as dangerous as you make it sound, maybe make sure it's not a sporulating body.",
+      "yes": "If you get me a fungal chunk from one of those creatures, I'll join up with you.  Hell, maybe I'll help you set up a lab to study this stuff.  You might have to cut up a dead one to get it, so wear some protection.  A gas mask, or at least a filter mask, and maybe some goggles.",
       "no": "I dunno, scientific interest?  If you don't bring me anything, no worries.  I'm positively swimming in entertainment here, as you can see."
     },
     "speaker_effect": [ { "effect": { "npc_add_var": "general_mission_luo_mycus_mission", "value": "yes" } } ],
     "responses": [
       {
         "condition": {
-          "and": [ { "u_has_item": "vegetable_tainted" }, { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } ]
+          "and": [
+            { "or": [ { "u_has_item": "vegetable_tainted" }, { "u_has_item": "dry_vegetable_tainted" } ] },
+            { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" }
+          ]
         },
         "text": "It just so happens I have a chunk of fungal matter on me right now.",
         "topic": "TALK_REFUGEE_BEGGAR_3_MYCUS4_RECRUIT"
@@ -575,7 +578,7 @@
       {
         "condition": {
           "and": [
-            { "u_has_item": "vegetable_tainted" },
+            { "or": [ { "u_has_item": "vegetable_tainted" }, { "u_has_item": "dry_vegetable_tainted" } ] },
             { "not": { "npc_has_var": "general_recruit_luo_attempt_recruit", "value": "yes" } }
           ]
         },
@@ -605,7 +608,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_REFUGEE_BEGGAR_3_RECRUITED2",
-    "dynamic_line": "Well good.  Let's get going, I want to see some more of these crazy mushrooms.",
+    "dynamic_line": "Well good.  Let's get going, I want to see some more of this crazy fungus.",
     "responses": [ { "text": "I'll see what I can do.", "topic": "TALK_DONE", "effect": "follow" } ]
   }
 ]

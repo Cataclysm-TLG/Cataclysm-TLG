@@ -10,11 +10,7 @@
         "text": "Blind!",
         "color": "red",
         "condition": {
-          "or": [
-            { "u_has_effect": "blind" },
-            { "u_has_effect": "boomered" },
-            { "math": [ "u_val('fine_detail_vision_mod') >= 11" ] }
-          ]
+          "or": [ { "u_has_effect": "blind" }, { "u_has_effect": "boomered" }, { "math": [ "u_val('fine_detail_vision_mod') >= 11" ] } ]
         }
       },
       {
@@ -58,10 +54,7 @@
         "text": "Nearly Blind",
         "color": "black_white",
         "condition": {
-          "and": [
-            { "math": [ "u_val('fine_detail_vision_mod') >= 7" ] },
-            { "math": [ "u_val('fine_detail_vision_mod') < 11" ] }
-          ]
+          "and": [ { "math": [ "u_val('fine_detail_vision_mod') >= 7" ] }, { "math": [ "u_val('fine_detail_vision_mod') < 11" ] } ]
         }
       }
     ]
