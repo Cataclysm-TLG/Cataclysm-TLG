@@ -156,7 +156,6 @@
     "connects_to": "BRICKFLOOR",
     "move_cost": 2,
     "coverage": 0,
-    
     "flags": [ "TRANSPARENT", "INDOORS", "COLLAPSES", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
     "bash": { "ter_set": "t_open_air", "str_min": 75, "str_max": 400, "str_min_supported": 100, "bash_below": true }
   },
@@ -198,7 +197,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    
     "flags": [ "TRANSPARENT", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "bash": {
       "str_min": 2,
@@ -250,7 +248,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    
     "looks_like": "t_linoleum_gray",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "bash": {
@@ -277,7 +274,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    
     "looks_like": "t_linoleum_white",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "bash": {
@@ -438,7 +434,6 @@
     "connect_groups": [ "INDOORFLOOR", "MARBLEFLOOR" ],
     "connects_to": "MARBLEFLOOR",
     "move_cost": 2,
-    
     "flags": [ "TRANSPARENT", "INDOORS", "COLLAPSES", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
     "bash": { "ter_set": "t_open_air", "str_min": 75, "str_max": 400, "str_min_supported": 100, "bash_below": true }
   },
@@ -465,7 +460,6 @@
     "connect_groups": [ "INDOORFLOOR", "METALFLOOR" ],
     "connects_to": "METALFLOOR",
     "move_cost": 2,
-    
     "coverage": 0,
     "flags": [ "TRANSPARENT", "INDOORS", "SUPPORTS_ROOF", "FLAT", "ROAD" ],
     "bash": {
@@ -1408,7 +1402,6 @@
     "connects_to": "LINOLEUM",
     "move_cost": 2,
     "coverage": 0,
-    
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD" ],
     "bash": {
       "sound": "SMASH!",
@@ -1423,7 +1416,6 @@
     "type": "terrain",
     "id": "t_linoleum_gray",
     "name": "linoleum tile",
-    
     "description": "A section of flooring made out of a tough, gray, rubbery material.  Can support a roof.",
     "symbol": ".",
     "color": "light_gray",
@@ -1453,7 +1445,6 @@
     "connects_to": "WOODFLOOR",
     "move_cost": 2,
     "coverage": 0,
-    
     "bash": {
       "str_min": 50,
       "str_max": 400,
@@ -1600,7 +1591,6 @@
     "color": "brown",
     "move_cost": 3,
     "coverage": 0,
-    
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "DIGGABLE" ],
     "bash": {
@@ -1618,7 +1608,6 @@
     "name": "moss",
     "//": "for caverns and other natural underground formations.",
     "looks_like": "t_grass",
-    
     "description": "A patch of moist, spongy moss.",
     "symbol": ".",
     "color": "light_green",
@@ -1647,7 +1636,6 @@
     "connects_to": "CLAY",
     "move_cost": 2,
     "coverage": 0,
-    
     "flags": [ "TRANSPARENT", "DIGGABLE", "FLAT", "SUPPORTS_ROOF", "INDOORS" ],
     "bash": {
       "sound": "thump",
@@ -1671,7 +1659,6 @@
     "move_cost": 5,
     "coverage": 10,
     "concealment": 10,
-    
     "flags": [ "TRANSPARENT", "BURROWABLE", "SUPPORTS_ROOF", "INDOORS" ],
     "bash": {
       "str_min": 2,
