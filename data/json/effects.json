@@ -1252,7 +1252,7 @@
     "type": "effect_type",
     "id": "mutagen",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1289,7 +1289,7 @@
     "scaling_mods": { "vomit_chance": [ -450 ], "hurt_chance": [ -240, -50 ], "hurt_tick": [ -25 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Alpha Mutagen"
+    "blood_analysis_description": "Human Tissue"
   },
   {
     "type": "effect_type",
@@ -1320,7 +1320,7 @@
     "scaling_mods": { "vomit_chance": [ -425 ], "thirst_tick": [ -400 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Frog Mutagen"
+    "blood_analysis_description": "Batrachian Tissue"
   },
   {
     "type": "effect_type",
@@ -1349,7 +1349,7 @@
     "scaling_mods": { "hunger_tick": [ -200 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Beast Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1375,7 +1375,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Bird Mutagen"
+    "blood_analysis_description": "Avian Tissue"
   },
   {
     "type": "effect_type",
@@ -1403,7 +1403,7 @@
     "scaling_mods": { "vomit_chance": [ -450 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -5 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Bovine Mutagen"
+    "blood_analysis_description": "Bovoid Tissue"
   },
   {
     "type": "effect_type",
@@ -1432,7 +1432,7 @@
     "scaling_mods": { "thirst_tick": [ -400 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Cephalopod Mutagen"
+    "blood_analysis_description": "Cephalopod Tissue"
   },
   {
     "type": "effect_type",
@@ -1461,7 +1461,7 @@
     "scaling_mods": { "hunger_tick": [ -120 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Chimera Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1487,7 +1487,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -15 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Elf-A Mutagen"
+    "blood_analysis_description": "Human Tissue"
   },
   {
     "type": "effect_type",
@@ -1513,7 +1513,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Feline Mutagen"
+    "blood_analysis_description": "Feline Tissue"
   },
   {
     "type": "effect_type",
@@ -1542,7 +1542,7 @@
     "scaling_mods": { "thirst_tick": [ -400 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Fish Mutagen"
+    "blood_analysis_description": "Piscine Tissue"
   },
   {
     "type": "effect_type",
@@ -1559,7 +1559,7 @@
     "scaling_mods": { "speed_mod": [ -7.5 ], "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Gastropod Mutagen"
+    "blood_analysis_description": "Gastropod Tissue"
   },
   {
     "type": "effect_type",
@@ -1604,7 +1604,7 @@
     "scaling_mods": { "vomit_chance": [ -420 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Insect Mutagen"
+    "blood_analysis_description": "Insect Tissue"
   },
   {
     "type": "effect_type",
@@ -1630,7 +1630,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Reptilian Mutagen"
+    "blood_analysis_description": "Reptilian Tissue"
   },
   {
     "type": "effect_type",
@@ -1660,7 +1660,7 @@
     "scaling_mods": { "hunger_tick": [ -175 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Canine Mutagen"
+    "blood_analysis_description": "Canine Tissue"
   },
   {
     "type": "effect_type",
@@ -1686,7 +1686,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -16 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Medical Mutagen"
+    "blood_analysis_description": "Circulating Tumor DNA"
   },
   {
     "type": "effect_type",
@@ -1713,7 +1713,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Murine Mutagen"
+    "blood_analysis_description": "Murine Tissue"
   },
   {
     "type": "effect_type",
@@ -1730,7 +1730,7 @@
     "scaling_mods": { "str_mod": [ 1.5 ], "dex_mod": [ 1.5 ], "int_mod": [ -1 ], "speed_mod": [ -7.5 ], "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Plant Mutagen"
+    "blood_analysis_description": "Plant Tissue"
   },
   {
     "type": "effect_type",
@@ -1759,7 +1759,7 @@
     "scaling_mods": { "hunger_tick": [ -200 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Raptor Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1785,7 +1785,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -15 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Lagomorph Mutagen"
+    "blood_analysis_description": "Lagomorph Tissue"
   },
   {
     "type": "effect_type",
@@ -1811,7 +1811,7 @@
     "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Rattine Mutagen"
+    "blood_analysis_description": "Rattine Tissue"
   },
   {
     "type": "effect_type",
@@ -1837,7 +1837,7 @@
     "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Chiropteran Mutagen"
+    "blood_analysis_description": "Chiropteran Tissue"
   },
   {
     "type": "effect_type",
@@ -1859,7 +1859,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Slime Mutagen"
+    "blood_analysis_description": "Unknown Matter"
   },
   {
     "type": "effect_type",
@@ -1885,7 +1885,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -25 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Spider Mutagen"
+    "blood_analysis_description": "Aranean Tissue"
   },
   {
     "type": "effect_type",
@@ -1911,7 +1911,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Troglobite Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1939,7 +1939,7 @@
     "scaling_mods": { "fatigue_chance": [ -500 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Ursine Mutagen"
+    "blood_analysis_description": "Ursine Tissue"
   },
   {
     "type": "effect_type",
@@ -1965,7 +1965,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Crustacean Mutagen"
+    "blood_analysis_description": "Crustacean Tissue"
   },
   {
     "type": "effect_type",
