@@ -371,7 +371,8 @@
       "furniture": { " ": [ [ "f_null", 5 ], "f_rubble_rock" ] },
       "items": { " ": { "item": "mine_equipment", "chance": 3 } },
       "monster": { " ": { "monster": "mon_zombie_miner", "chance": 5 } },
-      "nested": { " ": { "chunks": [ [ "mine_minerals_equipment", 10 ], [ "null", 100 ] ] } }
+      "nested": { " ": { "chunks": [ [ "mine_minerals_equipment", 10 ], [ "null", 100 ] ] } },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 11, 14 ], "y": [ 4, 5 ] } ]
     }
   },
   {
@@ -411,7 +412,8 @@
       "items": { " ": { "item": "mine_equipment", "chance": 3 } },
       "monster": { " ": { "monster": "mon_zombie_miner", "chance": 5 } },
       "vehicles": { "o": { "vehicle": "trencher", "chance": 100, "fuel": 70, "status": 0 } },
-      "nested": { " ": { "chunks": [ [ "mine_minerals_equipment", 10 ], [ "null", 100 ] ] } }
+      "nested": { " ": { "chunks": [ [ "mine_minerals_equipment", 10 ], [ "null", 100 ] ] } },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 10, 15 ], "y": [ 5, 7 ] } ]
     }
   },
   {
@@ -454,7 +456,8 @@
       },
       "monster": { "D": { "monster": "mon_dog_thing", "friendly": true } },
       "items": { "D": { "item": "microlab_artifacts", "chance": 100 } },
-      "nested": { " ": { "chunks": [ [ "mine_the_thing_victims", 1 ], [ "null", 50 ] ] } }
+      "nested": { " ": { "chunks": [ [ "mine_the_thing_victims", 1 ], [ "null", 50 ] ] } },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 10, 15 ], "y": [ 5, 7 ] } ]
     }
   },
   {
@@ -497,7 +500,8 @@
       },
       "item": { " ": { "item": "material_soil", "chance": 5, "amount": [ 5, 10 ] } },
       "items": { "S": { "item": "archeology_tools", "chance": 90, "repeat": [ 1, 2 ] } },
-      "nested": { "1": { "chunks": [ [ "mine_finale_archaeology", 100 ] ] } }
+      "nested": { "1": { "chunks": [ [ "mine_finale_archaeology", 100 ] ] } },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 10, 15 ], "y": [ 5, 7 ] } ]
     }
   },
   {
@@ -534,7 +538,8 @@
       ],
       "terrain": { "#": "t_rock", "@": [ [ "t_rock", 4 ], [ "t_rock_floor", 1 ] ] },
       "furniture": { " ": [ [ "f_null", 5 ], "f_rubble_rock" ] },
-      "items": { " ": { "item": "mine_equipment", "chance": 3 }, "o": { "item": "microlab_artifacts", "chance": 100 } }
+      "items": { " ": { "item": "mine_equipment", "chance": 3 }, "o": { "item": "microlab_artifacts", "chance": 100 } },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 10, 15 ], "y": [ 5, 7 ] } ]
     }
   }
 ]
