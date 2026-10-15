@@ -122,15 +122,6 @@ std::string durability( item const &it, unsigned int /* quantity */,
     return {};
 }
 
-std::string wheel_diameter( item const &it, unsigned int /* quantity */,
-                            segment_bitset const &/* segments */ )
-{
-    if( it.is_wheel() && !it.is_tool() && it.type->wheel->diameter > 0 ) {
-        return string_format( pgettext( "vehicle adjective", "%d\" " ), it.type->wheel->diameter );
-    }
-    return {};
-}
-
 std::string burn( item const &it, unsigned int /* quantity */,
                   segment_bitset const &/* segments */ )
 {
@@ -663,7 +654,6 @@ constexpr std::array<decl_f_print_segment *, num_segments> get_segs_array()
     arr[static_cast<size_t>( tname::segments::OVERHEAT ) ] = overheat_symbol;
     arr[static_cast<size_t>( tname::segments::FAVORITE_PRE ) ] = pre_asterisk;
     arr[static_cast<size_t>( tname::segments::DURABILITY ) ] = durability;
-    arr[static_cast<size_t>( tname::segments::WHEEL_DIAMETER ) ] = wheel_diameter;
     arr[static_cast<size_t>( tname::segments::BURN ) ] = burn;
     arr[static_cast<size_t>( tname::segments::WEAPON_MODS ) ] = weapon_mods;
     arr[static_cast<size_t>( tname::segments::CUSTOM_ITEM_PREFIX )] = custom_item_prefix;
@@ -728,7 +718,6 @@ std::string enum_to_string<tname::segments>( tname::segments seg )
         case tname::segments::OVERHEAT: return "OVERHEAT";
         case tname::segments::FAVORITE_PRE: return "FAVORITE_PRE";
         case tname::segments::DURABILITY: return "DURABILITY";
-        case tname::segments::WHEEL_DIAMETER: return "WHEEL_DIAMETER";
         case tname::segments::BURN: return "BURN";
         case tname::segments::WEAPON_MODS: return "WEAPON_MODS";
         case tname::segments::CUSTOM_ITEM_PREFIX: return "CUSTOM_ITEM_PREFIX";
@@ -830,7 +819,7 @@ tname_set const &get_tname_set()
         }
 
         //~ You can use this string to change the order of item name segments. The default order is:
-        //~ FAULTS DIRT OVERHEAT FAVORITE_PRE DURABILITY WHEEL_DIAMETER BURN WEAPON_MODS
+        //~ FAULTS DIRT OVERHEAT FAVORITE_PRE DURABILITY BURN WEAPON_MODS
         //~ CUSTOM_ITEM_PREFIX TYPE CATEGORY CUSTOM_ITEM_SUFFIX MODS CRAFT WHITEBLACKLIST CHARGES
         //~ FOOD_TRAITS FOOD_STATUS FOOD_IRRADIATED TEMPERATURE LOCATION_HINT CLOTHING_SIZE ETHEREAL
         //~ FILTHY BROKEN CBM_STATUS UPS TAGS VARS WETNESS ACTIVE SEALED FAVORITE_POST RELIC LINK

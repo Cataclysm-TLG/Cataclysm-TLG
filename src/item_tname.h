@@ -21,7 +21,6 @@ enum class segments : std::size_t {
     OVERHEAT,
     FAVORITE_PRE,
     DURABILITY,
-    WHEEL_DIAMETER,
     BURN,
     WEAPON_MODS,
     CUSTOM_ITEM_PREFIX,

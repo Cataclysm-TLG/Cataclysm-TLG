@@ -261,7 +261,7 @@
     "durability": 800,
     "description": "A heavy-duty wheel with a reinforced run-flat tire.",
     "damage_modifier": 50,
-    "wheel_offroad_rating": 0.45,
+    "wheel_offroad_rating": 0.5,
     "breaks_into": [
       { "item": "steel_chunk", "count": [ 2, 3 ] },
       { "item": "steel_fragment", "count": [ 2, 3 ] },
@@ -276,7 +276,7 @@
       "repair": { "skills": [ [ "mechanics", 5 ] ], "time": "10 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
     "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_JACKING", "NEEDS_WHEEL_MOUNT_HEAVY" ],
-    "damage_reduction": { "bash": 60, "cut": 65, "stab": 65, "bullet": 16 },
+    "damage_reduction": { "bash": 30, "cut": 40, "stab": 38, "bullet": 16 },
     "variants": [ { "symbols": "0", "symbols_broken": "x" } ]
   },
   {
