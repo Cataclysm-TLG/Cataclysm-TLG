@@ -22,8 +22,8 @@
       "-": "t_bridge_underground",
       "#": "t_grate",
       "<": "t_ladder_up",
-      "o": "t_sewage_pipe",
-      "p": "t_sewage_pump"
+      "o": "t_sewage_pipe_underground",
+      "p": "t_sewage_pump_underground"
     },
     "traps": { "?": [ "tr_cot" ] },
     "furniture": {

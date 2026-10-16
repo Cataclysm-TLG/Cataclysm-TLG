@@ -293,8 +293,8 @@
       "terrain": {
         "!": "t_bars",
         "*": "t_door_bar_locked",
-        "2": "t_sewage_pipe",
-        "3": "t_sewage_pump",
+        "2": "t_sewage_pipe_underground",
+        "3": "t_sewage_pump_underground",
         "#": "t_soil",
         "|": "t_concrete_wall",
         "^": "t_ladder_up",

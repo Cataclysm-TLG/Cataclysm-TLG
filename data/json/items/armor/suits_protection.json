@@ -683,7 +683,7 @@
     "repairs_like": "bunker_coat",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "cleansuit" },
+    "name": { "str": "CBRN suit" },
     "description": "A hooded boiler suit, complete with bulky gloves and boots, that covers everything but the face in impermeable rubber fabric.  Though not designed to stand up to combat, it should protect from chemicals, radiation, and other environmental hazards.  A tag advises the user to wear an activated gas mask while working in these conditions.",
     "weight": "2100 g",
     "volume": "2500 ml",
@@ -693,10 +693,9 @@
     "symbol": "[",
     "looks_like": "jumpsuit",
     "color": "white",
-    "warmth": 15,
+    "warmth": 18,
     "longest_side": "12 cm",
-    "material_thickness": 1,
-    "environmental_protection": 10,
+    "environmental_protection": 16,
     "flags": [ "VARSIZE", "WATERPROOF", "RAD_RESIST" ],
     "armor": [
       {
@@ -707,32 +706,47 @@
         "layers": [ "OUTER", "NORMAL" ]
       },
       {
-        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
         "covers": [ "head" ],
         "coverage": 100,
         "encumbrance": 22
       },
       {
-        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_upper" ],
         "coverage": 100,
         "encumbrance": 22
       },
       {
-        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
         "covers": [ "torso" ],
         "specifically_covers": [ "torso_lower" ],
         "coverage": 100
       },
       {
-        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
         "covers": [ "arm_r", "arm_l" ],
         "coverage": 100,
         "encumbrance": 22
       },
       {
-        "material": [ { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.4 } ],
+        "material": [
+          { "type": "soft_rubber", "covered_by_mat": 100, "thickness": 0.3 },
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.2 }
+        ],
         "covers": [ "leg_l", "leg_r" ],
         "coverage": 100,
         "encumbrance": 22
@@ -755,7 +769,10 @@
       {
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
-        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6 } ],
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.1 },
+          { "type": "rubber", "covered_by_mat": 100, "thickness": 6 }
+        ],
         "coverage": 100,
         "layers": [ "OUTER", "NORMAL" ]
       }
