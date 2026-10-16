@@ -683,7 +683,7 @@
     "repairs_like": "bunker_coat",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "name": { "str": "CBRN suit" },
+    "name": { "str": "cleansuit" },
     "description": "A hooded boiler suit, complete with bulky gloves and boots, that covers everything but the face in impermeable rubber fabric.  Though not designed to stand up to combat, it should protect from chemicals, radiation, and other environmental hazards.  A tag advises the user to wear an activated gas mask while working in these conditions.",
     "weight": "2100 g",
     "volume": "2500 ml",
