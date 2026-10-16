@@ -5618,29 +5618,53 @@ void Character::update_needs( int rate_multiplier )
                 mod_fatigue( -25 );
             } else {
                 if( has_effect( effect_disrupted_sleep ) ) {
-                    recovered *= .5;
+                    if( recovered > 0 ) {
+                        recovered = static_cast<int>( recovered * 0.5f );
+                    }
                 }
-                mod_fatigue( -recovered );
-                // Sleeping on the ground, no bionic = 1x rest_modifier
-                // Sleeping on a bed, no bionic      = 2x rest_modifier
-                // Sleeping on a comfy bed, no bionic= 3x rest_modifier
-
-                // Sleeping on the ground, bionic    = 3x rest_modifier
-                // Sleeping on a bed, bionic         = 6x rest_modifier
-                // Sleeping on a comfy bed, bionic   = 9x rest_modifier
-                float rest_modifier = ( has_flag( json_flag_STOP_SLEEP_DEPRIVATION ) ? 3 : 1 );
-                // Melatonin supplements also add a flat bonus to recovery speed
-                if( has_effect( effect_melatonin ) ) {
-                    rest_modifier += 1;
-                }
+                // REDUCE FATIGUE
+                // Fatigue is just sleepiness. It isn't sleep deprivation or sleep hygeine.
+                // A full night's sleep should always leave it at or close to 0, because even if
+                // you slept badly, you can't just immediately knock out for 8 more hours when you wake up.
+                float fatigue_multiplier = 1.f;
+                // rest_modifier is for sleep deprivation.
+                float rest_modifier = 1.f;
                 const int comfort = get_comfort_at( pos_bub() ).comfort;
                 if( comfort >= comfort_data::COMFORT_VERY_COMFORTABLE ) {
                     rest_modifier *= 3;
+                    if( one_in( 8 ) ) {
+                        fatigue_multiplier += 1.f;
+                    }
                 } else if( comfort >= comfort_data::COMFORT_COMFORTABLE ) {
                     rest_modifier *= 2.5;
+                    if( one_in( 16 ) ) {
+                        fatigue_multiplier += 1.f;
+                    }
                 } else if( comfort >= comfort_data::COMFORT_SLIGHTLY_COMFORTABLE ) {
                     rest_modifier *= 2;
+                    if( one_in( 32 ) ) {
+                        fatigue_multiplier += 1.f;
+                    }
                 }
+                if( get_fatigue() >= fatigue_levels::DEAD_TIRED ) {
+                    fatigue_multiplier += 1.f;
+                }
+                int fatigue_recovered = static_cast<int>( std::round( recovered * fatigue_multiplier ) );
+                mod_fatigue( -fatigue_recovered );
+                
+                // REDUCE SLEEP DEPRIVATION
+                // Sleep deprivation represents our sleep hygeine. This is more heavily affected by sleep
+                // conditions, and we should not expect it to be nearly zero after a full night's sleep
+                // if we did not sleep well or we are not sleeping consistently.
+
+                if( has_flag( json_flag_STOP_SLEEP_DEPRIVATION ) ) {
+                    rest_modifier *= 3.f;
+                }
+                // Melatonin supplements also add a flat bonus to recovery speed.
+                if( has_effect( effect_melatonin ) ) {
+                    rest_modifier += 1;
+                }
+
                 // If we're just tired, we'll get a decent boost to our sleep quality.
                 // The opposite is true for very tired characters.
                 if( get_fatigue() < fatigue_levels::DEAD_TIRED ) {
