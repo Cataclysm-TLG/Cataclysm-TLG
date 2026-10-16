@@ -793,7 +793,6 @@
     "entries": [
       { "group": "clothing_military", "damage": [ -1, 5 ] },
       { "group": "clothing_militia_headwear", "prob": 40, "damage": [ -1, 5 ] },
-      { "group": "clothing_protest_masks", "prob": 40, "damage": [ -1, 5 ] },
       { "item": "two_way_radio", "charges": [ 0, 300 ], "prob": 25 },
       { "group": "wallets_military", "prob": 5 },
       { "group": "clothing_glasses", "damage": [ -1, 5 ], "prob": 5 },
