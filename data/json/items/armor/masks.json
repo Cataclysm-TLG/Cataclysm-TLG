@@ -16,8 +16,8 @@
     "warmth": 15,
     "material_thickness": 0.5,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "SKINTIGHT" ],
-    "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "head", "mouth" ] } ]
+    "flags": [ "SKINTIGHT" ],
+    "armor": [ { "encumbrance": 4, "coverage": 95, "covers": [ "head", "mouth" ] } ]
   },
   {
     "id": "balaclava_skull",
@@ -36,7 +36,8 @@
     "description": "A face covering that helps protect from slashes and cuts, in addition to the cold.",
     "copy-from": "balaclava",
     "price": "76 USD",
-    "material": [ "kevlar" ]
+    "material": [ "kevlar" ],
+    "armor": [ { "encumbrance": 5, "coverage": 95, "covers": [ "head", "mouth" ] } ]
   },
   {
     "id": "bandana",

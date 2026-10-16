@@ -508,6 +508,23 @@
     ]
   },
   {
+    "id": "clothing_militia_headwear",
+    "type": "item_group",
+    "subtype": "distribution",
+    "//": "Hats worn by militia weirdos.",
+    "items": [
+      { "item": "hat_ball", "prob": 30 },
+      { "item": "hat_boonie", "prob": 20 },
+      { "item": "balaclava", "prob": 20 },
+      { "item": "hat_field", "prob": 10 },
+      { "item": "balaclava_skull", "prob": 5 },
+      { "item": "balaclava_cut_resistant", "prob": 2 },
+      { "item": "bandana_head", "prob": 10 },
+      { "item": "turban", "prob": 1 },
+      { "item": "beret", "prob": 1 }
+    ]
+  },
+  {
     "id": "clothing_outdoor_pants",
     "type": "item_group",
     "//": "Standard (non-winter) pants suitable for wearing outdoors.",
@@ -833,10 +850,11 @@
       { "item": "mask_gas_half", "prob": 30, "charges": [ 0, 100 ] },
       [ "glasses_safety", 30 ],
       [ "ear_plugs", 35 ],
-      [ "apron_cut_resistant", 5 ],
-      [ "gloves_cut_resistant", 10 ],
+      [ "apron_cut_resistant", 4 ],
+      [ "gloves_cut_resistant", 8 ],
       [ "chaps_cut_resistant", 5 ],
-      [ "armguard_cut_resistant", 5 ],
+      [ "armguard_cut_resistant", 6 ],
+      [ "balaclava_cut_resistant", 1 ],
       [ "apron_leather", 10 ],
       [ "tool_belt", 30 ],
       [ "knee_pads", 20 ],
@@ -2727,6 +2745,9 @@
       [ "mask_survivor", 8 ],
       [ "mask_hsurvivor", 6 ],
       [ "survivor_vest", 8 ],
+      [ "nomex_hood", 1 ],
+      [ "armguard_cut_resistant", 6 ],
+      [ "balaclava_cut_resistant", 2 ],
       [ "survivor_runner_pack", 6 ],
       [ "survivor_pack", 5 ],
       [ "survivor_rucksack", 4 ],
