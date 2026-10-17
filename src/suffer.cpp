@@ -15,6 +15,7 @@
 
 #include "activity_handlers.h"
 #include "addiction.h"
+#include "anatomy.h"
 #include "bionics.h"
 #include "bodypart.h"
 #include "calendar.h"
@@ -126,6 +127,7 @@ static const json_character_flag json_flag_ETHEREAL( "ETHEREAL" );
 static const json_character_flag json_flag_GILLS( "GILLS" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
+static const json_character_flag json_flag_HAND( "LIMB_HAND" );
 static const json_character_flag json_flag_LIMB_BONELESS( "LIMB_BONELESS" );
 static const json_character_flag json_flag_MEND_ALL( "MEND_ALL" );
 static const json_character_flag json_flag_MEND_LIMB( "MEND_LIMB" );
@@ -1049,7 +1051,7 @@ void suffer::from_sunburn( Character &you, bool severe )
             exposure = 1.0;
         } else if( ( you.get_wielded_item() && you.get_wielded_item()->has_flag( flag_RAIN_PROTECT ) &&
                      !you.get_wielded_item()->has_flag( flag_TRANSPARENT ) )
-                   || ( ( bp == body_part_hand_l || bp == body_part_hand_r )
+                   || ( ( bp == body_part_hand_l || bp == body_part_hand_r || bp->has_flag( json_flag_HAND ) )
                         && you.worn_with_flag( flag_POCKETS )
                         && you.can_use_pockets() )
                    || ( bp == body_part_head
