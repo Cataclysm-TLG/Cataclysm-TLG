@@ -769,9 +769,7 @@
       {
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_sole_r", "foot_sole_l" ],
-        "material": [
-          { "type": "rubber", "covered_by_mat": 100, "thickness": 6 }
-        ],
+        "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 6 } ],
         "coverage": 100,
         "layers": [ "OUTER", "NORMAL" ]
       }
