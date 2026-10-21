@@ -517,7 +517,7 @@
     "move_cost": 0,
     "coverage": 50,
     "concealment": 50,
-    "flags": [ "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
+    "flags": [ "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "INDOORS" ],
     "bash": {
       "str_min": 20,
       "str_max": 150,

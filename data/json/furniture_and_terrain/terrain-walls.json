@@ -242,7 +242,7 @@
       "str_max": 350,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_thconc_floor",
       "items": [ { "item": "rock", "count": [ 10, 22 ] } ]
     }
   },
@@ -1035,7 +1035,7 @@
       "str_max": 350,
       "sound": "crash!",
       "sound_fail": "whump!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_thconc_floor",
       "items": [ { "item": "rock", "count": [ 5, 11 ] } ]
     }
   },
@@ -1106,7 +1106,7 @@
       "str_max": 200,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_scrap_floor",
       "items": [ { "item": "steel_fragment", "count": [ 10, 22 ] } ]
     }
   },
@@ -1127,7 +1127,7 @@
       "str_max": 130,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_scrap_floor",
       "items": [ { "item": "steel_fragment", "count": [ 5, 11 ] } ]
     }
   },
@@ -1391,7 +1391,7 @@
       "str_max": 200,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_scrap_floor",
       "items": [
         { "item": "pipe", "count": [ 1, 6 ] },
         { "item": "scrap", "count": [ 1, 40 ] },
@@ -1467,7 +1467,7 @@
       "str_max": 200,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_scrap_floor",
       "items": [ { "item": "pipe", "count": [ 1, 2 ] }, { "item": "scrap", "count": [ 1, 40 ] } ]
     }
   },
@@ -1813,14 +1813,13 @@
     "color": "white",
     "extend": { "flags": [ "NATURAL_UNDERGROUND", "SUPPORTS_ROOF" ] },
     "delete": { "flags": [ "AUTO_WALL_SYMBOL" ] },
-    "roof": "t_rock_floor_no_roof",
+    "roof": "t_rock_floor",
     "bash": {
       "str_min": 150,
       "str_max": 500,
       "sound": "crash!",
       "sound_fail": "whump!",
       "ter_set": "t_rock_floor",
-      "ter_set_bashed_from_above": "t_rock_floor_no_roof",
       "items": [ { "group": "mining_rock", "count": 1 } ]
     }
   },

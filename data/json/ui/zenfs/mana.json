@@ -90,12 +90,7 @@
     "style": "text",
     "width": 1,
     "clauses": [
-      {
-        "id": "label_invisible",
-        "text": " ",
-        "color": "c_black",
-        "condition": { "math": [ "u_val('mana_max') <= 0" ] }
-      },
+      { "id": "label_invisible", "text": " ", "color": "c_black", "condition": { "math": [ "u_val('mana_max') <= 0" ] } },
       {
         "id": "label_visible",
         "text": "M",
@@ -112,12 +107,7 @@
     "style": "text",
     "width": 4,
     "clauses": [
-      {
-        "id": "label_invisible",
-        "text": "    ",
-        "color": "c_black",
-        "condition": { "math": [ "u_val('mana_max') <= 0" ] }
-      },
+      { "id": "label_invisible", "text": "    ", "color": "c_black", "condition": { "math": [ "u_val('mana_max') <= 0" ] } },
       {
         "id": "label_visible",
         "text": "Mana",

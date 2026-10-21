@@ -4,7 +4,6 @@
     "type": "terrain",
     "id": "t_bullettrailer_brownfloor",
     "name": "brown laminate floor",
-    "roof": "t_metal_flat_roof",
     "description": "A section of flooring made out of a tough, smooth material, colored in an atrocious mottled brown.",
     "symbol": ".",
     "color": "brown",

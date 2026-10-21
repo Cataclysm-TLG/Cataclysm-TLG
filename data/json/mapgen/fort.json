@@ -163,7 +163,8 @@
         "*": { "chunks": [ [ "fort_zombie", 8 ], [ "null", 1701 ] ] },
         ".": { "chunks": [ [ "fort_zombie", 2 ], [ "null", 94 ] ] },
         ",": { "chunks": [ [ "fort_zombie", 2 ], [ "null", 17 ] ] }
-      }
+      },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 40, 45 ], "y": [ 20, 22 ] } ]
     }
   },
   {
@@ -324,7 +325,8 @@
         }
       },
       "nested": { ".": { "chunks": [ [ "fort_zombie", 8 ], [ "null", 1058 ] ] } },
-      "vehicles": { "U": { "vehicle": "cannon_3in", "chance": 70 }, "Q": { "vehicle": "cannon_3in_plugged", "chance": 80 } }
+      "vehicles": { "U": { "vehicle": "cannon_3in", "chance": 70 }, "Q": { "vehicle": "cannon_3in_plugged", "chance": 80 } },
+      "place_zones": [ { "type": "ZONE_START_POINT", "faction": "your_followers", "x": [ 18, 22 ], "y": [ 49, 50 ] } ]
     }
   }
 ]

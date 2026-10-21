@@ -121,9 +121,6 @@ std::string vehicle_part::name( bool with_prefix ) const
             res += " "; // aligns names when printing degrading and non-degrading parts with prefixes
         }
     }
-    if( base.is_wheel() ) {
-        res += string_format( _( "%d\" " ), base.type->wheel->diameter );
-    }
     res += info().name();
     // animal carrier
     if( base.has_var( "contained_name" ) ) {

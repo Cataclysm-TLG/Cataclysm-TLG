@@ -88,12 +88,7 @@
     "string": "Power",
     "width": 5,
     "clauses": [
-      {
-        "id": "label_invisible",
-        "text": "     ",
-        "color": "c_black",
-        "condition": { "math": [ "u_val('power_max') <= 0" ] }
-      },
+      { "id": "label_invisible", "text": "     ", "color": "c_black", "condition": { "math": [ "u_val('power_max') <= 0" ] } },
       {
         "id": "label_visible",
         "text": "Power",

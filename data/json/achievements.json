@@ -450,7 +450,7 @@
         "event_statistic": "avatar_last_crosses_mutation_threshold",
         "is": "==",
         "target": [ "mutation_category_id", "ELFA" ],
-        "description": "crossed Elf-A mutation threshold",
+        "description": "crossed Sylvan mutation threshold",
         "visible": "when_achievement_completed"
       }
     ]

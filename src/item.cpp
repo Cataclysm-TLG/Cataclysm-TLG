@@ -1709,7 +1709,6 @@ stacking_info item::stacks_with( const item &rhs, bool check_components, bool co
     tname::segment_bitset bits;
     if( type == rhs.type ) {
         bits.set( tname::segments::TYPE );
-        bits.set( tname::segments::WHEEL_DIAMETER );
         bits.set( tname::segments::WHITEBLACKLIST, _stacks_whiteblacklist( *this, rhs ) );
     }
 

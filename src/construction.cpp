@@ -1577,6 +1577,10 @@ bool construct::check_support( const tripoint_bub_ms &p )
     // than the orthogonal tiles supporting a roof tile. Thus, the construction logic
     // uses similar criteria, which means you may have to first change grass into a dirt
     // floor before you may be able to build a roof above it.
+
+    // FIXME: Most floors probably shouldn't have SUPPORTS_ROOF and instead things should
+    // try to look for actual supports and connections to places that are supported.
+
     int num_supports = 0;
     for( const point &offset : four_adjacent_offsets ) {
         if( here.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, p + offset ) ||

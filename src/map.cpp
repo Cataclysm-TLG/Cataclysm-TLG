@@ -1161,7 +1161,6 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
                                 ( has_flag( ter_furn_flag::TFLAG_DIGGABLE, wheel_p ) &&
                                   !has_flag( ter_furn_flag::TFLAG_ROAD, wheel_p ) &&
                                   !has_flag( ter_furn_flag::TFLAG_TIRE_SAFE, wheel_p ) );
-
             if( !hazard || ( vp_wheel.info().wheel_info->offroad_rating >= 0.6f && !extra_hazard ) ) {
                 continue;
             }
@@ -1169,7 +1168,7 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
             // Turn the big side of the clamp up if you want it safer for slow drivers.
             int chance = std::clamp( 80000 / velocity, 25, 125 );
             if( extra_hazard ) {
-                chance = chance / 2;
+                chance = static_cast<int>( std::round( chance / ( std::max( 1.f, 2.f - vp_wheel.info().wheel_info->offroad_rating ) ) ) );
             }
 
             add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to proc rough terrain: 1 / %d.", chance );
@@ -4614,44 +4613,19 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
     }
 }
 
-
-ter_str_id map::get_roof( const tripoint_bub_ms &p, const bool allow_air ) const
+ter_str_id map::get_roof( const tripoint_bub_ms &p ) const
 {
     // This function should not be called from the 2D mode
     // Just use t_dirt instead
     cata_assert( zlevels );
-    if( allow_air ) {
-        return ter_t_open_air;
-    }
     if( p.z() <= -OVERMAP_DEPTH ) {
-        // Could be magma/"void" instead
         return ter_t_rock_floor;
     }
-
     const ter_t &ter_there = ter( p ).obj();
     const ter_str_id &roof = ter_there.roof;
     if( !roof ) {
-        // No roof
-        // Not acceptable if the tile is not passable
-        if( !allow_air && p.z() > -1 ) {
-            return ter_t_dirt;
-        } else {
-            return ter_t_rock_floor;
-        }
-
         return ter_t_open_air;
     }
-    if( roof == ter_str_id::NULL_ID() ) {
-        debugmsg( "map::get_new_floor: %d,%d,%d has invalid roof type %s",
-                  p.x(), p.y(), p.z(), roof.c_str() );
-        return ter_t_dirt;
-    }
-
-    if( p.z() == -1 && roof == ter_t_rock_floor ) {
-        // HACK: A hack to work around not having a "solid earth" tile
-        return ter_t_dirt;
-    }
-
     return roof;
 }
 
@@ -4925,9 +4899,9 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         // If it's a fire doing the bashing, we need to stop here so that our fire doesn't punch holes in dirt or concrete.
         bool no_burn = false;
         if( params.fire ) {
-            no_burn = !get_roof( below, false ).obj().has_flag( ter_furn_flag::TFLAG_FLAMMABLE ) &&
-                      !get_roof( below, false ).obj().has_flag( ter_furn_flag::TFLAG_FLAMMABLE_HARD ) &&
-                      !get_roof( below, false ).obj().has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH );
+            no_burn = !get_roof( below ).obj().has_flag( ter_furn_flag::TFLAG_FLAMMABLE ) &&
+                      !get_roof( below ).obj().has_flag( ter_furn_flag::TFLAG_FLAMMABLE_HARD ) &&
+                      !get_roof( below ).obj().has_flag( ter_furn_flag::TFLAG_FLAMMABLE_ASH );
         }
         if( !no_burn && p.z() > -9 && bash->bash_below &&
             ter_below.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) ) {
@@ -4945,9 +4919,8 @@ void map::bash_ter_furn( const tripoint_bub_ms &p, bash_params &params )
         spawn_items( p, item_group::items_from( bash->drop_group, calendar::turn ) );
     }
     // Regenerates roofs for tiles that should be walkable from above.
-    if( zlevels && smash_ter && ter( p )->has_flag( "EMPTY_SPACE" ) &&
-        ter( below )->has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF ) && !phased ) {
-        const ter_str_id roof = get_roof( below, params.bash_floor && ter( below ).obj().movecost != 0 );
+    if( zlevels && smash_ter && ter( p )->has_flag( "EMPTY_SPACE" ) && !phased ) {
+        const ter_str_id roof = get_roof( below );
         ter_set( p, roof );
     }
 

@@ -5245,7 +5245,7 @@
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "COOK", "level": 2 } ],
     "tools": [ [ [ "surface_heat", 8, "LIST" ] ] ],
     "//": "cooking it longer than is typical for fruit.",
-    "components": [ [ [ "sweet_fruit", 1, "LIST" ] ], [ [ "sugar_standard_half", 1, "LIST" ] ] ]
+    "components": [ [ [ "sweet_fruit", 1, "LIST" ], [ "juice_pulp", 3 ] ], [ [ "sugar_standard_half", 1, "LIST" ] ] ]
   },
   {
     "type": "recipe",
