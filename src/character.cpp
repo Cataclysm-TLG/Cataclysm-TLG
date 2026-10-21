@@ -5612,7 +5612,7 @@ void Character::update_needs( int rate_multiplier )
     } else if( asleep ) {
         if( rates.recovery > 0.0f ) {
             int recovered = roll_remainder( rates.recovery * rate_multiplier );
-            if( get_fatigue() - recovered < -20 ) {
+            if( get_fatigue() - recovered < 10 ) {
                 // Should be wake up, but that could prevent some retroactive regeneration
                 sleep.set_duration( 1_turns );
                 mod_fatigue( -25 );
@@ -5630,33 +5630,41 @@ void Character::update_needs( int rate_multiplier )
                 // rest_modifier is for sleep deprivation.
                 float rest_modifier = 1.f;
                 const int comfort = get_comfort_at( pos_bub() ).comfort;
-                if( comfort >= comfort_data::COMFORT_VERY_COMFORTABLE ) {
-                    rest_modifier *= 3;
-                    if( one_in( 8 ) ) {
-                        fatigue_multiplier += 1.f;
-                    }
-                } else if( comfort >= comfort_data::COMFORT_COMFORTABLE ) {
-                    rest_modifier *= 2.5;
-                    if( one_in( 16 ) ) {
-                        fatigue_multiplier += 1.f;
-                    }
-                } else if( comfort >= comfort_data::COMFORT_SLIGHTLY_COMFORTABLE ) {
-                    rest_modifier *= 2;
-                    if( one_in( 32 ) ) {
-                        fatigue_multiplier += 1.f;
+                if( comfort >= comfort_data::COMFORT_SLIGHTLY_COMFORTABLE ) {
+                    if( comfort >= comfort_data::COMFORT_VERY_COMFORTABLE ) {
+                        rest_modifier *= 3;
+                        if( one_in( 8 ) ) {
+                            fatigue_multiplier += 1.f;
+                        }
+                    } else if( comfort >= comfort_data::COMFORT_COMFORTABLE ) {
+                        rest_modifier *= 2.5;
+                        if( one_in( 16 ) ) {
+                            fatigue_multiplier += 1.f;
+                        }
+                    } else {
+                        rest_modifier *= 2;
+                        if( one_in( 32 ) ) {
+                            fatigue_multiplier += 1.f;
+                        }
                     }
                 }
-                if( get_fatigue() >= fatigue_levels::DEAD_TIRED ) {
-                    fatigue_multiplier += 1.f;
+                int current_fatigue = get_fatigue();
+                if( current_fatigue >= fatigue_levels::TIRED ) {
+                    if( current_fatigue >= fatigue_levels::EXHAUSTED ) {
+                        fatigue_multiplier += 8.f;
+                    } else if( get_fatigue() >= fatigue_levels::DEAD_TIRED ) {
+                        fatigue_multiplier += 4.f;
+                    } else {
+                        fatigue_multiplier += 1.f;
+                    }
                 }
                 int fatigue_recovered = static_cast<int>( std::round( recovered * fatigue_multiplier ) );
                 mod_fatigue( -fatigue_recovered );
-                
+
                 // REDUCE SLEEP DEPRIVATION
                 // Sleep deprivation represents our sleep hygeine. This is more heavily affected by sleep
                 // conditions, and we should not expect it to be nearly zero after a full night's sleep
                 // if we did not sleep well or we are not sleeping consistently.
-
                 if( has_flag( json_flag_STOP_SLEEP_DEPRIVATION ) ) {
                     rest_modifier *= 3.f;
                 }
@@ -5664,7 +5672,6 @@ void Character::update_needs( int rate_multiplier )
                 if( has_effect( effect_melatonin ) ) {
                     rest_modifier += 1;
                 }
-
                 // If we're just tired, we'll get a decent boost to our sleep quality.
                 // The opposite is true for very tired characters.
                 if( get_fatigue() < fatigue_levels::DEAD_TIRED ) {
@@ -5740,7 +5747,6 @@ void Character::update_needs( int rate_multiplier )
     } else if( get_respiration_effect_mod() < 0 ) {
         modify_respiration_effect_mod( std::min( -get_respiration_effect_mod(), rate_multiplier ) );
     }
-
 }
 
 needs_rates Character::calc_needs_rates() const
@@ -9610,13 +9616,13 @@ void Character::fall_asleep()
         // In practice, the fatigue from filling the tank from (no msg) to Time For Bed
         // will last about 8 days.
     } else {
-        /* Fall asleep for a max of 10 hours by default. This time can be longer if we have
+        /* Fall asleep for a max of 12 hours by default. This time can be longer if we have
         a mutation like Sleepy. We will automatically wake up when we're no longer tired,
         so shorter naps are already handled. */
-        int sleep_hours = 36000;
+        int sleep_hours = 43200;
         sleep_hours = static_cast<int>( std::max( enchantment_cache->modify_value(
                                             enchant_vals::mod::FATIGUE,
-                                            sleep_hours ), 36000.0 ) );
+                                            sleep_hours ), 43200.0 ) );
         fall_asleep( time_duration::from_turns( sleep_hours ) );
     }
 }

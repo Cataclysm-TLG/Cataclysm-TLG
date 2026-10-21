@@ -1112,54 +1112,59 @@ static void eff_fun_sleep( Character &u, effect &it )
         }
         it.set_duration( 1_turns * timer );
     }
-    // Check mutation category strengths to see if we're mutated enough to get a dream
-    // If we've crossed a threshold, always show dreams for that category
-    // Otherwise, check for the category that we have the most mutagen in our blood for.
-    mutation_category_id cat = u.get_threshold_category();
-    weighted_int_list<mutation_category_id> cat_list = u.get_vitamin_weighted_categories();
-    if( cat.is_null() && cat_list.get_weight() > 0 ) {
-        cat = *cat_list.pick();
-    }
-    int cat_strength = u.mutation_category_level[cat];
 
-    if( cat_strength > 14 ) {
-        // Determine the strength of effects or dreams based upon category strength
-        int strength = 0; // Category too weak for any effect or dream
-        if( u.crossed_threshold() ) {
-            strength = 4; // Post-human.
-        } else if( cat_strength >= 15 && cat_strength < 22 ) {
-            strength = 1; // Low strength
-        } else if( cat_strength >= 22 && cat_strength < 30 ) {
-            strength = 2; // Medium strength
-        } else if( cat_strength >= 30 ) {
-            strength = 3; // High strength
-        }
+    bool woke_up = false;
 
-        // Get a dream if category strength is high enough.
-        if( strength != 0 ) {
-            //Once every 6 / 3 / 2 hours, with a bit of randomness.
-            if( calendar::once_every( 6_hours / strength ) && one_in( 6 ) ) {
-                // Select a dream.
-                std::string dream = u.get_category_dream( cat, strength );
-                if( !dream.empty() ) {
-                    u.add_msg_if_player( dream );
+    if( !anesthetized ) {
+        // Use 1 hour here because that divides cleanly into 2, 3, and 6 hours for the inner once_in check.
+        if( calendar::once_every( 1_hours ) ) {
+            // Check mutation category strengths to see if we're mutated enough to get a dream
+            // If we've crossed a threshold, always show dreams for that category
+            // Otherwise, check for the category that we have the most mutagen in our blood for.
+            mutation_category_id cat = u.get_threshold_category();
+            weighted_int_list<mutation_category_id> cat_list = u.get_vitamin_weighted_categories();
+            if( cat.is_null() && cat_list.get_weight() > 0 ) {
+                cat = *cat_list.pick();
+            }
+            int cat_strength = u.mutation_category_level[cat];
+
+            if( cat_strength > 14 ) {
+                // Determine the strength of effects or dreams based upon category strength
+                int strength = 0; // Category too weak for any effect or dream
+                if( u.crossed_threshold() ) {
+                    strength = 4; // Post-human.
+                } else if( cat_strength >= 15 && cat_strength < 22 ) {
+                    strength = 1; // Low strength
+                } else if( cat_strength >= 22 && cat_strength < 30 ) {
+                    strength = 2; // Medium strength
+                } else if( cat_strength >= 30 ) {
+                    strength = 3; // High strength
                 }
-                // Mycus folks upgrade in their sleep.
-                if( u.has_trait( trait_THRESH_MYCUS ) ) {
-                    if( one_in( 8 ) ) {
-                        u.mutate_category( mutation_category_MYCUS, false, true );
-                        u.mod_stored_kcal( -87 );
-                        u.mod_thirst( 10 );
-                        u.mod_fatigue( 5 );
-                        current_fatigue += 5;
+
+                // Get a dream if category strength is high enough.
+                if( strength != 0 ) {
+                    // Once every 6 / 3 / 2 hours, with a bit of randomness.
+                    if( calendar::once_every( 6_hours / strength ) && one_in( 6 ) ) {
+                        // Select a dream.
+                        std::string dream = u.get_category_dream( cat, strength );
+                        if( !dream.empty() ) {
+                            u.add_msg_if_player( dream );
+                        }
+                        // Mycus folks upgrade in their sleep.
+                        if( u.has_trait( trait_THRESH_MYCUS ) ) {
+                            if( one_in( 8 ) ) {
+                                u.mutate_category( mutation_category_MYCUS, false, true );
+                                u.mod_stored_kcal( -87 );
+                                u.mod_thirst( 10 );
+                                u.mod_fatigue( 5 );
+                                current_fatigue += 5;
+                            }
+                        }
                     }
                 }
             }
         }
-    }
 
-    bool woke_up = false;
-    if( !anesthetized ) {
         // Slightly wonky once_every() time so this isn't obviously every ten minutes.
         if( calendar::once_every( 465_seconds ) && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
             !u.is_blind() && !u.has_active_mutation( trait_CHLOROMORPH ) &&
@@ -1200,49 +1205,49 @@ static void eff_fun_sleep( Character &u, effect &it )
                 }
             }
         }
-    }
 
-    // Have we already woken up?
-    if( !woke_up && !anesthetized && calendar::once_every( 20_seconds ) &&
-        !u.has_active_bionic( bio_sleep_shutdown ) ) {
-        // Cold or heat may wake you up.
-        // Player will sleep through cold or heat if fatigued enough.
-        for( const bodypart_id &bp : u.get_all_body_parts() ) {
-            const units::temperature curr_temp = u.get_part_temp_cur( bp );
-            const units::temperature_delta fatigue_modifier = units::from_celsius_delta(
-                        current_fatigue / 1000.0 );
-            if( curr_temp < BODYTEMP_VERY_COLD - fatigue_modifier ) {
-                if( one_in( 30000 ) ) {
-                    u.add_msg_if_player( _( "You toss and turn trying to keep warm." ) );
-                }
-                if( curr_temp < BODYTEMP_FREEZING - fatigue_modifier ||
-                    one_in( units::to_celsius( curr_temp ) * 3000 + 16500 ) ) {
-                    u.add_msg_if_player( m_bad, _( "It's too cold to sleep." ) );
-                    // Set ourselves up for removal.
-                    it.set_duration( 0_turns );
-                    woke_up = true;
-                    break;
-                }
-            } else if( curr_temp > BODYTEMP_VERY_HOT + fatigue_modifier ) {
-                if( one_in( 30000 ) ) {
-                    u.add_msg_if_player( _( "You toss and turn in the heat." ) );
-                }
-                if( curr_temp > BODYTEMP_SCORCHING + fatigue_modifier ||
-                    one_in( 76500 - units::to_celsius( curr_temp ) * 500 ) ) {
-                    u.add_msg_if_player( m_bad, _( "It's too hot to sleep." ) );
-                    // Set ourselves up for removal.
-                    it.set_duration( 0_turns );
-                    woke_up = true;
-                    break;
+        // Have we already woken up?
+        if( !woke_up && calendar::once_every( 180_seconds ) &&
+            !u.has_active_bionic( bio_sleep_shutdown ) ) {
+            // Cold or heat may wake you up.
+            // Player will sleep through cold or heat if fatigued enough.
+            const units::temperature_delta fatigue_modifier =
+                units::from_celsius_delta( current_fatigue / 1000.0 );
+            for( const bodypart_id &bp : u.get_all_body_parts() ) {
+                const units::temperature curr_temp = u.get_part_temp_cur( bp );
+                if( curr_temp < BODYTEMP_VERY_COLD - fatigue_modifier ) {
+                    if( one_in( 30000 ) ) {
+                        u.add_msg_if_player( _( "You toss and turn trying to keep warm." ) );
+                    }
+                    if( curr_temp < BODYTEMP_FREEZING - fatigue_modifier ||
+                        one_in( units::to_celsius( curr_temp ) * 3000 + 16500 ) ) {
+                        u.add_msg_if_player( m_bad, _( "It's too cold to sleep." ) );
+                        // Set ourselves up for removal.
+                        it.set_duration( 0_turns );
+                        woke_up = true;
+                        break;
+                    }
+                } else if( curr_temp > BODYTEMP_VERY_HOT + fatigue_modifier ) {
+                    if( one_in( 30000 ) ) {
+                        u.add_msg_if_player( _( "You toss and turn in the heat." ) );
+                    }
+                    if( curr_temp > BODYTEMP_SCORCHING + fatigue_modifier ||
+                        one_in( 76500 - units::to_celsius( curr_temp ) * 500 ) ) {
+                        u.add_msg_if_player( m_bad, _( "It's too hot to sleep." ) );
+                        // Set ourselves up for removal.
+                        it.set_duration( 0_turns );
+                        woke_up = true;
+                        break;
+                    }
                 }
             }
-        }
-        if( !woke_up ) {
-            if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
-                u.get_effect_int( effect_hypovolemia ) < 3 ) {
-                u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
-                it.set_duration( 0_turns );
-                woke_up = true;
+            if( !woke_up ) {
+                if( u.get_thirst() > 240 && current_fatigue < fatigue_levels::MASSIVE_FATIGUE &&
+                    u.get_effect_int( effect_hypovolemia ) < 3 ) {
+                    u.add_msg_if_player( m_bad, _( "You can't sleep, you are in desperate need of water!" ) );
+                    it.set_duration( 0_turns );
+                    woke_up = true;
+                }
             }
         }
     }
