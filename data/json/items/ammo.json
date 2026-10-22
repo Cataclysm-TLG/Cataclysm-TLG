@@ -1091,6 +1091,8 @@
     "name": { "str_sp": "albuterol" },
     "symbol": "=",
     "color": "blue",
+    "price": "50 cent",
+    "price_postapoc": "5 cent",
     "description": "A bronchodilator that relaxes muscles in the airways and increases air flow to the lungs.",
     "material": [ "plastic" ],
     "volume": "1 ml",
