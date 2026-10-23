@@ -1667,12 +1667,12 @@
         "//": "min. length really just a hack to avoid adding a flag.",
         "moves": 800,
         "description": "Pockets for deltoid ballistic plates.",
-        "item_restriction": [ "iotv_shoulder_plate" ]
+        "item_restriction": [ "deltoid_plates" ]
       }
     ],
     "warmth": 15,
     "material_thickness": 0.4,
-    "flags": [ "VARSIZE", "POCKETS", "OUTER" ]
+    "flags": [ "VARSIZE", "POCKETS" ]
   },
   {
     "id": "jacket_chef",
