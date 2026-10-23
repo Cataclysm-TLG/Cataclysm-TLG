@@ -4147,11 +4147,9 @@ bool Character::meets_requirements( const item &it, const item &context ) const
 void Character::normalize()
 {
     Creature::normalize();
-
     activity_history.weary_clear();
     martial_arts_data->reset_style();
     weapon = item( itype_id::NULL_ID(), calendar::turn_zero );
-
     set_body();
     recalc_hp();
     set_all_parts_temp_conv( BODYTEMP_NORM );
@@ -4166,7 +4164,6 @@ void Character::die( map *, Creature *nkiller )
     set_all_parts_hp_cur( 0 );
     set_killer( nkiller );
     set_time_died( calendar::turn );
-
     if( has_effect( effect_heavysnare ) ) {
         inv->add_item( item( itype_rope_6, calendar::turn_zero ) );
         inv->add_item( item( itype_snare_trigger, calendar::turn_zero ) );
@@ -10993,9 +10990,9 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
     return effects;
 }
 
-void Character::place_corpse( map *here )
+void Character::place_corpse( map *here, const faction_id faction )
 {
-    //If the character/NPC is on a distant mission, don't drop their their gear when they die since they still have a local pos
+    // If the character/NPC is on a distant mission, don't drop their their gear when they die since they still have a local pos
     if( !death_drops ) {
         return;
     }
@@ -11028,20 +11025,27 @@ void Character::place_corpse( map *here )
             if( !corpse_in_cargo && veh.add_item( *here, *vpart, body ) ) {
                 corpse_in_cargo = true;
             }
-            if( wielded_item && !wielded_in_cargo && veh.add_item( *here, *vpart, weapon ) ) {
-                wielded_in_cargo = true;
+            if( wielded_item && !wielded_in_cargo ) {
+                if( auto added = veh.add_item( *here, *vpart, weapon ) ) {
+                    ( **added ).set_owner( faction );
+                    wielded_in_cargo = true;
+                }
             }
         }
     }
     if( wielded_item && !wielded_in_cargo ) {
-        here->add_item_or_charges( pos, weapon );
+        item &dropped_weapon = here->add_item_or_charges( pos, weapon );
+        if( !dropped_weapon.is_null() ) {
+            dropped_weapon.set_owner( faction );
+            wielded_in_cargo = true;
+        }
     }
     if( !corpse_in_cargo ) {
         here->add_item_or_charges( pos, body );
     }
 }
 
-void Character::place_corpse( const tripoint_abs_omt &om_target )
+void Character::place_corpse( const tripoint_abs_omt &om_target, const faction_id faction )
 {
     tinymap bay;
     bay.load( om_target, false );
@@ -11080,14 +11084,20 @@ void Character::place_corpse( const tripoint_abs_omt &om_target )
             if( !corpse_in_cargo && veh.add_item( bay_map, *vpart, body ) ) {
                 corpse_in_cargo = true;
             }
-            if( wielded_item && !wielded_in_cargo &&
-                veh.add_item( bay_map, *vpart, weapon ) ) {
-                wielded_in_cargo = true;
+            if( wielded_item && !wielded_in_cargo ) {
+                if( auto added = veh.add_item( bay_map, *vpart, weapon ) ) {
+                    ( **added ).set_owner( faction );
+                    wielded_in_cargo = true;
+                }
             }
         }
     }
     if( wielded_item && !wielded_in_cargo ) {
-        bay.add_item_or_charges( pos, weapon );
+        item &dropped_weapon = bay.add_item_or_charges( pos, weapon );
+        if( !dropped_weapon.is_null() ) {
+            dropped_weapon.set_owner( faction );
+            wielded_in_cargo = true;
+        }
     }
     if( !corpse_in_cargo ) {
         bay.add_item_or_charges( pos, body );
