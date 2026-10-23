@@ -777,6 +777,7 @@ std::string enum_to_string<oter_flags>( oter_flags data )
         case oter_flags::source_tailoring: return "SOURCE_TAILORING";
         case oter_flags::source_vehicles: return "SOURCE_VEHICLES";
         case oter_flags::source_weapon: return "SOURCE_WEAPON";
+        case oter_flags::defined_rotate: return "DEFINED_ROTATE";
         // *INDENT-ON*
         case oter_flags::num_oter_flags:
             break;
@@ -968,7 +969,10 @@ void oter_type_t::load( const JsonObject &jo, const std::string_view )
         if( has_flag( oter_flags::no_rotate ) ) {
             jo.throw_error( R"(Mutually exclusive flags: "NO_ROTATE" and "LINEAR".)" );
         }
-
+        // TODO: do these need to actually be mutually exclusive?
+        if( has_flag( oter_flags::defined_rotate ) ) {
+            jo.throw_error( R"(Mutually exclusive flags: "DEFINED_ROTATE" and "LINEAR".)" );
+        }
         for( const auto &elem : om_lines::mapgen_suffixes ) {
             load_overmap_terrain_mapgens( jo, id.str(), elem );
         }
@@ -1661,9 +1665,57 @@ struct fixed_overmap_special_data : overmap_special_data {
 
         for( const overmap_special_terrain &elem : terrains ) {
             const tripoint_om_omt location = origin + om_direction::rotate( elem.p, dir );
-            if( !( elem.terrain == oter_str_id::NULL_ID() ) ) {
-                result.omts_used.push_back( location );
-                const oter_id tid = elem.terrain->get_rotated( dir );
+if( !( elem.terrain == oter_str_id::NULL_ID() ) ) {
+    result.omts_used.push_back( location );
+    oter_id tid;
+
+    if( dir == om_direction::type::invalid ) {
+        debugmsg( "Invalid rotation was asked for overmap terrain \"%s\".",
+                  elem.terrain->get_type_id().str() );
+        tid = ot_null;
+    } else if( dir == om_direction::type::none ) {
+        tid = elem.terrain->get_rotated( dir );
+    } else if( elem.terrain->has_flag( oter_flags::defined_rotate ) ) {
+        std::string direction;
+        bool valid_direction = true;
+
+        switch( dir ) {
+            case om_direction::type::north:
+                direction = "";
+                break;
+            case om_direction::type::east:
+                direction = "_east";
+                break;
+            case om_direction::type::south:
+                direction = "_south";
+                break;
+            case om_direction::type::west:
+                direction = "_west";
+                break;
+            default:
+                debugmsg( "Unhandled rotation direction for overmap terrain \"%s\".",
+                          elem.terrain->get_type_id().str() );
+                tid = elem.terrain->get_rotated( dir );
+                valid_direction = false;
+                break;
+        }
+
+        if( valid_direction ) {
+            const std::string variant_id =
+                elem.terrain->get_type_id().str() + direction;
+            const oter_str_id variant( variant_id );
+
+            if( variant.is_valid() ) {
+                tid = variant.id();
+            } else {
+                debugmsg( "Missing directional terrain variant: %s", variant_id );
+                tid = elem.terrain->get_rotated( dir );
+            }
+        }
+    } else {
+        tid = elem.terrain->get_rotated( dir );
+    }
+
                 om.ter_set( location, tid );
                 if( elem.camp_owner.has_value() ) {
                     // This always results in z=0, but pos() doesn't return z-level information...
