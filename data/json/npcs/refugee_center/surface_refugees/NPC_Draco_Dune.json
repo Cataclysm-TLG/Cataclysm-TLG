@@ -156,7 +156,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_REFUGEE_Draco_4",
-    "dynamic_line": "Would you believe that they don't!  Not a one in the whole place.  Well, maybe downstairs, but that's a different matter, isn't it?  Say, you're not planning on sticking around, right?  You're a free-roller, not a settler, seems like to me.  Don't know if I could beg or cajole you into maybe keepin' an ear out for a new guitar for me?  There gotta still be plenty out there not gettin' any love these days.  Whattya say?  Help an old man play some blues?  Would be good to have some real music around this place.  Be good for PEOPLE, you know what I'm sayin'?",
+    "dynamic_line": "Would you believe that they don't!  Not a one in the whole place.  Say, you're not planning on sticking around, right?  You're a free-roller, not a settler, seems like to me.  Don't know if I could beg or cajole you into maybe keepin' an ear out for a new guitar for me?  There gotta still be plenty out there not gettin' any love these days.  Whattya say?  Help an old man play some blues?  Would be good to have some real music around this place.  Be good for PEOPLE, you know what I'm sayin'?",
     "responses": [
       { "text": "Where would we be without music?", "topic": "TALK_REFUGEE_Draco_5a" },
       {

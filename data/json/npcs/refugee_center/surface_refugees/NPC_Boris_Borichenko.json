@@ -237,7 +237,7 @@
     "responses": [
       { "text": "What have you lost, if it's okay for me to ask?", "topic": "TALK_REFUGEE_Boris_Background_loss" },
       {
-        "text": "It seems like carpentry work would be something the Free Merchants need.  Why are you so bored?",
+        "text": "It seems like carpentry work would be something the center needs.  Why are you so bored?",
         "topic": "TALK_REFUGEE_Boris_Work1",
         "condition": { "not": { "u_has_var": "mission_completed_Boris_mission_1", "value": "yes" } }
       },

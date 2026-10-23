@@ -2,7 +2,7 @@
   {
     "type": "npc",
     "id": "guard",
-    "//": "A generic guard for the Free Merchants faction.",
+    "//": "A generic guard for the refugee center.",
     "name_suffix": "Guard",
     "class": "NC_FREE_MERCH_GUARD",
     "attitude": 0,

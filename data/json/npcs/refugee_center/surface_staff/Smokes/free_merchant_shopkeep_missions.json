@@ -1,7 +1,7 @@
 [
   {
     "id": "MISSION_FREE_MERCHANTS_HUB_DELIVERY_1",
-    "//": "Breadcrumb quest from Free Merchants -> Hub 01.  Bring a hard drive to Hub 01 from the refugee center and then return.",
+    "//": "Breadcrumb quest from refugee center -> Hub 01.  Bring a hard drive to Hub 01 from the refugee center and then return.",
     "type": "mission_definition",
     "name": { "str": "Unknown Recipient" },
     "description": "Deliver the FEMA hard drive to the strange group that Smokes mentioned.  Return to the evacuation center when the data's been delivered.",
@@ -52,7 +52,7 @@
     "id": "MISSION_FREE_MERCHANTS_EVAC_1",
     "type": "mission_definition",
     "name": { "str": "Clear Back Bay" },
-    "description": "Clear out the barricaded back area in the refugee center and lay the former leader of the Free Merchants to rest, in exchange for the local currency: Free Merchant certified notes.",
+    "description": "Clear out the barricaded back area in the refugee center and lay the former leader of the refugee center to rest in exchange for the local currency: A wad of scrip that the people at the center call Merch.",
     "goal": "MGOAL_KILL_MONSTER",
     "difficulty": 2,
     "value": 50000,
@@ -229,7 +229,7 @@
     "id": "MISSION_FREE_MERCHANTS_EVAC_4",
     "type": "mission_definition",
     "name": { "str": "Solar Power" },
-    "description": "Deliver 10 solar panel arrays to help the Free Merchants set up a renewable power grid in exchange for a handsome reward.",
+    "description": "Deliver 10 solar panel arrays to help the refugee center set up a renewable power grid in exchange for a reward.",
     "value": 0,
     "goal": "MGOAL_CONDITION",
     "goal_condition": {
@@ -258,7 +258,7 @@
     "id": "MISSION_FREE_MERCHANTS_EVAC_5",
     "type": "mission_definition",
     "name": { "str": "In a Pickle" },
-    "description": "Deliver 100 0.5 L glass jars to the Free Merchants to kickstart their food storage plans.",
+    "description": "Deliver 100 0.5 L glass jars to the refugee center to kickstart their food storage plans.",
     "goal": "MGOAL_FIND_ITEM",
     "difficulty": 3,
     "value": 400000,
