@@ -288,7 +288,7 @@
     "id": "ACT_BLEED",
     "type": "activity_type",
     "activity_level": "MODERATE_EXERCISE",
-    "verb": "bleeding",
+    "verb": { "str": "bleeding", "ctxt": "butchery activity" },
     "based_on": "speed"
   },
   {
