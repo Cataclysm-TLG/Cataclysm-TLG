@@ -125,7 +125,7 @@
     "id": "BGSS_SCAVENGER_MERC_1_STORY3",
     "type": "talk_topic",
     "dynamic_line": {
-      "gendered_line": "Mostly I just wanted to get some scotch out of you.  There really ain't much of a story.  I was in the marines, years ago.  After that, did security contract work.  I was out guarding some dump of a warehouse when the apocalypse rolled through town.  I was out on the edge of town, armed, and know when to not pick a fight, so I didn't get killed.  Wound up recruited by the Free Merchants early on, and then the Old Guard for a bit, but I was getting itchy feet when you came by with an offer.  Here I am.",
+      "gendered_line": "Mostly I just wanted to get some scotch out of you.  There really ain't much of a story.  I was in the marines, years ago.  After that, did security contract work.  I was out guarding some dump of a warehouse when the apocalypse rolled through town.  I was out on the edge of town, armed, and know when to not pick a fight, so I didn't get killed.  Wound up recruited by the refugee center early on, and then the Old Guard for a bit, but I was getting itchy feet when you came by with an offer.  Here I am.",
       "relevant_genders": [ "npc" ]
     },
     "responses": [
@@ -134,7 +134,7 @@
         "condition": { "and": [ { "u_has_intelligence": 7 }, { "u_has_perception": 8 } ] },
         "topic": "BGSS_SCAVENGER_MERC_1_STORY4"
       },
-      { "text": "What was working for the Free Merchants like?", "topic": "BGSS_SCAVENGER_MERC_1_FREE_MERCHANTS" },
+      { "text": "What was working for the refugee center like?", "topic": "BGSS_SCAVENGER_MERC_1_FREE_MERCHANTS" },
       { "text": "What was working for the Old Guard like?", "topic": "BGSS_SCAVENGER_MERC_1_OLD_GUARD" },
       { "text": "Thanks for that.", "topic": "TALK_FRIEND_CONVERSATION" },
       { "text": "Thanks for that.  Let's get going.", "topic": "TALK_DONE" }
@@ -182,7 +182,7 @@
         "condition": { "and": [ { "u_has_intelligence": 7 }, { "u_has_perception": 8 } ] },
         "topic": "BGSS_SCAVENGER_MERC_1_STORY4"
       },
-      { "text": "What was working for the Free Merchants like?", "topic": "BGSS_SCAVENGER_MERC_1_FREE_MERCHANTS" },
+      { "text": "What was working for the refugee center like?", "topic": "BGSS_SCAVENGER_MERC_1_FREE_MERCHANTS" },
       { "text": "Thanks for that.", "topic": "TALK_FRIEND_CONVERSATION" },
       { "text": "Thanks for that.  Let's get going.", "topic": "TALK_DONE" }
     ]

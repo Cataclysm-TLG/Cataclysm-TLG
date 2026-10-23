@@ -214,12 +214,12 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_GUARD_A_Job",
-    "dynamic_line": "I'm a caravan guard, working for the Free Merchants.  I'm an independent contractor though.  Seems like a good way to get safety in numbers and try to find a safe place to settle down.",
+    "dynamic_line": "I'm a caravan guard, working for the refugee center.  Seems like a good way to get safety in numbers and try to find a safe place to settle down.",
     "responses": [
       { "text": "So you're working for these guys, but aren't one of them?", "topic": "TALK_CARAVAN_GUARD_A_Merc" },
       { "text": "You looking for work?  I might be hiring.", "topic": "TALK_CARAVAN_GUARD_A_Hire" },
       {
-        "text": "The Free Merchants?  Do they have some kind of trade outpost or anything like that?",
+        "text": "The refugee center?  Where's that?",
         "topic": "TALK_CARAVAN_GUARD_A_Directions",
         "condition": {
           "and": [
