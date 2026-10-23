@@ -2945,7 +2945,7 @@ bool game::is_game_over()
         if( u.in_vehicle ) {
             here.unboard_vehicle( u.pos_bub() );
         }
-        u.place_corpse( &here );
+        u.place_corpse( &here, get_player_character().get_faction()->id );
         return true;
     }
     if( uquit == QUIT_SUICIDE ) {

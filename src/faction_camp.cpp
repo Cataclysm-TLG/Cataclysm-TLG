@@ -2788,7 +2788,7 @@ void basecamp::combat_mission_return( const mission_id &miss_id )
                     popup( _( "(Gone forever, just like that…)" ) );
                     you.add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
                 }
-                comp->place_corpse( pt );
+                comp->place_corpse( pt, get_player_character().get_faction()->id );
                 overmap_buffer.add_note( pt, "DEAD NPC" );
                 overmap_buffer.remove_npc( comp->getID() );
                 return;

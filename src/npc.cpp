@@ -3212,7 +3212,9 @@ void npc::die( map *here, Creature *nkiller )
         murder = true;
     }
     // if this NPC was the only member of a micro-faction, clean it up.
+
     if( my_fac ) {
+        fac_id = my_fac->id;
         if( !is_fake() && !is_hallucination() ) {
             if( my_fac->members.size() == 1 ) {
                 for( const item *elem : inv_dump() ) {
@@ -3277,7 +3279,7 @@ void npc::die( map *here, Creature *nkiller )
     }
 
     if( spawn_corpse ) {
-        place_corpse( here );
+        place_corpse( here, fac_id );
     }
 }
 

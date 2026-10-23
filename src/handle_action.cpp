@@ -2850,7 +2850,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             if( query_yn( _( "Abandon this character?" ) ) ) {
                 if( query_yn( _( "This will kill your character.  Continue?" ) ) ) {
                     player_character.set_moves( 0 );
-                    player_character.place_corpse( &here );
+                    player_character.place_corpse( &here, get_player_character().get_faction()->id );
                     uquit = QUIT_SUICIDE;
                 }
             }

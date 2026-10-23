@@ -3405,9 +3405,9 @@ class Character : public Creature, public visitable
         float speed_rating() const override;
 
         // Put corpse+inventory on map at the place where this is.
-        void place_corpse( map *here );
+        void place_corpse( map *here, const faction_id faction );
         // Put corpse+inventory on defined om tile
-        void place_corpse( const tripoint_abs_omt &om_target );
+        void place_corpse( const tripoint_abs_omt &om_target, const faction_id faction );
 
         /** Modifies the movement cost and returns a list of effects */
         std::vector<run_cost_effect> run_cost_effects( float &movecost ) const;
