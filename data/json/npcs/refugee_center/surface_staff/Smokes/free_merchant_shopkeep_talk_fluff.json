@@ -94,7 +94,7 @@
   {
     "id": "TALK_FREE_MERCHANTS_MERCHANT_AboutMerch",
     "type": "talk_topic",
-    "dynamic_line": "Oh, merch.  They're just paper notes we've started using for local cash.  We started out paying each other with dollar bills, but there's so much paper money out there that it's just useless now.  For our internal use, we started certifying bills that represent food and labor in the center here.  We started trading them internally, and then they started circling around, and now other people have started adopting them, too."
+    "dynamic_line": "Oh, merch.  They started as scrip for the workers, but we realized we can use them as cash too, since theoretically each one we issue represents some amount of actual work that got done, or actual supplies that were traded.  Keeping ledgers is still a headache, but it's a lot more convenient for you than trying to pay for everything in cans of chili."
   },
   {
     "id": [
@@ -123,45 +123,6 @@
     "id": "TALK_FREE_MERCHANTS_MERCHANT_AskJoin2",
     "type": "talk_topic",
     "dynamic_line": "No way in hell.  I'm not going to risk the safety of dozens of people just for some ass.  If you're that desperate, go talk to Alonso."
-  },
-  {
-    "id": "TALK_FREE_MERCHANTS_MERCHANT_Basement",
-    "type": "talk_topic",
-    "dynamic_line": "The center has a pretty large lower floor, behind metal doors that were made to stand up to basically anything - bombs, radiation, you name it.  Place is basically a vault.  Most of our population is living in there; only people who we think are combat-capable stay up here.  Bear in mind, we started off with a few buses of office workers and soccer moms.  If worst comes to worst, they'll stand a chance if things go bad up here.",
-    "responses": [
-      { "text": "Good to know.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Talk" },
-      { "text": "How do I get down there?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess" }
-    ]
-  },
-  {
-    "id": [
-      "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess",
-      "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess2",
-      "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess3"
-    ],
-    "type": "talk_topic",
-    "dynamic_line": "I can't share that.  We're taking security extremely seriously right now.  The guards downstairs are well-armed, and they've got orders to immediately apprehend anyone they don't recognize.  We want to keep those people as safe we can until either we have more space up here or we've got some room inside the fence for them to live.",
-    "responses": [
-      { "text": "I suppose that makes sense.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Talk" },
-      {
-        "text": "Why spend so much effort keeping it locked down?  I thought you mentioned they weren't able to help.",
-        "topic": "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess2"
-      },
-      {
-        "text": "If I could go down there, I could help bring them supplies.  Food, medicine…",
-        "topic": "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess3"
-      }
-    ]
-  },
-  {
-    "id": "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess2",
-    "type": "talk_topic",
-    "dynamic_line": "Just because they're not boots on the ground doesn't mean they aren't helping.  In fact, I'd say that a lot of them are our most important people.  They keep the power running, for one thing.  And even if they weren't helping, look at it this way: all of us are scared, and almost all of us have lost someone from all this.  We aren't going to throw our own to the wolves."
-  },
-  {
-    "id": "TALK_FREE_MERCHANTS_MERCHANT_Basement_NoAccess3",
-    "type": "talk_topic",
-    "dynamic_line": "I appreciate the offer, I really do, but I'm sorry.  The basement is off-limits to outsiders, and we're not in the market for new recruits right now.  Maybe once we're in a better spot there might be some room to think about it, but right now I can't justify just giving you free reign down there."
   },
   {
     "id": "TALK_FREE_MERCHANTS_MERCHANT_OutsideWorld1",

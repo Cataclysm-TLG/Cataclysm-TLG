@@ -2,7 +2,7 @@
   {
     "type": "npc",
     "id": "FM_caravan_merchant_random",
-    "//": "Random NPC, non persistent, can direct you to the free merchants and sell you things.",
+    "//": "Random NPC, non persistent, can direct you to the refugee center and sell you things.",
     "name_suffix": "Caravan Merchant",
     "class": "NC_CARAVAN_MERCHANT",
     "attitude": 0,
@@ -13,7 +13,7 @@
   {
     "type": "npc",
     "id": "FM_caravan_guard_A",
-    "//": "Random NPC, non persistent, tells you about being a guard and directs you to free merchants.",
+    "//": "Random NPC, non persistent, tells you about being a guard and directs you to the refugee center.",
     "name_suffix": "Caravan Guard",
     "class": "NC_CARAVAN_GUARD",
     "attitude": 0,
@@ -117,39 +117,9 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_MERCHANT_Story",
-    "dynamic_line": "We're with a larger group of survivors, working out of one of the old FEMA bunkers.  Folks have taken to calling us Free Merchants, although that sounds kinda on the nose to me.  We know about a few survivor groups and we make regular trips around, sharing supplies back and forth and bringing them home.  We're on the way back now.",
+    "dynamic_line": "We're with a larger group of survivors.  We've been out scavenging for supplies and we're on the way back now.",
     "responses": [
       { "text": "That's interesting.  Well, let's trade.", "topic": "TALK_CARAVAN_MERCHANT_Trade", "effect": "start_trade" },
-      {
-        "text": "Can you give me directions to any of these other survivor groups?",
-        "topic": "TALK_CARAVAN_MERCHANT_Others"
-      },
-      {
-        "text": "Where is 'home'?",
-        "topic": "TALK_CARAVAN_MERCHANT_Home",
-        "condition": {
-          "and": [
-            { "not": { "u_has_mission": "MISSION_REACH_REFUGEE_CENTER" } },
-            { "not": { "u_has_var": "found_refugee_center", "value": "yes" } }
-          ]
-        }
-      },
-      { "text": "Thanks for chatting.  I'd better go.", "topic": "TALK_DONE" }
-    ]
-  },
-  {
-    "type": "talk_topic",
-    "id": "TALK_CARAVAN_MERCHANT_Others",
-    "dynamic_line": {
-      "gendered_line": "No offense, but my clients definitely would not like me giving strangers directions to their hideouts.  You'll have to find them on their own terms.",
-      "relevant_genders": [ "u" ]
-    },
-    "responses": [
-      {
-        "text": "I can understand that.  Well, let's trade.",
-        "topic": "TALK_CARAVAN_MERCHANT_Trade",
-        "effect": "start_trade"
-      },
       {
         "text": "Where is 'home'?",
         "topic": "TALK_CARAVAN_MERCHANT_Home",
@@ -166,14 +136,10 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_MERCHANT_Home",
-    "dynamic_line": "Here, I'll mark it on your map.  Feel free to come by and trade, or if you're the type, we might have use for your services as a merc.",
+    "dynamic_line": "Here, I'll mark it on your map.  Feel free to come by and trade, or if you're the type, we might have use for your services.",
     "speaker_effect": { "effect": { "assign_mission": "MISSION_REACH_REFUGEE_CENTER" } },
     "responses": [
-      { "text": "Hey, thanks.  Well, let's trade.", "topic": "TALK_CARAVAN_MERCHANT_Trade", "effect": "start_trade" },
-      {
-        "text": "Can you give me directions to any of these other survivor groups?",
-        "topic": "TALK_CARAVAN_MERCHANT_Others"
-      },
+      { "text": "Thank you.  Let's trade.", "topic": "TALK_CARAVAN_MERCHANT_Trade", "effect": "start_trade" },
       { "text": "Thanks for that.  I'd better go.", "topic": "TALK_DONE" }
     ]
   },
@@ -214,12 +180,12 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_GUARD_A_Job",
-    "dynamic_line": "I'm a caravan guard, working for the Free Merchants.  I'm an independent contractor though.  Seems like a good way to get safety in numbers and try to find a safe place to settle down.",
+    "dynamic_line": "We're out looking for food and supplies for a group of survivors.  I'm just hired help.",
     "responses": [
       { "text": "So you're working for these guys, but aren't one of them?", "topic": "TALK_CARAVAN_GUARD_A_Merc" },
       { "text": "You looking for work?  I might be hiring.", "topic": "TALK_CARAVAN_GUARD_A_Hire" },
       {
-        "text": "The Free Merchants?  Do they have some kind of trade outpost or anything like that?",
+        "text": "A group?  Where at?",
         "topic": "TALK_CARAVAN_GUARD_A_Directions",
         "condition": {
           "and": [
@@ -234,7 +200,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_GUARD_A_Merc",
-    "dynamic_line": "Yeah, these guys snagged some kind of FEMA evacuation bunker during the early part of <the_cataclysm> and hoard the space.  They don't let anyone else join, but they need supplies, so they send out traders, and those traders need protection, so they send out guys like me.",
+    "dynamic_line": "Yeah, these guys snagged some kind of FEMA evacuation bunker during the early part of <the_cataclysm>.  They're full up but they need supplies, so they send out foraging parties.  I come along for protection in exchange for a cut of the loot.  With any luck nobody dies and we all get to eat.",
     "responses": [
       { "text": "You looking for work?  I might be hiring.", "topic": "TALK_CARAVAN_GUARD_A_Hire" },
       {
@@ -253,7 +219,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_GUARD_A_Hire",
-    "dynamic_line": "I'm good for the moment, but you can usually find a merc or two waiting between jobs, back at the Free Merchant base.",
+    "dynamic_line": "I'm good for the moment, but there are a couple other guys like me who hang around the center looking for work.  Check the side offices if you go by, they don't like us hanging around in the living area.",
     "responses": [
       {
         "text": "How do I get there?",
@@ -281,7 +247,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_CARAVAN_GUARD_B",
-    "dynamic_line": "*tips their hat down from their eyes and looks at you blearily.  \"Huh?  Hey, I'm tryin'a sleep here.  I was on night watch.",
+    "dynamic_line": "Huh?  Hey, I'm trying to sleep here.",
     "responses": [ { "text": "Oh, uh, sorry.", "topic": "TALK_DONE" } ]
   }
 ]

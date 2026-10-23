@@ -322,7 +322,7 @@
     "dynamic_line": "&The intercom hisses.  A voice of indeterminate sex speaks flatly.  \"I don't know who you are or how you got to this location, but we have nothing to gain from one another.  If you have a reason to be here, then please state your business.  Otherwise, please leave the area.\"",
     "responses": [
       {
-        "text": "I have a delivery from the Free Merchants.  You requested a hard drive from them.",
+        "text": "I have a delivery from the refugee center.  You requested a hard drive from them.",
         "condition": {
           "and": [
             { "not": { "u_has_var": "dialogue_intercom_completed_robofac_intercom_1", "value": "yes" } },

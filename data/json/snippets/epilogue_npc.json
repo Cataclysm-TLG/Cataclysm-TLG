@@ -117,7 +117,7 @@
       },
       {
         "id": "epilogue_npc_male_30",
-        "text": "     He wandered and scavenged the land for years after your death, eventually becoming a skilled mechanic.  Employed by the Free Merchants, he lived a comfortable, if rather uneventful life, dying of cancer, a rare luxury these days."
+        "text": "     He wandered and scavenged the land for years after your death, eventually becoming a skilled mechanic.  Employed by the refugee center, he lived a comfortable, if rather uneventful life, dying of cancer, a rare luxury these days."
       },
       {
         "id": "epilogue_npc_male_31",
@@ -145,7 +145,7 @@
       },
       {
         "id": "epilogue_npc_male_37",
-        "text": "     He wandered alone for days, before finding a Free Merchant outpost.  He spent a few years as a caravan guard, often drinking himself half blind and enjoying any woman he could find.  Booze made his grip unsteady and he was eventually fired.  He died of alcohol poisoning the same day."
+        "text": "     He wandered alone for days before finding a survivor settlement.  He spent a few years with them, often drinking himself half blind until one day he up and vanished."
       },
       {
         "id": "epilogue_npc_male_38",
@@ -153,7 +153,7 @@
       },
       {
         "id": "epilogue_npc_male_39",
-        "text": "     Became famous in the wastes after finding an old brewery and copying their recipe.  His chilled beer, a known delicacy, is traded far and wide by the Free Merchants."
+        "text": "     Became famous in the wastes after finding an old brewery and copying the."
       },
       {
         "id": "epilogue_npc_male_40",
@@ -371,12 +371,9 @@
       },
       {
         "id": "epilogue_npc_female_29",
-        "text": "     She became a runner for the Old Guard and was eventually permitted to join.  She spent the rest of her life hunting raiders.  She died in a skirmish after a few years, sacrificing her life to let her unit retreat.  Her name is venerated in songs and inscriptions."
+        "text": "     She became a runner for the Old Guard and was eventually permitted to join.  She died some years later fighting in service to a federal government that might not have even existed anymore."
       },
-      {
-        "id": "epilogue_npc_female_30",
-        "text": "     Shortly after your death she joined the Free Merchants, becoming a caravan guard and after a few months became the new liaison in the Refugee Center.  She died a few years later of a mysterious illness."
-      },
+      { "id": "epilogue_npc_female_30", "text": "     Shortly after your death she died of a mysterious illness." },
       {
         "id": "epilogue_npc_female_31",
         "text": "     She was found half-dead by the Old Guard who took her in.  She became a famous scavenger, known for finding an intact stash of experimental antibiotics."
@@ -415,7 +412,7 @@
       },
       {
         "id": "epilogue_npc_female_40",
-        "text": "     Devoured alive by a group of zombies, she kept thinking of you as she died."
+        "text": "     Got drunk one night and threw herself into a portal.  No one knows what happened after that."
       },
       {
         "id": "epilogue_npc_female_41",
@@ -423,7 +420,7 @@
       },
       {
         "id": "epilogue_npc_female_42",
-        "text": "     Kept wandering for years.  Her life was cut short when a group of raiders used her as a target practice."
+        "text": "     Wandered the wasteland for years before dying in a gunfight with an unusually well-armed bandit gamg."
       },
       {
         "id": "epilogue_npc_female_43",
@@ -447,7 +444,7 @@
       },
       {
         "id": "epilogue_npc_female_48",
-        "text": "     She joined the Free Merchants and led their first caravan to Canada.  She died a few years later of dysentery."
+        "text": "     She continued traveling for several months, but one day became hopelessly lost and wound up dying of exposure."
       },
       {
         "id": "epilogue_npc_female_49",
@@ -459,7 +456,7 @@
       },
       {
         "id": "epilogue_npc_female_51",
-        "text": "     Became obsessed with chems, and died of an overdose a few months after your death."
+        "text": "     Became obsessed with drugs and died of an overdose a few months after your death."
       },
       {
         "id": "epilogue_npc_female_52",
@@ -479,11 +476,11 @@
       },
       {
         "id": "epilogue_npc_female_56",
-        "text": "     She had a dream she told no other about.  It was a grand ideal, a fantasy out of a long-dead era.  She aspired to become a leader who would shield humanity from the tribulations of the new world.  She gathered survivors and built a settlement with the fledging numbers she had.  They held out for as long as they could, but the dream of civilization could not flourish.  She died a heartbroken woman."
+        "text": "     She lived on a houseboat for a few years, but eventually drowned when it capsized during a storm."
       },
       {
         "id": "epilogue_npc_female_57",
-        "text": "     She had a dream she told no other about.  It was a grand ideal, a fantasy out of a long-dead era.  She aspired to become a leader who would shield humanity from the tribulations of the new world.  She gathered survivors and built a settlement with the fledging numbers she had.  With her infinite grace and unyielding devotion, she managed to lift up her people into a brighter dawn.  Before long, her realm encompassed vast swaths of land.  She honored you as one of the founders of her kingdom."
+        "text": "     She woke up one night to see herself standing over her bed, looking down at her with a face that wasn't quite right."
       },
       {
         "id": "epilogue_npc_female_58",

@@ -2,7 +2,7 @@
   {
     "type": "npc",
     "id": "hostile_guard",
-    "//": "A generic hostile guard for the Free Merchants faction.  For where the player shouldn't venture.'",
+    "//": "A generic hostile guard for the refugee center faction.  For where the player shouldn't venture.'",
     "name_suffix": "Guard",
     "class": "NC_FREE_MERCH_GUARD",
     "attitude": 10,

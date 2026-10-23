@@ -83,7 +83,7 @@
       "TALK_REFUGEE_JENNY_Project2",
       "TALK_REFUGEE_JENNY_Project3",
       "TALK_REFUGEE_JENNY_Refugees1",
-      "TALK_REFUGEE_JENNY_FreeMerchants",
+      "TALK_REFUGEE_JENNY_Center",
       "TALK_REFUGEE_JENNY_Refugees2_Fatima",
       "TALK_REFUGEE_JENNY_Refugees2_Friends",
       "TALK_REFUGEE_JENNY_Refugees2_Borichenko",
@@ -367,7 +367,7 @@
     "dynamic_line": {
       "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 60" ],
       "no": "Well, these things are a standard .30 caliber.  They should be compatible with any similar rifle barrel.  It would be pretty easy to repurpose some rifle parts into large air weapons that we could use without relying on gunpowder, and without so much noise.  I'm still drawing up an actual design though, I have a bunch of features I want.  Ask me again in a couple weeks and I'll give you some more info.",
-      "yes": "\"They're pretty big.  This isn't something you'd carry around with you.  They fire .30 cal bullets using compressed air that we'd make inside the basement and then pipe up to individual storage tanks for the guns that would be good for a few hundred shots each.  The design should be capable of auto or semi-auto fire, at a range that's pretty comparable to a gunpowder-based weapon.  It takes out some of the most limited parts of ranged weapons: no gunpowder, no brass casings, just lead that we melt into my mold.  It's not soundless, but it's not as loud as a chemical weapon.  There are tons of advantages.  Only trouble is, I can't convince the Free Merchants to give me the parts I need, even though it's for our own defense.\"  She grimaces.  \"Being one of the 'surface people' is so frustrating.  I'm pretty sure they talk about these decisions downstairs, behind our backs, and we're just not part of the process and can't advocate for our own projects.\""
+      "yes": "They're pretty big.  This isn't something you'd carry around with you.  They fire .30 cal bullets using compressed air.  The design should be capable of auto or semi-auto fire, at a range that's pretty comparable to a gunpowder-based weapon.  It takes out some of the most limited parts of ranged weapons: no gunpowder, no brass casings, just lead that we melt into my mold.  There are tons of advantages.  Only trouble is, I can't convince anyone to give me the parts I need, even though it's for our own defense."
     },
     "responses": [
       {
@@ -408,10 +408,10 @@
       "no": "Living here?  Yeah, I guess I live here now.  It's… it's weird.  We're crowded into this tiny space, I don't know these people, but we're sharing bathrooms and we've all been through the same stuff.  It's not great.  At night we can hear the <zombies> outside, and we all just lie there awake, thinking the same things but too scared to talk about it.",
       "yes": {
         "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 60" ],
-        "no": "It's been over a month now, so I guess I'm starting to get used to it.  Things were pretty rough after Sean died, but it wasn't our first big loss and it won't be the last I guess.  I've made a couple friends, and in a weird way we're all like family.  We were all hoping they'd let us downstairs sooner than this though.  We're never quite sure if there's going to be enough food to go around.  I'm really hoping I can lose myself in this project.  Still haven't had a good night's sleep since <the_cataclysm>.",
+        "no": "It's been over a month now, so I guess I'm starting to get used to it.  Things were pretty rough after Sean died, but it wasn't our first big loss and it won't be the last I guess.  I've made a couple friends, and in a weird way we're all like family.  We're never quite sure if there's going to be enough food to go around.  I'm really hoping I can lose myself in this project.  Still haven't had a good night's sleep since <the_cataclysm>.",
         "yes": {
           "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 120" ],
-          "no": "There's good and there's bad.  We're all pretty sick of being cooped up in here for months, never knowing if there's going to be food to eat or not.  It's starting to look like they're never going to let us go down to the secure basement, and none of us have slept well since we were brought in.  We know we've got it pretty good… we're safe, we're alive.  It's just, like, what kind of life are we even living?",
+          "no": "There's good and there's bad.  We're all pretty sick of being cooped up in here for months, never knowing if there's going to be food to eat or not.  We know we've got it pretty good… we're safe, we're alive.  It's just, like, what kind of life are we even living?",
           "yes": "It's getting bad.  We've been stuck in here for months, nothing changing, nothing improving.  We can't go outside, we don't have enough to eat, and we didn't choose to be with each other.  I don't know how long we can stay like this before somebody snaps."
         }
       }
@@ -426,7 +426,7 @@
     "//": "Table of contents for repeated conversation options when asking Jenny about the other refugees",
     "id": [
       "TALK_REFUGEE_JENNY_Refugees1",
-      "TALK_REFUGEE_JENNY_FreeMerchants",
+      "TALK_REFUGEE_JENNY_Center",
       "TALK_REFUGEE_JENNY_Refugees2_Fatima",
       "TALK_REFUGEE_JENNY_Refugees2_Friends",
       "TALK_REFUGEE_JENNY_Refugees2_Borichenko",
@@ -434,7 +434,7 @@
       "TALK_REFUGEE_JENNY_Refugees2_Others"
     ],
     "responses": [
-      { "text": "Can you tell me about the Free Merchants?", "topic": "TALK_REFUGEE_JENNY_FreeMerchants" },
+      { "text": "Can you tell me about the refugee center?", "topic": "TALK_REFUGEE_JENNY_Center" },
       { "text": "Can you tell me about Fatima?", "topic": "TALK_REFUGEE_JENNY_Refugees2_Fatima" },
       {
         "text": "What has made you friends with Dana, Draco, and Aleesha?",
@@ -461,8 +461,8 @@
   },
   {
     "type": "talk_topic",
-    "id": "TALK_REFUGEE_JENNY_FreeMerchants",
-    "dynamic_line": "They run this place, and they don't run a charity.  We get paid for working around the place, maintaining it, what have you, and we trade cash for food.  The thing is, supply and demand and all… there's a lot more cash than food around.  It's easier to buy a laptop than a piece of beef jerky, and there's no sign of that getting better.  The balance is way off right now, a hard day of work barely gets you enough to fill your belly.  I shouldn't bitch too much though.  I don't know much better way to run it, although rumor is that the folks living downstairs have it a lot easier than we do.  I try not to think too much on that.",
+    "id": "TALK_REFUGEE_JENNY_Center",
+    "dynamic_line": "Uh, yeah.  It's run kind of like a co-op.  We're all members, but most of us aren't management.  We get paid in scrip for pitching in however we can, and we use that to buy food and supplies.  The thing is, there's not a lot of food to go around, and mostly we don't get paid much if we're not out scavenging or keeping the lights on.  I shouldn't complain though, before they figured out how to ration everything out it was chaos.  There was a lot of fighting.",
     "responses": [
       { "text": "What was it you said earlier?", "topic": "TALK_NONE" },
       { "text": "I'd better get going.", "topic": "TALK_DONE" }

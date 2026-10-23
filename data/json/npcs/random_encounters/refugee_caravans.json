@@ -2,7 +2,7 @@
   {
     "type": "npc",
     "id": "NC_caravan_refugee_A",
-    "//": "Random NPC, can direct you to the free merchants and nearest FEMA camp.",
+    "//": "Random NPC, can direct you to the refugee center and nearest FEMA camp.",
     "name_suffix": "refugee",
     "class": "NC_SCAVENGER",
     "attitude": 0,

@@ -493,7 +493,7 @@
     "dynamic_line": {
       "u_has_var": "recruit_general_Nunez_Tacoma",
       "value": "phase_1",
-      "no": "Huh.  I've made a few friends here, but not so much as I'd stick around here with no future prospects, hoping someone downstairs dies to make room for me.  It does sound nice, if they're looking for more workers.",
+      "no": "Huh.  I've made a few friends here, but not so much as I'd stick around here with no future prospects.  It does sound nice, if they're looking for more workers.",
       "yes": { "gendered_line": "Have you heard anything back from the ranch about jobs yet?", "relevant_genders": [ "u" ] }
     },
     "speaker_effect": { "effect": { "u_add_var": "recruit_general_Nunez_Tacoma", "value": "phase_1" } },

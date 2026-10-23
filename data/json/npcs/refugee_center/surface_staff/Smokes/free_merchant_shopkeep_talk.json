@@ -132,7 +132,6 @@
       },
       { "text": "What are you doing out here?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Plans" },
       { "text": "You're having trouble with food?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_TroubleWithFood" },
-      { "text": "You mentioned you were selling hardware?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_SellingHardware" },
       {
         "text": "What's with these people in the lobby?  Are they with you?",
         "condition": { "not": { "u_has_var": "general_recruit_beggars_recruited", "value": "yes" } },
@@ -152,7 +151,7 @@
       { "text": "Who's in charge here?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_WhosInCharge" },
       { "text": "Is there any way I can join your group?", "topic": "TALK_FREE_MERCHANTS_MERCHANT_AskJoin" },
       {
-        "text": "What's with these 'Free Merchant certified notes'?",
+        "text": "What's with these bank notes?",
         "topic": "TALK_FREE_MERCHANTS_MERCHANT_AboutMerch",
         "condition": { "u_has_item": "FMCNote" },
         "effect": { "u_add_var": "general_free_merchants_u_knows_about_merch", "value": "yes" }
@@ -302,47 +301,10 @@
     ]
   },
   {
-    "id": [ "TALK_FREE_MERCHANTS_MERCHANT_SellingHardware", "TALK_FREE_MERCHANTS_MERCHANT_SellingHardware1" ],
-    "type": "talk_topic",
-    "dynamic_line": "Tools, to be precise.  The basement and the storage rooms had way more than we need, and a lot of people brought their own when they were evacuating.  There's more than we could ever use, so we'll be happy to sell them at a very fair price.  Nothing in the way of radios, so you'll have to look somewhere else for that.",
-    "responses": [
-      {
-        "text": "Wait, basement?  I didn't know this place had a basement.",
-        "topic": "TALK_FREE_MERCHANTS_MERCHANT_Basement",
-        "condition": { "not": { "u_has_var": "general_free_merchants_u_knows_about_basement", "value": "yes" } },
-        "effect": { "u_add_var": "general_free_merchants_u_knows_about_basement", "value": "yes" }
-      },
-      {
-        "text": "Mind if I take a look at your stock?",
-        "trial": {
-          "type": "CONDITION",
-          "condition": { "math": [ "faction_food_supply('free_merchants', 'vitamin':'human_flesh_vitamin') < 1" ] }
-        },
-        "success": { "effect": "start_trade", "topic": "TALK_FREE_MERCHANTS_MERCHANT_DoneTrading" },
-        "failure": { "topic": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO" }
-      },
-      { "text": "Radios?  That seems awfully specific.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_SellingHardware1" },
-      { "text": "Good to know.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Talk" }
-    ]
-  },
-  {
-    "id": "TALK_FREE_MERCHANTS_MERCHANT_SellingHardware1",
-    "type": "talk_topic",
-    "dynamic_line": "We've had some issues with scavengers.  Apparently a big part of the marketing for these shelters was high-end radio equipment that they could use to keep in touch with each other, and a lot of the people we've traded with have asked about it.  Not that we don't have any radios, mind you, but they're all absolutely awful.  Even if we *could* spare any, they'd be useless to anyone that actually needed it - not much point in lugging around a ham radio that can't pick up anything more than a mile away."
-  },
-  {
     "id": "TALK_FREE_MERCHANTS_MERCHANT_TroubleWithFood",
     "type": "talk_topic",
-    "dynamic_line": "Yes we are.  The center had a good stock of those awful soy bars, but between all of us, it went fast.  We're making do with what we can skim off the edge of towns, but mostly we rely on trade from people like you.  Speaking of, we'll pay top dollar for anything preserved - canned, salted, dried, whatever.  Just talk to the broker in the back.",
-    "responses": [
-      {
-        "text": "I don't see that many of you around.",
-        "topic": "TALK_FREE_MERCHANTS_MERCHANT_Basement",
-        "condition": { "not": { "u_has_var": "general_free_merchants_u_knows_about_basement", "value": "yes" } },
-        "effect": { "u_add_var": "general_free_merchants_u_knows_about_basement", "value": "yes" }
-      },
-      { "text": "I'll keep that in mind.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Talk" }
-    ]
+    "dynamic_line": "Yes we are.  The center had some emergency ratiosn, but they went fast.  We're making do with what our people can bring in from the outside but it's not enough, so we're always looking to trade for more.",
+    "responses": [ { "text": "I'll keep that in mind.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Talk" } ]
   },
   {
     "id": "TALK_FREE_MERCHANTS_MERCHANT_CANNIBAL_GTFO",
