@@ -8971,9 +8971,12 @@ bool map::clear_path( const tripoint_bub_ms &f, const tripoint_bub_ms &t, const 
         [this, &is_clear, cost_min, cost_max, &t, &last_point]( const point_bub_ms & new_point ) {
             // Exit before checking the last square, it's still reachable even if it is an obstacle.
             if( new_point.x() == t.x() && new_point.y() == t.y() ) {
+                if( obstructed_by_vehicle_rotation(
+                        tripoint_bub_ms( last_point, t.z() ), t ) ) {
+                    is_clear = false;
+                }
                 return false;
             }
-
             const int cost = this->move_cost( new_point );
             if( ( cost < cost_min || cost > cost_max ) ||
                 obstructed_by_vehicle_rotation( tripoint_bub_ms( last_point, t.z() ), tripoint_bub_ms( new_point,
