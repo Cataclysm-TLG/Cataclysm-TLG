@@ -916,7 +916,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str_sp": "pliers" },
-    "description": "A basic pair of needle-nosed pliers.  They're more useful for crafts than mechanical work, but the inclusion of a wire cutter has made them a mainstay in many a toolbox or junk drawer.",
+    "description": "A small pair of needle-nosed pliers.  They're more useful for crafts than mechanical work, but the inclusion of a wire cutter has made them a mainstay in many a toolbox or junk drawer.",
     "weight": "225 g",
     "volume": "107 ml",
     "longest_side": "17 cm",
