@@ -276,9 +276,9 @@
   {
     "id": "chainmail_standard",
     "type": "requirement",
-    "//": "Construction of chainmail items",
-    "qualities": [ { "id": "HAMMER", "level": 3 }, { "id": "ANVIL", "level": 3 }, { "id": "WRENCH", "level": 1 } ],
-    "tools": [ [ [ "boltcutters", -1 ] ], [ [ "cordless_drill", 10 ], [ "corded_powerdrill", 10 ], [ "drill_press_tool", 5 ] ] ]
+    "//": "Construction of chainmail items. ",
+    "qualities": [ { "id": "WRENCH", "level": 1 } ],
+    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ], [ "tin_snips", -1 ], [ "pliers", -1 ] ] ]
   },
   {
     "id": "soldering_standard",
