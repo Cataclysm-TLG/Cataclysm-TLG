@@ -260,3 +260,8 @@ VERSION.txt
 dda-backport-tracked-pr
 dda-backports
 /tools/.venv
+/src/build/.cmake/api/v1
+/src/build/CMakeFiles/4.2.1
+src/build/CMakeFiles/cmake.check_cache
+src/build/CMakeFiles/CMakeConfigureLog.yaml
+src/build/CMakeCache.txt
