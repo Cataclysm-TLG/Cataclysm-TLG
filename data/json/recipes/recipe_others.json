@@ -2194,6 +2194,7 @@
   {
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
+    "//": "Butted mail.  The recipe lacks a rod to wind the wire around to give it shape, but you could use practically anything for that, so who cares.",
     "result": "chain_link",
     "id_suffix": "fabrication",
     "category": "CC_OTHER",
@@ -2203,7 +2204,7 @@
     "time": "5 m",
     "book_learn": [ [ "textbook_armwest", 1 ], [ "textbook_fabrication", 1 ], [ "recipe_melee", 1 ] ],
     "qualities": [ { "id": "WRENCH", "level": 1 } ],
-    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ] ], [ [ "cu_pipe", -1 ] ] ],
+    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ], [ "tin_snips", -1 ], [ "pliers", -1 ] ] ],
     "components": [ [ [ "wire", 1 ] ] ]
   },
   {
