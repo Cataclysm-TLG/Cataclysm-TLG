@@ -11918,10 +11918,14 @@ int item::ammo_consume( int qty, map &here, const tripoint_bub_ms &pos, Characte
     }
 
     // Dirty fix: activating a container of meds leads here, and used to use up all of the charges.
-    if( is_medication() && charges > 1 ) {
-        int charg_used = std::min( charges, qty );
-        charges -= charg_used;
-        qty -= charg_used;
+    if( is_medication() ) {
+        if( count_by_charges() && charges > 1 ) {
+            int charg_used = std::min( charges, qty );
+            charges -= charg_used;
+            qty -= charg_used;
+        } else {
+            qty -= std::min( qty, 1 );
+        }
     }
 
     // Some weird internal non-item charges (used by grenades)
