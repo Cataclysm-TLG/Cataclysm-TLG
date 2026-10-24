@@ -7610,7 +7610,8 @@ bool Character::invoke_item( item *used, const std::string &method, const tripoi
 
     actually_used->activation_consume( charges_used.value(), pt, this );
 
-    if( actually_used->is_comestible() || actually_used->has_flag( flag_SINGLE_USE ) || actually_used->is_bionic() ||
+    if( actually_used->is_comestible() || actually_used->has_flag( flag_SINGLE_USE ) ||
+        actually_used->is_bionic() ||
         actually_used->is_deployable() ) {
         i_rem( actually_used );
         return true;
