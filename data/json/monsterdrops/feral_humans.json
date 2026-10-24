@@ -9,9 +9,9 @@
           { "item": "ax", "prob": 50, "damage": [ 1, 3 ] },
           { "item": "hatchet", "prob": 25, "damage": [ 1, 3 ] },
           { "item": "fire_ax", "prob": 15, "damage": [ 2, 5 ] },
-          { "item": "iceaxe", "prob": 5, "damage": [ 1, 3 ] },
+          { "item": "iceaxe", "prob": 2, "damage": [ 1, 3 ] },
           { "item": "brush_axe", "prob": 10, "damage": [ 1, 3 ] },
-          { "item": "crash_axe", "prob": 5, "damage": [ 1, 3 ] }
+          { "item": "crash_axe", "prob": 1, "damage": [ 1, 3 ] }
         ]
       },
       { "item": "rock", "prob": 20, "count": [ 1, 2 ] },
@@ -713,8 +713,8 @@
           { "item": "ax", "prob": 50, "damage": [ 1, 3 ] },
           { "item": "hatchet", "prob": 25, "damage": [ 1, 3 ] },
           { "item": "fire_ax", "prob": 15, "damage": [ 2, 5 ] },
-          { "item": "iceaxe", "prob": 5, "damage": [ 1, 3 ] },
-          { "item": "crash_axe", "prob": 5, "damage": [ 1, 3 ] }
+          { "item": "iceaxe", "prob": 2, "damage": [ 1, 3 ] },
+          { "item": "crash_axe", "prob": 1, "damage": [ 1, 3 ] }
         ]
       }
     ]

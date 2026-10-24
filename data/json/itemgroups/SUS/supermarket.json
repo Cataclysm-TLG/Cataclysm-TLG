@@ -153,6 +153,8 @@
       [ "can_chicken", 1 ],
       [ "can_spam", 1 ],
       [ "can_clams", 1 ],
+      [ "broth_meat", 1 ],
+      [ "broth_bone", 1 ],
       [ "meat_canned", 1 ]
     ]
   },
@@ -178,7 +180,16 @@
       [ "can_chicken", 1 ],
       [ "can_spam", 1 ],
       [ "can_clams", 1 ],
-      [ "meat_canned", 1 ]
+      [ "meat_canned", 1 ],
+      [ "curry_meat", 1 ],
+      [ "curry_vegetable", 1 ],
+      [ "soup_vegetable", 1 ],
+      [ "soup_fish", 1 ],
+      [ "soup_meat", 1 ],
+      [ "soup_chicken", 1 ],
+      [ "soup_tomato", 1 ],
+      [ "soup_dumplings", 1 ],
+      [ "soup_lobsterstew", 1 ]
     ]
   },
   {
@@ -889,8 +900,6 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      [ "chili", 1 ],
-      [ "ravioli", 1 ],
       { "group": "pizza_cheese_box_small_4", "prob": 1 },
       { "group": "pizza_meat_box_small_4", "prob": 1 },
       { "group": "pizza_vegetable_box_small_4", "prob": 1 },

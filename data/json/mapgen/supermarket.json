@@ -268,8 +268,7 @@
         ],
         "L": { "item": "fast_locker" },
         "d": { "item": "SUS_office_desk" },
-        "u": { "item": "SUS_office_filing_cabinet" },
-        "j": { "item": "fireman_cabinet" }
+        "u": { "item": "SUS_office_filing_cabinet" }
       },
       "item": {
         " ": [
@@ -288,7 +287,8 @@
           { "item": "can_food", "chance": 1 },
           { "item": "can_medium", "chance": 1 },
           { "item": "bone", "chance": 1 }
-        ]
+        ],
+        "j": [ { "item": "extinguisher", "chance": 60, "charges": 100 } ]
       },
       "vehicles": {
         "Ü": { "chance": 13, "vehicle": "parking_garage" },
@@ -492,7 +492,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_vegetables", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_vegetables", "x": 0, "y": 0, "chance": 13 } ]
     }
   },
   {
@@ -501,7 +501,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_fruits", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_fruits", "x": 0, "y": 0, "chance": 13 } ]
     }
   },
   {
@@ -510,7 +510,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 13 } ]
     }
   },
   {
@@ -519,7 +519,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meals", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meals", "x": 0, "y": 0, "chance": 13 } ]
     }
   },
   {
@@ -645,7 +645,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_seafood", "x": 0, "y": 0, "chance": 30 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_seafood", "x": 0, "y": 0, "chance": 20 } ]
     }
   },
   {
@@ -654,7 +654,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_icecream", "x": 0, "y": 0, "chance": 30 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_icecream", "x": 0, "y": 0, "chance": 20 } ]
     }
   },
   {
@@ -663,7 +663,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_frozen_dessert", "x": 0, "y": 0, "chance": 30 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_frozen_dessert", "x": 0, "y": 0, "chance": 20 } ]
     }
   },
   {
@@ -942,7 +942,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_frozen_meals", "x": 0, "y": 0 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_frozen_meals", "x": 0, "y": 0, "chance": 16 } ]
     }
   },
   {
@@ -951,7 +951,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_any", "x": 0, "y": 0 } ]
+      "place_items": [ { "item": "SUS_shelf_any", "x": 0, "y": 0, "chance": 30 } ]
     }
   },
   {
