@@ -1313,7 +1313,6 @@
   },
   {
     "id": "COLLAPSIBLE_STOCK",
-    "//": "this is deprecated for the COLLAPSED_STOCK and FOLDED_STOCK, kept around for mod support",
     "type": "json_flag"
   },
   {
@@ -1330,9 +1329,7 @@
   },
   {
     "id": "COLLAPSED_STOCK",
-    "//": "for weapons that stock collapses into the body reducing volume as well.",
-    "type": "json_flag",
-    "info": "This items stock is collapsed it will be hard to shoot with."
+    "type": "json_flag"
   },
   {
     "id": "CONDUCTIVE",

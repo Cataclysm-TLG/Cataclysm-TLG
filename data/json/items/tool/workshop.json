@@ -925,7 +925,7 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "light_gray",
-    "qualities": [ [ "WRENCH", 1 ], [ "SAW_M", 1 ], [ "SAW_M_FINE", 1 ]  ],
+    "qualities": [ [ "WRENCH", 1 ], [ "SAW_M", 1 ], [ "SAW_M_FINE", 1 ] ],
     "use_action": [ "BOLTCUTTERS" ],
     "flags": [ "BELT_CLIP" ],
     "melee_damage": { "bash": 3 }
