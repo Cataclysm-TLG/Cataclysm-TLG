@@ -3743,9 +3743,14 @@ void item::armor_protection_info( std::vector<iteminfo> &info, const iteminfo_qu
         }
         info.emplace_back( "DESCRIPTION",
                            string_format( _( "<bold>Layer</bold>:%s" ), layering ) );
-        info.emplace_back( bp_cat,
-                           string_format( "%s", _( "<bold>Coverage</bold>: " ) ),
-                           iteminfo::no_flags, get_coverage( sbp ) );
+
+        info.emplace_back(
+            bp_cat,
+            string_format( "<bold>%s</bold>: ", _( "Coverage" ) ),
+            "",
+            iteminfo::no_flags,
+            get_coverage( sbp )
+        );
 
         bool printed_any = false;
 
