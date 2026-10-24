@@ -9,6 +9,7 @@
 #include <numeric>
 #include <ostream>
 
+#include "anatomy.h"
 #include "avatar_action.h"
 #include "bodygraph.h"
 #include "calendar.h"
@@ -63,6 +64,7 @@ static const efftype_id effect_null( "null" );
 static const efftype_id effect_onfire( "onfire" );
 
 static const flag_id json_flag_FILTHY( "FILTHY" );
+static const json_character_flag json_flag_HAND( "LIMB_HAND" );
 static const flag_id json_flag_HIDDEN( "HIDDEN" );
 static const flag_id json_flag_ONE_PER_LAYER( "ONE_PER_LAYER" );
 
@@ -2414,7 +2416,8 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
             // some clothing flags provide warmth without providing coverage or encumberance
             // these are included in the worn list so that players aren't confused about why body parts are warm
             // but not included in the later coverage and encumberance calculations
-            if( ( bp == body_part_hand_l || bp == body_part_hand_r ) && armor.has_flag( flag_POCKETS ) &&
+            if( ( bp == body_part_hand_l || bp == body_part_hand_r || bp->has_flag( json_flag_HAND ) ) &&
+                armor.has_flag( flag_POCKETS ) &&
                 person.can_use_pockets() ) {
                 //~ name of a clothing/armor item, indicating it has pockets providing hand warmth
                 info.worn_names.push_back( string_format( _( "%s (pockets)" ), armor.tname() ) );
@@ -2702,6 +2705,7 @@ void outfit::write_text_memorial( std::ostream &file, const std::string &indent,
 
 bool outfit::hands_conductive() const
 {
+    // FIXME: This should check attack vector and if it's vector_none, we should make a function that checks what part we currently wield things with.
     for( const item &i : worn ) {
         if( !i.conductive()
             && ( ( i.get_coverage( bodypart_id( "hand_l" ) ) >= 95 ) ||
