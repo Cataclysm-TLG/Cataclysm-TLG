@@ -799,8 +799,7 @@
         "collection": [
           { "item": "hose" },
           { "item": "sm_extinguisher" },
-          { "item": "fire_ax", "prob": 50 },
-          { "item": "crash_axe", "prob": 80 },
+          { "item": "fire_ax", "prob": 40 },
           { "item": "throw_extinguisher", "prob": 30, "count": [ 3, 5 ] }
         ],
         "prob": 30

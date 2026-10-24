@@ -159,13 +159,7 @@
     "integral_weight": "170 g",
     "integral_volume": "25 ml",
     "integral_longest_side": "5 mm",
-    "use_action": {
-      "type": "transform",
-      "msg": "You extend the stock.",
-      "menu_text": "Expand",
-      "target": "wire_stock",
-      "moves": 120
-    },
+    "use_action": { "type": "transform", "msg": "You extend the stock.", "menu_text": "Expand", "target": "wire_stock", "moves": 120 },
     "//": "10 is the modifier that stocked weapons normally get, but due to it being inline it has no imbalance malus..",
     "handling_modifier": -10,
     "flags": [ "COLLAPSED_STOCK", "IRREMOVABLE" ]

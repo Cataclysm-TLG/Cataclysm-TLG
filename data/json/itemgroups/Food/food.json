@@ -290,8 +290,8 @@
     "id": "cannedfood_commercial",
     "subtype": "distribution",
     "entries": [
-      { "prob": 1, "group": "kitchen_sealed_3L_jar", "count": [ 1, 4 ] },
-      { "prob": 1, "group": "kitchen_plastic_bag", "count": [ 1, 4 ] },
+      { "prob": 1, "group": "kitchen_sealed_3L_jar", "count": [ 1, 2 ] },
+      { "prob": 1, "group": "kitchen_plastic_bag", "count": [ 1, 2 ] },
       { "prob": 1, "group": "kitchen_sack", "count": [ 1, 2 ] }
     ]
   },
