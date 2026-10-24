@@ -167,8 +167,8 @@
         "description": "The MAC-10 is a popular machine pistol originally designed for military use.  For many years it was the most inexpensive automatic weapon in the US, and enjoyed great popularity among criminals less concerned with quality firearms."
       }
     ],
-    "weight": "2810 g",
-    "volume": "1195 ml",
+    "weight": "2640 g",
+    "volume": "960 ml",
     "longest_side": "298 mm",
     "barrel_length": "146 mm",
     "price": "1800 USD",
@@ -540,19 +540,11 @@
     "looks_like": "hk_mp5",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": ".45 WWII submachine gun" },
-    "description": "A WWII submachine gun, lacking semi-auto fire selector and chambered in .45 ACP.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "greasegun",
-        "name": { "str": "M3 SMG" },
-        "description": "An American-made submachine gun developed during WWII as an alternative to Thompson M1928A1 and used at least till early 1990s.  Simple, cheap, and somewhat crude, the M3 was still quite an effective weapon, mostly made from sheet metal to reduce costs and speed up production.  In times of active use, it was considered as a disposable weapon, which is more expedient to replace than to repair.  Unfortunately, you cannot afford such wastefulness, unlike this submachine gun, which is devoid of even a fire selector for semi-auto fire."
-      }
-    ],
-    "weight": "3700 g",
-    "volume": "2003 ml",
-    "longest_side": "740 mm",
+    "name": { "str": "M3 SMG" },
+    "description": "A submachine gun developed for the United States in World War II, affectionately called a \"grease gun\" because it resembled a piece of hardware more than a firearm.  Designed for economy and scale rather than individual performance, it nonetheless played its part in carrying the Allies to victory.",
+    "weight": "3600 g",
+    "volume": "1750 ml",
+    "longest_side": "579 mm",
     "barrel_length": "203 mm",
     "price": "23000 USD",
     "price_postapoc": "40 USD",

@@ -7214,13 +7214,6 @@ units::length item::length() const
                 }
             } else if( mod->type->gunmod->location.str() == "stock" ) {
                 stock_length = mod->type->integral_longest_side;
-                if( has_flag( flag_COLLAPSED_STOCK ) || has_flag( flag_FOLDED_STOCK ) ) {
-                    // stock is folded so need to reduce length
-
-                    // folded stock length is estimated at about 20 cm, LOP for guns should be about
-                    // 13.5 inches and a folding stock folds past the trigger and isn't perfectly efficient
-                    stock_length -= 20_cm;
-                }
             } else if( mod->type->gunmod->location.str() == "stock accessory" ) {
                 stock_accessory_length = mod->type->integral_longest_side;
             } else {
@@ -7264,11 +7257,7 @@ units::length item::barrel_length() const
 units::volume item::collapsed_volume_delta() const
 {
     units::volume delta_volume = 0_ml;
-
-    // COLLAPSIBLE_STOCK is the legacy version of this just here for mod support
-    // TODO Remove at some point
-    if( is_gun() && ( has_flag( flag_COLLAPSIBLE_STOCK ) || has_flag( flag_COLLAPSED_STOCK ) ||
-                      has_flag( flag_REMOVED_STOCK ) ) ) {
+    if( is_gun() && ( has_flag( flag_REMOVED_STOCK ) ) ) {
         // consider only the base size of the gun (without mods)
         int tmpvol = get_var( "volume",
                               ( type->volume - type->gun->barrel_volume ) / 250_ml );
