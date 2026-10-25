@@ -294,3 +294,4 @@ src/build/CMakeFiles/4.2.1/CMakeCCompiler.cmake
 src/build/CMakeCache.txt
 src/build/.cmake/api/v1/reply/error-2026-10-24T11-08-17-0536.json
 src/build/.cmake/api/v1/query/client-vscode/query.json
+/src/build/.cmake/api/v1/reply
