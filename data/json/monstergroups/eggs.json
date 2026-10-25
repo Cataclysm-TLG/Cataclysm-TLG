@@ -89,11 +89,6 @@
     "monsters": [ { "monster": "mon_giant_cockroach_nymph" } ]
   },
   {
-    "name": "GROUP_EGG_ROACH_PLAGUE",
-    "type": "monstergroup",
-    "monsters": [ { "monster": "mon_plague_nymph" } ]
-  },
-  {
     "name": "GROUP_EGG_LOCUST",
     "type": "monstergroup",
     "monsters": [ { "monster": "mon_locust_nymph" } ]

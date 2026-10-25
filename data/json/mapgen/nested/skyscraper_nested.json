@@ -433,10 +433,8 @@
       "place_monster": [
         { "group": "GROUP_GROCERY", "x": [ 4, 10 ], "y": 1, "chance": 5, "repeat": [ 1, 5 ] },
         { "group": "GROUP_GROCERY", "x": 1, "y": [ 0, 3 ], "chance": 5, "repeat": [ 1, 5 ] },
-        { "group": "GROUP_PLAGUE_ROACH", "x": [ 4, 10 ], "y": 1, "chance": 20, "repeat": [ 1, 5 ] },
-        { "group": "GROUP_PLAGUE_ROACH", "x": 1, "y": [ 0, 3 ], "chance": 20, "repeat": [ 1, 5 ] },
-        { "group": "GROUP_ROACH", "x": [ 4, 10 ], "y": 1, "chance": 20, "repeat": [ 1, 5 ] },
-        { "group": "GROUP_ROACH", "x": 1, "y": [ 0, 3 ], "chance": 20, "repeat": [ 1, 5 ] }
+        { "group": "GROUP_ROACH", "x": [ 4, 10 ], "y": 1, "chance": 30, "repeat": [ 1, 5 ] },
+        { "group": "GROUP_ROACH", "x": 1, "y": [ 0, 3 ], "chance": 30, "repeat": [ 1, 5 ] }
       ]
     }
   },

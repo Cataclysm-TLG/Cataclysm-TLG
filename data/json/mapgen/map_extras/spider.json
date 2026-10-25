@@ -41,7 +41,7 @@
       "//": "Null terrain definitions to avoid error",
       "terrain": { "x": "t_null", "o": "t_null", ",": "t_null", ".": "t_null" },
       "furniture": { "X": "f_egg_sackws" },
-      "monsters": { "X": { "monster": "GROUP_SPIDER", "chance": 1, "density": 0.5 } },
+      "monsters": { "X": { "monster": "GROUP_SPIDER", "chance": 1, "density": 0.3 } },
       "nested": {
         "X": { "chunks": [ "spider_webs" ] },
         "x": { "chunks": [ "spider_webs" ] },
