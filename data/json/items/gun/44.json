@@ -9,7 +9,7 @@
     "description": "An icon of popular culture more than a practical weapon, this massive pistol can shoot a variety of magnum handgun rounds depending on the conversion kit and magazine used.",
     "weight": "1407 g",
     "volume": "671 ml",
-    "longest_side": "29 cm",
+    "longest_side": "247 mm",
     "//": "Numbers for weight, volume, and length calculations are based upon weapon without caliber conversion. The difference will be made up for with integrated stats from the installable caliber conversion.",
     "price": "1600 USD",
     "price_postapoc": "27 USD 50 cent",

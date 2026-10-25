@@ -284,6 +284,7 @@
     "weight": "150 g",
     "volume": "200 ml",
     "longest_side": "18 cm",
+    "integral_longest_side": "18 cm",
     "integral_volume": "0 L",
     "price": "50 USD",
     "price_postapoc": "3 USD",
