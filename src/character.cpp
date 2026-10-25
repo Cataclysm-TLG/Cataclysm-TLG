@@ -330,6 +330,7 @@ static const json_character_flag json_flag_GLIDE( "GLIDE" );
 static const json_character_flag json_flag_GLIDING( "GLIDING" );
 static const json_character_flag json_flag_GRAB( "GRAB" );
 static const json_character_flag json_flag_GRAB_FILTER( "GRAB_FILTER" );
+static const json_character_flag json_flag_HAND( "LIMB_HAND" );
 static const json_character_flag json_flag_HEAL_OVERRIDE( "HEAL_OVERRIDE" );
 static const json_character_flag json_flag_HEATSINK( "HEATSINK" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
@@ -8877,8 +8878,10 @@ dealt_damage_instance Character::deal_damage( Creature *source, bodypart_id bp,
 
     int recoil_mul = 100;
 
+    // FIXME: Write a function that figures out what the character is using to wield and use that instead.
     if( bp == body_part_hand_l || bp == body_part_arm_l ||
-        bp == body_part_hand_r || bp == body_part_arm_r ) {
+        bp == body_part_hand_r || bp == body_part_arm_r ||
+        bp->has_flag( json_flag_HAND ) ) {
         recoil_mul = 200;
     } else if( bp == bodypart_str_id::NULL_ID() ) {
         add_msg_debug( debugmode::DF_CHAR_HEALTH, "dealt_damage_instance() picked a null body part." );
@@ -9752,7 +9755,8 @@ std::map<bodypart_id, int> Character::bonus_item_warmth() const
     for( const bodypart_id &bp : get_all_body_parts() ) {
         ret.emplace( bp, 0 );
 
-        if( ( bp == body_part_hand_l || bp == body_part_hand_r ) && can_use_pockets() ) {
+        if( ( bp == body_part_hand_l || bp == body_part_hand_r || bp->has_flag( json_flag_HAND ) ) &&
+            can_use_pockets() ) {
             ret[bp] += pocket_warmth;
         }
 
