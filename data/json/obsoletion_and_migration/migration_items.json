@@ -4405,5 +4405,10 @@
     "id": "rope_loop",
     "type": "MIGRATION",
     "replace": "rope_30"
+  },
+  {
+    "id": "egg_roach_plague",
+    "type": "MIGRATION",
+    "replace": "egg_roach"
   }
 ]

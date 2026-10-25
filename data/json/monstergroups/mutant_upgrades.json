@@ -42,6 +42,16 @@
     ]
   },
   {
+    "name": "GROUP_COCKROACH_UPGRADE",
+    "type": "monstergroup",
+    "monsters": [
+      { "monster": "mon_plague_vector", "weight": 35 },
+      { "monster": "mon_pregnant_giant_cockroach", "weight": 60 },
+      { "monster": "mon_giant_cockroach", "weight": 10 },
+      { "group": "GROUP_EMPTY", "weight": 5 }
+    ]
+  },
+  {
     "name": "GROUP_CENTIPEDE_GIANT",
     "type": "monstergroup",
     "default": "mon_centipede_mom",

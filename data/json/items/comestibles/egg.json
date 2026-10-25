@@ -251,18 +251,8 @@
     "copy-from": "egg_insect",
     "looks_like": "ant_egg",
     "color": "white",
-    "rot_spawn": { "group": "GROUP_EGG_ROACH", "chance": 40 }
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "id": "egg_roach_plague",
-    "name": { "str": "mutated roach egg" },
-    "description": "A fist-sized egg from a mutated giant roach.  Incredibly gross.",
-    "looks_like": "ant_egg",
-    "copy-from": "egg_roach",
     "vitamins": [ [ "mutant_toxin", 50 ], [ "egg_allergen", 1 ] ],
-    "rot_spawn": { "group": "GROUP_EGG_ROACH_PLAGUE", "chance": 70 }
+    "rot_spawn": { "group": "GROUP_EGG_ROACH", "chance": 40 }
   },
   {
     "type": "ITEM",
