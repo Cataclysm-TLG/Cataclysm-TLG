@@ -4400,5 +4400,10 @@
     "id": "harmonica_holder",
     "type": "MIGRATION",
     "replace": "harmonica"
+  },
+  {
+    "id": "rope_loop",
+    "type": "MIGRATION",
+    "replace": "rope_30"
   }
 ]

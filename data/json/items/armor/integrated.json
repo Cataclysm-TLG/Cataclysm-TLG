@@ -17,7 +17,16 @@
     "warmth": 1,
     "environmental_protection": 2,
     "//": "bark can photosynthesize, so all of Plant's integrated armors are flagged transparent",
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "SOFT", "TRANSPARENT" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "WATER_FRIENDLY",
+      "SOFT",
+      "TRANSPARENT"
+    ],
     "armor": [
       {
         "material": [
@@ -73,7 +82,17 @@
     "color": "brown",
     "warmth": 8,
     "environmental_protection": 3,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "RAINPROOF", "PADDED", "TRANSPARENT" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "NORMAL",
+      "SKINTIGHT",
+      "RAINPROOF",
+      "PADDED",
+      "TRANSPARENT"
+    ],
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 2 } ],
@@ -126,7 +145,17 @@
     "color": "brown",
     "warmth": 8,
     "environmental_protection": 4,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "RAINPROOF", "PADDED", "TRANSPARENT" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "NORMAL",
+      "SKINTIGHT",
+      "RAINPROOF",
+      "PADDED",
+      "TRANSPARENT"
+    ],
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 2 }, { "type": "wood", "covered_by_mat": 75, "thickness": 4 } ],
@@ -179,7 +208,17 @@
     "color": "brown",
     "warmth": 12,
     "environmental_protection": 4,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "RAINPROOF", "PADDED", "TRANSPARENT" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "NORMAL",
+      "SKINTIGHT",
+      "RAINPROOF",
+      "PADDED",
+      "TRANSPARENT"
+    ],
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 14 } ],
@@ -247,7 +286,7 @@
     "color": "brown",
     "warmth": 10,
     "environmental_protection": 2,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "PADDED", "TRANSPARENT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "PADDED", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "wood", "covered_by_mat": 100, "thickness": 4 }, { "type": "wood", "covered_by_mat": 75, "thickness": 6 } ],
@@ -316,7 +355,7 @@
     "color": "white",
     "warmth": 15,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "TRANSPARENT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "feathers", "covered_by_mat": 100, "thickness": 4 } ],
@@ -392,7 +431,7 @@
     "color": "white",
     "warmth": 10,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.5 } ],
@@ -440,7 +479,7 @@
     "color": "light_gray",
     "warmth": 20,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 2 } ],
@@ -498,7 +537,7 @@
     "color": "light_gray",
     "warmth": 25,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "RAINPROOF" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "RAINPROOF" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.8 } ],
@@ -562,7 +601,7 @@
     "color": "black",
     "warmth": 45,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "WATER_FRIENDLY", "SOFT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "WATER_FRIENDLY", "SOFT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 5 } ],
@@ -620,7 +659,7 @@
     "color": "black",
     "warmth": 32,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "WATER_FRIENDLY", "SOFT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "SKINTIGHT", "WATER_FRIENDLY", "SOFT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
@@ -678,7 +717,7 @@
     "color": "dark_gray",
     "warmth": 25,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
@@ -743,7 +782,7 @@
     "color": "dark_gray",
     "warmth": 18,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3.5 } ],
@@ -808,7 +847,7 @@
     "color": "brown",
     "warmth": 13,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
@@ -866,7 +905,7 @@
     "color": "brown",
     "warmth": 7,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "COLLAR" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "NORMAL", "COLLAR" ],
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3 } ],
@@ -896,12 +935,12 @@
     "environmental_protection": 1,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "PERSONAL",
       "UNBREAKABLE",
       "WATER_FRIENDLY",
       "SOFT",
-      "NO_SALVAGE",
       "TRANSPARENT"
     ],
     "armor": [
@@ -971,13 +1010,13 @@
     "environmental_protection": 1,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "SKINTIGHT",
       "WATER_FRIENDLY",
       "SOFT",
-      "TOUGH_FEET",
-      "NO_SALVAGE"
+      "TOUGH_FEET"
     ],
     "armor": [
       {
@@ -1048,13 +1087,13 @@
     "environmental_protection": 1,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "SKINTIGHT",
       "NORMAL",
       "WATER_FRIENDLY",
-      "PADDED",
-      "NO_SALVAGE"
+      "PADDED"
     ],
     "armor": [
       {
@@ -1129,11 +1168,11 @@
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 4 ] ],
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "SKINTIGHT",
       "PADDED",
-      "NO_SALVAGE",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
@@ -1166,12 +1205,12 @@
     "warmth": 2,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "WATER_FRIENDLY",
       "PADDED",
-      "NO_SALVAGE",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
@@ -1204,12 +1243,12 @@
     "warmth": 2,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "WATER_FRIENDLY",
       "PADDED",
-      "NO_SALVAGE",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
@@ -1241,12 +1280,12 @@
     "color": "black",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "WATER_FRIENDLY",
       "PADDED",
-      "NO_SALVAGE",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
@@ -1280,12 +1319,12 @@
     "material_thickness": 3,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "WATER_FRIENDLY",
       "PADDED",
-      "NO_SALVAGE",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
     ],
@@ -1309,7 +1348,7 @@
     "color": "light_gray",
     "warmth": 2,
     "environmental_protection": 2,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "SOFT", "TRANSPARENT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "SOFT", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 1 } ],
@@ -1369,12 +1408,12 @@
     "environmental_protection": 1,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "NORMAL",
       "SKINTIGHT",
       "WATER_FRIENDLY",
-      "NO_SALVAGE",
       "PADDED"
     ],
     "armor": [
@@ -1464,6 +1503,7 @@
     "//": "Freshly molted bugs have semi-transparent chitin.",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "NORMAL",
@@ -1548,7 +1588,7 @@
     "color": "brown",
     "warmth": 20,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "OUTER", "NORMAL", "SKINTIGHT", "PADDED" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "OUTER", "NORMAL", "SKINTIGHT", "PADDED" ],
     "armor": [
       {
         "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 2.8 } ],
@@ -1645,7 +1685,7 @@
     "color": "brown",
     "warmth": 7,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "OUTER", "NORMAL", "SKINTIGHT", "PADDED" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "OUTER", "NORMAL", "SKINTIGHT", "PADDED" ],
     "armor": [
       {
         "material": [ { "type": "leather_arthropod", "covered_by_mat": 100, "thickness": 2.5 } ],
@@ -1744,7 +1784,16 @@
     "qualities": [ [ "CUT", 1 ], [ "BUTCHER", -4 ], [ "PRY", 1 ], [ "HAMMER", 1 ] ],
     "environmental_protection": 3,
     "techniques": [ "TEC_PINCER_CRUSH", "TEC_PINCER_STRANGLE" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "BELTED", "PADDED", "NATURAL_WEAPON", "PROVIDES_TECHNIQUES" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "BELTED",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "PROVIDES_TECHNIQUES"
+    ],
     "armor": [
       {
         "material": [ { "type": "sclerotin", "covered_by_mat": 100, "thickness": 3.2 } ],
@@ -1774,6 +1823,7 @@
     "environmental_protection": 10,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "OUTER",
@@ -1828,6 +1878,7 @@
     "environmental_protection": 13,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "OUTER",
@@ -1914,6 +1965,7 @@
     "environmental_protection": 13,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "OUTER",
@@ -1989,7 +2041,7 @@
     "color": "light_red",
     "warmth": 5,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.4 } ],
@@ -2024,7 +2076,7 @@
     "color": "light_red",
     "warmth": 1,
     "environmental_protection": 1,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
     "armor": [
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
@@ -2086,7 +2138,7 @@
     "color": "light_red",
     "warmth": 2,
     "environmental_protection": 2,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY", "TOUGH_FEET" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY", "TOUGH_FEET" ],
     "armor": [
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 1.0 } ],
@@ -2156,7 +2208,7 @@
     "color": "light_red",
     "warmth": 3,
     "environmental_protection": 4,
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY", "TOUGH_FEET" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "SKINTIGHT", "WATER_FRIENDLY", "TOUGH_FEET" ],
     "armor": [
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 2 } ],
@@ -2224,14 +2276,14 @@
     "environmental_protection": 4,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "SKINTIGHT",
       "NORMAL",
       "WATER_FRIENDLY",
       "PADDED",
-      "TOUGH_FEET",
-      "NO_SALVAGE"
+      "TOUGH_FEET"
     ],
     "armor": [
       {
@@ -2315,7 +2367,7 @@
     "color": "dark_gray",
     "warmth": 0,
     "environmental_protection": 16,
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "NO_SALVAGE" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR" ],
     "armor": [
       {
         "material": [
@@ -2348,6 +2400,7 @@
     "qualities": [ [ "GLARE", 1 ] ],
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "SKINTIGHT",
       "WATER_FRIENDLY",
@@ -2355,7 +2408,6 @@
       "NO_REPAIR",
       "SWIM_GOGGLES",
       "PADDED",
-      "NO_SALVAGE",
       "FLASH_PROTECTION"
     ],
     "armor": [
@@ -2388,7 +2440,7 @@
     "warmth": 0,
     "material_thickness": 0.2,
     "environmental_protection": 10,
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "PADDED", "SWIM_GOGGLES", "NO_SALVAGE" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "UNBREAKABLE", "PERSONAL", "WATER_FRIENDLY", "NO_REPAIR", "PADDED", "SWIM_GOGGLES" ],
     "armor": [
       {
         "material": [ { "type": "scales", "covered_by_mat": 100, "thickness": 0.2 } ],
@@ -2416,7 +2468,7 @@
     "warmth": 0,
     "material_thickness": 1.5,
     "environmental_protection": 10,
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "SKINTIGHT", "SOFT", "WATER_FRIENDLY", "NO_REPAIR", "SWIM_GOGGLES", "NO_SALVAGE" ],
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "UNBREAKABLE", "SKINTIGHT", "SOFT", "WATER_FRIENDLY", "NO_REPAIR", "SWIM_GOGGLES" ],
     "armor": [
       {
         "material": [
@@ -2448,14 +2500,14 @@
     "environmental_protection": 10,
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "SKINTIGHT",
       "NORMAL",
       "SOFT",
       "WATER_FRIENDLY",
       "NO_REPAIR",
-      "SWIM_GOGGLES",
-      "NO_SALVAGE"
+      "SWIM_GOGGLES"
     ],
     "armor": [
       {
@@ -2486,11 +2538,11 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
-      "NO_SALVAGE",
       "TRANSPARENT",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
@@ -2526,11 +2578,11 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
-      "NO_SALVAGE",
       "TRANSPARENT",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON",
@@ -2567,11 +2619,11 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
-      "NO_SALVAGE",
       "TRANSPARENT",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
@@ -2606,11 +2658,11 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
-      "NO_SALVAGE",
       "TRANSPARENT",
       "PROVIDES_TECHNIQUES",
       "NATURAL_WEAPON"
@@ -2644,7 +2696,16 @@
     "color": "white",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 4 ] ],
     "techniques": [ "SHARKTEETH_BITE", "SHARKTEETH_BITE_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PROVIDES_TECHNIQUES", "PADDED", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PROVIDES_TECHNIQUES",
+      "PADDED",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 5 } ],
@@ -2683,7 +2744,16 @@
       "FANGS_BITE_NATURAL_MUZZLE_RAPTOR",
       "FANGS_BITE_MUZZLE_LONG"
     ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 3.2 } ],
@@ -2712,7 +2782,16 @@
     "color": "white",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 4 ] ],
     "techniques": [ "VAMPIRE_BITE", "VAMPIRE_BITE_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 3.2 } ],
@@ -2741,7 +2820,16 @@
     "color": "white",
     "qualities": [ [ "CUT", 2 ], [ "BUTCHER", 4 ] ],
     "techniques": [ "SABER_TEETH_BITE", "SABER_TEETH_BITE_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 7 } ],
@@ -2775,7 +2863,16 @@
       "INCISORS_BITE_MUZZLE_RAT_RABBIT_NOSE",
       "INCISORS_BITE_NATURAL_MUZZLE_RAT_RABBIT_NOSE"
     ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 7 } ],
@@ -2803,7 +2900,16 @@
     "symbol": ",",
     "color": "white",
     "techniques": [ "WIDE_MOUTH_BITE", "WIDE_MOUTH_BITE_NATURAL" ],
-    "flags": [ "INTEGRATED", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "PADDED", "PROVIDES_TECHNIQUES", "NATURAL_WEAPON" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "ALLOWS_NATURAL_ATTACKS",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "PROVIDES_TECHNIQUES",
+      "NATURAL_WEAPON"
+    ],
     "armor": [
       {
         "material": [ { "type": "bone", "covered_by_mat": 100, "thickness": 7 } ],
@@ -2833,6 +2939,7 @@
     "techniques": [ "BEAK_BITE", "BEAK_BITE_NATURAL", "BEAK_BITE_MOUTH_TENTACLES" ],
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
@@ -2870,6 +2977,7 @@
     "techniques": [ "DRILL_BEAK_PECK", "DRILL_BEAK_PECK_NATURAL" ],
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "ALLOWS_NATURAL_ATTACKS",
       "UNBREAKABLE",
       "PERSONAL",
@@ -2906,6 +3014,7 @@
     "qualities": [ [ "HAMMER", 1 ] ],
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
@@ -2951,6 +3060,7 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
@@ -2991,6 +3101,7 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
@@ -3027,7 +3138,17 @@
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "NATURAL_WEAPON", "ALLOWS_NATURAL_ATTACKS", "SKINTIGHT", "NORMAL" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL"
+    ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 15 } ],
@@ -3054,7 +3175,17 @@
     "material": [ "keratin" ],
     "symbol": ",",
     "color": "dark_gray",
-    "flags": [ "INTEGRATED", "UNBREAKABLE", "PERSONAL", "PADDED", "NATURAL_WEAPON", "ALLOWS_NATURAL_ATTACKS", "SKINTIGHT", "NORMAL" ],
+    "flags": [
+      "INTEGRATED",
+      "NO_SALVAGE",
+      "UNBREAKABLE",
+      "PERSONAL",
+      "PADDED",
+      "NATURAL_WEAPON",
+      "ALLOWS_NATURAL_ATTACKS",
+      "SKINTIGHT",
+      "NORMAL"
+    ],
     "armor": [
       {
         "material": [ { "type": "keratin", "covered_by_mat": 100, "thickness": 15 } ],
@@ -3083,6 +3214,7 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
@@ -3122,6 +3254,7 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
@@ -3161,6 +3294,7 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
@@ -3200,6 +3334,7 @@
     "color": "dark_gray",
     "flags": [
       "INTEGRATED",
+      "NO_SALVAGE",
       "UNBREAKABLE",
       "PERSONAL",
       "PADDED",
