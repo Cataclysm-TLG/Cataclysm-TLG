@@ -1564,7 +1564,6 @@
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "upgrades": { "half_life": 90, "into": "mon_spider_web_mega" },
     "trap_avoids": [ "tr_sinkhole" ],
-    "//": "Only has SEES so that it doesn't go charging away from its web.",
     "flags": [ "SEES", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
     "armor": { "bash": 3, "cut": 6, "bullet": 4, "acid": 7 }
   },
