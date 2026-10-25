@@ -317,7 +317,7 @@ float monster::rate_target( Creature &c, float best, bool smart ) const
         return FLT_MAX;
     }
 
-    // Check a very common and cheap case first
+    // Check a very common and cheap case first.
     if( !smart && d >= best ) {
         return FLT_MAX;
     }
@@ -332,7 +332,7 @@ float monster::rate_target( Creature &c, float best, bool smart ) const
 
     float power = c.power_rating();
     monster *mon = dynamic_cast< monster * >( &c );
-    // Their attitude to us and not ours to them, so that bobcats won't get gunned down
+    // Their attitude to us and not ours to them, so that bobcats won't get gunned down.
     if( mon != nullptr && mon->attitude_to( *this ) == Attitude::HOSTILE ) {
         power += 2;
     }
@@ -347,7 +347,7 @@ float monster::rate_target( Creature &c, float best, bool smart ) const
 struct monster_plan {
     explicit monster_plan( const monster &mon );
 
-    // Bots are more intelligent than most living stuff
+    // Bots are more intelligent than most living stuff.
     bool smart_planning;
 
     bool fleeing;
@@ -362,7 +362,7 @@ struct monster_plan {
     bool group_morale;
     bool swarms;
 
-    // 8.6f is rating for tank drone 60 tiles away, moose 16 or boomer 33
+    // 8.6f is rating for tank drone 60 tiles away, moose 16 or boomer 33.
     float dist;
 
     int max_sight_range;
@@ -1062,7 +1062,7 @@ void monster::move()
             const pathfinding_settings &pf_settings = get_pathfinding_settings();
             if( pf_settings.max_dist >= rl_dist( pos_abs(), get_dest() ) &&
                 ( path.empty() || rl_dist( pos_bub(), path.front() ) >= 2 || path.back() != local_dest ) ) {
-                // We need a new path
+                // We need a new path.
                 if( can_pathfind() ) {
                     path = here.route( *this, pathfinding_target::point( local_dest ) );
                     if( path.empty() ) {
@@ -1081,13 +1081,13 @@ void monster::move()
                 }
             }
 
-            // Try to respect old paths, even if we can't pathfind at the moment
+            // Try to respect old paths, even if we can't pathfind at the moment.
             if( !path.empty() && path.back() == local_dest ) {
                 destination = path.front();
                 moved = true;
                 pathed = true;
             } else {
-                // Straight line forward, probably because we can't pathfind (well enough)
+                // Straight line forward, probably because we can't pathfind (well enough).
                 destination = local_dest;
                 moved = true;
             }
