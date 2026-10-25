@@ -666,7 +666,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
             // If it's player doing the butchery, ask them first.
             if( you.is_avatar() ) {
                 if( do_cannibalism_piss_people_off( you ) ) {
-                    //give the player a random message showing their disgust and cause morale penalty.
+                    // Give the player a random message showing their disgust and cause morale penalty.
                     switch( rng( 1, 3 ) ) {
                         case 1:
                             you.add_msg_if_player( m_bad, _( "You clench your teeth at the prospect of this gruesome job." ) );
