@@ -31,8 +31,11 @@
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "-": [ [ "t_dirt_rocky", 5 ], "t_moss", "t_dirt" ], "#": [ [ "t_dirt_rocky", 5 ], "t_moss" ] },
+      "item": { 
+        "-": [ { "item": "rock", "chance": 5 }, { "item": "material_gravel", "chance": 3, "charges": [ 1, 5 ] }, { "item": "rock_large", "chance": 5 } ],
+        " ": [ { "item": "rock", "chance": 2 }, { "item": "material_gravel", "chance": 1, "charges": [ 1, 5 ] }, { "item": "rock_large", "chance": 1 } ] },
       "furniture": {
-        "-": [ [ "f_rubble_rock", 3 ], "f_boulder_small", [ "f_null", 10 ] ],
+        "-": [ [ "f_rubble_rock", 2 ], "f_boulder_small", [ "f_null", 12 ] ],
         "#": [ "f_boulder_small", "f_boulder_medium", "f_boulder_large", "f_rubble_rock", "f_null" ]
       }
     }
@@ -69,8 +72,11 @@
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "-": [ [ "t_dirt_rocky", 5 ], "t_moss", "t_dirt" ], "#": [ [ "t_dirt_rocky", 5 ], "t_moss" ] },
+      "item": { 
+        "-": [ { "item": "rock", "chance": 5 }, { "item": "material_gravel", "chance": 3, "charges": [ 1, 5 ] }, { "item": "rock_large", "chance": 5 } ],
+        " ": [ { "item": "rock", "chance": 2 }, { "item": "material_gravel", "chance": 1, "charges": [ 1, 5 ] }, { "item": "rock_large", "chance": 1 } ] },
       "furniture": {
-        "-": [ [ "f_rubble_rock", 3 ], "f_boulder_small", [ "f_null", 10 ] ],
+        "-": [ [ "f_rubble_rock", 2 ], "f_boulder_small", [ "f_null", 12 ] ],
         "#": [ "f_boulder_small", "f_boulder_medium", "f_boulder_large", "f_rubble_rock", "f_null" ]
       }
     }
@@ -107,8 +113,11 @@
       ],
       "flags": [ "ERASE_ALL_BEFORE_PLACING_TERRAIN" ],
       "terrain": { "-": [ [ "t_dirt_rocky", 5 ], "t_moss", "t_dirt" ], "#": [ [ "t_dirt_rocky", 5 ], "t_moss" ] },
+      "item": { 
+        "-": [ { "item": "rock", "chance": 5 }, { "item": "material_gravel", "chance": 3, "charges": [ 1, 5 ] }, { "item": "rock_large", "chance": 5 } ],
+        " ": [ { "item": "rock", "chance": 2 }, { "item": "material_gravel", "chance": 1, "charges": [ 1, 5 ] }, { "item": "rock_large", "chance": 1 } ] },
       "furniture": {
-        "-": [ [ "f_rubble_rock", 3 ], "f_boulder_small", [ "f_null", 10 ] ],
+        "-": [ [ "f_rubble_rock", 2 ], "f_boulder_small", [ "f_null", 12 ] ],
         "#": [ "f_boulder_small", "f_boulder_medium", "f_boulder_large", "f_rubble_rock", "f_null" ]
       }
     }
