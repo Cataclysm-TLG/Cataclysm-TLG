@@ -18,12 +18,30 @@
     }
   },
   {
+    "type": "mapgen",
+    "nested_mapgen_id": "seedling_oat",
+    "object": {
+      "mapgensize": [ 1, 1 ],
+      "rows": [ "#" ],
+      "sealed_item": { "#": { "item": { "item": "seed_wheat" }, "furniture": "f_plant_seedling", "chance": 1 } }
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "seedling_soybean",
+    "object": {
+      "mapgensize": [ 1, 1 ],
+      "rows": [ "#" ],
+      "sealed_item": { "#": { "item": { "item": "soybean_seed" }, "furniture": "f_plant_seedling", "chance": 1 } }
+    }
+  },
+  {
     "type": "palette",
     "id": "farm_lots",
     "parameters": {
-      "variant": { "type": "nested_mapgen_id", "default": { "distribution": [ [ "seedling_corn", 70 ], [ "seedling_wheat", 30 ] ] } }
+      "variant": { "type": "nested_mapgen_id", "default": { "distribution": [ [ "seedling_corn", 50 ], [ "null", 20 ], [ "seedling_wheat", 25 ], [ "seedling_oat", 1 ], [ "seedling_soybean", 4 ] ] } }
     },
-    "nested": { "#": { "chunks": [ { "param": "variant", "fallback": "seedling_corn" }, [ "null", 10 ] ] } },
+    "nested": { "#": { "chunks": [ { "param": "variant", "fallback": "seedling_corn" }, [ "null", 20 ] ] } },
     "terrain": {
       ",": "t_dirtfloor",
       ":": "t_metal_floor",
