@@ -330,7 +330,27 @@
     "looks_like": "helmet_motor",
     "color": "dark_gray",
     "armor": [
-      { "covers": [ "head" ], "coverage": 100, "encumbrance": 42 },
+      {
+        "encumbrance": 42,
+        "coverage": 100,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_crown", "head_forehead" ],
+        "layers": [ "NORMAL", "OUTER" ]
+      },
+      {
+        "encumbrance": 0,
+        "coverage": 95,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_nape" ],
+        "layers": [ "OUTER" ]
+      },
+      {
+        "encumbrance": 0,
+        "coverage": 95,
+        "covers": [ "head" ],
+        "specifically_covers": [ "head_throat" ],
+        "layers": [ "OUTER" ]
+      },
       { "covers": [ "eyes" ], "coverage": 100, "encumbrance": 36 },
       { "covers": [ "mouth" ], "coverage": 100, "encumbrance": 12 }
     ],
