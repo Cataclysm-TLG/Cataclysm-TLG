@@ -1599,6 +1599,7 @@
   {
     "id": "NEEDS_UNFOLD",
     "//": "should not be used for folding mods, use a transforming mod instead",
+    "info": "This weapon will take <bad>longer to wield</bad> than usual.",
     "type": "json_flag"
   },
   {

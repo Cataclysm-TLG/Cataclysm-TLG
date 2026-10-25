@@ -625,6 +625,7 @@
     "material": [ "steel" ],
     "symbol": ";",
     "color": "dark_gray",
+    "tool_ammo": [ "propane" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "GAS_TANK" ], "default_magazine": "large_propane_tank" } ],
     "sub": "forge",
     "flags": [ "ALLOWS_REMOTE_USE" ],
