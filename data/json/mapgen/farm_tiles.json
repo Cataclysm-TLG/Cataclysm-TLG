@@ -450,11 +450,11 @@
         "_": "t_region_soil"
       },
       "sealed_item": {
-        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 8 },
-        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 8 },
-        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 8 },
-        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 8 },
-        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 8 }
+        "♥": { "item": { "item": "seed_tomato" }, "furniture": "f_plant_seedling", "chance": 4 },
+        "♠": { "item": { "item": "seed_lettuce" }, "furniture": "f_plant_seedling", "chance": 4 },
+        "♦": { "item": { "item": "seed_cucumber" }, "furniture": "f_plant_seedling", "chance": 4 },
+        "♣": { "item": { "item": "seed_carrot" }, "furniture": "f_plant_seedling", "chance": 4 },
+        "Ʌ": { "item": { "item": "seed_zucchini" }, "furniture": "f_plant_seedling", "chance": 4 }
       }
     }
   },
