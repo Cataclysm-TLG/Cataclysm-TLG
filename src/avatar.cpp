@@ -173,6 +173,7 @@ void avatar::control_npc( npc &np, const bool debug )
     const std::function<void( npc & )> update_npc = [new_character]( npc & guy ) {
         guy.update_missions_target( get_avatar().getID(), new_character );
     };
+
     overmap_buffer.foreach_npc( update_npc );
     mission().update_world_missions_character( get_avatar().getID(), new_character );
     // move avatar character data into shadow npc
@@ -192,7 +193,8 @@ void avatar::control_npc( npc &np, const bool debug )
     const bool z_level_changed = g->vertical_shift( posz() );
     g->update_map( *this, z_level_changed );
     character_mood_face( true );
-
+    invalidate_flag_caches();
+    np.invalidate_flag_caches();
     profession_id prof_id = prof ? prof->ident() : profession::generic()->ident();
     get_event_bus().send<event_type::game_avatar_new>( /*is_new_game=*/false, debug,
             getID(), name, male, prof_id, custom_profession );

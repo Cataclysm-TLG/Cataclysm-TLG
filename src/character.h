@@ -2508,6 +2508,8 @@ class Character : public Creature, public visitable
         void invalidate_inventory_validity_cache();
 
         void invalidate_weight_carried_cache();
+
+        void invalidate_flag_caches();
         /** Returns all items that must be taken off before taking off this item */
         std::list<item *> get_dependent_worn_items( const item &it );
         /** Drops an item to the specified location */

@@ -3691,6 +3691,12 @@ void Character::invalidate_weight_carried_cache()
     cached_weight_carried = std::nullopt;
 }
 
+void Character::invalidate_flag_caches()
+{
+    trait_flag_cache.clear();
+    bio_flag_cache.clear();
+}
+
 units::mass Character::best_nearby_lifting_assist() const
 {
     return best_nearby_lifting_assist( this->pos_bub() );
