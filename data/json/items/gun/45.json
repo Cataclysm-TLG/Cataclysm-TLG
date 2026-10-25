@@ -158,18 +158,10 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "MAC-10 submachine gun" },
-    "description": "A submachine gun chambered in .45 ACP and accepting MAC-10 magazines.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "mac_10",
-        "name": { "str": "MAC-10 SMG" },
-        "description": "The MAC-10 is a popular machine pistol originally designed for military use.  For many years it was the most inexpensive automatic weapon in the US, and enjoyed great popularity among criminals less concerned with quality firearms."
-      }
-    ],
+    "description": "The MAC-10 is a popular machine pistol originally designed for military use.  For many years it was the most inexpensive automatic weapon in the US, and enjoyed great popularity among criminals less concerned with quality firearms.",
     "weight": "2640 g",
     "volume": "960 ml",
-    "longest_side": "298 mm",
+    "longest_side": "292 mm",
     "barrel_length": "146 mm",
     "price": "1800 USD",
     "price_postapoc": "25 USD",
@@ -544,7 +536,7 @@
     "description": "A submachine gun developed for the United States in World War II, affectionately called a \"grease gun\" because it resembled a piece of hardware more than a firearm.  Designed for economy and scale rather than individual performance, it nonetheless played its part in carrying the Allies to victory.",
     "weight": "3600 g",
     "volume": "1750 ml",
-    "longest_side": "579 mm",
+    "longest_side": "574 mm",
     "barrel_length": "203 mm",
     "price": "23000 USD",
     "price_postapoc": "40 USD",
