@@ -2443,18 +2443,6 @@
     "proficiencies": [ { "proficiency": "prof_closures" }, { "proficiency": "prof_leatherworking_basic" } ]
   },
   {
-    "result": "rope_loop",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_STORAGE",
-    "skill_used": "tailor",
-    "time": "6 m",
-    "autolearn": true,
-    "reversible": true,
-    "components": [ [ [ "rope_any_short", 1, "LIST" ] ] ]
-  },
-  {
     "result": "suspenders_holster",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",
