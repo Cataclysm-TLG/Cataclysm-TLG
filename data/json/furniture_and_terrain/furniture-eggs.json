@@ -32,7 +32,7 @@
     "type": "furniture",
     "id": "f_egg_sackws",
     "name": "spider egg sac",
-    "description": "A gigantic sac of spider eggs, each one larger than your fist.  They're definitely moving around.  Really gross, just seeing it makes your skin crawl.",
+    "description": "A gigantic sac of spider eggs, each one larger than your fist.  It might be your imagination, but some of them might be moving around.",
     "symbol": "O",
     "color": "yellow",
     "looks_like": "f_sack_bw",

@@ -1579,7 +1579,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "dissect": "dissect_spider_sample_single",
     "reproduction": { "baby_egg": "egg_spider_web", "baby_count": 2, "baby_timer": 24 },
-    "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
+    "baby_flags": [ "AUTUMN" ],
     "fungalize_into": "mon_spider_fungus",
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "upgrades": { "half_life": 90, "into": "mon_spider_web_mega" },
