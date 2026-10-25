@@ -1557,7 +1557,8 @@
     "volume": "62500 ml",
     "weight": "81500 g",
     "hp": 40,
-    "speed": 110,
+    "speed": 70,
+    "attack_cost": 70,
     "material": [ "iflesh" ],
     "symbol": "s",
     "color": "yellow",
@@ -1584,8 +1585,9 @@
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "upgrades": { "half_life": 90, "into": "mon_spider_web_mega" },
     "trap_avoids": [ "tr_sinkhole" ],
-    "flags": [ "SEES", "HEARS", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
-    "armor": { "bash": 2, "cut": 6, "bullet": 5, "acid": 7 }
+    "//": "Only has SEES so that it doesn't go charging away from its web.",
+    "flags": [ "SEES", "WEBWALK", "CLIMBS", "PATH_AVOID_DANGER" ],
+    "armor": { "bash": 3, "cut": 6, "bullet": 4, "acid": 7 }
   },
   {
     "id": "mon_spider_web_mega",
@@ -1593,7 +1595,7 @@
     "name": { "str": "enormous web spider" },
     "description": "A cow-sized mutated grass spider with long spindly legs, light gray in color.  It moves ponderously, depending on its webs to prevent prey from fleeing.",
     "copy-from": "mon_spider_web",
-    "proportional": { "hp": 10, "speed": 0.25, "dodge": 0.5, "vision_day": 2 },
+    "proportional": { "hp": 10, "speed": 0.15, "dodge": 0.5, "vision_day": 2 },
     "volume": "525 L",
     "weight": "335 kg",
     "melee_dice": 2,
@@ -1603,7 +1605,7 @@
     "special_attacks": [ { "id": "grab", "cooldown": 5, "condition": { "not": { "u_has_effect": "maimed_leg" } } } ],
     "upgrades": { "half_life": 40, "into_group": "GROUP_EMPTY" },
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
-    "armor": { "bash": 2, "cut": 6, "bullet": 5, "electric": 1, "acid": 7 }
+    "armor": { "bash": 5, "cut": 12, "bullet": 5, "electric": 1, "acid": 7 }
   },
   {
     "id": "mon_spider_web_s",
@@ -1614,7 +1616,7 @@
     "default_faction": "spider_web",
     "bodytype": "spider",
     "species": [ "SPIDER" ],
-    "speed": 90,
+    "speed": 80,
     "symbol": "c",
     "color": "yellow",
     "weakpoint_sets": [ "wps_arthropod", "wps_arthropod_spider" ],
@@ -1624,7 +1626,7 @@
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
     "upgrades": { "age_grow": 30, "into": "mon_spider_web" },
     "extend": { "flags": [ "WEBWALK", "SMALL_HIDER" ] },
-    "armor": { "bash": 2, "cut": 6, "bullet": 5 }
+    "armor": { "bash": 2, "cut": 6, "bullet": 1 }
   },
   {
     "id": "mon_spider_widow_small",
