@@ -615,7 +615,7 @@
     "description": "A massive piece of machinery used to take hundreds of X-ray images from 360 degrees, often used for medical examinations.",
     "symbol": "o",
     "bgcolor": "white",
-    "move_cost_mod": 7,
+    "move_cost_mod": 8,
     "coverage": 75,
     "concealment": 75,
     "required_str": -1,
