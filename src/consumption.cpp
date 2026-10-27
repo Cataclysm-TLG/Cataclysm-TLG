@@ -1520,8 +1520,7 @@ double Character::compute_effective_food_volume_ratio( const item &food ) const
 // These maths are made easier by the fact that 1 g = 1 mL. Thanks, metric system.
 std::pair<units::volume, units::volume> Character::masticated_volume( const item &food ) const
 {
-    units::volume water_vol = ( food.get_comestible()->quench > 0 ) ? food.get_comestible()->quench *
-                              5_ml : 0_ml;
+    units::volume water_vol = food.get_comestible()->quench * 5_ml;
     units::mass water_weight = units::from_gram( units::to_milliliter( water_vol ) );
     // handle the division by zero exception when the food count is 0 with std::max()
     units::mass food_dry_weight = food.weight() / std::max( 1, food.count() ) - water_weight;
