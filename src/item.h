@@ -864,7 +864,7 @@ class item : public visitable
         bool allow_crafting_component() const;
 
         // seal the item's pockets. used for crafting and spawning items.
-        bool seal();
+        bool seal( bool force = false );
 
         bool all_pockets_sealed() const;
         bool any_pockets_sealed() const;
@@ -1016,7 +1016,7 @@ class item : public visitable
          */
         item in_its_container( int qty = 0 ) const;
         item in_container( const itype_id &container_type, int qty = 0, bool sealed = true,
-                           const std::string &container_variant = "" ) const;
+                           const std::string &container_variant = "", bool force_sealed = false ) const;
         void add_automatic_whitelist();
         void clear_automatic_whitelist();
 

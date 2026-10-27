@@ -1305,7 +1305,7 @@ item item::in_its_container( int qty ) const
 }
 
 item item::in_container( const itype_id &cont, int qty, bool sealed,
-                         const std::string &variant ) const
+                         const std::string &variant, bool force_sealed ) const
 {
     if( cont.is_null() ) {
         return *this;
@@ -1322,7 +1322,7 @@ item item::in_container( const itype_id &cont, int qty, bool sealed,
         container.fill_with( *this, qty );
         container.invlet = invlet;
         if( sealed ) {
-            container.seal();
+            container.seal( force_sealed );
         }
         if( !container.has_item_with( [&cont]( const item & it ) {
         return it.typeId() == cont;
@@ -10453,9 +10453,9 @@ bool item::is_map() const
            type->use_methods.count( "reveal_map" );
 }
 
-bool item::seal()
+bool item::seal( bool force )
 {
-    if( is_container_full() ) {
+    if( is_container_full() || force ) {
         return contents.seal_all_pockets();
     } else {
         return false;

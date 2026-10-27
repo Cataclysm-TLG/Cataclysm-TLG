@@ -1091,7 +1091,7 @@ std::vector<item> recipe::create_result( bool set_components, bool is_food,
     }
 
     if( contained ) {
-        newit = newit.in_container( container, amount, sealed, container_variant );
+        newit = newit.in_container( container, amount, sealed, container_variant, true );
         return { newit };
         // TODO: Special handling for stack_max > 1?
     } else if( newit.count_by_charges() && newit.type->stack_max != 1 ) {
