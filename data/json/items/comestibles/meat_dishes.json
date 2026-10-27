@@ -1211,6 +1211,7 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
     ],
     "copy-from": "meat_cooked",
+    "volume": "250 ml",
     "color": "red",
     "spoils_in": "1 day 16 hours",
     "container": "can_food",
@@ -1469,6 +1470,7 @@
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": { "str_sp": "%s, mutant" } }
     ],
     "copy-from": "meat_cooked",
+    "volume": "250 ml",
     "color": "pink",
     "spoils_in": "4 days",
     "container": "jar_glass_sealed",
