@@ -185,7 +185,7 @@
     "comestible_type": "DRINK",
     "container": "bottle_glass",
     "primary_material": "water",
-    "quench": -20,
+    "quench": -10,
     "charges": 10,
     "fun": -15,
     "freezing_point": -30,

@@ -1365,7 +1365,7 @@
     "comestible_type": "DRINK",
     "spoils_in": "48 hours",
     "symbol": "~",
-    "quench": -35,
+    "quench": -10,
     "description": "Often regarded as folk medicine in some countries, bark tea tastes awful and tends to dry you out, but can help flush out stomach or other gut bugs.",
     "price": "12 USD 50 cent",
     "price_postapoc": "25 cent",
