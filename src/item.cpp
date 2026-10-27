@@ -2016,7 +2016,7 @@ static std::string get_freshness_description( const item &food_item )
     if( !player_character.can_estimate_rot() ) {
         // Unskilled characters only get a hint that more information exists...
         return _( "* This food looks <info>fine</info>.  If you were more skilled in "
-                  "cooking or survival, you might be able to make a better estimation." );
+                  "cooking, you might be able to make a better estimation." );
     }
 
     // Otherwise, a skilled character can determine the below options:

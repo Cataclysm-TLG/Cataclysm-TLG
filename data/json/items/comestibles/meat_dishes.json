@@ -209,7 +209,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str": "wasteland sausage" },
     "description": "Lean sausage made from heavily salt-cured offal, with natural gut casing.  Waste not, want not.",
-    "quench": -7,
+    "quench": -5,
     "fun": -3,
     "flags": [ "SMOKED" ]
   },
@@ -220,7 +220,7 @@
     "subtypes": [ "COMESTIBLE" ],
     "name": { "str": "raw wasteland sausage" },
     "description": "Lean raw sausage made from heavily salt-cured offal, ready to be smoked.",
-    "quench": -7,
+    "quench": -5,
     "flags": [ "SMOKABLE" ],
     "smoking_result": "sausage_wasteland"
   },
@@ -690,7 +690,7 @@
     "container": "can_food",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "quench": -8,
+    "quench": -5,
     "calories": 340,
     "description": "Salty little fish.  They'll make you thirsty.",
     "price": "2 USD",
@@ -895,7 +895,7 @@
     "container": "can_medium",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "quench": -8,
+    "quench": -5,
     "calories": 283,
     "description": "Greasy Prospector brand improved pork and beans with hickory smoked pig fat chunks.",
     "price": "1 USD",
@@ -1286,7 +1286,7 @@
     "name": { "str_sp": "fried SPAM" },
     "copy-from": "can_spam",
     "color": "red",
-    "quench": -6,
+    "quench": -5,
     "description": "Now that it's been fried, this SPAM is actually pretty tasty.",
     "price": "5 USD",
     "material": [ "flesh" ],
@@ -1697,7 +1697,7 @@
     "id": "homemade_burrito",
     "name": { "str": "homemade burrito" },
     "conditional_names": [
-      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": "bone-chilling burrito" },
+      { "type": "COMPONENT_ID_SUBSTRING", "condition": "mutant", "name": "beastly burrito" },
       { "type": "COMPONENT_ID_SUBSTRING", "condition": "egg", "name": { "str": "breakfast burrito" } }
     ],
     "weight": "142 g",
@@ -1705,7 +1705,7 @@
     "spoils_in": "1 days 4 hours",
     "comestible_type": "FOOD",
     "symbol": "%",
-    "quench": -8,
+    "quench": -4,
     "calories": 292,
     "description": "A traditional Mexican dish of meat, beans or rice, and vegetables spread on a corn tortilla and rolled into a tube shape.  The fresh ingredients make this one taste way better than those gas station knockoffs.",
     "price": "233 cent",
@@ -1924,7 +1924,7 @@
     "spoils_in": "5 days",
     "calories": 127,
     "fun": 1,
-    "quench": -8,
+    "quench": -4,
     "flags": [ "EATEN_HOT" ],
     "vitamins": [ [ "vitC", 0 ], [ "calcium", 3 ], [ "iron", 8 ], [ "meat_allergen", 1 ], [ "wheat_allergen", 1 ] ]
   }

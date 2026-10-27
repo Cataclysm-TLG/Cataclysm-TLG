@@ -1355,7 +1355,7 @@
     "symbol": "~",
     "color": "yellow",
     "phase": "liquid",
-    "quench": -50,
+    "quench": -10,
     "fun": -4,
     "spoils_in": "28 days",
     "use_action": [ "ANTIPARASITIC" ],

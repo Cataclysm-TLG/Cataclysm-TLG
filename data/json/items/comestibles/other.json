@@ -693,19 +693,14 @@
     "weight": "56 g",
     "color": "pink",
     "looks_like": "offal",
-    "use_action": [ "POISON" ],
-    "comestible_type": "FOOD",
+    "comestible_type": "INVALID",
     "symbol": "%",
-    "quench": -47,
-    "calories": 78,
-    "vitamins": [ [ "vitC", 2 ], [ "calcium", 1 ], [ "iron", 8 ], [ "meat_allergen", 1 ] ],
-    "description": "This is a human brain soaked in a solution of highly toxic formaldehyde.  Eating this would be a terrible idea.",
+    "description": "This is a human brain soaked in a solution of highly toxic formaldehyde.",
     "price": "80 cent",
     "price_postapoc": "0 cent",
     "material": [ "hflesh" ],
-    "flags": [ "TRADER_AVOID" ],
-    "volume": "250 ml",
-    "fun": -30
+    "flags": [ "TRADER_AVOID", "INEDIBLE" ],
+    "volume": "250 ml"
   },
   {
     "id": "cattlefodder",
