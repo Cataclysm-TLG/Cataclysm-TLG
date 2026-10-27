@@ -644,7 +644,7 @@ void Item_modifier::modify( item &new_item, const std::string &context ) const
                 debugmsg( "tried to set ammo for %s which does not have ammo or a magazine",
                           new_item.typeId().c_str() );
             }
-            // Make sure the item is in valid state
+            // Make sure the item is in valid state.
             if( new_item.magazine_integral() ) {
                 new_item.charges = std::min( new_item.charges,
                                              new_item.ammo_capacity( item_controller->find_template( new_item.ammo_default() )->ammo->type ) );
