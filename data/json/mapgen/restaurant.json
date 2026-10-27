@@ -200,12 +200,7 @@
   {
     "type": "mapgen",
     "nested_mapgen_id": "24x24_kitchen_roach_infestation",
-    "object": {
-      "mapgensize": [ 24, 24 ],
-      "place_monsters": [
-        { "monster": "GROUP_ROACH", "x": [ 7, 19 ], "y": 19, "chance": 100 }
-      ]
-    }
+    "object": { "mapgensize": [ 24, 24 ], "place_monsters": [ { "monster": "GROUP_ROACH", "x": [ 7, 19 ], "y": 19, "chance": 100 } ] }
   },
   {
     "type": "mapgen",

@@ -4134,10 +4134,10 @@ void itype::load( const JsonObject &jo, std::string_view src )
     optional( jo, was_loaded, "price_postapoc", price_post, not_negative_money, -1_cent );
     optional( jo, was_loaded, "stackable", stackable_ );
     optional( jo, was_loaded, "stack_max", stack_max );
-    optional( jo, was_loaded, "integral_volume", integral_volume, not_negative_volume, -1_ml );
+    optional( jo, was_loaded, "integral_volume", integral_volume, not_negative_volume, 0_ml );
     optional( jo, was_loaded, "light", light_emission, 0 );
     optional( jo, was_loaded, "integral_longest_side", integral_longest_side, not_negative_length,
-              -1_mm );
+              0_mm );
     optional( jo, was_loaded, "variant_type", variant_kind, itype_variant_kind::generic );
     optional( jo, was_loaded, "variants", variants, json_read_reader<itype_variant_data> {} );
     optional( jo, was_loaded, "container", default_container );
