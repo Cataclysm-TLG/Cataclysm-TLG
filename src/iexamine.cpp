@@ -6234,9 +6234,8 @@ static void smoker_activate( Character &you, const tripoint_bub_ms &examp )
     }
 }
 
-void iexamine::mill_finalize( Character &, const tripoint_bub_ms &examp )
+void iexamine::mill_finalize( Character &, map &here, const tripoint_bub_ms &examp )
 {
-    map &here = get_map();
     const furn_id &cur_mill_type = here.furn( examp );
     furn_id next_mill_type = furn_str_id::NULL_ID();
     if( cur_mill_type == furn_f_wind_mill_active ) {
@@ -6350,10 +6349,9 @@ void iexamine::mill_finalize( Character &, const tripoint_bub_ms &examp )
     here.furn_set( examp, next_mill_type );
 }
 
-static void smoker_finalize( Character &, const tripoint_bub_ms &examp,
+static void smoker_finalize( map &here, Character &, const tripoint_bub_ms &examp,
                              const time_point &start_time )
 {
-    map &here = get_map();
     const furn_id &cur_smoker_type = here.furn( examp );
     furn_id next_smoker_type = furn_str_id::NULL_ID();
     if( cur_smoker_type == furn_f_smoking_rack_active ) {
@@ -6588,12 +6586,12 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     you.invalidate_inventory();
 }
 
-void iexamine::on_smoke_out( const tripoint_bub_ms &examp, const time_point &start_time )
+void iexamine::on_smoke_out( map &here, const tripoint_bub_ms &examp, const time_point &start_time )
 {
-    const furn_id &f = get_map().furn( examp );
+    const furn_id &f = here.furn( examp );
     if( f == furn_f_smoking_rack_active ||
         f == furn_f_metal_smoking_rack_active ) {
-        smoker_finalize( get_avatar(), examp, start_time );
+        smoker_finalize( here, get_avatar(), examp, start_time );
     }
 }
 

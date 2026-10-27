@@ -295,10 +295,9 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Enhanced Hearing CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "While this bionic is active, the user's hearing will be drastically improved, allowing them to hear ten times better than the average person.  Additionally, high-intensity sounds will be automatically dampened before they can damage the user's hearing.",
+    "description": "While this bionic is active, the user's hearing will be drastically improved, allowing them to hear over three times better than the average person, even if they were previously deaf or hard of hearing.  Additionally, high-intensity sounds will be automatically dampened before they can damage the user's hearing.",
     "price": "5000 USD",
     "price_postapoc": "25 USD",
-    "weight": "500 g",
     "difficulty": 6
   },
   {

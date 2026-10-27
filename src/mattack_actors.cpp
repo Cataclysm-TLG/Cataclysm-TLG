@@ -1,6 +1,9 @@
 #include "mattack_actors.h"
 
 #include <algorithm>
+#include <cstdlib>
+#include <functional>
+#include <iterator>
 #include <limits>
 #include <memory>
 #include <optional>
@@ -28,6 +31,7 @@
 #include "line.h"
 #include "map.h"
 #include "map_iterator.h"
+#include "melee.h"
 #include "messages.h"
 #include "monster.h"
 #include "mtype.h"
@@ -498,6 +502,10 @@ Creature *melee_actor::find_target( monster &z ) const
         return nullptr;
     }
 
+    if( range == 1 && !z.is_adjacent( target, /*bool allow_z_levels =*/ false ) ) {
+        return nullptr;
+    }
+
     if( range > 1 ) {
         bool in_range = false;
 
@@ -518,15 +526,34 @@ Creature *melee_actor::find_target( monster &z ) const
             }
         }
         if( !in_range ||
-            !z.sees( here, *target ) ||
-            !here.clear_path( z.pos_bub( here ), target->pos_bub( here ),
-                              range, 1, 200 ) ) {
+            !z.sees( here, *target ) ) {
             return nullptr;
+        }
+        const int horiz_dist = trig_dist( z.pos_bub().xy(), target->pos_bub().xy() );
+        const int vert_dist = std::abs( z.pos_bub().z() - target->pos_bub().z() );
+
+        if( horiz_dist + vert_dist > range ) {
+            return nullptr;
+        }
+
+        std::vector<tripoint_bub_ms> path = line_to( z.pos_bub(), target->pos_bub(), 0, 0 );
+        path.pop_back(); // Last point is our target
+
+        // Scaled-down reimplementation of Character::reach_attack() with character-specific values removed.
+        for( const tripoint_bub_ms &path_point : path ) {
+            Creature *collateral_damage = get_creature_tracker().creature_at( path_point );
+            if( collateral_damage ) {
+                return nullptr; // Something else in the way, can't attack.
+            }
+            // FIXME: All melee specials with range > 1 are currently considered to be "spear" type attacks or otherwise capable of passing through thin obstacles.
+            if( here.impassable( path_point ) &&
+                !here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, path_point ) ) {
+                return nullptr;
+            }
         }
     } else if( !z.is_adjacent( target, false ) ) {
         return nullptr;
     }
-
     return target;
 }
 
@@ -837,7 +864,7 @@ bool melee_actor::call( monster &z ) const
     // Dodge check
 
     const int acc = accuracy >= 0 ? accuracy : z.type->melee_skill;
-    int hitspread = target->deal_melee_attack( &z, dice( acc, 10 ) );
+    int hitspread = target->deal_melee_attack( &z, melee::melee_hit_range( acc ) );
 
     // Pick body part
     bodypart_str_id bp_hit = body_parts.empty() ?
