@@ -529,12 +529,6 @@ Creature *melee_actor::find_target( monster &z ) const
             !z.sees( here, *target ) ) {
             return nullptr;
         }
-        const int horiz_dist = trig_dist( z.pos_bub().xy(), target->pos_bub().xy() );
-        const int vert_dist = std::abs( z.pos_bub().z() - target->pos_bub().z() );
-
-        if( horiz_dist + vert_dist > range ) {
-            return nullptr;
-        }
 
         std::vector<tripoint_bub_ms> path = line_to( z.pos_bub(), target->pos_bub(), 0, 0 );
         path.pop_back(); // Last point is our target
