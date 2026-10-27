@@ -272,9 +272,7 @@
         "s": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] },
         "R": { "chunks": [ [ "1x1_bash", 10 ], [ "null", 90 ] ] }
       },
-      "place_monster": [
-        { "group": "GROUP_ROACH", "x": [ 2, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 4, 10 ] }
-      ]
+      "place_monster": [ { "group": "GROUP_ROACH", "x": [ 2, 22 ], "y": [ 2, 22 ], "chance": 100, "repeat": [ 4, 10 ] } ]
     }
   },
   {

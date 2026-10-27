@@ -7218,7 +7218,11 @@ units::length item::length() const
                     stock_length -= 26_cm;
                 }
             } else if( mod->type->gunmod->location.str() == "stock" ) {
-                stock_length = mod->type->integral_longest_side;
+                if( has_flag( flag_FOLDED_STOCK ) ) {
+                    stock_length -= 24_cm;
+                } else {
+                    stock_length = mod->type->integral_longest_side;
+                }
             } else if( mod->type->gunmod->location.str() == "stock accessory" ) {
                 stock_accessory_length = mod->type->integral_longest_side;
             } else {
