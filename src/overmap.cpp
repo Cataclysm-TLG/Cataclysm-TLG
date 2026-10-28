@@ -582,13 +582,14 @@ const std::vector<overmap_special> &overmap_specials::get_all()
     return specials.get_all();
 }
 
-overmap_special_batch overmap_specials::get_default_batch( const point_abs_om &origin )
+overmap_special_batch overmap_specials::get_default_batch( const point_abs_om &origin,
+        int city_size )
 {
     std::vector<const overmap_special *> res;
 
     res.reserve( specials.size() );
     for( const overmap_special &elem : specials.get_all() ) {
-        if( elem.can_spawn() ) {
+        if( elem.can_spawn( city_size ) ) {
             res.push_back( &elem );
         }
     }
@@ -2969,13 +2970,12 @@ overmap_special::overmap_special( const overmap_special_id &i, const overmap_spe
     , data_{ make_shared_fast<fixed_overmap_special_data>( ter ) }
 {}
 
-bool overmap_special::can_spawn() const
+bool overmap_special::can_spawn( int city_size ) const
 {
     if( get_constraints().occurrences.empty() ) {
         return false;
     }
 
-    const int city_size = get_option<int>( "CITY_SIZE" );
     return city_size != 0 || get_constraints().city_size.min <= city_size;
 }
 
@@ -3168,8 +3168,9 @@ void overmap::populate( overmap_special_batch &enabled_specials )
 
 void overmap::populate()
 {
-    overmap_special_batch enabled_specials = overmap_specials::get_default_batch( loc );
     const region_settings_feature_flag &overmap_feature_flag = settings->overmap_feature_flag;
+    overmap_special_batch enabled_specials = overmap_specials::get_default_batch( loc,
+            settings->get_settings_city().city_size );
 
     const bool should_blacklist = !overmap_feature_flag.blacklist.empty();
     const bool should_whitelist = !overmap_feature_flag.whitelist.empty();
@@ -5009,7 +5010,7 @@ void overmap::place_forest_trails()
 void overmap::place_forest_trailheads()
 {
     // No trailheads if there are no cities.
-    const int city_size = get_option<int>( "CITY_SIZE" );
+    const int city_size = settings->get_settings_city().city_size;
     if( city_size <= 0 ) {
         return;
     }
@@ -5176,7 +5177,7 @@ void overmap::place_swamps()
 
 void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps )
 {
-    int op_city_size = get_option<int>( "CITY_SIZE" );
+    int op_city_size = settings->get_settings_city().city_size;
     if( op_city_size <= 0 ) {
         return;
     }
@@ -5236,7 +5237,7 @@ void overmap::place_roads( const std::vector<const overmap *> &neighbor_overmaps
 void overmap::place_railroads( const std::vector<const overmap *> &neighbor_overmaps )
 {
     // no railroads if there are no cities
-    int op_city_size = get_option<int>( "CITY_SIZE" );
+    int op_city_size = settings->get_settings_city().city_size;
     if( op_city_size <= 0 ) {
         return;
     }
@@ -5375,7 +5376,7 @@ void overmap::calculate_forestosity()
 
 void overmap::calculate_urbanity()
 {
-    int op_city_size = get_option<int>( "CITY_SIZE" );
+    int op_city_size = settings->get_settings_city().city_size;
     if( op_city_size <= 0 ) {
         return;
     }

@@ -464,7 +464,7 @@ class monster : public Creature
         void reset_stats() override;
 
         void die( map *here, Creature *killer ) override; //this is the die from Creature, it calls kill_mo
-        void drop_items_on_death( map *here, item *corpse );
+        void drop_items_on_death( map *here, item *corpse ) const;
         void spawn_dissectables_on_death( item *corpse ) const; //spawn dissectable CBMs into CORPSE pocket
         //spawn monster's inventory without killing it
         void generate_inventory( bool disableDrops = true );

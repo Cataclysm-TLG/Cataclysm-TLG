@@ -2658,12 +2658,7 @@ void options_manager::add_options_world_default()
 
     add_empty_line();
 
-    add( "CITY_SIZE", "world_default", translation(), translation(), 0, 16, 8, COPT_ALWAYS_HIDE
-       );
-
-    add( "CITY_SPACING", "world_default", translation(), translation(), 0, 8, 4, COPT_ALWAYS_HIDE
-       );
-
+    // These options are purposefully and permanently hidden, left intact for mods.
     add( "SPAWN_DENSITY", "world_default", translation(), translation(), 0.0, 50.0, 1.0, 0.1,
          COPT_ALWAYS_HIDE
        );

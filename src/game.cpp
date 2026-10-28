@@ -173,6 +173,7 @@
 #include "proficiency.h"
 #include "recipe.h"
 #include "recipe_dictionary.h"
+#include "regional_settings.h"
 #include "ret_val.h"
 #include "rng.h"
 #include "safemode_ui.h"
@@ -992,6 +993,12 @@ bool game::start_game()
     load_map( lev, /*pump_events=*/true );
 
     start_loc.place_player( u, omtstart );
+    // Set spawn location for starting items (maps need it to be readable)
+    const tripoint_abs_ms player_pos = u.pos_abs();
+    u.visit_items( [&player_pos]( item * it, item * ) {
+        it->preserve_location( player_pos );
+        return VisitResponse::NEXT;
+    } );
     map &here = reality_bubble();
     int level = here.get_abs_sub().z();
     // Rebuild map cache because we want visibility cache to avoid spawning monsters in sight
@@ -1001,7 +1008,7 @@ bool game::start_game()
     overmap_buffer.reveal( u.pos_abs_omt().xy(),
                            get_scenario()->get_distance_initial_visibility(), 0 );
 
-    const int city_size = get_option<int>( "CITY_SIZE" );
+    const int city_size = overmap_buffer.get_settings( u.pos_abs_omt() ).get_settings_city().city_size;
     if( get_scenario()->get_reveal_locale() && city_size > 0 ) {
         city_reference nearest_city = overmap_buffer.closest_city( here.get_abs_sub() );
         const tripoint_abs_omt city_center_omt = project_to<coords::omt>( nearest_city.abs_sm_pos );

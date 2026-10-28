@@ -33,16 +33,12 @@
     "scenarios": [ "lone_survivor_start", "largebuilding", "fire", "bad_day", "last_delivery" ]
   },
   {
-    "type": "EXTERNAL_OPTION",
-    "name": "MEGACITY",
-    "//": "If true, mapgen will be overwritten to place several large overlapping cities on every overmap. Intended for use only in the megacity mod, using it in other circumstances may cause strange behavior.",
-    "stype": "bool",
-    "value": true
-  },
-  {
     "type": "region_settings_city",
     "id": "mega_mega_city_settings",
     "copy-from": "default",
+    "is_megacity": true,
+    "city_size": 16,
+    "city_spacing": 0,
     "shop_radius": 200,
     "shop_sigma": 0,
     "park_radius": 0,

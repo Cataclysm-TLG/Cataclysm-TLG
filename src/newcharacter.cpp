@@ -46,6 +46,7 @@
 #include "options.h"
 #include "output.h"
 #include "overmap_ui.h"
+#include "overmapbuffer.h"
 #include "path_info.h"
 #include "pimpl.h"
 #include "profession.h"
@@ -53,6 +54,8 @@
 #include "proficiency.h"
 #include "recipe.h"
 #include "recipe_dictionary.h"
+#include "regional_settings.h"
+#include "ret_val.h"
 #include "rng.h"
 #include "scenario.h"
 #include "skill.h"
@@ -441,7 +444,8 @@ void Character::randomize( const bool random_scenario, bool play_now )
     randomize_height();
     randomize_blood();
     randomize_heartrate();
-    bool cities_enabled = world_generator->active_world->WORLD_OPTIONS["CITY_SIZE"].getValue() != "0";
+    bool cities_enabled = overmap_buffer.get_settings(
+                              this->pos_abs_omt() ).get_settings_city().city_size != 0;
     if( random_scenario ) {
         std::vector<const scenario *> scenarios;
         for( const scenario &scen : scenario::get_all() ) {
@@ -3672,7 +3676,6 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
 
     do {
         if( recalc_scens ) {
-            options_manager::options_container &wopts = world_generator->active_world->WORLD_OPTIONS;
             std::vector<const scenario *> new_scens;
             for( const scenario &scen : scenario::get_all() ) {
                 if( scen.scen_is_blacklisted() ) {
@@ -3681,7 +3684,8 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 new_scens.push_back( &scen );
             }
             scenario_sorter.male = u.male;
-            scenario_sorter.cities_enabled = wopts["CITY_SIZE"].getValue() != "0";
+            scenario_sorter.cities_enabled = overmap_buffer
+                                             .get_settings( u.pos_abs_omt() ).get_settings_city().city_size != 0;
             if( ( scens_length = filter_entries( u, cur_id, sorted_scens, new_scens, get_scenario(),
                                                  filterstring,
                                                  scenario_sorter ) ) == 0 ) {
