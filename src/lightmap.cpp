@@ -424,18 +424,19 @@ void map::generate_lightmap( const int zlev )
     bool top_floor = zlev == OVERMAP_DEPTH;
     lm.fill( four_quadrants{} );
     sm.fill( 0 );
+    map_cache.light_color_cache.fill( light_color_rgb{} );
 
     /* Bulk light sources wastefully cast rays into neighbors; a burning hospital can produce
          significant slowdown, so for stuff like fire and lava:
      * Step 1: Store the position and luminance in buffer via add_light_source, for efficient
-         checking of neighbors.
+         checking of neighbors. Color rides the same buffer additively.
      * Step 2: After everything else, iterate buffer and apply_light_source only in non-redundant
-         directions
+         directions, propagating both scalar light and color in the same octant decisions.
      * Step 3: ????
      * Step 4: Profit!
      */
     auto &light_source_buffer = map_cache.light_source_buffer;
-    light_source_buffer.fill( 0 );
+    light_source_buffer.fill( level_cache::buffered_light_source{} );
 
     constexpr std::array<int, 4> dir_x = { {  0, -1, 1, 0 } };    //    [0]
     constexpr std::array<int, 4> dir_y = { { -1,  0, 0, 1 } };    // [1][X][2]
@@ -500,22 +501,21 @@ void map::generate_lightmap( const int zlev )
 
                     const ter_id &terrain = cur_submap->get_ter( { sx, sy } );
                     if( terrain->light_emitted > 0 ) {
-                        add_light_source( p, terrain->light_emitted );
+                        add_light_source( p, terrain->light_emitted, terrain->light_color );
                     }
                     const furn_id &furniture = cur_submap->get_furn( {sx, sy } );
                     if( furniture->light_emitted > 0 ) {
-                        add_light_source( p, furniture->light_emitted );
+                        add_light_source( p, furniture->light_emitted, furniture->light_color );
                     }
 
                     for( const auto &fld : cur_submap->get_field( { sx, sy } ) ) {
                         const field_entry *cur = &fld.second;
-                        const int light_emitted = cur->get_intensity_level().light_emitted;
-                        if( light_emitted > 0 ) {
-                            add_light_source( p, light_emitted );
+                        const field_intensity_level &fil = cur->get_intensity_level();
+                        if( fil.light_emitted > 0 ) {
+                            add_light_source( p, fil.light_emitted, fil.light_color );
                         }
-                        const float light_override = cur->get_intensity_level().local_light_override;
-                        if( light_override >= 0.0f ) {
-                            lm_override.emplace_back( p, light_override );
+                        if( fil.local_light_override >= 0.0f ) {
+                            lm_override.emplace_back( p, fil.local_light_override );
                         }
                     }
                 }
@@ -572,16 +572,16 @@ void map::generate_lightmap( const int zlev )
 
             if( vp.has_flag( VPFLAG_CONE_LIGHT ) ) {
                 if( veh_luminance > lit_level::LIT ) {
-                    add_light_source( src, M_SQRT2 ); // Add a little surrounding light
+                    add_light_source( src, M_SQRT2, vp.light_color ); // Add a little surrounding light
                     apply_light_arc( src, v->face.dir() + pt->direction, veh_luminance,
-                                     45_degrees );
+                                     45_degrees, vp.light_color );
                 }
 
             } else if( vp.has_flag( VPFLAG_WIDE_CONE_LIGHT ) ) {
                 if( veh_luminance > lit_level::LIT ) {
-                    add_light_source( src, M_SQRT2 ); // Add a little surrounding light
+                    add_light_source( src, M_SQRT2, vp.light_color ); // Add a little surrounding light
                     apply_light_arc( src, v->face.dir() + pt->direction, veh_luminance,
-                                     90_degrees );
+                                     90_degrees, vp.light_color );
                 }
 
             } else if( vp.has_flag( VPFLAG_HALF_CIRCLE_LIGHT ) ) {
@@ -591,11 +591,13 @@ void map::generate_lightmap( const int zlev )
                     tripoint_bub_ms offset = src;
                     offset.x() = src.x() + tdir.dx();
                     offset.y() = src.y() + tdir.dy();
-                    add_light_source( offset, M_SQRT2 ); // Add a little surrounding light
-                    apply_light_arc( offset, v->face.dir() + pt->direction, vp.bonus, 180_degrees );
+                    add_light_source( offset, M_SQRT2, vp.light_color ); // Add a little surrounding light
+                    apply_light_arc( offset, v->face.dir() + pt->direction, vp.bonus, 180_degrees,
+                                     vp.light_color );
                 } else {
-                    add_light_source( src, M_SQRT2 ); // Add a little surrounding light
-                    apply_light_arc( src, v->face.dir() + pt->direction, vp.bonus, 180_degrees );
+                    add_light_source( src, M_SQRT2, vp.light_color ); // Add a little surrounding light
+                    apply_light_arc( src, v->face.dir() + pt->direction, vp.bonus, 180_degrees,
+                                     vp.light_color );
                 }
 
             } else if( vp.has_flag( VPFLAG_CIRCLE_LIGHT ) ) {
@@ -604,11 +606,11 @@ void map::generate_lightmap( const int zlev )
                     ( !odd_turn && vp.has_flag( VPFLAG_EVENTURN ) ) ||
                     ( !( vp.has_flag( VPFLAG_EVENTURN ) || vp.has_flag( VPFLAG_ODDTURN ) ) ) ) {
 
-                    add_light_source( src, vp.bonus );
+                    add_light_source( src, vp.bonus, vp.light_color );
                 }
 
             } else {
-                add_light_source( src, vp.bonus );
+                add_light_source( src, vp.bonus, vp.light_color );
             }
         }
 
@@ -629,20 +631,108 @@ void map::generate_lightmap( const int zlev )
     const tripoint_bub_ms cache_start( 0, 0, zlev );
     const tripoint_bub_ms cache_end( LIGHTMAP_CACHE_X, LIGHTMAP_CACHE_Y, zlev );
     for( const tripoint_bub_ms &p : points_in_rectangle( cache_start, cache_end ) ) {
-        if( light_source_buffer[p.x()][p.y()] > 0.0 ) {
-            apply_light_source( p, light_source_buffer[p.x()][p.y()] );
+        if( light_source_buffer[p.x()][p.y()].luminance > 0.0 ) {
+            apply_light_source( p, light_source_buffer[p.x()][p.y()].luminance );
         }
     }
+
     for( const std::pair<tripoint_bub_ms, float> &elem : lm_override ) {
         lm[elem.first.x()][elem.first.y()].fill( elem.second );
     }
+
+    // 3x3 box blur on the color cache softens residual octant boundary seams.
+    // Even with per-channel max in update_light_color, attenuation differences
+    // between adjacent octants can leave visible intensity steps.
+    {
+        auto &light_color_cache = map_cache.light_color_cache;
+        static auto blur_buf =
+            std::make_unique<cata::mdarray<light_color_rgb, point_bub_ms>>();
+        blur_buf->fill( light_color_rgb{} );
+        for( int x = 1; x < MAPSIZE_X - 1; ++x ) {
+            for( int y = 1; y < MAPSIZE_Y - 1; ++y ) {
+                if( !light_color_cache[x][y].is_colored() ) {
+                    continue;
+                }
+                light_color_rgb sum;
+                int count = 0;
+                for( int dx = -1; dx <= 1; ++dx ) {
+                    for( int dy = -1; dy <= 1; ++dy ) {
+                        sum += light_color_cache[x + dx][y + dy];
+                        ++count;
+                    }
+                }
+                ( *blur_buf )[x][y] = sum * ( 1.0f / count );
+            }
+        }
+        for( int x = 1; x < MAPSIZE_X - 1; ++x ) {
+            for( int y = 1; y < MAPSIZE_Y - 1; ++y ) {
+                if( ( *blur_buf )[x][y].is_colored() ) {
+                    light_color_cache[x][y] = ( *blur_buf )[x][y];
+                }
+            }
+        }
+    }
 }
 
-void map::add_light_source( const tripoint_bub_ms &p, float luminance )
+void map::add_light_source( const tripoint_bub_ms &p, float luminance,
+                            const light_color_rgb &color )
 {
-    auto &light_source_buffer = get_cache( p.z() ).light_source_buffer;
-    light_source_buffer[p.x()][p.y()] = std::max( luminance, light_source_buffer[p.x()][p.y()] );
+    auto &buf = get_cache( p.z() ).light_source_buffer[p.x()][p.y()];
+    if( luminance > buf.luminance ) {
+        buf.luminance = luminance;
+    }
+    // Color accumulates additively, weighted by luminance so brighter sources
+    // dominate the hue. Luminance itself uses max() for the buffer dedup that
+    // prevents redundant ray casting into neighbors (see apply_light_source).
+    if( color.is_colored() ) {
+        buf.color += color * luminance;
+    }
 }
+
+light_color_rgb light_color_rgb::from_hsv( float h, float s, float v )
+{
+    const float c = v * s;
+    const float x = c * ( 1.0f - std::abs( std::fmod( h / 60.0f, 2.0f ) - 1.0f ) );
+    const float m = v - c;
+    float r1 = 0.0f;
+    float g1 = 0.0f;
+    float b1 = 0.0f;
+    if( h < 60.0f ) {
+        r1 = c;
+        g1 = x;
+    } else if( h < 120.0f ) {
+        r1 = x;
+        g1 = c;
+    } else if( h < 180.0f ) {
+        g1 = c;
+        b1 = x;
+    } else if( h < 240.0f ) {
+        g1 = x;
+        b1 = c;
+    } else if( h < 300.0f ) {
+        r1 = x;
+        b1 = c;
+    } else {
+        r1 = c;
+        b1 = x;
+    }
+    return { r1 + m, g1 + m, b1 + m };
+}
+
+// Set before each castLight sequence, read by update_light_color callback.
+static light_color_rgb g_current_source_color;
+
+// castLight callback for color propagation. Per-channel max prevents octant
+// boundary seams (two adjacent octants hitting the same tile would double
+// the color with +=, but scalar light uses max() so it stays clean).
+static void update_light_color( light_color_rgb &tile_color, const float &intensity, quadrant )
+{
+    const light_color_rgb contrib = g_current_source_color * intensity;
+    tile_color.r = std::max( tile_color.r, contrib.r );
+    tile_color.g = std::max( tile_color.g, contrib.g );
+    tile_color.b = std::max( tile_color.b, contrib.b );
+}
+
 
 // Tile light/transparency: 3D
 
@@ -1211,12 +1301,11 @@ static bool light_check( const float &transparency, const float &intensity )
 void map::apply_light_source( const tripoint_bub_ms &p, float luminance )
 {
     level_cache &cache = get_cache( p.z() );
-    cata::mdarray<four_quadrants, point_bub_ms> &lm = cache.lm;
-    cata::mdarray<float, point_bub_ms> &sm = cache.sm;
-    cata::mdarray<float, point_bub_ms> &transparency_cache =
-        cache.transparency_cache;
-    cata::mdarray<float, point_bub_ms> &light_source_buffer =
-        cache.light_source_buffer;
+    auto &lm = cache.lm;
+    auto &sm = cache.sm;
+    auto &transparency_cache = cache.transparency_cache;
+    auto &light_source_buffer = cache.light_source_buffer;
+    auto &light_color_cache = cache.light_color_cache;
     cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache =
         cache.vehicle_obstructed_cache;
 
@@ -1233,10 +1322,21 @@ void map::apply_light_source( const tripoint_bub_ms &p, float luminance )
         luminance = 1.49f;
     }
 
+    // Color propagation: the buffer stores accumulated (color * luminance).
+    // Dividing by luminance recovers the average color, which castLight then
+    // re-scales by the per-tile attenuated intensity -- same falloff as scalar.
+    const auto &buf = light_source_buffer[p2.x()][p2.y()];
+    const bool has_color = buf.color.is_colored();
+    if( has_color ) {
+        g_current_source_color = buf.color * ( 1.0f / buf.luminance );
+        // Set source tile color directly
+        light_color_cache[p2.x()][p2.y()] += g_current_source_color * luminance;
+    }
+
     /* If we're a 5 luminance fire , we skip casting rays into ey && sx if we have
          neighboring fires to the north and west that were applied via light_source_buffer
        If there's a 1 luminance candle east in buffer, we still cast rays into ex since it's smaller
-       If there's a 100 luminance magnesium flare south added via apply_light_source instead od
+       If there's a 100 luminance magnesium flare south added via apply_light_source instead of
          add_light_source, it's unbuffered so we'll still cast rays into sy.
 
           ey
@@ -1250,45 +1350,87 @@ void map::apply_light_source( const tripoint_bub_ms &p, float luminance )
            sy
     */
     const int peer_inbounds = LIGHTMAP_CACHE_X - 1;
-    bool north = p2.y() != 0 && light_source_buffer[p2.x()][p2.y() - 1] < luminance;
-    bool south = p2.y() != peer_inbounds && light_source_buffer[p2.x()][p2.y() + 1] < luminance;
-    bool east = p2.x() != peer_inbounds && light_source_buffer[p2.x() + 1][p2.y()] < luminance;
-    bool west = p2.x() != 0 && light_source_buffer[p2.x() - 1][p2.y()] < luminance;
+    bool north = p2.y() != 0 && light_source_buffer[p2.x()][p2.y() - 1].luminance < luminance;
+    bool south = p2.y() != peer_inbounds &&
+                 light_source_buffer[p2.x()][p2.y() + 1].luminance < luminance;
+    bool east = p2.x() != peer_inbounds &&
+                light_source_buffer[p2.x() + 1][p2.y()].luminance < luminance;
+    bool west = p2.x() != 0 && light_source_buffer[p2.x() - 1][p2.y()].luminance < luminance;
 
     if( north ) {
         castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight < 1, 0, 0, -1, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency > (
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
         castLight < -1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight < -1, 0, 0, -1, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency > (
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
     }
 
     if( east ) {
         castLight < 0, -1, 1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight < 0, -1, 1, 0, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency > (
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
         castLight < 0, -1, -1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight < 0, -1, -1, 0, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency > (
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
     }
 
     if( south ) {
         castLight<1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency>(
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight<1, 0, 0, 1, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency>(
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
         castLight < -1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight < -1, 0, 0, 1, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency > (
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
     }
 
     if( west ) {
         castLight<0, 1, 1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency>(
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight<0, 1, 1, 0, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency>(
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
         castLight < 0, 1, -1, 0, float, four_quadrants, light_calc, light_check,
                   update_light_quadrants, accumulate_transparency > (
                       lm, transparency_cache, blocked_cache, p2, 0, luminance );
+        if( has_color ) {
+            castLight < 0, 1, -1, 0, float, light_color_rgb, light_calc, light_check,
+                      update_light_color, accumulate_transparency > (
+                          light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance );
+        }
     }
 }
 
@@ -1335,7 +1477,7 @@ void map::apply_directional_light( const tripoint_bub_ms &p, int direction, floa
 }
 
 void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, float luminance,
-                           const units::angle &wideangle )
+                           const units::angle &wideangle, const light_color_rgb &color )
 {
     if( luminance <= LIGHT_SOURCE_LOCAL ) {
         return;
@@ -1351,6 +1493,15 @@ void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, 
         cache.transparency_cache;
     cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache =
         cache.vehicle_obstructed_cache;
+    cata::mdarray<light_color_rgb, point_bub_ms> &light_color_cache =
+        cache.light_color_cache;
+
+    const bool has_color = color.is_colored();
+    if( has_color ) {
+        g_current_source_color = color;
+        // Source tile gets only the local halo intensity, matching scalar path
+        light_color_cache[p2.x()][p2.y()] += color * LIGHT_SOURCE_LOCAL;
+    }
 
     const units::angle wangle = wideangle / 2.0;
     // Normalize so oangle is between 0 and 360 degrees
@@ -1377,53 +1528,46 @@ void map::apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, 
         start_angle = std::max( 45_degrees * start, oangle );
         end_angle = std::min( 45_degrees * end, cangle );
 
+        // Helper macro: cast scalar light, then color through the same octant.
+        // The template parameters encode the octant direction.
+#define CAST_ARC_OCTANT( xx, xy, yx, yy, s1, s2 ) \
+    castLight < xx, xy, yx, yy, float, four_quadrants, light_calc, light_check, \
+    update_light_quadrants, accumulate_transparency > ( \
+            lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, s1, s2 ); \
+    if( has_color ) { \
+        castLight < xx, xy, yx, yy, float, light_color_rgb, light_calc, light_check, \
+        update_light_color, accumulate_transparency > ( \
+                light_color_cache, transparency_cache, blocked_cache, p2, 0, luminance, 1, s1, s2 ); \
+    }
+
         // i is positive
         switch( i % 8 ) {
             case 0:
-                castLight < 0, -1, -1, 0, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, tan( end_angle ), tan( start_angle ) );
+                CAST_ARC_OCTANT( 0, -1, -1, 0, tan( end_angle ), tan( start_angle ) );
                 break;
             case 1:
-                castLight < -1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, cot( start_angle ), cot( end_angle ) );
+                CAST_ARC_OCTANT( -1, 0, 0, -1, cot( start_angle ), cot( end_angle ) );
                 break;
             case 2:
-                castLight < 1, 0, 0, -1, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -cot( end_angle ),
-                              -cot( start_angle ) );
+                CAST_ARC_OCTANT( 1, 0, 0, -1, -cot( end_angle ), -cot( start_angle ) );
                 break;
             case 3:
-                castLight < 0, 1, -1, 0, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -tan( start_angle ),
-                              -tan( end_angle ) );
+                CAST_ARC_OCTANT( 0, 1, -1, 0, -tan( start_angle ), -tan( end_angle ) );
                 break;
             case 4:
-                castLight < 0, 1, 1, 0, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency >(
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, tan( end_angle ), tan( start_angle ) );
+                CAST_ARC_OCTANT( 0, 1, 1, 0, tan( end_angle ), tan( start_angle ) );
                 break;
             case 5:
-                castLight < 1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency >(
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, cot( start_angle ), cot( end_angle ) );
+                CAST_ARC_OCTANT( 1, 0, 0, 1, cot( start_angle ), cot( end_angle ) );
                 break;
             case 6:
-                castLight < -1, 0, 0, 1, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -cot( end_angle ),
-                              -cot( start_angle ) );
+                CAST_ARC_OCTANT( -1, 0, 0, 1, -cot( end_angle ), -cot( start_angle ) );
                 break;
             case 7:
-                castLight < 0, -1, 1, 0, float, four_quadrants, light_calc, light_check,
-                          update_light_quadrants, accumulate_transparency > (
-                              lm, transparency_cache, blocked_cache, p2, 0, luminance, 1, -tan( start_angle ),
-                              -tan( end_angle ) );
+                CAST_ARC_OCTANT( 0, -1, 1, 0, -tan( start_angle ), -tan( end_angle ) );
                 break;
         }
+#undef CAST_ARC_OCTANT
         i++;
     }
 }

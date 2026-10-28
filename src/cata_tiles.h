@@ -138,14 +138,23 @@ class texture
             return std::make_pair( srcrect.w, srcrect.h );
         }
         /// Interface to @ref SDL_RenderCopyEx, using this as the texture, and
-        /// null as source rectangle (render the whole texture). Other parameters
-        /// are simply passed through.
+        /// the stored source rectangle. Other parameters are simply passed through.
         int render_copy_ex( const SDL_Renderer_Ptr &renderer, const SDL_Rect *const dstrect,
                             const double angle,
                             const SDL_Point *const center, const SDL_RendererFlip flip ) const {
-            return SDL_RenderCopyEx( renderer.get(), sdl_texture_ptr.get(), &srcrect, dstrect, angle, center,
-                                     flip );
+            RenderCopyEx( renderer, sdl_texture_ptr.get(), &srcrect, dstrect, angle, center, flip );
+            return 0;
         }
+};
+
+/**
+ * Bundles per-tile rendering state so the draw path carries all lighting
+ * decisions in one place. Future fields (light color tint, per-tile
+ * brightness) extend this struct without adding parameters to every function.
+ */
+struct tile_render_params {
+    lit_level ll;
+    bool use_night_vision_tiles = false;
 };
 
 /**
@@ -521,7 +530,7 @@ class cata_tiles
             int subtile,
             int rota,
             lit_level ll,
-            bool apply_visual_effects
+            bool apply_night_vision_goggles
         );
 
         bool draw_from_id_string(
@@ -530,7 +539,7 @@ class cata_tiles
             int subtile,
             int rota,
             lit_level ll,
-            bool apply_visual_effects,
+            bool apply_night_vision_goggles,
             int &height_3d,
             const draw_options &opts
         );
@@ -541,7 +550,7 @@ class cata_tiles
             int rota,
             lit_level ll,
             int retract,
-            bool apply_visual_effects,
+            bool apply_night_vision_goggles,
             int &height_3d,
             const draw_options &opts
         );
@@ -550,18 +559,18 @@ class cata_tiles
         bool draw_from_id_string_om( const std::string &id, TILE_CATEGORY category,
                                      const std::string &subcategory, const tripoint_abs_omt &pos, int subtile, int rota,
                                      lit_level ll,
-                                     bool apply_visual_effects, int &height_3d, float scale_x, float scale_y );
+                                     bool apply_night_vision_goggles, int &height_3d, float scale_x, float scale_y );
 
         // Wrapper for draw_sprite_at()
         bool draw_tile_at( const tile_type &tile, const point &, unsigned int loc_rand, int rota,
-                           lit_level ll, bool apply_visual_effects, int retract, int &height_3d,
+                           const tile_render_params &rp, int retract, int &height_3d,
                            const point &offset,
                            float scale_x, float scale_y, int mirror, bool creature = false );
 
         bool draw_sprite_at(
             const tile_type &tile, const weighted_int_list<std::vector<int>> &svlist,
-            const point &, unsigned int loc_rand, bool rota_fg, int rota, lit_level ll,
-            bool apply_visual_effects, int retract, int &height_3d, const point &offset,
+            const point &, unsigned int loc_rand, bool rota_fg, int rota, const tile_render_params &rp,
+            int retract, int &height_3d, const point &offset,
             float scale_x, float scale_y, int mirror, bool creature = false );
 
         /* Tile Picking */
