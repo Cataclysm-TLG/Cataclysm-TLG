@@ -24,6 +24,7 @@
 #include "avatar_action.h"
 #include "bionics.h"
 #include "cached_options.h"
+#include "calendar.h"
 #include "cata_assert.h"
 #include "cata_utility.h"
 #include "catacharset.h"

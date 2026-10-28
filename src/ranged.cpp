@@ -185,6 +185,7 @@ static const trait_id trait_ECHOLOCATION( "ECHOLOCATION" );
 static const trait_id trait_PYROMANIA( "PYROMANIA" );
 
 static const trap_str_id tr_practice_target( "tr_practice_target" );
+static const trap_str_id tr_target_spinner( "tr_target_spinner" );
 
 static const std::string gun_mechanical_simple( "gun_mechanical_simple" );
 
@@ -3523,12 +3524,14 @@ tripoint_bub_ms target_ui::choose_initial_target()
     if( !targets.empty() ) {
         return targets[0];
     }
-
     // Try closest practice target
     map &here = get_map();
+    const std::vector<tripoint_bub_ms> nearby = closest_points_first( src, range );
+    // Try closest practice/spinner target
     std::optional<tripoint_bub_ms> target_spot = find_point_closest_first( src, 0, range, [this,
     &here]( const tripoint_bub_ms & pt ) {
-        return here.tr_at( pt ).id == tr_practice_target && this->you->sees( here, pt );
+        return ( here.tr_at( pt ).id == tr_practice_target || here.tr_at( pt ).id == tr_target_spinner ) &&
+               this->you->sees( here, pt );
     } );
 
     if( target_spot != std::nullopt ) {

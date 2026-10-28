@@ -20,6 +20,8 @@ struct item_comp;
 struct tool_comp;
 template<typename T> struct enum_traits;
 
+const std::string flag_ALWAYS_START_ON_GROUND( "ALWAYS_START_ON_GROUND" );
+
 /**
 *   enum used by comp_selection to indicate where a component should be consumed from.
 */
@@ -113,6 +115,11 @@ class craft_command
 
         bool is_long() const {
             return longcraft;
+        }
+
+        // prevent player from
+        bool always_start_on_ground() const {
+            return rec->has_flag( flag_ALWAYS_START_ON_GROUND );
         }
 
         bool has_cached_selections() const {
