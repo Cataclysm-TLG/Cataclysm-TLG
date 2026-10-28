@@ -622,6 +622,8 @@ time_point noon( const time_point &p );
 bool is_night( const time_point &p );
 /** Returns true if it's currently day time - after dawn and before dusk. */
 bool is_day( const time_point &p );
+/** Returns true if it's currently twilight, either dusk or dawn. */
+bool is_twilight( const time_point &p );
 /** Returns true if it's currently dusk - between sunset and and twilight_duration after sunset. */
 bool is_dusk( const time_point &p );
 /** Returns true if it's currently dawn - between sunrise and twilight_duration after sunrise. */

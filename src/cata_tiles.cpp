@@ -1773,10 +1773,11 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
     }
 
     if( max_draw_depth <= 0 ) {
+    int cur_zlevel = std::max( center.z() - fov_3d_z_range, -OVERMAP_DEPTH );
         // Legacy draw mode
         for( int row = min_row; row < max_row; row ++ ) {
             for( auto f : drawing_layers_legacy ) {
-                for( tile_render_info &p : here.draw_points_cache[center.z()][row] ) {
+                for( tile_render_info &p : here.draw_points_cache[cur_zlevel][row] ) {
                     if( const tile_render_info::vision_effect * const
                         var = std::get_if<tile_render_info::vision_effect>( &p.var ) ) {
                         if( f == &cata_tiles::draw_terrain ) {
@@ -1844,6 +1845,8 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         // gold (45 deg HSV) as the sun climbs. Sine ease gives a smooth
         // fade in/out instead of a sudden switch at the twilight boundary.
         if( cur_zlevel >= 0 && is_twilight( calendar::turn ) ) {
+        const half_open_rectangle<point> &cur_any_tile_range = is_isometric()
+                ? z_any_tile_range[center.z() - cur_zlevel] : top_any_tile_range;
             const units::angle alt = sun_azimuth_altitude( calendar::turn ).second;
             // lo/hi: nautical twilight range in degrees below horizon
             constexpr float lo = -6.0f;
@@ -1861,11 +1864,11 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                     static_cast<Uint8>( sun_rgb.b * 255.0f ),
                     sun_alpha
                 };
-                const auto &outside_cache = here.access_cache( cur_zlevel ).outside_cache;
+                const auto &outside_cache = here.access_cache( center.z() ).outside_cache;
                 SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_BLEND );
                 for( int sun_row = cur_any_tile_range.p_min.y; sun_row < cur_any_tile_range.p_max.y;
                      sun_row++ ) {
-                    for( const tile_render_info &p : here.draw_points_cache[cur_zlevel][sun_row] ) {
+                    for( const tile_render_info &p : here.draw_points_cache[center.z()][sun_row] ) {
                         if( !outside_cache[p.com.pos.x()][p.com.pos.y()] ) {
                             continue;
                         }
@@ -3176,24 +3179,26 @@ bool cata_tiles::draw_sprite_at(
             sprite_tex = ptr;
         }
     } else if( rp.use_night_vision_tiles ) {
-        if( rp.ll != lit_level::LOW ) {
-            if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
-                sprite_tex = ptr;
-            }
-        } else {
-            if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
-                sprite_tex = ptr;
-            }
-        }
         // TODO: Review if this works for remote view e.g. RC cars.
-    } else if( rp.use_night_vision_tiles && get_player_character().is_underwater() ) {
-        if( rp.ll != lit_level::LOW ) {
-            if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
-                sprite_tex = ptr;
+        if( get_player_character().is_underwater() ) {
+            if( rp.ll != lit_level::LOW ) {
+                if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
+                    sprite_tex = ptr;
+                }
+            } else {
+                if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
+                    sprite_tex = ptr;
+                }
             }
         } else {
-            if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
-                sprite_tex = ptr;
+            if( rp.ll != lit_level::LOW ) {
+                if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
+                    sprite_tex = ptr;
+                }
+            } else {
+                if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
+                    sprite_tex = ptr;
+                }
             }
         }
     } else if( rp.ll == lit_level::LOW ) {
