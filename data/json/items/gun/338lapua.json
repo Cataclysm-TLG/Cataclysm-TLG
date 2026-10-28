@@ -5,16 +5,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": ".338 bolt-action sniper rifle" },
-    "description": "A high-precision bolt-action sniper rifle, in service with special operations members of the US Navy prior to the cataclysm.  Firing the powerful .338 Lapua cartridge, the weapon feeds from detachable five round Accuracy International magazines.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "tac338",
-        "name": { "str": "McMillan Tac-338 rifle" },
-        "description": "Chambering the .338 Lapua cartridge, the Tac-338 is a high-precision, bolt-action sniper rifle that, before the Cataclysm, complemented the arsenal of the US Navy Special Warfare unit.  Providing Navy SEAL marksmen with the capability to land effective shots on targets at a typical range of 1600 meters, a valuable capability for the long-distance engagements prevalent during the US army's war on terror, the rifle comes kitted with an adjustable cheek pad, butt hook, and muzzle break."
-      }
-    ],
+    "name": { "str": "McMillan Tac-338 rifle" },
+    "description": "Chambering the .338 Lapua cartridge, the Tac-338 is a high-precision, bolt-action sniper rifle that, before the Cataclysm, complemented the arsenal of the US Navy Special Warfare unit.  Providing Navy SEAL marksmen with the capability to land effective shots on targets at a typical range of 1600 meters, a valuable capability for the long-distance engagements prevalent during the US army's war on terror, the rifle comes kitted with an adjustable cheek pad, butt hook, and muzzle break.",
     "weight": "5897 g",
     "volume": "4000 ml",
     "longest_side": "1295 mm",
@@ -40,7 +32,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "default_mods": [ "cheek_pad", "butt_hook", "bipod", "rifle_scope", "muzzle_brake" ],
-    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "ai_338mag", "ai_338mag_10" ] } ],
     "melee_damage": { "bash": 12 }
   },
@@ -50,16 +42,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "single-shot target rifle" },
+    "name": { "str": "Savage 112 Magnum Target rifle" },
     "description": "A bolt-action precision rifle with the potential for impressive accuracy, this particular weapon makes use of the powerful .338 Lapua cartridge and is decked in a handsome set of wooden furniture, providing the rifle with a classical mystique.  Unfortunately, the weapon's single-round magazine and a lack of factory iron sights, which makes target acquisition an exercise in futility unless a gunsight is installed, make the rifle limited in its post-Cataclysm utility.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "savage112",
-        "name": { "str": "Savage 112 Magnum Target rifle" },
-        "description": "A highly-accurate precision rifle chambered for the powerful .338 Lapua cartridge, the Savage 112 Magnum Target is a classically designed bolt-action rifle in both its fit and finish, with a heavy barrel, a hardwood stock, and an attached muzzle brake.  Unfortunately for the weapon and its users, a traditional veneer, no matter how admittedly swanky, isn't conducive to tactical effectiveness, as demonstrated by the 112 Magnum Target's mighty magazine size of one entire cartridge and lack of any factory-attached sights."
-      }
-    ],
     "weight": "5470 g",
     "volume": "3000 ml",
     "longest_side": "1264 mm",
@@ -87,7 +71,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "338lapua": 1 } } ],
     "barrel_volume": "820 ml",
     "melee_damage": { "bash": 12 }
@@ -98,16 +82,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "Barrett precision rifle" },
+    "name": { "str": "Barrett MRAD SMR rifle" },
     "description": "A box magazine-fed bolt-action precision rifle developed by the Barrett Arms Company, firing the .338 Lapua cartridge.  A civilian copy of more versatile military weapons, this rifle is a remarkably well-crafted piece of anti-personnel engineering despite lacking the sheer modularity of its Marshal sister, and is still capable of engaging targets at extreme distances.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "mrad_smr",
-        "name": { "str": "Barrett MRAD SMR rifle" },
-        "description": "Chambered for the .338 Lapua cartridge, the Barrett MRAD SMR is a civilian variant of the MK22 MRAD sniper rifle, which was in service with elements of the US army and is often regarded as one of the finest bolt-action sniper rifles ever developed.  The primary differences that set this weapon apart from its Marshal sibling are the removal of the MRAD's caliber conversion capabilities and the installation of a fixed buttstock.  These changes have resulted in a lighter and slimmer rifle that, most importantly for the discerning pre-Cataclysmic precision shooter, didn't require a second mortgage to purchase."
-      }
-    ],
     "weight": "6305 g",
     "volume": "5500 ml",
     "longest_side": "1204 mm",
@@ -122,7 +98,7 @@
     "durability": 10,
     "blackpowder_tolerance": 24,
     "built_in_mods": [ "cheek_pad" ],
-    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "//": "Cheek pad required for holding the buttstock in place and keep it from folding.",
     "default_mods": [ "match_trigger", "muzzle_brake" ],
     "valid_mod_locations": [
@@ -172,7 +148,7 @@
       [ "underbarrel", 1 ],
       [ "stock", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "melee_damage": { "bash": 12 }
   }
 ]

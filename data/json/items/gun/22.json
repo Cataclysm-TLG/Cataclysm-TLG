@@ -88,7 +88,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET", "LEVER_ACTION" ],
     "pocket_data": [
       {
         "pocket_type": "MAGAZINE",
@@ -745,16 +745,8 @@
     "looks_like": "marlin_9a",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "small game lever-action rifle" },
-    "description": "A .22 Long Rifle lever-action rifle, which holds 15 rounds of ammo.  While quite useful against small game, its effectiveness isn't as great against the undead.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "rio_bravo",
-        "name": { "str": "Rossi Rio Bravo rifle" },
-        "description": "A modern .22 LR lever-action rifle, the Rio Bravo features an 18\" barrel with 15 rounds of ammo in its tube magazine, which is loaded from the front of the rifle.  The mechanical origins date back decades, being based off of Rossi's R92 series of rifles which themselves were based off of the Winchester 1892."
-      }
-    ],
+    "name": { "str": "Rossi Rio Bravo rifle" },
+    "description": "A modern .22 LR lever-action rifle, the Rio Bravo features an 18\" barrel with 15 rounds of ammo in its tube magazine, which is loaded from the front of the rifle.  The mechanical origins date back decades, being based off of Rossi's R92 series of rifles which themselves were based off of the Winchester 1892.",
     "weight": "2345 g",
     "volume": "2101 ml",
     "longest_side": "931 mm",
@@ -784,7 +776,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET", "LEVER_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "22": 15 } } ],
     "melee_damage": { "bash": 9 }
   },
@@ -794,16 +786,8 @@
     "looks_like": "marlin_9a",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "small game lever-action rifle" },
-    "description": "A .22 Long Rifle lever-action rifle, which holds 16 rounds of ammo.  While quite useful against small game, its effectiveness isn't as great against the undead.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "henry_golden_boy",
-        "name": { "str": "Henry Golden Boy rifle" },
-        "description": "A modern .22 LR lever-action rifle, the Henry Golden Boy features an 20\" octagonal barrel with 16 rounds of ammo in its tube magazine, which is loaded from the front of the rifle.  It fairly resembles the original Henry Model 1860 with its brass colored receiver, though with wooden furniture at the front, and without a doubt using modern manufacturing."
-      }
-    ],
+    "name": { "str": "Henry Golden Boy rifle" },
+    "description": "A modern .22 LR lever-action rifle, the Henry Golden Boy features an 20\" octagonal barrel with 16 rounds of ammo in its tube magazine, which is loaded from the front of the rifle.  It fairly resembles the original Henry Model 1860 with its brass colored receiver, though with wooden furniture at the front, and without a doubt using modern manufacturing.",
     "weight": "3062 g",
     "volume": "2116 ml",
     "longest_side": "979 mm",

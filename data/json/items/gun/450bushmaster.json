@@ -19,7 +19,7 @@
     "ammo": [ "450" ],
     "dispersion": 120,
     "durability": 8,
-    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "mechanism", 2 ],

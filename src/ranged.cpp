@@ -1022,32 +1022,28 @@ bool Character::handle_gun_overheat( item &it )
 
 static int get_action_penalty( const map &here, const Character &guy, const item &gun )
 {
-    // skip action penalty if we do not have any more rounds to load
+    // Skip action penalty if we do not have any more rounds to load.
     if( gun.shots_remaining( here, &guy ) == 0 ) {
         return 0;
     }
 
     float action_penalty = 0;
-
-    if( gun.has_flag( json_flag_LEVER_ACTION ) ) {
+    if( gun.has_flag( json_flag_PUMP_ACTION ) ) {
+        action_penalty += 600.f;
+    } else if( gun.has_flag( json_flag_LEVER_ACTION ) || gun.has_flag( json_flag_SINGLE_ACTION ) ) {
         action_penalty += 800.f;
-    } else if( gun.has_flag( json_flag_SINGLE_ACTION ) ) {
-        action_penalty += 1000.f;
-    } else if( gun.has_flag( json_flag_PUMP_ACTION ) ) {
-        action_penalty += 1200.f;
     } else if( gun.has_flag( json_flag_BOLT_ACTION ) ) {
         action_penalty += 1600.f;
     }
 
-    // for higher calibers, the penalty doesn't matter that much,
-    // their recoil is already hard enough they have to effectively re-aim from scratch every time
+    // For high recoil weapons, the penalty doesn't matter that much.
     action_penalty = std::max( action_penalty - gun.gun_recoil( guy ), 0.f );
 
     if( action_penalty == 0.f ) {
         return 0;
     }
 
-    // either 12 in marksmanship, or 12 in skill the gun uses, or something in between, would mitigate 80% of penalty
+    // Either 12 in marksmanship, or 12 in skill the gun uses, or something in between, would mitigate 80% of penalty.
     const float action_skill =
         std::min( guy.get_skill_level( skill_gun ) + guy.get_skill_level( gun.gun_skill() ), 12.f );
 

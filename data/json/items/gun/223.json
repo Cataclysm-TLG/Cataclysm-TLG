@@ -1056,7 +1056,7 @@
       [ "stock", 1 ],
       [ "grip", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "BOLT_ACTION" ],
     "melee_damage": { "bash": 10 }
   },
   {
