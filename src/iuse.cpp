@@ -317,6 +317,7 @@ static const itype_id itype_water_purifying_active( "water_purifying_active" );
 static const itype_id itype_wax( "wax" );
 static const itype_id itype_weather_reader( "weather_reader" );
 
+static const json_character_flag json_flag_CANNOT_USE_COMPUTERS( "CANNOT_USE_COMPUTERS" );
 static const json_character_flag json_flag_ENHANCED_VISION( "ENHANCED_VISION" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
@@ -5206,6 +5207,11 @@ std::optional<int> iuse::robotcontrol( Character *p, item *it, const tripoint_bu
             return std::nullopt;
         }
 
+        if( p->has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
+            p->add_msg_if_player( m_info, _( "You don't have any idea how to operate that." ) );
+            return std::nullopt;
+        }
+
         if( p->has_flag( json_flag_HYPEROPIC ) && !p->worn_with_flag( flag_FIX_FARSIGHT ) &&
             !p->has_effect( effect_contacts ) && !p->has_effect( effect_transition_contacts ) &&
             !p->has_flag( json_flag_ENHANCED_VISION ) ) {
@@ -5377,6 +5383,11 @@ std::optional<int> iuse::efiledevice( Character *p, item *it, const tripoint_bub
         return std::nullopt;
     }
     if( p->cant_do_underwater() ) {
+        return std::nullopt;
+    }
+    if( p->has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
+        p->add_msg_if_player( m_info,
+                              _( "You push some buttons but have no idea how to get it to work." ) );
         return std::nullopt;
     }
     if( p->has_trait( trait_ILLITERATE ) ) {
@@ -6322,6 +6333,7 @@ static bool show_photo_selection( Character &p, item &it, const std::string &var
 
 std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms & )
 {
+
     enum {c_shot, c_view};
 
     // From item processing
@@ -8350,6 +8362,10 @@ std::optional<int> iuse::measure_resonance( Character *p, item *it, const tripoi
 
 std::optional<int> iuse::ebooksave( Character *p, item *it, const tripoint_bub_ms & )
 {
+    if( p->has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
+        p->add_msg_if_player( m_info, _( "You push some buttons but it's all meaningless to you." ) );
+        return std::nullopt;
+    }
     if( !p ) {
         debugmsg( "%s called action ebooksave that requires character but no character is present",
                   it->typeId().str() );
