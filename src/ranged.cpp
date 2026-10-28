@@ -3515,8 +3515,6 @@ void target_ui::update_target_list()
 
 tripoint_bub_ms target_ui::choose_initial_target()
 {
-    map &here = get_map();
-
     // Try previously targeted creature
     shared_ptr_fast<Creature> cr = you->last_target.lock();
     if( cr && pl_sees( *cr ) && dist_fn( cr->pos_bub() ) <= range ) {
