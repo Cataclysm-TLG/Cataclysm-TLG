@@ -4020,7 +4020,8 @@ bool target_practice_activity_actor::check_character_and_gun( Character &who )
     // todo: move this to pick_target_practice_gun() maybe?
     // todo2: limb scores boogalo
     if( who.is_limb_broken( body_part_arm_l ) || who.is_limb_broken( body_part_arm_r ) ) {
-        const bool is_pistol = ( gun_loc->gun_type() == gun_type_type( "smg" ) || gun_loc->gun_type() == gun_type_type( "pistol" ) );
+        const bool is_pistol = ( gun_loc->gun_type() == gun_type_type( "smg" ) ||
+                                 gun_loc->gun_type() == gun_type_type( "pistol" ) );
 
         if( is_pistol ) {
             who.add_msg_if_player( m_good,

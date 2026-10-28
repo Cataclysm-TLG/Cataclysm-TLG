@@ -5035,7 +5035,9 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     }
 
     // Reject tainted/poisonous items (saprophages/saprovores can handle it)
-    if( ( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) || !it.rotten() ) ) || ( it.type->use_methods.count( "POISON_TAINTED" ) && !who.has_trait( trait_EATDEAD ) ) ) {
+    if( ( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) ||
+            !it.rotten() ) ) || ( it.type->use_methods.count( "POISON_TAINTED" ) &&
+                                  !who.has_trait( trait_EATDEAD ) ) ) {
         return 0.0f;
     }
 
@@ -5100,7 +5102,9 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     // NPCs won't eat poison food unless it's only a little poisoned
     if( it.poison > 0 ) {
         // Reject tainted/poisonous items (saprophages/saprovores can handle it)
-        if( !( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) || !it.rotten() ) ) && !( it.type->use_methods.count( "POISON_TAINTED" ) && !who.has_trait( trait_EATDEAD ) ) ) {
+        if( !( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) ||
+                !it.rotten() ) ) && !( it.type->use_methods.count( "POISON_TAINTED" ) &&
+                                       !who.has_trait( trait_EATDEAD ) ) ) {
             weight -= it.poison;
         }
     }

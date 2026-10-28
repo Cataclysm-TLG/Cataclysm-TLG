@@ -2534,7 +2534,7 @@ int RAS_time( const Character &p, const item_location &loc )
 
 static void cycle_action( item &weap, const itype_id &ammo, map *here, const tripoint_bub_ms &pos )
 {
-  // Eject casings and linkages in random direction avoiding walls using player position as fallback.
+    // Eject casings and linkages in random direction avoiding walls using player position as fallback.
     std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, 1 );
     tiles.erase( tiles.begin() );
     tiles.erase( std::remove_if( tiles.begin(), tiles.end(), [&pos,

@@ -507,7 +507,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Rossi R92 16\" rifle" },
-        "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features wooden furniture, a 16\" barrel, and 8 rounds of .357 Magnum or .38 Special.",
+    "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features wooden furniture, a 16\" barrel, and 8 rounds of .357 Magnum or .38 Special.",
     "weight": "2662 g",
     "volume": "1909 ml",
     "longest_side": "843 mm",
