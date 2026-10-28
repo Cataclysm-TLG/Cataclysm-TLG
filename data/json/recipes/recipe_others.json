@@ -2800,7 +2800,7 @@
         [ "hard_plate", 1 ],
         [ "alloy_plate", 1 ],
         [ "steel_plate", 1 ],
-        [ "steel_lump_any", 1, "LIST" ],
+        [ "steel_chunk", 1 ],
         [ "sheet_metal", 1 ]
       ],
       [ [ "pipe", 8 ] ],
