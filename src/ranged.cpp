@@ -2450,7 +2450,7 @@ int RAS_time( const Character &p, const item_location &loc )
 
 static void cycle_action( item &weap, const itype_id &ammo, map *here, const tripoint_bub_ms &pos )
 {
-    // Eject casings and linkages in random direction avoiding walls using player position as fallback.
+  // Eject casings and linkages in random direction avoiding walls using player position as fallback.
     std::vector<tripoint_bub_ms> tiles = closest_points_first( pos, 1 );
     tiles.erase( tiles.begin() );
     tiles.erase( std::remove_if( tiles.begin(), tiles.end(), [&pos,
@@ -3513,8 +3513,6 @@ void target_ui::update_target_list()
 
 tripoint_bub_ms target_ui::choose_initial_target()
 {
-    map &here = get_map();
-
     // Try previously targeted creature
     shared_ptr_fast<Creature> cr = you->last_target.lock();
     if( cr && pl_sees( *cr ) && dist_fn( cr->pos_bub() ) <= range ) {
@@ -3527,12 +3525,13 @@ tripoint_bub_ms target_ui::choose_initial_target()
     }
 
     // Try closest practice target
-    const std::vector<tripoint_bub_ms> nearby = closest_points_first( src, range );
-    const auto target_spot = std::find_if( nearby.begin(), nearby.end(),
-    [this, &here]( const tripoint_bub_ms & pt ) {
+    map &here = get_map();
+    std::optional<tripoint_bub_ms> target_spot = find_point_closest_first( src, 0, range, [this,
+    &here]( const tripoint_bub_ms & pt ) {
         return here.tr_at( pt ).id == tr_practice_target && this->you->sees( here, pt );
     } );
-    if( target_spot != nearby.end() ) {
+
+    if( target_spot != std::nullopt ) {
         return *target_spot;
     }
 
