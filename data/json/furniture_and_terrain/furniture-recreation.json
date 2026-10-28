@@ -663,7 +663,9 @@
     "coverage": 38,
     "concealment": 38,
     "flags": [ "TRANSPARENT", "FLAMMABLE", "EASY_DECONSTRUCT" ],
+    "deployed_item": "archery_target_box",
     "crafting_pseudo_item": "pseudo_archery_target_box",
+    "examine_action": "deployed_furniture",
     "deconstruct": { "items": [ { "item": "archery_target_box", "count": 1 } ] },
     "bash": {
       "str_min": 4,

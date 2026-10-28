@@ -12,17 +12,6 @@
   },
   {
     "type": "construction",
-    "id": "constr_archery_target_box",
-    "group": "build_archery_target_box",
-    "category": "CONSTRUCT",
-    "time": "1 m",
-    "difficulty": 0,
-    "components": [ [ [ "archery_target_box", 1 ] ] ],
-    "pre_special": "check_down_OK",
-    "post_terrain": "f_archery_target_box"
-  },
-  {
-    "type": "construction",
     "id": "constr_ergometer_mechanical",
     "group": "build_ergometer_mechanical",
     "category": "FURN",

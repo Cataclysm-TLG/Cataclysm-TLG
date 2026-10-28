@@ -3856,6 +3856,7 @@
     "description": "A soft target for archery, consisting of tightly-packed cloth stuffed into a cardboard box, with a bullseye marked on the front.  Must be set up to use.",
     "price": "30 USD",
     "price_postapoc": "2 USD",
+    "use_action": { "type": "deploy_furn", "furn_type": "f_archery_target_box" },
     "material": [ { "type": "cotton", "portion": 9 }, { "type": "cardboard" } ],
     "weight": "16 kg",
     "volume": "50 L",
