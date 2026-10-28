@@ -1723,7 +1723,28 @@
     "type": "json_flag"
   },
   {
+    "id": "PUMP_RAIL",
+    "//": "Can only fit small underbarrel mods due to the presence of a pump or other conflicting part.",
+    "type": "json_flag"
+  },
+  {
+    "id": "LEVER_ACTION",
+    "info": "This weapon uses a manual lever to chamber each round, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
+    "type": "json_flag"
+  },
+  {
+    "id": "SINGLE_ACTION",
+    "info": "This weapon must be manually cocked before each shot, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
+    "type": "json_flag"
+  },
+  {
     "id": "PUMP_ACTION",
+    "info": "This weapon requires pumping a sliding grip to cycle each round, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
+    "type": "json_flag"
+  },
+  {
+    "id": "BOLT_ACTION",
+    "info": "This weapon utilizes a turn-bolt to manually cycle each round, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
     "type": "json_flag"
   },
   {
@@ -2000,6 +2021,7 @@
   },
   {
     "id": "PUMP_RAIL_COMPATIBLE",
+    "//": "Small enough or otherwise specially designed to fit as an underbarrel attachment on pump-action weapons.",
     "type": "json_flag"
   },
   {

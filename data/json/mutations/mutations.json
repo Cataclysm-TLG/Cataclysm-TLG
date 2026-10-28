@@ -6687,7 +6687,7 @@
     "name": { "str": "Dense Bones" },
     "points": 1,
     "mixed_effect": true,
-    "description": "Your bones are particularly dense and durable.  Your tougher frame grants 5% more HP and 15% more carry capacity plus bashing attacks injure you less, but your higher weight makes attacking and moving 5% slower.  Also, dodging and swimming are harder.",
+    "description": "Your bones are particularly dense and durable.  Your tougher frame grants 5% more HP and 15% more carry capacity.  You are slightly resistant to bash damage, but your higher weight makes attacking and moving 5% slower and hinders your ability to dodge and swim.",
     "types": [ "BONES" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "CRUSTACEAN", "PLANT" ],
     "enchantments": [

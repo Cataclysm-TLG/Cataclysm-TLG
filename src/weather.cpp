@@ -66,6 +66,7 @@ static const flag_id json_flag_WATERPROOF( "WATERPROOF" );
 static const itype_id itype_water( "water" );
 
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
+static const json_character_flag json_flag_RAIN_IMMUNE( "RAIN_IMMUNE" );
 
 static const oter_type_str_id oter_type_forest( "forest" );
 static const oter_type_str_id oter_type_forest_water( "forest_water" );
@@ -382,6 +383,9 @@ void wet_character( Character &target, int amount )
 {
     // This function was originally designed to run every 6 seconds, so maintian that rate.
     if( amount <= 0 || !calendar::once_every( 6_seconds ) ) {
+        return;
+    }
+    if( target.has_flag( json_flag_RAIN_IMMUNE ) ) {
         return;
     }
     item_location weapon = target.get_wielded_item();

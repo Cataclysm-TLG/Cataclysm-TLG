@@ -80,7 +80,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET", "LEVER_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 10 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -261,17 +261,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": ".44 lever-action rifle" },
+    "name": { "str": "Rossi R92 16\" rifle" },
     "description": "This lever-action rifle is chambered in the powerful .44 Magnum cartridge, with an 16\" barrel with a tube-fed magazine.  Go get 'em cowboy!",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "rossi_r92_44_16",
-        "name": { "str": "Rossi R92 16\" rifle" },
-        "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features all-black furniture, a 16\" barrel, and 8 rounds of .44 Magnum, along with a large lever loop."
-      }
-    ],
-    "//": "Stats from https://rossiusa.com/rifles/lever-action-rifles/349-r92-triple-black-wood-black-cerakote-44-mag-16-in",
     "weight": "2529 g",
     "volume": "2076 ml",
     "longest_side": "879 mm",
@@ -297,7 +288,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET", "LEVER_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 8 } } ],
     "melee_damage": { "bash": 12 }
   },
@@ -307,17 +298,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": ".44 lever-action rifle" },
-    "description": "This lever-action rifle is chambered in the powerful .44 Magnum cartridge, with an 20\" barrel with a tube-fed magazine.  Go get 'em cowboy!",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "rossi_r92_44_16",
-        "name": { "str": "Rossi R92 20\" rifle" },
-        "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features all-black furniture, a 20\" barrel, and 10 rounds of .44 Magnum."
-      }
-    ],
-    "//": "Stats from https://rossiusa.com/rifles/lever-action-rifles/368-r92-hardwood-polished-black-oxide-44-mag-20-in",
+    "name": { "str": "Rossi R92 20\" rifle" },
+    "description": "The R92 is a widely successful line of lever-action rifles from Rossi, featuring a wide array of different calibers and barrel lengths.  These aim to be less reproductions of old rifles, but rather modern takes on the lever-action formula.  This particular one features all-black furniture, a 20\" barrel, and 10 rounds of .44 Magnum.",
     "weight": "2705 g",
     "volume": "2015 ml",
     "longest_side": "965 mm",
@@ -343,7 +325,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET", "LEVER_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "44": 10 } } ],
     "melee_damage": { "bash": 12 }
   }

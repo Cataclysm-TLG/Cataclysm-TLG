@@ -168,6 +168,7 @@ static const itype_id itype_water_clean( "water_clean" );
 
 static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
 static const json_character_flag json_flag_BLOODFEEDER( "BLOODFEEDER" );
+static const json_character_flag json_flag_IMMUNE_SPOIL( "IMMUNE_SPOIL" );
 static const json_character_flag json_flag_PARAIMMUNE( "PARAIMMUNE" );
 
 static const npc_class_id NC_EVAC_SHOPKEEP( "NC_EVAC_SHOPKEEP" );
@@ -179,9 +180,12 @@ static const string_id<behavior::node_t> behavior_node_t_npc_decision( "npc_deci
 static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
 
 static const trait_id trait_ALCMET( "ALCMET" );
+static const trait_id trait_EATDEAD( "EATDEAD" );
 static const trait_id trait_GOURMAND( "GOURMAND" );
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
 static const trait_id trait_RETURN_TO_START_POS( "RETURN_TO_START_POS" );
+static const trait_id trait_SAPROPHAGE( "SAPROPHAGE" );
+static const trait_id trait_SAPROVORE( "SAPROVORE" );
 
 static const vitamin_id vitamin_ethanol( "ethanol" );
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
@@ -5017,19 +5021,23 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
         return 0.0f;
     }
 
-    if( weight <= 0.f && !it.type->use_methods.empty() ) {
-        // TODO: Get a good method of telling apart:
-        // raw meat (parasites - don't eat unless mutant)
-        // zed meat (poison - don't eat unless mutant)
-        // caffeine (fine to consume, but expensive and prevents sleep)
-        // hallucination mushrooms (NPCs don't hallucinate, so don't eat those)
-        // honeycomb (harmless iuse)
-        // royal jelly (way too expensive to eat as food)
-        // mutagenic crap (don't eat, we want player to micromanage mutagens)
-        // marloss (NPCs don't turn fungal)
-        // seeds (too expensive)
+    // Don't eat medicine as food (NPC self-medication is handled in use_painkiller)
+    if( food->comesttype == "MED" ) {
+        return 0.0f;
+    }
 
-        // For now skip all of those
+    // Reject marloss/mycus items -- player should control the fungal path
+    if( it.has_flag( flag_MYCUS_OK ) ||
+        it.type->use_methods.count( "MARLOSS" ) ||
+        it.type->use_methods.count( "MARLOSS_SEED" ) ||
+        it.type->use_methods.count( "MARLOSS_GEL" ) ) {
+        return 0.0f;
+    }
+
+    // Reject tainted/poisonous items (saprophages/saprovores can handle it)
+    if( ( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) ||
+            !it.rotten() ) ) || ( it.type->use_methods.count( "POISON_TAINTED" ) &&
+                                  !who.has_trait( trait_EATDEAD ) ) ) {
         return 0.0f;
     }
 
@@ -5085,7 +5093,6 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     }
 
     if( nutr > want_nutr ) {
-
         // Discount fresh foods that are bigger than our hunger.
         if( relative_rot < 0.9f ) {
             weight /= nutr - want_nutr;
@@ -5094,7 +5101,12 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
 
     // NPCs won't eat poison food unless it's only a little poisoned
     if( it.poison > 0 ) {
-        weight -= it.poison;
+        // Reject tainted/poisonous items (saprophages/saprovores can handle it)
+        if( !( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) ||
+                !it.rotten() ) ) && !( it.type->use_methods.count( "POISON_TAINTED" ) &&
+                                       !who.has_trait( trait_EATDEAD ) ) ) {
+            weight -= it.poison;
+        }
     }
 
     // Quench surplus and other penalties can make weight negative for

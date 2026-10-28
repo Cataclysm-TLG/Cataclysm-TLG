@@ -191,6 +191,7 @@ class overmapbuffer
         overmap &get( const point_abs_om & );
         void save();
         void clear();
+        void reset();
         void create_custom_overmap( const point_abs_om &, overmap_special_batch &specials );
 
         /**
