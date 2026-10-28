@@ -3179,28 +3179,26 @@ bool cata_tiles::draw_sprite_at(
             sprite_tex = ptr;
         }
     } else if( rp.use_night_vision_tiles ) {
-        // TODO: Review if this works for remote view e.g. RC cars.
-        if( get_player_character().is_underwater() ) {
-            if( rp.ll != lit_level::LOW ) {
-                if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
-                    sprite_tex = ptr;
-                }
-            } else {
-                if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
-                    sprite_tex = ptr;
-                }
+        if( rp.ll != lit_level::LOW ) {
+            if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
+                sprite_tex = ptr;
             }
         } else {
-            if( rp.ll != lit_level::LOW ) {
-                if( const texture *ptr = tileset_ptr->get_overexposed_tile( sprite_index ) ) {
-                    sprite_tex = ptr;
-                }
-            } else {
-                if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
-                    sprite_tex = ptr;
-                }
+            if( const texture *ptr = tileset_ptr->get_night_tile( sprite_index ) ) {
+                sprite_tex = ptr;
             }
         }
+        // TODO: Review if this works for remote view e.g. RC cars.
+    // } else if( rp.use_night_vision_tiles && get_player_character().is_underwater() ) {
+    //     if( rp.ll != lit_level::LOW ) {
+    //         if( const auto ptr = tileset_ptr->get_underwater_tile( sprite_index ) ) {
+    //             sprite_tex = ptr;
+    //         }
+    //     } else {
+    //         if( const auto ptr = tileset_ptr->get_underwater_dark_tile( sprite_index ) ) {
+    //             sprite_tex = ptr;
+    //         }
+    //     }
     } else if( rp.ll == lit_level::LOW ) {
         if( const texture *ptr = tileset_ptr->get_shadow_tile( sprite_index ) ) {
             sprite_tex = ptr;
