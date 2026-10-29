@@ -30,6 +30,9 @@ enum class quadrant : int {
     default_ = NE
 };
 
+// For a direction vector defined by x, y, return the quadrant that's the
+// source of that direction.  Assumes x != 0 && y != 0
+// NOLINTNEXTLINE(cata-xy)
 constexpr quadrant quadrant_from_x_y( int x, int y )
 {
     return ( x > 0 ) ?

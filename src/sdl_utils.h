@@ -40,6 +40,11 @@ SDL_Color color_pixel_overexposed( const SDL_Color &color );
 SDL_Color color_pixel_underwater( const SDL_Color &color );
 SDL_Color color_pixel_underwater_dark( const SDL_Color &color );
 SDL_Color color_pixel_darken( const SDL_Color &color );
+// White silhouette preserving alpha. Used as tint mask texture.
+inline SDL_Color color_pixel_silhouette( const SDL_Color &color )
+{
+    return { 255, 255, 255, color.a };
+}
 SDL_Color color_pixel_mixer( const SDL_Color &color, const float &gammav,
                              const SDL_Color &color_a, const SDL_Color &color_b );
 

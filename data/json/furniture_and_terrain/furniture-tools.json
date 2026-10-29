@@ -828,6 +828,7 @@
     "coverage": 30,
     "required_str": 6,
     "light_emitted": 25,
+    "light_color": [ 100, 240, 100 ],
     "flags": [ "TRANSPARENT", "NOITEM", "BLOCKSDOOR" ],
     "bash": {
       "str_min": 20,
