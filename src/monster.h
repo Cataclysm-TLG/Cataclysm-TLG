@@ -666,6 +666,8 @@ class monster : public Creature
         void load( const JsonObject &data, const tripoint_abs_sm &submap_loc );
 
         void on_move( const tripoint_abs_ms &old_pos ) override;
+        void on_effect_int_change( const efftype_id &eid, int intensity,
+                                   const bodypart_id &bp ) override;
         /** Processes monster-specific effects of an effect. */
         void process_one_effect( effect &it, bool is_new ) override;
 };

@@ -23,6 +23,7 @@
 #include "active_item_cache.h"
 #include "calendar.h"
 #include "cata_assert.h"
+#include "cata_small_literal_vector.h"
 #include "cata_type_traits.h"
 #include "cata_utility.h"
 #include "colony.h"
@@ -309,11 +310,63 @@ struct drawsq_params {
         //@}
 };
 
+// Accumulated screen-pixel bounding box of all sprites drawn for a single tile
+// during the current frame. Used by the ortho tint overlay to cover the full
+// sprite extent instead of a fixed tile_width x tile_height rect.
+// NOLINTNEXTLINE(cata-xy)
+struct sprite_screen_bounds {
+    int x = 0, y = 0, w = 0, h = 0;
+    bool valid = false;
+    // NOLINTNEXTLINE(cata-large-inline-function,cata-xy)
+    void expand( int rx, int ry, int rw, int rh ) {
+        if( !valid ) {
+            x = rx;
+            y = ry;
+            w = rw;
+            h = rh;
+            valid = true;
+        } else {
+            const int nx = x < rx ? x : rx; // NOLINT(cata-combine-locals-into-point)
+            const int ny = y < ry ? y : ry;
+            const int x2 = ( x + w > rx + rw ) ? x + w : rx + rw;
+            const int y2 = ( y + h > ry + rh ) ? y + h : ry + rh;
+            x = nx;
+            y = ny;
+            w = x2 - nx;
+            h = y2 - ny;
+        }
+    }
+};
+
+// Snapshot of a single sprite draw call, recorded during the layer loop so the
+// ortho tint overlay can replay the sprite as a white silhouette into a mask
+// texture. Captures everything needed to reproduce the draw at the same screen
+// position with the silhouette color filter variant.
+struct tint_sprite_record {
+    int sprite_index;      // index into tileset tile_values / silhouette_tile_values
+    struct { // NOLINT(cata-xy)
+        int x, y, w, h;
+    } destination;         // screen-space destination rect at time of draw
+    double angle;          // rotation angle (0, -90, 90)
+    int flip;              // SDL_RendererFlip cast to int (avoids SDL include)
+};
+
 struct tile_render_info {
     struct common {
         const tripoint_bub_ms pos;
         // accumulator for 3d tallness of sprites rendered here so far;
         int height_3d = 0;
+        // Ortho tint overlay state, populated during the draw prepass and layer
+        // loop. For tiles where needs_tint is true:
+        //   bounds       - union of all content sprite screen rects (opaque only)
+        //   tint_sprites - draw records for silhouette mask replay
+        //   tint_color   - precomputed RGBA tint from the colored light cache
+        sprite_screen_bounds bounds;
+        small_literal_vector<tint_sprite_record, 4> tint_sprites;
+        bool needs_tint = false;
+        struct {
+            uint8_t r, g, b, a;
+        } tint_color = { 0, 0, 0, 0 };
 
         common( const tripoint_bub_ms &pos, const int height_3d )
             : pos( pos ), height_3d( height_3d ) {}
@@ -444,6 +497,8 @@ class map
         void set_seen_cache_dirty( int zlevel );
         void set_outside_cache_dirty( int zlev );
         void set_floor_cache_dirty( int zlev );
+        void set_lightmap_cache_dirty( int zlev );
+        void set_lightmap_cache_dirty_below( int zlev );
         void set_pathfinding_cache_dirty( int zlev );
         void set_pathfinding_cache_dirty( const tripoint_bub_ms &p );
         /*@}*/
@@ -2158,7 +2213,8 @@ class map
         void add_light_source( const tripoint_bub_ms &p, float luminance,
                                const light_color_rgb &color = {} );
         // Handle just cardinal directions and 45 deg angles.
-        void apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance );
+        void apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance,
+                                      const light_color_rgb &color = {} );
         void apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, float luminance,
                               const units::angle &wideangle = 30_degrees,
                               const light_color_rgb &color = {} );

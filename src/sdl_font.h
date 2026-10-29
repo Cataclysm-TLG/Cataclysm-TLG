@@ -53,7 +53,7 @@ class Font
 
         /// Try to load a font by typeface (Bitmap or Truetype).
         static std::unique_ptr<Font> load_font(
-            SDL_Renderer_Ptr &renderer, SDL_PixelFormat_Ptr &format,
+            SDL_Renderer_Ptr &renderer, Uint32 pixel_format,
             const std::string &typeface, int fontsize, int fontwidth,
             int fontheight,
             const palette_array &palette,
@@ -124,7 +124,7 @@ class BitmapFont : public Font
 {
     public:
         BitmapFont(
-            SDL_Renderer_Ptr &renderer, SDL_PixelFormat_Ptr &format,
+            SDL_Renderer_Ptr &renderer, Uint32 pixel_format,
             int w, int h,
             const palette_array &palette,
             const std::string &typeface_path );
@@ -151,7 +151,7 @@ class FontFallbackList : public Font
 {
     public:
         FontFallbackList(
-            SDL_Renderer_Ptr &renderer, SDL_PixelFormat_Ptr &format,
+            SDL_Renderer_Ptr &renderer, Uint32 pixel_format,
             int w, int h,
             const palette_array &palette,
             const std::vector<std::string> &typefaces,

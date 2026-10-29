@@ -10,6 +10,7 @@
     "coverage": 10,
     "concealment": 10,
     "light_emitted": 15,
+    "light_color": [ 40, 200, 100 ],
     "required_str": -1,
     "flags": [ "TRANSPARENT" ],
     "bash": {
@@ -205,6 +206,8 @@
     "coverage": 100,
     "concealment": 100,
     "flags": [ "TRANSPARENT", "ORGANIC" ],
+    "light_emitted": 30,
+    "light_color": [ 120, 20, 180 ],
     "deconstruct": { "items": [ { "item": "glass_shard", "count": 1000 } ] },
     "required_str": -1,
     "bash": {
@@ -229,6 +232,8 @@
     "move_cost_mod": -1,
     "coverage": 100,
     "concealment": 100,
+    "light_emitted": 10,
+    "light_color": [ 90, 20, 160 ],
     "deconstruct": { "items": [ { "item": "glass_shard", "count": 1000 } ] },
     "required_str": -1,
     "bash": {
