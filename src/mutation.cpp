@@ -1681,7 +1681,6 @@ bool Character::mutate_towards( const trait_id &mut, const mutation_category_id 
                 // Need to pass this on, since we might end up gaining prerequisites that would not know about the removal otherwise
                 removed_base_trait = true;
                 my_traits.erase( removed );
-                add_msg_if_player( _( "Something integral to you has changed.  Good riddance." ) );
             }
             remove_mutation( removed );
             cancel.erase( cancel.begin() + i );
