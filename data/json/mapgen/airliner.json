@@ -273,9 +273,9 @@
         { "group": "snacks", "repeat": [ 10, 15 ], "x": 38, "y": 58 }
       ],
       "place_monsters": [
-        { "monster": "GROUP_MALL", "x": [ 27, 47 ], "y": [ 10, 23 ], "repeat": [ 5, 10 ], "density": 0.1 },
-        { "monster": "GROUP_MALL", "x": [ 27, 47 ], "y": [ 24, 47 ], "repeat": [ 7, 16 ], "density": 0.1 },
-        { "monster": "GROUP_MALL", "x": [ 27, 47 ], "y": [ 48, 61 ], "repeat": [ 3, 4 ], "density": 0.1 }
+        { "monster": "GROUP_VANILLA_NO_FERAL", "x": [ 27, 47 ], "y": [ 10, 23 ], "repeat": [ 5, 10 ], "density": 0.1 },
+        { "monster": "GROUP_VANILLA_NO_FERAL", "x": [ 27, 47 ], "y": [ 24, 47 ], "repeat": [ 7, 16 ], "density": 0.1 },
+        { "monster": "GROUP_VANILLA_NO_FERAL", "x": [ 27, 47 ], "y": [ 48, 61 ], "repeat": [ 3, 4 ], "density": 0.1 }
       ],
       "monsters": {
         "Z": { "monster": "GROUP_VANILLA_NO_FERAL" },

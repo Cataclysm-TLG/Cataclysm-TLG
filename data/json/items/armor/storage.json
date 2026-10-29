@@ -1365,8 +1365,8 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "copy-from": "armrig",
-    "name": { "str": "small leg purse" },
-    "description": "A small purse that can be worn on the upper leg using buckled straps, easier to use than on the arm.  For those who want to wear a dress without pockets while carrying their phone and money.  Use it to adjust it to fit your arm.",
+    "name": { "str": "thigh pouch" },
+    "description": "A small purse that can be worn on the upper leg using buckled straps.  Use it to adjust it to fit your arm.",
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
@@ -1379,22 +1379,19 @@
     ],
     "armor": [
       {
-        "encumbrance": 1,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
       },
       {
-        "encumbrance": 1,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
       },
       {
-        "encumbrance": 1,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "crab_leg_1", "crab_leg_3" ],
         "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
@@ -1412,12 +1409,12 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "armband pouch", "str_pl": "armband pouches" },
-    "description": "A small pouch that can be worn on the upper arm using buckled straps.  This is a favored item among sports & camping enthusiasts.  Use it to adjust it to fit your leg.",
+    "description": "A small pouch that can be worn on the upper arm using buckled straps.  Use it to adjust it to fit your leg.",
     "weight": "205 g",
     "volume": "550 ml",
     "price": "30 USD",
     "price_postapoc": "2 USD 50 cent",
-    "material": [ { "type": "canvas", "portion": 9 }, { "type": "plastic", "portion": 1 } ],
+    "material": [ { "type": "nylon", "portion": 9 }, { "type": "plastic", "portion": 1 } ],
     "symbol": "[",
     "looks_like": "armguard_soft",
     "color": "dark_gray",
@@ -1435,15 +1432,13 @@
     "flags": [ "OVERSIZE", "WATER_FRIENDLY", "BELTED" ],
     "armor": [
       {
-        "encumbrance": 0,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
       },
       {
-        "encumbrance": 0,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]

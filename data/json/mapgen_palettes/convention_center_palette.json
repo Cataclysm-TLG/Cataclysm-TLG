@@ -76,10 +76,10 @@
       "a": "f_trashcan"
     },
     "items": {
-      "e": { "item": "SUS_fridge_breakroom", "chance": 80 },
-      "é": { "item": "fast_fridge", "chance": 80, "repeat": [ 4, 10 ] },
-      "r": { "item": "fast_kitchen", "chance": 80, "repeat": [ 2, 5 ] },
-      "m": { "item": "groce_softdrink", "chance": 80, "repeat": [ 4, 10 ] },
+      "e": { "item": "SUS_fridge_breakroom", "chance": 60 },
+      "é": { "item": "fast_fridge", "chance": 60, "repeat": [ 1, 8 ] },
+      "r": { "item": "fast_kitchen", "chance": 60, "repeat": [ 1, 5 ] },
+      "m": { "item": "groce_softdrink", "chance": 60, "repeat": [ 1, 10 ] },
       "O": { "item": "SUS_oven", "chance": 80 },
       "P": { "item": "SUS_office_filing_cabinet", "chance": 33 },
       "d": { "item": "SUS_office_desk", "chance": 33 },
