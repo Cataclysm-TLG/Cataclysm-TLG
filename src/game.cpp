@@ -267,6 +267,7 @@ static const efftype_id effect_onfire( "onfire" );
 static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_playing_instrument( "playing_instrument" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_revived_marker( "revived_marker" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_riding( "riding" );
 static const efftype_id effect_stunned( "stunned" );
@@ -3468,7 +3469,7 @@ void game::load_world_modfiles( loading_ui &ui )
 {
     auto &mods = world_generator->active_world->active_mod_order;
 
-    // remove any duplicates whilst preserving order (fixes #19385)
+    // remove any duplicates while preserving order (fixes #19385)
     std::set<mod_id> found;
     mods.erase( std::remove_if( mods.begin(), mods.end(), [&found]( const mod_id & e ) {
         if( found.count( e ) ) {
@@ -5826,7 +5827,6 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
         // Failed reanimation due to corpse being too burned.
         return false;
     }
-
     const item_location loc = get_item_location( g->u, it, &m, p );
     const item_location::type loc_type = loc.where();
     bool avoid_vehicle = loc_type != item_location::type::vehicle &&
@@ -5842,11 +5842,13 @@ bool game::revive_corpse( const tripoint_bub_ms &p, item &it, int radius )
             ammo.second = 0;
         }
     }
-
     if( it.get_var( "times_combatted", 0.0 ) > 0.0 ) {
-        critter.times_combatted_player = it.get_var( "times_combatted", 0.0 );
+        critter.times_combatted_player = std::numeric_limits<short>::max();
     }
-
+    // Add a permanent effect marking this as a revived creature. Every time they revive they will have this effect forever.
+    // This effect currently just prevents farming kill xp (currently unused in main) from revived creatures.
+    critter.add_effect( effect_source(), effect_revived_marker, calendar::INDEFINITELY_LONG_DURATION,
+                        true );
     return place_critter_around( newmon_ptr, p, radius, false, avoid_vehicle );
 }
 
@@ -10254,7 +10256,7 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
         return false;
     }
     if( u.is_mounted() && !pushing && vp_there ) {
-        add_msg( m_warning, _( "You cannot board a vehicle whilst riding." ) );
+        add_msg( m_warning, _( "You cannot board a vehicle while riding." ) );
         return false;
     }
     u.set_underwater( false );
@@ -10319,10 +10321,15 @@ bool game::walk_move( const tripoint_bub_ms &dest_loc, const bool via_ramp,
             here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_OPENCLOSE_INSIDE, dest_loc ) ||
             here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_BARRICADABLE_DOOR_DAMAGED, dest_loc ) ||
             here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_BARRICADABLE_DOOR_REINFORCED, dest_loc ) ) {
-            add_msg( m_warning, _( "You cannot pass obstacles whilst mounted." ) );
+            add_msg( m_warning, _( "You cannot pass obstacles while mounted." ) );
             return false;
         }
-        const double base_moves = u.run_cost( mcost, diag ) * 100.0 / crit->get_speed();
+        double crit_speed;
+
+        // Approximate animal walk speed by halving base speed
+        crit_speed = crit->get_speed() / 2.0;
+
+        const double base_moves = u.run_cost( mcost, diag ) * 100.0 / crit_speed;
         const double encumb_moves = u.get_weight() / 4800.0_gram;
         u.mod_moves( -static_cast<int>( std::ceil( base_moves + encumb_moves ) ) );
     } else {
@@ -11001,7 +11008,8 @@ bool game::phasing_move_enchant( const tripoint_bub_ms &dest_loc, const int phas
     }
 
     // phasing only applies to impassible tiles such as walls
-
+    // enforce a height cost for z level changes
+    const int z_level_height = 4;
     int tunneldist = 0;
     tripoint_bub_ms dest = dest_loc;
     const tripoint_rel_ms d( sgn( dest.x() - pos.x() ), sgn( dest.y() - pos.y() ),
@@ -11010,8 +11018,7 @@ bool game::phasing_move_enchant( const tripoint_bub_ms &dest_loc, const int phas
 
     while( here.impassable( dest ) ||
            ( creatures.creature_at( dest ) != nullptr && tunneldist > 0 ) ) {
-        // add 1 to tunnel distance for each impassable tile in the line
-        tunneldist += 1;
+        tunneldist += d.z() != 0 ? z_level_height : 1;
         if( tunneldist > phase_distance ) {
             return false;
         }
@@ -11023,10 +11030,10 @@ bool game::phasing_move_enchant( const tripoint_bub_ms &dest_loc, const int phas
 
     // vertical handling for adjacent tiles
     if( d.z() != 0 && !here.impassable( dest_loc ) && tunneldist == 0 ) {
-        tunneldist += 1;
+        tunneldist += z_level_height;
     }
 
-    if( tunneldist != 0 ) {
+    if( tunneldist != 0 && tunneldist <= phase_distance ) {
         if( u.in_vehicle ) {
             here.unboard_vehicle( pos );
         }
@@ -11036,6 +11043,10 @@ bool game::phasing_move_enchant( const tripoint_bub_ms &dest_loc, const int phas
             vertical_shift( dest.z() );
         }
 
+        const bool is_diagonal = d.x() != 0 && d.y() != 0;
+        const int phase_move_cost = u.run_cost( 100, is_diagonal );
+        u.mod_moves( -phase_move_cost );
+        u.burn_move_stamina( phase_move_cost );
         u.setpos( here, dest );
 
         if( here.veh_at( pos ).part_with_feature( "BOARDABLE", true ) ) {
@@ -11443,7 +11454,8 @@ void game::on_move_effects()
     }
 
     if( u.is_running() ) {
-        if( !u.can_run() ) {
+        // If mounted, don't break trot
+        if( !u.is_mounted() && !u.can_run() ) {
             u.toggle_run_mode();
         }
         if( u.get_stamina() <= 0 ) {

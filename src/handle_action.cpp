@@ -1855,7 +1855,7 @@ static void fire()
 static void open_movement_mode_menu()
 {
     avatar &player_character = get_avatar();
-    const std::vector<move_mode_id> &modes = move_modes_by_speed();
+    std::vector<move_mode_id> modes = move_modes_by_speed();
     const int cycle = 1027;
     uilist as_m;
 
@@ -1868,7 +1868,7 @@ static void open_movement_mode_menu()
                                    curr->name() );
     }
     as_m.entries.emplace_back( cycle,
-                               player_character.can_switch_to( player_character.current_movement_mode()->cycle() ),
+                               true, // cycling movement is controlled in relevant functions, always allow
                                hotkey_for_action( ACTION_OPEN_MOVEMENT, /*maximum_modifier_count=*/1 ),
                                _( "Cycle move mode" ) );
     // This should select the middle move mode

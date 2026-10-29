@@ -431,11 +431,24 @@
         "color": "yellow",
         "dangerous": true,
         "light_emitted": 20,
+        "light_color": [ 255, 180, 120 ],
         "translucency": 0.7,
         "convection_temperature_mod": 300
       },
-      { "name": { "ctxt": "noun", "str": "fire" }, "color": "light_red", "light_emitted": 60, "translucency": 0.4 },
-      { "name": "raging fire", "color": "red", "light_emitted": 160, "translucency": 0.1 }
+      {
+        "name": { "ctxt": "noun", "str": "fire" },
+        "color": "light_red",
+        "light_emitted": 60,
+        "light_color": [ 255, 200, 160 ],
+        "translucency": 0.4
+      },
+      {
+        "name": "raging fire",
+        "color": "red",
+        "light_emitted": 140,
+        "light_color": [ 255, 225, 190 ],
+        "translucency": 0.1
+      }
     ],
     "description_affix": "on",
     "underwater_age_speedup": "60 minutes",
@@ -1089,16 +1102,16 @@
     "substance_name": "sparks",
     "legacy_enum_id": 19,
     "intensity_levels": [
-      { "name": "sparks", "sym": "9", "dangerous": true, "light_emitted": 0.01 },
-      { "//": "repeat last entry", "light_emitted": 1 },
-      { "//": "repeat last entry", "light_emitted": 2.5 },
-      { "name": "electric crackle", "color": "cyan", "light_emitted": 4 },
-      { "//": "repeat last entry", "light_emitted": 7.5 },
-      { "//": "repeat last entry", "light_emitted": 11 },
-      { "name": "electric cloud", "color": "blue", "light_emitted": 14.5 },
-      { "//": "repeat last entry", "light_emitted": 18 },
-      { "//": "repeat last entry", "light_emitted": 21.5 },
-      { "//": "repeat last entry", "light_emitted": 25 }
+      { "name": "sparks", "sym": "9", "dangerous": true, "light_emitted": 0.01, "light_color": [ 110, 190, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 1, "light_color": [ 110, 190, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 2.5, "light_color": [ 110, 190, 255 ] },
+      { "name": "electric crackle", "color": "cyan", "light_emitted": 4, "light_color": [ 155, 200, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 7.5, "light_color": [ 155, 200, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 11, "light_color": [ 155, 200, 255 ] },
+      { "name": "electric cloud", "color": "blue", "light_emitted": 14.5, "light_color": [ 155, 200, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 18, "light_color": [ 200, 220, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 21.5, "light_color": [ 200, 220, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 25, "light_color": [ 200, 220, 255 ] }
     ],
     "description_affix": "illuminated_by",
     "has_elec": true,

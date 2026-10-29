@@ -1943,6 +1943,13 @@ void Character::mount_creature( monster &z )
     z.facing = facing;
     invalidate_tile_eye_level_cache();
     recalc_sight_limits();
+
+    // Switch from potentially invalid crouch or prone to trot.
+    // Trot is sustained and doesn't spend stamina, so it's a good default for animal riding.
+    if( get_steed_type() == steed_type::ANIMAL ) {
+        set_movement_mode( move_mode_run );
+    }
+
     mod_moves( -100 );
 }
 
@@ -2636,6 +2643,11 @@ bool Character::can_switch_to( const move_mode_id &mode ) const
         get_steed_type() == steed_type::NONE && mode->type() != move_mode_type::WALKING ) {
         return false;
     }
+    if( get_steed_type() == steed_type::ANIMAL &&
+        ( mode->type() == move_mode_type::PRONE || mode->type() == move_mode_type::CROUCHING ) ) {
+        return false;
+    }
+    // Only running modes are restricted at the moment and only when its your legs doing the running
     return get_steed_type() != steed_type::NONE || mode->type() != move_mode_type::RUNNING || can_run();
 }
 
@@ -5834,7 +5846,7 @@ void Character::calc_sleep_recovery_rate( needs_rates &rates ) const
         const float accelerated_recovery_rate = 1.0f / accelerated_recovery_chance;
         rates.recovery += accelerated_recovery_rate;
     } else {
-        // Hunger and thirst advance *much* more slowly whilst we hibernate.
+        // Hunger and thirst advance *much* more slowly while we hibernate.
         rates.hunger *= ( 2.0f / 7.0f );
         rates.thirst *= ( 2.0f / 7.0f );
     }
@@ -6139,7 +6151,7 @@ void Character::get_sick( bool is_flu )
 
 bool Character::is_hibernating() const
 {
-    // Hibernating only kicks in whilst Engorged; separate tracking for hunger/thirst here
+    // Hibernating only kicks in while Engorged; separate tracking for hunger/thirst here
     // as a safety catch.  One test subject managed to get two Colds during hibernation;
     // since those add fatigue and dry out the character, the subject went for the full 10 days plus
     // a little, and came out of it well into Parched.  Hibernating shouldn't endanger your
@@ -10849,7 +10861,18 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
 
     map &here = get_map();
 
+
     if( is_mounted() ) {
+        // Ignore mech movemodes
+        // TODO: Figure what to do with mech movemodes
+        if( get_steed_type() != steed_type::MECH ) {
+            run_cost_effect_mul( 1.0 / get_modifier( character_modifier_move_mode_move_cost_mod ),
+                                 //TODO get these strings from elsewhere
+                                 is_running() ? _( "Running" ) :
+                                 is_crouching() ? _( "Crouching" ) :
+                                 is_prone() ? _( "Prone" ) : _( "Walking" )
+                               );
+        }
         return effects;
     }
 
@@ -10978,7 +11001,6 @@ std::vector<run_cost_effect> Character::run_cost_effects( float &movecost ) cons
 
     run_cost_effect_mul( 1.0 / get_modifier( character_modifier_stamina_move_cost_mod ),
                          _( "Stamina" ) );
-
     run_cost_effect_mul( 1.0 / get_modifier( character_modifier_move_mode_move_cost_mod ),
                          //TODO get these strings from elsewhere
                          is_running() ? _( "Running" ) :
@@ -13856,7 +13878,7 @@ bool Character::wield( item &it, std::optional<int> obtain_cost, bool combat )
     // Wielding from inventory is relatively slow and does not improve with increasing weapon skill.
     // Worn items (including guns with shoulder straps) are faster but still slower
     // than a skilled player with a holster.
-    // There is an additional penalty when wielding items from the inventory whilst currently grabbed.
+    // There is an additional penalty when wielding items from the inventory while currently grabbed.
 
     bool worn = is_worn( it );
     // Ideally the cost should be calculated from wield(item_location), but as backup try it here.

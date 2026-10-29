@@ -194,7 +194,7 @@ class game
         void load_world_modfiles( loading_ui &ui );
         /**
          *  Load content packs
-         *  @param msg string to display whilst loading prompt
+         *  @param msg string to display while loading prompt
          *  @param packs content packs to load in correct dependent order
          *  @param ui structure for load progress display
          */

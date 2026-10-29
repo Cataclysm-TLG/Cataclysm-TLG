@@ -1064,7 +1064,7 @@ void npc::pretend_fire( npc *source, int shots, item &gun )
     while( curshot != shots ) {
         const int required = gun.ammo_required();
         if( gun.ammo_consume( required, pos_bub(), this ) != required ) {
-            debugmsg( "Unexpected shortage of ammo whilst firing %s", gun.tname().c_str() );
+            debugmsg( "Unexpected shortage of ammo while firing %s", gun.tname().c_str() );
             break;
         }
 
@@ -2721,7 +2721,7 @@ dispersion_sources Character::get_weapon_dispersion( const item &obj ) const
         const item *parent = has_item( obj ) ? find_parent( obj ) : nullptr;
         const int vol = ( parent ? parent->volume() : obj.volume() ) / 250_ml;
 
-        /** @EFFECT_DRIVING reduces the inaccuracy penalty when using guns whilst driving */
+        /** @EFFECT_DRIVING reduces the inaccuracy penalty when using guns while driving */
         dispersion.add_range( std::max( vol - get_skill_level( skill_driving ), 1.0f ) * 20 );
     }
     /** @EFFECT_GUN improves usage of accurate weapons and sights */

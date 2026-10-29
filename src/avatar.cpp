@@ -1356,21 +1356,25 @@ void avatar::reset_move_mode()
 
 void avatar::cycle_move_mode()
 {
-    const move_mode_id next = current_movement_mode()->cycle();
-    set_movement_mode( next );
-    // if a movemode is disabled then just cycle to the next one
-    if( !movement_mode_is( next ) ) {
-        set_movement_mode( next->cycle() );
+    move_mode_id next = current_movement_mode()->cycle();
+    while( next != current_movement_mode() ) {
+        if( can_switch_to( next ) ) {
+            set_movement_mode( next );
+            return;
+        }
+        next = next->cycle();
     }
 }
 
 void avatar::cycle_move_mode_reverse()
 {
-    const move_mode_id prev = current_movement_mode()->cycle_reverse();
-    set_movement_mode( prev );
-    // if a movemode is disabled then just cycle to the previous one
-    if( !movement_mode_is( prev ) ) {
-        set_movement_mode( prev->cycle_reverse() );
+    move_mode_id prev = current_movement_mode()->cycle_reverse();
+    while( prev != current_movement_mode() ) {
+        if( can_switch_to( prev ) ) {
+            set_movement_mode( prev );
+            return;
+        }
+        prev = prev->cycle_reverse();
     }
 }
 

@@ -4169,13 +4169,12 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
     item blood( itype_blood, calendar::turn );
     bool drew_blood = false;
     bool acid_blood = false;
-    bool vampire = false;
-    units::temperature blood_temp = units::from_kelvin( -1.0f ); //kelvins
+    units::temperature blood_temp = units::from_kelvin( -1.0f );
     for( item &map_it : here.i_at( pos.xy() ) ) {
         if( map_it.is_corpse() &&
             query_yn( _( "Draw blood from %s?" ),
                       colorize( map_it.tname(), map_it.color_in_inventory() ) ) ) {
-            p->add_msg_if_player( m_info, _( "You drew blood from the %s…" ), map_it.tname() );
+            p->add_msg_if_player( m_info, _( "You draw blood from the %s…" ), map_it.tname() );
             drew_blood = true;
             blood_temp = map_it.temperature;
 
@@ -4195,43 +4194,11 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
         }
     }
 
-    if( !drew_blood && query_yn( _( "Draw your own blood?" ) ) ) {
-        p->add_msg_if_player( m_info, _( "You drew your own blood…" ) );
-        drew_blood = true;
-        blood_temp = units::from_celsius( 37 );
-        if( p->has_trait( trait_ACIDBLOOD ) ) {
-            acid_blood = true;
-        }
-        if( p->has_trait( trait_VAMPIRE ) ) {
-            vampire = true;
-        }
-        // From wikipedia,
-        // "To compare, this (volume of blood loss that causes death) is five to eight times
-        // as much blood as people usually give in a blood donation.[2]"
-        // This is half a TU, hence I'm setting it to 1/10th of a lethal exsanguination.
-        p->vitamin_mod( vitamin_redcells, vitamin_redcells->min() / 10 );
-        p->vitamin_mod( vitamin_blood, vitamin_blood->min() / 10 );
-        p->mod_pain( 3 );
-    }
-
     if( acid_blood ) {
-        item acid( itype_blood_acid, calendar::turn );
-        acid.set_item_temperature( blood_temp );
-        it->put_in( acid, pocket_type::CONTAINER );
-        if( one_in( 3 ) ) {
-            if( it->inc_damage() ) {
-                p->add_msg_if_player( m_info, _( "…but acidic blood melts the %s, destroying it!" ),
-                                      it->tname() );
-                p->i_rem( it );
-                return 0;
-            }
-            p->add_msg_if_player( m_info, _( "…but acidic blood damages the %s!" ), it->tname() );
-        }
-        return 1;
-    }
-
-    if( vampire ) {
-        p->vitamin_mod( vitamin_human_blood_vitamin, -500 );
+            p->add_msg_if_player( m_info, _( "…but the acidic blood melts the %s, destroying it!" ),
+                                    it->tname() );
+            p->i_rem( it );
+            return 0;
     }
 
     if( !drew_blood ) {
