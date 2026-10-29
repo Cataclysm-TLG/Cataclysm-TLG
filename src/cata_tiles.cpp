@@ -2322,20 +2322,20 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         if( dir != gamepad::direction::NONE ) {
             tripoint offset = gamepad::direction_to_offset( dir );
             tripoint_bub_ms indicator_pos = you.pos_bub() + tripoint_rel_ms( offset.x, offset.y, 0 );
-                draw_options opts{};
-                opts.category = TILE_CATEGORY::NONE;
-                int height_3d = 0;
-                draw_from_id_string(
-                    "cursor",
-                    indicator_pos,
-                    0, 0,
-                    lit_level::LIT,
-                    false,
-                    height_3d,
-                    opts
-                );
-            }
+            draw_options opts{};
+            opts.category = TILE_CATEGORY::NONE;
+            int height_3d = 0;
+            draw_from_id_string(
+                "cursor",
+                indicator_pos,
+                0, 0,
+                lit_level::LIT,
+                false,
+                height_3d,
+                opts
+            );
         }
+    }
 
     printErrorIf( SDL_RenderSetClipRect( renderer.get(), nullptr ) != 0,
                   "SDL_RenderSetClipRect failed" );

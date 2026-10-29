@@ -590,7 +590,8 @@ FontFallbackList::FontFallbackList(
     : Font( w, h, palette )
 {
     for( const std::string &typeface : typefaces ) {
-        std::unique_ptr<Font> font = Font::load_font( renderer, pixel_format, typeface, fontsize, w, h, palette,
+        std::unique_ptr<Font> font = Font::load_font( renderer, pixel_format, typeface, fontsize, w, h,
+                                     palette,
                                      fontblending );
         if( !font ) {
             throw std::runtime_error( "Cannot load font " + typeface );

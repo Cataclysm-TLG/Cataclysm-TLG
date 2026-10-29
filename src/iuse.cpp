@@ -1502,8 +1502,8 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
         if( bcp ) {
             basecamp *actual_camp = *bcp;
             if( actual_camp->get_owner() != faction_your_followers ) {
-                    p->add_msg_if_player( _( "That animal belongs to %s." ), actual_camp->get_owner()->name );
-                    return std::nullopt;
+                p->add_msg_if_player( _( "That animal belongs to %s." ), actual_camp->get_owner()->name );
+                return std::nullopt;
             }
         }
 
@@ -4207,10 +4207,10 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
     }
 
     if( acid_blood ) {
-            p->add_msg_if_player( m_info, _( "…but the acidic blood melts the %s, destroying it!" ),
-                                    it->tname() );
-            p->i_rem( it );
-            return 0;
+        p->add_msg_if_player( m_info, _( "…but the acidic blood melts the %s, destroying it!" ),
+                              it->tname() );
+        p->i_rem( it );
+        return 0;
     }
 
     if( !drew_blood ) {
@@ -7411,8 +7411,8 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
             if( bcp && !f.is_pet() ) {
                 basecamp *actual_camp = *bcp;
                 if( actual_camp->get_owner() != faction_your_followers ) {
-                        p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
-                        return std::nullopt;
+                    p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
+                    return std::nullopt;
                 }
             }
 
