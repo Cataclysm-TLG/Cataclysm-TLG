@@ -990,16 +990,6 @@ bool map::pl_sees( const tripoint_bub_ms &t, const int max_range ) const
              map_cache.sm[t.x()][t.y()] > 0.0 );
 }
 
-// For a direction vector defined by x, y, return the quadrant that's the
-// source of that direction.  Assumes x != 0 && y != 0
-// NOLINTNEXTLINE(cata-xy)
-static constexpr quadrant quadrant_from_x_y( int x, int y )
-{
-    return ( x > 0 ) ?
-           ( ( y > 0 ) ? quadrant::NW : quadrant::SW ) :
-           ( ( y > 0 ) ? quadrant::NE : quadrant::SE );
-}
-
 // Precomputed 2D Euclidean distances for castLight inner loop.
 // Eliminates sqrt calls from the hottest code path.
 static const auto &trig_dist_2d_lut()
@@ -1136,7 +1126,7 @@ void castLight( cata::mdarray<Out, point_bub_ms> &output_cache,
             // Only cast recursively if previous span was not opaque.
             if( check( current_transparency, last_intensity ) ) {
                 castLight<xx, xy, yx, yy, T, Out, calc, check, update_output, accumulate, with_color>(
-                    output_cache, input_array, offset, offsetDistance,
+                    output_cache, input_array, blocked_array, offset, offsetDistance,
                     numerator, distance + 1, start, trailingEdge,
                     accumulate( cumulative_transparency, current_transparency, distance ),
                     source_color, color_cache );
@@ -1514,6 +1504,8 @@ void map::apply_directional_light( const tripoint_bub_ms &p, int direction,
         cache.transparency_cache;
     cata::mdarray<light_color_rgb, point_bub_ms> &light_color_cache =
         cache.light_color_cache;
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &blocked_cache =
+        cache.vehicle_obstructed_cache;
 
     const bool has_color = color.is_colored();
     if( has_color ) {
