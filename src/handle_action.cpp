@@ -690,16 +690,22 @@ static void grab()
                        target_npc->is_enemy() ||
                        target_npc->has_effect( effect_narcosis ) ||
                        !target_npc->enough_working_legs();
-            // You can grab your pets.
+            // You can grab your own pets.
         } else if( target->is_monster() ) {
             tolerate = target->as_monster()->is_pet();
         }
 
-        if( target->is_npc() && !tolerate ) {
-            if( !query_yn( _( "Really attack %s?" ), target->disp_name() ) ) {
+        if( !tolerate ) {
+            if( target->is_npc() ) {
+                if( !query_yn( _( "Really attack %s?" ), target->disp_name() ) ) {
+                    return;
+                }
+            }
+            if( !g->warn_player_maybe_anger_local_faction( true, false ) ) {
                 return;
             }
         }
+
         // Most melee combat is EXPLOSIVE, but here we're just grabbing on.
         const float weary_mult = you.exertion_adjusted_move_multiplier( EXTRA_EXERCISE );
         item weap =  null_item_reference();

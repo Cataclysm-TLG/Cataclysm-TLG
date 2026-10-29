@@ -1477,6 +1477,15 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
 
     creature_tracker &creatures = get_creature_tracker();
     if( monster *const mon = creatures.creature_at<monster>( *pnt, true ) ) {
+        std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
+        if( bcp ) {
+            basecamp *actual_camp = *bcp;
+            if( actual_camp->get_owner()->limited_area_claim &&
+                p->pos_abs_omt() == actual_camp->camp_omt_pos() ) {
+                    p->add_msg_if_player( _( "That animal belongs to %s." ), actual_camp->get_owner()->name );
+                    return std::nullopt;
+            }
+        }
         p->mod_moves( -to_moves<int>( 1_seconds ) );
 
         bool can_feed = false;
@@ -7394,6 +7403,15 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
 
         // Capture the thing, if it's on the target square.
         if( const monster *const mon_ptr = get_creature_tracker().creature_at<monster>( target ) ) {
+            std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
+            if( bcp ) {
+                basecamp *actual_camp = *bcp;
+                if( actual_camp->get_owner()->limited_area_claim &&
+                    p->pos_abs_omt() == actual_camp->camp_omt_pos() ) {
+                        p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
+                        return std::nullopt;
+                }
+            }
             const monster &f = *mon_ptr;
 
             if( f.get_size() > Creature::size_map.find( capacity )->second ) {
