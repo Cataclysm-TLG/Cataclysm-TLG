@@ -1351,7 +1351,7 @@
       { "item": "arrow_wood_bodkin", "prob": 20, "count": [ 1, 6 ], "damage": [ -1, 5 ] },
       { "item": "arrow_wood_stone", "prob": 20, "count": [ 1, 6 ], "damage": [ -1, 5 ] },
       { "item": "arrow_wood_horn", "prob": 20, "count": [ 1, 6 ], "damage": [ -1, 5 ] },
-      { "item": "bolt_wood", "prob": 30, "count": [ 1, 6 ], "damage": [ -1, 5 ] },
+      { "item": "bolt_wood_broadhead", "prob": 30, "count": [ 1, 6 ], "damage": [ -1, 5 ] },
       { "item": "bolt_wood_bodkin", "prob": 30, "count": [ 1, 6 ], "damage": [ -1, 5 ] },
       { "item": "colt_army", "prob": 50, "damage": [ -1, 5 ] },
       { "item": "colt_navy", "prob": 50, "damage": [ -1, 5 ] },

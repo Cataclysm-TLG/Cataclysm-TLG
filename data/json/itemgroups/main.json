@@ -244,7 +244,7 @@
     "id": "crossbow_bolts",
     "subtype": "distribution",
     "entries": [
-      { "item": "bolt_wood", "prob": 100, "count": [ 4, 8 ] },
+      { "item": "bolt_wood_broadhead", "prob": 100, "count": [ 4, 8 ] },
       { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 4, 8 ] },
       { "item": "bolt_steel", "prob": 100, "count": [ 4, 8 ] },
       { "item": "bolt_steel_bodkin", "prob": 100, "count": [ 4, 8 ] },
@@ -258,7 +258,7 @@
     "entries": [
       { "item": "bolt_crude", "prob": 100, "count": [ 4, 8 ] },
       { "item": "bolt_simple_wood", "prob": 100, "count": [ 4, 8 ] },
-      { "item": "bolt_wood", "prob": 100, "count": [ 4, 8 ] },
+      { "item": "bolt_wood_broadhead", "prob": 100, "count": [ 4, 8 ] },
       { "item": "bolt_wood_bodkin", "prob": 50, "count": [ 4, 8 ] }
     ]
   }

@@ -4410,5 +4410,10 @@
     "id": "egg_roach_plague",
     "type": "MIGRATION",
     "replace": "egg_roach"
+  },
+  {
+    "id": "bolt_wood",
+    "type": "MIGRATION",
+    "replace": "bolt_wood_broadhead"
   }
 ]

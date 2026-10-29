@@ -161,7 +161,7 @@
     "autolearn": true,
     "using": [ [ "cordage", 1 ] ],
     "proficiencies": [ { "proficiency": "prof_traps" }, { "proficiency": "prof_trapsetting" } ],
-    "components": [ [ [ "crossbow", 1 ] ], [ [ "bolt_steel", 1 ], [ "bolt_wood", 4 ] ] ]
+    "components": [ [ [ "crossbow", 1 ] ], [ [ "bolt_steel", 1 ], [ "bolt_wood_broadhead", 4 ] ] ]
   },
   {
     "type": "recipe",

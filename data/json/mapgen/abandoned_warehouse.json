@@ -14,7 +14,6 @@
         "default": {
           "distribution": [
             [ "t_region_soil", 1 ],
-            [ "t_region_groundcover_forest", 1 ],
             [ "t_region_groundcover", 1 ],
             [ "t_region_groundcover_urban", 1 ]
           ]
@@ -32,7 +31,7 @@
       "Ł": "t_thconc_floor",
       "d": "t_region_groundcover_barren",
       "^": [ [ "t_thconc_floor", 10 ], "t_region_soil" ],
-      " ": { "param": "lawn_type", "fallback": "t_region_groundcover_forest" },
+      " ": { "param": "lawn_type", "fallback": "t_region_groundcover" },
       "|": { "param": "wall_type", "fallback": "t_concrete_wall" }
     },
     "furniture": {
