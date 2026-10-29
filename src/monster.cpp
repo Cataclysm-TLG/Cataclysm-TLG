@@ -1655,7 +1655,6 @@ Creature::Attitude monster::attitude_to( const Creature &other ) const
         if( m == this ) {
             return Attitude::FRIENDLY;
         }
-
         mf_attitude faction_att = faction.obj().attitude( m->faction );
         if( ( friendly != 0 && m->friendly != 0 ) ||
             ( friendly == 0 && m->friendly == 0 && faction_att == MFA_FRIENDLY ) ) {

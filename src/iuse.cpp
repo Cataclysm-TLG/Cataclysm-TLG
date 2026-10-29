@@ -46,6 +46,7 @@
 #include "event.h"
 #include "event_bus.h"
 #include "explosion.h"
+#include "faction.h"
 #include "field.h"
 #include "field_type.h"
 #include "flag.h"
@@ -243,6 +244,8 @@ static const efftype_id effect_weak_antibiotic( "weak_antibiotic" );
 static const efftype_id effect_weak_antibiotic_visible( "weak_antibiotic_visible" );
 static const efftype_id effect_webbed( "webbed" );
 static const efftype_id effect_zapped( "zapped" );
+
+static const faction_id faction_your_followers( "your_followers" );
 
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 static const flag_id json_flag_NUMB( "NUMB" );
@@ -1477,6 +1480,7 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
 
     creature_tracker &creatures = get_creature_tracker();
     if( monster *const mon = creatures.creature_at<monster>( *pnt, true ) ) {
+
         p->mod_moves( -to_moves<int>( 1_seconds ) );
 
         bool can_feed = false;
@@ -1489,10 +1493,18 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
                 break;
             }
         }
-
         if( !can_feed ) {
             p->add_msg_if_player( _( "The %s doesn't want that kind of food." ), mon->get_name() );
             return std::nullopt;
+        }
+
+        std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
+        if( bcp ) {
+            basecamp *actual_camp = *bcp;
+            if( actual_camp->get_owner() != faction_your_followers ) {
+                    p->add_msg_if_player( _( "That animal belongs to %s." ), actual_camp->get_owner()->name );
+                    return std::nullopt;
+            }
         }
 
         bool halluc = mon->is_hallucination();
@@ -7394,7 +7406,15 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
 
         // Capture the thing, if it's on the target square.
         if( const monster *const mon_ptr = get_creature_tracker().creature_at<monster>( target ) ) {
+            std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
             const monster &f = *mon_ptr;
+            if( bcp && !f.is_pet() ) {
+                basecamp *actual_camp = *bcp;
+                if( actual_camp->get_owner() != faction_your_followers ) {
+                        p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
+                        return std::nullopt;
+                }
+            }
 
             if( f.get_size() > Creature::size_map.find( capacity )->second ) {
                 p->add_msg_if_player( m_info, _( "The %1$s is too big to put in your %2$s." ),
@@ -7421,7 +7441,7 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
             }
             p->mod_moves( -to_moves<int>( 1_seconds ) );
         } else {
-            add_msg( _( "The %s can't capture nothing" ), it->tname() );
+            add_msg( _( "The %s can't capture something if it isn't there." ), it->tname() );
             return std::nullopt;
         }
     }
