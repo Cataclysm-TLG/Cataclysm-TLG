@@ -395,7 +395,7 @@
     "to_hit": -3,
     "material": [ "nylon" ],
     "symbol": "[",
-    "looks_like": "jumpsuit",
+    "looks_like": "jumpsuit_long",
     "color": "light_gray",
     "environmental_protection": 3,
     "armor": [
