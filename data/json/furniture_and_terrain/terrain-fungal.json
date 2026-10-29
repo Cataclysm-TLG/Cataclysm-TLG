@@ -23,7 +23,7 @@
     "color": "light_gray",
     "fall_damage_reduction": 8,
     "move_cost": 3,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "DIGGABLE", "FUNGUS", "NOCOLLIDE" ],
+    "flags": [ "TRANSPARENT", "DIGGABLE", "FUNGUS", "NOCOLLIDE" ],
     "bash": {
       "sound": "smash",
       "//": "muffled because fungus",
@@ -44,7 +44,7 @@
     "move_cost": 2,
     "fall_damage_reduction": 5,
     "connect_groups": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "FUNGUS" ],
+    "flags": [ "TRANSPARENT", "COLLAPSES", "INDOORS", "FLAT", "FUNGUS" ],
     "bash": { "sound": "smash", "ter_set": "t_open_air", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
   },
   {
@@ -57,7 +57,7 @@
     "color": "light_gray",
     "move_cost": 2,
     "fall_damage_reduction": 5,
-    "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "SUPPORTS_ROOF", "FLAT", "FUNGUS" ],
+    "flags": [ "TRANSPARENT", "FLAT", "FUNGUS" ],
     "bash": { "sound": "smash", "ter_set": "t_open_air", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
   },
   {
@@ -70,7 +70,7 @@
     "color": "light_gray",
     "move_cost": 2,
     "fall_damage_reduction": 5,
-    "flags": [ "TRANSPARENT", "FLAMMABLE", "FLAT", "FUNGUS" ],
+    "flags": [ "TRANSPARENT", "FLAT", "FUNGUS" ],
     "bash": { "sound": "SMASH!", "ter_set": "t_open_air", "str_min": 20, "str_max": 400, "str_min_supported": 50 }
   },
   {
