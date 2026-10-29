@@ -29,7 +29,7 @@
       }
     },
     "terrain": {
-      " ": { "param": "lawn_type", "fallback": "t_region_groundcover_forest" },
+      " ": { "param": "lawn_type", "fallback": "t_region_groundcover" },
       "s": "t_sidewalk",
       "+": "t_door_c",
       ".": "t_floor",

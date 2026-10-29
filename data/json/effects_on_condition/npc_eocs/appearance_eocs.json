@@ -108,7 +108,10 @@
     "recurrence": { "math": [ "time('14 d')" ] },
     "global": false,
     "condition": {
-      "and": [ { "u_has_trait": "natural_hair_growth" }, { "or": [ { "not": "u_is_female" }, { "u_has_trait": "bearded_lady" } ] } ]
+      "and": [
+        { "u_has_trait": "natural_hair_growth" },
+        { "or": [ { "math": [ "u_gender() == 1" ] }, { "u_has_trait": "bearded_lady" } ] }
+      ]
     },
     "effect": [
       {

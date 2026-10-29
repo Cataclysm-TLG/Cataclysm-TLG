@@ -199,7 +199,7 @@
     "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
     "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
+    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
@@ -226,7 +226,7 @@
     "qualities": [
       { "id": "HAMMER", "level": 2 },
       { "id": "CUT", "level": 2 },
-      { "id": "ANVIL", "level": 3 },
+      { "id": "ANVIL", "level": 2 },
       { "id": "GRIND", "level": 2 }
     ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
@@ -327,8 +327,8 @@
     "time": "10 m",
     "autolearn": true,
     "book_learn": [ [ "recipe_arrows", 3 ] ],
-    "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
+    "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
+    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
@@ -351,8 +351,8 @@
     "autolearn": true,
     "batch_time_factors": [ 80, 2 ],
     "book_learn": [ [ "recipe_arrows", 3 ] ],
-    "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" } ],
-    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 3 } ],
+    "proficiencies": [ { "proficiency": "prof_fletching" }, { "proficiency": "prof_carving" }, { "proficiency": "prof_metalworking" } ],
+    "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "CUT", "level": 2 }, { "id": "ANVIL", "level": 2 } ],
     "tools": [ [ [ "metalworking_tongs_any", 1, "LIST" ] ] ],
     "components": [
       [ [ "adhesive", 1, "LIST" ], [ "filament", 2, "LIST" ] ],
