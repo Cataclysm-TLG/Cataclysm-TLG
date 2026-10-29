@@ -714,10 +714,11 @@ static void grab( const std::optional<tripoint_bub_ms> &p = std::nullopt )
                 if( !query_yn( _( "Really attack %s?" ), target->disp_name() ) ) {
                     return;
                 }
-            }
-            if( !g->warn_player_maybe_anger_local_faction( true, false ) ) {
-                return;
-            }
+            } else if( target->as_monster()->attitude_to( you ) != Creature::Attitude::HOSTILE ) {
+                 if( !g->warn_player_maybe_anger_local_faction( true, false ) ) {
+                     return;
+                 }
+             }
         }
 
         // Most melee combat is EXPLOSIVE, but here we're just grabbing on.
