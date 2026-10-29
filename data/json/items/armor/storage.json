@@ -1379,22 +1379,19 @@
     ],
     "armor": [
       {
-        "encumbrance": 1,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
       },
       {
-        "encumbrance": 1,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
         "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
       },
       {
-        "encumbrance": 1,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "crab_leg_1", "crab_leg_3" ],
         "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
@@ -1435,15 +1432,13 @@
     "flags": [ "OVERSIZE", "WATER_FRIENDLY", "BELTED" ],
     "armor": [
       {
-        "encumbrance": 0,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_upper_r", "arm_upper_l" ]
       },
       {
-        "encumbrance": 0,
-        "volume_encumber_modifier": 0.35,
+        "encumbrance": [ 1, 2 ],
         "coverage": 50,
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ]
