@@ -7408,10 +7408,9 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
         if( const monster *const mon_ptr = get_creature_tracker().creature_at<monster>( target ) ) {
             std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
             const monster &f = *mon_ptr;
-            if( bcp && f.is_pet() ) {
+            if( bcp && !f.is_pet() ) {
                 basecamp *actual_camp = *bcp;
-                if( actual_camp->get_owner()->limited_area_claim &&
-                    p->pos_abs_omt() == actual_camp->camp_omt_pos() ) {
+                if( actual_camp->get_owner() != faction_your_followers ) {
                         p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
                         return std::nullopt;
                 }
@@ -7442,7 +7441,7 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
             }
             p->mod_moves( -to_moves<int>( 1_seconds ) );
         } else {
-            add_msg( _( "The %s can't capture nothing" ), it->tname() );
+            add_msg( _( "The %s can't capture something if it isn't there." ), it->tname() );
             return std::nullopt;
         }
     }
