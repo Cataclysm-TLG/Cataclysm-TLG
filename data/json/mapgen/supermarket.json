@@ -492,7 +492,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_vegetables", "x": 0, "y": 0, "chance": 13 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_vegetables", "x": 0, "y": 0, "chance": 10 } ]
     }
   },
   {
@@ -501,7 +501,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_fruits", "x": 0, "y": 0, "chance": 13 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_fruits", "x": 0, "y": 0, "chance": 10 } ]
     }
   },
   {
@@ -510,7 +510,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 13 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 10 } ]
     }
   },
   {
@@ -519,7 +519,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meals", "x": 0, "y": 0, "chance": 13 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meals", "x": 0, "y": 0, "chance": 10 } ]
     }
   },
   {
@@ -528,7 +528,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_coffee", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_coffee", "x": 0, "y": 0, "chance": 13 } ]
     }
   },
   {
@@ -537,7 +537,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_tea", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_tea", "x": 0, "y": 0, "chance": 13 } ]
     }
   },
   {
@@ -546,7 +546,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_breakfast_cereal", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_breakfast_cereal", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -555,7 +555,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_breakfast_mixes", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_breakfast_mixes", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -564,7 +564,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_spreads", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_spreads", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
@@ -582,7 +582,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_butter_cream", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_butter_cream", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
@@ -591,7 +591,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_yogurt", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_yogurt", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
@@ -600,7 +600,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_cheese", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_cheese", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -609,7 +609,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_milk", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_milk", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
@@ -618,7 +618,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_eggs", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_eggs", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -627,7 +627,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_deli", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_deli", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -636,7 +636,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_meat", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_meat", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -645,7 +645,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_seafood", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_seafood", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -654,7 +654,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_icecream", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_icecream", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -663,7 +663,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_frozen_dessert", "x": 0, "y": 0, "chance": 20 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_frozen_dessert", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -672,7 +672,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_water", "x": 0, "y": 0, "chance": 50 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_water", "x": 0, "y": 0, "chance": 20 } ]
     }
   },
   {
@@ -681,7 +681,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_soda", "x": 0, "y": 0, "chance": 30 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_soda", "x": 0, "y": 0, "chance": 18 } ]
     }
   },
   {
@@ -690,7 +690,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_juices", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_juices", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -699,7 +699,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_sports_drink", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_sports_drink", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -708,7 +708,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_chips", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_chips", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -717,7 +717,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_nuts_crackers", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_nuts_crackers", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -726,7 +726,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_chocolate", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_chocolate", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -735,7 +735,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_candy", "x": 0, "y": 0, "chance": 14 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_candy", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -843,7 +843,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_toilet_paper", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_toilet_paper", "x": 0, "y": 0, "chance": 8 } ]
     }
   },
   {
@@ -852,7 +852,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_dental_care", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_dental_care", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
@@ -861,7 +861,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_drugs", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_drugs", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -879,7 +879,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_personal_care", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_personal_care", "x": 0, "y": 0, "chance": 14 } ]
     }
   },
   {
@@ -888,7 +888,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_vegetables", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_vegetables", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -897,7 +897,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_fruits", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_fruits", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -906,7 +906,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_bread_specialty", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_bread_specialty", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -915,7 +915,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_bread_sweet", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_bread_sweet", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -924,7 +924,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_bread", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_bread", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -933,7 +933,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_frozen_vegetables", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_frozen_vegetables", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
@@ -942,7 +942,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_display_fridge", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_frozen_meals", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_frozen_meals", "x": 0, "y": 0, "chance": 12 } ]
     }
   },
   {
