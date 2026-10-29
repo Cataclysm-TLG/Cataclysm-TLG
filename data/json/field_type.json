@@ -431,7 +431,7 @@
         "color": "yellow",
         "dangerous": true,
         "light_emitted": 20,
-        "light_color": [ 255, 160, 60 ],
+        "light_color": [ 255, 180, 120 ],
         "translucency": 0.7,
         "convection_temperature_mod": 300
       },
@@ -439,14 +439,14 @@
         "name": { "ctxt": "noun", "str": "fire" },
         "color": "light_red",
         "light_emitted": 60,
-        "light_color": [ 255, 200, 100 ],
+        "light_color": [ 255, 200, 160 ],
         "translucency": 0.4
       },
       {
         "name": "raging fire",
         "color": "red",
-        "light_emitted": 160,
-        "light_color": [ 255, 255, 240 ],
+        "light_emitted": 140,
+        "light_color": [ 255, 225, 190 ],
         "translucency": 0.1
       }
     ],
