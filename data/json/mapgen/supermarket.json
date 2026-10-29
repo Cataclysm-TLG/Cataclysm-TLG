@@ -474,7 +474,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_baking", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_baking", "x": 0, "y": 0, "chance": 15 } ]
     }
   },
   {
@@ -483,7 +483,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_pasta", "x": 0, "y": 0, "chance": 16 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_pasta", "x": 0, "y": 0, "chance": 15 } ]
     }
   },
   {
@@ -492,7 +492,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_vegetables", "x": 0, "y": 0, "chance": 10 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_vegetables", "x": 0, "y": 0, "chance": 9 } ]
     }
   },
   {
@@ -501,7 +501,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_fruits", "x": 0, "y": 0, "chance": 10 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_fruits", "x": 0, "y": 0, "chance": 9 } ]
     }
   },
   {
@@ -510,7 +510,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 10 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meat", "x": 0, "y": 0, "chance": 9 } ]
     }
   },
   {
@@ -519,7 +519,7 @@
     "object": {
       "mapgensize": [ 1, 1 ],
       "place_furniture": [ { "furn": "f_warehouse_shelf", "x": 0, "y": 0 } ],
-      "place_items": [ { "item": "SUS_shelf_commercial_canned_meals", "x": 0, "y": 0, "chance": 10 } ]
+      "place_items": [ { "item": "SUS_shelf_commercial_canned_meals", "x": 0, "y": 0, "chance": 9 } ]
     }
   },
   {
