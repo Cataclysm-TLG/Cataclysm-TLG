@@ -4169,7 +4169,6 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
     item blood( itype_blood, calendar::turn );
     bool drew_blood = false;
     bool acid_blood = false;
-    bool vampire = false;
     units::temperature blood_temp = units::from_kelvin( -1.0f );
     for( item &map_it : here.i_at( pos.xy() ) ) {
         if( map_it.is_corpse() &&
