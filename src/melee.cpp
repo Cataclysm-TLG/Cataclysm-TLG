@@ -828,7 +828,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             perform_technique( technique, t, d, move_cost, cur_weapon );
         }
 
-        // Player has a very small chance, based on their intelligence, to learn a style whilst using the CQB bionic
+        // Player has a very small chance, based on their intelligence, to learn a style while using the CQB bionic
         if( has_active_bionic( bio_cqb ) && !martial_arts_data->knows_selected_style() ) {
             /** @EFFECT_INT slightly increases chance to learn techniques when using CQB bionic */
             // Enhanced Memory Banks bionic doubles chance to learn martial art

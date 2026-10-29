@@ -6,7 +6,7 @@
     "magazine": 100,
     "ammo": 40,
     "entries": [
-      { "group": "cop_armor", "prob": 40, "damage": [ -1, 5 ] },
+      { "group": "cop_armor", "prob": 15, "damage": [ -1, 5 ] },
       { "group": "cop_other_clothes", "prob": 70, "damage": [ -1, 5 ] },
       { "group": "cop_gear", "prob": 70, "damage": [ -1, 5 ] },
       { "group": "cop_gloves", "prob": 30, "damage": [ -1, 5 ] },

@@ -5841,7 +5841,7 @@ void Character::calc_sleep_recovery_rate( needs_rates &rates ) const
         const float accelerated_recovery_rate = 1.0f / accelerated_recovery_chance;
         rates.recovery += accelerated_recovery_rate;
     } else {
-        // Hunger and thirst advance *much* more slowly whilst we hibernate.
+        // Hunger and thirst advance *much* more slowly while we hibernate.
         rates.hunger *= ( 2.0f / 7.0f );
         rates.thirst *= ( 2.0f / 7.0f );
     }
@@ -6146,7 +6146,7 @@ void Character::get_sick( bool is_flu )
 
 bool Character::is_hibernating() const
 {
-    // Hibernating only kicks in whilst Engorged; separate tracking for hunger/thirst here
+    // Hibernating only kicks in while Engorged; separate tracking for hunger/thirst here
     // as a safety catch.  One test subject managed to get two Colds during hibernation;
     // since those add fatigue and dry out the character, the subject went for the full 10 days plus
     // a little, and came out of it well into Parched.  Hibernating shouldn't endanger your
@@ -13873,7 +13873,7 @@ bool Character::wield( item &it, std::optional<int> obtain_cost, bool combat )
     // Wielding from inventory is relatively slow and does not improve with increasing weapon skill.
     // Worn items (including guns with shoulder straps) are faster but still slower
     // than a skilled player with a holster.
-    // There is an additional penalty when wielding items from the inventory whilst currently grabbed.
+    // There is an additional penalty when wielding items from the inventory while currently grabbed.
 
     bool worn = is_worn( it );
     // Ideally the cost should be calculated from wield(item_location), but as backup try it here.

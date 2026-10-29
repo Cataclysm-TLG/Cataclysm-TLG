@@ -1082,7 +1082,7 @@ void vehicle::backfire( map *here, const vehicle_part &vp ) const
 }
 
 // engines & alternators all have power.
-// engines provide, whilst alternators consume.
+// engines provide, while alternators consume.
 units::power vehicle::part_vpower_w( map &here, const vehicle_part &vp,
                                      const bool at_full_hp ) const
 {
@@ -1149,7 +1149,7 @@ units::power vehicle::part_vpower_w( map &here, const vehicle_part &vp,
 }
 
 // alternators, solar panels, reactors, and accessories all have epower.
-// alternators, solar panels, and reactors provide, whilst accessories consume.
+// alternators, solar panels, and reactors provide, while accessories consume.
 // for motor consumption see @ref vpart_info::energy_consumption instead
 units::power vehicle::part_epower( const vehicle_part &vp ) const
 {

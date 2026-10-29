@@ -65,11 +65,11 @@ void move_mode::load( const JsonObject &jo, std::string_view/*src*/ )
     mandatory( jo, was_loaded, "change_good_mech", change_messages_success[steed_type::MECH] );
 
     optional( jo, was_loaded, "change_bad_none", change_messages_fail[steed_type::NONE],
-              to_translation( "You feel bugs crawl over your skin." ) );
+              to_translation( "Seeing this message is a bug.  Please report it." ) );
     optional( jo, was_loaded, "change_bad_animal", change_messages_fail[steed_type::ANIMAL],
-              to_translation( "You feel bugs crawl over your skin." ) );
+              to_translation( "Seeing this message is a bug.  Please report it." ) );
     optional( jo, was_loaded, "change_bad_mech", change_messages_fail[steed_type::MECH],
-              to_translation( "You feel bugs crawl over your skin." ) );
+              to_translation( "Seeing this message is a bug.  Please report it." ) );
 
     mandatory( jo, was_loaded, "move_type", _type, make_flag_reader( move_types, "move type" ) );
 
@@ -139,7 +139,7 @@ std::string move_mode::change_message( bool success, steed_type steed ) const
         //~ This should never occur - this is the message when the character switches to
         //~ an invalid move mode or there's not a message for failing to switch to a move
         //~ mode
-        return _( "You feel bugs crawl over your skin." );
+        return _( "Seeing this message is a bug.  Please report it." );
     }
 
     if( success ) {

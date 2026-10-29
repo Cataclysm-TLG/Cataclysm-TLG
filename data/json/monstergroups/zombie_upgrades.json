@@ -56,6 +56,24 @@
   },
   {
     "type": "monstergroup",
+    "name": "GROUP_ZOMBIE_COP_UPGRADE",
+    "default": "mon_zombie_kevlar_0",
+    "//": "Upgrades from cop and firefighter zombies.",
+    "monsters": [
+      { "monster": "mon_zombie_crawler", "weight": 10 },
+      { "monster": "mon_zombie_kevlar_0", "weight": 50 },
+      { "monster": "mon_skeleton", "weight": 80 },
+      { "monster": "mon_zombie_brute", "weight": 50 },
+      { "monster": "mon_boomer", "weight": 50 },
+      { "monster": "mon_zombie_necro_boomer", "weight": 50 },
+      { "monster": "mon_zombie_smoker", "weight": 20 },
+      { "monster": "mon_boomer", "weight": 30 },
+      { "monster": "mon_brute_pupa", "weight": 10 },
+      { "monster": "mon_brute_pupa_decoy", "weight": 10 }
+    ]
+  },
+  {
+    "type": "monstergroup",
     "name": "GROUP_ZOMBIE_CRAWLER_UPGRADE",
     "default": "mon_zombie_crawler",
     "//": "crawling zombie upgrades",
