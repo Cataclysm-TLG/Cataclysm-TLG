@@ -52,7 +52,7 @@
   {
     "type": "ITEM",
     "subtypes": [ "AMMO" ],
-    "id": "bolt_wood",
+    "id": "bolt_wood_broadhead",
     "name": { "str": "wooden broadhead bolt" },
     "symbol": "=",
     "color": "green",
