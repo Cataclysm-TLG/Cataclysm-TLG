@@ -82,6 +82,25 @@
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "9mm": 15 } } ]
   },
   {
+    "id": "glockmag_10",
+    "looks_like": "glockmag",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
+    "name": { "str": "Glock 9x19mm 10-round magazine" },
+    "description": "A compact, light-weight polymer magazine for use with Glock compatible firearms.",
+    "weight": "60 g",
+    "volume": "65 ml",
+    "longest_side": "100 mm",
+    "price": "20 USD",
+    "price_postapoc": "80 cent",
+    "material": [ "plastic", "steel" ],
+    "symbol": "#",
+    "color": "light_gray",
+    "ammo_type": [ "9mm" ],
+    "flags": [ "MAG_COMPACT" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "9mm": 10 } } ]
+  },
+  {
     "id": "glock17_17",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
@@ -99,6 +118,24 @@
     "reload_time": 140,
     "flags": [ "MAG_COMPACT" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "9mm": 17 } } ]
+  },
+  {
+    "id": "glock17_10",
+    "type": "ITEM",
+    "subtypes": [ "MAGAZINE" ],
+    "name": { "str": "Glock 9x19mm 17-round magazine" },
+    "description": "Made for the Glock 17, this magazine holds 10 rounds.",
+    "weight": "70 g",
+    "volume": "71 ml",
+    "longest_side": "110 mm",
+    "price": "20 USD",
+    "price_postapoc": "80 cent",
+    "material": [ "plastic", "steel" ],
+    "symbol": "#",
+    "color": "light_gray",
+    "ammo_type": [ "9mm" ],
+    "flags": [ "MAG_COMPACT" ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "9mm": 10 } } ]
   },
   {
     "id": "glock17_22",
