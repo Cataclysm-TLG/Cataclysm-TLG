@@ -3440,10 +3440,14 @@ bool game::load( const save_t &name )
                                 time_played_it->second.get<std::chrono::seconds>();
                         }
                     }
-
                     effect_on_conditions::load_existing_character( u );
                     // recalculate light level for correctly resuming crafting and disassembly
                     here.build_map_cache( here.get_abs_sub().z() );
+                    #if defined(TILES)
+                    // Ensure tileset display is synced with loaded zoom level
+                    rescale_tileset( uistate.tileset_zoom );
+                    overmap_tilecontext->set_draw_scale( uistate.overmap_tileset_zoom );
+                    #endif
                 }
             },
         }
