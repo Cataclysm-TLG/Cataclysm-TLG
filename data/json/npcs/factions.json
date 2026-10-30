@@ -64,7 +64,7 @@
     "//": "90 days worth of food for 10 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
     "//2": "Expect to see these values a lot.",
     "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
-    "wealth": 30000000,
+    "wealth": 40000000,
     "currency": "RobofacCoin",
     "price_rules": [
       { "group": "NC_ROBOFAC_gear", "markup": 2 },
@@ -195,7 +195,7 @@
     "size": 100,
     "power": 100,
     "fac_food_supply": [ [ 0, { "calories": 9000000000, "vitamins": { "iron": 288000, "calcium": 288000, "vitC": 288000 } } ] ],
-    "wealth": 30000000,
+    "wealth": 40000000,
     "currency": "FMCNote",
     "price_rules": [
       { "item": "money_strap_FMCNote", "fixed_adj": 0 },
