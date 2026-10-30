@@ -18,7 +18,7 @@
  * default to uint8_t for minimal overhead over the inline storage.
  */
 template<typename T, size_t kInlineCount = 4, typename SizeT = uint8_t>
-struct alignas( T * ) small_literal_vector {
+struct small_literal_vector {
     // To avoid having to invoke constructors and destructors when copying Elements
     // around or inserting new ones, we enforce it is a literal type.
     static_assert( std::is_trivially_destructible_v<T>, "T must be trivially destructible." );
