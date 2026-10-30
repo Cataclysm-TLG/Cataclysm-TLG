@@ -74,7 +74,7 @@ class npc_class
         std::vector<faction_price_rule> shop_price_rules;
         shopkeeper_cons_rates_id shop_cons_rates_id = shopkeeper_cons_rates_id::NULL_ID();
         shopkeeper_blacklist_id shop_blacklist_id = shopkeeper_blacklist_id::NULL_ID();
-        time_duration restock_interval = 6_days;
+        time_duration restock_interval = 8_days;
 
     public:
         npc_class_id id;

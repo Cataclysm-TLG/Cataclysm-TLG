@@ -8,7 +8,7 @@
     "attitude": 0,
     "mission": 7,
     "chat": "TALK_RESCUE_PILOT",
-    "faction": "wasteland_scavengers",
+    "faction": "no_faction",
     "mission_offered": "MISSION_RESCUE_PILOT_HOSPITAL"
   },
   {

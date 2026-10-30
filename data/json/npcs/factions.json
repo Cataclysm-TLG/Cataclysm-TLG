@@ -64,7 +64,7 @@
     "//": "90 days worth of food for 10 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
     "//2": "Expect to see these values a lot.",
     "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
-    "wealth": 100000000,
+    "wealth": 30000000,
     "currency": "RobofacCoin",
     "price_rules": [
       { "group": "NC_ROBOFAC_gear", "markup": 2 },
@@ -157,7 +157,7 @@
     "size": 100,
     "power": 100,
     "fac_food_supply": [ [ 0, { "calories": 2700000000, "vitamins": { "iron": 86400, "calcium": 86400, "vitC": 86400 } } ] ],
-    "wealth": 100000000,
+    "wealth": 10000000,
     "relations": {
       "old_guard": {
         "kill on sight": false,
@@ -194,10 +194,8 @@
     "known_by_u": false,
     "size": 100,
     "power": 100,
-    "//": "(only) 30 days worth of food for 100 people, at 3000kcal/day and full RDA of iron/calcium/vitC",
-    "//2": "Their canonical starvation is not yet implemented.",
     "fac_food_supply": [ [ 0, { "calories": 9000000000, "vitamins": { "iron": 288000, "calcium": 288000, "vitC": 288000 } } ] ],
-    "wealth": 75000000,
+    "wealth": 30000000,
     "currency": "FMCNote",
     "price_rules": [
       { "item": "money_strap_FMCNote", "fixed_adj": 0 },
@@ -597,6 +595,7 @@
       { "category": "spare_parts", "purchase_rate": 0 },
       { "category": "chems", "purchase_rate": 0 },
       { "category": "bionics", "purchase_rate": 0 },
+      { "category": "food", "purchase_rate": 0.66 },
       { "category": "tools", "purchase_rate": 0 },
       { "category": "armor", "purchase_rate": 0 },
       { "category": "fuel", "purchase_rate": 0.08 },
