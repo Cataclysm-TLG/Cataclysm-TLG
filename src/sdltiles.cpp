@@ -3268,7 +3268,6 @@ static void CheckMessages()
         // SDL3: converts event coordinates from window space to render-logical space.
         // SDL2: no-op (logical size auto-scales events).
         ConvertEventCoordinates( renderer, &ev );
-        imclient->process_input( &ev );
 
         // Window events: SDL3 flattens the SDL_WINDOWEVENT+subtype to top-level events.
         // IsWindowEvent/GetWindowEventID normalize across versions.

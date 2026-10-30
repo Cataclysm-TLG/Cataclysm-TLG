@@ -1,4 +1,4 @@
-#if defined(TILES)
+#if defined(TILES) || defined(SDL_SOUND)
 
 #include "sdl_wrappers.h"
 
@@ -931,3 +931,4 @@ float GetFingerY( const SDL_Event &ev, const int windowHeight )
 }
 
 #endif // defined(TILES)
+#endif // defined(TILES) || defined(SDL_SOUND)
