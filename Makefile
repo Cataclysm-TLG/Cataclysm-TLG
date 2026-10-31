@@ -561,8 +561,14 @@ ifeq ($(NATIVE), osx)
   LDFLAGS += -mmacosx-version-min=10.15 -framework CoreFoundation -Wl,-headerpad_max_install_names
   LDFLAGS += -liconv
   ifeq ($(UNIVERSAL_BINARY), 1)
-    CXXFLAGS += -arch x86_64 -arch arm64
+    CXXFLAGS += -arch x86_64 -mcx16 -arch arm64
+    CFLAGS += -arch x86_64 -mcx16 -arch arm64
     LDFLAGS += -arch x86_64 -arch arm64
+  else
+    ifneq ($(findstring x86-64,$(shell $(CXX) -v 2>&1 | grep Target: | awk '{print $2}')),)
+      CXXFLAGS += -mcx16
+      CFLAGS += -mcx16
+    endif
   endif
   ifdef FRAMEWORK
     ifeq ($(FRAMEWORKSDIR),)
@@ -587,10 +593,7 @@ ifeq ($(NATIVE), osx)
       endif
     endif
   endif
-  TARGETSYSTEM=LINUX
-  ifneq ($(OS), Linux)
-    BINDIST_CMD = tar -s"@^$(BINDIST_DIR)@cataclysm-tlg-$(VERSION)@" -czvf $(BINDIST) $(BINDIST_DIR)
-  endif
+  BINDIST_CMD = tar -s"@^$(BINDIST_DIR)@cataclysm-tlg-$(VERSION)@" -czvf $(BINDIST) $(BINDIST_DIR)
 endif
 
 # Win32 (MinGW32 or MinGW-w64(32bit)?)
@@ -850,7 +853,7 @@ endif
 
 # Global settings for Windows targets (at end)
 ifeq ($(TARGETSYSTEM),WINDOWS)
-  LDFLAGS += -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lversion
+  LDFLAGS += -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lversion -lBcrypt
   ifeq ($(BACKTRACE),1)
     LDFLAGS += -ldbghelp
   endif
@@ -873,6 +876,8 @@ ifeq ($(LOCALIZE),1)
 endif
 
 ifeq ($(TARGETSYSTEM),LINUX)
+  CFLAGS += -mcx16
+  CXXFLAGS += -mcx16
   BINDIST_EXTRAS += cataclysm-launcher
   ifneq ("$(wildcard LICENSE-SDL.txt)","")
     SDL2_solib = $(shell ldd $(TARGET) | grep libSDL2-2\.0 | cut -d ' ' -f 3)
@@ -886,6 +891,8 @@ ifeq ($(TARGETSYSTEM),LINUX)
 endif
 
 ifeq ($(TARGETSYSTEM),CYGWIN)
+  CFLAGS += -mcx16
+  CXXFLAGS += -mcx16
   BINDIST_EXTRAS += cataclysm-launcher
   DEFINES += -D_GLIBCXX_USE_C99_MATH_TR1
 endif
@@ -895,9 +902,8 @@ ifeq ($(MSYS2),1)
   CXXFLAGS += -DMSYS2
 endif
 
-CFLAGS := $(CXXFLAGS)
-CFLAGS += $(C_STD)
-CXXFLAGS += $(CXX_STD) $(CXX_WARNINGS)
+CFLAGS += $(C_STD) $(WARNINGS) -fvisibility=hidden
+CXXFLAGS += $(CXX_STD) $(CXX_WARNINGS) -fvisibility=hidden
 
 # Enumerations of all the source files and headers.
 ifeq ($(HEADERPOPULARITY), 1)
@@ -1018,7 +1024,7 @@ ifeq ($(RELEASE), 1)
   ifndef DEBUG_SYMBOLS
     ifneq ($(BACKTRACE),1)
       ifneq ($(NATIVE), emscripten)
-	$(STRIP) $(TARGET)
+	$(STRIP) -Sx $(TARGET)
       endif
     endif
   endif

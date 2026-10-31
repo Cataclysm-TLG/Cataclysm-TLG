@@ -2990,690 +2990,750 @@ static void CheckMessages()
         input_context *new_input_context = *--input_context::input_context_stack.end();
         if( new_input_context && *new_input_context != touch_input_context ) {
 
-        // If we were in an allow_text_entry input context, and text input is still active, and we're auto-managing keyboard, hide it.
-        if( touch_input_context.allow_text_entry &&
-            !new_input_context->allow_text_entry &&
-            !is_string_input( *new_input_context ) &&
-            IsTextInputActive( ::window.get() ) &&
-            get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-            focus_aware_stop_text_input();
+            // If we were in an allow_text_entry input context, and text input is still active, and we're auto-managing keyboard, hide it.
+            if( touch_input_context.allow_text_entry &&
+                !new_input_context->allow_text_entry &&
+                !is_string_input( *new_input_context ) &&
+                IsTextInputActive( ::window.get() ) &&
+                get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
+                focus_aware_stop_text_input();
+            }
         }
-    }
 
-    bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
-    quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                 touch_input_context.get_category() )];
+        bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
+        quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                     touch_input_context.get_category() )];
 
-    // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
-    if( !needupdate ) {
+        // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
+        if( !needupdate ) {
 
-        // Check action weightings and auto-add any immediate-surrounding actions as quick shortcuts
-        // This code is based heavily off action.cpp handle_action_menu() which puts common shortcuts at the top
-        if( is_default_mode && get_option<bool>( "ANDROID_SHORTCUT_AUTOADD" ) ) {
-            static int last_moves_since_last_save = -1;
-            if( last_moves_since_last_save != g->get_moves_since_last_save() ) {
-                last_moves_since_last_save = g->get_moves_since_last_save();
+            // Check action weightings and auto-add any immediate-surrounding actions as quick shortcuts
+            // This code is based heavily off action.cpp handle_action_menu() which puts common shortcuts at the top
+            if( is_default_mode && get_option<bool>( "ANDROID_SHORTCUT_AUTOADD" ) ) {
+                static int last_moves_since_last_save = -1;
+                if( last_moves_since_last_save != g->get_moves_since_last_save() ) {
+                    last_moves_since_last_save = g->get_moves_since_last_save();
 
-                // Actions to add
-                std::set<action_id> actions;
+                    // Actions to add
+                    std::set<action_id> actions;
 
-                // Actions to remove - we only want to remove things that we're 100% sure won't be useful to players otherwise
-                std::set<action_id> actions_remove;
+                    // Actions to remove - we only want to remove things that we're 100% sure won't be useful to players otherwise
+                    std::set<action_id> actions_remove;
 
-                Character &player_character = get_player_character();
-                // Check if we're in a potential combat situation, if so, sort a few actions to the top.
-                if( !player_character.get_hostile_creatures( MAX_VIEW_DISTANCE ).empty() ) {
-                    // Only prioritize movement options if we're not driving.
-                    if( !player_character.controlling_vehicle ) {
-                        actions.insert( ACTION_CYCLE_MOVE );
-                    }
-                    // Only prioritize fire weapon options if we're wielding a ranged weapon.
-                    item_location wielded = player_character.get_wielded_item();
-                    if( wielded ) {
-                        if( wielded->is_gun() || wielded->has_flag( flag_REACH_ATTACK ) ) {
-                            actions.insert( ACTION_FIRE );
+                    Character &player_character = get_player_character();
+                    // Check if we're in a potential combat situation, if so, sort a few actions to the top.
+                    if( !player_character.get_hostile_creatures( MAX_VIEW_DISTANCE ).empty() ) {
+                        // Only prioritize movement options if we're not driving.
+                        if( !player_character.controlling_vehicle ) {
+                            actions.insert( ACTION_CYCLE_MOVE );
+                        }
+                        // Only prioritize fire weapon options if we're wielding a ranged weapon.
+                        item_location wielded = player_character.get_wielded_item();
+                        if( wielded ) {
+                            if( wielded->is_gun() || wielded->has_flag( flag_REACH_ATTACK ) ) {
+                                actions.insert( ACTION_FIRE );
+                            }
                         }
                     }
-                }
 
-                // If we're already running, make it simple to toggle running to off.
-                if( player_character.is_running() ) {
-                    actions.insert( ACTION_TOGGLE_RUN );
-                }
-                // If we're already crouching, make it simple to toggle crouching to off.
-                if( player_character.is_crouching() ) {
-                    actions.insert( ACTION_TOGGLE_CROUCH );
-                }
-                // If we're already prone, make it simple to toggle prone to off.
-                if( player_character.is_prone() ) {
-                    actions.insert( ACTION_TOGGLE_PRONE );
-                }
+                    // If we're already running, make it simple to toggle running to off.
+                    if( player_character.is_running() ) {
+                        actions.insert( ACTION_TOGGLE_RUN );
+                    }
+                    // If we're already crouching, make it simple to toggle crouching to off.
+                    if( player_character.is_crouching() ) {
+                        actions.insert( ACTION_TOGGLE_CROUCH );
+                    }
+                    // If we're already prone, make it simple to toggle prone to off.
+                    if( player_character.is_prone() ) {
+                        actions.insert( ACTION_TOGGLE_PRONE );
+                    }
 
-                // We're not already running or in combat, so remove cycle walk/run
-                if( std::find( actions.begin(), actions.end(), ACTION_CYCLE_MOVE ) == actions.end() ) {
-                    actions_remove.insert( ACTION_CYCLE_MOVE );
-                }
+                    // We're not already running or in combat, so remove cycle walk/run
+                    if( std::find( actions.begin(), actions.end(), ACTION_CYCLE_MOVE ) == actions.end() ) {
+                        actions_remove.insert( ACTION_CYCLE_MOVE );
+                    }
 
-                map &here = get_map();
-                // Check if we can perform one of our actions on nearby terrain. If so,
-                // display that action at the top of the list.
-                for( int dx = -1; dx <= 1; dx++ ) {
-                    for( int dy = -1; dy <= 1; dy++ ) {
-                        int x = player_character.posx( here ) + dx;
-                        int y = player_character.posy( here ) + dy;
-                        int z = player_character.posz();
-                        const tripoint pos( x, y, z );
-                        const tripoint_bub_ms bub_pos( pos );
-                        // Check if we're near a vehicle, if so, vehicle controls should be top.
-                        {
-                            const optional_vpart_position vp = here.veh_at( bub_pos );
-                            if( vp ) {
-                                if( const std::optional<vpart_reference> controlpart = vp.part_with_feature( "CONTROLS", true ) ) {
-                                    actions.insert( ACTION_CONTROL_VEHICLE );
+                    map &here = get_map();
+                    // Check if we can perform one of our actions on nearby terrain. If so,
+                    // display that action at the top of the list.
+                    for( int dx = -1; dx <= 1; dx++ ) {
+                        for( int dy = -1; dy <= 1; dy++ ) {
+                            int x = player_character.posx( here ) + dx;
+                            int y = player_character.posy( here ) + dy;
+                            int z = player_character.posz();
+                            const tripoint pos( x, y, z );
+                            const tripoint_bub_ms bub_pos( pos );
+                            // Check if we're near a vehicle, if so, vehicle controls should be top.
+                            {
+                                const optional_vpart_position vp = here.veh_at( bub_pos );
+                                if( vp ) {
+                                    if( const std::optional<vpart_reference> controlpart = vp.part_with_feature( "CONTROLS", true ) ) {
+                                        actions.insert( ACTION_CONTROL_VEHICLE );
+                                    }
+                                    const std::optional<vpart_reference> openablepart = vp.part_with_feature( "OPENABLE", true );
+                                    if( openablepart && openablepart->part().open && ( dx != 0 ||
+                                            dy != 0 ) ) { // an open door adjacent to us
+                                        actions.insert( ACTION_CLOSE );
+                                    }
+                                    const std::optional<vpart_reference> curtainpart = vp.part_with_feature( "CURTAIN", true );
+                                    if( curtainpart && curtainpart->part().open && ( dx != 0 || dy != 0 ) ) {
+                                        actions.insert( ACTION_CLOSE );
+                                    }
+                                    const std::optional<vpart_reference> cargopart = vp.cargo();
+                                    if( cargopart && ( !cargopart->items().empty() ) ) {
+                                        actions.insert( ACTION_PICKUP );
+                                    }
                                 }
-                                const std::optional<vpart_reference> openablepart = vp.part_with_feature( "OPENABLE", true );
-                                if( openablepart && openablepart->part().open && ( dx != 0 ||
-                                        dy != 0 ) ) { // an open door adjacent to us
+                            }
+                            if( dx != 0 || dy != 0 ) {
+                                // Check for actions that work on nearby tiles
+                                //if( can_interact_at( ACTION_OPEN, pos ) ) {
+                                // don't bother with open since user can just walk into target
+                                //}
+                                if( can_interact_at( ACTION_CLOSE, here, bub_pos ) ) {
                                     actions.insert( ACTION_CLOSE );
                                 }
-                                const std::optional<vpart_reference> curtainpart = vp.part_with_feature( "CURTAIN", true );
-                                if( curtainpart && curtainpart->part().open && ( dx != 0 || dy != 0 ) ) {
-                                    actions.insert( ACTION_CLOSE );
+                                if( can_interact_at( ACTION_EXAMINE, here, bub_pos ) ) {
+                                    actions.insert( ACTION_EXAMINE );
                                 }
-                                const std::optional<vpart_reference> cargopart = vp.cargo();
-                                if( cargopart && ( !cargopart->items().empty() ) ) {
-                                    actions.insert( ACTION_PICKUP );
+                            } else {
+                                // Check for actions that work on own tile only
+                                if( can_interact_at( ACTION_BUTCHER, here, bub_pos ) ) {
+                                    actions.insert( ACTION_BUTCHER );
+                                } else {
+                                    actions_remove.insert( ACTION_BUTCHER );
+                                }
+
+                                if( can_interact_at( ACTION_MOVE_UP, here, bub_pos ) ) {
+                                    actions.insert( ACTION_MOVE_UP );
+                                } else {
+                                    actions_remove.insert( ACTION_MOVE_UP );
+                                }
+
+                                if( can_interact_at( ACTION_MOVE_DOWN, here, bub_pos ) ) {
+                                    actions.insert( ACTION_MOVE_DOWN );
+                                } else {
+                                    actions_remove.insert( ACTION_MOVE_DOWN );
                                 }
                             }
-                        }
-                        if( dx != 0 || dy != 0 ) {
-                            // Check for actions that work on nearby tiles
-                            //if( can_interact_at( ACTION_OPEN, pos ) ) {
-                            // don't bother with open since user can just walk into target
-                            //}
-                            if( can_interact_at( ACTION_CLOSE, here, bub_pos ) ) {
-                                actions.insert( ACTION_CLOSE );
-                            }
-                            if( can_interact_at( ACTION_EXAMINE, here, bub_pos ) ) {
-                                actions.insert( ACTION_EXAMINE );
-                            }
-                        } else {
-                            // Check for actions that work on own tile only
-                            if( can_interact_at( ACTION_BUTCHER, here, bub_pos ) ) {
-                                actions.insert( ACTION_BUTCHER );
-                            } else {
-                                actions_remove.insert( ACTION_BUTCHER );
-                            }
 
-                            if( can_interact_at( ACTION_MOVE_UP, here, bub_pos ) ) {
-                                actions.insert( ACTION_MOVE_UP );
-                            } else {
-                                actions_remove.insert( ACTION_MOVE_UP );
+                            // Check for actions that work on nearby tiles and own tile
+                            if( can_interact_at( ACTION_PICKUP, here, tripoint_bub_ms( pos ) ) ) {
+                                actions.insert( ACTION_PICKUP );
                             }
-
-                            if( can_interact_at( ACTION_MOVE_DOWN, here, bub_pos ) ) {
-                                actions.insert( ACTION_MOVE_DOWN );
-                            } else {
-                                actions_remove.insert( ACTION_MOVE_DOWN );
-                            }
-                        }
-
-                        // Check for actions that work on nearby tiles and own tile
-                        if( can_interact_at( ACTION_PICKUP, here, tripoint_bub_ms( pos ) ) ) {
-                            actions.insert( ACTION_PICKUP );
                         }
                     }
-                }
 
-                // We're not near a vehicle, so remove control vehicle
-                if( std::find( actions.begin(), actions.end(), ACTION_CONTROL_VEHICLE ) == actions.end() ) {
-                    actions_remove.insert( ACTION_CONTROL_VEHICLE );
-                }
+                    // We're not near a vehicle, so remove control vehicle
+                    if( std::find( actions.begin(), actions.end(), ACTION_CONTROL_VEHICLE ) == actions.end() ) {
+                        actions_remove.insert( ACTION_CONTROL_VEHICLE );
+                    }
 
-                // We're not able to close anything nearby, so remove it
-                if( std::find( actions.begin(), actions.end(), ACTION_CLOSE ) == actions.end() ) {
-                    actions_remove.insert( ACTION_CLOSE );
-                }
+                    // We're not able to close anything nearby, so remove it
+                    if( std::find( actions.begin(), actions.end(), ACTION_CLOSE ) == actions.end() ) {
+                        actions_remove.insert( ACTION_CLOSE );
+                    }
 
-                // We're not able to examine anything nearby, so remove it
-                if( std::find( actions.begin(), actions.end(), ACTION_EXAMINE ) == actions.end() ) {
-                    actions_remove.insert( ACTION_EXAMINE );
-                }
+                    // We're not able to examine anything nearby, so remove it
+                    if( std::find( actions.begin(), actions.end(), ACTION_EXAMINE ) == actions.end() ) {
+                        actions_remove.insert( ACTION_EXAMINE );
+                    }
 
-                // We're not able to pickup anything nearby, so remove it
-                if( std::find( actions.begin(), actions.end(), ACTION_PICKUP ) == actions.end() ) {
-                    actions_remove.insert( ACTION_PICKUP );
-                }
+                    // We're not able to pickup anything nearby, so remove it
+                    if( std::find( actions.begin(), actions.end(), ACTION_PICKUP ) == actions.end() ) {
+                        actions_remove.insert( ACTION_PICKUP );
+                    }
 
-                // Check if we can't move because of safe mode - if so, add ability to ignore
-                if( g && !g->check_safe_mode_allowed( false ) ) {
-                    actions.insert( ACTION_IGNORE_ENEMY );
-                    actions.insert( ACTION_TOGGLE_SAFEMODE );
-                } else {
-                    actions_remove.insert( ACTION_IGNORE_ENEMY );
-                    actions_remove.insert( ACTION_TOGGLE_SAFEMODE );
-                }
+                    // Check if we can't move because of safe mode - if so, add ability to ignore
+                    if( g && !g->check_safe_mode_allowed( false ) ) {
+                        actions.insert( ACTION_IGNORE_ENEMY );
+                        actions.insert( ACTION_TOGGLE_SAFEMODE );
+                    } else {
+                        actions_remove.insert( ACTION_IGNORE_ENEMY );
+                        actions_remove.insert( ACTION_TOGGLE_SAFEMODE );
+                    }
 
-                // Check if we're significantly hungry or thirsty - if so, add eat
-                if( player_character.get_hunger() > 100 || player_character.get_thirst() > 40 ) {
-                    actions.insert( ACTION_EAT );
-                }
+                    // Check if we're significantly hungry or thirsty - if so, add eat
+                    if( player_character.get_hunger() > 100 || player_character.get_thirst() > 40 ) {
+                        actions.insert( ACTION_EAT );
+                    }
 
-                // Check if we're dead tired - if so, add sleep
-                if( player_character.get_fatigue() > fatigue_levels::DEAD_TIRED ) {
-                    actions.insert( ACTION_SLEEP );
-                }
+                    // Check if we're dead tired - if so, add sleep
+                    if( player_character.get_fatigue() > fatigue_levels::DEAD_TIRED ) {
+                        actions.insert( ACTION_SLEEP );
+                    }
 
-                for( const auto &action : actions ) {
-                    if( add_best_key_for_action_to_quick_shortcuts( action, touch_input_context.get_category(),
-                            !get_option<bool>( "ANDROID_SHORTCUT_AUTOADD_FRONT" ) ) ) {
+                    for( const auto &action : actions ) {
+                        if( add_best_key_for_action_to_quick_shortcuts( action, touch_input_context.get_category(),
+                                !get_option<bool>( "ANDROID_SHORTCUT_AUTOADD_FRONT" ) ) ) {
+                            needupdate = true;
+                        }
+                    }
+
+                    size_t old_size = qsl.size();
+                    for( const auto &action_remove : actions_remove ) {
+                        remove_action_from_quick_shortcuts( action_remove, touch_input_context.get_category() );
+                    }
+                    if( qsl.size() != old_size ) {
                         needupdate = true;
                     }
                 }
-
-                size_t old_size = qsl.size();
-                for( const auto &action_remove : actions_remove ) {
-                    remove_action_from_quick_shortcuts( action_remove, touch_input_context.get_category() );
-                }
-                if( qsl.size() != old_size ) {
-                    needupdate = true;
-                }
             }
-        }
 
-        if( remove_expired_actions_from_quick_shortcuts( touch_input_context.get_category() ) ) {
-            needupdate = true;
-        }
-
-        // Toggle quick shortcuts on/off
-        if( ac_back_down_time > 0 &&
-            ticks - ac_back_down_time > static_cast<uint32_t>
-            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-            if( !quick_shortcuts_toggle_handled ) {
-                quick_shortcuts_enabled = !quick_shortcuts_enabled;
-                quick_shortcuts_toggle_handled = true;
-                refresh_display();
-
-                // Display an Android toast message
-                {
-                    JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-                    jobject activity = ( jobject )SDL_AndroidGetActivity();
-                    jclass clazz( env->GetObjectClass( activity ) );
-                    jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
-                                            "Shortcuts hidden" );
-                    jmethodID method_id = env->GetMethodID( clazz, "toast", "(Ljava/lang/String;)V" );
-                    env->CallVoidMethod( activity, method_id, toast_message );
-                    env->DeleteLocalRef( activity );
-                    env->DeleteLocalRef( clazz );
-                }
+            if( remove_expired_actions_from_quick_shortcuts( touch_input_context.get_category() ) ) {
+                needupdate = true;
             }
-        }
 
-        // Handle repeating inputs from touch + holds
-        if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
-            finger_down_time > 0 &&
-            ticks - finger_down_time > static_cast<uint32_t>
-            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-            if( ticks - finger_repeat_time > finger_repeat_delay ) {
-                handle_finger_input( ticks );
-                finger_repeat_time = ticks;
-                // Prevent repeating inputs on the next call to this function if there is a fingerup event
-                while( SDL_PollEvent( &ev ) ) {
-                    if( ev.type == CATA_FINGERUP ) {
-                        third_finger_down_x = third_finger_curr_x = second_finger_down_x = second_finger_curr_x =
-                                                  finger_down_x = finger_curr_x = -1.0f;
-                        third_finger_down_y = third_finger_curr_y = second_finger_down_y = second_finger_curr_y =
-                                                  finger_down_y = finger_curr_y = -1.0f;
-                        is_two_finger_touch = false;
-                        is_three_finger_touch = false;
-                        finger_down_time = 0;
-                        finger_repeat_time = 0;
-                        // let the next call decide if needupdate should be true
-                        break;
+            // Toggle quick shortcuts on/off
+            if( ac_back_down_time > 0 &&
+                ticks - ac_back_down_time > static_cast<uint32_t>
+                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                if( !quick_shortcuts_toggle_handled ) {
+                    quick_shortcuts_enabled = !quick_shortcuts_enabled;
+                    quick_shortcuts_toggle_handled = true;
+                    refresh_display();
+
+                    // Display an Android toast message
+                    {
+                        JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
+                        jobject activity = ( jobject )SDL_AndroidGetActivity();
+                        jclass clazz( env->GetObjectClass( activity ) );
+                        jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
+                                                "Shortcuts hidden" );
+                        jmethodID method_id = env->GetMethodID( clazz, "toast", "(Ljava/lang/String;)V" );
+                        env->CallVoidMethod( activity, method_id, toast_message );
+                        env->DeleteLocalRef( activity );
+                        env->DeleteLocalRef( clazz );
                     }
                 }
+            }
+
+            // Handle repeating inputs from touch + holds
+            if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
+                finger_down_time > 0 &&
+                ticks - finger_down_time > static_cast<uint32_t>
+                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                if( ticks - finger_repeat_time > finger_repeat_delay ) {
+                    handle_finger_input( ticks );
+                    finger_repeat_time = ticks;
+                    // Prevent repeating inputs on the next call to this function if there is a fingerup event
+                    while( SDL_PollEvent( &ev ) ) {
+                        if( ev.type == CATA_FINGERUP ) {
+                            third_finger_down_x = third_finger_curr_x = second_finger_down_x = second_finger_curr_x =
+                                                      finger_down_x = finger_curr_x = -1.0f;
+                            third_finger_down_y = third_finger_curr_y = second_finger_down_y = second_finger_curr_y =
+                                                      finger_down_y = finger_curr_y = -1.0f;
+                            is_two_finger_touch = false;
+                            is_three_finger_touch = false;
+                            finger_down_time = 0;
+                            finger_repeat_time = 0;
+                            // let the next call decide if needupdate should be true
+                            break;
+                        }
+                    }
+                    return;
+                }
+            }
+
+            // If we received a first tap and not another one within a certain period, this was a single tap, so trigger the input event
+            if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
+                last_tap_time > 0 &&
+                ticks - last_tap_time >= static_cast<uint32_t>
+                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                // Single tap
+                last_tap_time = ticks;
+                last_input = input_event( is_default_mode ? get_key_event_from_string(
+                                              get_option<std::string>( "ANDROID_TAP_KEY" ) ) : '\n', input_event_t::keyboard_char );
+                last_tap_time = 0;
                 return;
             }
-        }
 
-        // If we received a first tap and not another one within a certain period, this was a single tap, so trigger the input event
-        if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
-            last_tap_time > 0 &&
-            ticks - last_tap_time >= static_cast<uint32_t>
-            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-            // Single tap
-            last_tap_time = ticks;
-            last_input = input_event( is_default_mode ? get_key_event_from_string(
-                                          get_option<std::string>( "ANDROID_TAP_KEY" ) ) : '\n', input_event_t::keyboard_char );
-            last_tap_time = 0;
-            return;
-        }
-
-        // ensure hint text pops up even if player doesn't move finger to trigger a FINGERMOTION event
-        if( is_quick_shortcut_touch && finger_down_time > 0 &&
-            ticks - finger_down_time > static_cast<uint32_t>
-            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-            needupdate = true;
-        }
-    }
-#endif
-
-    last_input = input_event();
-
-    std::optional<point> resize_dims;
-    bool render_target_reset = false;
-    using cata::options::mouse;
-
-    while( SDL_PollEvent( &ev ) ) {
-        // SDL3: converts event coordinates from window space to render-logical space.
-        // SDL2: no-op (logical size auto-scales events).
-        ConvertEventCoordinates( renderer, &ev );
-
-        // Window events: SDL3 flattens the SDL_WINDOWEVENT+subtype to top-level events.
-        // IsWindowEvent/GetWindowEventID normalize across versions.
-        if( IsWindowEvent( ev ) ) {
-            switch( GetWindowEventID( ev ) ) {
-#if defined(__ANDROID__)
-                // SDL will send a focus lost event whenever the app loses focus (eg. lock screen, switch app focus etc.)
-                // If we detect it and the game seems in a saveable state, try and do a quicksave. This is a bit dodgy
-                // as the player could be ANYWHERE doing ANYTHING (a sub-menu, interacting with an NPC/computer etc.)
-                // but it seems to work so far, and the alternative is the player losing their progress as the app is likely
-                // to be destroyed pretty quickly when it goes out of focus due to memory usage.
-                case CATA_WINDOWEVENT_FOCUS_LOST:
-                    if( world_generator &&
-                        world_generator->active_world &&
-                        g && g->uquit == QUIT_NO &&
-                        get_option<bool>( "ANDROID_QUICKSAVE" ) &&
-                        !std::uncaught_exception() ) {
-                        g->quicksave();
-                    }
-                    break;
-                // SDL sends a window resize event whenever the screen rotates orientation.
-                // SDL3: SIZE_CHANGED removed; RESIZED covers the same case.
-                case CATA_WINDOWEVENT_RESIZED:
-                    WindowWidth = ev.window.data1;
-                    WindowHeight = ev.window.data2;
-                    SDL_Delay( 500 );
-                    SDL_GetWindowSurface( window.get() );
-                    ui_manager::redraw_invalidated();
-                    refresh_display();
-                    needupdate = true;
-                    break;
-#else
-                case CATA_WINDOWEVENT_FOCUS_LOST:
-                    window_focus = false;
-                    if( IsTextInputActive( ::window.get() ) ) {
-                        text_input_active_when_regaining_focus = true;
-                        // Stop text input to not interfere with other programs
-                        StopTextInput( ::window.get() );
-                        // Clear uncommitted IME text. TODO: commit IME text instead.
-                        last_input = input_event();
-                        last_input.type = input_event_t::keyboard_char;
-                        last_input.edit.clear();
-                        last_input.edit_refresh = true;
-                        text_refresh = true;
-                    } else {
-                        text_input_active_when_regaining_focus = false;
-                    }
-                    break;
-                case CATA_WINDOWEVENT_FOCUS_GAINED:
-                    window_focus = true;
-                    // Restore text input status
-                    if( text_input_active_when_regaining_focus ) {
-                        StartTextInput( ::window.get() );
-                    }
-                    break;
-#endif
-                case CATA_WINDOWEVENT_SHOWN:
-                case CATA_WINDOWEVENT_MINIMIZED:
-                    break;
-                case CATA_WINDOWEVENT_EXPOSED:
-                    needupdate = true;
-                    break;
-                case CATA_WINDOWEVENT_RESTORED:
-#if defined(__ANDROID__)
-                    needs_sdl_surface_visibility_refresh = true;
-                    if( android_is_hardware_keyboard_available() ) {
-                        focus_aware_stop_text_input();
-                        focus_aware_start_text_input();
-                    }
-#endif
-                    break;
-#if !defined(__ANDROID__)
-                // Non-Android resize: store dimensions for deferred handling
-                case CATA_WINDOWEVENT_RESIZED:
-                    resize_dims = point( ev.window.data1, ev.window.data2 );
-                    break;
-#endif
-                default:
-                    break;
+            // ensure hint text pops up even if player doesn't move finger to trigger a FINGERMOTION event
+            if( is_quick_shortcut_touch && finger_down_time > 0 &&
+                ticks - finger_down_time > static_cast<uint32_t>
+                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                needupdate = true;
             }
-        } else {
-            switch( ev.type ) {
-                case CATA_RENDER_TARGETS_RESET:
-                    render_target_reset = true;
-                    break;
-                case CATA_KEYDOWN: {
-#if defined(__ANDROID__)
-                    // Toggle virtual keyboard with Android back button. For some reason I get double inputs, so ignore everything once it's already down.
-                    if( GetKeysym( ev ).sym == SDLK_AC_BACK && ac_back_down_time == 0 ) {
-                        ac_back_down_time = ticks;
-                        quick_shortcuts_toggle_handled = false;
-                    }
+        }
 #endif
-                    is_repeat = ev.key.repeat;
-                    //hide mouse cursor on keyboard input
-                    if( get_option<std::string>( "HIDE_CURSOR" ) != "show" && IsCursorVisible() ) {
-                        HideCursor();
-                    }
-                    keyboard_mode mode = keyboard_mode::keychar;
-#if !defined(__ANDROID__) && !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE == 1)
-                    if( !IsTextInputActive( ::window.get() ) ) {
-                        mode = keyboard_mode::keycode;
-                    }
-#endif
-                    if( mode == keyboard_mode::keychar ) {
-                        const int lc = sdl_keysym_to_curses( GetKeysym( ev ) );
-                        if( lc <= 0 ) {
-                            // a key we don't know in curses and won't handle.
-                            break;
-                        } else if( add_alt_code( lc ) ) {
-                            // key was handled
-                        } else {
-                            last_input = input_event( lc, input_event_t::keyboard_char );
-#if defined(__ANDROID__)
-                            if( !android_is_hardware_keyboard_available() ) {
-                                if( !is_string_input( touch_input_context ) && !touch_input_context.allow_text_entry ) {
-                                    if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-                                        focus_aware_stop_text_input();
-                                    }
 
-                                    // add a quick shortcut
-                                    if( !last_input.text.empty() ||
-                                        !inp_mngr.get_keyname( lc, input_event_t::keyboard_char ).empty() ) {
+        last_input = input_event();
+
+        std::optional<point> resize_dims;
+        bool render_target_reset = false;
+        using cata::options::mouse;
+
+        while( SDL_PollEvent( &ev ) ) {
+            // SDL3: converts event coordinates from window space to render-logical space.
+            // SDL2: no-op (logical size auto-scales events).
+            ConvertEventCoordinates( renderer, &ev );
+
+            // Window events: SDL3 flattens the SDL_WINDOWEVENT+subtype to top-level events.
+            // IsWindowEvent/GetWindowEventID normalize across versions.
+            if( IsWindowEvent( ev ) ) {
+                switch( GetWindowEventID( ev ) ) {
+#if defined(__ANDROID__)
+                    // SDL will send a focus lost event whenever the app loses focus (eg. lock screen, switch app focus etc.)
+                    // If we detect it and the game seems in a saveable state, try and do a quicksave. This is a bit dodgy
+                    // as the player could be ANYWHERE doing ANYTHING (a sub-menu, interacting with an NPC/computer etc.)
+                    // but it seems to work so far, and the alternative is the player losing their progress as the app is likely
+                    // to be destroyed pretty quickly when it goes out of focus due to memory usage.
+                    case CATA_WINDOWEVENT_FOCUS_LOST:
+                        if( world_generator &&
+                            world_generator->active_world &&
+                            g && g->uquit == QUIT_NO &&
+                            get_option<bool>( "ANDROID_QUICKSAVE" ) &&
+                            !std::uncaught_exception() ) {
+                            g->quicksave();
+                        }
+                        break;
+                    // SDL sends a window resize event whenever the screen rotates orientation.
+                    // SDL3: SIZE_CHANGED removed; RESIZED covers the same case.
+                    case CATA_WINDOWEVENT_RESIZED:
+                        WindowWidth = ev.window.data1;
+                        WindowHeight = ev.window.data2;
+                        SDL_Delay( 500 );
+                        SDL_GetWindowSurface( window.get() );
+                        ui_manager::redraw_invalidated();
+                        refresh_display();
+                        needupdate = true;
+                        break;
+#else
+                    case CATA_WINDOWEVENT_FOCUS_LOST:
+                        window_focus = false;
+                        if( IsTextInputActive( ::window.get() ) ) {
+                            text_input_active_when_regaining_focus = true;
+                            // Stop text input to not interfere with other programs
+                            StopTextInput( ::window.get() );
+                            // Clear uncommitted IME text. TODO: commit IME text instead.
+                            last_input = input_event();
+                            last_input.type = input_event_t::keyboard_char;
+                            last_input.edit.clear();
+                            last_input.edit_refresh = true;
+                            text_refresh = true;
+                        } else {
+                            text_input_active_when_regaining_focus = false;
+                        }
+                        break;
+                    case CATA_WINDOWEVENT_FOCUS_GAINED:
+                        window_focus = true;
+                        // Restore text input status
+                        if( text_input_active_when_regaining_focus ) {
+                            StartTextInput( ::window.get() );
+                        }
+                        break;
+#endif
+                    case CATA_WINDOWEVENT_SHOWN:
+                    case CATA_WINDOWEVENT_MINIMIZED:
+                        break;
+                    case CATA_WINDOWEVENT_EXPOSED:
+                        needupdate = true;
+                        break;
+                    case CATA_WINDOWEVENT_RESTORED:
+#if defined(__ANDROID__)
+                        needs_sdl_surface_visibility_refresh = true;
+                        if( android_is_hardware_keyboard_available() ) {
+                            focus_aware_stop_text_input();
+                            focus_aware_start_text_input();
+                        }
+#endif
+                        break;
+#if !defined(__ANDROID__)
+                    // Non-Android resize: store dimensions for deferred handling
+                    case CATA_WINDOWEVENT_RESIZED:
+                        resize_dims = point( ev.window.data1, ev.window.data2 );
+                        break;
+#endif
+                    default:
+                        break;
+                }
+            } else {
+                switch( ev.type ) {
+                    case CATA_RENDER_TARGETS_RESET:
+                        render_target_reset = true;
+                        break;
+                    case CATA_KEYDOWN: {
+#if defined(__ANDROID__)
+                        // Toggle virtual keyboard with Android back button. For some reason I get double inputs, so ignore everything once it's already down.
+                        if( GetKeysym( ev ).sym == SDLK_AC_BACK && ac_back_down_time == 0 ) {
+                            ac_back_down_time = ticks;
+                            quick_shortcuts_toggle_handled = false;
+                        }
+#endif
+                        is_repeat = ev.key.repeat;
+                        //hide mouse cursor on keyboard input
+                        if( get_option<std::string>( "HIDE_CURSOR" ) != "show" && IsCursorVisible() ) {
+                            HideCursor();
+                        }
+                        keyboard_mode mode = keyboard_mode::keychar;
+#if !defined(__ANDROID__) && !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE == 1)
+                        if( !IsTextInputActive( ::window.get() ) ) {
+                            mode = keyboard_mode::keycode;
+                        }
+#endif
+                        if( mode == keyboard_mode::keychar ) {
+                            const int lc = sdl_keysym_to_curses( GetKeysym( ev ) );
+                            if( lc <= 0 ) {
+                                // a key we don't know in curses and won't handle.
+                                break;
+                            } else if( add_alt_code( lc ) ) {
+                                // key was handled
+                            } else {
+                                last_input = input_event( lc, input_event_t::keyboard_char );
+#if defined(__ANDROID__)
+                                if( !android_is_hardware_keyboard_available() ) {
+                                    if( !is_string_input( touch_input_context ) && !touch_input_context.allow_text_entry ) {
+                                        if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
+                                            focus_aware_stop_text_input();
+                                        }
+
+                                        // add a quick shortcut
+                                        if( !last_input.text.empty() ||
+                                            !inp_mngr.get_keyname( lc, input_event_t::keyboard_char ).empty() ) {
+                                            qsl.remove( last_input );
+                                            add_quick_shortcut( qsl, last_input, false, true );
+                                            ui_manager::redraw_invalidated();
+                                            refresh_display();
+                                        }
+                                    } else if( lc == '\n' || lc == KEY_ESCAPE ) {
+                                        if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
+                                            focus_aware_stop_text_input();
+                                        }
+                                    }
+                                }
+#endif
+                            }
+                        } else {
+                            last_input = sdl_keysym_to_keycode_evt( GetKeysym( ev ) );
+                        }
+                    }
+                    break;
+                    case CATA_KEYUP: {
+#if defined(__ANDROID__)
+                        // Toggle virtual keyboard with Android back button
+                        if( GetKeysym( ev ).sym == SDLK_AC_BACK ) {
+                            if( ticks - ac_back_down_time <= static_cast<uint32_t>
+                                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                                if( IsTextInputActive( ::window.get() ) ) {
+                                    focus_aware_stop_text_input();
+                                } else {
+                                    focus_aware_start_text_input();
+                                }
+                            }
+                            ac_back_down_time = 0;
+                        }
+#endif
+                        keyboard_mode mode = keyboard_mode::keychar;
+#if !defined(__ANDROID__) && !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE == 1)
+                        if( !IsTextInputActive( ::window.get() ) ) {
+                            mode = keyboard_mode::keycode;
+                        }
+#endif
+                        is_repeat = ev.key.repeat;
+                        if( mode == keyboard_mode::keychar ) {
+                            if( GetKeysym( ev ).sym == SDLK_LALT || GetKeysym( ev ).sym == SDLK_RALT ) {
+                                int code = end_alt_code();
+                                if( code ) {
+                                    last_input = input_event( code, input_event_t::keyboard_char );
+                                    last_input.text = utf32_to_utf8( code );
+                                }
+                            }
+                        } else if( is_repeat ) {
+                            last_input = sdl_keysym_to_keycode_evt( GetKeysym( ev ) );
+                        }
+                    }
+                    break;
+                    case CATA_TEXTINPUT:
+                        if( !add_alt_code( *ev.text.text ) ) {
+                            if( strlen( ev.text.text ) > 0 ) {
+                                const unsigned lc = UTF8_getch( ev.text.text );
+                                last_input = input_event( lc, input_event_t::keyboard_char );
+#if defined(__ANDROID__)
+                                if( !android_is_hardware_keyboard_available() ) {
+                                    if( !is_string_input( touch_input_context ) && !touch_input_context.allow_text_entry ) {
+                                        if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
+                                            focus_aware_stop_text_input();
+                                        }
+
+                                        quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                                                     touch_input_context.get_category() )];
                                         qsl.remove( last_input );
                                         add_quick_shortcut( qsl, last_input, false, true );
-                                        ui_manager::redraw_invalidated();
                                         refresh_display();
-                                    }
-                                } else if( lc == '\n' || lc == KEY_ESCAPE ) {
-                                    if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-                                        focus_aware_stop_text_input();
+                                    } else if( lc == '\n' || lc == KEY_ESCAPE ) {
+                                        if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
+                                            focus_aware_stop_text_input();
+                                        }
                                     }
                                 }
-                            }
 #endif
-                        }
-                    } else {
-                        last_input = sdl_keysym_to_keycode_evt( GetKeysym( ev ) );
-                    }
-                }
-                break;
-                case CATA_KEYUP: {
-#if defined(__ANDROID__)
-                    // Toggle virtual keyboard with Android back button
-                    if( GetKeysym( ev ).sym == SDLK_AC_BACK ) {
-                        if( ticks - ac_back_down_time <= static_cast<uint32_t>
-                            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-                            if( IsTextInputActive( ::window.get() ) ) {
-                                focus_aware_stop_text_input();
                             } else {
-                                focus_aware_start_text_input();
+                                // no key pressed in this event
+                                last_input = input_event();
+                                last_input.type = input_event_t::keyboard_char;
                             }
+                            last_input.text = ev.text.text;
+                            text_refresh = true;
                         }
-                        ac_back_down_time = 0;
-                    }
-#endif
-                    keyboard_mode mode = keyboard_mode::keychar;
-#if !defined(__ANDROID__) && !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE == 1)
-                    if( !IsTextInputActive( ::window.get() ) ) {
-                        mode = keyboard_mode::keycode;
-                    }
-#endif
-                    is_repeat = ev.key.repeat;
-                    if( mode == keyboard_mode::keychar ) {
-                        if( GetKeysym( ev ).sym == SDLK_LALT || GetKeysym( ev ).sym == SDLK_RALT ) {
-                            int code = end_alt_code();
-                            if( code ) {
-                                last_input = input_event( code, input_event_t::keyboard_char );
-                                last_input.text = utf32_to_utf8( code );
-                            }
-                        }
-                    } else if( is_repeat ) {
-                        last_input = sdl_keysym_to_keycode_evt( GetKeysym( ev ) );
-                    }
-                }
-                break;
-                case CATA_TEXTINPUT:
-                    if( !add_alt_code( *ev.text.text ) ) {
-                        if( strlen( ev.text.text ) > 0 ) {
-                            const unsigned lc = UTF8_getch( ev.text.text );
+                        break;
+                    case CATA_TEXTEDITING: {
+                        if( strlen( ev.edit.text ) > 0 ) {
+                            const unsigned lc = UTF8_getch( ev.edit.text );
                             last_input = input_event( lc, input_event_t::keyboard_char );
-#if defined(__ANDROID__)
-                            if( !android_is_hardware_keyboard_available() ) {
-                                if( !is_string_input( touch_input_context ) && !touch_input_context.allow_text_entry ) {
-                                    if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-                                        focus_aware_stop_text_input();
-                                    }
-
-                                    quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                                                 touch_input_context.get_category() )];
-                                    qsl.remove( last_input );
-                                    add_quick_shortcut( qsl, last_input, false, true );
-                                    refresh_display();
-                                } else if( lc == '\n' || lc == KEY_ESCAPE ) {
-                                    if( get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-                                        focus_aware_stop_text_input();
-                                    }
-                                }
-                            }
-#endif
                         } else {
                             // no key pressed in this event
                             last_input = input_event();
                             last_input.type = input_event_t::keyboard_char;
                         }
-                        last_input.text = ev.text.text;
+                        // Convert to string explicitly to avoid accidentally using
+                        // the array out of scope.
+                        last_input.edit = std::string( ev.edit.text );
+                        last_input.edit_refresh = true;
                         text_refresh = true;
+                        break;
                     }
-                    break;
-                case CATA_TEXTEDITING: {
-                    if( strlen( ev.edit.text ) > 0 ) {
-                        const unsigned lc = UTF8_getch( ev.edit.text );
-                        last_input = input_event( lc, input_event_t::keyboard_char );
-                    } else {
-                        // no key pressed in this event
-                        last_input = input_event();
-                        last_input.type = input_event_t::keyboard_char;
-                    }
-                    // Convert to string explicitly to avoid accidentally using
-                    // the array out of scope.
-                    last_input.edit = std::string( ev.edit.text );
-                    last_input.edit_refresh = true;
-                    text_refresh = true;
-                    break;
-                }
 #if defined(SDL_HINT_IME_SUPPORT_EXTENDED_TEXT)
-                case SDL_TEXTEDITING_EXT: {
-                    if( !ev.editExt.text ) {
-                        break;
-                    }
-                    if( strlen( ev.editExt.text ) > 0 ) {
-                        const unsigned lc = UTF8_getch( ev.editExt.text );
-                        last_input = input_event( lc, input_event_t::keyboard_char );
-                    } else {
-                        // no key pressed in this event
-                        last_input = input_event();
-                        last_input.type = input_event_t::keyboard_char;
-                    }
-                    // Convert to string explicitly to avoid accidentally using
-                    // a pointer that will be freed
-                    last_input.edit = std::string( ev.editExt.text );
-                    last_input.edit_refresh = true;
-                    text_refresh = true;
-                    SDL_free( ev.editExt.text );
-                    break;
-                }
-#endif
-                case CATA_MOUSEMOTION:
-                    if( ! mouse.enabled ) {
-                        break;
-                    }
-                    if( get_option<std::string>( "HIDE_CURSOR" ) == "show" ||
-                        get_option<std::string>( "HIDE_CURSOR" ) == "hidekb" ) {
-                        if( !IsCursorVisible() ) {
-                            ShowCursor();
+                    case SDL_TEXTEDITING_EXT: {
+                        if( !ev.editExt.text ) {
+                            break;
                         }
-
-                        // Only monitor motion when cursor is visible
-                        last_input = input_event( MouseInput::Move, input_event_t::mouse );
-                    }
-                    break;
-
-                case CATA_MOUSEBUTTONDOWN:
-                    if( ! mouse.enabled ) {
+                        if( strlen( ev.editExt.text ) > 0 ) {
+                            const unsigned lc = UTF8_getch( ev.editExt.text );
+                            last_input = input_event( lc, input_event_t::keyboard_char );
+                        } else {
+                            // no key pressed in this event
+                            last_input = input_event();
+                            last_input.type = input_event_t::keyboard_char;
+                        }
+                        // Convert to string explicitly to avoid accidentally using
+                        // a pointer that will be freed
+                        last_input.edit = std::string( ev.editExt.text );
+                        last_input.edit_refresh = true;
+                        text_refresh = true;
+                        SDL_free( ev.editExt.text );
                         break;
                     }
-                    switch( ev.button.button ) {
-                        case SDL_BUTTON_LEFT:
-                            last_input = input_event( MouseInput::LeftButtonPressed, input_event_t::mouse );
+#endif
+                    case CATA_MOUSEMOTION:
+                        if( ! mouse.enabled ) {
                             break;
-                        case SDL_BUTTON_RIGHT:
-                            last_input = input_event( MouseInput::RightButtonPressed, input_event_t::mouse );
-                            break;
-                        case SDL_BUTTON_X1:
-                            last_input = input_event( MouseInput::X1ButtonPressed, input_event_t::mouse );
-                            break;
-                        case SDL_BUTTON_X2:
-                            last_input = input_event( MouseInput::X2ButtonPressed, input_event_t::mouse );
-                            break;
-                    }
-                    break;
+                        }
+                        if( get_option<std::string>( "HIDE_CURSOR" ) == "show" ||
+                            get_option<std::string>( "HIDE_CURSOR" ) == "hidekb" ) {
+                            if( !IsCursorVisible() ) {
+                                ShowCursor();
+                            }
 
-                case CATA_MOUSEBUTTONUP:
-                    if( ! mouse.enabled ) {
+                            // Only monitor motion when cursor is visible
+                            last_input = input_event( MouseInput::Move, input_event_t::mouse );
+                        }
                         break;
-                    }
-                    switch( ev.button.button ) {
-                        case SDL_BUTTON_LEFT:
-                            last_input = input_event( MouseInput::LeftButtonReleased, input_event_t::mouse );
-                            break;
-                        case SDL_BUTTON_RIGHT:
-                            last_input = input_event( MouseInput::RightButtonReleased, input_event_t::mouse );
-                            break;
-                        case SDL_BUTTON_X1:
-                            last_input = input_event( MouseInput::X1ButtonReleased, input_event_t::mouse );
-                            break;
-                        case SDL_BUTTON_X2:
-                            last_input = input_event( MouseInput::X2ButtonReleased, input_event_t::mouse );
-                            break;
-                    }
-                    break;
 
-                case CATA_MOUSEWHEEL:
-                    if( ! mouse.enabled ) {
+                    case CATA_MOUSEBUTTONDOWN:
+                        if( ! mouse.enabled ) {
+                            break;
+                        }
+                        switch( ev.button.button ) {
+                            case SDL_BUTTON_LEFT:
+                                last_input = input_event( MouseInput::LeftButtonPressed, input_event_t::mouse );
+                                break;
+                            case SDL_BUTTON_RIGHT:
+                                last_input = input_event( MouseInput::RightButtonPressed, input_event_t::mouse );
+                                break;
+                            case SDL_BUTTON_X1:
+                                last_input = input_event( MouseInput::X1ButtonPressed, input_event_t::mouse );
+                                break;
+                            case SDL_BUTTON_X2:
+                                last_input = input_event( MouseInput::X2ButtonPressed, input_event_t::mouse );
+                                break;
+                        }
                         break;
-                    }
-                    if( ev.wheel.y > 0 ) {
-                        last_input = input_event( MouseInput::ScrollWheelUp, input_event_t::mouse );
-                    } else if( ev.wheel.y < 0 ) {
-                        last_input = input_event( MouseInput::ScrollWheelDown, input_event_t::mouse );
-                    }
-                    break;
+
+                    case CATA_MOUSEBUTTONUP:
+                        if( ! mouse.enabled ) {
+                            break;
+                        }
+                        switch( ev.button.button ) {
+                            case SDL_BUTTON_LEFT:
+                                last_input = input_event( MouseInput::LeftButtonReleased, input_event_t::mouse );
+                                break;
+                            case SDL_BUTTON_RIGHT:
+                                last_input = input_event( MouseInput::RightButtonReleased, input_event_t::mouse );
+                                break;
+                            case SDL_BUTTON_X1:
+                                last_input = input_event( MouseInput::X1ButtonReleased, input_event_t::mouse );
+                                break;
+                            case SDL_BUTTON_X2:
+                                last_input = input_event( MouseInput::X2ButtonReleased, input_event_t::mouse );
+                                break;
+                        }
+                        break;
+
+                    case CATA_MOUSEWHEEL:
+                        if( ! mouse.enabled ) {
+                            break;
+                        }
+                        if( ev.wheel.y > 0 ) {
+                            last_input = input_event( MouseInput::ScrollWheelUp, input_event_t::mouse );
+                        } else if( ev.wheel.y < 0 ) {
+                            last_input = input_event( MouseInput::ScrollWheelDown, input_event_t::mouse );
+                        }
+                        break;
 
 #if defined(__ANDROID__)
-                case CATA_FINGERMOTION:
-                    if( GetFingerID( ev ) == 0 ) {
-                        if( !is_quick_shortcut_touch ) {
-                            update_finger_repeat_delay();
-                        }
-                        needupdate = true; // ensure virtual joystick and quick shortcuts redraw as we interact
-                        ui_manager::redraw_invalidated();
-                        finger_curr_x = GetFingerX( ev, WindowWidth );
-                        finger_curr_y = GetFingerY( ev, WindowHeight );
+                    case CATA_FINGERMOTION:
+                        if( GetFingerID( ev ) == 0 ) {
+                            if( !is_quick_shortcut_touch ) {
+                                update_finger_repeat_delay();
+                            }
+                            needupdate = true; // ensure virtual joystick and quick shortcuts redraw as we interact
+                            ui_manager::redraw_invalidated();
+                            finger_curr_x = GetFingerX( ev, WindowWidth );
+                            finger_curr_y = GetFingerY( ev, WindowHeight );
 
-                        if( get_option<bool>( "ANDROID_VIRTUAL_JOYSTICK_FOLLOW" ) && !is_two_finger_touch &&
-                            !is_three_finger_touch ) {
-                            // If we've moved too far from joystick center, offset joystick center automatically
-                            float delta_x = finger_curr_x - finger_down_x;
-                            float delta_y = finger_curr_y - finger_down_y;
-                            float dist = std::sqrt( delta_x * delta_x + delta_y * delta_y );
-                            float max_dist = ( get_option<float>( "ANDROID_DEADZONE_RANGE" ) +
-                                               get_option<float>( "ANDROID_REPEAT_DELAY_RANGE" ) ) * std::max( WindowWidth, WindowHeight );
-                            if( dist > max_dist ) {
-                                float delta_ratio = ( dist / max_dist ) - 1.0f;
-                                finger_down_x += delta_x * delta_ratio;
-                                finger_down_y += delta_y * delta_ratio;
+                            if( get_option<bool>( "ANDROID_VIRTUAL_JOYSTICK_FOLLOW" ) && !is_two_finger_touch &&
+                                !is_three_finger_touch ) {
+                                // If we've moved too far from joystick center, offset joystick center automatically
+                                float delta_x = finger_curr_x - finger_down_x;
+                                float delta_y = finger_curr_y - finger_down_y;
+                                float dist = std::sqrt( delta_x * delta_x + delta_y * delta_y );
+                                float max_dist = ( get_option<float>( "ANDROID_DEADZONE_RANGE" ) +
+                                                   get_option<float>( "ANDROID_REPEAT_DELAY_RANGE" ) ) * std::max( WindowWidth, WindowHeight );
+                                if( dist > max_dist ) {
+                                    float delta_ratio = ( dist / max_dist ) - 1.0f;
+                                    finger_down_x += delta_x * delta_ratio;
+                                    finger_down_y += delta_y * delta_ratio;
+                                }
+                            }
+
+                        } else if( GetFingerID( ev ) == 1 ) {
+                            second_finger_curr_x = GetFingerX( ev, WindowWidth );
+                            second_finger_curr_y = GetFingerY( ev, WindowHeight );
+                        } else if( GetFingerID( ev ) == 2 ) {
+                            third_finger_curr_x = GetFingerX( ev, WindowWidth );
+                            third_finger_curr_y = GetFingerY( ev, WindowHeight );
+                        }
+                        break;
+                    case CATA_FINGERDOWN:
+                        if( GetFingerID( ev ) == 0 ) {
+                            finger_down_x = finger_curr_x = GetFingerX( ev, WindowWidth );
+                            finger_down_y = finger_curr_y = GetFingerY( ev, WindowHeight );
+                            finger_down_time = ticks;
+                            finger_repeat_time = 0;
+                            is_quick_shortcut_touch = get_quick_shortcut_under_finger() != NULL;
+                            if( !is_quick_shortcut_touch ) {
+                                update_finger_repeat_delay();
+                            }
+                            ui_manager::redraw_invalidated();
+                            needupdate = true; // ensure virtual joystick and quick shortcuts redraw as we interact
+                        } else if( GetFingerID( ev ) == 1 ) {
+                            if( !is_quick_shortcut_touch ) {
+                                second_finger_down_x = second_finger_curr_x = GetFingerX( ev, WindowWidth );
+                                second_finger_down_y = second_finger_curr_y = GetFingerY( ev, WindowHeight );
+                                is_two_finger_touch = true;
+                            }
+                        } else if( GetFingerID( ev ) == 2 ) {
+                            if( !is_quick_shortcut_touch ) {
+                                third_finger_down_x = third_finger_curr_x = GetFingerX( ev, WindowWidth );
+                                third_finger_down_y = third_finger_curr_y = GetFingerY( ev, WindowHeight );
+                                is_three_finger_touch = true;
+                                is_two_finger_touch = false;
                             }
                         }
-
-                    } else if( GetFingerID( ev ) == 1 ) {
-                        second_finger_curr_x = GetFingerX( ev, WindowWidth );
-                        second_finger_curr_y = GetFingerY( ev, WindowHeight );
-                    } else if( GetFingerID( ev ) == 2 ) {
-                        third_finger_curr_x = GetFingerX( ev, WindowWidth );
-                        third_finger_curr_y = GetFingerY( ev, WindowHeight );
-                    }
-                    break;
-                case CATA_FINGERDOWN:
-                    if( GetFingerID( ev ) == 0 ) {
-                        finger_down_x = finger_curr_x = GetFingerX( ev, WindowWidth );
-                        finger_down_y = finger_curr_y = GetFingerY( ev, WindowHeight );
-                        finger_down_time = ticks;
-                        finger_repeat_time = 0;
-                        is_quick_shortcut_touch = get_quick_shortcut_under_finger() != NULL;
-                        if( !is_quick_shortcut_touch ) {
-                            update_finger_repeat_delay();
-                        }
-                        ui_manager::redraw_invalidated();
-                        needupdate = true; // ensure virtual joystick and quick shortcuts redraw as we interact
-                    } else if( GetFingerID( ev ) == 1 ) {
-                        if( !is_quick_shortcut_touch ) {
-                            second_finger_down_x = second_finger_curr_x = GetFingerX( ev, WindowWidth );
-                            second_finger_down_y = second_finger_curr_y = GetFingerY( ev, WindowHeight );
-                            is_two_finger_touch = true;
-                        }
-                    } else if( GetFingerID( ev ) == 2 ) {
-                        if( !is_quick_shortcut_touch ) {
-                            third_finger_down_x = third_finger_curr_x = GetFingerX( ev, WindowWidth );
-                            third_finger_down_y = third_finger_curr_y = GetFingerY( ev, WindowHeight );
-                            is_three_finger_touch = true;
-                            is_two_finger_touch = false;
-                        }
-                    }
-                    break;
-                case CATA_FINGERUP:
-                    if( GetFingerID( ev ) == 0 ) {
-                        finger_curr_x = GetFingerX( ev, WindowWidth );
-                        finger_curr_y = GetFingerY( ev, WindowHeight );
-                        if( is_quick_shortcut_touch ) {
-                            input_event *quick_shortcut = get_quick_shortcut_under_finger();
-                            if( quick_shortcut ) {
-                                last_input = *quick_shortcut;
-                                if( get_option<bool>( "ANDROID_SHORTCUT_MOVE_FRONT" ) ) {
-                                    quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                                                 touch_input_context.get_category() )];
-                                    reorder_quick_shortcut( qsl, quick_shortcut->get_first_input(), false );
+                        break;
+                    case CATA_FINGERUP:
+                        if( GetFingerID( ev ) == 0 ) {
+                            finger_curr_x = GetFingerX( ev, WindowWidth );
+                            finger_curr_y = GetFingerY( ev, WindowHeight );
+                            if( is_quick_shortcut_touch ) {
+                                input_event *quick_shortcut = get_quick_shortcut_under_finger();
+                                if( quick_shortcut ) {
+                                    last_input = *quick_shortcut;
+                                    if( get_option<bool>( "ANDROID_SHORTCUT_MOVE_FRONT" ) ) {
+                                        quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                                                     touch_input_context.get_category() )];
+                                        reorder_quick_shortcut( qsl, quick_shortcut->get_first_input(), false );
+                                    }
+                                    quick_shortcut->shortcut_last_used_action_counter = g->get_user_action_counter();
+                                } else {
+                                    // Get the quick shortcut that was originally touched
+                                    quick_shortcut = get_quick_shortcut_under_finger( true );
+                                    if( quick_shortcut &&
+                                        ticks - finger_down_time <= static_cast<uint32_t>( get_option<int>( "ANDROID_INITIAL_DELAY" ) )
+                                        &&
+                                        finger_curr_y < finger_down_y &&
+                                        finger_down_y - finger_curr_y > std::abs( finger_down_x - finger_curr_x ) ) {
+                                        // a flick up was detected, remove the quick shortcut!
+                                        quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                                                     touch_input_context.get_category() )];
+                                        qsl.remove( *quick_shortcut );
+                                    }
                                 }
-                                quick_shortcut->shortcut_last_used_action_counter = g->get_user_action_counter();
                             } else {
-                                // Get the quick shortcut that was originally touched
-                                quick_shortcut = get_quick_shortcut_under_finger( true );
-                                if( quick_shortcut &&
-                                    ticks - finger_down_time <= static_cast<uint32_t>( get_option<int>( "ANDROID_INITIAL_DELAY" ) )
-                                    &&
-                                    finger_curr_y < finger_down_y &&
-                                    finger_down_y - finger_curr_y > std::abs( finger_down_x - finger_curr_x ) ) {
-                                    // a flick up was detected, remove the quick shortcut!
-                                    quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                                                 touch_input_context.get_category() )];
-                                    qsl.remove( *quick_shortcut );
-                                }
-                            }
-                        } else {
-                            if( is_two_finger_touch ) {
-                                // handle zoom in/out
-                                if( is_default_mode ) {
+                                if( is_two_finger_touch ) {
+                                    // handle zoom in/out
+                                    if( is_default_mode ) {
+                                        float x1 = ( finger_curr_x - finger_down_x );
+                                        float y1 = ( finger_curr_y - finger_down_y );
+                                        float d1 = std::sqrt( x1 * x1 + y1 * y1 );
+
+                                        float x2 = ( second_finger_curr_x - second_finger_down_x );
+                                        float y2 = ( second_finger_curr_y - second_finger_down_y );
+                                        float d2 = std::sqrt( x2 * x2 + y2 * y2 );
+
+                                        float longest_window_edge = std::max( WindowWidth, WindowHeight );
+
+                                        if( std::max( d1, d2 ) < get_option<float>( "ANDROID_DEADZONE_RANGE" ) * longest_window_edge ) {
+                                            last_input = input_event( get_key_event_from_string(
+                                                                          get_option<std::string>( "ANDROID_2_TAP_KEY" ) ), input_event_t::keyboard_char );
+                                        } else {
+                                            float dot = ( x1 * x2 + y1 * y2 ) / ( d1 * d2 ); // dot product of two finger vectors, -1 to +1
+                                            if( dot > 0.0f ) { // both fingers mostly heading in same direction, check for double-finger swipe gesture
+                                                float dratio = d1 / d2;
+                                                const float dist_ratio = 0.3f;
+                                                if( dratio > dist_ratio &&
+                                                    dratio < ( 1.0f /
+                                                               dist_ratio ) ) { // both fingers moved roughly the same distance, so it's a double-finger swipe!
+                                                    float xavg = 0.5f * ( x1 + x2 );
+                                                    float yavg = 0.5f * ( y1 + y2 );
+                                                    if( xavg > 0 && xavg > std::abs( yavg ) ) {
+                                                        last_input = input_event( get_key_event_from_string(
+                                                                                      get_option<std::string>( "ANDROID_2_SWIPE_LEFT_KEY" ) ), input_event_t::keyboard_char );
+                                                    } else if( xavg < 0 && -xavg > std::abs( yavg ) ) {
+                                                        last_input = input_event( get_key_event_from_string(
+                                                                                      get_option<std::string>( "ANDROID_2_SWIPE_RIGHT_KEY" ) ), input_event_t::keyboard_char );
+                                                    } else if( yavg > 0 && yavg > std::abs( xavg ) ) {
+                                                        last_input = input_event( get_key_event_from_string(
+                                                                                      get_option<std::string>( "ANDROID_2_SWIPE_DOWN_KEY" ) ), input_event_t::keyboard_char );
+                                                    } else {
+                                                        last_input = input_event( get_key_event_from_string(
+                                                                                      get_option<std::string>( "ANDROID_2_SWIPE_UP_KEY" ) ), input_event_t::keyboard_char );
+                                                    }
+                                                }
+                                            } else {
+                                                // both fingers heading in opposite direction, check for zoom gesture
+                                                float down_x = finger_down_x - second_finger_down_x;
+                                                float down_y = finger_down_y - second_finger_down_y;
+                                                float down_dist = std::sqrt( down_x * down_x + down_y * down_y );
+
+                                                float curr_x = finger_curr_x - second_finger_curr_x;
+                                                float curr_y = finger_curr_y - second_finger_curr_y;
+                                                float curr_dist = std::sqrt( curr_x * curr_x + curr_y * curr_y );
+
+                                                const float zoom_ratio = 0.9f;
+                                                if( curr_dist < down_dist * zoom_ratio ) {
+                                                    last_input = input_event( get_key_event_from_string(
+                                                                                  get_option<std::string>( "ANDROID_PINCH_IN_KEY" ) ), input_event_t::keyboard_char );
+                                                } else if( curr_dist > down_dist / zoom_ratio ) {
+                                                    last_input = input_event( get_key_event_from_string(
+                                                                                  get_option<std::string>( "ANDROID_PINCH_OUT_KEY" ) ), input_event_t::keyboard_char );
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if( is_three_finger_touch ) {
+                                    // handle zoom in/out
                                     float x1 = ( finger_curr_x - finger_down_x );
                                     float y1 = ( finger_curr_y - finger_down_y );
                                     float d1 = std::sqrt( x1 * x1 + y1 * y1 );
@@ -3682,14 +3742,40 @@ static void CheckMessages()
                                     float y2 = ( second_finger_curr_y - second_finger_down_y );
                                     float d2 = std::sqrt( x2 * x2 + y2 * y2 );
 
+                                    float x3 = ( third_finger_curr_x - third_finger_down_x );
+                                    float y3 = ( third_finger_curr_y - third_finger_down_y );
+                                    float d3 = std::sqrt( x3 * x3 + y3 * y3 );
+
                                     float longest_window_edge = std::max( WindowWidth, WindowHeight );
 
-                                    if( std::max( d1, d2 ) < get_option<float>( "ANDROID_DEADZONE_RANGE" ) * longest_window_edge ) {
-                                        last_input = input_event( get_key_event_from_string(
-                                                                      get_option<std::string>( "ANDROID_2_TAP_KEY" ) ), input_event_t::keyboard_char );
+                                    if( std::max( d1, std::max( d2,
+                                                                d3 ) ) < get_option<float>( "ANDROID_DEADZONE_RANGE" ) * longest_window_edge ) {
+                                        int three_tap_key = 0; //get_option<int>( "ANDROID_3_TAP_KEY" );
+                                        if( three_tap_key == 0 ) { // not set
+                                            quick_shortcuts_enabled = !quick_shortcuts_enabled;
+
+                                            quick_shortcuts_toggle_handled = true;
+
+                                            // Display an Android toast message
+                                            {
+                                                JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
+                                                jobject activity = ( jobject )SDL_AndroidGetActivity();
+                                                jclass clazz( env->GetObjectClass( activity ) );
+                                                jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
+                                                                        "Shortcuts hidden" );
+                                                jmethodID method_id = env->GetMethodID( clazz, "toast", "(Ljava/lang/String;)V" );
+                                                env->CallVoidMethod( activity, method_id, toast_message );
+                                                env->DeleteLocalRef( activity );
+                                                env->DeleteLocalRef( clazz );
+                                            }
+                                        } else {
+                                            last_input = input_event( three_tap_key, input_event_t::keyboard_char );
+                                        }
                                     } else {
                                         float dot = ( x1 * x2 + y1 * y2 ) / ( d1 * d2 ); // dot product of two finger vectors, -1 to +1
-                                        if( dot > 0.0f ) { // both fingers mostly heading in same direction, check for double-finger swipe gesture
+                                        float dot2 = ( x1 * x3 + y1 * y3 ) / ( d1 * d3 ); // dot product of three finger vectors, -1 to +1
+                                        if( dot > 0.0f &&
+                                            dot2 > 0.0f ) { // all fingers mostly heading in same direction, check for triple-finger swipe gesture
                                             float dratio = d1 / d2;
                                             const float dist_ratio = 0.3f;
                                             if( dratio > dist_ratio &&
@@ -3698,886 +3784,763 @@ static void CheckMessages()
                                                 float xavg = 0.5f * ( x1 + x2 );
                                                 float yavg = 0.5f * ( y1 + y2 );
                                                 if( xavg > 0 && xavg > std::abs( yavg ) ) {
-                                                    last_input = input_event( get_key_event_from_string(
-                                                                                  get_option<std::string>( "ANDROID_2_SWIPE_LEFT_KEY" ) ), input_event_t::keyboard_char );
+                                                    last_input = input_event( '\t', input_event_t::keyboard_char );
                                                 } else if( xavg < 0 && -xavg > std::abs( yavg ) ) {
-                                                    last_input = input_event( get_key_event_from_string(
-                                                                                  get_option<std::string>( "ANDROID_2_SWIPE_RIGHT_KEY" ) ), input_event_t::keyboard_char );
+                                                    last_input = input_event( KEY_BTAB, input_event_t::keyboard_char );
                                                 } else if( yavg > 0 && yavg > std::abs( xavg ) ) {
-                                                    last_input = input_event( get_key_event_from_string(
-                                                                                  get_option<std::string>( "ANDROID_2_SWIPE_DOWN_KEY" ) ), input_event_t::keyboard_char );
+                                                    last_input = input_event( KEY_NPAGE, input_event_t::keyboard_char );
                                                 } else {
-                                                    last_input = input_event( get_key_event_from_string(
-                                                                                  get_option<std::string>( "ANDROID_2_SWIPE_UP_KEY" ) ), input_event_t::keyboard_char );
+                                                    last_input = input_event( KEY_PPAGE, input_event_t::keyboard_char );
                                                 }
                                             }
-                                        } else {
-                                            // both fingers heading in opposite direction, check for zoom gesture
-                                            float down_x = finger_down_x - second_finger_down_x;
-                                            float down_y = finger_down_y - second_finger_down_y;
-                                            float down_dist = std::sqrt( down_x * down_x + down_y * down_y );
-
-                                            float curr_x = finger_curr_x - second_finger_curr_x;
-                                            float curr_y = finger_curr_y - second_finger_curr_y;
-                                            float curr_dist = std::sqrt( curr_x * curr_x + curr_y * curr_y );
-
-                                            const float zoom_ratio = 0.9f;
-                                            if( curr_dist < down_dist * zoom_ratio ) {
-                                                last_input = input_event( get_key_event_from_string(
-                                                                              get_option<std::string>( "ANDROID_PINCH_IN_KEY" ) ), input_event_t::keyboard_char );
-                                            } else if( curr_dist > down_dist / zoom_ratio ) {
-                                                last_input = input_event( get_key_event_from_string(
-                                                                              get_option<std::string>( "ANDROID_PINCH_OUT_KEY" ) ), input_event_t::keyboard_char );
-                                            }
                                         }
                                     }
+
+                                } else if( ticks - finger_down_time <= static_cast<uint32_t>(
+                                               get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                                    handle_finger_input( ticks );
                                 }
-                            } else if( is_three_finger_touch ) {
-                                // handle zoom in/out
-                                float x1 = ( finger_curr_x - finger_down_x );
-                                float y1 = ( finger_curr_y - finger_down_y );
-                                float d1 = std::sqrt( x1 * x1 + y1 * y1 );
-
-                                float x2 = ( second_finger_curr_x - second_finger_down_x );
-                                float y2 = ( second_finger_curr_y - second_finger_down_y );
-                                float d2 = std::sqrt( x2 * x2 + y2 * y2 );
-
-                                float x3 = ( third_finger_curr_x - third_finger_down_x );
-                                float y3 = ( third_finger_curr_y - third_finger_down_y );
-                                float d3 = std::sqrt( x3 * x3 + y3 * y3 );
-
-                                float longest_window_edge = std::max( WindowWidth, WindowHeight );
-
-                                if( std::max( d1, std::max( d2,
-                                                            d3 ) ) < get_option<float>( "ANDROID_DEADZONE_RANGE" ) * longest_window_edge ) {
-                                    int three_tap_key = 0; //get_option<int>( "ANDROID_3_TAP_KEY" );
-                                    if( three_tap_key == 0 ) { // not set
-                                        quick_shortcuts_enabled = !quick_shortcuts_enabled;
-
-                                        quick_shortcuts_toggle_handled = true;
-
-                                        // Display an Android toast message
-                                        {
-                                            JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-                                            jobject activity = ( jobject )SDL_AndroidGetActivity();
-                                            jclass clazz( env->GetObjectClass( activity ) );
-                                            jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
-                                                                    "Shortcuts hidden" );
-                                            jmethodID method_id = env->GetMethodID( clazz, "toast", "(Ljava/lang/String;)V" );
-                                            env->CallVoidMethod( activity, method_id, toast_message );
-                                            env->DeleteLocalRef( activity );
-                                            env->DeleteLocalRef( clazz );
-                                        }
-                                    } else {
-                                        last_input = input_event( three_tap_key, input_event_t::keyboard_char );
-                                    }
-                                } else {
-                                    float dot = ( x1 * x2 + y1 * y2 ) / ( d1 * d2 ); // dot product of two finger vectors, -1 to +1
-                                    float dot2 = ( x1 * x3 + y1 * y3 ) / ( d1 * d3 ); // dot product of three finger vectors, -1 to +1
-                                    if( dot > 0.0f &&
-                                        dot2 > 0.0f ) { // all fingers mostly heading in same direction, check for triple-finger swipe gesture
-                                        float dratio = d1 / d2;
-                                        const float dist_ratio = 0.3f;
-                                        if( dratio > dist_ratio &&
-                                            dratio < ( 1.0f /
-                                                       dist_ratio ) ) { // both fingers moved roughly the same distance, so it's a double-finger swipe!
-                                            float xavg = 0.5f * ( x1 + x2 );
-                                            float yavg = 0.5f * ( y1 + y2 );
-                                            if( xavg > 0 && xavg > std::abs( yavg ) ) {
-                                                last_input = input_event( '\t', input_event_t::keyboard_char );
-                                            } else if( xavg < 0 && -xavg > std::abs( yavg ) ) {
-                                                last_input = input_event( KEY_BTAB, input_event_t::keyboard_char );
-                                            } else if( yavg > 0 && yavg > std::abs( xavg ) ) {
-                                                last_input = input_event( KEY_NPAGE, input_event_t::keyboard_char );
-                                            } else {
-                                                last_input = input_event( KEY_PPAGE, input_event_t::keyboard_char );
-                                            }
-                                        }
-                                    }
-                                }
-
-                            } else if( ticks - finger_down_time <= static_cast<uint32_t>(
-                                           get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-                                handle_finger_input( ticks );
+                            }
+                            third_finger_down_x = third_finger_curr_x = second_finger_down_x = second_finger_curr_x =
+                                                      finger_down_x = finger_curr_x = -1.0f;
+                            third_finger_down_y = third_finger_curr_y = second_finger_down_y = second_finger_curr_y =
+                                                      finger_down_y = finger_curr_y = -1.0f;
+                            is_two_finger_touch = false;
+                            is_three_finger_touch = false;
+                            finger_down_time = 0;
+                            finger_repeat_time = 0;
+                            needupdate = true; // ensure virtual joystick and quick shortcuts are updated properly
+                            ui_manager::redraw_invalidated();
+                            refresh_display(); // as above, but actually redraw it now as well
+                        } else if( GetFingerID( ev ) == 1 ) {
+                            if( is_two_finger_touch ) {
+                                // on second finger release, just remember the x/y position so we can calculate delta once first finger is done
+                                // is_two_finger_touch will be reset when first finger lifts (see above)
+                                second_finger_curr_x = GetFingerX( ev, WindowWidth );
+                                second_finger_curr_y = GetFingerY( ev, WindowHeight );
+                            }
+                        } else if( GetFingerID( ev ) == 2 ) {
+                            if( is_three_finger_touch ) {
+                                // on third finger release, just remember the x/y position so we can calculate delta once first finger is done
+                                // is_three_finger_touch will be reset when first finger lifts (see above)
+                                third_finger_curr_x = GetFingerX( ev, WindowWidth );
+                                third_finger_curr_y = GetFingerY( ev, WindowHeight );
                             }
                         }
-                        third_finger_down_x = third_finger_curr_x = second_finger_down_x = second_finger_curr_x =
-                                                  finger_down_x = finger_curr_x = -1.0f;
-                        third_finger_down_y = third_finger_curr_y = second_finger_down_y = second_finger_curr_y =
-                                                  finger_down_y = finger_curr_y = -1.0f;
-                        is_two_finger_touch = false;
-                        is_three_finger_touch = false;
-                        finger_down_time = 0;
-                        finger_repeat_time = 0;
-                        needupdate = true; // ensure virtual joystick and quick shortcuts are updated properly
-                        ui_manager::redraw_invalidated();
-                        refresh_display(); // as above, but actually redraw it now as well
-                    } else if( GetFingerID( ev ) == 1 ) {
-                        if( is_two_finger_touch ) {
-                            // on second finger release, just remember the x/y position so we can calculate delta once first finger is done
-                            // is_two_finger_touch will be reset when first finger lifts (see above)
-                            second_finger_curr_x = GetFingerX( ev, WindowWidth );
-                            second_finger_curr_y = GetFingerY( ev, WindowHeight );
-                        }
-                    } else if( GetFingerID( ev ) == 2 ) {
-                        if( is_three_finger_touch ) {
-                            // on third finger release, just remember the x/y position so we can calculate delta once first finger is done
-                            // is_three_finger_touch will be reset when first finger lifts (see above)
-                            third_finger_curr_x = GetFingerX( ev, WindowWidth );
-                            third_finger_curr_y = GetFingerY( ev, WindowHeight );
-                        }
-                    }
 
-                    break;
+                        break;
 #endif
 
-                case CATA_QUIT:
-                    quit = true;
-                    break;
-                default:
-                    if( gamepad::is_gamepad_event( ev ) ) {
-                        if( gamepad::handle_event( ev ) ) {
-                            needupdate = true;
-                            ui_manager::redraw_invalidated();
+                    case CATA_QUIT:
+                        quit = true;
+                        break;
+                    default:
+                        if( gamepad::is_gamepad_event( ev ) ) {
+                            if( gamepad::handle_event( ev ) ) {
+                                needupdate = true;
+                                ui_manager::redraw_invalidated();
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
+            }
+            if( text_refresh && !is_repeat ) {
+                break;
             }
         }
-        if( text_refresh && !is_repeat ) {
-            break;
+        bool resized = false;
+        if( resize_dims.has_value() ) {
+            restore_on_out_of_scope prev_last_input( last_input );
+            needupdate = resized = handle_resize( resize_dims.value().x, resize_dims.value().y );
+        }
+        // resizing already reinitializes the render target
+        if( !resized && render_target_reset ) {
+            throwErrorIf( !SetupRenderTarget(), "SetupRenderTarget failed" );
+            reinitialize_framebuffer( true );
+            needupdate = true;
+            restore_on_out_of_scope prev_last_input( last_input );
+            // FIXME: SDL_RENDER_TARGETS_RESET only seems to be fired after the first redraw
+            // when restoring the window after system sleep, rather than immediately
+            // on focus gain. This seems to mess up the first redraw and
+            // causes black screen that lasts ~0.5 seconds before the screen
+            // contents are redrawn in the following code.
+            ui_manager::invalidate( rectangle<point>( point::zero, point( WindowWidth, WindowHeight ) ),
+                                    false );
+            ui_manager::redraw_invalidated();
+        }
+        if( needupdate ) {
+            try_sdl_update();
+        }
+        if( quit ) {
+            catacurses::endwin();
+            exit( 0 );
         }
     }
-    bool resized = false;
-    if( resize_dims.has_value() ) {
-        restore_on_out_of_scope prev_last_input( last_input );
-        needupdate = resized = handle_resize( resize_dims.value().x, resize_dims.value().y );
-    }
-    // resizing already reinitializes the render target
-    if( !resized && render_target_reset ) {
-        throwErrorIf( !SetupRenderTarget(), "SetupRenderTarget failed" );
-        reinitialize_framebuffer( true );
-        needupdate = true;
-        restore_on_out_of_scope prev_last_input( last_input );
-        // FIXME: SDL_RENDER_TARGETS_RESET only seems to be fired after the first redraw
-        // when restoring the window after system sleep, rather than immediately
-        // on focus gain. This seems to mess up the first redraw and
-        // causes black screen that lasts ~0.5 seconds before the screen
-        // contents are redrawn in the following code.
-        ui_manager::invalidate( rectangle<point>( point::zero, point( WindowWidth, WindowHeight ) ),
-                                false );
-        ui_manager::redraw_invalidated();
-    }
-    if( needupdate ) {
-        try_sdl_update();
-    }
-    if( quit ) {
-        catacurses::endwin();
-        exit( 0 );
-    }
-}
 
-//***********************************
-//Pseudo-Curses Functions           *
-//***********************************
+    //***********************************
+    //Pseudo-Curses Functions           *
+    //***********************************
 
-// Calculates the new width of the window
-int projected_window_width()
-{
-    return get_option<int>( "TERMINAL_X" ) * fontwidth;
-}
+    // Calculates the new width of the window
+    int projected_window_width() {
+        return get_option<int>( "TERMINAL_X" ) * fontwidth;
+    }
 
-// Calculates the new height of the window
-int projected_window_height()
-{
-    return get_option<int>( "TERMINAL_Y" ) * fontheight;
-}
+    // Calculates the new height of the window
+    int projected_window_height() {
+        return get_option<int>( "TERMINAL_Y" ) * fontheight;
+    }
 
-// Measures scaling factor for high-dpi displays
-static std::pair<float, float> get_display_scale( int display_index )
-{
+    // Measures scaling factor for high-dpi displays
+    static std::pair<float, float> get_display_scale( int display_index ) {
 #if SDL_VERSION_ATLEAST(2,26,0)
-    SDL_Window_Ptr probe = CreateGameWindow( "probe", display_index, 16, 16,
-                           CATA_WINDOW_HIDDEN | CATA_WINDOW_HIGH_DPI );
-    if( !probe ) {
+        SDL_Window_Ptr probe = CreateGameWindow( "probe", display_index, 16, 16,
+                               CATA_WINDOW_HIDDEN | CATA_WINDOW_HIGH_DPI );
+        if( !probe ) {
+            return std::make_pair( 1.0f, 1.0f );
+        }
+
+        int lw = 0;
+        int lh = 0;
+        GetWindowSize( probe.get(), &lw, &lh );
+        int pw = 0;
+        int ph = 0;
+        GetWindowSizeInPixels( probe.get(), &pw, &ph );
+        probe.reset();
+
+        float scale_w = lw ? static_cast<float>( pw ) / static_cast<float>( lw ) : 1.0f;
+        float scale_h = lh ? static_cast<float>( ph ) / static_cast<float>( lh ) : 1.0f;
+        return std::make_pair( scale_w, scale_h );
+#else
+        ( void )display_index; // avoid unused parameter lint
         return std::make_pair( 1.0f, 1.0f );
+#endif
     }
 
-    int lw = 0;
-    int lh = 0;
-    GetWindowSize( probe.get(), &lw, &lh );
-    int pw = 0;
-    int ph = 0;
-    GetWindowSizeInPixels( probe.get(), &pw, &ph );
-    probe.reset();
-
-    float scale_w = lw ? static_cast<float>( pw ) / static_cast<float>( lw ) : 1.0f;
-    float scale_h = lh ? static_cast<float>( ph ) / static_cast<float>( lh ) : 1.0f;
-    return std::make_pair( scale_w, scale_h );
-#else
-    ( void )display_index; // avoid unused parameter lint
-    return std::make_pair( 1.0f, 1.0f );
-#endif
-}
-
-static void init_term_size_and_scaling_factor()
-{
-    scaling_factor = 1;
-    point terminal( get_option<int>( "TERMINAL_X" ), get_option<int>( "TERMINAL_Y" ) );
+    static void init_term_size_and_scaling_factor() {
+        scaling_factor = 1;
+        point terminal( get_option<int>( "TERMINAL_X" ), get_option<int>( "TERMINAL_Y" ) );
 
 #if !defined(__ANDROID__)
 
-    if( get_option<std::string>( "SCALING_FACTOR" ) == "2" ) {
-        scaling_factor = 2;
-    } else if( get_option<std::string>( "SCALING_FACTOR" ) == "4" ) {
-        scaling_factor = 4;
-    }
-
-    if( scaling_factor > 1 ) {
-
-        int max_width;
-        int max_height;
-
-        int current_display_id = std::stoi( get_option<std::string>( "DISPLAY" ) );
-        SDL_DisplayMode current_display;
-
-        if( GetDesktopDisplayMode( current_display_id, &current_display ) ) {
-            if( get_option<std::string>( "FULLSCREEN" ) == "no" ) {
-
-                // Make a maximized test window to determine maximum windowed size
-                SDL_Window_Ptr test_window = CreateGameWindow(
-                                                 "test_window", current_display_id,
-                                                 EVEN_MINIMUM_TERM_WIDTH * fontwidth,
-                                                 EVEN_MINIMUM_TERM_HEIGHT * fontheight,
-                                                 CATA_WINDOW_RESIZABLE | CATA_WINDOW_HIGH_DPI | CATA_WINDOW_MAXIMIZED );
-
-                GetWindowSizeInPixels( test_window.get(), &max_width, &max_height );
-
-                // If the video subsystem isn't reset the test window messes things up later
-                test_window.reset();
-                SDL_QuitSubSystem( SDL_INIT_VIDEO );
-                SDL_InitSubSystem( SDL_INIT_VIDEO );
-
-            } else {
-                // For fullscreen or window borderless maximum size is the display size
-                auto [ dpi_scale_w, dpi_scale_h ] = get_display_scale( current_display_id );
-                max_width = dpi_scale_w * current_display.w;
-                max_height = dpi_scale_h * current_display.h;
-            }
-        } else {
-            dbg( D_WARNING ) << "Failed to get current Display Mode, assuming infinite display size.";
-            max_width = INT_MAX;
-            max_height = INT_MAX;
+        if( get_option<std::string>( "SCALING_FACTOR" ) == "2" ) {
+            scaling_factor = 2;
+        } else if( get_option<std::string>( "SCALING_FACTOR" ) == "4" ) {
+            scaling_factor = 4;
         }
 
-        if( terminal.x * fontwidth > max_width ||
-            EVEN_MINIMUM_TERM_WIDTH * fontwidth * scaling_factor > max_width ) {
-            if( EVEN_MINIMUM_TERM_WIDTH * fontwidth * scaling_factor > max_width ) {
-                dbg( D_WARNING ) << "SCALING_FACTOR set too high for display size, resetting to 1";
-                scaling_factor = 1;
-                terminal.x = max_width / fontwidth;
-                terminal.y = max_height / fontheight;
-                get_options().get_option( "SCALING_FACTOR" ).setValue( "1" );
+        if( scaling_factor > 1 ) {
+
+            int max_width;
+            int max_height;
+
+            int current_display_id = std::stoi( get_option<std::string>( "DISPLAY" ) );
+            SDL_DisplayMode current_display;
+
+            if( GetDesktopDisplayMode( current_display_id, &current_display ) ) {
+                if( get_option<std::string>( "FULLSCREEN" ) == "no" ) {
+
+                    // Make a maximized test window to determine maximum windowed size
+                    SDL_Window_Ptr test_window = CreateGameWindow(
+                                                     "test_window", current_display_id,
+                                                     EVEN_MINIMUM_TERM_WIDTH * fontwidth,
+                                                     EVEN_MINIMUM_TERM_HEIGHT * fontheight,
+                                                     CATA_WINDOW_RESIZABLE | CATA_WINDOW_HIGH_DPI | CATA_WINDOW_MAXIMIZED );
+
+                    GetWindowSizeInPixels( test_window.get(), &max_width, &max_height );
+
+                    // If the video subsystem isn't reset the test window messes things up later
+                    test_window.reset();
+                    SDL_QuitSubSystem( SDL_INIT_VIDEO );
+                    SDL_InitSubSystem( SDL_INIT_VIDEO );
+
+                } else {
+                    // For fullscreen or window borderless maximum size is the display size
+                    auto [ dpi_scale_w, dpi_scale_h ] = get_display_scale( current_display_id );
+                    max_width = dpi_scale_w * current_display.w;
+                    max_height = dpi_scale_h * current_display.h;
+                }
             } else {
-                terminal.x = max_width / fontwidth;
+                dbg( D_WARNING ) << "Failed to get current Display Mode, assuming infinite display size.";
+                max_width = INT_MAX;
+                max_height = INT_MAX;
             }
-        }
 
-        if( terminal.y * fontheight > max_height ||
-            EVEN_MINIMUM_TERM_HEIGHT * fontheight * scaling_factor > max_height ) {
-            if( EVEN_MINIMUM_TERM_HEIGHT * fontheight * scaling_factor > max_height ) {
-                dbg( D_WARNING ) << "SCALING_FACTOR set too high for display size, resetting to 1";
-                scaling_factor = 1;
-                terminal.x = max_width / fontwidth;
-                terminal.y = max_height / fontheight;
-                get_options().get_option( "SCALING_FACTOR" ).setValue( "1" );
-            } else {
-                terminal.y = max_height / fontheight;
+            if( terminal.x * fontwidth > max_width ||
+                EVEN_MINIMUM_TERM_WIDTH * fontwidth * scaling_factor > max_width ) {
+                if( EVEN_MINIMUM_TERM_WIDTH * fontwidth * scaling_factor > max_width ) {
+                    dbg( D_WARNING ) << "SCALING_FACTOR set too high for display size, resetting to 1";
+                    scaling_factor = 1;
+                    terminal.x = max_width / fontwidth;
+                    terminal.y = max_height / fontheight;
+                    get_options().get_option( "SCALING_FACTOR" ).setValue( "1" );
+                } else {
+                    terminal.x = max_width / fontwidth;
+                }
             }
+
+            if( terminal.y * fontheight > max_height ||
+                EVEN_MINIMUM_TERM_HEIGHT * fontheight * scaling_factor > max_height ) {
+                if( EVEN_MINIMUM_TERM_HEIGHT * fontheight * scaling_factor > max_height ) {
+                    dbg( D_WARNING ) << "SCALING_FACTOR set too high for display size, resetting to 1";
+                    scaling_factor = 1;
+                    terminal.x = max_width / fontwidth;
+                    terminal.y = max_height / fontheight;
+                    get_options().get_option( "SCALING_FACTOR" ).setValue( "1" );
+                } else {
+                    terminal.y = max_height / fontheight;
+                }
+            }
+
+            terminal.x -= terminal.x % scaling_factor;
+            terminal.y -= terminal.y % scaling_factor;
+
+            terminal.x = std::max( EVEN_MINIMUM_TERM_WIDTH * scaling_factor, terminal.x );
+            terminal.y = std::max( EVEN_MINIMUM_TERM_HEIGHT * scaling_factor, terminal.y );
+
+            get_options().get_option( "TERMINAL_X" ).setValue(
+                std::max( EVEN_MINIMUM_TERM_WIDTH * scaling_factor, terminal.x ) );
+            get_options().get_option( "TERMINAL_Y" ).setValue(
+                std::max( EVEN_MINIMUM_TERM_HEIGHT * scaling_factor, terminal.y ) );
+
+            get_options().save();
         }
-
-        terminal.x -= terminal.x % scaling_factor;
-        terminal.y -= terminal.y % scaling_factor;
-
-        terminal.x = std::max( EVEN_MINIMUM_TERM_WIDTH * scaling_factor, terminal.x );
-        terminal.y = std::max( EVEN_MINIMUM_TERM_HEIGHT * scaling_factor, terminal.y );
-
-        get_options().get_option( "TERMINAL_X" ).setValue(
-            std::max( EVEN_MINIMUM_TERM_WIDTH * scaling_factor, terminal.x ) );
-        get_options().get_option( "TERMINAL_Y" ).setValue(
-            std::max( EVEN_MINIMUM_TERM_HEIGHT * scaling_factor, terminal.y ) );
-
-        get_options().save();
-    }
 
 #endif //__ANDROID__
 
-    TERMINAL_WIDTH = terminal.x / scaling_factor;
-    TERMINAL_HEIGHT = terminal.y / scaling_factor;
-}
+        TERMINAL_WIDTH = terminal.x / scaling_factor;
+        TERMINAL_HEIGHT = terminal.y / scaling_factor;
+    }
 
-//Basic Init, create the font, backbuffer, etc
-void catacurses::init_interface()
-{
-    last_input = input_event();
-    inputdelay = -1;
+    //Basic Init, create the font, backbuffer, etc
+    void catacurses::init_interface() {
+        last_input = input_event();
+        inputdelay = -1;
 
-    InitSDL();
+        InitSDL();
 
-    get_options().init();
-    get_options().load();
-    set_language_from_options(); //Prevent translated language strings from causing an error if language not set
+        get_options().init();
+        get_options().load();
+        set_language_from_options(); //Prevent translated language strings from causing an error if language not set
 
-    font_loader fl;
-    fl.load();
-    fl.fontwidth = get_option<int>( "FONT_WIDTH" );
-    fl.fontheight = get_option<int>( "FONT_HEIGHT" );
-    fl.fontsize = get_option<int>( "FONT_SIZE" );
-    fl.fontblending = get_option<bool>( "FONT_BLENDING" );
-    fl.map_fontsize = get_option<int>( "MAP_FONT_SIZE" );
-    fl.map_fontwidth = get_option<int>( "MAP_FONT_WIDTH" );
-    fl.map_fontheight = get_option<int>( "MAP_FONT_HEIGHT" );
-    fl.overmap_fontsize = get_option<int>( "OVERMAP_FONT_SIZE" );
-    fl.overmap_fontwidth = get_option<int>( "OVERMAP_FONT_WIDTH" );
-    fl.overmap_fontheight = get_option<int>( "OVERMAP_FONT_HEIGHT" );
-    ::fontwidth = fl.fontwidth;
-    ::fontheight = fl.fontheight;
+        font_loader fl;
+        fl.load();
+        fl.fontwidth = get_option<int>( "FONT_WIDTH" );
+        fl.fontheight = get_option<int>( "FONT_HEIGHT" );
+        fl.fontsize = get_option<int>( "FONT_SIZE" );
+        fl.fontblending = get_option<bool>( "FONT_BLENDING" );
+        fl.map_fontsize = get_option<int>( "MAP_FONT_SIZE" );
+        fl.map_fontwidth = get_option<int>( "MAP_FONT_WIDTH" );
+        fl.map_fontheight = get_option<int>( "MAP_FONT_HEIGHT" );
+        fl.overmap_fontsize = get_option<int>( "OVERMAP_FONT_SIZE" );
+        fl.overmap_fontwidth = get_option<int>( "OVERMAP_FONT_WIDTH" );
+        fl.overmap_fontheight = get_option<int>( "OVERMAP_FONT_HEIGHT" );
+        ::fontwidth = fl.fontwidth;
+        ::fontheight = fl.fontheight;
 
-    init_term_size_and_scaling_factor();
+        init_term_size_and_scaling_factor();
 
-    WinCreate();
-    using cata::options::mouse;
-    dbg( D_INFO ) << "Initializing SDL Tiles context";
-    fartilecontext = std::make_shared<cata_tiles>( renderer, geometry, ts_cache );
-    if( use_far_tiles ) {
+        WinCreate();
+        using cata::options::mouse;
+        dbg( D_INFO ) << "Initializing SDL Tiles context";
+        fartilecontext = std::make_shared<cata_tiles>( renderer, geometry, ts_cache );
+        if( use_far_tiles ) {
+            try {
+                // Disable UIs below to avoid accessing the tile context during loading.
+                ui_adaptor dummy( ui_adaptor::disable_uis_below{} );
+                fartilecontext->load_tileset( get_option<std::string>( "DISTANT_TILES" ),
+                                              /*precheck=*/true, /*force=*/false,
+                                              /*pump_events=*/true );
+            } catch( const std::exception &err ) {
+                dbg( D_ERROR ) << "failed to check for tileset: " << err.what();
+                // use_tiles is the cached value of the USE_TILES option.
+                // most (all?) code refers to this to see if cata_tiles should be used.
+                // Setting it to false disables this from getting used.
+                use_far_tiles = false;
+            }
+        }
+        closetilecontext = std::make_shared<cata_tiles>( renderer, geometry, ts_cache );
         try {
             // Disable UIs below to avoid accessing the tile context during loading.
             ui_adaptor dummy( ui_adaptor::disable_uis_below{} );
-            fartilecontext->load_tileset( get_option<std::string>( "DISTANT_TILES" ),
-                                          /*precheck=*/true, /*force=*/false,
-                                          /*pump_events=*/true );
+            closetilecontext->load_tileset( get_option<std::string>( "TILES" ),
+                                            /*precheck=*/true, /*force=*/false,
+                                            /*pump_events=*/true );
+            tilecontext = closetilecontext;
         } catch( const std::exception &err ) {
             dbg( D_ERROR ) << "failed to check for tileset: " << err.what();
             // use_tiles is the cached value of the USE_TILES option.
             // most (all?) code refers to this to see if cata_tiles should be used.
             // Setting it to false disables this from getting used.
-            use_far_tiles = false;
+            use_tiles = false;
         }
-    }
-    closetilecontext = std::make_shared<cata_tiles>( renderer, geometry, ts_cache );
-    try {
-        // Disable UIs below to avoid accessing the tile context during loading.
-        ui_adaptor dummy( ui_adaptor::disable_uis_below{} );
-        closetilecontext->load_tileset( get_option<std::string>( "TILES" ),
-                                        /*precheck=*/true, /*force=*/false,
-                                        /*pump_events=*/true );
-        tilecontext = closetilecontext;
-    } catch( const std::exception &err ) {
-        dbg( D_ERROR ) << "failed to check for tileset: " << err.what();
-        // use_tiles is the cached value of the USE_TILES option.
-        // most (all?) code refers to this to see if cata_tiles should be used.
-        // Setting it to false disables this from getting used.
-        use_tiles = false;
-    }
-    overmap_tilecontext = std::make_unique<cata_tiles>( renderer, geometry, ts_cache );
-    try {
-        // Disable UIs below to avoid accessing the tile context during loading.
-        ui_adaptor dummy( ui_adaptor::disable_uis_below{} );
-        overmap_tilecontext->load_tileset( get_option<std::string>( "OVERMAP_TILES" ),
-                                           /*precheck=*/true, /*force=*/false,
-                                           /*pump_events=*/true );
-    } catch( const std::exception &err ) {
-        dbg( D_ERROR ) << "failed to check for overmap tileset: " << err.what();
-        // use_tiles is the cached value of the USE_TILES option.
-        // most (all?) code refers to this to see if cata_tiles should be used.
-        // Setting it to false disables this from getting used.
-        use_tiles = false;
-    }
+        overmap_tilecontext = std::make_unique<cata_tiles>( renderer, geometry, ts_cache );
+        try {
+            // Disable UIs below to avoid accessing the tile context during loading.
+            ui_adaptor dummy( ui_adaptor::disable_uis_below{} );
+            overmap_tilecontext->load_tileset( get_option<std::string>( "OVERMAP_TILES" ),
+                                               /*precheck=*/true, /*force=*/false,
+                                               /*pump_events=*/true );
+        } catch( const std::exception &err ) {
+            dbg( D_ERROR ) << "failed to check for overmap tileset: " << err.what();
+            // use_tiles is the cached value of the USE_TILES option.
+            // most (all?) code refers to this to see if cata_tiles should be used.
+            // Setting it to false disables this from getting used.
+            use_tiles = false;
+        }
 
-    color_loader<SDL_Color>().load( windowsPalette );
-    init_colors();
+        color_loader<SDL_Color>().load( windowsPalette );
+        init_colors();
 
 #if defined(SDL_SOUND)
-    // initialize sound set
-    if( sound_init_success ) {
-        load_soundset();
-    }
+        // initialize sound set
+        if( sound_init_success ) {
+            load_soundset();
+        }
 #endif
 
-    font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.fontwidth, fl.fontheight,
-            windowsPalette, fl.typeface, fl.fontsize, fl.fontblending );
-    map_font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.map_fontwidth,
-               fl.map_fontheight,
-               windowsPalette, fl.map_typeface, fl.map_fontsize, fl.fontblending );
-    overmap_font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.overmap_fontwidth,
-                   fl.overmap_fontheight,
-                   windowsPalette, fl.overmap_typeface, fl.overmap_fontsize, fl.fontblending );
-    stdscr = newwin( get_terminal_height(), get_terminal_width(), point::zero );
-    //newwin calls `new WINDOW`, and that will throw, but not return nullptr.
+        font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.fontwidth, fl.fontheight,
+                windowsPalette, fl.typeface, fl.fontsize, fl.fontblending );
+        map_font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.map_fontwidth,
+                   fl.map_fontheight,
+                   windowsPalette, fl.map_typeface, fl.map_fontsize, fl.fontblending );
+        overmap_font = std::make_unique<FontFallbackList>( renderer, pixel_format, fl.overmap_fontwidth,
+                       fl.overmap_fontheight,
+                       windowsPalette, fl.overmap_typeface, fl.overmap_fontsize, fl.fontblending );
+        stdscr = newwin( get_terminal_height(), get_terminal_width(), point::zero );
+        //newwin calls `new WINDOW`, and that will throw, but not return nullptr.
 
 #if defined(__ANDROID__)
-    // Make sure we initialize preview_terminal_width/height to sensible values
-    preview_terminal_width = TERMINAL_WIDTH * fontwidth;
-    preview_terminal_height = TERMINAL_HEIGHT * fontheight;
+        // Make sure we initialize preview_terminal_width/height to sensible values
+        preview_terminal_width = TERMINAL_WIDTH * fontwidth;
+        preview_terminal_height = TERMINAL_HEIGHT * fontheight;
 #endif
-}
-
-// This is supposed to be called from init.cpp, and only from there.
-void load_tileset()
-{
-    if( !tilecontext || !use_tiles ) {
-        return;
-    }
-    closetilecontext->load_tileset( get_option<std::string>( "TILES" ),
-                                    /*precheck=*/false, /*force=*/false,
-                                    /*pump_events=*/true );
-    if( use_far_tiles ) {
-        fartilecontext->load_tileset( get_option<std::string>( "DISTANT_TILES" ),
-                                      /*precheck=*/false, /*force=*/false,
-                                      /*pump_events=*/true );
-    }
-    tilecontext = closetilecontext;
-    tilecontext->do_tile_loading_report();
-
-    if( overmap_tilecontext ) {
-        overmap_tilecontext->load_tileset( get_option<std::string>( "OVERMAP_TILES" ),
-                                           /*precheck=*/false, /*force=*/false,
-                                           /*pump_events=*/true );
-        overmap_tilecontext->do_tile_loading_report();
-    }
-}
-
-//Ends the terminal, destroy everything
-void catacurses::endwin()
-{
-    tilecontext.reset();
-    closetilecontext.reset();
-    fartilecontext.reset();
-    overmap_tilecontext.reset();
-    font.reset();
-    map_font.reset();
-    overmap_font.reset();
-    ui_manager::reset();
-    WinDestroy();
-}
-
-template<>
-SDL_Color color_loader<SDL_Color>::from_rgb( const int r, const int g, const int b )
-{
-    SDL_Color result;
-    result.b = b;       //Blue
-    result.g = g;       //Green
-    result.r = r;       //Red
-    result.a = 0xFF;    // Opaque
-    return result;
-}
-
-void input_manager::set_timeout( const int delay )
-{
-    input_timeout = delay;
-    inputdelay = delay;
-}
-
-void input_manager::pump_events()
-{
-    if( test_mode ) {
-        return;
     }
 
-    // Handle all events, but ignore any keypress
-    CheckMessages();
+    // This is supposed to be called from init.cpp, and only from there.
+    void load_tileset() {
+        if( !tilecontext || !use_tiles ) {
+            return;
+        }
+        closetilecontext->load_tileset( get_option<std::string>( "TILES" ),
+                                        /*precheck=*/false, /*force=*/false,
+                                        /*pump_events=*/true );
+        if( use_far_tiles ) {
+            fartilecontext->load_tileset( get_option<std::string>( "DISTANT_TILES" ),
+                                          /*precheck=*/false, /*force=*/false,
+                                          /*pump_events=*/true );
+        }
+        tilecontext = closetilecontext;
+        tilecontext->do_tile_loading_report();
 
-    last_input = input_event();
-    previously_pressed_key = 0;
-}
-
-// This is how we're actually going to handle input events, SDL getch
-// is simply a wrapper around this.
-input_event input_manager::get_input_event( const keyboard_mode preferred_keyboard_mode )
-{
-    if( test_mode ) {
-        // input should be skipped in caller's code
-        throw std::runtime_error( "input_manager::get_input_event called in test mode" );
+        if( overmap_tilecontext ) {
+            overmap_tilecontext->load_tileset( get_option<std::string>( "OVERMAP_TILES" ),
+                                               /*precheck=*/false, /*force=*/false,
+                                               /*pump_events=*/true );
+            overmap_tilecontext->do_tile_loading_report();
+        }
     }
+
+    //Ends the terminal, destroy everything
+    void catacurses::endwin() {
+        tilecontext.reset();
+        closetilecontext.reset();
+        fartilecontext.reset();
+        overmap_tilecontext.reset();
+        font.reset();
+        map_font.reset();
+        overmap_font.reset();
+        ui_manager::reset();
+        WinDestroy();
+    }
+
+    template<>
+    SDL_Color color_loader<SDL_Color>::from_rgb( const int r, const int g, const int b ) {
+        SDL_Color result;
+        result.b = b;       //Blue
+        result.g = g;       //Green
+        result.r = r;       //Red
+        result.a = 0xFF;    // Opaque
+        return result;
+    }
+
+    void input_manager::set_timeout( const int delay ) {
+        input_timeout = delay;
+        inputdelay = delay;
+    }
+
+    void input_manager::pump_events() {
+        if( test_mode ) {
+            return;
+        }
+
+        // Handle all events, but ignore any keypress
+        CheckMessages();
+
+        last_input = input_event();
+        previously_pressed_key = 0;
+    }
+
+    // This is how we're actually going to handle input events, SDL getch
+    // is simply a wrapper around this.
+    input_event input_manager::get_input_event( const keyboard_mode preferred_keyboard_mode ) {
+        if( test_mode ) {
+            // input should be skipped in caller's code
+            throw std::runtime_error( "input_manager::get_input_event called in test mode" );
+        }
 
 #if !defined(__ANDROID__) && !(defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE == 1)
-    if( actual_keyboard_mode( preferred_keyboard_mode ) == keyboard_mode::keychar ) {
-        focus_aware_start_text_input();
-    } else {
-        focus_aware_stop_text_input();
-    }
-#else
-    // TODO: support keycode mode if hardware keyboard is connected?
-    ( void ) preferred_keyboard_mode;
-#endif
-
-    previously_pressed_key = 0;
-
-    // standards note: getch is sometimes required to call refresh
-    // see, e.g., http://linux.die.net/man/3/getch
-    // so although it's non-obvious, that refresh() call (and maybe InvalidateRect?) IS supposed to be there
-    // however, the refresh call has not effect when nothing has been drawn, so
-    // we can skip screen update if `needupdate` is false to improve performance during mouse
-    // move events.
-    wnoutrefresh( catacurses::stdscr );
-    if( needupdate ) {
-        refresh_display();
-    }
-
-    if( inputdelay < 0 ) {
-        do {
-            CheckMessages();
-            if( last_input.type != input_event_t::error ) {
-                break;
-            }
-            SDL_Delay( 1 );
-        } while( last_input.type == input_event_t::error );
-    } else if( inputdelay > 0 ) {
-        uint32_t starttime = GetTicks();
-        uint32_t endtime = 0;
-        bool timedout = false;
-        do {
-            CheckMessages();
-            endtime = GetTicks();
-            if( last_input.type != input_event_t::error ) {
-                break;
-            }
-            SDL_Delay( 1 );
-            timedout = endtime >= starttime + inputdelay;
-            if( timedout ) {
-                last_input.type = input_event_t::timeout;
-            }
-        } while( !timedout );
-    } else {
-        CheckMessages();
-    }
-
-    GetMouseState( &last_input.mouse_pos.x, &last_input.mouse_pos.y );
-    if( last_input.type == input_event_t::keyboard_char ) {
-        previously_pressed_key = last_input.get_first_input();
-#if defined(__ANDROID__)
-        android_vibrate();
-#endif
-    }
-#if defined(__ANDROID__)
-    else if( last_input.type == input_event_t::gamepad ) {
-        android_vibrate();
-    }
-#endif
-
-    return last_input;
-}
-
-bool gamepad_available()
-{
-    return gamepad::is_active();
-}
-
-void rescale_tileset( int size )
-{
-    // zoom is calculated as powers of 2 so need to convert swap zoom between 4 and 64
-    if( size <= pow( 2, get_option<int>( "SWAP_ZOOM" ) + 1 ) && use_far_tiles ) {
-        tilecontext = fartilecontext;
-        g->mark_main_ui_adaptor_resize();
-    } else {
-        tilecontext = closetilecontext;
-        g->mark_main_ui_adaptor_resize();
-    }
-    tilecontext->set_draw_scale( size );
-}
-
-static window_dimensions get_window_dimensions( const catacurses::window &win,
-        const point &pos, const point &size )
-{
-    window_dimensions dim;
-    if( use_tiles && g && win == g->w_terrain ) {
-        // tiles might have different dimensions than standard font
-        dim.scaled_font_size.x = tilecontext->get_tile_width();
-        dim.scaled_font_size.y = tilecontext->get_tile_height();
-    } else if( map_font && g && win == g->w_terrain ) {
-        // map font (if any) might differ from standard font
-        dim.scaled_font_size.x = map_font->width;
-        dim.scaled_font_size.y = map_font->height;
-    } else if( overmap_font && g && win == g->w_overmap ) {
-        if( use_tiles && use_tiles_overmap ) {
-            // tiles might have different dimensions than standard font
-            dim.scaled_font_size.x = overmap_tilecontext->get_tile_width();
-            dim.scaled_font_size.y = overmap_tilecontext->get_tile_height();
+        if( actual_keyboard_mode( preferred_keyboard_mode ) == keyboard_mode::keychar ) {
+            focus_aware_start_text_input();
         } else {
-            dim.scaled_font_size.x = overmap_font->width;
-            dim.scaled_font_size.y = overmap_font->height;
+            focus_aware_stop_text_input();
         }
-    } else {
-        dim.scaled_font_size.x = fontwidth;
-        dim.scaled_font_size.y = fontheight;
-    }
+#else
+        // TODO: support keycode mode if hardware keyboard is connected?
+        ( void ) preferred_keyboard_mode;
+#endif
 
-    // multiplied by the user's specified scaling factor regardless of whether tiles are in use
-    dim.scaled_font_size *= get_scaling_factor();
+        previously_pressed_key = 0;
 
-    if( win ) {
-        cata_cursesport::WINDOW *const pwin = win.get<cata_cursesport::WINDOW>();
-        dim.window_pos_cell = pwin->pos;
-        dim.window_size_cell.x = pwin->width;
-        dim.window_size_cell.y = pwin->height;
-    } else {
-        dim.window_pos_cell = pos;
-        dim.window_size_cell = size;
-    }
-
-    // the window position is *always* in standard font dimensions!
-    dim.window_pos_pixel = point( dim.window_pos_cell.x * fontwidth,
-                                  dim.window_pos_cell.y * fontheight );
-    // But the size of the window might not be.
-    if( use_tiles && g && win == g->w_terrain ) {
-        // The terrain GUI has special size during rendering.
-        dim.window_size_pixel.x = TERRAIN_WINDOW_TERM_WIDTH * fontwidth;
-        dim.window_size_pixel.y = TERRAIN_WINDOW_TERM_HEIGHT * fontheight;
-    } else if( use_tiles && use_tiles_overmap && g && win == g->w_overmap ) {
-        // The overmap GUI has special size during rendering.
-        dim.window_size_pixel.x = OVERMAP_WINDOW_TERM_WIDTH * fontwidth;
-        dim.window_size_pixel.y = OVERMAP_WINDOW_TERM_HEIGHT * fontheight;
-    } else {
-        // Otherwise, the window size corresponds to the window font size.
-        dim.window_size_pixel.x = dim.window_size_cell.x * dim.scaled_font_size.x;
-        dim.window_size_pixel.y = dim.window_size_cell.y * dim.scaled_font_size.y;
-    }
-
-    return dim;
-}
-
-window_dimensions get_window_dimensions( const catacurses::window &win )
-{
-    return get_window_dimensions( win, point::zero, point::zero );
-}
-
-window_dimensions get_window_dimensions( const point &pos, const point &size )
-{
-    return get_window_dimensions( {}, pos, size );
-}
-
-std::optional<tripoint_bub_ms> input_context::get_coordinates( const catacurses::window
-        &capture_win_, const point &offset, const bool center_cursor ) const
-{
-    // This information is required by curses, but is not (currently) used in SDL
-    ( void ) center_cursor;
-
-    if( !coordinate_input_received ) {
-        return std::nullopt;
-    }
-
-    const catacurses::window &capture_win = capture_win_ ? capture_win_ : g->w_terrain;
-    const window_dimensions dim = get_window_dimensions( capture_win );
-
-    const point &win_min = dim.window_pos_pixel;
-    point win_size = dim.window_size_pixel;
-    point logical_coordinate = coordinate;
-    const int scaling_factor = get_scaling_factor();
-
-    // convert window size and coordinate to logical if UI is scaled
-    if( scaling_factor > 1 ) {
-        logical_coordinate.x /= scaling_factor;
-        logical_coordinate.y /= scaling_factor;
-
-        const bool is_terrain_or_overmap = ( use_tiles && g && capture_win == g->w_terrain ) ||
-                                           ( use_tiles && use_tiles_overmap && g && capture_win == g->w_overmap );
-        if( !is_terrain_or_overmap ) {
-            win_size.x /= scaling_factor;
-            win_size.y /= scaling_factor;
+        // standards note: getch is sometimes required to call refresh
+        // see, e.g., http://linux.die.net/man/3/getch
+        // so although it's non-obvious, that refresh() call (and maybe InvalidateRect?) IS supposed to be there
+        // however, the refresh call has not effect when nothing has been drawn, so
+        // we can skip screen update if `needupdate` is false to improve performance during mouse
+        // move events.
+        wnoutrefresh( catacurses::stdscr );
+        if( needupdate ) {
+            refresh_display();
         }
+
+        if( inputdelay < 0 ) {
+            do {
+                CheckMessages();
+                if( last_input.type != input_event_t::error ) {
+                    break;
+                }
+                SDL_Delay( 1 );
+            } while( last_input.type == input_event_t::error );
+        } else if( inputdelay > 0 ) {
+            uint32_t starttime = GetTicks();
+            uint32_t endtime = 0;
+            bool timedout = false;
+            do {
+                CheckMessages();
+                endtime = GetTicks();
+                if( last_input.type != input_event_t::error ) {
+                    break;
+                }
+                SDL_Delay( 1 );
+                timedout = endtime >= starttime + inputdelay;
+                if( timedout ) {
+                    last_input.type = input_event_t::timeout;
+                }
+            } while( !timedout );
+        } else {
+            CheckMessages();
+        }
+
+        GetMouseState( &last_input.mouse_pos.x, &last_input.mouse_pos.y );
+        if( last_input.type == input_event_t::keyboard_char ) {
+            previously_pressed_key = last_input.get_first_input();
+#if defined(__ANDROID__)
+            android_vibrate();
+#endif
+        }
+#if defined(__ANDROID__)
+        else if( last_input.type == input_event_t::gamepad ) {
+            android_vibrate();
+        }
+#endif
+
+        return last_input;
     }
 
-    const point win_max = win_min + win_size;
-
-    // Translate mouse coordinates to map coordinates based on tile size
-    // Check if click is within bounds of the window we care about
-    const half_open_rectangle<point> win_bounds( win_min, win_max );
-    if( !win_bounds.contains( logical_coordinate ) ) {
-        return std::nullopt;
+    bool gamepad_available() {
+        return gamepad::is_active();
     }
 
-    const point screen_pos = logical_coordinate - win_min;
+    void rescale_tileset( int size ) {
+        // zoom is calculated as powers of 2 so need to convert swap zoom between 4 and 64
+        if( size <= pow( 2, get_option<int>( "SWAP_ZOOM" ) + 1 ) && use_far_tiles ) {
+            tilecontext = fartilecontext;
+            g->mark_main_ui_adaptor_resize();
+        } else {
+            tilecontext = closetilecontext;
+            g->mark_main_ui_adaptor_resize();
+        }
+        tilecontext->set_draw_scale( size );
+    }
 
-    const bool use_isometric = g->w_overmap &&
-                               capture_win == g->w_overmap ? false : g->is_tileset_isometric();
+    static window_dimensions get_window_dimensions( const catacurses::window & win,
+            const point & pos, const point & size ) {
+        window_dimensions dim;
+        if( use_tiles && g && win == g->w_terrain ) {
+            // tiles might have different dimensions than standard font
+            dim.scaled_font_size.x = tilecontext->get_tile_width();
+            dim.scaled_font_size.y = tilecontext->get_tile_height();
+        } else if( map_font && g && win == g->w_terrain ) {
+            // map font (if any) might differ from standard font
+            dim.scaled_font_size.x = map_font->width;
+            dim.scaled_font_size.y = map_font->height;
+        } else if( overmap_font && g && win == g->w_overmap ) {
+            if( use_tiles && use_tiles_overmap ) {
+                // tiles might have different dimensions than standard font
+                dim.scaled_font_size.x = overmap_tilecontext->get_tile_width();
+                dim.scaled_font_size.y = overmap_tilecontext->get_tile_height();
+            } else {
+                dim.scaled_font_size.x = overmap_font->width;
+                dim.scaled_font_size.y = overmap_font->height;
+            }
+        } else {
+            dim.scaled_font_size.x = fontwidth;
+            dim.scaled_font_size.y = fontheight;
+        }
 
-    // convert tile size to logical if UI is scaled
-    point logical_tile_size;
-    if( scaling_factor > 1 ) {
-        const bool is_terrain = use_tiles && g && capture_win == g->w_terrain;
-        const bool is_overmap = use_tiles && use_tiles_overmap && g && capture_win == g->w_overmap;
+        // multiplied by the user's specified scaling factor regardless of whether tiles are in use
+        dim.scaled_font_size *= get_scaling_factor();
 
-        if( is_terrain ) {
-            logical_tile_size.x = tilecontext->get_tile_width();
-            logical_tile_size.y = tilecontext->get_tile_height();
-        } else if( is_overmap ) {
-            logical_tile_size.x = overmap_tilecontext->get_tile_width();
-            logical_tile_size.y = overmap_tilecontext->get_tile_height();
+        if( win ) {
+            cata_cursesport::WINDOW *const pwin = win.get<cata_cursesport::WINDOW>();
+            dim.window_pos_cell = pwin->pos;
+            dim.window_size_cell.x = pwin->width;
+            dim.window_size_cell.y = pwin->height;
+        } else {
+            dim.window_pos_cell = pos;
+            dim.window_size_cell = size;
+        }
+
+        // the window position is *always* in standard font dimensions!
+        dim.window_pos_pixel = point( dim.window_pos_cell.x * fontwidth,
+                                      dim.window_pos_cell.y * fontheight );
+        // But the size of the window might not be.
+        if( use_tiles && g && win == g->w_terrain ) {
+            // The terrain GUI has special size during rendering.
+            dim.window_size_pixel.x = TERRAIN_WINDOW_TERM_WIDTH * fontwidth;
+            dim.window_size_pixel.y = TERRAIN_WINDOW_TERM_HEIGHT * fontheight;
+        } else if( use_tiles && use_tiles_overmap && g && win == g->w_overmap ) {
+            // The overmap GUI has special size during rendering.
+            dim.window_size_pixel.x = OVERMAP_WINDOW_TERM_WIDTH * fontwidth;
+            dim.window_size_pixel.y = OVERMAP_WINDOW_TERM_HEIGHT * fontheight;
+        } else {
+            // Otherwise, the window size corresponds to the window font size.
+            dim.window_size_pixel.x = dim.window_size_cell.x * dim.scaled_font_size.x;
+            dim.window_size_pixel.y = dim.window_size_cell.y * dim.scaled_font_size.y;
+        }
+
+        return dim;
+    }
+
+    window_dimensions get_window_dimensions( const catacurses::window & win ) {
+        return get_window_dimensions( win, point::zero, point::zero );
+    }
+
+    window_dimensions get_window_dimensions( const point & pos, const point & size ) {
+        return get_window_dimensions( {}, pos, size );
+    }
+
+    std::optional<tripoint_bub_ms> input_context::get_coordinates( const catacurses::window
+            &capture_win_, const point & offset, const bool center_cursor ) const {
+        // This information is required by curses, but is not (currently) used in SDL
+        ( void ) center_cursor;
+
+        if( !coordinate_input_received ) {
+            return std::nullopt;
+        }
+
+        const catacurses::window &capture_win = capture_win_ ? capture_win_ : g->w_terrain;
+        const window_dimensions dim = get_window_dimensions( capture_win );
+
+        const point &win_min = dim.window_pos_pixel;
+        point win_size = dim.window_size_pixel;
+        point logical_coordinate = coordinate;
+        const int scaling_factor = get_scaling_factor();
+
+        // convert window size and coordinate to logical if UI is scaled
+        if( scaling_factor > 1 ) {
+            logical_coordinate.x /= scaling_factor;
+            logical_coordinate.y /= scaling_factor;
+
+            const bool is_terrain_or_overmap = ( use_tiles && g && capture_win == g->w_terrain ) ||
+                                               ( use_tiles && use_tiles_overmap && g && capture_win == g->w_overmap );
+            if( !is_terrain_or_overmap ) {
+                win_size.x /= scaling_factor;
+                win_size.y /= scaling_factor;
+            }
+        }
+
+        const point win_max = win_min + win_size;
+
+        // Translate mouse coordinates to map coordinates based on tile size
+        // Check if click is within bounds of the window we care about
+        const half_open_rectangle<point> win_bounds( win_min, win_max );
+        if( !win_bounds.contains( logical_coordinate ) ) {
+            return std::nullopt;
+        }
+
+        const point screen_pos = logical_coordinate - win_min;
+
+        const bool use_isometric = g->w_overmap &&
+                                   capture_win == g->w_overmap ? false : g->is_tileset_isometric();
+
+        // convert tile size to logical if UI is scaled
+        point logical_tile_size;
+        if( scaling_factor > 1 ) {
+            const bool is_terrain = use_tiles && g && capture_win == g->w_terrain;
+            const bool is_overmap = use_tiles && use_tiles_overmap && g && capture_win == g->w_overmap;
+
+            if( is_terrain ) {
+                logical_tile_size.x = tilecontext->get_tile_width();
+                logical_tile_size.y = tilecontext->get_tile_height();
+            } else if( is_overmap ) {
+                logical_tile_size.x = overmap_tilecontext->get_tile_width();
+                logical_tile_size.y = overmap_tilecontext->get_tile_height();
+            } else {
+                logical_tile_size = dim.scaled_font_size;
+                logical_tile_size.x /= scaling_factor;
+                logical_tile_size.y /= scaling_factor;
+            }
         } else {
             logical_tile_size = dim.scaled_font_size;
-            logical_tile_size.x /= scaling_factor;
-            logical_tile_size.y /= scaling_factor;
         }
-    } else {
-        logical_tile_size = dim.scaled_font_size;
+
+        const point_bub_ms p = cata_tiles::screen_to_player(
+                                   screen_pos, logical_tile_size, win_size,
+                                   point_bub_ms( offset ), use_isometric );
+
+        return tripoint_bub_ms( p, get_map().get_abs_sub().z() );
     }
 
-    const point_bub_ms p = cata_tiles::screen_to_player(
-                               screen_pos, logical_tile_size, win_size,
-                               point_bub_ms( offset ), use_isometric );
-
-    return tripoint_bub_ms( p, get_map().get_abs_sub().z() );
-}
-
-int get_terminal_width()
-{
-    return TERMINAL_WIDTH;
-}
-
-int get_terminal_height()
-{
-    return TERMINAL_HEIGHT;
-}
-
-int get_scaling_factor()
-{
-    return scaling_factor;
-}
-
-static int map_font_width()
-{
-    if( use_tiles && tilecontext ) {
-        return tilecontext->get_tile_width();
+    int get_terminal_width() {
+        return TERMINAL_WIDTH;
     }
-    return ( map_font ? map_font.get() : font.get() )->width;
-}
 
-static int map_font_height()
-{
-    if( use_tiles && tilecontext ) {
-        return tilecontext->get_tile_height();
+    int get_terminal_height() {
+        return TERMINAL_HEIGHT;
     }
-    return ( map_font ? map_font.get() : font.get() )->height;
-}
 
-static int overmap_font_width()
-{
-    if( use_tiles && overmap_tilecontext && use_tiles_overmap ) {
-        return overmap_tilecontext->get_tile_width();
+    int get_scaling_factor() {
+        return scaling_factor;
     }
-    return ( overmap_font ? overmap_font.get() : font.get() )->width;
-}
 
-static int overmap_font_height()
-{
-    if( use_tiles && overmap_tilecontext && use_tiles_overmap ) {
-        return overmap_tilecontext->get_tile_height();
+    static int map_font_width() {
+        if( use_tiles && tilecontext ) {
+            return tilecontext->get_tile_width();
+        }
+        return ( map_font ? map_font.get() : font.get() )->width;
     }
-    return ( overmap_font ? overmap_font.get() : font.get() )->height;
-}
 
-void to_map_font_dim_width( int &w )
-{
-    w = ( w * fontwidth ) / map_font_width();
-}
+    static int map_font_height() {
+        if( use_tiles && tilecontext ) {
+            return tilecontext->get_tile_height();
+        }
+        return ( map_font ? map_font.get() : font.get() )->height;
+    }
 
-void to_map_font_dim_height( int &h )
-{
-    h = ( h * fontheight ) / map_font_height();
-}
+    static int overmap_font_width() {
+        if( use_tiles && overmap_tilecontext && use_tiles_overmap ) {
+            return overmap_tilecontext->get_tile_width();
+        }
+        return ( overmap_font ? overmap_font.get() : font.get() )->width;
+    }
 
-void to_map_font_dimension( int &w, int &h )
-{
-    to_map_font_dim_width( w );
-    to_map_font_dim_height( h );
-}
+    static int overmap_font_height() {
+        if( use_tiles && overmap_tilecontext && use_tiles_overmap ) {
+            return overmap_tilecontext->get_tile_height();
+        }
+        return ( overmap_font ? overmap_font.get() : font.get() )->height;
+    }
 
-void from_map_font_dimension( int &w, int &h )
-{
-    w = ( w * map_font_width() + fontwidth - 1 ) / fontwidth;
-    h = ( h * map_font_height() + fontheight - 1 ) / fontheight;
-}
+    void to_map_font_dim_width( int &w ) {
+        w = ( w * fontwidth ) / map_font_width();
+    }
 
-void to_overmap_font_dimension( int &w, int &h )
-{
-    w = ( w * fontwidth ) / overmap_font_width();
-    h = ( h * fontheight ) / overmap_font_height();
-}
+    void to_map_font_dim_height( int &h ) {
+        h = ( h * fontheight ) / map_font_height();
+    }
 
-bool is_draw_tiles_mode()
-{
-    return use_tiles;
-}
+    void to_map_font_dimension( int &w, int &h ) {
+        to_map_font_dim_width( w );
+        to_map_font_dim_height( h );
+    }
 
-bool catacurses::supports_256_colors()
-{
-    // trust SDL to do the right thing instead
-    return false;
-}
+    void from_map_font_dimension( int &w, int &h ) {
+        w = ( w * map_font_width() + fontwidth - 1 ) / fontwidth;
+        h = ( h * map_font_height() + fontheight - 1 ) / fontheight;
+    }
 
-/** Saves a screenshot of the current viewport, as a PNG file, to the given location.
-* @param file_path: A full path to the file where the screenshot should be saved.
-* @returns `true` if the screenshot generation was successful, `false` otherwise.
-*/
-bool save_screenshot( const std::string &file_path )
-{
-    // Note: the viewport is returned by SDL and we don't have to manage its lifetime.
-    SDL_Rect viewport;
+    void to_overmap_font_dimension( int &w, int &h ) {
+        w = ( w * fontwidth ) / overmap_font_width();
+        h = ( h * fontheight ) / overmap_font_height();
+    }
 
-    // Get the viewport size (width and height of the screen)
-    RenderGetViewport( renderer, &viewport );
+    bool is_draw_tiles_mode() {
+        return use_tiles;
+    }
 
-    // Create SDL_Surface with depth of 32 bits (note: using zeros for the RGB masks sets a default value, based on the depth; Alpha mask will be 0).
-    SDL_Surface_Ptr surface = CreateRGBSurface( 0, viewport.w, viewport.h, 32, 0, 0, 0, 0 );
-
-    // Get data from SDL_Renderer and save them into surface
-    if( printErrorIf( !RenderReadPixels( renderer, nullptr, GetSurfacePixelFormat( surface ),
-                                         surface->pixels, surface->pitch ),
-                      "save_screenshot: cannot read data from SDL_Renderer." ) ) {
+    bool catacurses::supports_256_colors() {
+        // trust SDL to do the right thing instead
         return false;
     }
 
-    // Save screenshot as PNG file
-    if( printErrorIf( IMG_SavePNG( surface.get(), file_path.c_str() ) != 0,
-                      std::string( "save_screenshot: cannot save screenshot file: " + file_path ).c_str() ) ) {
-        return false;
-    }
+    /** Saves a screenshot of the current viewport, as a PNG file, to the given location.
+    * @param file_path: A full path to the file where the screenshot should be saved.
+    * @returns `true` if the screenshot generation was successful, `false` otherwise.
+    */
+    bool save_screenshot( const std::string & file_path ) {
+        // Note: the viewport is returned by SDL and we don't have to manage its lifetime.
+        SDL_Rect viewport;
 
-    return true;
-}
+        // Get the viewport size (width and height of the screen)
+        RenderGetViewport( renderer, &viewport );
+
+        // Create SDL_Surface with depth of 32 bits (note: using zeros for the RGB masks sets a default value, based on the depth; Alpha mask will be 0).
+        SDL_Surface_Ptr surface = CreateRGBSurface( 0, viewport.w, viewport.h, 32, 0, 0, 0, 0 );
+
+        // Get data from SDL_Renderer and save them into surface
+        if( printErrorIf( !RenderReadPixels( renderer, nullptr, GetSurfacePixelFormat( surface ),
+                                             surface->pixels, surface->pitch ),
+                          "save_screenshot: cannot read data from SDL_Renderer." ) ) {
+            return false;
+        }
+
+        // Save screenshot as PNG file
+        if( printErrorIf( IMG_SavePNG( surface.get(), file_path.c_str() ) != 0,
+                          std::string( "save_screenshot: cannot save screenshot file: " + file_path ).c_str() ) ) {
+            return false;
+        }
+
+        return true;
+    }
 
 #ifdef _WIN32
-HWND getWindowHandle()
-{
-    SDL_SysWMinfo info;
-    SDL_VERSION( &info.version );
-    SDL_GetWindowWMInfo( ::window.get(), &info );
-    return info.info.win.window;
-}
+    HWND getWindowHandle() {
+        SDL_SysWMinfo info;
+        SDL_VERSION( &info.version );
+        SDL_GetWindowWMInfo( ::window.get(), &info );
+        return info.info.win.window;
+    }
 #endif
 
-void set_title( const std::string &title )
-{
-    if( ::window ) {
-        SetWindowTitle( ::window.get(), title.c_str() );
+    void set_title( const std::string & title ) {
+        if( ::window ) {
+            SetWindowTitle( ::window.get(), title.c_str() );
+        }
     }
-}
 
-const SDL_Renderer_Ptr &get_sdl_renderer()
-{
-    return renderer;
-}
+    const SDL_Renderer_Ptr &get_sdl_renderer() {
+        return renderer;
+    }
 
-SDL_Window *get_sdl_window()
-{
-    return ::window.get();
-}
+    SDL_Window *get_sdl_window() {
+        return ::window.get();
+    }
 
 #endif // TILES
 
-bool window_contains_point_relative( const catacurses::window &win, const point &p )
-{
-    const point bound = point( catacurses::getmaxx( win ), catacurses::getmaxy( win ) );
-    const half_open_rectangle<point> win_bounds( point::zero, bound );
-    return win_bounds.contains( p );
-}
+    bool window_contains_point_relative( const catacurses::window & win, const point & p ) {
+        const point bound = point( catacurses::getmaxx( win ), catacurses::getmaxy( win ) );
+        const half_open_rectangle<point> win_bounds( point::zero, bound );
+        return win_bounds.contains( p );
+    }
