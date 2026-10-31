@@ -777,9 +777,15 @@ ifeq ($(TILES), 1)
       LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-image sdl3-ttf)
       LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
     else
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl2))
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf))
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+      ifeq ($(MSYS2),1)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
+      else
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl2))
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf))
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+      endif
 
       ifeq ($(STATIC), 1)
         LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --static --libs)
@@ -875,7 +881,11 @@ ifeq ($(SOUND), 1)
         endif
       endif
     else # not osx
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_mixer))
+      ifeq ($(MSYS2),1)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
+      else
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_mixer))
+      endif
       LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
       LDFLAGS += -lpthread
     endif
@@ -1310,6 +1320,7 @@ ifeq ($(SOUND), 1)
 endif  # ifeq ($(SOUND), 1)
 endif  # ifeq ($(SDL3), 1)
 endif  # ifdef FRAMEWORK
+endif  # ifdef TILES
 	dylibbundler -of -b -x $(APPRESOURCESDIR)/$(APPTARGET) -d $(APPRESOURCESDIR)/ -p @executable_path/
 
 dmgdistclean:
