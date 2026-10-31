@@ -269,32 +269,22 @@ static bool SetupRenderTarget()
     return true;
 }
 
-// NoMouseCursorChange blocks ImGui's per-frame SDL_ShowCursor, which
-// would otherwise re-show the cursor immediately after HideCursor.
 void refresh_mouse_config()
 {
     using cata::options::mouse;
-    ImGuiIO &io = ImGui::GetIO();
     if( !mouse.enabled ) {
-        io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
-        io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
         if( IsCursorVisible() ) {
             HideCursor();
         }
         return;
     }
 
-    io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
     const std::string hide_mode = get_option<std::string>( "HIDE_CURSOR" );
     if( hide_mode == "show" ) {
-        io.ConfigFlags &= ~ImGuiConfigFlags_NoMouseCursorChange;
         if( !IsCursorVisible() ) {
             ShowCursor();
         }
     } else {
-        // "hide" and "hidekb" both require blocking ImGui's per-frame
-        // cursor show so the game can manage visibility directly.
-        io.ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
         if( hide_mode == "hide" && IsCursorVisible() ) {
             HideCursor();
         }
