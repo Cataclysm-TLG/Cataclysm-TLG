@@ -45,14 +45,6 @@ constexpr std::optional<T> _get_common( C const &cnt, std::string_view token )
     return std::nullopt;
 }
 
-constexpr std::optional<double> get_constant( std::string_view token )
-{
-    if( std::optional<math_const const *> ret = _get_common<pmath_const>( constants, token ); ret ) {
-        return ( *ret )->val;
-    }
-    return std::nullopt;
-}
-
 std::optional<double> get_number( std::string_view token )
 {
     // FIXME: port to std::from_chars once double conversion is supported
