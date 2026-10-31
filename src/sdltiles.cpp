@@ -2950,7 +2950,7 @@ static void focus_aware_stop_text_input()
 #endif
 }
 
-//Check for any window messages (keypress, paint, mousemove, etc)
+// Check for any window messages (keypress, paint, mousemove, etc)
 static void CheckMessages()
 {
     SDL_Event ev;
@@ -3256,6 +3256,7 @@ static void CheckMessages()
                 needupdate = true;
             }
         }
+    }
 #endif
 
         last_input = input_event();
