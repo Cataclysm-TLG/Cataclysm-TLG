@@ -571,17 +571,22 @@ ifeq ($(NATIVE), osx)
     endif
   endif
   ifdef FRAMEWORK
+    ifeq ($(SDL3), 1)
+      SDL_FRAMEWORK_GLOB := SDL3.*
+    else
+      SDL_FRAMEWORK_GLOB := SDL2.*
+    endif
     ifeq ($(FRAMEWORKSDIR),)
       FRAMEWORKSDIR := $(strip $(if $(shell [ -d $(HOME)/Library/Frameworks ] && echo 1), \
-                             $(if $(shell find $(HOME)/Library/Frameworks -name 'SDL2.*'), \
+                             $(if $(shell find $(HOME)/Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
                                $(HOME)/Library/Frameworks,),))
     endif
     ifeq ($(FRAMEWORKSDIR),)
-      FRAMEWORKSDIR := $(strip $(if $(shell find /Library/Frameworks -name 'SDL2.*'), \
+      FRAMEWORKSDIR := $(strip $(if $(shell find /Library/Frameworks -name '$(SDL_FRAMEWORK_GLOB)'), \
                                  /Library/Frameworks,))
     endif
     ifeq ($(FRAMEWORKSDIR),)
-      $(error "SDL2 framework not found")
+      $(error "SDL framework not found")
     endif
   endif
   ifeq ($(LOCALIZE), 1)
@@ -702,76 +707,95 @@ endif
 
 PKG_CONFIG = $(CROSS)pkg-config
 
-ifeq ($(SOUND), 1)
+ifeq ($(SDL3), 1)
   SDL = 1
-  ifeq ($(NATIVE),osx)
-    ifndef FRAMEWORK # libsdl build
-      ifeq ($(MACPORTS), 1)
-        LDFLAGS += -lSDL2_mixer -lvorbisfile -lvorbis -logg
-      else # homebrew
-        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
-        LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
-        LDFLAGS += -lvorbisfile -lvorbis -logg
-      endif
-    endif
-  else # not osx
-    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
-    LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
-    LDFLAGS += -lpthread
-  endif
+  TILES = 1
+  DEFINES += -DUSE_SDL3
+endif
 
-  ifeq ($(MSYS2),1)
-    LDFLAGS += -lmpg123 -lshlwapi -lvorbisfile -lvorbis -logg -lflac
-  endif
-
-  CXXFLAGS += -DSDL_SOUND
+ifeq ($(SDL), 1)
+  TILES = 1
 endif
 
 ifeq ($(TILES), 1)
   SDL = 1
   BINDIST_EXTRAS += gfx
   ifeq ($(NATIVE),osx)
-    ifdef FRAMEWORK
-      OSX_INC = -F$(FRAMEWORKSDIR) \
+   ifeq ($(SDL3), 1)
+      ifdef FRAMEWORK
+        OSX_INC = -F$(FRAMEWORKSDIR) \
+		-I$(FRAMEWORKSDIR)/SDL3.framework/Headers \
+		-I$(FRAMEWORKSDIR)/SDL3_image.framework/Headers \
+		-I$(FRAMEWORKSDIR)/SDL3_ttf.framework/Headers
+        LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
+		 -framework SDL3 -framework SDL3_image -framework SDL3_ttf -framework Cocoa
+        CXXFLAGS += $(OSX_INC)
+      else
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3 sdl3-image sdl3-ttf))
+        LDFLAGS += -framework Cocoa $(shell $(PKG_CONFIG) --libs sdl3 sdl3-image sdl3-ttf)
+      endif
+    else
+      ifdef FRAMEWORK
+        OSX_INC = -F$(FRAMEWORKSDIR) \
 		-I$(FRAMEWORKSDIR)/SDL2.framework/Headers \
 		-I$(FRAMEWORKSDIR)/SDL2_image.framework/Headers \
 		-I$(FRAMEWORKSDIR)/SDL2_ttf.framework/Headers
 			ifeq ($(SOUND), 1)
 				OSX_INC += -I$(FRAMEWORKSDIR)/SDL2_mixer.framework/Headers
 			endif
-      LDFLAGS += -F$(FRAMEWORKSDIR) \
+        LDFLAGS += -F$(FRAMEWORKSDIR) -rpath $(FRAMEWORKSDIR) \
 		 -framework SDL2 -framework SDL2_image -framework SDL2_ttf -framework Cocoa
 		 ifeq ($(SOUND), 1)
 		 	LDFLAGS += -framework SDL2_mixer
 		 endif
-      CXXFLAGS += $(OSX_INC)
-    else # libsdl build
-      DEFINES += -DOSX_SDL2_LIBS
-      # handle #include "SDL2/SDL.h" and "SDL.h"
-      CXXFLAGS += $(shell sdl2-config --cflags) \
+        CXXFLAGS += $(OSX_INC)
+      else # libsdl build
+        DEFINES += -DOSX_SDL2_LIBS
+        # handle #include "SDL2/SDL.h" and "SDL.h"
+        CXXFLAGS += $(subst -I,-isystem ,$(shell sdl2-config --cflags)) \
 		  -I$(shell dirname $(shell sdl2-config --cflags | sed 's/-I\(.[^ ]*\) .*/\1/'))
-      LDFLAGS += -framework Cocoa $(shell sdl2-config --libs) -lSDL2_ttf
-      LDFLAGS += -lSDL2_image
-      ifeq ($(SOUND), 1)
-        LDFLAGS += -lSDL2_mixer
+        LDFLAGS += -framework Cocoa $(shell sdl2-config --libs) -lSDL2_ttf
+        LDFLAGS += -lSDL2_image
+        ifeq ($(SOUND), 1)
+          LDFLAGS += -lSDL2_mixer
+        endif
       endif
     endif
     CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
     LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   else ifneq ($(NATIVE),emscripten)
-    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2 SDL2_image SDL2_ttf)
+    ifeq ($(SDL3), 1)
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+      ifeq ($(STATIC), 1)
+        LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --static --libs)
+      else
+        LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --libs)
+      endif
 
-    ifeq ($(STATIC), 1)
-      LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --static --libs)
+      LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-image sdl3-ttf)
+      LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
     else
-      LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --libs)
+      ifeq ($(MSYS2),1)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl2)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
+      else
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl2))
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_image SDL2_ttf))
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+      endif
+
+      ifeq ($(STATIC), 1)
+        LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --static --libs)
+      else
+        LDFLAGS += $(shell $(PKG_CONFIG) sdl2 --libs)
+      endif
+
+      LDFLAGS += -lSDL2_ttf -lSDL2_image
+      LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
     endif
-
-    LDFLAGS += -lSDL2_ttf -lSDL2_image
-
-    # We don't use SDL_main -- we have proper main()/WinMain()
-    CXXFLAGS := $(filter-out -Dmain=SDL_main,$(CXXFLAGS))
-    LDFLAGS := $(filter-out -lSDL2main,$(LDFLAGS))
   endif
 
   DEFINES += -DTILES
@@ -837,6 +861,47 @@ else
     endif # HAVE_NCURSES5CONFIG
   endif # HAVE_PKGCONFIG
 endif # TILES
+
+ifeq ($(SOUND), 1)
+ ifeq ($(SDL3), 1)
+    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
+    LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-mixer)
+    ifneq ($(NATIVE),osx)
+      LDFLAGS += -lpthread
+    endif
+  else
+    ifeq ($(NATIVE),osx)
+      ifndef FRAMEWORK # libsdl build
+        ifeq ($(MACPORTS), 1)
+          LDFLAGS += -lSDL2_mixer -lvorbisfile -lvorbis -logg
+        else # homebrew
+          CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_mixer))
+          LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
+          LDFLAGS += -lvorbisfile -lvorbis -logg
+        endif
+      endif
+    else # not osx
+      ifeq ($(MSYS2),1)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags SDL2_mixer)
+      else
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags SDL2_mixer))
+      endif
+      LDFLAGS += $(shell $(PKG_CONFIG) --libs SDL2_mixer)
+      LDFLAGS += -lpthread
+    endif
+
+    ifeq ($(MSYS2),1)
+      LDFLAGS += -lmpg123 -lshlwapi -lvorbisfile -lvorbis -logg -lflac
+    endif
+  endif
+
+  CXXFLAGS += -DSDL_SOUND
+endif
+
+# We don't use SDL_main -- we have proper main()/WinMain()
+CXXFLAGS := $(filter-out -Dmain=SDL_main,$(CXXFLAGS))
+LDFLAGS := $(filter-out -lSDL2main,$(LDFLAGS))
+LDFLAGS := $(filter-out -lSDL3main,$(LDFLAGS))
 
 ifeq ($(BSD), 1)
   # BSDs have backtrace() and friends in a separate library
@@ -946,7 +1011,10 @@ ASTYLE_SOURCES := $(sort \
 SOURCES += $(THIRD_PARTY_SOURCES)
 C_SOURCES += $(THIRD_PARTY_C_SOURCES)
 
-_OBJS = $(SOURCES:$(SRC_DIR)/%.cpp=%.o)
+CPP_SOURCES := $(filter %.cpp,$(SOURCES))
+CC_SOURCES := $(filter %.cc,$(SOURCES))
+_OBJS = $(CPP_SOURCES:$(SRC_DIR)/%.cpp=%.o)
+_OBJS += $(CC_SOURCES:$(SRC_DIR)/%.cc=%.o)
 _OBJS += $(C_SOURCES:$(SRC_DIR)/%.c=%.o)
 ifeq ($(TARGETSYSTEM),WINDOWS)
   RSRC = $(wildcard $(SRC_DIR)/*.rc)
@@ -1239,12 +1307,18 @@ ifeq ($(SOUND), 1)
 endif  # ifeq ($(SOUND), 1)
 	cp -R gfx $(APPRESOURCESDIR)/
 ifdef FRAMEWORK
+ifeq ($(SDL3), 1)
+	cp -R $(FRAMEWORKSDIR)/SDL3.framework $(APPRESOURCESDIR)/
+	cp -R $(FRAMEWORKSDIR)/SDL3_image.framework $(APPRESOURCESDIR)/
+	cp -R $(FRAMEWORKSDIR)/SDL3_ttf.framework $(APPRESOURCESDIR)/
+else
 	cp -R $(FRAMEWORKSDIR)/SDL2.framework $(APPRESOURCESDIR)/
 	cp -R $(FRAMEWORKSDIR)/SDL2_image.framework $(APPRESOURCESDIR)/
 	cp -R $(FRAMEWORKSDIR)/SDL2_ttf.framework $(APPRESOURCESDIR)/
 ifeq ($(SOUND), 1)
 	cp -R $(FRAMEWORKSDIR)/SDL2_mixer.framework $(APPRESOURCESDIR)/
 endif  # ifeq ($(SOUND), 1)
+endif  # ifeq ($(SDL3), 1)
 endif  # ifdef FRAMEWORK
 endif  # ifdef TILES
 	dylibbundler -of -b -x $(APPRESOURCESDIR)/$(APPTARGET) -d $(APPRESOURCESDIR)/ -p @executable_path/
