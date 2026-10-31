@@ -4415,5 +4415,15 @@
     "id": "bolt_wood",
     "type": "MIGRATION",
     "replace": "bolt_wood_broadhead"
+  },
+  {
+    "id": "ar_glasses_basic",
+    "type": "MIGRATION",
+    "replace": "smart_glasses"
+  },
+  {
+    "id": "ar_glasses_advanced",
+    "type": "MIGRATION",
+    "replace": "smart_glasses"
   }
 ]
