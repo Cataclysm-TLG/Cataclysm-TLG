@@ -1,5 +1,3 @@
-#if defined(SDL_SOUND)
-
 #include "sdlsound.h"
 
 #include <atomic>
@@ -23,7 +21,6 @@
 #include "options.h"
 #include "path_info.h"
 #include "rng.h"
-#ifdef TILES
 #include "sdl_wrappers.h"
 #include "sound_backend.h"
 #include "sounds.h"
@@ -302,8 +299,6 @@ static bool check_sound( const int volume = 1 )
     return sound_init_success && sounds::sound_enabled && volume > 0;
 }
 
-static bool is_time_slowed();
-
 static const int audio_rate = 44100; // samples per second
 
 /**
@@ -336,11 +331,9 @@ bool init_sound()
     }
     for( int i = static_cast<int>( sfx::channel::stamina_75 );
          i <= static_cast<int>( sfx::channel::stamina_35 ); ++i ) {
-        groups[i] = sfx::group::low_stamina;
+        groups[i] = sfx::group::fatigue;
     }
     sound_backend::tag_reserved_groups( groups );
-
-    sound_backend::set_slow_time_predicate( &is_time_slowed );
 
     sound_init_success = true;
     return true;
@@ -654,18 +647,6 @@ bool sfx::has_exact_variant_sound( const std::string &id, const std::string &var
     return iter != nullptr;
 }
 
-static bool is_time_slowed()
-{
-    if( g == nullptr || g->uquit != QUIT_NO ) {
-        return false;
-    }
-    // if the player have significantly more moves than their speed, they probably used an artifact/CBM to slow time.
-    // I checked; the only things that increase a player's # of moves is spells/cbms that slow down time (and also unit tests) so this should work.
-    // Would get_speed_base() be better?
-    return std::max( get_avatar().get_speed(), 100 ) * 2 < get_avatar().get_moves();
-}
-
-
 void sfx::play_variant_sound( const std::string &id, const std::string &variant,
                               const std::string &season, const std::optional<bool> &is_indoors,
                               const std::optional<bool> &is_night, int volume )
@@ -825,15 +806,3 @@ void load_soundset()
         sfx_preload.swap( t_swap );
     }
 }
-
-// capitalized to mirror cata_tiles::InitSDL()
-void initSDLAudioOnly()
-{
-    const int ret = SDL_Init( SDL_INIT_AUDIO );
-    throwErrorIf( ret != 0, "SDL_Init failed" );
-    if( atexit( SDL_Quit ) ) {
-        debugmsg( "atexit failed to register SDL_Quit" );
-    }
-}
-
-#endif // SDL_SOUND
