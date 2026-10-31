@@ -364,6 +364,10 @@ if (BACKTRACE)
     endif ()
 endif ()
 
+file(GLOB CATACLYSM_TLG_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/cata_allocator_c.c)
+
 if ((LOCALIZE OR BUILD_TESTING) AND "${GETTEXT_MSGFMT_BINARY}" STREQUAL "")
     if(MSVC)
         list(APPEND Gettext_ROOT C:\\msys64\\usr)
