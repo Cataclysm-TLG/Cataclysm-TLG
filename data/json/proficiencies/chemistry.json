@@ -42,7 +42,9 @@
     "description": "Knowledge of the esoteric biology of fungi.",
     "can_learn": true,
     "required_proficiencies": [ "prof_intro_biology" ],
-    "time_to_learn": "8 h"
+    "time_to_learn": "8 h",
+    "default_weakpoint_bonus": 1,
+    "default_weakpoint_penalty": 0
   },
   {
     "type": "proficiency",
