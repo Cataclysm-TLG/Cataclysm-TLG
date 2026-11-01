@@ -1483,7 +1483,7 @@ void npc::move()
     }
 
     Character &player_character = get_player_character();
-    //faction opinion determines if it should consider you hostile
+    // Faction opinion determines if it should consider you hostile.
     if( !is_enemy() && guaranteed_hostile() && sees( here, player_character ) ) {
         if( is_player_ally() ) {
             mutiny();
