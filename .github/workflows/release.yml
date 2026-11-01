@@ -131,8 +131,6 @@ jobs:
   builds:
     needs:
       - release
-      - compose-tilesets
-      - build-translations
       - compile-shaders
     strategy:
       fail-fast: false
