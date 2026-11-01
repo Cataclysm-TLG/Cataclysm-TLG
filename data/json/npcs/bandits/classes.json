@@ -72,8 +72,8 @@
     "bonus_dex": { "rng": [ 1, 3 ] },
     "bonus_int": { "rng": [ 0, 2 ] },
     "bonus_per": { "rng": [ 0, 2 ] },
-    "bonus_aggression": { "rng": [ 1, 5 ] },
-    "bonus_bravery": { "rng": [ 2, 5 ] },
+    "bonus_aggression": { "rng": [ 4, 8 ] },
+    "bonus_bravery": { "rng": [ 5, 8 ] },
     "skills": [
       { "skill": "ALL", "level": { "sum": [ { "dice": [ 3, 2 ] }, { "constant": -4 } ] } },
       { "skill": "dodge", "bonus": { "rng": [ 2, 4 ] } },

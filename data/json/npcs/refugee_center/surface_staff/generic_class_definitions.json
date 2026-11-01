@@ -2,10 +2,15 @@
   {
     "type": "item_group",
     "id": "NC_FREE_MERCH_GUARD_wield_phase1",
-    "//": "Initially the free mechant guards indoors stick to melee weapons, as most of these folks aren't trained to use guns.",
+    "//": "Initially the ref center guards indoors stick to melee weapons, as most of these folks aren't trained to use guns.",
     "subtype": "distribution",
     "entries": [
       { "item": "spear_knife", "prob": 10 },
+      { "item": "machete", "prob": 10 },
+      { "item": "knife_meat_cleaver", "prob": 10 },
+      { "item": "hatchet", "prob": 10 },
+      { "item": "bat", "prob": 20 },
+      { "item": "pipe", "prob": 20 },
       { "item": "spear_wood", "prob": 40 },
       { "item": "spear_copper", "prob": 20 },
       { "item": "makeshift_glaive", "prob": 20 }
@@ -58,6 +63,12 @@
     "job_description": "I'm on a guard shift.",
     "weapon_override": "NC_FREE_MERCH_GUARD_wield_phase1",
     "worn_override": "NC_FREE_MERCH_GUARD_worn_phase1",
+    "bonus_str": { "rng": [ 1, 3 ] },
+    "bonus_dex": { "rng": [ 1, 3 ] },
+    "bonus_per": { "rng": [ 0, 3 ] },
+    "//": "These people have nowhere to run to and will fight with everything they have to protect their home.",
+    "bonus_aggression": { "rng": [ 10, 15 ] },
+    "bonus_bravery": { "rng": [ 10, 15 ] },
     "traits": [
       { "group": "NPC_starting_traits" },
       { "group": "Appearance_demographics" },
@@ -66,9 +77,10 @@
     ],
     "common": false,
     "skills": [
-      { "skill": "bashing", "bonus": { "rng": [ 1, 2 ] } },
-      { "skill": "cutting", "bonus": { "rng": [ 1, 3 ] } },
-      { "skill": "dodge", "bonus": { "rng": [ 1, 3 ] } },
+      { "skill": "ALL", "level": { "sum": [ { "dice": [ 3, 2 ] }, { "constant": -4 } ] } },
+      { "skill": "bashing", "bonus": { "rng": [ 2, 4 ] } },
+      { "skill": "cutting", "bonus": { "rng": [ 2, 4 ] } },
+      { "skill": "dodge", "bonus": { "rng": [ 2, 4 ] } },
       { "skill": "stabbing", "bonus": { "rng": [ 2, 4 ] } },
       { "skill": "melee", "bonus": { "rng": [ 2, 4 ] } }
     ]

@@ -11,13 +11,7 @@
       },
       "lawn_type": {
         "type": "ter_str_id",
-        "default": {
-          "distribution": [
-            [ "t_region_soil", 1 ],
-            [ "t_region_groundcover", 1 ],
-            [ "t_region_groundcover_urban", 1 ]
-          ]
-        }
+        "default": { "distribution": [ [ "t_region_soil", 1 ], [ "t_region_groundcover", 1 ], [ "t_region_groundcover_urban", 1 ] ] }
       }
     },
     "terrain": {
