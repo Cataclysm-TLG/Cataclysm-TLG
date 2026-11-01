@@ -274,9 +274,11 @@ static const move_mode_id move_mode_walk( "walk" );
 
 static const mtype_id mon_manhack( "mon_manhack" );
 
+static const proficiency_id proficiency_prof_intro_biology( "prof_intro_biology" );
 static const proficiency_id proficiency_prof_lockpicking( "prof_lockpicking" );
 static const proficiency_id proficiency_prof_lockpicking_expert( "prof_lockpicking_expert" );
 static const proficiency_id proficiency_prof_safecracking( "prof_safecracking" );
+static const proficiency_id proficiency_prof_wp_zombie( "prof_wp_zombie" );
 
 static const quality_id qual_CUT( "CUT" );
 static const quality_id qual_FISHING_ROD( "FISHING_ROD" );
@@ -290,6 +292,7 @@ static const quality_id qual_SHEAR( "SHEAR" );
 static const skill_id skill_computer( "computer" );
 static const skill_id skill_electronics( "electronics" );
 static const skill_id skill_fabrication( "fabrication" );
+static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_gun( "gun" );
 static const skill_id skill_mechanics( "mechanics" );
 static const skill_id skill_survival( "survival" );
@@ -9677,8 +9680,11 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
 
     float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
-    // Multiplier to get the chance right + some bonus for ecology skill.
-    pulp_power *= 20 + you.get_skill_level( skill_survival ) * 5;
+    // Multiplier to get the chance right + some bonus for proficiencies and medicine.  You don't learn profs this way as that requires more careful examination.
+    float medicine = std::max( 10.f, you.get_skill_level( skill_firstaid ) );
+    float biology = you._proficiencies->pct_practiced( proficiency_prof_intro_biology );
+    float anatomy = you._proficiencies->pct_practiced( proficiency_prof_wp_zombie );
+    pulp_power *= 20 + medicine * 2 + biology * 10 + anatomy * 20;
     int moves = 0;
     for( auto pos_iter = placement.cbegin(); pos_iter != placement.end();/*left - out*/ ) {
         const tripoint_bub_ms &pos = here.get_bub( *pos_iter );
@@ -9743,11 +9749,6 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
 
                 you.recoil = MAX_RECOIL;
 
-                if( one_in( 5 ) ) {
-                    // Smashing may not be butchery, but it involves some zombie anatomy.
-                    you.practice( skill_survival, 2, 2 );
-                }
-
                 item weap = you.get_wielded_item() ? *you.get_wielded_item() : null_item_reference();
                 moves += ( ( you.attack_speed( weap ) * 2 ) / you.exertion_adjusted_move_multiplier(
                                act.exertion_level() ) );
@@ -9758,6 +9759,13 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
             }
             corpse.set_flag( flag_PULPED );
+            if( biology < 1.f && one_in( 30 ) ) {
+                you.add_msg_if_player( m_info, _( "Knowing more about basic biology would make this easier." ) );
+            } else if( anatomy < 1.f && one_in( 30 ) ) {
+                you.add_msg_if_player( m_info, _( "Knowing more about undead anatomy would make this easier." ) );
+            } else if( medicine < 5.f && one_in( 30 ) ) {
+                you.add_msg_if_player( m_info, _( "More skill in medicine would make this a little easier." ) );
+            }
         }
         // At this point, we have finished one tile.
         pos_iter = placement.erase( pos_iter );
@@ -9767,6 +9775,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     act.moves_left = 0;
     if( num_corpses == 0 ) {
         you.add_msg_if_player( m_bad, _( "Your smashing was interrupted." ) );
+        act.set_to_null();
         return;
     }
     // TODO: Factor in how long it took to do the smashing.
