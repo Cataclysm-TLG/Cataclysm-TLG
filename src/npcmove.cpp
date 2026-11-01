@@ -4325,15 +4325,16 @@ std::list<item> npc::pick_up_item_vehicle( vehicle &veh, int part_index )
 bool npc::find_corpse_to_pulp()
 {
     map &here = get_map();
+    if( is_hallucination() ) {
+        return false;
+    }
 
-    Character &player_character = get_player_character();
     if( is_player_ally() ) {
         if( !rules.has_flag( ally_rule::allow_pulp ) ||
-            player_character.in_vehicle || is_hallucination() ) {
+            get_player_character().in_vehicle ) {
             return false;
         }
     }
-
     // Pathing with overdraw can get expensive, limit it
     int path_counter = 4;
     const auto check_tile = [this, &path_counter, &here]( const tripoint_bub_ms & p ) -> const item * {
@@ -4354,19 +4355,16 @@ bool npc::find_corpse_to_pulp()
                 if( is_dangerous_field( field_entry( it.get_mtype()->bloodType(), 1, 0_turns ) ) ) {
                     return nullptr;
                 }
-
                 found = &it;
                 break;
             }
         }
-
         if( found != nullptr )
         {
             path_counter--;
             // Only return corpses we can path to
             return update_path( p, false, false ) ? found : nullptr;
         }
-
         return nullptr;
     };
     // TODO: I'm not sure whether this should be farther.
@@ -4380,12 +4378,12 @@ bool npc::find_corpse_to_pulp()
         corpse = check_tile( here.get_bub( *pulp_location ) );
     }
 
-    // Find the old target to avoid spamming
+    // Find the old target to avoid spamming.
     const item *old_target = corpse;
 
     if( corpse == nullptr ) {
-        // If we're following the player, don't wander off to pulp corpses
-        const tripoint_bub_ms around = is_walking_with() ? player_character.pos_bub( here ) : pos_bub(
+        // If we're following the player, don't wander off to pulp corpses.
+        const tripoint_bub_ms around = is_walking_with() ? get_player_character().pos_bub( here ) : pos_bub(
                                            here );
         for( const item_location &location : here.get_active_items_in_radius( around, range,
                 special_item_type::corpse ) ) {
