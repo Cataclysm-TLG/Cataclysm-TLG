@@ -106,11 +106,7 @@
     "//": "No boys allowed.",
     "recurrence": { "math": [ "time('14 d')" ] },
     "global": false,
-    "condition": {
-      "and": [
-        { "math": [ "u_gender() == 1" ] }, { "u_has_trait": "bearded_lady" }
-      ]
-    },
+    "condition": { "and": [ { "math": [ "u_gender() == 1" ] }, { "u_has_trait": "bearded_lady" } ] },
     "effect": { "u_lose_trait": "bearded_lady" }
   },
   {

@@ -83,7 +83,7 @@
         "......_______,,_______sss...!1                    #l              zzz#                    1!...sss_______,,_______......",
         "......_______,,_______sss...!1  L  L  L  L    2##+##l              D##+#2     L  L  L  L  1!...sss_______,,_______......",
         "......________________sss...##  @  @  @  @     #  D##++##############  #      @  @  @  @  ##...sss________________......",
-        "......_______,,_______sss...##  @  @  @  @     V    #  vvvvFFFFcdc#    V      @  @  @  @  ##...sss_______,,_______......",
+        "......_______,,_______sss...##  @  @  @  @     V    #   vvvFFFFcdc#    V      @  @  @  @  ##...sss_______,,_______......",
         "......_______,,_______sss...##2       2        V k6k#            S# k6kV         2       2##...sss_______,,_______......",
         "......_______,,_______sss...##                 V  h #S  ccc2ccc  S#  hkV                  ##...sss_______,,_______......",
         "......________________sss...###      DD        #i   #c           c#D  i#        DD       ###...sss________________......",
@@ -136,9 +136,9 @@
         "k": { "item": "cubical_office", "chance": 20, "repeat": [ 1, 2 ] },
         "u": { "item": "cleaning", "chance": 80, "repeat": [ 1, 3 ] },
         "v": [
-          { "item": "cannedfood", "chance": 50, "repeat": [ 1, 3 ] },
-          { "item": "pasta", "chance": 50, "repeat": [ 1, 3 ] },
-          { "item": "snacks", "chance": 50, "repeat": [ 1, 3 ] }
+          { "item": "cannedfood", "chance": 15, "repeat": [ 1, 2 ] },
+          { "item": "pasta", "chance": 20, "repeat": [ 1, 2 ] },
+          { "item": "snacks", "chance": 15, "repeat": [ 1, 2 ] }
         ],
         "z": { "item": "shelter", "chance": 90, "repeat": [ 1, 3 ] }
       },
@@ -229,7 +229,7 @@
         "d": { "item": "dishes_dining", "chance": 80, "repeat": [ 2, 5 ] },
         "k": { "item": "cubical_office", "chance": 20, "repeat": [ 1, 2 ] },
         "r": { "item": "shower", "chance": 80, "repeat": [ 1, 3 ] },
-        "u": [ { "item": "cannedfood", "chance": 80, "repeat": [ 1, 8 ] }, { "item": "pasta", "chance": 70, "repeat": [ 1, 8 ] } ]
+        "u": [ { "item": "cannedfood", "chance": 18, "repeat": [ 1, 2 ] }, { "item": "pasta", "chance": 15, "repeat": [ 1, 4 ] } ]
       },
       "place_vehicles": [
         { "vehicle": "schoolbus", "x": 4, "y": 8, "chance": 75, "rotation": 270 },
@@ -267,20 +267,20 @@
         "......________________sss...################++#D cV   ppp            Vc D#++################...sss________________......",
         "......_______,,_______sss...###LLLLLL #  D    ##i##  bbbb      bbbb  ##i##    DD         ###...sss_______,,_______......",
         "......_______,,_______sss...##L   2   +       #####l                 ####                 ##...sss_______,,_______......",
-        "......_______,,_______sss...##LLLLLLL #      ##kk6##                ###         uuuuuuuu  ##...sss_______,,_______......",
-        "......________________sss...###########  2   +  hk###1111#+##+#1111####  vv     uuuuuuuu  ##...sss________________......",
+        "......_______,,_______sss...##LLLLLLL #      ##kk6##                ###         uuu  uuu  ##...sss_______,,_______......",
+        "......________________sss...###########  2   +  hk###1111#+##+#1111####         uuu  uuu  ##...sss________________......",
         "......_______,,_______sss...##62    2D#      V 2i###!!!!sssUnsss!!!!###  vv 2             ##...sss_______,,_______......",
         "......_______,,_______sss...!1   hh   +      ######......ssssss......##  vv          2    1!...sss_______,,_______......",
-        "......_______,,_______sss...!1  hTTh  +      Vioo##.......ssss.......##  vv     uuuuuuuu  1!...sss_______,,_______......",
-        "......________________sss...##  hTTh  #  2   + 2 ##.......ssss.......##         uuuuuuuu  ##...sss________________......",
+        "......_______,,_______sss...!1  hTTh  +      Vioo##.......ssss.......##  vv     uuu  uuu  1!...sss_______,,_______......",
+        "......________________sss...##  hTTh  #  2   + 2 ##.......ssss.......##         uuu  uuu  ##...sss________________......",
         "......_______,,_______sss...##  hTTh  #      Vkh 1!...%...ssss...%...!1  vv               ##...sss_______,,_______......",
         "......_______,,_______sss...##  hTTh  #      Vkkk1!..%%%..ssss..%%%..!1  vv 2             ##...sss_______,,_______......",
-        "......_______,,_______sss...##  hTTh  V     #######...%...ssss...%...##  vv     uuuuuuuu  ##...sss_______,,_______......",
-        "......________________sss...!1   hh   V  2  Vr @@##.......ssss.......##         uuuuuuuu  1!...sss________________......",
+        "......_______,,_______sss...##  hTTh  V     #######...%...ssss...%...##  vv     uuu  uuu  ##...sss_______,,_______......",
+        "......________________sss...!1   hh   V  2  Vr @@##.......ssss.......##         uuu  uuu  1!...sss________________......",
         "......_______,,_______sss...!1 2    2 #     +  2 ##.......ssss.......##  vv               1!...sss_______,,_______......",
         "......_______,,_______sss...##occco####     V  oo##.......ssss.......##  vv          2    ##...sss_______,,_______......",
-        "......_______,,_______sss...########D       #######...%...ssss...%...##  vv 2   uuuuuuuu  ##...sss_______,,_______......",
-        "......________________sss...##@@ rV   hTh2  Vr @@##..%%%..ssss..%%%..##  vv     uuuuuuuu  ##...sss________________......",
+        "......_______,,_______sss...########D       #######...%...ssss...%...##  vv 2   uuu  uuu  ##...sss_______,,_______......",
+        "......________________sss...##@@ rV   hTh2  Vr @@##..%%%..ssss..%%%..##         uuu  uuu  ##...sss________________......",
         "......_______,,_______sss...## 2  +         +  2 ##...%...ssss...%...##                   ##...sss_______,,_______......",
         "......_______,,_______sss...###oo V  PHHHP  V oo###.......ssss.......###                 ###...sss_______,,_______......",
         "......_______,,_______sss...#######11#####11#######!!!!!!!ssss!!!!!!!#######11#####11#######...sss_______,,_______......",
@@ -316,11 +316,11 @@
         "i": { "item": "office", "chance": 90, "repeat": [ 1, 6 ] },
         "k": { "item": "cubical_office", "chance": 20, "repeat": [ 1, 2 ] },
         "o": [ { "item": "homebooks", "chance": 80, "repeat": [ 1, 2 ] }, { "item": "textbooks", "chance": 20 } ],
-        "u": [ { "item": "cannedfood", "chance": 80, "repeat": [ 2, 8 ] }, { "item": "snacks", "chance": 25, "repeat": [ 1, 3 ] } ],
+        "u": [ { "item": "cannedfood", "chance": 18, "repeat": [ 1, 2 ] }, { "item": "snacks", "chance": 10, "repeat": [ 1, 2 ] } ],
         "v": [
-          { "item": "pasta", "chance": 80, "repeat": [ 2, 8 ] },
-          { "item": "kitchen", "chance": 50, "repeat": [ 1, 3 ] },
-          { "item": "snacks", "chance": 25, "repeat": [ 1, 3 ] }
+          { "item": "pasta", "chance": 20, "repeat": [ 1, 2 ] },
+          { "item": "kitchen", "chance": 20, "repeat": [ 1, 2 ] },
+          { "item": "snacks", "chance": 15, "repeat": [ 1, 2 ] }
         ],
         "w": { "item": "shelter", "repeat": [ 1, 12 ] }
       },
@@ -347,22 +347,6 @@
         { "class": "guard", "x": 73, "y": 3, "unique_id": "GUARD5" },
         { "class": "guard", "x": 89, "y": 3, "unique_id": "GUARD6" },
         { "class": "guard", "x": 88, "y": 19, "unique_id": "GUARD7" }
-      ],
-      "place_variables": [
-        { "name": "GUARD1_First", "x": 39, "y": 4 },
-        { "name": "GUARD1_Second", "x": 42, "y": 8 },
-        { "name": "GUARD2_First", "x": 36, "y": 7 },
-        { "name": "GUARD2_Second", "x": 32, "y": 6 },
-        { "name": "GUARD3_First", "x": 45, "y": 3 },
-        { "name": "GUARD3_Second", "x": 42, "y": 2 },
-        { "name": "GUARD4_First", "x": 52, "y": 4 },
-        { "name": "GUARD4_Second", "x": 58, "y": 3 },
-        { "name": "GUARD5_First", "x": 73, "y": 3 },
-        { "name": "GUARD5_Second", "x": 78, "y": 5 },
-        { "name": "GUARD6_First", "x": 89, "y": 3 },
-        { "name": "GUARD6_Second", "x": 83, "y": 2 },
-        { "name": "GUARD7_First", "x": 88, "y": 19 },
-        { "name": "GUARD7_Second", "x": 87, "y": 15 }
       ],
       "place_items": [
         { "item": "bed", "x": [ 53, 56 ], "y": 0, "chance": 70 },
