@@ -9681,7 +9681,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
     // Multiplier to get the chance right + some bonus for proficiencies and medicine.  You don't learn profs this way as that requires more careful examination.
-    float medicine = std::max( 10.f, you.get_skill_level( skill_firstaid ) );
+    float medicine = std::min( 10.f, you.get_skill_level( skill_firstaid ) );
     float biology = you._proficiencies->pct_practiced( proficiency_prof_intro_biology );
     float anatomy = you._proficiencies->pct_practiced( proficiency_prof_wp_zombie );
     pulp_power *= 20 + medicine * 2 + biology * 10 + anatomy * 20;
@@ -9759,13 +9759,6 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
             }
             corpse.set_flag( flag_PULPED );
-            if( biology < 1.f && one_in( 30 ) ) {
-                you.add_msg_if_player( m_info, _( "Knowing more about basic biology would make this easier." ) );
-            } else if( anatomy < 1.f && one_in( 30 ) ) {
-                you.add_msg_if_player( m_info, _( "Knowing more about undead anatomy would make this easier." ) );
-            } else if( medicine < 5.f && one_in( 30 ) ) {
-                you.add_msg_if_player( m_info, _( "More skill in medicine would make this a little easier." ) );
-            }
         }
         // At this point, we have finished one tile.
         pos_iter = placement.erase( pos_iter );
@@ -9779,6 +9772,15 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
         return;
     }
     // TODO: Factor in how long it took to do the smashing.
+    if( you.is_avatar() ) {
+        if( biology < 1.f && one_in( 30 ) ) {
+            you.add_msg_if_player( m_info, _( "Knowing more about basic biology would make this easier." ) );
+        } else if( anatomy < 1.f && one_in( 30 ) ) {
+            you.add_msg_if_player( m_info, _( "Knowing more about undead anatomy would make this easier." ) );
+        } else if( medicine < 5.f && one_in( 30 ) ) {
+            you.add_msg_if_player( m_info, _( "More skill in medicine would make this a little easier." ) );
+        }
+    }
     you.add_msg_player_or_npc( n_gettext( "The corpse is thoroughly pulped.",
                                           "The corpses are thoroughly pulped.", num_corpses ),
                                n_gettext( "<npcname> finished pulping the corpse.",

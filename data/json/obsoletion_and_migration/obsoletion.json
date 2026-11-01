@@ -1393,7 +1393,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-    {
+  {
     "type": "proficiency",
     "id": "prof_wp_spider",
     "category": "prof_weakpoint",
@@ -1404,7 +1404,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-      {
+  {
     "type": "proficiency",
     "id": "prof_wp_hymenoptera",
     "category": "prof_weakpoint",
@@ -1415,7 +1415,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-      {
+  {
     "type": "proficiency",
     "id": "prof_wp_centipede",
     "category": "prof_weakpoint",
@@ -1426,7 +1426,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-      {
+  {
     "type": "proficiency",
     "id": "prof_wp_beetle",
     "category": "prof_weakpoint",
@@ -1437,7 +1437,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-      {
+  {
     "type": "proficiency",
     "id": "prof_wp_child",
     "category": "prof_weakpoint",
@@ -1448,7 +1448,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-      {
+  {
     "type": "proficiency",
     "id": "prof_wp_fungaloid_basic",
     "category": "prof_weakpoint",
@@ -1459,7 +1459,7 @@
     "default_weakpoint_bonus": 0,
     "default_weakpoint_penalty": 0
   },
-      {
+  {
     "type": "proficiency",
     "id": "prof_wp_fungaloid_advanced",
     "category": "prof_weakpoint",
