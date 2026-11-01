@@ -108,9 +108,7 @@ class render_state
 };
 
 // RAII bracket around SDL_SetGPURenderState. Binds the supplied state on
-// construction, clears it on destruction (or earlier via unbind()). ImGui's
-// SDL3 renderer backend does not save/restore custom GPU state; any unpaired
-// bind leaks into the next draw, so the bracket is mandatory.
+// construction, clears it on destruction (or earlier via unbind()).
 class gpu_state_scope
 {
     public:
