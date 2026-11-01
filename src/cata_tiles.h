@@ -351,8 +351,7 @@ class tileset_cache
     public:
         std::shared_ptr<const tileset> load_tileset( const std::string &tileset_id,
                 const SDL_Renderer_Ptr &renderer, bool precheck,
-                bool force, bool pump_events, bool terrain,
-                const std::string &memory_map_mode );
+                bool force, bool pump_events, const std::string &memory_map_mode );
     private:
         class loader;
         std::unordered_map<std::string, std::weak_ptr<tileset>> tilesets_;

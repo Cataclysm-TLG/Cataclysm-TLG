@@ -52,11 +52,6 @@ int  get_reserved_volume( sfx::channel slot );
 void set_reserved_position( sfx::channel slot, int angle_deg, int distance );
 
 using bool_predicate = bool ( * )();
-void set_slow_time_predicate( bool_predicate fn );
-
-// Lets slow-time DSP code outside the backend query the installed
-// predicate without re-exporting the function pointer.
-bool slow_time_predicate_active();
 
 namespace testing
 {

@@ -525,7 +525,7 @@ float weakpoint::hit_chance( const weakpoint_attack &attack ) const
         // Probability of a sample from a normal distribution centered on `skill` with `SD = 2`
         // exceeding the difficulty.
         diff = attack.wp_skill - difficulty.of( attack );
-        difficulty_mult = 0.5f * ( 1.0f + erf( diff / ( 2.0f * sqrt( 2.0f ) ) ) );
+        difficulty_mult = 0.5f * ( 1.0f + erf( diff / ( 2.0f * std::sqrt( 2.0f ) ) ) );
         if( attack.source && attack.source->as_character() ) {
             final_coverage = attack.source->as_character()->enchantment_cache->modify_value(
                                  enchant_vals::mod::WEAKPOINT_ACCURACY, coverage );
@@ -535,7 +535,7 @@ float weakpoint::hit_chance( const weakpoint_attack &attack ) const
     } else {
         // Use erfc if the wp does not benefit the attacker.
         diff = attack.wp_skill - std::max( difficulty.of( attack ) + 10.0f, 10.0f );
-        difficulty_mult = std::max( 0.5f * erfc( diff / ( 2.0f * sqrt( 2.0f ) ) ), 0.1f );
+        difficulty_mult = std::max( 0.5f * erfc( diff / ( 2.0f * std::sqrt( 2.0f ) ) ), 0.1f );
         final_coverage = coverage;
     }
 

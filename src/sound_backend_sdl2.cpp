@@ -60,81 +60,6 @@ struct sound_effect_handler {
         delete handler;
     }
 
-    static void slowed_time_effect( int channel, void *stream, int len, void *udata ) {
-        sound_effect_handler *handler = static_cast<sound_effect_handler *>( udata );
-
-        using sample = int16_t;
-        constexpr int bytes_per_sample = sizeof( sample ) * 2;
-
-        const float playback_speed = slow_time_predicate_active() ? sound_speed_factor : 1;
-        const int num_source_samples = handler->audio_src->alen / bytes_per_sample;
-
-        if( handler->loops_remaining < 0 ) {
-            std::memset( stream, 0, len );
-
-            const int num_samples = len / bytes_per_sample;
-            handler->current_sample_index += num_samples * playback_speed;
-            if( handler->current_sample_index >= num_source_samples ) {
-                handler->loops_remaining--;
-            }
-
-            if( !handler->marked_for_termination && handler->loops_remaining < -1 ) {
-                if( channels_to_end_mutex.try_lock() ) {
-                    handler->marked_for_termination = true;
-                    channels_to_end.push_back( static_cast<sfx::channel>( channel ) );
-                    channels_to_end_mutex.unlock();
-                }
-            }
-            return;
-        }
-
-        for( int dst_index = 0; dst_index < len / bytes_per_sample &&
-             handler->current_sample_index < num_source_samples; dst_index++ ) {
-
-            int low_index = static_cast<int>( std::floor( handler->current_sample_index ) );
-            int high_index = static_cast<int>( std::ceil( handler->current_sample_index ) );
-
-            if( high_index == num_source_samples ) {
-                high_index = 0;
-            }
-            if( low_index == num_source_samples ) {
-                low_index = 0;
-            }
-
-            for( int ear_offset = 0; ear_offset < 4; ear_offset += 2 ) {
-                sample low_value;
-                sample high_value;
-
-                std::memcpy( &low_value,
-                             static_cast<uint8_t *>( handler->audio_src->abuf ) + ear_offset +
-                             low_index * bytes_per_sample, sizeof( sample ) );
-                std::memcpy( &high_value,
-                             static_cast<uint8_t *>( handler->audio_src->abuf ) + ear_offset +
-                             high_index * bytes_per_sample, sizeof( sample ) );
-
-                const float interpolation_factor = handler->current_sample_index - low_index;
-                const sample interpolated = static_cast<sample>(
-                                                ( high_value - low_value ) * interpolation_factor + low_value );
-
-                std::memcpy( static_cast<uint8_t *>( stream ) + dst_index * bytes_per_sample + ear_offset,
-                             &interpolated, sizeof( sample ) );
-            }
-
-            handler->current_sample_index += 1.0f * playback_speed;
-            if( handler->current_sample_index >= num_source_samples ) {
-                handler->loops_remaining--;
-                handler->current_sample_index = std::fmod( handler->current_sample_index,
-                                                static_cast<float>( num_source_samples ) );
-
-                if( handler->loops_remaining < 0 ) {
-                    const int bytes_remaining = len - dst_index * bytes_per_sample;
-                    std::memset( static_cast<uint8_t *>( stream ) + dst_index * bytes_per_sample, 0,
-                                 bytes_remaining );
-                    break;
-                }
-            }
-        }
-    }
 };
 
 // Pitch-shift helper: returns a new Mix_Chunk owning freshly malloc'd
@@ -221,8 +146,7 @@ bool play_effect( Mix_Chunk *audio_src, sfx::channel slot, int loops,
     }
     bool failed = channel == -1;
     if( !failed ) {
-        const int out = Mix_RegisterEffect( channel, sound_effect_handler::slowed_time_effect,
-                                            sound_effect_handler::on_finish, handler );
+        const int out = Mix_RegisterEffect( channel, sound_effect_handler::on_finish, handler );
         if( out == 0 ) {
             failed = true;
             dbg( D_WARNING ) << "Mix_RegisterEffect failed: " << Mix_GetError();
@@ -365,18 +289,6 @@ void set_reserved_position( sfx::channel slot, int angle_deg, int distance )
         // Positioning failure is non-fatal; the sound still plays.
         dbg( D_INFO ) << "Mix_SetPosition failed: " << Mix_GetError();
     }
-}
-
-static bool_predicate g_slow_time_predicate = nullptr;
-
-void set_slow_time_predicate( bool_predicate fn )
-{
-    g_slow_time_predicate = fn;
-}
-
-bool slow_time_predicate_active()
-{
-    return g_slow_time_predicate != nullptr && g_slow_time_predicate();
 }
 
 namespace testing

@@ -2133,7 +2133,7 @@ Character::craft_roll_data Character::recipe_success_roll_data( const recipe &ma
         // Store that it was negative to reapply later, then make it positive because we need a sqrt.
         summed_skills *= -1;
     }
-    float weighted_skill_average = sqrt( summed_skills );
+    float weighted_skill_average = std::sqrt( summed_skills );
     if( negative ) {
         weighted_skill_average *= -1;
     }
