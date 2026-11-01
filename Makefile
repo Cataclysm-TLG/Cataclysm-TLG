@@ -110,7 +110,8 @@ CXX_WARNINGS = \
   -Wzero-as-null-pointer-constant \
   -Wno-unknown-warning-option \
   -Wno-dangling-reference \
-  -Wno-c++20-compat
+  -Wno-c++20-compat \
+  -Wno-sfinae-incomplete
 ifeq ($(NATIVE), emscripten)
   # The EM_ASM macro triggers this warning.
   WARNINGS += -Wno-gnu-zero-variadic-macro-arguments
@@ -765,9 +766,15 @@ ifeq ($(TILES), 1)
     LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   else ifneq ($(NATIVE),emscripten)
     ifeq ($(SDL3), 1)
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
-      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+      ifeq ($(MSYS2),1)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf)
+        CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
+      else
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
+        CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+      endif
       ifeq ($(STATIC), 1)
         LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --static --libs)
       else
@@ -863,8 +870,12 @@ else
 endif # TILES
 
 ifeq ($(SOUND), 1)
- ifeq ($(SDL3), 1)
-    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
+  ifeq ($(SDL3), 1)
+    ifeq ($(MSYS2),1)
+      CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3-mixer)
+    else
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
+    endif
     LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-mixer)
     ifneq ($(NATIVE),osx)
       LDFLAGS += -lpthread
@@ -916,9 +927,9 @@ ifeq ($(BSD), 1)
   LDFLAGS += -L/usr/local/lib
 endif
 
-# Global settings for Windows targets (at end)
+# Global settings for Windows targets
 ifeq ($(TARGETSYSTEM),WINDOWS)
-  LDFLAGS += -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lversion -lBcrypt
+  LDFLAGS += -lgdi32 -lwinmm -limm32 -lole32 -loleaut32 -lversion -lWindowsApp -lmincore -lBcrypt -lkernel32
   ifeq ($(BACKTRACE),1)
     LDFLAGS += -ldbghelp
   endif

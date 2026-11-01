@@ -9678,7 +9678,7 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     int adjusted_cut  = static_cast<int>( std::round( ( weap_cut * ratio_cut ) / 1.25 ) );
     int adjusted_stab = static_cast<int>( std::round( ( weap_stab * ratio_stab ) / 3.0 ) );
 
-    float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
+    float pulp_power = std::sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
     // Multiplier to get the chance right + some bonus for proficiencies and medicine.  You don't learn profs this way as that requires more careful examination.
     float medicine = std::min( 10.f, you.get_skill_level( skill_firstaid ) );

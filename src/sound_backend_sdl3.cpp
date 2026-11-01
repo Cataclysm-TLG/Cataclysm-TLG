@@ -33,14 +33,11 @@ namespace
 {
 MIX_Mixer *g_mixer = nullptr;
 MIX_Track *g_music_track = nullptr;
-bool_predicate g_slow_time_predicate = nullptr;
 music_finished_cb g_music_finished_cb = nullptr;
 
 // SFX_TAG is applied to every SFX track so MIX_StopTag(mixer, SFX_TAG, ...)
 // affects all SFX without touching music.
 constexpr const char *SFX_TAG = "sfx";
-
-constexpr float SLOW_TIME_FACTOR = 0.25f;
 
 std::array<MIX_Track *, static_cast<size_t>( sfx::channel::MAX_CHANNEL )> g_reserved_tracks{};
 std::array<sfx::group, static_cast<size_t>( sfx::channel::MAX_CHANNEL )> g_reserved_groups{};
@@ -56,7 +53,7 @@ std::array<float, static_cast<size_t>( sfx::channel::MAX_CHANNEL )> g_reserved_d
 // on the main thread.
 //
 // base_pitch is the caller's per-play pitch so poll() can recompose
-// pitch with the current slow-time factor without losing it.
+// pitch without losing it.
 struct oneshot_entry {
     MIX_Track *track;
     float base_pitch;
@@ -78,8 +75,8 @@ const char *tag_for_group( sfx::group g )
             return "time_of_day";
         case sfx::group::context_themes:
             return "context_themes";
-        case sfx::group::low_stamina:
-            return "low_stamina";
+        case sfx::group::fatigue:
+            return "fatigue";
     }
     return nullptr;
 }
@@ -282,14 +279,7 @@ void configure_and_play( MIX_Track *track, const play_opts &opts )
     if( opts.positional ) {
         apply_pan( track, opts.angle_deg );
     }
-    // Compose the caller's pitch with the current slow-time factor so
-    // sounds spawned while bullet-time is active start slowed, rather
-    // than waiting for the next poll. Caller's pitch follows the
-    // do_pitch_shift convention (smaller = higher perceived pitch,
-    // produces a shorter chunk), which is the inverse of a native
-    // frequency ratio; invert here.
-    const float slow = slow_time_predicate_active() ? SLOW_TIME_FACTOR : 1.0f;
-    MIX_SetTrackFrequencyRatio( track, ( 1.0f / opts.pitch ) * slow );
+    MIX_SetTrackFrequencyRatio( track, ( 1.0f / opts.pitch ) );
 
     SDL_PropertiesID props = SDL_CreateProperties();
     if( opts.loops != 0 ) {
@@ -432,16 +422,6 @@ void set_reserved_position( sfx::channel slot, int angle_deg, int distance )
     MIX_SetTrackGain( track, g_reserved_base_gain[idx] * g_reserved_distance_scale[idx] );
 }
 
-void set_slow_time_predicate( bool_predicate fn )
-{
-    g_slow_time_predicate = fn;
-}
-
-bool slow_time_predicate_active()
-{
-    return g_slow_time_predicate != nullptr && g_slow_time_predicate();
-}
-
 namespace testing
 {
 float reserved_track_frequency_ratio( sfx::channel slot )
@@ -522,13 +502,6 @@ void fade_group( sfx::group g, int ms )
 
 void poll()
 {
-    const float slow = slow_time_predicate_active() ? SLOW_TIME_FACTOR : 1.0f;
-    for( size_t i = 0; i < g_reserved_tracks.size(); ++i ) {
-        MIX_Track *t = g_reserved_tracks[i];
-        if( t != nullptr ) {
-            MIX_SetTrackFrequencyRatio( t, ( 1.0f / g_reserved_base_pitch[i] ) * slow );
-        }
-    }
     std::lock_guard<std::mutex> lock( g_oneshots_mutex );
     // Reap stopped one-shots: destroy tracks the stopped callback
     // flagged, then drop them from the vector. Running one-shots
@@ -538,7 +511,6 @@ void poll()
             MIX_DestroyTrack( it->track );
             it = g_oneshots.erase( it );
         } else {
-            MIX_SetTrackFrequencyRatio( it->track, ( 1.0f / it->base_pitch ) * slow );
             ++it;
         }
     }
