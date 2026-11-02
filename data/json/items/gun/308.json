@@ -164,16 +164,8 @@
     "looks_like": "modular_ar15",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
-    "name": { "str": "American battle rifle" },
+    "name": { "str": "M1A rifle" },
     "description": "This civilian variant of an American battle rifle is essentially a rifle from World War 2 with a detachable magazine stuck in it that was sold to the military as a cheap, do-all rifle that could replace many other weapon systems.  While it delivered none of those things, it was an acceptable rifle, if marginally inferior to its contemporaries.",
-    "variant_type": "gun",
-    "variants": [
-      {
-        "id": "m1a",
-        "name": { "str": "M1A rifle" },
-        "description": "This civilian variant of the M14 is essentially the M1 Garand from World War 2 with a detachable magazine stuck in it that was sold to the military as a cheap, do-all rifle that could replace many other weapon systems.  While it delivered none of those things, it was an acceptable rifle, if marginally inferior to its contemporaries."
-      }
-    ],
     "weight": "4230 g",
     "volume": "3970 ml",
     "longest_side": "1126 mm",
@@ -188,6 +180,7 @@
     "dispersion": 200,
     "durability": 7,
     "min_cycle_recoil": 2700,
+    "modes": [ [ "DEFAULT", "semi-auto", 1 ] ],
     "barrel_volume": "500 ml",
     "valid_mod_locations": [
       [ "barrel", 1 ],
