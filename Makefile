@@ -985,6 +985,8 @@ endif
 ifeq ($(MSYS2),1)
   DEFINES += -D_GLIBCXX_USE_C99_MATH_TR1
   CXXFLAGS += -DMSYS2
+  CFLAGS += -mcx16
+  CXXFLAGS += -mcx16
 endif
 
 CFLAGS += $(C_STD) $(WARNINGS) -fvisibility=hidden
