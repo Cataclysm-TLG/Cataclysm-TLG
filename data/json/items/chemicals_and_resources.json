@@ -1201,7 +1201,6 @@
     "material": [ "powder" ],
     "weight": "1 g",
     "color": "white",
-    "use_action": [ "WATER_TABLETS" ],
     "comestible_type": "MED",
     "symbol": "!",
     "//": "Modeled after camping-scale aquatabs (https://cdn.shopify.com/s/files/1/0371/7506/6755/files/2020-49mg_insert.pdf?v=1592588294).  Usage procedure is: clarify and decant water, add tablets, mix for 10 minutes, wait for 30.",
