@@ -46,6 +46,7 @@ struct sound_effect_handler {
     float current_sample_index = 0;
     int loops_remaining = 0;
     bool marked_for_termination = false;
+    static void SDLCALL no_effect(int, void *, int, void *) {}
 
     ~sound_effect_handler() {
         if( owns_audio ) {
@@ -59,7 +60,6 @@ struct sound_effect_handler {
         cata_assert( handler != nullptr && handler->audio_src != nullptr );
         delete handler;
     }
-
 };
 
 // Pitch-shift helper: returns a new Mix_Chunk owning freshly malloc'd
@@ -148,7 +148,7 @@ bool play_effect( Mix_Chunk *audio_src, sfx::channel slot, int loops,
     if( !failed ) {
         const int out = Mix_RegisterEffect(
             channel,
-            sound_effect_handler::slowed_time_effect,
+            sound_effect_handler::no_effect,
             sound_effect_handler::on_finish,
             handler
         );
