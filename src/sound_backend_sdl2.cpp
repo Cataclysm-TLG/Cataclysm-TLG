@@ -146,7 +146,7 @@ bool play_effect( Mix_Chunk *audio_src, sfx::channel slot, int loops,
     }
     bool failed = channel == -1;
     if( !failed ) {
-        const int out = Mix_RegisterEffect( channel, sound_effect_handler::on_finish, handler );
+        const int out = Mix_RegisterEffect( channel, sound_effect_handler::on_finish, nullptr, handler );
         if( out == 0 ) {
             failed = true;
             dbg( D_WARNING ) << "Mix_RegisterEffect failed: " << Mix_GetError();
