@@ -340,7 +340,7 @@ jobs:
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: ${{ runner.workspace }}/sdl3_prefix
-          key: sdl3-stack-sdl-3.4.4-image-3.4.2-ttf-3.2.2-mixer-3.2.0-${{ runner.os }}-v2
+          key: sdl3-stack-sdl-3.4.4-image-3.4.2-ttf-3.2.2-mixer-3.2.0-${{ runner.os }}-v3
       - name: Build SDL3 stack from source (Linux, SDL3)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1 && steps.cache-sdl3-release.outputs.cache-hit != 'true'
         run: |
@@ -498,6 +498,16 @@ jobs:
           make -j$((`nproc`+0))
           cp LICENSE ${{ github.workspace }}/LICENSE-libbacktrace.txt
           sudo make install
+      - name: Verify SDL3 installation
+        if: matrix.sdl3 == 1 && runner.os == 'Linux'
+        run: |
+          PREFIX="$RUNNER_WORKSPACE/sdl3_prefix"
+          export PKG_CONFIG_PATH="$PREFIX/lib/pkgconfig:$PREFIX/lib/x86_64-linux-gnu/pkgconfig"
+
+          for pkg in sdl3 sdl3-image sdl3-ttf sdl3-mixer; do
+            pkg-config --modversion "$pkg" || exit 1
+          done
+          test -f "$PREFIX/include/SDL3/SDL.h"
       - name: Build CTLG (linux)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm
         run: |
