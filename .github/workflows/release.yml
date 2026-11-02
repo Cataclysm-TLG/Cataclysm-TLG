@@ -276,10 +276,6 @@ jobs:
           pattern: tileset-*
           path: gfx
           merge-multiple: true
-      - name: Fetch translations artifact into build
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
-        with:
-          name: translations
       - name: Fetch shader artifacts into build (SDL3)
         if: matrix.sdl3 == 1
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
