@@ -323,9 +323,11 @@ jobs:
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
         run: |
           sudo apt-get update
-          sudo apt-get install libsdl3-dev libsdl3-image-dev libsdl3-ttf-dev \
-            libflac-dev libogg-dev libvorbis-dev libmpg123-dev libwavpack-dev \
-            libpulse-dev libncursesw5-dev ccache gettext parallel pkg-config cmake
+          sudo apt-get install -y \
+            libflac-dev libogg-dev libvorbis-dev \
+            libmpg123-dev libwavpack-dev \
+            libpulse-dev libncursesw5-dev \
+            ccache gettext parallel pkg-config cmake
       - name: Build SDL3_mixer from source (Linux, SDL3)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
         run: |

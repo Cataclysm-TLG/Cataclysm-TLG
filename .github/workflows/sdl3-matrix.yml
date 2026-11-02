@@ -155,7 +155,7 @@ jobs:
     - name: download prebuilt shader artifacts
       uses: actions/download-artifact@v4
       with:
-        name: cdda-shaders
+        name: ctlg-shaders
         path: data/shaders
 
     - name: mark shader artifacts fresh
