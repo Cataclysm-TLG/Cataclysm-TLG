@@ -7,7 +7,7 @@ At the same time, species introduced in modern times are removed! E.g.: wild boa
 
 
 **Goals and Scope**
-The goal of the mod is to add extinct megafauna of the late Pleistocene and early holocene (about 30.000-8.000 BCE), that the first humans setting foot on the area CDDA mostly uses as a real world counterpart, New England, have encountered.
+The goal of the mod is to add extinct megafauna of the late Pleistocene and early holocene (about 30.000-8.000 BCE), that the first humans setting foot on the area CTLG mostly uses as a real world counterpart, New England, have encountered.
 
 The mod aims to provide a more realistic fauna for wilderness/stone age playthroughs, especially together with the innawood mod, or as a more mammal-focused addition together with the DinoMod (seems to work together, but might need tweaking). Part of that goal is that some species encountered in New England today which are quite new additions to the biosphere (like the wild boar) will be replaced by species more fitting to the time frame. These animals can fill niches for human use, not only regarding meat, but also wool and milk, that are currently only covered by modern day farm animals.
 

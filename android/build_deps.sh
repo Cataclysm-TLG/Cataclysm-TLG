@@ -3,7 +3,7 @@
 ###  FIX HERE VERSION IF NECESSARY  ###
 ###  LINKS ARE AT THE END OF SCRIPT  ###
 SDL2_URL=https://github.com/katemonster33/SDL.git
-SDL2_branch=cdda_android
+SDL2_branch=ctlg_android
 SDL2_image_URL=https://github.com/libsdl-org/SDL_image.git
 SDL2_image_branch=release-2.8.2
 SDL2_mixer_URL=https://github.com/libsdl-org/SDL_mixer.git

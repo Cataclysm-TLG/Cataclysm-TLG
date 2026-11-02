@@ -4,7 +4,7 @@
 Dark days of the dead is a Cataclysm full conversion mod meant to turn the kitchen sink of Cataclysm: DDA into a classic Romero-style zombie story.
 
 ## Gameplay
-DDotD, like CDDA, aims for verisimilitude and the feeling of being a survivor in a Romero zombie movie. Like Dawn of the Dead, zombies should represent less of an individual deadly threat, and more of an unstoppable glacial force. Survivors should be poorly prepared and weak.
+DDotD, like CTLG, aims for verisimilitude and the feeling of being a survivor in a Romero zombie movie. Like Dawn of the Dead, zombies should represent less of an individual deadly threat, and more of an unstoppable glacial force. Survivors should be poorly prepared and weak.
 
 ### Desired changes to monster stats
 Only classic zombies are allowed in DDotD. These zombies are slow moving shamblers. They have an enormous pool of hit points, but no armor. They are walking corpses, feeling no pain and continuing on in the face of incredible injuries. They can be destroyed with catastrophic damage, by completely destroying their bodies (represented by depleting their very large HP pool) or by a headshot. A deep bite from a zombie should have a very high (about 80%) chance of developing Conversion, an effect that kills you in about 3 days. (We should add an achievement for things accomplished in the time after getting Conversion). Scratches that pierce armor should have a low (about 10%) chance of causing Conversion, and gives an alternate form that takes longer, about 5 days, to kill you.
@@ -16,11 +16,11 @@ DDotD zombies *are* capable of learning. At some point we may add our own late s
 There are no aliens or interdimensional threats in DDotD.
 
 ## Setting
-The setting of DDotD should be vaguely "in the past", some time between 1980 and 2000. DDotD takes place in Alberta, Canada, in a fictionalized version of the Red Deer area. Why Alberta? Because the current CDDA mapgen of small clustered towns surrounded by fields and patches of forests on mostly flat land suits Alberta perfectly. This also allows us to have harsher winters to survive. Most buildings and loot in CDDA core will be appropriate, but guns and gun stores (with the exception of hunting rifles) are somewhat less common, and military presence substantially less so.
+The setting of DDotD should be vaguely "in the past", some time between 1980 and 2000. DDotD takes place in Alberta, Canada, in a fictionalized version of the Red Deer area. Why Alberta? Because the current CTLG mapgen of small clustered towns surrounded by fields and patches of forests on mostly flat land suits Alberta perfectly. This also allows us to have harsher winters to survive. Most buildings and loot in CTLG core will be appropriate, but guns and gun stores (with the exception of hunting rifles) are somewhat less common, and military presence substantially less so.
 
 ### Changes to in-game stuff for setting reasons
 #### Items and spawns
-Most changes will be for setting reasons, not balance. We will mostly use the CDDA philosophy that real life is fairly well balanced, and go from there. However as our setting is in some vague timeframe between the 80's and early 2000's, and set in Canada, we will need a number of changes to all sorts of spawns to bring them in line. Some examples would include:
+Most changes will be for setting reasons, not balance. We will mostly use the CTLG philosophy that real life is fairly well balanced, and go from there. However as our setting is in some vague timeframe between the 80's and early 2000's, and set in Canada, we will need a number of changes to all sorts of spawns to bring them in line. Some examples would include:
 - Electric cars should not exist, and cordless tools need substantially less battery life or shouldn't exist at all.
 - Solar power is much rarer and less efficient.
 - Cell phones exist but do nothing now that the grid is down. They have no flashlight, no camera.

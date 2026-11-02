@@ -160,12 +160,12 @@ jobs:
     - name: Post-build ccache manipulation
       if: ${{ !failure() }}
       run: |
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -s -v
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe --evict-older-than ${{ steps.get-ccache-age.outputs.ccache-age }}
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -s -v
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -M ${{ env.CCACHE_LIMIT }}
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -c
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -s -v
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -s -v
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe --evict-older-than ${{ steps.get-ccache-age.outputs.ccache-age }}
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -s -v
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -M ${{ env.CCACHE_LIMIT }}
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -c
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -s -v
 
     - name: clear ccache on PRs
       if: ${{ github.ref_name != 'master' }}
