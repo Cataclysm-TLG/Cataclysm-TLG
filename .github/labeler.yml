@@ -214,13 +214,6 @@
   - "**/**translation**"
   - "**/translation**"
 
-"Mods: Bombastic Perks":
-  - data/mods/BombasticPerks/**/*
-
-"Mods: Aftershock":
-  - data/mods/Aftershock/**/*
-  - data/mods/aftershock_exoplanet/**/*
-
 "Mods: Dark Days of the Dead":
   - data/mods/classic_zombies/**/*
 
@@ -236,29 +229,11 @@
 "Mods: Generic Guns":
   - data/mods/Generic_Guns/**/*
 
-"Mods: MA":
-  - data/mods/MA/**/*
-
-"Mods: MMA":
-  - data/mods/MMA/**/*
-
-"Mods: Magiclysm":
-  - data/mods/Magiclysm/**/*
-
-"Mods: Innawood 🌲":
+"Mods: Innawood":
   - data/mods/innawood/**/*
-
-"Mods: No Hope":
-  - data/mods/No_Hope/**/*
-
-"Mods: TropiCataclysm 🌴":
-  - data/mods/TropiCataclysm/**/*
 
 "Mods: Tamable Wildlife":
   - data/mods/Tamable_Wildlife/**/*
-
-"Mods: Xedra Evolved":
-  - data/mods/Xedra_Evolved/**/*
 
 "Mods: Mind Over Matter":
   - data/mods/MindOverMatter/**/*
