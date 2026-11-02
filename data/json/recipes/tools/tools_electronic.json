@@ -21,6 +21,7 @@
     "subcategory": "CSC_OTHER_TOOLS",
     "skill_used": "electronics",
     "difficulty": 6,
+    "skills_required": [ [ "fabrication", 3 ] ],
     "time": "6 h",
     "reversible": true,
     "decomp_learn": 2,
