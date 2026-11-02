@@ -119,7 +119,7 @@ jobs:
     - name: upload shader artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: cdda-shaders
+        name: ctlg-shaders
         path: |
           data/shaders/*.spv
           data/shaders/*.dxil
@@ -280,7 +280,7 @@ jobs:
         if: matrix.sdl3 == 1
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: cdda-shaders
+          name: ctlg-shaders
           path: data/shaders
       - name: Mark shader artifacts fresh (SDL3)
         if: matrix.sdl3 == 1
@@ -450,12 +450,12 @@ jobs:
         if: runner.os == 'Windows' && matrix.sdl3 == 1
         env:
           BACKTRACE: 1
-          CDDA_RELEASE_BUILD: 1
+          CTLG_RELEASE_BUILD: 1
           VCPKG_OVERLAY_TRIPLETS: ${{ github.workspace }}\.github\vcpkg_triplets
         run: |
           msbuild -m -p:Configuration=Release -p:Platform=${{ matrix.arch }} -p:UseSDL3=true "-target:Cataclysm-vcpkg-static;JsonFormatter-vcpkg-static;zzip" msvc-full-features\Cataclysm-vcpkg-static.sln
           .\build-scripts\windist.ps1
-          mv cataclysmdda-0.J.zip cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
+          mv cataclysmdda-0.J.zip ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
       - name: Build CTLG (osx, SDL2)
         if: runner.os == 'macOS' && matrix.sdl3 != 1
         run: |
@@ -467,7 +467,7 @@ jobs:
           PKG_CONFIG_PATH: /opt/homebrew/lib/pkgconfig
         run: |
           make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.tiles }} SDL3=1 RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 UNIVERSAL_BINARY=1 WARN_STALE_DATA=1 dmgdist
-          mv Cataclysm.dmg cdda-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
+          mv Cataclysm.dmg ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
       - name: Set up JDK 8 (android)
         if: runner.os == 'Linux' && matrix.android != 'none' && matrix.mxe == 'none'
         uses: actions/setup-java@v4
