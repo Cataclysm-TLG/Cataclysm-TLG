@@ -2592,12 +2592,12 @@ bool cata_tiles::draw_sprite_at(
     destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
                                       tileset_height * scale_y );
 
-    SDL_FlipMode flip = SDL_FLIP_NONE;
+    CataFlipMode flip = SDL_FLIP_NONE;
 
     if( mirror == 1 ) {
-        flip = static_cast<SDL_FlipMode>( flip | SDL_FLIP_HORIZONTAL );
+        flip = static_cast<CataFlipMode>( flip | SDL_FLIP_HORIZONTAL );
     } else if( mirror == 2 ) {
-        flip = static_cast<SDL_FlipMode>( flip | SDL_FLIP_VERTICAL );
+        flip = static_cast<CataFlipMode>( flip | SDL_FLIP_VERTICAL );
     }
     const bool iso = is_isometric();
 
