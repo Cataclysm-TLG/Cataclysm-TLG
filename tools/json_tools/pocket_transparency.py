@@ -96,7 +96,7 @@ def gen_new(path):
 def format_json(path):
     file_path = os.path.dirname(__file__)
     format_path_linux = os.path.join(file_path, "../format/json_formatter.cgi")
-    path_win = "../format/JsonFormatter-vcpkg-static-Release-x64.exe"
+    path_win = "../format/JsonFormatter-vcpkg-static-Release.exe"
     format_path_win = os.path.join(file_path, path_win)
     if os.path.exists(format_path_linux):
         os.system(f"{format_path_linux} {path}")

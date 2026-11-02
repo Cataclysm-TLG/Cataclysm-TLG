@@ -286,4 +286,4 @@ jobs:
     - name: run sound_backend tests (Windows)
       if: matrix.platform == 'windows'
       run: |
-          .\Cataclysm-test-vcpkg-static-Release-x64.exe --min-duration 20 --order lex --wait-for-keypress exit "[sound_backend]"
+          .\Cataclysm-test-vcpkg-static-Release.exe --min-duration 20 --order lex --wait-for-keypress exit "[sound_backend]"

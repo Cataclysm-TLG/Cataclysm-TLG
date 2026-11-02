@@ -121,8 +121,8 @@ $ cmake-gui ..
 
 2. Run
 ```
-cmake --preset windows-tiles-sounds-x64
-cmake --build --preset windows-tiles-sounds-x64
+cmake --preset windows-tiles-sounds
+cmake --build --preset windows-tiles-sounds
 ```
 
 ## CMake Build for Visual Studio / MSBuild
