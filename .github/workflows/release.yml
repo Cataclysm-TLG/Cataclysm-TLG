@@ -304,21 +304,6 @@ jobs:
           install: >-
             gettext
             make
-      - name: Install dependencies (windows mxe)
-        if: runner.os == 'Linux' && matrix.mxe != 'none'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y gettext
-      - name: Install MXE
-        if: runner.os == 'Linux' && matrix.mxe != 'none'
-        run: |
-          curl -L -o mxe-${{ matrix.mxe }}.tar.xz https://github.com/BrettDong/MXE-GCC/releases/download/mxe-sdl-2-0-20/mxe-${{ matrix.mxe }}.tar.xz
-          curl -L -o mxe-${{ matrix.mxe }}.tar.xz.sha256 https://github.com/BrettDong/MXE-GCC/releases/download/mxe-sdl-2-0-20/mxe-${{ matrix.mxe }}.tar.xz.sha256
-          shasum -a 256 -c ./mxe-${{ matrix.mxe }}.tar.xz.sha256
-          sudo tar xJf mxe-${{ matrix.mxe }}.tar.xz -C /opt
-          curl -L -o SDL2-devel-2.26.2-mingw.tar.gz https://github.com/libsdl-org/SDL/releases/download/release-2.26.2/SDL2-devel-2.26.2-mingw.tar.gz
-          shasum -a 256 -c ./build-scripts/SDL2-devel-2.26.2-mingw.tar.gz.sha256
-          sudo tar -xzf SDL2-devel-2.26.2-mingw.tar.gz -C /opt/mxe/usr/${{ matrix.mxe }}-w64-mingw32.static.gcc12 --strip-components=2 SDL2-2.26.2/${{ matrix.mxe }}-w64-mingw32
       - name: Install dependencies (Linux, SDL2)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 != 1
         run: |
@@ -422,13 +407,6 @@ jobs:
           ./build-scripts/build-emscripten.sh
           ./build-scripts/prepare-web.sh
           (cd build && zip ../ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.${{ matrix.ext }} *)
-      - name: Build CTLG (windows mxe)
-        if: matrix.mxe != 'none'
-        env:
-          PLATFORM: /opt/mxe/usr/bin/${{ matrix.mxe }}-w64-mingw32.static.gcc12-
-        run: |
-          make -j$((`nproc`+0)) CROSS="${PLATFORM}" TILES=1 SOUND=1 RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=1 LIBBACKTRACE=${{ matrix.libbacktrace }} PCH=0 bindist
-          mv cataclysm-tlg-1.0.zip ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
       - name: Build CTLG (windows msvc, SDL2)
         if: runner.os == 'Windows' && matrix.sdl3 != 1
         env:
