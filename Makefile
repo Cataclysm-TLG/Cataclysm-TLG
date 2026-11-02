@@ -983,10 +983,12 @@ CXXFLAGS += $(CXX_STD) $(CXX_WARNINGS) -fvisibility=hidden
 
 # Enumerations of all the source files and headers.
 ifeq ($(HEADERPOPULARITY), 1)
-  # Alternate source file enumeration sorted in order of how many times the matching header file is included in source files
   SOURCES := $(shell echo "$$(echo $$(grep -oh "^#include \"[^\"]*.h\"" $(SRC_DIR)/*.cpp | sort | uniq -c | sort -rn | cut -d \" -f 2 | sed -e 's/\.h$$/.cpp/' | sed -e 's/^/$(SRC_DIR)\//') | xargs -n 1 ls 2> /dev/null; ls -1 $(SRC_DIR)/*.cpp)" | awk '!x[$$0]++')
 else
   SOURCES := $(wildcard $(SRC_DIR)/*.cpp)
+endif
+ifneq ($(SOUND),1)
+  SOURCES := $(filter-out $(SRC_DIR)/sdlsound.cpp,$(SOURCES))
 endif
 THIRD_PARTY_SOURCES := $(wildcard $(SRC_DIR)/third-party/flatbuffers/*.cpp)
 THIRD_PARTY_C_SOURCES := $(wildcard $(SRC_DIR)/third-party/zstd/common/*.c $(SRC_DIR)/third-party/zstd/compress/*.c $(SRC_DIR)/third-party/zstd/decompress/*.c)

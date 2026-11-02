@@ -546,7 +546,8 @@ jobs:
       - name: Build CTLG (osx, SDL3)
         if: runner.os == 'macOS' && matrix.sdl3 == 1
         env:
-          PKG_CONFIG_PATH: /opt/homebrew/lib/pkgconfig
+          PKG_CONFIG_PATH: ${{ runner.workspace }}/sdl3_prefix/lib/pkgconfig:/opt/local/lib/pkgconfig:/opt/homebrew/lib/pkgconfig
+          DYLIBBUNDLER_SEARCH_PATHS: ${{ runner.workspace }}/sdl3_prefix/lib
         run: |
           make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.sound }} SDL3=1 RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 UNIVERSAL_BINARY=1 WARN_STALE_DATA=1 dmgdist
           mv Cataclysm.dmg ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
