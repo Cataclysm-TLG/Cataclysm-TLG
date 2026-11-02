@@ -57,7 +57,7 @@ function build_proj
 
 function clone_proj
 {
-    if [[ ! -e "$1" ]] then
+    if [[ ! -e "$1" ]]; then
         git clone "$2" -b "$3" --depth=1 "$1";
     fi
 }
@@ -96,8 +96,6 @@ cp -f SDL2_ttf/SDL_ttf.h deps/jni/SDL2_ttf/
 for ARCH in armeabi-v7a arm64-v8a x86 x86_64
 do
     build_proj SDL2 false
-
-    build_proj SDL2_image true
 
     build_proj SDL2_image true
 
