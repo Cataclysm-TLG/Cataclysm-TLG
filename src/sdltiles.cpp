@@ -3117,8 +3117,6 @@ static void CheckMessages()
         }
 
         bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
-        quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                     touch_input_context.get_category() )];
 
         // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
         if( !needupdate ) {
@@ -3287,7 +3285,6 @@ static void CheckMessages()
                         }
                     }
 
-                    bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
                     quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
                                                 touch_input_context.get_category() )];
                     size_t old_size = qsl.size();
@@ -3511,6 +3508,8 @@ static void CheckMessages()
                                     // add a quick shortcut
                                     if( !last_input.text.empty() ||
                                         !inp_mngr.get_keyname( lc, input_event_t::keyboard_char ).empty() ) {
+                                        quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                            touch_input_context.get_category() )];
                                         qsl.remove( last_input );
                                         add_quick_shortcut( qsl, last_input, false, true );
                                         ui_manager::redraw_invalidated();

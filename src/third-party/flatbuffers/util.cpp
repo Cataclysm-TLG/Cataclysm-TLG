@@ -57,6 +57,11 @@
 
 namespace flatbuffers {
 
+ClassicLocale::locale_type ClassicLocale::Get() {
+  static ClassicLocale instance_;
+  return instance_.locale_;
+}
+
 static bool FileExistsRaw(const char *name) {
   std::ifstream ifs(name);
   return ifs.good();

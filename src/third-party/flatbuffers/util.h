@@ -228,10 +228,7 @@ inline std::string IntToStringHex(int i, int xdigits) {
     ~ClassicLocale();
     locale_type locale_;
   public:
-    static locale_type Get() {
-      static ClassicLocale instance_;
-      return instance_.locale_;
-    }
+    static locale_type Get();
   };
 
   #ifdef _WIN32

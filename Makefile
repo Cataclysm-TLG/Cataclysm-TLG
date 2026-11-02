@@ -984,9 +984,10 @@ endif
 
 ifeq ($(MSYS2),1)
   DEFINES += -D_GLIBCXX_USE_C99_MATH_TR1
-  CXXFLAGS += -DMSYS2
-  CFLAGS += -mcx16
-  CXXFLAGS += -mcx16
+  CXXFLAGS += -DMSYS2 -mcx16
+  DEBUGSYMS = -gcodeview
+  LDFLAGS += -fuse-ld=lld
+  LDFLAGS += -Wl,--pdb=$(basename $(TARGET)).pdb
 endif
 
 CFLAGS += $(C_STD) $(WARNINGS) -fvisibility=hidden
