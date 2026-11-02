@@ -9768,7 +9768,6 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     act.moves_left = 0;
     if( num_corpses == 0 ) {
         you.add_msg_if_player( m_bad, _( "Your smashing was interrupted." ) );
-        act.set_to_null();
         return;
     }
     // TODO: Factor in how long it took to do the smashing.
