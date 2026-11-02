@@ -40,7 +40,7 @@ inline constexpr SDL_Keymod KMOD_CTRL  = SDL_KMOD_CTRL;
 inline constexpr SDL_Keymod KMOD_SHIFT = SDL_KMOD_SHIFT;
 inline constexpr SDL_Keymod KMOD_ALT   = SDL_KMOD_ALT;
 #else
-using CataFlipMode = SDL_FlipMode;
+using CataFlipMode = SDL_RendererFlip;
 #endif
 
 struct SDL_Renderer_deleter {
