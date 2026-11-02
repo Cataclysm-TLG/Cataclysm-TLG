@@ -246,14 +246,6 @@ jobs:
             artifact: android-bundle
             ext: aab
             content: application/aap
-          - name: WebAssembly Bundle
-            os: ubuntu-latest
-            mxe: none
-            artifact: wasm
-            ext: zip
-            content: application/zip
-            sound: 0
-            wasm: true
     name: ${{ matrix.name }}
     runs-on: ${{ matrix.os }}
     permissions: write-all
@@ -282,12 +274,19 @@ jobs:
           # Bump artifact mtimes so the Make/CMake shader rule sees them as
           # up-to-date and skips invoking build_shaders.py.
           touch data/shaders/build-*.stamp data/shaders/*.spv data/shaders/*.dxil data/shaders/*.msl
+      - name: Mark shader artifacts fresh (SDL3)
+        if: matrix.sdl3 == 1
+        shell: bash
+        run: |
+          # Bump artifact mtimes so the Make/CMake shader rule sees them as
+          # up-to-date and skips invoking build_shaders.py.
+          touch data/shaders/build-*.stamp data/shaders/*.spv data/shaders/*.dxil data/shaders/*.msl
       - name: Install dependencies (windows msvc) (1/4)
         if: runner.os == 'Windows'
-        uses: microsoft/setup-msbuild@v2
+        uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2
       - name: Install dependencies (windows msvc) (2/4)
         if: runner.os == 'Windows'
-        uses: lukka/run-vcpkg@v11
+        uses: lukka/run-vcpkg@b1a0dd252f06b9e25b3c022a9a03bd7a427fb6a2 # v11.6
         id: runvcpkg
         with:
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
@@ -298,12 +297,24 @@ jobs:
           vcpkg integrate install --vcpkg-root '${{ runner.workspace }}\b\vcpkg'
       - name: Install dependencies (windows msvc) (4/4)
         if: runner.os == 'Windows'
-        uses: msys2/setup-msys2@v2
+        uses: msys2/setup-msys2@4f806de0a5a7294ffabaff804b38a9b435a73bda # v2
         with:
           msystem: mingw64
           install: >-
             gettext
             make
+      - name: Cache vcpkg packages (Windows, SDL2)
+        if: runner.os == 'Windows' && matrix.sdl3 != 1
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: msvc-full-features/vcpkg_installed
+          key: vcpkg-installed-sdl2-${{ hashFiles('msvc-full-features/vcpkg.json', '.github/vcpkg_triplets/x64-windows-static.cmake') }}-c3867e714dd3a51c272826eea77267876517ed99
+      - name: Cache vcpkg packages (Windows, SDL3)
+        if: runner.os == 'Windows' && matrix.sdl3 == 1
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: msvc-full-features/vcpkg_installed
+          key: vcpkg-installed-sdl3-${{ hashFiles('msvc-full-features/vcpkg.json', '.github/vcpkg_triplets/x64-windows-static.cmake') }}-c3867e714dd3a51c272826eea77267876517ed99
       - name: Install dependencies (Linux, SDL2)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 != 1
         run: |
@@ -323,17 +334,53 @@ jobs:
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            libflac-dev libogg-dev libvorbis-dev \
-            libmpg123-dev libwavpack-dev \
-            libpulse-dev libncursesw5-dev \
-            ccache gettext parallel pkg-config cmake
-      - name: Build SDL3_mixer from source (Linux, SDL3)
+          sudo apt-get install libflac-dev libogg-dev libvorbis-dev libmpg123-dev libwavpack-dev \
+              libfreetype-dev libharfbuzz-dev libjpeg-dev libpng-dev libwebp-dev libtiff-dev \
+              libpulse-dev libncursesw5-dev ccache gettext parallel pkg-config cmake \
+              libx11-dev libxext-dev libxcursor-dev libxi-dev libxfixes-dev libxrandr-dev \
+              libxrender-dev libxss-dev libxtst-dev libxkbcommon-dev libwayland-dev \
+              libdecor-0-dev libdrm-dev libgbm-dev libudev-dev libpipewire-0.3-dev \
+              libdbus-1-dev libibus-1.0-dev
+      - name: Cache SDL3 stack source build (Linux, SDL3)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
+        id: cache-sdl3-release
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ runner.workspace }}/sdl3_prefix
+          key: sdl3-stack-sdl-3.4.4-image-3.4.2-ttf-3.2.2-mixer-3.2.0-${{ runner.os }}-v2
+      - name: Build SDL3 stack from source (Linux, SDL3)
+        if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1 && steps.cache-sdl3-release.outputs.cache-hit != 'true'
         run: |
+          PREFIX=${{ runner.workspace }}/sdl3_prefix
+          export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig:$PREFIX/lib/x86_64-linux-gnu/pkgconfig
+          export CMAKE_PREFIX_PATH=$PREFIX
+          git clone --depth 1 --branch release-3.4.4 https://github.com/libsdl-org/SDL.git sdl3_src
+          cmake -S sdl3_src -B sdl3_build \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_build -j$(nproc)
+          cmake --install sdl3_build
+          git clone --depth 1 --branch release-3.4.2 https://github.com/libsdl-org/SDL_image.git sdl3_image_src
+          cmake -S sdl3_image_src -B sdl3_image_build \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DSDLIMAGE_VENDORED=OFF \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_image_build -j$(nproc)
+          cmake --install sdl3_image_build
+          git clone --depth 1 --branch release-3.2.2 https://github.com/libsdl-org/SDL_ttf.git sdl3_ttf_src
+          cmake -S sdl3_ttf_src -B sdl3_ttf_build \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DSDLTTF_VENDORED=OFF \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_ttf_build -j$(nproc)
+          cmake --install sdl3_ttf_build
           git clone --depth 1 --branch release-3.2.0 https://github.com/libsdl-org/SDL_mixer.git sdl3_mixer_src
           cmake -S sdl3_mixer_src -B sdl3_mixer_build \
               -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
               -DSDLMIXER_VENDORED=OFF \
               -DSDLMIXER_FLAC=ON -DSDLMIXER_FLAC_LIBFLAC=ON \
               -DSDLMIXER_MP3=ON -DSDLMIXER_MP3_MPG123=ON \
@@ -341,15 +388,19 @@ jobs:
               -DSDLMIXER_WAVPACK=ON \
               -DSDLMIXER_OPUS=OFF -DSDLMIXER_MOD=OFF -DSDLMIXER_MIDI=OFF \
               -DBUILD_SHARED_LIBS=ON
-          cmake --build sdl3_mixer_build -j$((`nproc`+0))
-          sudo cmake --install sdl3_mixer_build
-          cp sdl3_mixer_src/LICENSE.txt ${{ github.workspace }}/LICENSE-SDL3_mixer.txt
-      - name: Install Emscripten (WebAssembly)
-        if: matrix.wasm
-        uses: mymindstorm/setup-emsdk@v13
+          cmake --build sdl3_mixer_build -j$(nproc)
+          cmake --install sdl3_mixer_build
+          mkdir -p $PREFIX/share
+          cp sdl3_src/LICENSE.txt $PREFIX/share/LICENSE-SDL.txt
+          cp sdl3_mixer_src/LICENSE.txt $PREFIX/share/LICENSE-SDL3_mixer.txt
+      - name: Stage SDL3 license files (Linux, SDL3)
+        if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.sdl3 == 1
+        run: |
+          cp ${{ runner.workspace }}/sdl3_prefix/share/LICENSE-SDL.txt ${{ github.workspace }}/LICENSE-SDL.txt
+          cp ${{ runner.workspace }}/sdl3_prefix/share/LICENSE-SDL3_mixer.txt ${{ github.workspace }}/LICENSE-SDL3_mixer.txt
       - name: Install runtime dependencies (mac, SDL2)
         if: runner.os == 'macOS' && matrix.sdl3 != 1
-        uses: BrettDong/setup-sdl2-frameworks@v2
+        uses: BrettDong/setup-sdl2-frameworks@a8ca795ef904417e9ddcb010ef6bf2d11779dbe3 # v2
         with:
           sdl2: 2.30.11
           sdl2-ttf: 2.24.0
@@ -358,22 +409,78 @@ jobs:
       - name: Install build dependencies (mac)
         if: runner.os == 'macOS'
         run: |
-          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes \
-            brew install gettext ccache parallel dylibbundler pipx
-          pipx install dmgbuild
-          pipx inject dmgbuild biplist
+          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes brew install gettext ccache parallel dylibbundler
+          pip3 install --break-system-packages dmgbuild biplist
       - name: install macports (mac, SDL2)
         if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 != 1
-        uses: melusina-org/setup-macports@v1
+        uses: melusina-org/setup-macports@c7eb59386def259a274627092566a7f7b8d219b1 # v1
       - name: install macports packages (mac, SDL2)
         if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 != 1
         run: |
           sudo port install freetype +universal pkgconfig +universal
-      - name: install brew packages (mac, SDL3)
+      - name: install macports (mac, SDL3)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 == 1
+        uses: melusina-org/setup-macports@c7eb59386def259a274627092566a7f7b8d219b1 # v1
+      - name: install macports packages (mac, SDL3)
         if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 == 1
         run: |
-          HOMEBREW_NO_AUTO_UPDATE=yes HOMEBREW_NO_INSTALL_CLEANUP=yes \
-            brew install pkgconf sdl3 sdl3_image sdl3_ttf sdl3_mixer freetype
+          sudo port install freetype +universal pkgconfig +universal
+      - name: Cache SDL3 stack source build (mac, SDL3)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 == 1
+        id: cache-sdl3-release-macos
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ runner.workspace }}/sdl3_prefix
+          key: sdl3-stack-universal-sdl-3.4.4-image-3.4.2-ttf-3.2.2-mixer-3.2.0-${{ runner.os }}-v1
+      - name: Build SDL3 stack from source (mac, SDL3, universal)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 == 1 && steps.cache-sdl3-release-macos.outputs.cache-hit != 'true'
+        run: |
+          PREFIX=${{ runner.workspace }}/sdl3_prefix
+          export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig:/opt/local/lib/pkgconfig
+          export CMAKE_PREFIX_PATH=$PREFIX
+          ARCH_ARG='-DCMAKE_OSX_ARCHITECTURES=arm64;x86_64'
+          git clone --depth 1 --branch release-3.4.4 https://github.com/libsdl-org/SDL.git sdl3_src
+          cmake -S sdl3_src -B sdl3_build "$ARCH_ARG" \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_build -j$(sysctl -n hw.ncpu)
+          cmake --install sdl3_build
+          git clone --depth 1 --branch release-3.4.2 --recurse-submodules --shallow-submodules https://github.com/libsdl-org/SDL_image.git sdl3_image_src
+          cmake -S sdl3_image_src -B sdl3_image_build "$ARCH_ARG" \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DSDLIMAGE_VENDORED=ON \
+              -DSDLIMAGE_AVIF=OFF -DSDLIMAGE_JXL=OFF -DSDLIMAGE_WEBP=OFF \
+              -DPNG_ARM_NEON=off \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_image_build -j$(sysctl -n hw.ncpu)
+          cmake --install sdl3_image_build
+          git clone --depth 1 --branch release-3.2.2 --recurse-submodules --shallow-submodules https://github.com/libsdl-org/SDL_ttf.git sdl3_ttf_src
+          cmake -S sdl3_ttf_src -B sdl3_ttf_build "$ARCH_ARG" \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DSDLTTF_VENDORED=ON \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_ttf_build -j$(sysctl -n hw.ncpu)
+          cmake --install sdl3_ttf_build
+          git clone --depth 1 --branch release-3.2.0 --recurse-submodules --shallow-submodules https://github.com/libsdl-org/SDL_mixer.git sdl3_mixer_src
+          cmake -S sdl3_mixer_src -B sdl3_mixer_build "$ARCH_ARG" \
+              -DCMAKE_BUILD_TYPE=Release \
+              -DCMAKE_INSTALL_PREFIX=$PREFIX \
+              -DSDLMIXER_VENDORED=ON \
+              -DSDLMIXER_OPUS=OFF -DSDLMIXER_MOD=OFF -DSDLMIXER_MIDI=OFF \
+              -DBUILD_SHARED_LIBS=ON
+          cmake --build sdl3_mixer_build -j$(sysctl -n hw.ncpu)
+          cmake --install sdl3_mixer_build
+          mkdir -p $PREFIX/share
+          cp sdl3_src/LICENSE.txt $PREFIX/share/LICENSE-SDL.txt
+          cp sdl3_mixer_src/LICENSE.txt $PREFIX/share/LICENSE-SDL3_mixer.txt
+      - name: Stage SDL3 license files (mac, SDL3)
+        if: runner.os == 'macOS' && matrix.tiles == 1 && matrix.sdl3 == 1
+        run: |
+          cp ${{ runner.workspace }}/sdl3_prefix/share/LICENSE-SDL.txt ${{ github.workspace }}/LICENSE-SDL.txt
+          cp ${{ runner.workspace }}/sdl3_prefix/share/LICENSE-SDL3_mixer.txt ${{ github.workspace }}/LICENSE-SDL3_mixer.txt
       - name: Create VERSION.TXT
         shell: bash
         run: |
