@@ -310,7 +310,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y gettext
       - name: Install MXE
-        if: matrix.mxe != 'none'
+        if: runner.os == 'Linux' && matrix.mxe != 'none'
         run: |
           curl -L -o mxe-${{ matrix.mxe }}.tar.xz https://github.com/BrettDong/MXE-GCC/releases/download/mxe-sdl-2-0-20/mxe-${{ matrix.mxe }}.tar.xz
           curl -L -o mxe-${{ matrix.mxe }}.tar.xz.sha256 https://github.com/BrettDong/MXE-GCC/releases/download/mxe-sdl-2-0-20/mxe-${{ matrix.mxe }}.tar.xz.sha256
@@ -449,7 +449,7 @@ jobs:
         run: |
           msbuild -m -p:Configuration=Release -p:Platform=${{ matrix.arch }} -p:UseSDL3=true "-target:Cataclysm-vcpkg-static;JsonFormatter-vcpkg-static;zzip" msvc-full-features\Cataclysm-vcpkg-static.sln
           .\build-scripts\windist.ps1
-          mv cataclysmdda-0.J.zip ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
+          mv cataclysm-tlg-1.0.zip ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.zip
       - name: Build CTLG (osx, SDL2)
         if: runner.os == 'macOS' && matrix.sdl3 != 1
         run: |
