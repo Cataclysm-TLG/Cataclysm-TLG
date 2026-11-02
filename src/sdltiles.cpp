@@ -3287,6 +3287,9 @@ static void CheckMessages()
                         }
                     }
 
+                    bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
+                    quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
+                                                touch_input_context.get_category() )];
                     size_t old_size = qsl.size();
                     for( const auto &action_remove : actions_remove ) {
                         remove_action_from_quick_shortcuts( action_remove, touch_input_context.get_category() );
@@ -3789,7 +3792,8 @@ static void CheckMessages()
                             }
                         } else {
                             if( is_two_finger_touch ) {
-                                // handle zoom in/out
+                                // handle zoom in/out                                
+                                bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
                                 if( is_default_mode ) {
                                     float x1 = ( finger_curr_x - finger_down_x );
                                     float y1 = ( finger_curr_y - finger_down_y );

@@ -869,6 +869,15 @@ else
   endif # HAVE_PKGCONFIG
 endif # TILES
 
+# MSYS2 UCRT64: generate separate PDB debug information
+ifeq ($(MSYS2),1)
+  ifneq ($(CLANG),0)
+    CXXFLAGS += -gcodeview
+    LDFLAGS += -fuse-ld=lld
+    LDFLAGS += -Wl,--pdb=$(basename $(TARGET)).pdb
+  endif
+endif
+
 ifeq ($(SOUND), 1)
   ifeq ($(SDL3), 1)
     ifeq ($(MSYS2),1)
