@@ -965,8 +965,13 @@ ifeq ($(TARGETSYSTEM),LINUX)
   CXXFLAGS += -mcx16
   BINDIST_EXTRAS += cataclysm-launcher
   ifneq ("$(wildcard LICENSE-SDL.txt)","")
-    SDL2_solib = $(shell ldd $(TARGET) | grep libSDL2-2\.0 | cut -d ' ' -f 3)
-    INSTALL_EXTRAS += $(SDL2_solib)
+    ifeq ($(SDL3), 1)
+      SDL3_solib = $(shell ldd $(TARGET) | awk '/libSDL3.*=>/ && $$3 ~ /^\// {print $$3}')
+      INSTALL_EXTRAS += $(SDL3_solib)
+    else
+      SDL2_solib = $(shell ldd $(TARGET) | awk '/libSDL2-2\.0.*=>/ && $$3 ~ /^\// {print $$3}')
+      INSTALL_EXTRAS += $(SDL2_solib)
+    endif
     BINDIST_EXTRAS += LICENSE-SDL.txt
   endif
   ifeq ($(BACKTRACE),1)
