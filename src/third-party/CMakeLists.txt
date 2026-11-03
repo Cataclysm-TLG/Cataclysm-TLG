@@ -15,8 +15,9 @@ add_library(
 
 set(THIRD_PARTY_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/third-party)
 
-file(GLOB FLATBUFFERS_HEADERS ${THIRD_PARTY_SOURCE_DIR}/flatbuffers/**/*.h)
-file(GLOB FLATBUFFERS_SOURCES ${THIRD_PARTY_SOURCE_DIR}/flatbuffers/*.cpp)
+# Flatbuffers
+file(GLOB FLATBUFFERS_HEADERS flatbuffers/**/*.h)
+file(GLOB FLATBUFFERS_SOURCES flatbuffers/*.cpp)
 
 add_library(
         flatbuffers
@@ -28,7 +29,7 @@ target_include_directories(
         flatbuffers
         SYSTEM
         PUBLIC
-        ${THIRD_PARTY_SOURCE_DIR})
+        ${CMAKE_CURRENT_SOURCE_DIR})
 
 # For cata_flatbuffers_assert.h
 target_include_directories(
@@ -36,6 +37,12 @@ target_include_directories(
         PUBLIC
         ${CATA_REPO_ROOT}/src)
 
+target_link_libraries(
+        third-party
+        INTERFACE
+        flatbuffers
+        )
+        
 file(GLOB GHC_HEADERS ${THIRD_PARTY_SOURCE_DIR}/ghc/*.hpp)
 
 add_library(
