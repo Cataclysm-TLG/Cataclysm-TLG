@@ -2235,6 +2235,7 @@ void item_contents::add_pocket( const item &pocket_item )
                                      i_pocket->get_pocket_data()->volume_encumber_modifier;
     }
     additional_pockets_volume += total_nonrigid_volume;
+    additional_pockets_effective_volume += effective_nonrigid_volume;
     additional_pockets_space_used += pocket_item.get_pocket_size();
     additional_pockets.push_back( pocket_item );
     additional_pockets.back().clear_items();
@@ -2259,7 +2260,8 @@ item item_contents::remove_pocket( int index )
         total_nonrigid_volume += i_pocket->volume_capacity();
         effective_nonrigid_volume += ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
                                      i_pocket->get_pocket_data()->volume_encumber_modifier;
-        // Move items from the consolidated pockets to the item that will be returned.
+
+        // move items from the consolidated pockets to the item that will be returned
         for( const item *item_to_move : it->all_items_top() ) {
             i_pocket->add( *item_to_move );
         }
@@ -2267,6 +2269,7 @@ item item_contents::remove_pocket( int index )
         contents.erase( it++ );
     }
     additional_pockets_volume -= total_nonrigid_volume;
+    additional_pockets_effective_volume -= effective_nonrigid_volume;
     additional_pockets_space_used -= additional_pockets[index].get_pocket_size();
     // Create a copy of the item to return and delete the old items entry.
     item it_return( additional_pockets[index] );
@@ -2304,7 +2307,7 @@ bool item_contents::has_additional_pockets() const
 
 int item_contents::get_additional_pocket_encumbrance( float mod ) const
 {
-    return additional_pockets_volume * mod / 250_ml;
+    return additional_pockets_effective_volume * mod / 250_ml;
 }
 
 int item_contents::get_additional_space_used() const
