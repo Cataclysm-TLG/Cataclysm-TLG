@@ -152,8 +152,8 @@ jobs:
           #   ext: zip
           #   content: application/zip
           #   sound: 1
-          - name: Windows Tiles Sounds MSVC (SDL3)
-            artifact: windows-tiles-sounds-sdl3
+          - name: Windows
+            artifact: windows
             arch: x64
             os: windows-2022
             ext: zip
@@ -181,17 +181,17 @@ jobs:
           #   artifact: linux-tiles-sounds
           #   ext: tar.gz
           #   content: application/gzip
-          - name: Linux Tiles Sounds (SDL3)
+          - name: Linux
             os: ubuntu-24.04
             android: none
             libbacktrace: 1
             tiles: 1
             sound: 1
             sdl3: 1
-            artifact: linux-tiles-sounds-sdl3
+            artifact: linux
             ext: tar.gz
             content: application/gzip
-          - name: Linux Curses x64
+          - name: Linux (Curses)
             os: ubuntu-22.04
             mxe: none
             android: none
@@ -201,12 +201,12 @@ jobs:
             artifact: linux-curses
             ext: tar.gz
             content: application/gzip
-          - name: macOS Curses Universal Binary (x64 and arm64)
+          - name: macOS (Curses)
             os: macos-15
             mxe: none
             tiles: 0
             sound: 0
-            artifact: osx-curses-universal
+            artifact: osx-curses
             ext: dmg
             content: application/x-apple-diskimage
           # - name: macOS Tiles Universal Binary (x64 and arm64)
@@ -217,12 +217,12 @@ jobs:
           #   artifact: osx-tiles-universal
           #   ext: dmg
           #   content: application/x-apple-diskimage
-          - name: macOS Tiles Universal Binary (SDL3)
+          - name: macOS
             os: macos-15
             tiles: 1
             sound: 0
             sdl3: 1
-            artifact: osx-with-graphics-sdl3-universal
+            artifact: osx
             ext: dmg
             content: application/x-apple-diskimage
           - name: Android x64
