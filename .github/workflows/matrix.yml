@@ -312,8 +312,15 @@ jobs:
         key: ccache-${{ github.ref_name }}-${{ matrix.ccache_key }}--${{ steps.get-vars.outputs.datetime }}
         restore-keys: |
           ccache-master-${{ matrix.ccache_key }}--
-    - uses: ammaraskar/gcc-problem-matcher@master
-    - name: build
+    - uses: ammaraskar/gcc-problem-matcher@0f9c86f9e693db67dacf53986e1674de5f2e5f28 # master
+
+    - name: Set up JDK (android)
+      if: runner.os == 'Linux' && matrix.android != 'none'
+      uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+    - name: Build CTLG
       if: ${{ env.SKIP == 'false' }}
       run: bash ./build-scripts/gha_compile_only.sh
     - name: post-build ccache manipulation

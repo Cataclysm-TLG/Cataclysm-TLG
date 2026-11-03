@@ -2222,6 +2222,42 @@ uint32_t finger_repeat_delay = 500;
 // should we make sure the sdl surface is visible? set to true whenever the SDL window is shown.
 static bool needs_sdl_surface_visibility_refresh = true;
 
+// SDL_FingerID is an opaque per-touch ID, not a 0-based index, so map raw
+// IDs to local slots 0/1/2 here.
+static constexpr int CATA_MAX_FINGERS = 3;
+static constexpr SDL_FingerID INVALID_FINGER_ID = -1;
+static SDL_FingerID finger_id_slots[CATA_MAX_FINGERS] = {
+    INVALID_FINGER_ID, INVALID_FINGER_ID, INVALID_FINGER_ID
+};
+
+static int finger_slot_for( SDL_FingerID id, bool create_if_missing )
+{
+    for( int i = 0; i < CATA_MAX_FINGERS; ++i ) {
+        if( finger_id_slots[i] == id ) {
+            return i;
+        }
+    }
+    if( create_if_missing ) {
+        for( int i = 0; i < CATA_MAX_FINGERS; ++i ) {
+            if( finger_id_slots[i] == INVALID_FINGER_ID ) {
+                finger_id_slots[i] = id;
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+static void finger_slot_clear( SDL_FingerID id )
+{
+    for( int i = 0; i < CATA_MAX_FINGERS; ++i ) {
+        if( finger_id_slots[i] == id ) {
+            finger_id_slots[i] = INVALID_FINGER_ID;
+            return;
+        }
+    }
+}
+
 // Quick shortcuts container: maps the touch input context category (std::string) to a std::list of input_events.
 using quick_shortcuts_t = std::list<input_event>;
 std::map<std::string, quick_shortcuts_t> quick_shortcuts_map;
@@ -2243,8 +2279,8 @@ std::string get_quick_shortcut_name( const std::string &category )
 
 float android_get_display_density()
 {
-    JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-    jobject activity = ( jobject )SDL_AndroidGetActivity();
+    JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+    jobject activity = ( jobject )GetAndroidActivity();
     jclass clazz( env->GetObjectClass( activity ) );
     jmethodID method_id = env->GetMethodID( clazz, "getDisplayDensity", "()F" );
     jfloat ans = env->CallFloatMethod( activity, method_id );
@@ -3002,8 +3038,8 @@ void handle_finger_input( uint32_t ticks )
 
 bool android_is_hardware_keyboard_available()
 {
-    JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-    jobject activity = ( jobject )SDL_AndroidGetActivity();
+    JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+    jobject activity = ( jobject )GetAndroidActivity();
     jclass clazz( env->GetObjectClass( activity ) );
     jmethodID method_id = env->GetMethodID( clazz, "isHardwareKeyboardAvailable", "()Z" );
     jboolean ans = env->CallBooleanMethod( activity, method_id );
@@ -3016,8 +3052,8 @@ void android_vibrate()
 {
     int vibration_ms = get_option<int>( "ANDROID_VIBRATION" );
     if( vibration_ms > 0 && !android_is_hardware_keyboard_available() ) {
-        JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-        jobject activity = ( jobject )SDL_AndroidGetActivity();
+        JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+        jobject activity = ( jobject )GetAndroidActivity();
         jclass clazz( env->GetObjectClass( activity ) );
         jmethodID method_id = env->GetMethodID( clazz, "vibrate", "(I)V" );
         env->CallVoidMethod( activity, method_id, vibration_ms );
@@ -3092,8 +3128,8 @@ static void CheckMessages()
         needs_sdl_surface_visibility_refresh = false;
 
         // Call Java show_sdl_surface()
-        JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-        jobject activity = ( jobject )SDL_AndroidGetActivity();
+        JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+        jobject activity = ( jobject )GetAndroidActivity();
         jclass clazz( env->GetObjectClass( activity ) );
         jmethodID method_id = env->GetMethodID( clazz, "show_sdl_surface", "()V" );
         env->CallVoidMethod( activity, method_id );
@@ -3296,59 +3332,56 @@ static void CheckMessages()
                     }
                 }
             }
+        if( remove_expired_actions_from_quick_shortcuts( touch_input_context.get_category() ) ) {
+            needupdate = true;
+        }
 
-            if( remove_expired_actions_from_quick_shortcuts( touch_input_context.get_category() ) ) {
-                needupdate = true;
-            }
+        // Toggle quick shortcuts on/off
+        if( ac_back_down_time > 0 &&
+            ticks - ac_back_down_time > static_cast<uint32_t>
+            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+            if( !quick_shortcuts_toggle_handled ) {
+                quick_shortcuts_enabled = !quick_shortcuts_enabled;
+                quick_shortcuts_toggle_handled = true;
+                refresh_display();
 
-            // Toggle quick shortcuts on/off
-            if( ac_back_down_time > 0 &&
-                ticks - ac_back_down_time > static_cast<uint32_t>
-                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-                if( !quick_shortcuts_toggle_handled ) {
-                    quick_shortcuts_enabled = !quick_shortcuts_enabled;
-                    quick_shortcuts_toggle_handled = true;
-                    refresh_display();
-
-                    // Display an Android toast message
-                    {
-                        JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-                        jobject activity = ( jobject )SDL_AndroidGetActivity();
-                        jclass clazz( env->GetObjectClass( activity ) );
-                        jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
-                                                "Shortcuts hidden" );
-                        jmethodID method_id = env->GetMethodID( clazz, "toast", "(Ljava/lang/String;)V" );
-                        env->CallVoidMethod( activity, method_id, toast_message );
-                        env->DeleteLocalRef( activity );
-                        env->DeleteLocalRef( clazz );
-                    }
+                // Display an Android toast message
+                {
+                    JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+                    jobject activity = ( jobject )GetAndroidActivity();
+                    jclass clazz( env->GetObjectClass( activity ) );
+                    jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
+                                            "Shortcuts hidden" );
+                    jmethodID method_id = env->GetMethodID( clazz, "toast", "(Ljava/lang/String;)V" );
+                    env->CallVoidMethod( activity, method_id, toast_message );
+                    env->DeleteLocalRef( activity );
+                    env->DeleteLocalRef( clazz );
                 }
             }
 
-            // Handle repeating inputs from touch + holds
-            if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
-                finger_down_time > 0 &&
-                ticks - finger_down_time > static_cast<uint32_t>
-                ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
-                if( ticks - finger_repeat_time > finger_repeat_delay ) {
-                    handle_finger_input( ticks );
-                    finger_repeat_time = ticks;
-                    // Prevent repeating inputs on the next call to this function if there is a fingerup event
-                    while( SDL_PollEvent( &ev ) ) {
-                        if( ev.type == CATA_FINGERUP ) {
-                            third_finger_down_x = third_finger_curr_x = second_finger_down_x = second_finger_curr_x =
-                                                      finger_down_x = finger_curr_x = -1.0f;
-                            third_finger_down_y = third_finger_curr_y = second_finger_down_y = second_finger_curr_y =
-                                                      finger_down_y = finger_curr_y = -1.0f;
-                            is_two_finger_touch = false;
-                            is_three_finger_touch = false;
-                            finger_down_time = 0;
-                            finger_repeat_time = 0;
-                            // let the next call decide if needupdate should be true
-                            break;
-                        }
+        // Handle repeating inputs from touch + holds
+        if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
+            finger_down_time > 0 &&
+            ticks - finger_down_time > static_cast<uint32_t>
+            ( get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+            if( ticks - finger_repeat_time > finger_repeat_delay ) {
+                handle_finger_input( ticks );
+                finger_repeat_time = ticks;
+                // Prevent repeating inputs on the next call to this function if there is a fingerup event
+                while( SDL_PollEvent( &ev ) ) {
+                    if( ev.type == CATA_FINGERUP ) {
+                        third_finger_down_x = third_finger_curr_x = second_finger_down_x = second_finger_curr_x =
+                                                  finger_down_x = finger_curr_x = -1.0f;
+                        third_finger_down_y = third_finger_curr_y = second_finger_down_y = second_finger_curr_y =
+                                                  finger_down_y = finger_curr_y = -1.0f;
+                        is_two_finger_touch = false;
+                        is_three_finger_touch = false;
+                        finger_down_time = 0;
+                        finger_repeat_time = 0;
+                        finger_slot_clear( GetFingerID( ev ) );
+                        // let the next call decide if needupdate should be true
+                        break;
                     }
-                    return;
                 }
             }
 
@@ -3701,8 +3734,9 @@ static void CheckMessages()
                     break;
 
 #if defined(__ANDROID__)
-                case CATA_FINGERMOTION:
-                    if( GetFingerID( ev ) == 0 ) {
+                case CATA_FINGERMOTION: {
+                    const int slot = finger_slot_for( GetFingerID( ev ), false );
+                    if( slot == 0 ) {
                         if( !is_quick_shortcut_touch ) {
                             update_finger_repeat_delay();
                         }
@@ -3726,16 +3760,17 @@ static void CheckMessages()
                             }
                         }
 
-                    } else if( GetFingerID( ev ) == 1 ) {
+                    } else if( slot == 1 ) {
                         second_finger_curr_x = GetFingerX( ev, WindowWidth );
                         second_finger_curr_y = GetFingerY( ev, WindowHeight );
-                    } else if( GetFingerID( ev ) == 2 ) {
+                    } else if( slot == 2 ) {
                         third_finger_curr_x = GetFingerX( ev, WindowWidth );
                         third_finger_curr_y = GetFingerY( ev, WindowHeight );
                     }
                     break;
+                }
                 case CATA_FINGERDOWN:
-                    if( GetFingerID( ev ) == 0 ) {
+                    if( finger_slot_for( GetFingerID( ev ), true ) == 0 ) {
                         finger_down_x = finger_curr_x = GetFingerX( ev, WindowWidth );
                         finger_down_y = finger_curr_y = GetFingerY( ev, WindowHeight );
                         finger_down_time = ticks;
@@ -3746,13 +3781,13 @@ static void CheckMessages()
                         }
                         ui_manager::redraw_invalidated();
                         needupdate = true; // ensure virtual joystick and quick shortcuts redraw as we interact
-                    } else if( GetFingerID( ev ) == 1 ) {
+                    } else if( finger_slot_for( GetFingerID( ev ), true ) == 1 ) {
                         if( !is_quick_shortcut_touch ) {
                             second_finger_down_x = second_finger_curr_x = GetFingerX( ev, WindowWidth );
                             second_finger_down_y = second_finger_curr_y = GetFingerY( ev, WindowHeight );
                             is_two_finger_touch = true;
                         }
-                    } else if( GetFingerID( ev ) == 2 ) {
+                    } else if( finger_slot_for( GetFingerID( ev ), true ) == 2 ) {
                         if( !is_quick_shortcut_touch ) {
                             third_finger_down_x = third_finger_curr_x = GetFingerX( ev, WindowWidth );
                             third_finger_down_y = third_finger_curr_y = GetFingerY( ev, WindowHeight );
@@ -3761,8 +3796,9 @@ static void CheckMessages()
                         }
                     }
                     break;
-                case CATA_FINGERUP:
-                    if( GetFingerID( ev ) == 0 ) {
+                case CATA_FINGERUP: {
+                    const int slot = finger_slot_for( GetFingerID( ev ), false );
+                    if( slot == 0 ) {
                         finger_curr_x = GetFingerX( ev, WindowWidth );
                         finger_curr_y = GetFingerY( ev, WindowHeight );
                         if( is_quick_shortcut_touch ) {
@@ -3878,8 +3914,8 @@ static void CheckMessages()
 
                                         // Display an Android toast message
                                         {
-                                            JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-                                            jobject activity = ( jobject )SDL_AndroidGetActivity();
+                                            JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+                                            jobject activity = ( jobject )GetAndroidActivity();
                                             jclass clazz( env->GetObjectClass( activity ) );
                                             jstring toast_message = env->NewStringUTF( quick_shortcuts_enabled ? "Shortcuts visible" :
                                                                     "Shortcuts hidden" );
@@ -3932,14 +3968,14 @@ static void CheckMessages()
                         needupdate = true; // ensure virtual joystick and quick shortcuts are updated properly
                         ui_manager::redraw_invalidated();
                         refresh_display(); // as above, but actually redraw it now as well
-                    } else if( GetFingerID( ev ) == 1 ) {
+                    } else if( slot == 1 ) {
                         if( is_two_finger_touch ) {
                             // on second finger release, just remember the x/y position so we can calculate delta once first finger is done
                             // is_two_finger_touch will be reset when first finger lifts (see above)
                             second_finger_curr_x = GetFingerX( ev, WindowWidth );
                             second_finger_curr_y = GetFingerY( ev, WindowHeight );
                         }
-                    } else if( GetFingerID( ev ) == 2 ) {
+                    } else if( slot == 2 ) {
                         if( is_three_finger_touch ) {
                             // on third finger release, just remember the x/y position so we can calculate delta once first finger is done
                             // is_three_finger_touch will be reset when first finger lifts (see above)
@@ -3947,8 +3983,10 @@ static void CheckMessages()
                             third_finger_curr_y = GetFingerY( ev, WindowHeight );
                         }
                     }
+                    finger_slot_clear( GetFingerID( ev ) );
 
                     break;
+                }
 #endif
 
                 case CATA_QUIT:
