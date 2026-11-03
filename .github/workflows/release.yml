@@ -181,16 +181,6 @@ jobs:
           #   artifact: linux-tiles-sounds
           #   ext: tar.gz
           #   content: application/gzip
-          - name: Linux
-            os: ubuntu-24.04
-            android: none
-            libbacktrace: 1
-            tiles: 1
-            sound: 1
-            sdl3: 1
-            artifact: linux
-            ext: tar.gz
-            content: application/gzip
           - name: Linux (Curses)
             os: ubuntu-22.04
             mxe: none
@@ -199,6 +189,16 @@ jobs:
             tiles: 0
             sound: 0
             artifact: linux-curses
+            ext: tar.gz
+            content: application/gzip
+          - name: Linux
+            os: ubuntu-24.04
+            android: none
+            libbacktrace: 1
+            tiles: 1
+            sound: 1
+            sdl3: 1
+            artifact: linux
             ext: tar.gz
             content: application/gzip
           - name: macOS (Curses)
