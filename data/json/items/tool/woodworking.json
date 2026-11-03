@@ -507,7 +507,6 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CHISEL", 1 ], [ "CHISEL_WOOD", 1 ] ],
-    "flags": [ "BELT_CLIP" ],
     "melee_damage": { "bash": 4, "cut": 1 }
   }
 ]

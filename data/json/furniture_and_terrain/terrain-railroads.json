@@ -644,7 +644,7 @@
     "id": "t_railroad_track_recessed",
     "type": "terrain",
     "name": "recessed railroad track",
-    "description": "Trains used to chug along on these.  These rail tracks sit flush with the road.  You could probably reclaim lengths of the track itself with a metalcutting tool like a hacksaw.",
+    "description": "Trains used to chug along on these.  These rail tracks sit flush with the road.  You could probably reclaim lengths of the track with a powerful metal cutting tool like an angle grinder or acetylene torch.",
     "symbol": "X",
     "color": "cyan",
     "looks_like": "t_railroad_track",
