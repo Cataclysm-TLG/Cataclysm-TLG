@@ -551,11 +551,11 @@ jobs:
         run: |
           make -j3 TILES=${{ matrix.tiles }} SOUND=${{ matrix.sound }} SDL3=1 RELEASE=1 LOCALIZE=1 LANGUAGES=all BACKTRACE=0 PCH=0 USE_HOME_DIR=1 UNIVERSAL_BINARY=1 WARN_STALE_DATA=1 dmgdist
           mv Cataclysm.dmg ctlg-${{ matrix.artifact }}-${{ needs.release.outputs.timestamp }}.dmg
-      - name: Set up JDK 8 (android)
+      - name: Set up JDK 17 (android)
         if: runner.os == 'Linux' && matrix.android != 'none'
         uses: actions/setup-java@v4
         with:
-          java-version: '11'
+          java-version: '17'
           distribution: 'adopt'   
       - name: Setup Build and Dependencies (android)
         if: runner.os == 'Linux' && matrix.android != 'none'
