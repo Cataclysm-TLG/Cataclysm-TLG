@@ -2,16 +2,6 @@
     "name": "ctlg-vcpkg-dependencies",
     "version-string": "1.0",
     "dependencies": [
-        "sdl2",
-        {
-          "name": "sdl2-image",
-          "features": [ "libjpeg-turbo" ]
-        },
-        {
-          "name": "sdl2-mixer",
-          "features": [ "libflac", "mpg123", "libmodplug" ]
-        },
-        "sdl2-ttf",
         "pdcurses"
     ],
     "features": {

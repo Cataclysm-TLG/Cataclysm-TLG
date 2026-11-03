@@ -37,8 +37,6 @@ namespace
 std::vector<sfx::channel> channels_to_end;
 std::mutex channels_to_end_mutex;
 
-constexpr float sound_speed_factor = 0.25f;
-
 struct sound_effect_handler {
     Mix_Chunk *audio_src;
     bool active;
