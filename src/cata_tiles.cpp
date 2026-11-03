@@ -5194,7 +5194,7 @@ void cata_tiles::draw_async_anim()
                 0,
                 0,
                 lit_level::LIT,
-                true,
+                false,
                 height_3d,
                 opts
             );

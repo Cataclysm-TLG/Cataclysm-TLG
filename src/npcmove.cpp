@@ -3394,9 +3394,13 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
             return;
         }
 
+        // FIXME: Unify avatar/npc behavior, filter "I want to go attack a monster
+        // but I'm following avatar at 2/4 paces and am not allowed to do my own pathing"
         if( critter->is_avatar() ) {
             if( sees( here, *critter ) ) {
-                say( chat_snippets().snip_let_me_pass.translated() );
+                if( one_in( 10 ) ) {
+                    say( chat_snippets().snip_let_me_pass.translated() );
+                }
             } else {
                 stumble_invis( *critter );
             }
@@ -3418,7 +3422,9 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
             // other npcs should not try to move into this npc anymore,
             // so infinite loop can be avoided.
             realnomove->insert( pos );
-            say( chat_snippets().snip_let_me_pass.translated() );
+            if( one_in( 10 ) ) {
+                say( chat_snippets().snip_let_me_pass.translated() );
+            }
             np->move_away_from( pos, true, realnomove );
             // if we moved NPC, readjust their path, so NPCs don't jostle each other out of their activity paths.
             if( np->attitude == NPCATT_ACTIVITY ) {
