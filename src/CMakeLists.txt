@@ -13,7 +13,24 @@ if (WIN32)
             OBJECT_DEPENDS "${RSRC_RC_DEP}")
 endif ()
 
-file(GLOB CATACLYSM_TLG_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+file(GLOB CATACLYSM_TLG_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/cata_allocator_c.c)
+
+if (MSVC)
+    set_source_files_properties(
+        ${CMAKE_CURRENT_SOURCE_DIR}/mapgen.cpp
+        PROPERTIES COMPILE_OPTIONS "/bigobj"
+    )
+endif()
+
+if (NOT WARN_STALE_DATA)
+    set_source_files_properties(
+        ${CMAKE_CURRENT_SOURCE_DIR}/flexbuffer_cache.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/options.cpp
+        PROPERTIES COMPILE_DEFINITIONS NO_STALE_DATA_WARN
+    )
+endif()
 
 list(REMOVE_ITEM CATACLYSM_TLG_SOURCES ${MAIN_CPP} ${MESSAGES_CPP})
 
@@ -29,6 +46,7 @@ add_custom_command(
         OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/version.h
         COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_SOURCE_DIR}/version.cmake
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
+
 
 # Build tiles version if requested
 if (TILES)

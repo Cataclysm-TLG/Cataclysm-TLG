@@ -418,10 +418,6 @@ if (BACKTRACE)
     endif ()
 endif ()
 
-file(GLOB CATACLYSM_TLG_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp
-    ${CMAKE_CURRENT_SOURCE_DIR}/cata_allocator_c.c)
-
 if ((LOCALIZE OR BUILD_TESTING) AND "${GETTEXT_MSGFMT_BINARY}" STREQUAL "")
     if(MSVC)
         list(APPEND Gettext_ROOT C:\\msys64\\usr)
@@ -447,6 +443,7 @@ if (USE_XDG_DIR)
     add_definitions(-DUSE_XDG_DIR)
 endif ()
 
+find_program(CCACHE_FOUND ccache HINTS ${CMAKE_CURRENT_SOURCE_DIR}/ccache)
 find_program(CCACHE_FOUND ccache)
 if (CCACHE_FOUND AND CATA_CCACHE)
     set(CMAKE_C_COMPILER_LAUNCHER ccache)
