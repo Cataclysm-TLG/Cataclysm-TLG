@@ -469,7 +469,8 @@
     "qualities": [ [ "AXE", 4 ], [ "BUTCHER", -100 ] ],
     "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "SPAWN_ACTIVE", "POWERED", "FRAGILE_MELEE" ],
     "pocket_data": [  ],
-    "revert_to": "elec_chainsaw_cord_off"
+    "revert_to": "elec_chainsaw_cord_off",
+    "melee_damage": { "bash": 4, "cut": 52 }
   },
   {
     "id": "saw",
@@ -507,6 +508,6 @@
     "color": "light_gray",
     "qualities": [ [ "CHISEL", 1 ], [ "CHISEL_WOOD", 1 ] ],
     "flags": [ "BELT_CLIP" ],
-    "melee_damage": { "bash": 2, "cut": 1 }
+    "melee_damage": { "bash": 4, "cut": 1 }
   }
 ]
