@@ -2231,22 +2231,36 @@ void item_contents::add_pocket( const item &pocket_item )
         // Need to update it once it's stored in the contents list.
         ( ++contents.rbegin() )->name_as_description = true;
         total_nonrigid_volume += i_pocket->volume_capacity();
-        effective_nonrigid_volume += ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
-                                     i_pocket->get_pocket_data()->volume_encumber_modifier;
+        const pocket_data *data = i_pocket->get_pocket_data();
+debugmsg( "Pocket: capacity=%d ml, magazine_well=%d ml, modifier=%.2f, type=%d, rigid=%d",
+          to_milliliter( i_pocket->volume_capacity() ),
+          to_milliliter( i_pocket->magazine_well() ),
+          data->volume_encumber_modifier,
+          static_cast<int>( data->type ),
+          static_cast<int>( data->rigid ) );
+        bool pocket_is_standard = data->type == pocket_type::CONTAINER ||
+                                data->type == pocket_type::MAGAZINE ||
+                                data->type == pocket_type::MAGAZINE_WELL;
+
+        if( !data->rigid && pocket_is_standard ) {
+            effective_nonrigid_volume +=
+                ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
+                data->volume_encumber_modifier;
+        }
     }
+
     additional_pockets_volume += total_nonrigid_volume;
     additional_pockets_effective_volume += effective_nonrigid_volume;
     additional_pockets_space_used += pocket_item.get_pocket_size();
     additional_pockets.push_back( pocket_item );
     additional_pockets.back().clear_items();
-
 }
+
 
 item item_contents::remove_pocket( int index )
 {
     // start at the first pocket
     auto rit = contents.rbegin();
-
     // find the pockets to remove from the item
     for( int i = additional_pockets.size() - 1; i >= index; --i ) {
         // move the iterator past all the pockets we aren't removing
@@ -2257,10 +2271,19 @@ item item_contents::remove_pocket( int index )
     units::volume total_nonrigid_volume = 0_ml;
     units::volume effective_nonrigid_volume = 0_ml;
     for( item_pocket *i_pocket : additional_pockets[index].get_all_contained_pockets() ) {
-        total_nonrigid_volume += i_pocket->volume_capacity();
-        effective_nonrigid_volume += ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
-                                     i_pocket->get_pocket_data()->volume_encumber_modifier;
+            total_nonrigid_volume += i_pocket->volume_capacity();
 
+            const pocket_data *data = i_pocket->get_pocket_data();
+
+            bool pocket_is_standard = data->type == pocket_type::CONTAINER ||
+                                    data->type == pocket_type::MAGAZINE ||
+                                    data->type == pocket_type::MAGAZINE_WELL;
+
+            if( !data->rigid && pocket_is_standard ) {
+                effective_nonrigid_volume +=
+                    ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
+                    data->volume_encumber_modifier;
+            }
         // move items from the consolidated pockets to the item that will be returned
         for( const item *item_to_move : it->all_items_top() ) {
             i_pocket->add( *item_to_move );
@@ -2274,7 +2297,6 @@ item item_contents::remove_pocket( int index )
     // Create a copy of the item to return and delete the old items entry.
     item it_return( additional_pockets[index] );
     additional_pockets.erase( additional_pockets.begin() + index );
-
     return it_return;
 }
 

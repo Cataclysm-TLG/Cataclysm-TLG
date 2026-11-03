@@ -118,7 +118,7 @@ ifeq ($(NATIVE), emscripten)
 endif
 # Uncomment below to disable warnings
 #WARNINGS = -w
-DEBUGSYMS = -g
+#DEBUGSYMS = -g
 #PROFILE = -pg
 #OTHERS = -O3
 #DEFINES = -DNDEBUG
@@ -234,6 +234,11 @@ ifeq ($(MSYS2), 1)
 endif
 ifneq (,$(findstring mingw32,$(CROSS)))
   JSON_FORMATTER_BIN=tools/format/json_formatter.exe
+endif
+
+# Avoid the horrendous DWARF thing for MSYS builds that makes them 3gb and unopenable, preserve .pdb generation for other builds.
+ifneq ($(MSYS2), 1)
+  DEBUGSYMS = -g
 endif
 
 # Determine zzip compression tool name
@@ -990,7 +995,7 @@ endif
 ifeq ($(MSYS2),1)
   DEFINES += -D_GLIBCXX_USE_C99_MATH_TR1
   CXXFLAGS += -DMSYS2 -mcx16
-  DEBUGSYMS = -gcodeview
+  override DEBUGSYMS :=
   LDFLAGS += -fuse-ld=lld
   LDFLAGS += -Wl,--pdb=$(basename $(TARGET)).pdb
 endif
