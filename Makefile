@@ -1351,7 +1351,19 @@ endif  # ifeq ($(SOUND), 1)
 endif  # ifeq ($(SDL3), 1)
 endif  # ifdef FRAMEWORK
 endif  # ifdef TILES
+ifeq ($(SDL3), 1)
+	@SDL3_LIBDIR="$$($(PKG_CONFIG) --variable=libdir sdl3)"; \
+	for lib in libSDL3.0.dylib libSDL3_image.0.dylib libSDL3_ttf.0.dylib; do \
+		if [ -f "$$SDL3_LIBDIR/$$lib" ]; then \
+			cp -L "$$SDL3_LIBDIR/$$lib" "$(APPRESOURCESDIR)/"; \
+		fi; \
+	done
+	install_name_tool -change @rpath/libSDL3.0.dylib @executable_path/libSDL3.0.dylib "$(APPRESOURCESDIR)/$(APPTARGET)"
+	install_name_tool -change @rpath/libSDL3_image.0.dylib @executable_path/libSDL3_image.0.dylib "$(APPRESOURCESDIR)/$(APPTARGET)"
+	install_name_tool -change @rpath/libSDL3_ttf.0.dylib @executable_path/libSDL3_ttf.0.dylib "$(APPRESOURCESDIR)/$(APPTARGET)"
+else
 	dylibbundler -of -b -x $(APPRESOURCESDIR)/$(APPTARGET) -d $(APPRESOURCESDIR)/ -p @executable_path/
+endif
 
 dmgdistclean:
 	rm -rf Cataclysm
