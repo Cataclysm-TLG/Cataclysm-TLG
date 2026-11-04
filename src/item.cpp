@@ -10846,7 +10846,8 @@ void item_location::salvage_on_break( map &here, item &it ) const
         }
         // Discard invalid component
         // Non-salvageable items are discarded even if made of appropriate material
-        if( !curr.made_of_any( mat_set ) ) {
+        if( !curr.made_of_any( mat_set ) )
+        {
             return;
         }
         // Items count by charges are not always smaller than base materials
