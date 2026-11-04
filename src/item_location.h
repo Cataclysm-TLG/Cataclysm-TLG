@@ -172,6 +172,7 @@ class item_location
          */
         void overflow( map &here );
 
+        // Potentially drops some components on map when an item is destroyed. Does not destroy the item.
         void salvage_on_break( map &here, item &it ) const;
 
         /**

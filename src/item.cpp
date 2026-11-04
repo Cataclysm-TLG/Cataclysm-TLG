@@ -10807,7 +10807,6 @@ std::optional<recipe> item::find_uncraft_recipe() const
     return std::nullopt;
 }
 
-
 void item_location::salvage_on_break( map &here, item &it ) const
 {
     tripoint_bub_ms position = pos_bub( here );
@@ -10821,7 +10820,10 @@ void item_location::salvage_on_break( map &here, item &it ) const
     }
 
     // Randomize efficiency so we don't get predictable results.
-    float efficiency = 0.5f - ( 0.02f * rng( 1, 20 ) );
+    float efficiency = 0.7f - ( 0.025f * rng( 0, 28 ) );
+    if( efficiency <= 0.001f ) {
+        return;
+    }
 
     auto distribute_uniformly = [&mat_to_weight]( const item & x, float num_adjusted ) -> void {
         for( const auto &type : x.made_of() )
@@ -10835,7 +10837,6 @@ void item_location::salvage_on_break( map &here, item &it ) const
     std::function<void( item, float )> cut_up_component =
         [&salvage, &mat_set, &distribute_uniformly, &cut_up_component]
     ( const item & curr, float num_adjusted ) -> void {
-
         // If it is one of the basic components, add it into the list
         if( curr.type->is_basic_component() )
         {
@@ -10843,14 +10844,11 @@ void item_location::salvage_on_break( map &here, item &it ) const
             salvage[curr.typeId()] += num_actual;
             return;
         }
-
         // Discard invalid component
         // Non-salvageable items are discarded even if made of appropriate material
-        if( !curr.made_of_any( mat_set ) || !curr.is_salvageable() )
-        {
+        if( !curr.made_of_any( mat_set ) ) {
             return;
         }
-
         // Items count by charges are not always smaller than base materials
         // Necessary for e.g. bones -> bone splinters
         if( curr.count_by_charges() )
@@ -10858,7 +10856,6 @@ void item_location::salvage_on_break( map &here, item &it ) const
             distribute_uniformly( curr, num_adjusted );
             return;
         }
-
         // All intact components are also cut up and destroyed
         if( !curr.components.empty() )
         {
@@ -10899,7 +10896,9 @@ void item_location::salvage_on_break( map &here, item &it ) const
         {
             // No recipe was found so we guess and distribute the weight uniformly.
             // This is imprecise but it can't be exploited as no recipe exists for the item
-            distribute_uniformly( curr, num_adjusted );
+            if( curr.is_salvageable() ) {
+                distribute_uniformly( curr, num_adjusted );
+            }
         }
     };
 
@@ -10916,9 +10915,6 @@ void item_location::salvage_on_break( map &here, item &it ) const
 
     const bool filthy = it.is_filthy();
 
-    // Original item has been consumed.
-    it.remove_item( it );
-
     for( const auto &salvaged_mat : salvage ) {
         item result( salvaged_mat.first, calendar::turn );
         int amount = salvaged_mat.second;
@@ -10931,7 +10927,15 @@ void item_location::salvage_on_break( map &here, item &it ) const
                 result.set_flag( flag_FILTHY );
             }
             for( int i = 0; i < amount; i++ ) {
-                here.add_item_or_charges( position, result );
+                item damaged_result = result;
+                // Randomly damage the salvaged item up to 4 times.
+                if( !damaged_result.count_by_charges() ) {
+                    const int damage_times = rng( 0, 4 );
+                    for( int i = 0; i < damage_times; i++ ) {
+                        damaged_result.inc_damage();
+                    }
+                }
+                here.add_item_or_charges( position, damaged_result );
             }
         }
     }

@@ -4478,6 +4478,7 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
 
             item_location loc( map_cursor( this, p ), &*i );
             loc.salvage_on_break( *this, *i );
+            i = items.erase( i );
             items_destroyed++;
         } else {
             i++;
@@ -4645,6 +4646,7 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
 
             item_location loc( map_cursor( this, p ), &*i );
             loc.salvage_on_break( *this, *i );
+            i = items.erase( i );
             items_destroyed++;
         } else {
             i++;

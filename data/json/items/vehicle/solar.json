@@ -15,7 +15,12 @@
     "to_hit": -4,
     "color": "yellow",
     "symbol": "]",
-    "material": [ "tempered_glass" ],
+    "material": [
+      { "type": "tempered_glass", "portion": 70 },
+      { "type": "aluminum", "portion": 20 },
+      { "type": "plastic", "portion": 8 },
+      { "type": "copper", "portion": 2 }
+    ],
     "volume": "12500 ml",
     "flags": [ "NO_REPAIR", "WATER_BREAK" ],
     "category": "veh_parts",
@@ -140,6 +145,11 @@
     "category": "spare_parts",
     "price": "50 USD",
     "price_postapoc": "1 USD",
+    "material": [
+      { "type": "tempered_glass", "portion": 70 },
+      { "type": "aluminum", "portion": 20 },
+      { "type": "plastic", "portion": 10 }
+    ],
     "copy-from": "solar_panel"
   },
   {
@@ -149,6 +159,11 @@
     "description": "A small electronic device that can convert solar radiation into electric power.  This one is a high-performance type made of monocrystalline silicon.",
     "price": "150 USD",
     "price_postapoc": "3 USD",
+    "material": [
+      { "type": "tempered_glass", "portion": 70 },
+      { "type": "aluminum", "portion": 20 },
+      { "type": "plastic", "portion": 10 }
+    ],
     "copy-from": "solar_cell"
   }
 ]
