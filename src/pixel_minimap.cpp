@@ -32,6 +32,7 @@
 #include "monster.h"
 #include "pixel_minimap_projectors.h"
 #include "sdl_utils.h"
+#include "sdl_wrappers.h"
 #include "vehicle.h"
 #include "vpart_position.h"
 

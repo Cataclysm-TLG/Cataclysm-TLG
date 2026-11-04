@@ -435,7 +435,7 @@ class tileset_cache
         // and reloads.
         std::shared_ptr<const tileset> load_tileset( const std::string &tileset_id,
                 const SDL_Renderer_Ptr &renderer, bool precheck,
-                bool force, bool pump_events, bool terrain,
+                bool force, bool pump_events,
                 const std::string &memory_map_mode,
                 uint64_t current_renderer_instance_gen,
                 uint64_t current_gpu_textures_gen );

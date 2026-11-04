@@ -407,7 +407,7 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
     // reset the overlay ordering from the previous loaded tileset
     tileset_mutation_overlay_ordering.clear();
 
-    tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events, terrain,
+    tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events,
                                       memory_map_mode, 0, 0 );
 
     set_draw_scale( 16 );
@@ -4609,7 +4609,7 @@ bool cata_tiles::draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d
 
 std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &tileset_id,
         const SDL_Renderer_Ptr &renderer, const bool precheck, const bool force, const bool pump_events,
-        const bool terrain, const std::string &memory_map_mode,
+        const std::string &memory_map_mode,
         const uint64_t current_renderer_instance_gen, const uint64_t current_gpu_textures_gen )
 {
     const tileset_cache_key key {
@@ -4628,7 +4628,7 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
         }
         std::shared_ptr<tileset> new_ts = std::make_shared<tileset>();
         loader loader( *new_ts, renderer, memory_map_mode );
-        loader.load( tileset_id, precheck, pump_events, terrain );
+        loader.load( tileset_id, precheck, pump_events );
         new_ts->set_upload_generations( current_renderer_instance_gen, current_gpu_textures_gen );
         // insert_or_assign so an expired weak_ptr at this key is replaced
         // instead of being kept alongside a duplicate emplace attempt.
@@ -4640,7 +4640,7 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
 
     if( force || ( ts->get_tileset_id().empty() && !precheck ) ) {
         loader loader( *ts, renderer, memory_map_mode );
-        loader.load( tileset_id, precheck, pump_events, terrain );
+        loader.load( tileset_id, precheck, pump_events );
         ts->set_upload_generations( current_renderer_instance_gen, current_gpu_textures_gen );
     }
     return ts;
