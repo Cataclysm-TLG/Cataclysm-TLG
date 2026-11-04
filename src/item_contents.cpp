@@ -2232,12 +2232,6 @@ void item_contents::add_pocket( const item &pocket_item )
         ( ++contents.rbegin() )->name_as_description = true;
         total_nonrigid_volume += i_pocket->volume_capacity();
         const pocket_data *data = i_pocket->get_pocket_data();
-debugmsg( "Pocket: capacity=%d ml, magazine_well=%d ml, modifier=%.2f, type=%d, rigid=%d",
-          to_milliliter( i_pocket->volume_capacity() ),
-          to_milliliter( i_pocket->magazine_well() ),
-          data->volume_encumber_modifier,
-          static_cast<int>( data->type ),
-          static_cast<int>( data->rigid ) );
         bool pocket_is_standard = data->type == pocket_type::CONTAINER ||
                                 data->type == pocket_type::MAGAZINE ||
                                 data->type == pocket_type::MAGAZINE_WELL;

@@ -1087,7 +1087,10 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         RenderSetClipRect( renderer, nullptr );
 
                         // Phase 1: build the silhouette mask.
-                        SetRenderTarget( renderer, tint_mask_tex );
+                        if( !tint_mask_tex || !SetRenderTarget( renderer, tint_mask_tex ) ) {
+                            debugmsg( "Failed to set tint mask render target" );
+                            return;
+                        }
                         SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_NONE );
                         SetRenderDrawColor( renderer, 0, 0, 0, 0 );
                         const SDL_Rect clear_rect = { 0, 0, batch_union.w, batch_union.h };
@@ -1145,6 +1148,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                             // Must flush any pending complex batch before drawing
                             // a simple tile to preserve correct draw order.
                             flush_tint_batch();
+                            
                             const SDL_Color tc = { tp->com.tint_color.r, tp->com.tint_color.g,
                                                    tp->com.tint_color.b, tp->com.tint_color.a
                                                  };
