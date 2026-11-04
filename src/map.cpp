@@ -4399,7 +4399,16 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
             }
         }
 
-        const float material_factor = i->chip_resistance( true );
+        float material_factor = i->chip_resistance( true );
+        if( i->has_flag( flag_FRAGILE ) || i->has_flag( flag_FRAGILE_MELEE ) ) {
+            material_factor *= 0.5f;
+        }
+        if( i->has_flag( flag_SOFT ) ) {
+            material_factor *= 3.f;
+        }
+        if( i->has_flag( flag_DURABLE_MELEE ) || i->has_flag( flag_STURDY ) ) {
+            material_factor *= 1.5f;
+        }
         if( power < material_factor ) {
             i++;
             continue;
@@ -4407,7 +4416,7 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
 
         // The volume check here pretty much only influences very large items
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
-        float damage_chance = 10.0f * power / volume_factor;
+        float damage_chance = 5.0f * power / volume_factor;
         // Example:
         // Power 40 (just below C4 epicenter) vs plank
         // damage_chance = 10 * 40 / 40 = 10, material_factor = 8
@@ -4418,25 +4427,32 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
 
         const bool by_charges = i->count_by_charges();
         // See if they were damaged
+
         if( by_charges ) {
-            damage_chance *= i->charges_per_volume( 250_ml );
+            damage_chance *= std::max( 1, i->charges_per_volume( 250_ml ) );
             while( ( damage_chance > material_factor ||
                      x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    i->charges > 0 ) {
-                i->charges--;
+                const float damage_probability = damage_chance /
+                                                 ( damage_chance + material_factor * 2.0f );
+                if( x_in_y( damage_probability * 100, 100 ) ) {
+                    i->charges--;
+                    item_was_damaged = true;
+                }
                 damage_chance -= material_factor;
-                // We can't increment items_damaged directly because a single item can be damaged more than once
-                item_was_damaged = true;
             }
         } else {
-            const field_type_id type_blood = i->is_corpse() ? i->get_mtype()->bloodType() : fd_null;
-            while( ( damage_chance > material_factor || x_in_y( damage_chance / material_factor, 1.0f ) ) &&
+            while( ( damage_chance > material_factor ||
+                     x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    ( i->damage() < i->max_damage() ) ) {
-                i->inc_damage();
-                add_splash( type_blood, p, 1, damage_chance );
-                damage_chance -= material_factor;
-                item_was_damaged = true;
+                const float damage_probability = damage_chance /
+                                                 ( damage_chance + material_factor );
+                if( x_in_y( damage_probability * 100, 100 ) ) {
+                    i->inc_damage();
+                    item_was_damaged = true;
+                }
             }
+            damage_chance -= material_factor;
         }
 
         // If an item was damaged, increment the counter and set it as most recently damaged.
@@ -4460,7 +4476,9 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
                 }
             }
 
-            i = i_rem( p, i );
+            item_location loc( map_cursor( this, p ), &*i );
+            loc.salvage_on_break( *this, *i );
+            i = items.erase( i );
             items_destroyed++;
         } else {
             i++;
@@ -4544,21 +4562,26 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
             continue;
         }
 
-        const float material_factor = i->chip_resistance( true );
+        float material_factor = i->chip_resistance( true );
+        if( i->has_flag( flag_FRAGILE ) || i->has_flag( flag_FRAGILE_MELEE ) ) {
+            material_factor *= 0.5f;
+        }
+        if( i->is_soft() ) {
+            material_factor *= 2.f;
+        }
+        if( i->has_flag( flag_DURABLE_MELEE ) || i->has_flag( flag_STURDY ) ) {
+            material_factor *= 1.5f;
+        }
         if( power < material_factor ) {
             i++;
             continue;
         }
         // The volume check here pretty much only influences very large items
         const float volume_factor = std::max<float>( 40, i->volume() / 250_ml );
+        float damage_chance = 5.f * power / volume_factor;
         add_msg_debug( debugmode::DF_MAP,
-                       "manually_smash_items(): power %1s / volume factor %2s", power, volume_factor );
-        float damage_chance = 10.f * power / volume_factor;
-        if( i->is_soft() && damage_chance > 0.f ) {
-            damage_chance /= 5.f;
-        }
-        add_msg_debug( debugmode::DF_MAP,
-                       "manually_smash_items(): damage_chance for %1s is %2s", damage_chance, i->tname() );
+                       "manually_smash_items(): damage_chance for %1s is %2s, material factor %3s vs bash power %4s / volume factor %5s.",
+                       i->tname(), damage_chance, material_factor, power, volume_factor );
         params.did_bash = true;
         params.bashed_solid = true;
         const bool by_charges = i->count_by_charges();
@@ -4569,18 +4592,26 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
             while( ( damage_chance > material_factor ||
                      x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    i->charges > 0 ) {
-                i->charges--;
+                const float damage_probability = damage_chance /
+                                                 ( damage_chance + material_factor * 2.0f );
+                if( x_in_y( damage_probability * 100, 100 ) ) {
+                    i->charges--;
+                    item_was_damaged = true;
+                }
                 damage_chance -= material_factor;
-                item_was_damaged = true;
             }
         } else {
             while( ( damage_chance > material_factor ||
                      x_in_y( damage_chance / material_factor, 1.0f ) ) &&
                    ( i->damage() < i->max_damage() ) ) {
-                i->inc_damage();
-                damage_chance -= material_factor;
-                item_was_damaged = true;
+                const float damage_probability = damage_chance /
+                                                 ( damage_chance + material_factor );
+                if( x_in_y( damage_probability * 100, 100 ) ) {
+                    i->inc_damage();
+                    item_was_damaged = true;
+                }
             }
+            damage_chance -= material_factor;
         }
 
         // If an item was damaged, increment the counter and set it as most recently damaged.
@@ -4613,6 +4644,8 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
                                "smash_success", "smash_glass_contents" );
             }
 
+            item_location loc( map_cursor( this, p ), &*i );
+            loc.salvage_on_break( *this, *i );
             i = items.erase( i );
             items_destroyed++;
         } else {

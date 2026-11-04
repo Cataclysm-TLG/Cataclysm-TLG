@@ -38,6 +38,7 @@
 #include "color.h"
 #include "coordinates.h"
 #include "craft_command.h"
+#include "crafting.h"
 #include "creature.h"
 #include "damage.h"
 #include "debug.h"
@@ -10774,6 +10775,172 @@ bool item::is_salvageable() const
     }
     return !has_flag( flag_NO_SALVAGE );
 }
+
+units::mass item::proportional_weight( int material_portions ) const
+{
+    int total_portions = std::max( 1, type->mat_portion_total );
+    return weight() * material_portions / total_portions;
+}
+
+// Find a recipe that can be used to craft item x. Searches craft and uncraft recipes
+// Used only by salvage_actor::cut_up
+std::optional<recipe> item::find_uncraft_recipe() const
+{
+    auto is_valid_uncraft = [this]( const recipe & curr ) -> bool {
+        return !( curr.obsolete || curr.result() != typeId()
+                  || curr.makes_amount() > 1 || curr.is_null() );
+    };
+
+    // Check uncraft first, then crafting recipes if none was found
+    recipe uncraft = recipe_dictionary::get_uncraft( typeId() );
+    if( is_valid_uncraft( uncraft ) ) {
+        return uncraft;
+    }
+
+    auto iter = std::find_if( recipe_dict.begin(), recipe_dict.end(),
+    [&]( const std::pair<const recipe_id, recipe> &curr ) {
+        return is_valid_uncraft( curr.second );
+    } );
+    if( iter != recipe_dict.end() ) {
+        return iter->second;
+    }
+    return std::nullopt;
+}
+
+void item_location::salvage_on_break( map &here, item &it ) const
+{
+    tripoint_bub_ms position = pos_bub( here );
+
+    // Map of salvaged items (id, count)
+    std::map<itype_id, int> salvage;
+    std::map<material_id, units::mass> mat_to_weight;
+    std::set<material_id> mat_set;
+    for( const std::pair<const material_id, int> &mat : it.made_of() ) {
+        mat_set.insert( mat.first );
+    }
+
+    // Randomize efficiency so we don't get predictable results.
+    float efficiency = 0.7f - ( 0.025f * rng( 0, 28 ) );
+    if( efficiency <= 0.001f ) {
+        return;
+    }
+
+    auto distribute_uniformly = [&mat_to_weight]( const item & x, float num_adjusted ) -> void {
+        for( const auto &type : x.made_of() )
+        {
+            mat_to_weight[type.first] += x.proportional_weight( type.second ) * num_adjusted;
+        }
+    };
+
+    // efficiency is decreased every time the ingredients of a recipe have more mass than the output
+    // num_adjusted represents the number of items and efficiency in one value
+    std::function<void( item, float )> cut_up_component =
+        [&salvage, &mat_set, &distribute_uniformly, &cut_up_component]
+    ( const item & curr, float num_adjusted ) -> void {
+        // If it is one of the basic components, add it into the list
+        if( curr.type->is_basic_component() )
+        {
+            int num_actual = static_cast<int>( num_adjusted );
+            salvage[curr.typeId()] += num_actual;
+            return;
+        }
+        // Discard invalid component
+        // Non-salvageable items are discarded even if made of appropriate material
+        if( !curr.made_of_any( mat_set ) ) {
+            return;
+        }
+        // Items count by charges are not always smaller than base materials
+        // Necessary for e.g. bones -> bone splinters
+        if( curr.count_by_charges() )
+        {
+            distribute_uniformly( curr, num_adjusted );
+            return;
+        }
+        // All intact components are also cut up and destroyed
+        if( !curr.components.empty() )
+        {
+            for( const item_components::type_vector_pair &tvp : curr.components ) {
+                for( const item &iter : tvp.second ) {
+                    cut_up_component( iter, num_adjusted );
+                }
+            }
+            return;
+        }
+
+        // Try to find an available recipe and "restore" its components
+        std::optional<recipe> uncraft = curr.find_uncraft_recipe();
+        if( uncraft )
+        {
+            const requirement_data requirements = uncraft->simple_requirements();
+
+            units::mass ingredient_weight = 0_gram;
+            for( const auto &altercomps : requirements.get_components() ) {
+                if( !altercomps.empty() && altercomps.front().type ) {
+                    ingredient_weight += altercomps.front().type->weight * altercomps.front().count;
+                }
+            }
+            // We decrease efficiency so on avg no more mass is salvaged than the original item weighed
+            num_adjusted *= std::min( 1.0f, static_cast<float>( curr.weight().value() )
+                                      / static_cast<float>( ingredient_weight.value() ) );
+
+            // Find default components set from recipe
+            for( const auto &altercomps : requirements.get_components() ) {
+                const item_comp &comp = altercomps.front();
+                item next = item( comp.type, calendar::turn );
+                if( next.count_by_charges() ) {
+                    next.charges = 1;
+                }
+                cut_up_component( next, num_adjusted * comp.count );
+            }
+        } else
+        {
+            // No recipe was found so we guess and distribute the weight uniformly.
+            // This is imprecise but it can't be exploited as no recipe exists for the item
+            if( curr.is_salvageable() ) {
+                distribute_uniformly( curr, num_adjusted );
+            }
+        }
+    };
+
+    // Decompose the item into irreducible parts
+    cut_up_component( it, efficiency );
+
+
+    // Add the uniformly distributed mass to the relevant salvage items
+    for( const auto &iter : mat_to_weight ) {
+        if( const std::optional<itype_id> id = iter.first->salvaged_into() ) {
+            salvage[*id] += iter.second / id->obj().weight;
+        }
+    }
+
+    const bool filthy = it.is_filthy();
+
+    for( const auto &salvaged_mat : salvage ) {
+        item result( salvaged_mat.first, calendar::turn );
+        int amount = salvaged_mat.second;
+        if( amount > 0 ) {
+            if( result.count_by_charges() ) {
+                result.charges = amount;
+                amount = 1;
+            }
+            if( filthy ) {
+                result.set_flag( flag_FILTHY );
+            }
+            for( int i = 0; i < amount; i++ ) {
+                item damaged_result = result;
+                // Randomly damage the salvaged item up to 4 times.
+                if( !damaged_result.count_by_charges() ) {
+                    const int damage_times = rng( 0, 4 );
+                    for( int i = 0; i < damage_times; i++ ) {
+                        damaged_result.inc_damage();
+                    }
+                }
+                here.add_item_or_charges( position, damaged_result );
+            }
+        }
+    }
+}
+
 
 bool item::is_disassemblable() const
 {
