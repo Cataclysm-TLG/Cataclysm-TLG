@@ -271,7 +271,7 @@
     "chip_resist": 8,
     "wind_resist": 90,
     "repaired_with": "bone",
-    "salvaged_into": "skewer_bone",
+    "salvaged_into": "bone",
     "dmg_adj": [ "scratched", { "str": "cut", "ctxt": "material damage adjective" }, "cracked", "shattered" ],
     "bash_dmg_verb": "cracked",
     "cut_dmg_verb": "chipped",
@@ -286,6 +286,14 @@
     "burn_products": [ [ "corpse_ash", 0.035 ] ],
     "resist": { "bash": 2, "cut": 3, "acid": 7, "heat": 1, "bullet": 1 },
     "repair_difficulty": 3
+  },
+  {
+    "type": "material",
+    "id": "bone_tainted",
+    "name": "Tainted Bone",
+    "copy-from": "bone",
+    "repaired_with": "bone_tainted",
+    "salvaged_into": "bone_tainted"
   },
   {
     "type": "material",
