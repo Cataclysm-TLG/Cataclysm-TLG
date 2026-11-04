@@ -297,6 +297,10 @@ void tileset::clear()
     overexposed_tile_values.clear();
     memory_tile_values.clear();
     silhouette_tile_values.clear();
+    atlas_descriptors.clear();
+    default_item_highlight_index.reset();
+    renderer_instance_generation_at_upload = 0;
+    gpu_textures_generation_at_upload = 0;
     duplicate_ids.clear();
     tile_ids.clear();
     for( std::unordered_map<std::string, season_tile_value> &m : tile_ids_by_season ) {
@@ -304,6 +308,30 @@ void tileset::clear()
     }
     item_layer_data.clear();
     field_layer_data.clear();
+}
+
+uint64_t compute_tileset_filter_fingerprint( const std::string &memory_map_mode )
+{
+    auto mix = []( uint64_t &h, uint64_t v ) {
+        h ^= v + 0x9e3779b97f4a7c15ULL + ( h << 6 ) + ( h >> 2 );
+    };
+    uint64_t h = 0;
+    // SCALING_MODE is stamped onto every texture at CreateTexture time via
+    // the SDL default scale quality.
+    mix( h, std::hash<std::string> {}( get_option<std::string>( "SCALING_MODE" ) ) );
+    if( memory_map_mode == "color_pixel_custom" ) {
+        mix( h, static_cast<uint64_t>( get_option<int>( "MEMORY_RGB_DARK_RED" ) ) );
+        mix( h, static_cast<uint64_t>( get_option<int>( "MEMORY_RGB_DARK_GREEN" ) ) );
+        mix( h, static_cast<uint64_t>( get_option<int>( "MEMORY_RGB_DARK_BLUE" ) ) );
+        mix( h, static_cast<uint64_t>( get_option<int>( "MEMORY_RGB_BRIGHT_RED" ) ) );
+        mix( h, static_cast<uint64_t>( get_option<int>( "MEMORY_RGB_BRIGHT_GREEN" ) ) );
+        mix( h, static_cast<uint64_t>( get_option<int>( "MEMORY_RGB_BRIGHT_BLUE" ) ) );
+        const float gamma = get_option<float>( "MEMORY_GAMMA" );
+        uint32_t gamma_bits = 0;
+        std::memcpy( &gamma_bits, &gamma, sizeof( gamma_bits ) );
+        mix( h, static_cast<uint64_t>( gamma_bits ) );
+    }
+    return h;
 }
 
 const tile_type *tileset::find_tile_type( const std::string &id ) const
@@ -380,7 +408,7 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
     tileset_mutation_overlay_ordering.clear();
 
     tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events,
-                                      memory_map_mode );
+                                      memory_map_mode, 0, 0 );
 
     set_draw_scale( 16 );
 
@@ -393,6 +421,12 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
 void cata_tiles::reinit()
 {
     set_draw_scale( 16 );
+    // Wrap so the clear lands on display_buffer rather than the null idle
+    // target.
+    display_buffer_draw_scope draw_scope;
+    if( display_buffer_scope_is_invalid() ) {
+        return;
+    }
     RenderClear( renderer );
 }
 
@@ -439,7 +473,8 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                        std::multimap<point, formatted_text> &overlay_strings,
                        color_block_overlay_container &color_blocks )
 {
-    if( !g ) {
+    display_buffer_draw_scope draw_scope;
+    if( display_buffer_scope_is_invalid() || !g ) {
         return;
     }
 
@@ -1092,20 +1127,24 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 
                         // Phase 1: build the silhouette mask.
                         {
+                            scoped_render_target mask_scope( renderer, tint_mask_tex.get()
 #if SDL_MAJOR_VERSION >= 3
-                            cata_shader::render_target_scope mask_scope(
-                                renderer.get(), tint_mask_tex.get(), m_variant_pass.get() );
+                                                             , m_variant_pass.get()
+#endif
+                                                           );
                             if( !mask_scope.is_valid() ) {
                                 // variant_pass may have failed to unbind; later
                                 // target switches would cross with shader bound.
                                 batch_tiles.clear();
                                 batch_sum_area = 0;
-                                throw std::runtime_error(
-                                    "cata_tiles::flush_tint_batch: render_target_scope construction failed" );
+                                if( !mask_scope.boundary_intact() ) {
+                                    // Boundary lost: latch so the enclosing dtor skips detach.
+                                    display_buffer_scope_signal_recovery_required();
+                                }
+                                throw std::runtime_error( mask_scope.boundary_intact()
+                                                          ? "cata_tiles::flush_tint_batch: variant_pass refused boundary"
+                                                          : "cata_tiles::flush_tint_batch: scoped_render_target boundary lost" );
                             }
-#else
-                            SetRenderTarget( renderer, tint_mask_tex );
-#endif
                             // Clip is per-target; clear defensively for reused mask.
                             RenderSetClipRect( renderer, nullptr );
                             SetRenderDrawBlendMode( renderer, SDL_BLENDMODE_NONE );
@@ -1130,17 +1169,19 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                                                          static_cast<CataFlipMode>( rec.flip ) );
                                 }
                             }
-#if SDL_MAJOR_VERSION >= 3
+                            // Explicit restore before phase 2 so a failure
+                            // aborts compositing instead of leaving the draw
+                            // landing in the mask.
                             if( !mask_scope.restore() ) {
-                                // Subsequent draws would land in the mask.
                                 batch_tiles.clear();
                                 batch_sum_area = 0;
-                                throw std::runtime_error(
-                                    "cata_tiles::flush_tint_batch: failed to restore display_buffer render target" );
+                                if( !mask_scope.boundary_intact() ) {
+                                    display_buffer_scope_signal_recovery_required();
+                                }
+                                throw std::runtime_error( mask_scope.boundary_intact()
+                                                          ? "cata_tiles::flush_tint_batch: variant_pass refused boundary on restore"
+                                                          : "cata_tiles::flush_tint_batch: failed to restore display_buffer render target" );
                             }
-#else
-                            set_displaybuffer_rendertarget();
-#endif
                         }
 
                         // Phase 2: composite the mask to the display buffer.
@@ -1422,10 +1463,14 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 
     RenderSetClipRect( renderer, nullptr );
 #if SDL_MAJOR_VERSION >= 3
-    // Unbind any GPU render state held across sprite batches the
-    // next-frame draws see a clean state.
-    if( m_variant_pass ) {
-        m_variant_pass->flush();
+    // Unbind any GPU render state held across sprite batches so the
+    // next-frame draws see clean state. On flush failure the bind boundary
+    // forbids a target switch: abort the unbind, latch recovery, and throw.
+    if( m_variant_pass && !m_variant_pass->flush() ) {
+        draw_scope.abort_unbind();
+        display_buffer_scope_signal_recovery_required();
+        throw std::runtime_error(
+            "cata_tiles::draw: variant_pass flush failed at end of frame; renderer in undefined state" );
     }
 #endif
 }
@@ -4581,18 +4626,31 @@ bool cata_tiles::draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d
 
 std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &tileset_id,
         const SDL_Renderer_Ptr &renderer, const bool precheck, const bool force, const bool pump_events,
-        const std::string &memory_map_mode )
+        const std::string &memory_map_mode,
+        const uint64_t current_renderer_instance_gen, const uint64_t current_gpu_textures_gen )
 {
+    const tileset_cache_key key {
+        tileset_id, memory_map_mode, compute_tileset_filter_fingerprint( memory_map_mode )
+    };
+
     const auto get_or_create_tileset = [&]() {
-        const auto it = tilesets_.find( tileset_id );
-        if( it == tilesets_.end() || it->second.expired() ) {
-            std::shared_ptr<tileset> new_ts = std::make_shared<tileset>();
-            loader loader( *new_ts, renderer, memory_map_mode );
-            loader.load( tileset_id, precheck, pump_events );
-            tilesets_.emplace( tileset_id, new_ts );
-            return new_ts;
+        const auto it = tilesets_.find( key );
+        if( it != tilesets_.end() ) {
+            std::shared_ptr<tileset> cached = it->second.lock();
+            if( cached
+                && cached->get_renderer_instance_generation_at_upload() == current_renderer_instance_gen
+                && cached->get_gpu_textures_generation_at_upload() == current_gpu_textures_gen ) {
+                return cached;
+            }
         }
-        return it->second.lock();
+        std::shared_ptr<tileset> new_ts = std::make_shared<tileset>();
+        loader loader( *new_ts, renderer, memory_map_mode );
+        loader.load( tileset_id, precheck, pump_events );
+        new_ts->set_upload_generations( current_renderer_instance_gen, current_gpu_textures_gen );
+        // insert_or_assign so an expired weak_ptr at this key is replaced
+        // instead of being kept alongside a duplicate emplace attempt.
+        tilesets_.insert_or_assign( key, new_ts );
+        return new_ts;
     };
 
     std::shared_ptr<tileset> ts = get_or_create_tileset();
@@ -4600,6 +4658,7 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
     if( force || ( ts->get_tileset_id().empty() && !precheck ) ) {
         loader loader( *ts, renderer, memory_map_mode );
         loader.load( tileset_id, precheck, pump_events );
+        ts->set_upload_generations( current_renderer_instance_gen, current_gpu_textures_gen );
     }
     return ts;
 }

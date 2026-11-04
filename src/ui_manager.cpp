@@ -343,6 +343,16 @@ void ui_adaptor::redraw_invalidated()
     if( test_mode || ui_stack.empty() ) {
         return;
     }
+#if defined(TILES)
+    display_buffer_draw_scope draw_scope;
+    if( display_buffer_scope_is_invalid() ) {
+        // Bind failed; skip the redraw. Invalidation is preserved for retry.
+        return;
+    }
+    int buf_w = 0;
+    int buf_h = 0;
+    get_display_buffer_dims( &buf_w, &buf_h );
+#endif
 
     restore_on_out_of_scope prev_redraw_in_progress( redraw_in_progress );
     restore_on_out_of_scope prev_restart_redrawing( restart_redrawing );
