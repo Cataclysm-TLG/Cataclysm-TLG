@@ -10820,8 +10820,8 @@ void item_location::salvage_on_break( map &here, item &it ) const
     }
 
     // Randomize efficiency so we don't get predictable results.
-    float efficiency = 0.7f - ( 0.025f * rng( 0, 28 ) );
-    if( efficiency <= 0.001f ) {
+    float efficiency = 0.33f - ( 0.05f * rng( 0, 8 ) );
+    if( efficiency < 0.1f ) {
         return;
     }
 
@@ -10846,7 +10846,8 @@ void item_location::salvage_on_break( map &here, item &it ) const
         }
         // Discard invalid component
         // Non-salvageable items are discarded even if made of appropriate material
-        if( !curr.made_of_any( mat_set ) ) {
+        if( !curr.made_of_any( mat_set ) )
+        {
             return;
         }
         // Items count by charges are not always smaller than base materials
