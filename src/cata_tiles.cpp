@@ -187,23 +187,23 @@ static int msgtype_to_tilecolor( const game_message_type type, const bool bOldMs
     const int iBold = bOldMsg ? 0 : 8;
 
     switch( type ) {
-    case m_good:
-        return iBold + catacurses::green;
-    case m_bad:
-        return iBold + catacurses::red;
-    case m_mixed:
-    case m_headshot:
-        return iBold + catacurses::magenta;
-    case m_neutral:
-        return iBold + catacurses::white;
-    case m_warning:
-    case m_critical:
-        return iBold + catacurses::yellow;
-    case m_info:
-    case m_grazing:
-        return iBold + catacurses::blue;
-    default:
-        break;
+        case m_good:
+            return iBold + catacurses::green;
+        case m_bad:
+            return iBold + catacurses::red;
+        case m_mixed:
+        case m_headshot:
+            return iBold + catacurses::magenta;
+        case m_neutral:
+            return iBold + catacurses::white;
+        case m_warning:
+        case m_critical:
+            return iBold + catacurses::yellow;
+        case m_info:
+        case m_grazing:
+            return iBold + catacurses::blue;
+        default:
+            break;
     }
 
     return -1;
@@ -214,19 +214,19 @@ formatted_text::formatted_text( const std::string &text, const int color,
     : text( text ), color( color )
 {
     switch( text_direction ) {
-    case direction::NORTHWEST:
-    case direction::WEST:
-    case direction::SOUTHWEST:
-        alignment = text_alignment::right;
-        break;
-    case direction::NORTH:
-    case direction::CENTER:
-    case direction::SOUTH:
-        alignment = text_alignment::center;
-        break;
-    default:
-        alignment = text_alignment::left;
-        break;
+        case direction::NORTHWEST:
+        case direction::WEST:
+        case direction::SOUTHWEST:
+            alignment = text_alignment::right;
+            break;
+        case direction::NORTH:
+        case direction::CENTER:
+        case direction::SOUTH:
+            alignment = text_alignment::center;
+            break;
+        default:
+            alignment = text_alignment::left;
+            break;
     }
 }
 
@@ -379,7 +379,8 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
     // reset the overlay ordering from the previous loaded tileset
     tileset_mutation_overlay_ordering.clear();
 
-    tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events, memory_map_mode );
+    tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events,
+                                      memory_map_mode );
 
     set_draw_scale( 16 );
 
@@ -522,7 +523,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             eastmost = tile_to_player( { max_col - 1, min_row } );
         }
         if( northmost.has_value() && southmost.has_value()
-                && westmost.has_value() && eastmost.has_value() ) {
+            && westmost.has_value() && eastmost.has_value() ) {
             min_mm_reg = point( std::min( min_mm_reg.x, westmost->x ),
                                 std::min( min_mm_reg.y, northmost->y ) );
             max_mm_reg = point( std::max( max_mm_reg.x, eastmost->x ),
@@ -566,7 +567,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 
     // check that the creature for which we'll draw the visibility map is still alive at that point
     if( g->display_overlay_state( ACTION_DISPLAY_VISIBILITY ) &&
-            g->displaying_visibility_creature ) {
+        g->displaying_visibility_creature ) {
         const Creature *creature = g->displaying_visibility_creature;
         const auto is_same_creature_predicate = [&creature]( const Creature & c ) {
             return creature == &c;
@@ -773,7 +774,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         }
 
                         if( g->display_overlay_state( ACTION_DISPLAY_VISIBILITY ) &&
-                                g->displaying_visibility_creature && !invisible[0] ) {
+                            g->displaying_visibility_creature && !invisible[0] ) {
                             const bool visibility = g->displaying_visibility_creature->sees( here, pos );
 
                             // color overlay.
@@ -835,9 +836,9 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         if( would_apply_vision_effects( vis_type ) ) {
                             const Creature *critter = creatures.creature_at( pos, true );
                             if( has_draw_override( pos ) || you.has_memory_at( pos_global ) ||
-                                    ( critter &&
-                                      ( critter->has_flag( mon_flag_ALWAYS_VISIBLE )
-                                        || you.sees_with_specials( *critter ) ) ) ) {
+                                ( critter &&
+                                  ( critter->has_flag( mon_flag_ALWAYS_VISIBLE )
+                                    || you.sees_with_specials( *critter ) ) ) ) {
                                 invisible[0] = true;
                             } else {
                                 here.draw_points_cache[zlevel][row].emplace_back( tile_render_info::common{ pos, 0},
@@ -860,7 +861,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         It is currently only used for treetops because of how they're rendered in MSXOtto+.
                     */
                     if( here.dont_draw_lower_floor( pos ) &&
-                            !here.has_flag_ter( ter_furn_flag::TFLAG_DRAW_BELOW, pos ) ) {
+                        !here.has_flag_ter( ter_furn_flag::TFLAG_DRAW_BELOW, pos ) ) {
                         break;
                     }
                 }
@@ -925,7 +926,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                 const tile_render_info::sprite *const
                 var = std::get_if<tile_render_info::sprite>( &p.var );
                 if( !var || var->ll == lit_level::DARK || var->ll == lit_level::BLANK ||
-                        var->ll == lit_level::MEMORIZED ) {
+                    var->ll == lit_level::MEMORIZED ) {
                     continue;
                 }
                 const light_color_rgb &lc =
@@ -983,7 +984,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                     m_cur_bounds = ortho_tint ? &p.com.bounds : nullptr;
                     m_cur_tint_sprites = ortho_tint ? &p.com.tint_sprites : nullptr;
                     if( const tile_render_info::vision_effect * const
-                            var = std::get_if<tile_render_info::vision_effect>( &p.var ) ) {
+                        var = std::get_if<tile_render_info::vision_effect>( &p.var ) ) {
                         if( f == &cata_tiles::draw_terrain ) {
                             apply_vision_effects( p.com.pos, var->vis, p.com.height_3d );
                         }
@@ -1005,7 +1006,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         } else if( f == &cata_tiles::draw_critter_at ) {
                             // Draw
                             if( !( this->*f )( p.com.pos, ll, p.com.height_3d, invisible, false ) && do_draw_shadow &&
-                                    here.dont_draw_lower_floor( p.com.pos ) ) {
+                                here.dont_draw_lower_floor( p.com.pos ) ) {
                                 // Draw shadow of flying critters on bottom-most tile if no other critter drawn
                                 draw_critter_above( p.com.pos, ll, p.com.height_3d, invisible );
                             }
@@ -1148,7 +1149,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                             // Must flush any pending complex batch before drawing
                             // a simple tile to preserve correct draw order.
                             flush_tint_batch();
-                            
+
                             const SDL_Color tc = { tp->com.tint_color.r, tp->com.tint_color.g,
                                                    tp->com.tint_color.b, tp->com.tint_color.a
                                                  };
@@ -1164,7 +1165,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                                                     tp->com.tint_color.b, tp->com.tint_color.a
                                                   };
                         if( batch_tiles.empty() ||
-                                std::memcmp( &batch_color, &tile_tc, sizeof( SDL_Color ) ) != 0 ) {
+                            std::memcmp( &batch_color, &tile_tc, sizeof( SDL_Color ) ) != 0 ) {
                             flush_tint_batch();
                             batch_color = tile_tc;
                         }
@@ -1542,7 +1543,7 @@ std::optional<point_bub_ms> cata_tiles::tile_to_player(
         // Based on the screen tile pattern, the player position can be calculated
         // from the column and row numbers as follows
         if( modulo( colrow.y - base_tile_cnt.y / 2, 2 )
-                != modulo( colrow.x - base_tile_cnt.x / 2, 2 ) ) {
+            != modulo( colrow.x - base_tile_cnt.x / 2, 2 ) ) {
             return std::nullopt;
         }
         return o + point_rel_ms {
@@ -1814,93 +1815,93 @@ cata_tiles::find_tile_looks_like( const std::string &id, TILE_CATEGORY category,
 
     // Then do looks_like
     switch( category ) {
-    case TILE_CATEGORY::FURNITURE:
-        return find_tile_looks_like_by_string_id<furn_t>( id, category,
-                looks_like_jumps_limit );
-    case TILE_CATEGORY::TERRAIN:
-        return find_tile_looks_like_by_string_id<ter_t>( id, category, looks_like_jumps_limit );
-    case TILE_CATEGORY::FIELD:
-        return find_tile_looks_like_by_string_id<field_type>( id, category,
-                looks_like_jumps_limit );
-    case TILE_CATEGORY::MONSTER:
-        return find_tile_looks_like_by_string_id<mtype>( id, category, looks_like_jumps_limit );
-    case TILE_CATEGORY::OVERMAP_VISION_LEVEL: {
-        size_t id_end = id.find( '$' );
-        om_vision_level level = io::string_to_enum<om_vision_level>( id.substr( id_end + 1 ) );
-        oter_vision_id vision_id( id.substr( 0, id_end ) );
-        // This shouldn't fail, but better safe than sorry
-        const oter_vision::level *viewed = vision_id->viewed( level );
-        if( viewed != nullptr && !viewed->looks_like.empty() ) {
-            return find_tile_looks_like( viewed->looks_like, TILE_CATEGORY::OVERMAP_TERRAIN, variant,
+        case TILE_CATEGORY::FURNITURE:
+            return find_tile_looks_like_by_string_id<furn_t>( id, category,
+                    looks_like_jumps_limit );
+        case TILE_CATEGORY::TERRAIN:
+            return find_tile_looks_like_by_string_id<ter_t>( id, category, looks_like_jumps_limit );
+        case TILE_CATEGORY::FIELD:
+            return find_tile_looks_like_by_string_id<field_type>( id, category,
+                    looks_like_jumps_limit );
+        case TILE_CATEGORY::MONSTER:
+            return find_tile_looks_like_by_string_id<mtype>( id, category, looks_like_jumps_limit );
+        case TILE_CATEGORY::OVERMAP_VISION_LEVEL: {
+            size_t id_end = id.find( '$' );
+            om_vision_level level = io::string_to_enum<om_vision_level>( id.substr( id_end + 1 ) );
+            oter_vision_id vision_id( id.substr( 0, id_end ) );
+            // This shouldn't fail, but better safe than sorry
+            const oter_vision::level *viewed = vision_id->viewed( level );
+            if( viewed != nullptr && !viewed->looks_like.empty() ) {
+                return find_tile_looks_like( viewed->looks_like, TILE_CATEGORY::OVERMAP_TERRAIN, variant,
+                                             looks_like_jumps_limit - 1 );
+            }
+            return std::nullopt;
+        }
+        case TILE_CATEGORY::OVERMAP_TERRAIN: {
+            std::optional<tile_lookup_res> ret;
+            const oter_type_str_id type_tmp( id );
+            if( !type_tmp.is_valid() ) {
+                return ret;
+            }
+
+            int jump_limit = looks_like_jumps_limit;
+            for( const std::string &looks_like : type_tmp.obj().looks_like ) {
+
+                ret = find_tile_looks_like( looks_like, category, "", jump_limit - 1 );
+                if( ret.has_value() ) {
+                    return ret;
+                }
+
+                jump_limit--;
+                if( jump_limit <= 0 ) {
+                    return ret;
+                }
+            }
+
+            return ret;
+        }
+
+
+        case TILE_CATEGORY::VEHICLE_PART: {
+            const int lljl = looks_like_jumps_limit - 1;
+            // vehicle parts start with vp_ for their tiles, but not their IDs
+            const vpart_id vpid( id.substr( 3 ) );
+            if( !vpid.is_valid() ) {
+                return std::nullopt;
+            }
+            const std::string &looks_like = vpid->looks_like;
+            if( looks_like.empty() ) {
+                return std::nullopt;
+            }
+            if( auto ret = find_tile_looks_like( "vp_" + looks_like, category, variant, lljl ) ) {
+                return ret;
+            }
+            if( auto ret = find_tile_looks_like( looks_like, category, variant, lljl ) ) {
+                return ret;
+            }
+            if( auto ret = find_tile_looks_like( looks_like, TILE_CATEGORY::FURNITURE, variant, lljl ) ) {
+                return ret;
+            }
+            return std::nullopt;
+        }
+
+        case TILE_CATEGORY::ITEM: {
+            if( !item::type_is_defined( itype_id( id ) ) ) {
+                if( string_starts_with( id, "corpse_" ) ) {
+                    return find_tile_looks_like(
+                               "corpse", category, "", looks_like_jumps_limit - 1
+                           );
+                }
+                return std::nullopt;
+            }
+            const itype *new_it = item::find_type( itype_id( id ) );
+            return find_tile_looks_like( new_it->looks_like.str(), category, "",
                                          looks_like_jumps_limit - 1 );
         }
-        return std::nullopt;
-    }
-    case TILE_CATEGORY::OVERMAP_TERRAIN: {
-        std::optional<tile_lookup_res> ret;
-        const oter_type_str_id type_tmp( id );
-        if( !type_tmp.is_valid() ) {
-            return ret;
-        }
-
-        int jump_limit = looks_like_jumps_limit;
-        for( const std::string &looks_like : type_tmp.obj().looks_like ) {
-
-            ret = find_tile_looks_like( looks_like, category, "", jump_limit - 1 );
-            if( ret.has_value() ) {
-                return ret;
-            }
-
-            jump_limit--;
-            if( jump_limit <= 0 ) {
-                return ret;
-            }
-        }
-
-        return ret;
-    }
 
 
-    case TILE_CATEGORY::VEHICLE_PART: {
-        const int lljl = looks_like_jumps_limit - 1;
-        // vehicle parts start with vp_ for their tiles, but not their IDs
-        const vpart_id vpid( id.substr( 3 ) );
-        if( !vpid.is_valid() ) {
+        default:
             return std::nullopt;
-        }
-        const std::string &looks_like = vpid->looks_like;
-        if( looks_like.empty() ) {
-            return std::nullopt;
-        }
-        if( auto ret = find_tile_looks_like( "vp_" + looks_like, category, variant, lljl ) ) {
-            return ret;
-        }
-        if( auto ret = find_tile_looks_like( looks_like, category, variant, lljl ) ) {
-            return ret;
-        }
-        if( auto ret = find_tile_looks_like( looks_like, TILE_CATEGORY::FURNITURE, variant, lljl ) ) {
-            return ret;
-        }
-        return std::nullopt;
-    }
-
-    case TILE_CATEGORY::ITEM: {
-        if( !item::type_is_defined( itype_id( id ) ) ) {
-            if( string_starts_with( id, "corpse_" ) ) {
-                return find_tile_looks_like(
-                           "corpse", category, "", looks_like_jumps_limit - 1
-                       );
-            }
-            return std::nullopt;
-        }
-        const itype *new_it = item::find_type( itype_id( id ) );
-        return find_tile_looks_like( new_it->looks_like.str(), category, "",
-                                     looks_like_jumps_limit - 1 );
-    }
-
-
-    default:
-        return std::nullopt;
     }
 }
 
@@ -1982,7 +1983,7 @@ std::string cata_tiles::get_multitile_base_id( const std::string &id,
         const ter_t &current = ter_str_id( id ).obj();
         for( const ter_t &candidate : get_all_terrain_types() ) {
             if( candidate.id == current.id ||
-                    candidate.connect_groups != current.connect_groups ) {
+                candidate.connect_groups != current.connect_groups ) {
                 continue;
             }
 
@@ -2088,180 +2089,180 @@ bool cata_tiles::draw_from_id_string_internal(
         nc_color col = c_white;
 
         switch( category ) {
-        case TILE_CATEGORY::FURNITURE: {
-            const furn_str_id fid( found_id );
-            if( fid.is_valid() ) {
-                const furn_t &f = fid.obj();
-                sym = f.symbol();
-                col = f.color();
+            case TILE_CATEGORY::FURNITURE: {
+                const furn_str_id fid( found_id );
+                if( fid.is_valid() ) {
+                    const furn_t &f = fid.obj();
+                    sym = f.symbol();
+                    col = f.color();
+                }
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::TERRAIN: {
-            const ter_str_id tid( found_id );
-            if( tid.is_valid() ) {
-                const ter_t &t = tid.obj();
-                sym = t.symbol();
-                col = t.color();
+            case TILE_CATEGORY::TERRAIN: {
+                const ter_str_id tid( found_id );
+                if( tid.is_valid() ) {
+                    const ter_t &t = tid.obj();
+                    sym = t.symbol();
+                    col = t.color();
+                }
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::MONSTER: {
-            const mtype_id mid( found_id );
-            if( mid.is_valid() ) {
-                const mtype &mt = mid.obj();
-                sym = UTF8_getch( mt.sym );
-                col = mt.color;
+            case TILE_CATEGORY::MONSTER: {
+                const mtype_id mid( found_id );
+                if( mid.is_valid() ) {
+                    const mtype &mt = mid.obj();
+                    sym = UTF8_getch( mt.sym );
+                    col = mt.color;
+                }
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::VEHICLE_PART: {
-            const vpart_id vpid( string_starts_with( found_id, "vp_" ) ? found_id.substr( 3 ) : found_id );
-            if( vpid.is_valid() ) {
-                const vpart_info &vpi = *vpid;
-                if( vpi.variants.count( variant ) ) {
-                    const vpart_variant &vv = vpi.variants.at( variant );
-                    if( subtile == open_ ) {
-                        sym = '\'';
-                    } else {
-                        sym = vv.get_symbol_curses( 90_degrees * rota, subtile == broken );
+            case TILE_CATEGORY::VEHICLE_PART: {
+                const vpart_id vpid( string_starts_with( found_id, "vp_" ) ? found_id.substr( 3 ) : found_id );
+                if( vpid.is_valid() ) {
+                    const vpart_info &vpi = *vpid;
+                    if( vpi.variants.count( variant ) ) {
+                        const vpart_variant &vv = vpi.variants.at( variant );
+                        if( subtile == open_ ) {
+                            sym = '\'';
+                        } else {
+                            sym = vv.get_symbol_curses( 90_degrees * rota, subtile == broken );
+                        }
+                        col = vpi.color;
+                        subtile = -1;
+                        rota = 0;
+                    } else if( ll != lit_level::MEMORIZED ) {
+                        debugmsg( "invalid variant '%s' on vpart_id '%s'", variant, vpid.str() );
                     }
-                    col = vpi.color;
-                    subtile = -1;
-                    rota = 0;
                 } else if( ll != lit_level::MEMORIZED ) {
-                    debugmsg( "invalid variant '%s' on vpart_id '%s'", variant, vpid.str() );
+                    debugmsg( "invalid vpart_id '%s'", vpid.str() );
                 }
-            } else if( ll != lit_level::MEMORIZED ) {
-                debugmsg( "invalid vpart_id '%s'", vpid.str() );
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::ITEM: {
-            item tmp;
-            if( string_starts_with( found_id, "corpse_" ) ) {
-                tmp = item( itype_corpse, calendar::turn_zero );
-            } else {
-                tmp = item( itype_id( found_id ), calendar::turn_zero );
-            }
-            if( !variant.empty() ) {
-                tmp.set_itype_variant( variant );
-            } else {
-                tmp.clear_itype_variant();
-            }
-            sym = static_cast<uint8_t>( tmp.symbol().empty() ? ' ' : tmp.symbol().front() );
-            col = tmp.color();
-            break;
-        }
-        case TILE_CATEGORY::OVERMAP_TERRAIN: {
-            const oter_type_str_id tmp( id );
-            if( tmp.is_valid() ) {
-                if( !tmp->is_linear() ) {
-                    // For overmap terrain with connections, make sure rotation stays in bounds.
-                    rota %= om_direction::size;
-                    sym = tmp->get_rotated( static_cast<om_direction::type>( rota ) )->get_uint32_symbol();
-                    col = tmp->get_color();
+            case TILE_CATEGORY::ITEM: {
+                item tmp;
+                if( string_starts_with( found_id, "corpse_" ) ) {
+                    tmp = item( itype_corpse, calendar::turn_zero );
                 } else {
-                    sym = tmp->get_uint32_symbol();
-                    col = tmp->get_color();
+                    tmp = item( itype_id( found_id ), calendar::turn_zero );
                 }
+                if( !variant.empty() ) {
+                    tmp.set_itype_variant( variant );
+                } else {
+                    tmp.clear_itype_variant();
+                }
+                sym = static_cast<uint8_t>( tmp.symbol().empty() ? ' ' : tmp.symbol().front() );
+                col = tmp.color();
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::OVERMAP_NOTE: {
-            sym = static_cast<uint8_t>( id[5] );
-            col = color_from_string( id.substr( 7, id.length() - 1 ) );
-            break;
-        }
-        case TILE_CATEGORY::FIELD: {
-            const field_type_id fid = field_type_id( found_id );
-            sym = fid->get_intensity_level().symbol;
-            col = fid->get_intensity_level().color;
-            break;
-        }
-        case TILE_CATEGORY::TRAP: {
-            const trap_str_id tmp( found_id );
-            if( tmp.is_valid() ) {
-                const trap &t = tmp.obj();
-                sym = t.sym;
-                col = t.color;
+            case TILE_CATEGORY::OVERMAP_TERRAIN: {
+                const oter_type_str_id tmp( id );
+                if( tmp.is_valid() ) {
+                    if( !tmp->is_linear() ) {
+                        // For overmap terrain with connections, make sure rotation stays in bounds.
+                        rota %= om_direction::size;
+                        sym = tmp->get_rotated( static_cast<om_direction::type>( rota ) )->get_uint32_symbol();
+                        col = tmp->get_color();
+                    } else {
+                        sym = tmp->get_uint32_symbol();
+                        col = tmp->get_color();
+                    }
+                }
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::OVERMAP_WEATHER: {
-            const weather_type_id weather_def( id );
-            if( weather_def.is_valid() ) {
-                sym = weather_def->symbol;
-                col = weather_def->map_color;
+            case TILE_CATEGORY::OVERMAP_NOTE: {
+                sym = static_cast<uint8_t>( id[5] );
+                col = color_from_string( id.substr( 7, id.length() - 1 ) );
+                break;
             }
-            break;
-        }
-        case TILE_CATEGORY::OVERMAP_VISION_LEVEL: {
-            size_t id_end = id.find( '$' );
-            om_vision_level level = io::string_to_enum<om_vision_level>( id.substr( id_end + 1 ) );
-            oter_vision_id vision_id( id.substr( 0, id_end ) );
-            // if we have gotten this far, this call can't fail, because the id never would have
-            // been generated to get it. Nonetheless, better safe than sorry
-            if( const oter_vision::level *viewed = vision_id->viewed( level ) ) {
-                sym = viewed->symbol;
-                col = viewed->color;
+            case TILE_CATEGORY::FIELD: {
+                const field_type_id fid = field_type_id( found_id );
+                sym = fid->get_intensity_level().symbol;
+                col = fid->get_intensity_level().color;
+                break;
             }
-            break;
-        }
+            case TILE_CATEGORY::TRAP: {
+                const trap_str_id tmp( found_id );
+                if( tmp.is_valid() ) {
+                    const trap &t = tmp.obj();
+                    sym = t.sym;
+                    col = t.color;
+                }
+                break;
+            }
+            case TILE_CATEGORY::OVERMAP_WEATHER: {
+                const weather_type_id weather_def( id );
+                if( weather_def.is_valid() ) {
+                    sym = weather_def->symbol;
+                    col = weather_def->map_color;
+                }
+                break;
+            }
+            case TILE_CATEGORY::OVERMAP_VISION_LEVEL: {
+                size_t id_end = id.find( '$' );
+                om_vision_level level = io::string_to_enum<om_vision_level>( id.substr( id_end + 1 ) );
+                oter_vision_id vision_id( id.substr( 0, id_end ) );
+                // if we have gotten this far, this call can't fail, because the id never would have
+                // been generated to get it. Nonetheless, better safe than sorry
+                if( const oter_vision::level *viewed = vision_id->viewed( level ) ) {
+                    sym = viewed->symbol;
+                    col = viewed->color;
+                }
+                break;
+            }
 
 
-        default:
-            break;
+            default:
+                break;
         }
 
         // Special cases for walls
         switch( sym ) {
-        case LINE_XOXO:
-        case LINE_XOXO_UNICODE:
-            sym = LINE_XOXO_C;
-            break;
-        case LINE_OXOX:
-        case LINE_OXOX_UNICODE:
-            sym = LINE_OXOX_C;
-            break;
-        case LINE_XXOO:
-        case LINE_XXOO_UNICODE:
-            sym = LINE_XXOO_C;
-            break;
-        case LINE_OXXO:
-        case LINE_OXXO_UNICODE:
-            sym = LINE_OXXO_C;
-            break;
-        case LINE_OOXX:
-        case LINE_OOXX_UNICODE:
-            sym = LINE_OOXX_C;
-            break;
-        case LINE_XOOX:
-        case LINE_XOOX_UNICODE:
-            sym = LINE_XOOX_C;
-            break;
-        case LINE_XXXO:
-        case LINE_XXXO_UNICODE:
-            sym = LINE_XXXO_C;
-            break;
-        case LINE_XXOX:
-        case LINE_XXOX_UNICODE:
-            sym = LINE_XXOX_C;
-            break;
-        case LINE_XOXX:
-        case LINE_XOXX_UNICODE:
-            sym = LINE_XOXX_C;
-            break;
-        case LINE_OXXX:
-        case LINE_OXXX_UNICODE:
-            sym = LINE_OXXX_C;
-            break;
-        case LINE_XXXX:
-        case LINE_XXXX_UNICODE:
-            sym = LINE_XXXX_C;
-            break;
-        default:
-            break;
+            case LINE_XOXO:
+            case LINE_XOXO_UNICODE:
+                sym = LINE_XOXO_C;
+                break;
+            case LINE_OXOX:
+            case LINE_OXOX_UNICODE:
+                sym = LINE_OXOX_C;
+                break;
+            case LINE_XXOO:
+            case LINE_XXOO_UNICODE:
+                sym = LINE_XXOO_C;
+                break;
+            case LINE_OXXO:
+            case LINE_OXXO_UNICODE:
+                sym = LINE_OXXO_C;
+                break;
+            case LINE_OOXX:
+            case LINE_OOXX_UNICODE:
+                sym = LINE_OOXX_C;
+                break;
+            case LINE_XOOX:
+            case LINE_XOOX_UNICODE:
+                sym = LINE_XOOX_C;
+                break;
+            case LINE_XXXO:
+            case LINE_XXXO_UNICODE:
+                sym = LINE_XXXO_C;
+                break;
+            case LINE_XXOX:
+            case LINE_XXOX_UNICODE:
+                sym = LINE_XXOX_C;
+                break;
+            case LINE_XOXX:
+            case LINE_XOXX_UNICODE:
+                sym = LINE_XOXX_C;
+                break;
+            case LINE_OXXX:
+            case LINE_OXXX_UNICODE:
+                sym = LINE_OXXX_C;
+                break;
+            case LINE_XXXX:
+            case LINE_XXXX_UNICODE:
+                sym = LINE_XXXX_C;
+                break;
+            default:
+                break;
         }
 
         // ASCII tile fallback
@@ -2325,77 +2326,77 @@ bool cata_tiles::draw_from_id_string_internal(
     creature_tracker &creatures = get_creature_tracker();
     bool creature = true;
     switch( category ) {
-    case TILE_CATEGORY::TERRAIN:
-    case TILE_CATEGORY::FIELD:
-    case TILE_CATEGORY::LIGHTING:
-        creature = false;
-        seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
-        break;
-    case TILE_CATEGORY::VEHICLE_PART: {
-        creature = false;
-        const auto vp_override = vpart_override.find( tripoint_bub_ms( pos ) );
-        const bool vp_overridden = vp_override != vpart_override.end();
-        if( vp_overridden ) {
-            const vpart_id &vp_id = std::get<0>( vp_override->second );
-            if( vp_id ) {
-                const point_rel_ms mount( std::get<4>( vp_override->second ) );
-                seed = simple_point_hash( mount.raw() );
-            }
-        } else if( const optional_vpart_position vp = here.veh_at( tripoint_bub_ms( pos ) ) ) {
-            seed = simple_point_hash( vp->mount_pos().raw() );
-        }
-        break;
-    }
-    case TILE_CATEGORY::FURNITURE: {
-        creature = false;
-        const furn_str_id fid( found_id );
-        if( fid.is_valid() && !fid.obj().is_movable() ) {
+        case TILE_CATEGORY::TERRAIN:
+        case TILE_CATEGORY::FIELD:
+        case TILE_CATEGORY::LIGHTING:
+            creature = false;
             seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
-        }
-        break;
-    }
-    case TILE_CATEGORY::OVERMAP_WEATHER:
-    case TILE_CATEGORY::OVERMAP_TERRAIN:
-    case TILE_CATEGORY::OVERMAP_VISION_LEVEL:
-    case TILE_CATEGORY::MAP_EXTRA:
-        creature = false;
-        seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
-        break;
-    case TILE_CATEGORY::NONE:
-        if( found_id == "graffiti" ) {
-            seed = std::hash<std::string> {}( here.graffiti_at( tripoint_bub_ms( pos ) ) );
-        } else if( string_starts_with( found_id, "graffiti" ) ) {
-            seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
-        }
-        break;
-    case TILE_CATEGORY::ITEM:
-    case TILE_CATEGORY::TRAP:
-    case TILE_CATEGORY::BULLET:
-    case TILE_CATEGORY::HIT_ENTITY:
-        creature = false;
-        break;
-    case TILE_CATEGORY::WEATHER:
-        creature = false;
-        seed = rng_bits();
-        break;
-    case TILE_CATEGORY::MONSTER:
-        if( monster_override.find( tripoint_bub_ms( pos ) ) == monster_override.end() ) {
-            seed = reinterpret_cast<uintptr_t>( creatures.creature_at<monster>( tripoint_bub_ms( pos ) ) );
-        }
-        break;
-    default:
-        if( string_starts_with( found_id, "player_" ) ) {
-            seed = std::hash<std::string> {}( get_player_character().name );
-        } else if( string_starts_with( found_id, "npc_" ) ) {
-            if( npc *const guy = creatures.creature_at<npc>( tripoint_bub_ms( pos ) ) ) {
-                seed = guy->getID().get_value();
+            break;
+        case TILE_CATEGORY::VEHICLE_PART: {
+            creature = false;
+            const auto vp_override = vpart_override.find( tripoint_bub_ms( pos ) );
+            const bool vp_overridden = vp_override != vpart_override.end();
+            if( vp_overridden ) {
+                const vpart_id &vp_id = std::get<0>( vp_override->second );
+                if( vp_id ) {
+                    const point_rel_ms mount( std::get<4>( vp_override->second ) );
+                    seed = simple_point_hash( mount.raw() );
+                }
+            } else if( const optional_vpart_position vp = here.veh_at( tripoint_bub_ms( pos ) ) ) {
+                seed = simple_point_hash( vp->mount_pos().raw() );
             }
+            break;
         }
-        break;
+        case TILE_CATEGORY::FURNITURE: {
+            creature = false;
+            const furn_str_id fid( found_id );
+            if( fid.is_valid() && !fid.obj().is_movable() ) {
+                seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
+            }
+            break;
+        }
+        case TILE_CATEGORY::OVERMAP_WEATHER:
+        case TILE_CATEGORY::OVERMAP_TERRAIN:
+        case TILE_CATEGORY::OVERMAP_VISION_LEVEL:
+        case TILE_CATEGORY::MAP_EXTRA:
+            creature = false;
+            seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
+            break;
+        case TILE_CATEGORY::NONE:
+            if( found_id == "graffiti" ) {
+                seed = std::hash<std::string> {}( here.graffiti_at( tripoint_bub_ms( pos ) ) );
+            } else if( string_starts_with( found_id, "graffiti" ) ) {
+                seed = simple_point_hash( here.get_abs( pos ).raw().xy() );
+            }
+            break;
+        case TILE_CATEGORY::ITEM:
+        case TILE_CATEGORY::TRAP:
+        case TILE_CATEGORY::BULLET:
+        case TILE_CATEGORY::HIT_ENTITY:
+            creature = false;
+            break;
+        case TILE_CATEGORY::WEATHER:
+            creature = false;
+            seed = rng_bits();
+            break;
+        case TILE_CATEGORY::MONSTER:
+            if( monster_override.find( tripoint_bub_ms( pos ) ) == monster_override.end() ) {
+                seed = reinterpret_cast<uintptr_t>( creatures.creature_at<monster>( tripoint_bub_ms( pos ) ) );
+            }
+            break;
+        default:
+            if( string_starts_with( found_id, "player_" ) ) {
+                seed = std::hash<std::string> {}( get_player_character().name );
+            } else if( string_starts_with( found_id, "npc_" ) ) {
+                if( npc *const guy = creatures.creature_at<npc>( tripoint_bub_ms( pos ) ) ) {
+                    seed = guy->getID().get_value();
+                }
+            }
+            break;
     }
 
     if( !display_tile.rotates && category != TILE_CATEGORY::NONE &&
-            category != TILE_CATEGORY::MONSTER ) {
+        category != TILE_CATEGORY::MONSTER ) {
         rota = 0;
     }
 
@@ -2645,17 +2646,17 @@ bool cata_tiles::draw_sprite_at(
             render_flip = SDL_FLIP_HORIZONTAL;
         } else if( !iso ) {
             switch( rota % 4 ) {
-            case 1:
-                render_angle = -90;
-                break;
-            case 2:
-                render_flip = static_cast<CataFlipMode>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL );
-                break;
-            case 3:
-                render_angle = 90;
-                break;
-            default:
-                break;
+                case 1:
+                    render_angle = -90;
+                    break;
+                case 2:
+                    render_flip = static_cast<CataFlipMode>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL );
+                    break;
+                case 3:
+                    render_angle = 90;
+                    break;
+                default:
+                    break;
             }
         }
     }
@@ -2676,60 +2677,60 @@ bool cata_tiles::draw_sprite_at(
                       static_cast<CataFlipMode>( SDL_FLIP_HORIZONTAL ) );
         } else {
             switch( rota % 4 ) {
-            default:
-            case 0:
-                // unrotated (and 180, with just two sprites)
-                ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
-                                                  flip );
-                break;
-            case 1:
-                // 90 degrees (and 270, with just two sprites)
+                default:
+                case 0:
+                    // unrotated (and 180, with just two sprites)
+                    ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                      flip );
+                    break;
+                case 1:
+                    // 90 degrees (and 270, with just two sprites)
 #if defined(_WIN32) && defined(CROSS_LINUX)
-                // For an unknown reason, additional offset is required in direct3d mode
-                // for cross-compilation from Linux to Windows
-                if( direct3d_mode ) {
-                    destination.y -= 1;
-                }
+                    // For an unknown reason, additional offset is required in direct3d mode
+                    // for cross-compilation from Linux to Windows
+                    if( direct3d_mode ) {
+                        destination.y -= 1;
+                    }
 #endif
-                if( !iso ) {
-                    // never rotate isometric tiles
-                    ret = sprite_tex->render_copy_ex( renderer, &destination, -90, nullptr,
-                                                      flip );
-                } else {
-                    ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
-                                                      SDL_FLIP_NONE );
-                }
-                break;
-            case 2:
-                // 180 degrees, implemented with flips instead of rotation
-                if( !iso ) {
-                    // never flip isometric tiles vertically
-                    ret = sprite_tex->render_copy_ex(
-                              renderer, &destination, 0, nullptr,
-                              static_cast<CataFlipMode>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL ) );
-                } else {
-                    ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
-                                                      flip );
-                }
-                break;
-            case 3:
-                // 270 degrees
+                    if( !iso ) {
+                        // never rotate isometric tiles
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, -90, nullptr,
+                                                          flip );
+                    } else {
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                          SDL_FLIP_NONE );
+                    }
+                    break;
+                case 2:
+                    // 180 degrees, implemented with flips instead of rotation
+                    if( !iso ) {
+                        // never flip isometric tiles vertically
+                        ret = sprite_tex->render_copy_ex(
+                                  renderer, &destination, 0, nullptr,
+                                  static_cast<CataFlipMode>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL ) );
+                    } else {
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                          flip );
+                    }
+                    break;
+                case 3:
+                    // 270 degrees
 #if defined(_WIN32) && defined(CROSS_LINUX)
-                // For an unknown reason, additional offset is required in direct3d mode
-                // for cross-compilation from Linux to Windows
-                if( direct3d_mode ) {
-                    destination.x -= 1;
-                }
+                    // For an unknown reason, additional offset is required in direct3d mode
+                    // for cross-compilation from Linux to Windows
+                    if( direct3d_mode ) {
+                        destination.x -= 1;
+                    }
 #endif
-                if( !iso ) {
-                    // never rotate isometric tiles
-                    ret = sprite_tex->render_copy_ex( renderer, &destination, 90, nullptr,
-                                                      flip );
-                } else {
-                    ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
-                                                      SDL_FLIP_NONE );
-                }
-                break;
+                    if( !iso ) {
+                        // never rotate isometric tiles
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 90, nullptr,
+                                                          flip );
+                    } else {
+                        ret = sprite_tex->render_copy_ex( renderer, &destination, 0, nullptr,
+                                                          SDL_FLIP_NONE );
+                    }
+                    break;
             }
         }
     } else {
@@ -2763,24 +2764,24 @@ bool cata_tiles::apply_vision_effects( const tripoint_bub_ms &pos,
     }
     std::string light_name;
     switch( visibility ) {
-    case visibility_type::HIDDEN:
-        light_name = "lighting_hidden";
-        break;
-    case visibility_type::LIT:
-        light_name = "lighting_lowlight_light";
-        break;
-    case visibility_type::BOOMER:
-        light_name = "lighting_boomered_light";
-        break;
-    case visibility_type::BOOMER_DARK:
-        light_name = "lighting_boomered_dark";
-        break;
-    case visibility_type::DARK:
-        light_name = "lighting_lowlight_dark";
-        break;
-    case visibility_type::CLEAR:
-        // should never happen
-        break;
+        case visibility_type::HIDDEN:
+            light_name = "lighting_hidden";
+            break;
+        case visibility_type::LIT:
+            light_name = "lighting_lowlight_light";
+            break;
+        case visibility_type::BOOMER:
+            light_name = "lighting_boomered_light";
+            break;
+        case visibility_type::BOOMER_DARK:
+            light_name = "lighting_boomered_dark";
+            break;
+        case visibility_type::DARK:
+            light_name = "lighting_lowlight_dark";
+            break;
+        case visibility_type::CLEAR:
+            // should never happen
+            break;
     }
 
     // lighting is never rotated, though, could possibly add in random rotation?
@@ -2884,7 +2885,7 @@ bool cata_tiles::draw_terrain_below( const tripoint_bub_ms &p, const lit_level, 
     const auto low_override = draw_below_override.find( p );
     const bool low_overridden = low_override != draw_below_override.end();
     if( low_overridden ? !low_override->second :
-            ( invisible[0] || here.dont_draw_lower_floor( p ) ) ) {
+        ( invisible[0] || here.dont_draw_lower_floor( p ) ) ) {
         return false;
     }
     tripoint_bub_ms pbelow = p + tripoint::below;
@@ -3073,8 +3074,8 @@ bool cata_tiles::draw_furniture( const tripoint_bub_ms &p, const lit_level ll, i
         }
         const std::string &fname = f.id().str();
         if( !( you.get_grab_type() == object_type::FURNITURE
-                && p == you.pos_bub() + you.grab_point )
-                && here.memory_cache_dec_is_dirty( p ) ) {
+               && p == you.pos_bub() + you.grab_point )
+            && here.memory_cache_dec_is_dirty( p ) ) {
             you.memorize_decoration( here.get_abs( p ), fname, subtile, rotation );
         }
         // Draw the actual furniture if there's no override.
@@ -3725,9 +3726,9 @@ bool cata_tiles::draw_vpart( const tripoint_bub_ms &p, lit_level ll, int &height
             avatar &you = get_avatar();
 
             if( !veh.forward_velocity() && !veh.player_in_control( here, you )
-                    && !( you.get_grab_type() == object_type::VEHICLE
-                          && veh.get_points().count( ( you.pos_abs() + you.grab_point ) ) )
-                    && here.memory_cache_dec_is_dirty( p ) ) {
+                && !( you.get_grab_type() == object_type::VEHICLE
+                      && veh.get_points().count( ( you.pos_abs() + you.grab_point ) ) )
+                && here.memory_cache_dec_is_dirty( p ) ) {
                 you.memorize_decoration( here.get_abs( p ), vd.get_tileset_id(), subtile, rotation );
             }
             if( !overridden ) {
@@ -3894,8 +3895,8 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
     // creature_at returns monsters first. If the monster is underwater beneath a
     // solid surface (invisible), fall back to the player/NPC sharing the tile.
     if( pcritter != nullptr && pcritter->is_underwater() &&
-            here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, p ) &&
-            !you.is_underwater() ) {
+        here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, p ) &&
+        !you.is_underwater() ) {
         if( you.pos_bub() == p ) {
             pcritter = &you;
         } else {
@@ -4031,24 +4032,24 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
             float scale_y = 1.0f;
             if( use_scaling ) {
                 switch( pl->enum_size() ) {
-                case 1:
-                    scale_x = 0.5f;
-                    scale_y = 0.5f;
-                    break;
-                case 2:
-                    scale_x = 0.75f;
-                    scale_y = 0.75f;
-                    break;
-                case 4:
-                    scale_x = 1.3f;
-                    scale_y = 1.3f;
-                    break;
-                case 5:
-                    scale_x = 1.5f;
-                    scale_y = 1.5f;
-                    break;
-                default:
-                    break;
+                    case 1:
+                        scale_x = 0.5f;
+                        scale_y = 0.5f;
+                        break;
+                    case 2:
+                        scale_x = 0.75f;
+                        scale_y = 0.75f;
+                        break;
+                    case 4:
+                        scale_x = 1.3f;
+                        scale_y = 1.3f;
+                        break;
+                    case 5:
+                        scale_x = 1.5f;
+                        scale_y = 1.5f;
+                        break;
+                    default:
+                        break;
                 }
             }
             draw_entity_with_overlays( *pl, p, ll, height_3d, scale_x, scale_y );
@@ -4136,8 +4137,8 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
     const Creature *pcritter = nullptr;
     // Search for a creature above
     while( pcritter == nullptr && scan_p.z() <= OVERMAP_HEIGHT &&
-            !here.dont_draw_lower_floor( scan_p ) &&
-            scan_p.z() - you.posz() <= fov_3d_z_range ) {
+           !here.dont_draw_lower_floor( scan_p ) &&
+           scan_p.z() - you.posz() <= fov_3d_z_range ) {
         pcritter = get_creature_tracker().creature_at( scan_p, true );
         scan_p.z()++;
     }
@@ -4160,16 +4161,16 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
     opts.category = TILE_CATEGORY::NONE;
 
     if( draw_from_id_string(
-                "shadow",
-                p,
-                0,
-                0,
-                ll,
-                false,
-                height_3d,
-                opts
-            ) && scan_p.z() - 1 > you.pos_bub().z() &&
-            you.sees( here, critter ) ) {
+            "shadow",
+            p,
+            0,
+            0,
+            ll,
+            false,
+            height_3d,
+            opts
+        ) && scan_p.z() - 1 > you.pos_bub().z() &&
+        you.sees( here, critter ) ) {
         bool is_player = false;
         bool sees_player = false;
         Creature::Attitude attitude = Creature::Attitude::ANY;
@@ -4266,8 +4267,8 @@ bool cata_tiles::draw_zombie_revival_indicators( const tripoint_bub_ms &pos, con
     }
     map &here = get_map();
     if( tileset_ptr->find_tile_type( ZOMBIE_REVIVAL_INDICATOR ) && !invisible[0] &&
-            item_override.find( pos ) == item_override.end() &&
-            here.could_see_items( pos, get_player_character() ) ) {
+        item_override.find( pos ) == item_override.end() &&
+        here.could_see_items( pos, get_player_character() ) ) {
         for( item &i : here.i_at( pos ) ) {
             if( i.can_revive() ) {
                 draw_options opts{};
@@ -4877,56 +4878,56 @@ void cata_tiles::draw_custom_explosion_frame()
         const nc_color col = pr.second.color;
 
         switch( ngh ) {
-        case N_NORTH:
-        case N_SOUTH:
-            subtile = edge;
-            rotation = 1;
-            break;
-        case N_WEST:
-        case N_EAST:
-            subtile = edge;
-            rotation = 0;
-            break;
-        case N_NORTH | N_SOUTH:
-        case N_NORTH | N_SOUTH | N_WEST:
-        case N_NORTH | N_SOUTH | N_EAST:
-            subtile = edge;
-            rotation = 1;
-            break;
-        case N_WEST | N_EAST:
-        case N_WEST | N_EAST | N_NORTH:
-        case N_WEST | N_EAST | N_SOUTH:
-            subtile = edge;
-            rotation = 0;
-            break;
-        case N_SOUTH | N_EAST:
-            subtile = corner;
-            rotation = 0;
-            break;
-        case N_NORTH | N_EAST:
-            subtile = corner;
-            rotation = 1;
-            break;
-        case N_NORTH | N_WEST:
-            subtile = corner;
-            rotation = 2;
-            break;
-        case N_SOUTH | N_WEST:
-            subtile = corner;
-            rotation = 3;
-            break;
-        case N_NO_NEIGHBORS:
-        case N_WEST | N_EAST | N_NORTH | N_SOUTH:
-            // Needs some special tile
-            subtile = edge;
-            break;
+            case N_NORTH:
+            case N_SOUTH:
+                subtile = edge;
+                rotation = 1;
+                break;
+            case N_WEST:
+            case N_EAST:
+                subtile = edge;
+                rotation = 0;
+                break;
+            case N_NORTH | N_SOUTH:
+            case N_NORTH | N_SOUTH | N_WEST:
+            case N_NORTH | N_SOUTH | N_EAST:
+                subtile = edge;
+                rotation = 1;
+                break;
+            case N_WEST | N_EAST:
+            case N_WEST | N_EAST | N_NORTH:
+            case N_WEST | N_EAST | N_SOUTH:
+                subtile = edge;
+                rotation = 0;
+                break;
+            case N_SOUTH | N_EAST:
+                subtile = corner;
+                rotation = 0;
+                break;
+            case N_NORTH | N_EAST:
+                subtile = corner;
+                rotation = 1;
+                break;
+            case N_NORTH | N_WEST:
+                subtile = corner;
+                rotation = 2;
+                break;
+            case N_SOUTH | N_WEST:
+                subtile = corner;
+                rotation = 3;
+                break;
+            case N_NO_NEIGHBORS:
+            case N_WEST | N_EAST | N_NORTH | N_SOUTH:
+                // Needs some special tile
+                subtile = edge;
+                break;
         }
 
         const tripoint_bub_ms &p = pr.first;
         std::string explosion_tile_id;
         // Use target sprite if exist, otherwise col will determine fallback sprite
         if( pr.second.tile_name &&
-                find_tile_looks_like( *pr.second.tile_name, TILE_CATEGORY::NONE, "" ) ) {
+            find_tile_looks_like( *pr.second.tile_name, TILE_CATEGORY::NONE, "" ) ) {
             explosion_tile_id = *pr.second.tile_name;
         } else if( col == c_red ) {
             explosion_tile_id = exp_strong;
@@ -5296,128 +5297,128 @@ void cata_tiles::get_rotation_and_subtile( const char val, const char rot_to, in
 {
     const bool no_rotation = rot_to == CHAR_MAX;
     switch( val ) {
-    // no connections
-    case 0:
-        subtile = unconnected;
-        if( no_rotation ) {
+        // no connections
+        case 0:
+            subtile = unconnected;
+            if( no_rotation ) {
+                rotation = 0;
+                break;
+            }
+            rotation = get_rotation_unconnected( rot_to );
+            break;
+        // all connections
+        case 15:
+            subtile = center;
             rotation = 0;
             break;
-        }
-        rotation = get_rotation_unconnected( rot_to );
-        break;
-    // all connections
-    case 15:
-        subtile = center;
-        rotation = 0;
-        break;
-    // end pieces
-    // rotations:
-    //
-    // --> edge index
-    // Nw, Ws, Sw, Es,
-    // Ne, Wn, Se, En,  |
-    // N+, W+, S+, E+,  V  get_rotation_... return index
-    // N-, W-, S-, E-
-    //
-    // (Nw = north end piece, rotated to west)
-    case 8:
-        // vertical end piece S
-        subtile = end_piece;
-        if( no_rotation ) {
+        // end pieces
+        // rotations:
+        //
+        // --> edge index
+        // Nw, Ws, Sw, Es,
+        // Ne, Wn, Se, En,  |
+        // N+, W+, S+, E+,  V  get_rotation_... return index
+        // N-, W-, S-, E-
+        //
+        // (Nw = north end piece, rotated to west)
+        case 8:
+            // vertical end piece S
+            subtile = end_piece;
+            if( no_rotation ) {
+                rotation = 2;
+                break;
+            }
+            rotation = 2 + 4 * get_rotation_edge_ns( rot_to );
+            break;
+        case 4:
+            // horizontal end piece E
+            subtile = end_piece;
+            if( no_rotation ) {
+                rotation = 3;
+                break;
+            }
+            rotation = 3 + 4 * get_rotation_edge_ew( rot_to );
+            break;
+        case 2:
+            // horizontal end piece W
+            subtile = end_piece;
+            if( no_rotation ) {
+                rotation = 1;
+                break;
+            }
+            rotation = 1 + 4 * get_rotation_edge_ew( rot_to );
+            break;
+        case 1:
+            // vertical end piece N
+            subtile = end_piece;
+            if( no_rotation ) {
+                rotation = 0;
+                break;
+            }
+            rotation = 4 * get_rotation_edge_ns( rot_to );
+            break;
+        // edges
+        // rotations:
+        //
+        // --> edge index
+        // NSw, EWs,
+        // NSe, EWn,  |
+        // NS+, EW+,  V  get_rotation_... return index
+        // NS-, EW-,
+        //
+        // (NSw = north-south edge, rotated to west)
+        case 9:
+            // vertical edge
+            subtile = edge;
+            if( no_rotation ) {
+                rotation = 0;
+                break;
+            }
+            rotation = 2 * get_rotation_edge_ns( rot_to );
+            break;
+        case 6:
+            // horizontal edge
+            subtile = edge;
+            if( no_rotation ) {
+                rotation = 1;
+                break;
+            }
+            rotation = 1 + 2 * get_rotation_edge_ew( rot_to );
+            break;
+        // corners
+        case 12:
+            subtile = corner;
             rotation = 2;
             break;
-        }
-        rotation = 2 + 4 * get_rotation_edge_ns( rot_to );
-        break;
-    case 4:
-        // horizontal end piece E
-        subtile = end_piece;
-        if( no_rotation ) {
+        case 10:
+            subtile = corner;
+            rotation = 1;
+            break;
+        case 3:
+            subtile = corner;
+            rotation = 0;
+            break;
+        case 5:
+            subtile = corner;
             rotation = 3;
             break;
-        }
-        rotation = 3 + 4 * get_rotation_edge_ew( rot_to );
-        break;
-    case 2:
-        // horizontal end piece W
-        subtile = end_piece;
-        if( no_rotation ) {
+        // all t_connections
+        case 14:
+            subtile = t_connection;
+            rotation = 2;
+            break;
+        case 11:
+            subtile = t_connection;
             rotation = 1;
             break;
-        }
-        rotation = 1 + 4 * get_rotation_edge_ew( rot_to );
-        break;
-    case 1:
-        // vertical end piece N
-        subtile = end_piece;
-        if( no_rotation ) {
+        case 7:
+            subtile = t_connection;
             rotation = 0;
             break;
-        }
-        rotation = 4 * get_rotation_edge_ns( rot_to );
-        break;
-    // edges
-    // rotations:
-    //
-    // --> edge index
-    // NSw, EWs,
-    // NSe, EWn,  |
-    // NS+, EW+,  V  get_rotation_... return index
-    // NS-, EW-,
-    //
-    // (NSw = north-south edge, rotated to west)
-    case 9:
-        // vertical edge
-        subtile = edge;
-        if( no_rotation ) {
-            rotation = 0;
+        case 13:
+            subtile = t_connection;
+            rotation = 3;
             break;
-        }
-        rotation = 2 * get_rotation_edge_ns( rot_to );
-        break;
-    case 6:
-        // horizontal edge
-        subtile = edge;
-        if( no_rotation ) {
-            rotation = 1;
-            break;
-        }
-        rotation = 1 + 2 * get_rotation_edge_ew( rot_to );
-        break;
-    // corners
-    case 12:
-        subtile = corner;
-        rotation = 2;
-        break;
-    case 10:
-        subtile = corner;
-        rotation = 1;
-        break;
-    case 3:
-        subtile = corner;
-        rotation = 0;
-        break;
-    case 5:
-        subtile = corner;
-        rotation = 3;
-        break;
-    // all t_connections
-    case 14:
-        subtile = t_connection;
-        rotation = 2;
-        break;
-    case 11:
-        subtile = t_connection;
-        rotation = 1;
-        break;
-    case 7:
-        subtile = t_connection;
-        rotation = 0;
-        break;
-    case 13:
-        subtile = t_connection;
-        rotation = 3;
-        break;
     }
 }
 
@@ -5467,61 +5468,61 @@ int cata_tiles::get_rotation_unconnected( const char rot_to )
 {
     int rotation = 0;
     switch( rot_to ) {
-    // Catch no and all first for performance; these are the last sprites!
-    case 0: // NONE
-        rotation = 15;
-        break;
-    case 15: // ALL
-        rotation = 12;
-        break;
+        // Catch no and all first for performance; these are the last sprites!
+        case 0: // NONE
+            rotation = 15;
+            break;
+        case 15: // ALL
+            rotation = 12;
+            break;
 
-    // Cases for single tile to rotate to -> easy
-    case static_cast<int>( NEIGHBOUR::NORTH ):
-        rotation = 2;
-        break;
-    case static_cast<int>( NEIGHBOUR::EAST ):
-        rotation = 3;
-        break;
-    case static_cast<int>( NEIGHBOUR::SOUTH ):
-        rotation = 0;
-        break;
-    case static_cast<int>( NEIGHBOUR::WEST ):
-        rotation = 1;
-        break;
-    // Two tiles, resulting in diagonal
-    case 10: // NE
-        rotation = 6;
-        break;
-    case 3: // SE
-        rotation = 7;
-        break;
-    case 5: // SW
-        rotation = 4;
-        break;
-    case 12: // NW
-        rotation = 5;
-        break;
-    // Cases for three tiles to rotate to -> easy
-    // Arranged to fallback / modulo to fitting index 0-4
-    case 14: // 3 but south --> modulo = north
-        rotation = 10;
-        break;
-    case 11: // 3 but west --> modulo = east
-        rotation = 11;
-        break;
-    case 7: // 3 but north --> modulo = south
-        rotation = 8;
-        break;
-    case 13: // 3 but east --> modulo = west
-        rotation = 9;
-        break;
-    // Two opposing tiles, (No tiles, all tiles; see first cases)
-    case 9: // N-S
-        rotation = 14;
-        break;
-    case 6: // E-W
-        rotation = 13;
-        break;
+        // Cases for single tile to rotate to -> easy
+        case static_cast<int>( NEIGHBOUR::NORTH ):
+            rotation = 2;
+            break;
+        case static_cast<int>( NEIGHBOUR::EAST ):
+            rotation = 3;
+            break;
+        case static_cast<int>( NEIGHBOUR::SOUTH ):
+            rotation = 0;
+            break;
+        case static_cast<int>( NEIGHBOUR::WEST ):
+            rotation = 1;
+            break;
+        // Two tiles, resulting in diagonal
+        case 10: // NE
+            rotation = 6;
+            break;
+        case 3: // SE
+            rotation = 7;
+            break;
+        case 5: // SW
+            rotation = 4;
+            break;
+        case 12: // NW
+            rotation = 5;
+            break;
+        // Cases for three tiles to rotate to -> easy
+        // Arranged to fallback / modulo to fitting index 0-4
+        case 14: // 3 but south --> modulo = north
+            rotation = 10;
+            break;
+        case 11: // 3 but west --> modulo = east
+            rotation = 11;
+            break;
+        case 7: // 3 but north --> modulo = south
+            rotation = 8;
+            break;
+        case 13: // 3 but east --> modulo = west
+            rotation = 9;
+            break;
+        // Two opposing tiles, (No tiles, all tiles; see first cases)
+        case 9: // N-S
+            rotation = 14;
+            break;
+        case 6: // E-W
+            rotation = 13;
+            break;
     }
 
     return rotation;
@@ -5572,7 +5573,7 @@ void cata_tiles::get_tile_values_with_ter(
     uint8_t rotation_targets = here.get_known_rotates_to_f( p, rotate_to_group, {} );
     //check if furniture should connect to itself
     if( here.has_flag( ter_furn_flag::TFLAG_NO_SELF_CONNECT, p ) ||
-            here.has_flag( ter_furn_flag::TFLAG_ALIGN_WORKBENCH, p ) ) {
+        here.has_flag( ter_furn_flag::TFLAG_ALIGN_WORKBENCH, p ) ) {
         //if we don't ever connect to ourself just return unconnected to be used further
         get_rotation_and_subtile( 0, rotation_targets, rotation, subtile );
     } else {
@@ -5600,39 +5601,39 @@ void cata_tiles::get_tile_values_with_ter(
             for( int i = 0; i < 4; ++i ) {
                 const tripoint_bub_ms &pt = p + four_adjacent_offsets[i];
                 if( here.has_flag( ter_furn_flag::TFLAG_WALL, pt ) ||
-                        here.has_flag( ter_furn_flag::TFLAG_WINDOW, pt ) ||
-                        here.has_flag( ter_furn_flag::TFLAG_DOOR, pt ) ) {
+                    here.has_flag( ter_furn_flag::TFLAG_WINDOW, pt ) ||
+                    here.has_flag( ter_furn_flag::TFLAG_DOOR, pt ) ) {
                     val += 1 << i;
                 }
             }
         }
 
         switch( val ) {
-        case 4:    // south wall
-        case 14:   // north opening T
-            rotation = 2;
-            break;
-        case 2:    // east wall
-        case 6:    // southeast corner
-        case 5:    // E/W corridor
-        case 7:    // east opening T
-            rotation = 1;
-            break;
-        case 8:    // west wall
-        case 12:   // southwest corner
-        case 13:   // west opening T
-            rotation = 3;
-            break;
-        case 0:    // no walls
-        case 1:    // north wall
-        case 3:    // northeast corner
-        case 9:    // northwest corner
-        case 10:   // N/S corridor
-        case 11:   // south opening T
-        case 15:   // surrounded
-        default:   // just in case
-            rotation = rotate_to_group.none() ? 0 : 15;
-            break;
+            case 4:    // south wall
+            case 14:   // north opening T
+                rotation = 2;
+                break;
+            case 2:    // east wall
+            case 6:    // southeast corner
+            case 5:    // E/W corridor
+            case 7:    // east opening T
+                rotation = 1;
+                break;
+            case 8:    // west wall
+            case 12:   // southwest corner
+            case 13:   // west opening T
+                rotation = 3;
+                break;
+            case 0:    // no walls
+            case 1:    // north wall
+            case 3:    // northeast corner
+            case 9:    // northwest corner
+            case 10:   // N/S corridor
+            case 11:   // south opening T
+            case 15:   // surrounded
+            default:   // just in case
+                rotation = rotate_to_group.none() ? 0 : 15;
+                break;
         }
 
         //
@@ -5729,7 +5730,7 @@ void cata_tiles::lr_generic( Iter begin, Iter end, Func id_func, TILE_CATEGORY c
         const std::string id_string = id_func( begin );
 
         if( !tileset_ptr->find_tile_type( prefix + id_string ) &&
-                !find_tile_looks_like( id_string, category, "" ) ) {
+            !find_tile_looks_like( id_string, category, "" ) ) {
             missing_list.append( id_string + " " );
         } else if( !tileset_ptr->find_tile_type( prefix + id_string ) ) {
             missing_with_looks_like_list.append( id_string + " " );

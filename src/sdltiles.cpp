@@ -3156,7 +3156,6 @@ static void CheckMessages()
 
         // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
         if( !needupdate ) {
-
             // Check action weightings and auto-add any immediate-surrounding actions as quick shortcuts
             // This code is based heavily off action.cpp handle_action_menu() which puts common shortcuts at the top
             if( is_default_mode && get_option<bool>( "ANDROID_SHORTCUT_AUTOADD" ) ) {
@@ -3322,7 +3321,7 @@ static void CheckMessages()
                     }
 
                     quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                                touch_input_context.get_category() )];
+                                                 touch_input_context.get_category() )];
                     size_t old_size = qsl.size();
                     for( const auto &action_remove : actions_remove ) {
                         remove_action_from_quick_shortcuts( action_remove, touch_input_context.get_category() );
@@ -3359,7 +3358,7 @@ static void CheckMessages()
                     env->DeleteLocalRef( clazz );
                 }
             }
-
+        }
         // Handle repeating inputs from touch + holds
         if( !is_quick_shortcut_touch && !is_two_finger_touch && !is_three_finger_touch &&
             finger_down_time > 0 &&
@@ -3408,7 +3407,6 @@ static void CheckMessages()
         }
     }
 #endif
-
     last_input = input_event();
 
     std::optional<point> resize_dims;
@@ -3543,7 +3541,7 @@ static void CheckMessages()
                                     if( !last_input.text.empty() ||
                                         !inp_mngr.get_keyname( lc, input_event_t::keyboard_char ).empty() ) {
                                         quick_shortcuts_t &qsl = quick_shortcuts_map[get_quick_shortcut_name(
-                                            touch_input_context.get_category() )];
+                                                                     touch_input_context.get_category() )];
                                         qsl.remove( last_input );
                                         add_quick_shortcut( qsl, last_input, false, true );
                                         ui_manager::redraw_invalidated();
@@ -3828,7 +3826,7 @@ static void CheckMessages()
                             }
                         } else {
                             if( is_two_finger_touch ) {
-                                // handle zoom in/out                                
+                                // handle zoom in/out
                                 bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
                                 if( is_default_mode ) {
                                     float x1 = ( finger_curr_x - finger_down_x );

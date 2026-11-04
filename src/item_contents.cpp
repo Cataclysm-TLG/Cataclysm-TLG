@@ -2233,8 +2233,8 @@ void item_contents::add_pocket( const item &pocket_item )
         total_nonrigid_volume += i_pocket->volume_capacity();
         const pocket_data *data = i_pocket->get_pocket_data();
         bool pocket_is_standard = data->type == pocket_type::CONTAINER ||
-                                data->type == pocket_type::MAGAZINE ||
-                                data->type == pocket_type::MAGAZINE_WELL;
+                                  data->type == pocket_type::MAGAZINE ||
+                                  data->type == pocket_type::MAGAZINE_WELL;
 
         if( !data->rigid && pocket_is_standard ) {
             effective_nonrigid_volume +=
@@ -2265,19 +2265,19 @@ item item_contents::remove_pocket( int index )
     units::volume total_nonrigid_volume = 0_ml;
     units::volume effective_nonrigid_volume = 0_ml;
     for( item_pocket *i_pocket : additional_pockets[index].get_all_contained_pockets() ) {
-            total_nonrigid_volume += i_pocket->volume_capacity();
+        total_nonrigid_volume += i_pocket->volume_capacity();
 
-            const pocket_data *data = i_pocket->get_pocket_data();
+        const pocket_data *data = i_pocket->get_pocket_data();
 
-            bool pocket_is_standard = data->type == pocket_type::CONTAINER ||
-                                    data->type == pocket_type::MAGAZINE ||
-                                    data->type == pocket_type::MAGAZINE_WELL;
+        bool pocket_is_standard = data->type == pocket_type::CONTAINER ||
+                                  data->type == pocket_type::MAGAZINE ||
+                                  data->type == pocket_type::MAGAZINE_WELL;
 
-            if( !data->rigid && pocket_is_standard ) {
-                effective_nonrigid_volume +=
-                    ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
-                    data->volume_encumber_modifier;
-            }
+        if( !data->rigid && pocket_is_standard ) {
+            effective_nonrigid_volume +=
+                ( i_pocket->volume_capacity() - i_pocket->magazine_well() ) *
+                data->volume_encumber_modifier;
+        }
         // move items from the consolidated pockets to the item that will be returned
         for( const item *item_to_move : it->all_items_top() ) {
             i_pocket->add( *item_to_move );

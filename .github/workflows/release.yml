@@ -181,16 +181,6 @@ jobs:
           #   artifact: linux-tiles-sounds
           #   ext: tar.gz
           #   content: application/gzip
-          - name: Linux (Curses)
-            os: ubuntu-22.04
-            mxe: none
-            android: none
-            libbacktrace: 1
-            tiles: 0
-            sound: 0
-            artifact: linux-curses
-            ext: tar.gz
-            content: application/gzip
           - name: Linux
             os: ubuntu-24.04
             android: none
@@ -201,14 +191,16 @@ jobs:
             artifact: linux
             ext: tar.gz
             content: application/gzip
-          - name: macOS (Curses)
-            os: macos-15
+          - name: Linux (Curses)
+            os: ubuntu-22.04
             mxe: none
+            android: none
+            libbacktrace: 1
             tiles: 0
             sound: 0
-            artifact: osx-curses
-            ext: dmg
-            content: application/x-apple-diskimage
+            artifact: linux-curses
+            ext: tar.gz
+            content: application/gzip
           # - name: macOS Tiles Universal Binary (x64 and arm64)
           #   os: macos-15
           #   mxe: none
@@ -223,6 +215,14 @@ jobs:
             sound: 0
             sdl3: 1
             artifact: osx
+            ext: dmg
+            content: application/x-apple-diskimage
+          - name: macOS (Curses)
+            os: macos-15
+            mxe: none
+            tiles: 0
+            sound: 0
+            artifact: osx-curses
             ext: dmg
             content: application/x-apple-diskimage
           - name: Android x64
@@ -567,11 +567,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install gettext          
-      - name: Install ccache
-        if: runner.os == 'Linux' && matrix.android != 'none'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ccache
       - name: Build Ctlg (android)
         if: runner.os == 'Linux' && matrix.android != 'none'
         working-directory: ./android
