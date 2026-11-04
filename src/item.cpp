@@ -10820,8 +10820,8 @@ void item_location::salvage_on_break( map &here, item &it ) const
     }
 
     // Randomize efficiency so we don't get predictable results.
-    float efficiency = 0.7f - ( 0.025f * rng( 0, 28 ) );
-    if( efficiency <= 0.001f ) {
+    float efficiency = 0.33f - ( 0.05f * rng( 0, 8 ) );
+    if( efficiency < 0.1f ) {
         return;
     }
 
