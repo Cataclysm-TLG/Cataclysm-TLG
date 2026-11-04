@@ -172,6 +172,8 @@ class item_location
          */
         void overflow( map &here );
 
+        void salvage_on_break( map &here, item &it ) const;
+
         /**
          * returns whether the item can be reloaded with the specified item.
          * @param ammo item to be loaded in

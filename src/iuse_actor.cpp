@@ -1781,12 +1781,6 @@ static void visit_salvage_products( const item &it,
     }
 }
 
-static units::mass proportional_weight( const item &it, int material_portions )
-{
-    int total_portions = std::max( 1, it.type->mat_portion_total );
-    return it.weight() * material_portions / total_portions;
-}
-
 // Helper to determine if there's enough of any material to even produce a result when cut up.
 static bool can_produce_results( const item &it )
 {
@@ -1796,7 +1790,7 @@ static bool can_produce_results( const item &it )
             if( material.count_by_charges() ) {
                 material.charges = 1;
             }
-            if( material.weight() <= proportional_weight( it, mat.second ) ) {
+            if( material.weight() <= material.proportional_weight( mat.second ) ) {
                 return true;
             }
         }
@@ -1861,31 +1855,6 @@ bool salvage_actor::valid_to_cut_up( const Character *const p, const item &it ) 
     return true;
 }
 
-// Find a recipe that can be used to craft item x. Searches craft and uncraft recipes
-// Used only by salvage_actor::cut_up
-static std::optional<recipe> find_uncraft_recipe( const item &x )
-{
-    auto is_valid_uncraft = [&x]( const recipe & curr ) -> bool {
-        return !( curr.obsolete || curr.result() != x.typeId()
-                  || curr.makes_amount() > 1 || curr.is_null() );
-    };
-
-    // Check uncraft first, then crafting recipes if none was found
-    recipe uncraft = recipe_dictionary::get_uncraft( x.typeId() );
-    if( is_valid_uncraft( uncraft ) ) {
-        return uncraft;
-    }
-
-    auto iter = std::find_if( recipe_dict.begin(), recipe_dict.end(),
-    [&]( const std::pair<const recipe_id, recipe> &curr ) {
-        return is_valid_uncraft( curr.second );
-    } );
-    if( iter != recipe_dict.end() ) {
-        return iter->second;
-    }
-    return std::nullopt;
-}
-
 void salvage_actor::cut_up( Character &p, item_location &cut ) const
 {
     map &here = get_map();
@@ -1920,7 +1889,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
     auto distribute_uniformly = [&mat_to_weight]( const item & x, float num_adjusted ) -> void {
         for( const auto &type : x.made_of() )
         {
-            mat_to_weight[type.first] += proportional_weight( x, type.second ) * num_adjusted;
+            mat_to_weight[type.first] += x.proportional_weight( type.second ) * num_adjusted;
         }
     };
 
@@ -1965,7 +1934,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
         }
 
         // Try to find an available recipe and "restore" its components
-        std::optional<recipe> uncraft = find_uncraft_recipe( curr );
+        std::optional<recipe> uncraft = curr.find_uncraft_recipe();
         if( uncraft )
         {
             const requirement_data requirements = uncraft->simple_requirements();

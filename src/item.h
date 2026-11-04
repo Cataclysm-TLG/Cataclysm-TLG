@@ -3195,6 +3195,10 @@ class item : public visitable
         item *get_item_with( const std::function<bool( const item & )> &filter );
         const item *get_item_with( const std::function<bool( const item & )> &filter ) const;
 
+
+        /** Used by cut_up() and item::salvage_on_break() **/
+        std::optional<recipe> find_uncraft_recipe() const;
+
         /**
          * returns the number of items stacks in contents
          * each item that is not count_by_charges,
@@ -3217,6 +3221,8 @@ class item : public visitable
         void combine( const item_contents &read_input, bool convert = false );
 
         bool is_collapsed() const;
+
+        units::mass proportional_weight( int material_portions ) const;
 
     private:
         /** migrates an item into this item. */
