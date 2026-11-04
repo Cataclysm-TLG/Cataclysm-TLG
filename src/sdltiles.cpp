@@ -3332,6 +3332,7 @@ static void CheckMessages()
                     }
                 }
             }
+        }
         if( remove_expired_actions_from_quick_shortcuts( touch_input_context.get_category() ) ) {
             needupdate = true;
         }
