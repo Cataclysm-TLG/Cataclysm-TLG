@@ -4789,7 +4789,7 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
     std::shared_ptr<tileset> candidate = std::make_shared<tileset>();
     loader loader( *candidate, renderer, memory_map_mode );
     const atlas_upload_interrupt interrupt =
-        loader.load( tileset_id, precheck, pump_events, terrain,
+        loader.load( tileset_id, precheck, force, pump_events,
                      current_renderer_instance_gen, current_gpu_textures_gen, poll, quarantine );
     if( interrupt != atlas_upload_interrupt::none ) {
         if( out_interrupt ) {
