@@ -32,6 +32,8 @@
 #include <string>
 #include <vector>
 
+#include <cata_shader.h>
+
 struct point;
 
 // SDL3 type renames. Use CataFlipMode at call sites.
@@ -124,10 +126,53 @@ void GetRenderDrawBlendMode( const SDL_Renderer_Ptr &renderer, SDL_BlendMode &bl
 SDL_Surface_Ptr load_image( const char *path );
 bool SetRenderTarget( const SDL_Renderer_Ptr &renderer, const SDL_Texture_Ptr &texture );
 
-namespace cata_shader
+// Deferred-disposal list for GPU texture handles that must outlive an
+// interrupted or pre-rebuild operation. Each handle's deleter consults a shared
+// gate: while the gate is set, SDL_DestroyTexture is skipped because the
+// originating renderer is being torn down and reclaims the texture itself.
+// drain_live_renderer() destroys on the live renderer; abandon() and the
+// destructor release without destroying. Single-threaded, hence a plain vector.
+class gpu_handle_graveyard
 {
-class variant_pass;
-} // namespace cata_shader
+    public:
+        using gate = std::shared_ptr<std::atomic<bool>>;
+
+        gpu_handle_graveyard();
+        ~gpu_handle_graveyard();
+        gpu_handle_graveyard( const gpu_handle_graveyard & ) = delete;
+        gpu_handle_graveyard &operator=( const gpu_handle_graveyard & ) = delete;
+        gpu_handle_graveyard( gpu_handle_graveyard && ) = default;
+        gpu_handle_graveyard &operator=( gpu_handle_graveyard && ) = default;
+
+        // Adopt a raw handle, wrapping it in a shared_ptr that shares this
+        // graveyard's current gate.
+        void add( SDL_Texture *raw );
+        // Adopt a handle already wrapped against this graveyard's gate.
+        void adopt( std::shared_ptr<SDL_Texture> handle );
+        bool empty() const {
+            return handles_.empty();
+        }
+        // The gate every adopted handle's deleter consults; callers that build
+        // handles destined for this graveyard wrap them against it.
+        const gate &current_gate() const {
+            return gate_;
+        }
+        // Destroy the handles on the still-live renderer, then re-arm a fresh
+        // gate so the graveyard is reusable.
+        void drain_live_renderer();
+        // Release the handles without SDL_DestroyTexture because the originating
+        // renderer is being destroyed, then re-arm a fresh gate.
+        void abandon();
+
+    private:
+        std::vector<std::shared_ptr<SDL_Texture>> handles_;
+        gate gate_;
+};
+
+// Wrap a raw texture handle in a shared_ptr whose deleter skips
+// SDL_DestroyTexture while `g` is set. Ownership of `raw` transfers to the
+// returned handle.
+std::shared_ptr<SDL_Texture> make_gated_texture( SDL_Texture *raw, gpu_handle_graveyard::gate g );
 
 // RAII render-target swap: binds `target`, restores the prior target on
 // destruction. On SDL3 a non-null `vp` is flushed before the swap so shader
@@ -149,18 +194,64 @@ class scoped_render_target
             return valid_;
         }
 
+        // False when the renderer may be in an undefined state (see class
+        // doc). The global recovery latch is raised by the time this returns
+        // false, and the caller must abort the enclosing frame.
+        bool boundary_intact() const {
+            return boundary_intact_;
+        }
+
+        // Eagerly restore the prior target (re-flushing vp). Idempotent:
+        // caches its result. Returns false if the scope was never valid, the
+        // flush or SDL_SetRenderTarget fails, or recovery was already latched.
+        bool restore();
     private:
+        // Latch the global recovery embargo and clear boundary_intact_ after an
+        // unsafe SDL boundary outcome.
+        void mark_boundary_lost();
+
         SDL_Renderer *renderer_ = nullptr;
         SDL_Texture *prior_target_ = nullptr;
+        cata_shader::variant_pass *vp_ = nullptr;
         bool valid_ = false;
         bool restored_ = false;
+        bool restore_attempted_ = false;
+        bool last_restore_ok_ = false;
+        bool boundary_intact_ = true;
+};
+
+namespace cata_shader
+{
+class variant_pass;
+} // namespace cata_shader
+
+
+// Sticky renderer-boundary recovery latch, mirrored here so this header's
+// helpers can consult it without the full sdltiles.h chain. Defined in sdltiles.cpp.
+bool renderer_boundary_recovery_pending();
+// Raise that latch from code without the sdltiles.h chain.
+void renderer_boundary_signal_recovery_required();
+
+// Outcome of permanent_render_target_bind. This helper does NOT short-circuit
+// on the recovery latch -- the coordinator needs it during rebuild transitions.
+// - ok: SDL accepted the bind.
+// - refused_pre_switch: a precondition (null renderer) blocked any SDL call;
+//   the prior target is still bound and intact.
+// - failed_in_switch: variant_pass::flush() failed (undefined shader bind, or
+//   the abandoned_pending_rebind_ embargo) OR SDL_SetRenderTarget returned false
+//   (SDL may have mutated target state before failing). The renderer is left
+//   undefined and the helper raises the recovery latch.
+enum class bind_result {
+    ok,
+    refused_pre_switch,
+    failed_in_switch,
 };
 
 // Bind a render target permanently, with no auto-restore, for transitions
 // where the prior target is not meaningful. Flushes variant_pass on SDL3
 // when `vp` is non-null.
-bool permanent_render_target_bind( const SDL_Renderer_Ptr &renderer, SDL_Texture *target,
-                                   cata_shader::variant_pass *vp = nullptr );
+bind_result permanent_render_target_bind( const SDL_Renderer_Ptr &renderer, SDL_Texture *target,
+        cata_shader::variant_pass *vp = nullptr );
 void RenderClear( const SDL_Renderer_Ptr &renderer );
 SDL_Surface_Ptr CreateRGBSurface( Uint32 flags, int width, int height, int depth, Uint32 Rmask,
                                   Uint32 Gmask, Uint32 Bmask, Uint32 Amask );

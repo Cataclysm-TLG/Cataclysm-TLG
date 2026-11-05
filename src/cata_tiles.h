@@ -228,20 +228,6 @@ struct atlas_replay_descriptor {
     int expected_tilecount = 0;
 };
 
-// Inputs needed to re-upload one atlas after renderer recreate or
-// device-texture reset. image_path_u8 is a UTF-8 byte sequence so the
-// descriptor avoids a cata_path dependency.
-struct atlas_replay_descriptor {
-    std::string image_path_u8;
-    int color_key_r = -1;
-    int color_key_g = -1;
-    int color_key_b = -1;
-    int sprite_width = 0;
-    int sprite_height = 0;
-    int atlas_offset = 0;
-    int expected_tilecount = 0;
-};
-
 class tileset
 {
     private:

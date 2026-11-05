@@ -77,6 +77,7 @@
 #if defined(SDL_SOUND)
 #include "sound_backend.h"
 #endif
+#include "sdl_wrappers.h"
 #include "sdlsound.h"
 #include "string_formatter.h"
 #include "uistate.h"
@@ -1857,13 +1858,6 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     }
 
     RenderSetClipRect( renderer, nullptr );
-#if SDL_MAJOR_VERSION >= 3
-    // Flush so GPU shader state from sprite draws is not left bound across a
-    // following target switch.
-    if( m_variant_pass ) {
-        m_variant_pass->flush();
-    }
-#endif
 }
 
 static bool draw_window( Font_Ptr &font, const catacurses::window &w, const point &offset )

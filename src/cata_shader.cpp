@@ -1,6 +1,8 @@
 #if defined(TILES)
 
 #include "cata_shader.h"
+#include "sdltiles.h"
+#include "sdl_wrappers.h"
 
 namespace cata_shader
 {
@@ -220,7 +222,6 @@ gpu_handle_graveyard &probe_texture_graveyard()
     static gpu_handle_graveyard g;
     return g;
 }
-
 
 const char *shader_basename_for( variant_kind v )
 {
