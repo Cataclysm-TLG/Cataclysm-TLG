@@ -648,11 +648,6 @@ void BitmapFont::release_gpu_resources()
     }
 }
 
-void BitmapFont::rebuild_for_renderer( const SDL_Renderer_Ptr &renderer )
-{
-    build_textures( renderer, source_pixel_format );
-}
-
 void FontFallbackList::release_gpu_resources()
 {
     for( std::unique_ptr<Font> &child : fonts ) {

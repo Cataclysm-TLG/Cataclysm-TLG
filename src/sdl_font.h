@@ -56,13 +56,6 @@ class Font
         /// kept so the font can be rebuilt against a fresh renderer.
         virtual void release_gpu_resources() {}
 
-        /// Recreate GPU-side glyph textures against `renderer` after a device
-        /// reset. Default is a no-op for fonts whose glyphs repopulate lazily
-        /// on the next OutputChar (the TTF glyph cache).
-        virtual void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) {
-            ( void )renderer;
-        }
-
         /// Try to load a font by typeface (Bitmap or Truetype).
         static std::unique_ptr<Font> load_font(
             SDL_Renderer_Ptr &renderer, Uint32 pixel_format,
@@ -163,7 +156,6 @@ class BitmapFont : public Font
                                unsigned char line_id, const point &p, unsigned char color ) const override;
         void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
         void release_gpu_resources() override;
-        void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
     protected:
         // Build the per-color glyph atlases from typeface_path against
         // `renderer`, leaving ascii[] ready for OutputChar.
@@ -196,7 +188,6 @@ class FontFallbackList : public Font
                          unsigned char color, float opacity = 1.0f ) override;
         void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
         void release_gpu_resources() override;
-        void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
     protected:
         std::vector<std::unique_ptr<Font>> fonts;
         std::map<std::string, std::vector<std::unique_ptr<Font>>::iterator> glyph_font;
