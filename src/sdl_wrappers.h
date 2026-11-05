@@ -317,6 +317,9 @@ bool RenderReadPixels( const SDL_Renderer_Ptr &renderer, const SDL_Rect *rect,
                        Uint32 format, void *pixels, int pitch );
 // SDL3: renamed to SDL_GetCurrentRenderOutputSize.
 void GetRendererOutputSize( const SDL_Renderer_Ptr &renderer, int *w, int *h );
+// The texture currently bound as the renderer's target, or NULL for the
+// default window target.
+SDL_Texture *GetRenderTarget( const SDL_Renderer_Ptr &renderer );
 
 // SDL3: SDL_GetTicks returns Uint64. Wrapper keeps uint32_t for source compat.
 uint32_t GetTicks();
@@ -420,6 +423,7 @@ inline constexpr Uint32 CATA_WINDOWEVENT_RESIZED      = SDL_EVENT_WINDOW_RESIZED
 // SIZE_CHANGED removed in SDL3; use RESIZED instead.
 inline constexpr Uint32 CATA_WINDOWEVENT_FOCUS_LOST   = SDL_EVENT_WINDOW_FOCUS_LOST;
 inline constexpr Uint32 CATA_WINDOWEVENT_FOCUS_GAINED = SDL_EVENT_WINDOW_FOCUS_GAINED;
+inline constexpr Uint32 CATA_WINDOWEVENT_SAFE_AREA_CHANGED = SDL_EVENT_WINDOW_SAFE_AREA_CHANGED;
 #else
 inline constexpr Uint32 CATA_WINDOWEVENT_SHOWN        = SDL_WINDOWEVENT_SHOWN;
 inline constexpr Uint32 CATA_WINDOWEVENT_EXPOSED      = SDL_WINDOWEVENT_EXPOSED;
@@ -428,12 +432,31 @@ inline constexpr Uint32 CATA_WINDOWEVENT_RESTORED     = SDL_WINDOWEVENT_RESTORED
 inline constexpr Uint32 CATA_WINDOWEVENT_RESIZED      = SDL_WINDOWEVENT_RESIZED;
 inline constexpr Uint32 CATA_WINDOWEVENT_FOCUS_LOST   = SDL_WINDOWEVENT_FOCUS_LOST;
 inline constexpr Uint32 CATA_WINDOWEVENT_FOCUS_GAINED = SDL_WINDOWEVENT_FOCUS_GAINED;
+inline constexpr Uint32 CATA_WINDOWEVENT_SAFE_AREA_CHANGED = SDL_WINDOWEVENT_SAFE_AREA_CHANGED;
 #endif
 
 #if SDL_MAJOR_VERSION >= 3
 inline constexpr Uint32 CATA_RENDER_TARGETS_RESET = SDL_EVENT_RENDER_TARGETS_RESET;
 #else
 inline constexpr Uint32 CATA_RENDER_TARGETS_RESET = SDL_RENDER_TARGETS_RESET;
+#endif
+
+// Renderer device-reset/lost and mobile lifecycle event constants. SDL3 has
+// render device-lost; SDL2 has none. Pixel-size-change maps to SDL2's window
+// SIZE_CHANGED subtype.
+#if SDL_MAJOR_VERSION >= 3
+inline constexpr Uint32 CATA_RENDER_DEVICE_RESET = SDL_EVENT_RENDER_DEVICE_RESET;
+inline constexpr Uint32 CATA_RENDER_DEVICE_LOST = SDL_EVENT_RENDER_DEVICE_LOST;
+inline constexpr Uint32 CATA_APP_DIDENTERFOREGROUND = SDL_EVENT_DID_ENTER_FOREGROUND;
+inline constexpr Uint32 CATA_APP_WILLENTERBACKGROUND = SDL_EVENT_WILL_ENTER_BACKGROUND;
+inline constexpr Uint32 CATA_APP_DIDENTERBACKGROUND = SDL_EVENT_DID_ENTER_BACKGROUND;
+inline constexpr Uint32 CATA_WINDOWEVENT_PIXEL_SIZE_CHANGED = SDL_EVENT_WINDOW_PIXEL_SIZE_CHANGED;
+#else
+inline constexpr Uint32 CATA_RENDER_DEVICE_RESET = SDL_RENDER_DEVICE_RESET;
+inline constexpr Uint32 CATA_APP_DIDENTERFOREGROUND = SDL_APP_DIDENTERFOREGROUND;
+inline constexpr Uint32 CATA_APP_WILLENTERBACKGROUND = SDL_APP_WILLENTERBACKGROUND;
+inline constexpr Uint32 CATA_APP_DIDENTERBACKGROUND = SDL_APP_DIDENTERBACKGROUND;
+inline constexpr Uint32 CATA_WINDOWEVENT_PIXEL_SIZE_CHANGED = SDL_WINDOWEVENT_SIZE_CHANGED;
 #endif
 
 // Touch finger ID accessor. SDL3 renames fingerId -> fingerID.

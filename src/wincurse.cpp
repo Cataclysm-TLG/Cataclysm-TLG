@@ -810,6 +810,10 @@ void refresh_display()
     RedrawWindow( WindowHandle, nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW );
 }
 
+void drain_renderer_recovery()
+{
+}
+
 void refresh_mouse_config()
 {
 }

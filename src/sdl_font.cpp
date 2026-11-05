@@ -648,20 +648,20 @@ void BitmapFont::release_gpu_resources()
     }
 }
 
-void FontFallbackList::rebuild_for_renderer( const SDL_Renderer_Ptr &renderer )
-{
-    for( std::unique_ptr<Font> &child : fonts ) {
-        if( child ) {
-            child->rebuild_for_renderer( renderer );
-        }
-    }
-}
-
 void FontFallbackList::release_gpu_resources()
 {
     for( std::unique_ptr<Font> &child : fonts ) {
         if( child ) {
             child->release_gpu_resources();
+        }
+    }
+}
+
+void FontFallbackList::rebuild_for_renderer( const SDL_Renderer_Ptr &renderer )
+{
+    for( std::unique_ptr<Font> &child : fonts ) {
+        if( child ) {
+            child->rebuild_for_renderer( renderer );
         }
     }
 }
