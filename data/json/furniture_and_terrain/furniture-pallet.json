@@ -61,7 +61,7 @@
     "type": "furniture",
     "id": "f_pallet_cement",
     "name": "pallet of cement bags",
-    "looks_like": "material_cement",
+    "looks_like": "f_sandbag_half",
     "description": "A massive, packed-together block of cement bags wrapped with plastic packaging.  It makes for easy storage of building materials for masonry constructions.",
     "symbol": "#",
     "color": "light_gray",
