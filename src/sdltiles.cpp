@@ -1684,7 +1684,6 @@ recipe_result renderer_resource_coordinator::recipe_device_reset()
         return { recipe_outcome::failure };
     }
 #endif
-    loading_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };
@@ -1865,7 +1864,6 @@ recipe_result renderer_resource_coordinator::recipe_device_lost()
         return { recipe_outcome::failure };
     }
 #endif
-    loading_ui::release_gpu_resources();
     display_buffer.reset();
     if( check_pause_abort() ) {
         return { recipe_outcome::failure };
@@ -2244,7 +2242,7 @@ std::shared_ptr<const tileset> renderer_recovery_test_support::fetch_cached_bund
     const std::string &tileset_id, const std::string &memory_map_mode,
     const uint64_t current_renderer_instance_gen, const uint64_t current_gpu_textures_gen )
 {
-    return ts_cache.load_tileset( tileset_id, renderer, false, false, false, false,
+    return ts_cache.load_tileset( tileset_id, renderer, false, false, false,
                                   memory_map_mode, current_renderer_instance_gen,
                                   current_gpu_textures_gen );
 }
@@ -4049,7 +4047,6 @@ static bool apply_resize_layout( int w, int h )
         // ignore the minimum size so we clamp the terminal size here for safety.
         TERMINAL_WIDTH = std::max( WindowWidth / fontwidth / scaling_factor, EVEN_MINIMUM_TERM_WIDTH );
         TERMINAL_HEIGHT = std::max( WindowHeight / fontheight / scaling_factor, EVEN_MINIMUM_TERM_HEIGHT );
-        need_invalidate_framebuffers = true;
         catacurses::stdscr = catacurses::newwin( TERMINAL_HEIGHT, TERMINAL_WIDTH, point::zero );
     }
     return logical_changed;
