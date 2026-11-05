@@ -173,54 +173,6 @@ class gpu_handle_graveyard
 // returned handle.
 std::shared_ptr<SDL_Texture> make_gated_texture( SDL_Texture *raw, gpu_handle_graveyard::gate g );
 
-// Deferred-disposal list for GPU texture handles that must outlive an
-// interrupted or pre-rebuild operation. Each handle's deleter consults a shared
-// gate: while the gate is set, SDL_DestroyTexture is skipped because the
-// originating renderer is being torn down and reclaims the texture itself.
-// drain_live_renderer() destroys on the live renderer; abandon() and the
-// destructor release without destroying. Single-threaded, hence a plain vector.
-class gpu_handle_graveyard
-{
-    public:
-        using gate = std::shared_ptr<std::atomic<bool>>;
-
-        gpu_handle_graveyard();
-        ~gpu_handle_graveyard();
-        gpu_handle_graveyard( const gpu_handle_graveyard & ) = delete;
-        gpu_handle_graveyard &operator=( const gpu_handle_graveyard & ) = delete;
-        gpu_handle_graveyard( gpu_handle_graveyard && ) = default;
-        gpu_handle_graveyard &operator=( gpu_handle_graveyard && ) = default;
-
-        // Adopt a raw handle, wrapping it in a shared_ptr that shares this
-        // graveyard's current gate.
-        void add( SDL_Texture *raw );
-        // Adopt a handle already wrapped against this graveyard's gate.
-        void adopt( std::shared_ptr<SDL_Texture> handle );
-        bool empty() const {
-            return handles_.empty();
-        }
-        // The gate every adopted handle's deleter consults; callers that build
-        // handles destined for this graveyard wrap them against it.
-        const gate &current_gate() const {
-            return gate_;
-        }
-        // Destroy the handles on the still-live renderer, then re-arm a fresh
-        // gate so the graveyard is reusable.
-        void drain_live_renderer();
-        // Release the handles without SDL_DestroyTexture because the originating
-        // renderer is being destroyed, then re-arm a fresh gate.
-        void abandon();
-
-    private:
-        std::vector<std::shared_ptr<SDL_Texture>> handles_;
-        gate gate_;
-};
-
-// Wrap a raw texture handle in a shared_ptr whose deleter skips
-// SDL_DestroyTexture while `g` is set. Ownership of `raw` transfers to the
-// returned handle.
-std::shared_ptr<SDL_Texture> make_gated_texture( SDL_Texture *raw, gpu_handle_graveyard::gate g );
-
 // RAII render-target swap: binds `target`, restores the prior target on
 // destruction. On SDL3 a non-null `vp` is flushed before the swap so shader
 // GPU state is not left bound across the SetRenderTarget transition. Check

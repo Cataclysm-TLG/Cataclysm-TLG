@@ -536,6 +536,38 @@ void variant_pass::reset()
     unbind_required_ = false;
 }
 
+void variant_pass::clear_state_arrays( bool abandon_handles )
+{
+    if( abandon_handles ) {
+        for( shader &s : shaders_ ) {
+            s.abandon();
+        }
+        for( render_state &s : states_ ) {
+            s.abandon();
+        }
+        for( shader &s : memory_shaders_ ) {
+            s.abandon();
+        }
+        for( render_state &s : memory_states_ ) {
+            s.abandon();
+        }
+        tint_shader_.abandon();
+        tint_state_.abandon();
+    }
+    release_lit( abandon_handles );
+    resource_generation_ = next_resource_generation();
+    // rebuilt resources are probed again
+    lit_capability_.reset();
+    // Render states reference their fragment shader; clear states before
+    // shaders so SDL does not see a dangling reference on the clean path.
+    states_ = {};
+    memory_states_ = {};
+    tint_state_ = {};
+    shaders_ = {};
+    memory_shaders_ = {};
+    tint_shader_ = {};
+}
+
 void variant_pass::probe()
 {
     probe_attempted_ = true;
@@ -643,7 +675,7 @@ variant_pass::begin_result variant_pass::try_begin( variant_kind v )
         // currently_bound_ so operator== rejects the boundary, and force the
         // next flush() to call null-state even if currently_bound_ was empty.
         unbind_required_ = true;
-        return false;
+        return begin_result::abort_frame;
     }
     if( target ) {
         currently_bound_ = v;
@@ -651,7 +683,7 @@ variant_pass::begin_result variant_pass::try_begin( variant_kind v )
         currently_bound_.reset();
     }
     unbind_required_ = false;
-    return target != nullptr;
+    return target != nullptr ? begin_result::bound : begin_result::use_atlas;
 }
 
 bool variant_pass::end()

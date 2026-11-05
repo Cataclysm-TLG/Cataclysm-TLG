@@ -140,6 +140,7 @@ std::string get_ascii_tile_id( const uint32_t sym, const int FG, const int BG )
                         } );
 }
 
+
 pixel_minimap_mode pixel_minimap_mode_from_string( const std::string &mode )
 {
     if( mode == "solid" ) {
@@ -239,10 +240,6 @@ cata_tiles::cata_tiles( const SDL_Renderer_Ptr &renderer, const GeometryRenderer
     minimap( renderer, geometry )
 {
     cata_assert( renderer );
-
-#if SDL_MAJOR_VERSION >= 3
-    m_variant_pass = std::make_unique<cata_shader::variant_pass>( renderer.get() );
-#endif
 
     tile_height = 0;
     tile_width = 0;
@@ -1138,7 +1135,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         {
                             scoped_render_target mask_scope( renderer, tint_mask_tex.get()
 #if SDL_MAJOR_VERSION >= 3
-                                                             , m_variant_pass.get()
+                                                             , get_shared_variant_pass()
 #endif
                                                            );
                             if( !mask_scope.is_valid() ) {
@@ -1474,14 +1471,16 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
 
     RenderSetClipRect( renderer, nullptr );
 #if SDL_MAJOR_VERSION >= 3
-    // Unbind any GPU render state held across sprite batches so ImGui or the
+    // Unbind any GPU render state held across sprite batches so the
     // next-frame draws see clean state. On flush failure the bind boundary
     // forbids a target switch: abort the unbind, latch recovery, and throw.
-    if( m_variant_pass && !m_variant_pass->flush() ) {
-        draw_scope.abort_unbind();
-        display_buffer_scope_signal_recovery_required();
-        throw std::runtime_error(
-            "cata_tiles::draw: variant_pass flush failed at end of frame; renderer in undefined state" );
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        if( !vp->flush() ) {
+            draw_scope.abort_unbind();
+            display_buffer_scope_signal_recovery_required();
+            throw std::runtime_error(
+                "cata_tiles::draw: variant_pass flush failed at end of frame; renderer in undefined state" );
+        }
     }
 #endif
 }

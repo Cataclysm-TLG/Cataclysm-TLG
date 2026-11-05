@@ -129,7 +129,6 @@ std::unique_ptr<cata_tiles> overmap_tilecontext;
 static uint32_t lastupdate = 0;
 static uint32_t interval = 25;
 static bool needupdate = false;
-static bool need_invalidate_framebuffers = false;
 palette_array windowsPalette;
 
 static Font_Ptr font;
@@ -282,6 +281,15 @@ gpu_handle_graveyard &setup_target_quarantine()
     return q;
 }
 } // namespace
+
+// Terminal-sized intermediate buffer dimensions: logical window size over
+// scaling_factor, independent of backing-store pixels.
+static point compute_display_buffer_dims()
+{
+    // On desktop this matches the window over scaling up to a sub-cell remainder;
+    // on android TERMINAL follows orientation and options, not exact window size
+    return point{ TERMINAL_WIDTH * fontwidth, TERMINAL_HEIGHT * fontheight };
+}
 
 static bool SetupRenderTarget()
 {
@@ -1193,7 +1201,7 @@ static void reset_context_tint_masks()
 static void release_font_roots()
 {
     for( Font_Ptr *f : {
-             &font, &gui_font, &map_font, &overmap_font
+             &font, &map_font, &overmap_font
          } ) {
         if( *f ) {
             ( *f )->release_gpu_resources();
@@ -1206,7 +1214,7 @@ static void release_font_roots()
 static void rebuild_font_roots()
 {
     for( Font_Ptr *f : {
-             &font, &gui_font, &map_font, &overmap_font
+             &font, &map_font, &overmap_font
          } ) {
         if( *f ) {
             ( *f )->rebuild_for_renderer( renderer );
@@ -1407,9 +1415,6 @@ recipe_result renderer_resource_coordinator::recipe_device_reset()
         return { recipe_outcome::failure };
     }
 #endif
-    if( imclient ) {
-        imclient->destroy_backend_device_objects();
-    }
     // SDL3 documents a device reset as invalidating every texture, so cached
     // atlas bundles are rejected by the texture-generation bump and replayed
     // explicitly below over every live tileset.
@@ -1459,7 +1464,7 @@ recipe_result renderer_resource_coordinator::recipe_device_reset()
 }
 
 // Install a renderer and its display target, falling back to software if the
-// requested backend fails. ImGui and variant_pass re-attach to whichever
+// requested backend fails. Variant_pass re-attaches to whichever
 // renderer wins; on success the installed backend is recorded and the instance
 // and texture generations bump. False only if even software fails.
 bool renderer_resource_coordinator::install_renderer_with_fallback()
@@ -1469,13 +1474,6 @@ bool renderer_resource_coordinator::install_renderer_with_fallback()
          } ) {
         if( check_pause_abort() ) {
             return false;
-        }
-        if( imclient ) {
-            imclient->shutdown_renderer_backend();
-            if( check_pause_abort() ) {
-                return false;
-            }
-            imclient->shutdown_platform_backend();
         }
         if( check_pause_abort() ) {
             return false;
@@ -1494,13 +1492,6 @@ bool renderer_resource_coordinator::install_renderer_with_fallback()
         detect_renderer_backend();
         if( check_pause_abort() ) {
             return false;
-        }
-        if( imclient ) {
-            imclient->init_platform_backend();
-            if( check_pause_abort() ) {
-                return false;
-            }
-            imclient->init_renderer_backend();
         }
         if( check_pause_abort() ) {
             return false;
@@ -2695,11 +2686,13 @@ void cata_tiles::draw_om( const point &dest, const tripoint_abs_omt &center_abs_
     // Flush failure means the shader bind boundary forbids a target switch:
     // abort the scope's unbind, latch recovery, and throw to unwind
     // curses_drawwindow instead of drawing terrain overlays on a dead renderer.
-    if( m_variant_pass && !m_variant_pass->flush() ) {
-        draw_scope.abort_unbind();
-        display_buffer_scope_signal_recovery_required();
-        throw std::runtime_error(
-            "cata_tiles::draw_om: variant_pass flush failed at end of frame; renderer in undefined state" );
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        if( !vp->flush() ) {
+            draw_scope.abort_unbind();
+            display_buffer_scope_signal_recovery_required();
+            throw std::runtime_error(
+                "cata_tiles::draw_om: variant_pass flush failed at end of frame; renderer in undefined state" );
+        }
     }
 #endif
 }
@@ -2724,9 +2717,6 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
     //Specifically when showing the overmap
     //And in some instances of screen change, i.e. inventory.
     bool oldWinCompatible = false;
-
-    // clear the oversized buffer proportionally
-    invalidate_framebuffer_proportion( win );
 
     // use the oversize buffer when dealing with windows that can have a different font than the main text font
     bool use_oversized_framebuffer = g && ( w == g->w_terrain || w == g->w_overmap );
@@ -2982,9 +2972,6 @@ void cata_cursesport::curses_drawwindow( const catacurses::window &w )
             prev_coord = coord;
             x_offset = width;
         }
-
-        invalidate_framebuffer( terminal_framebuffer, win->pos,
-                                TERRAIN_WINDOW_TERM_WIDTH, TERRAIN_WINDOW_TERM_HEIGHT );
 
         update = true;
     } else if( g && w == g->w_terrain && map_font ) {
@@ -3381,7 +3368,6 @@ bool handle_resize( int w, int h )
     // the minimum size so we clamp the terminal size here for extra safety.
     TERMINAL_WIDTH = std::max( WindowWidth / fontwidth / scaling_factor, EVEN_MINIMUM_TERM_WIDTH );
     TERMINAL_HEIGHT = std::max( WindowHeight / fontheight / scaling_factor, EVEN_MINIMUM_TERM_HEIGHT );
-    need_invalidate_framebuffers = true;
     catacurses::stdscr = catacurses::newwin( TERMINAL_HEIGHT, TERMINAL_WIDTH, point::zero );
     throwErrorIf( !SetupRenderTarget(), "SetupRenderTarget failed" );
     game_ui::init_ui();
@@ -4656,9 +4642,6 @@ static void CheckMessages()
     bool render_target_reset = false;
     using cata::options::mouse;
 
-    int imgui_buf_w = 0;
-    int imgui_buf_h = 0;
-    get_display_buffer_dims( &imgui_buf_w, &imgui_buf_h );
     while( SDL_PollEvent( &ev ) ) {
         // Window events: SDL3 flattens the SDL_WINDOWEVENT+subtype to top-level events.
         // IsWindowEvent/GetWindowEventID normalize across versions.

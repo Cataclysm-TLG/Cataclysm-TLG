@@ -236,7 +236,6 @@ class variant_pass
         // Drop shader + render-state slots. abandon_handles=true skips SDL
         // destroy on each (renderer undefined or about to die); false runs the
         // destructors normally to release the SDL handles.
-        void clear_state_arrays( bool abandon_handles );
         SDL_GPURenderState *state_for( variant_kind v ) const;
 
         SDL_Renderer *renderer_ = nullptr;
@@ -245,6 +244,8 @@ class variant_pass
         std::array<shader, static_cast<size_t>( memory_preset::count )> memory_shaders_;
         std::array<render_state, static_cast<size_t>( memory_preset::count )>
         memory_states_;
+        shader tint_shader_;
+        render_state tint_state_;
         std::optional<memory_preset> active_memory_preset_;
         std::optional<variant_kind> currently_bound_;
         // Set after an unsafe bind transition (failed SDL_SetGPURenderState or

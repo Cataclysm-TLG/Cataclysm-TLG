@@ -838,8 +838,6 @@ int main( int argc, const char *argv[] )
         display_buffer_draw_scope draw_scope;
         if( !display_buffer_scope_is_invalid() ) {
 #endif
-            imclient->new_frame(); // we have to prime the pump, because of reasons
-            imclient->end_frame();
             const std::string lang = select_language();
             get_options().get_option( "USE_LANG" ).setValue( lang );
             set_language_from_options();
