@@ -198,6 +198,7 @@ jobs:
             libbacktrace: 1
             tiles: 0
             sound: 0
+            sdl3: 0
             artifact: linux-curses
             ext: tar.gz
             content: application/gzip
@@ -222,6 +223,7 @@ jobs:
             mxe: none
             tiles: 0
             sound: 0
+            sdl3: 0
             artifact: osx-curses
             ext: dmg
             content: application/x-apple-diskimage
