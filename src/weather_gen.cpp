@@ -101,7 +101,7 @@ static weather_gen_common get_common_data( const tripoint_abs_ms &location,
 
     result.cyf = std::cos( tau * ( year_fraction + .125 ) ); // [-1, 1]
     // We add one-eighth to line up `cyf` so that 1 is at
-    // midwinter and -1 at midsummer. (Cataclsym DDA years
+    // midwinter and -1 at midsummer. (Cataclsym years currently
     // start when spring starts. Gregorian years start when
     // winter starts.)
     result.season = season_of_year( t.t );

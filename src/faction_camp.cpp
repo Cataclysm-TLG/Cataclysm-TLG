@@ -201,7 +201,6 @@ static const zone_type_id zone_type_CAMP_STORAGE( "CAMP_STORAGE" );
 static const std::string base_recipe_group_string = "BASE";
 static const std::string cook_recipe_group_string = "COOK";
 static const std::string farm_recipe_group_string = "FARM";
-static const std::string smith_recipe_group_string = "SMITH";
 
 struct mass_volume {
     units::mass wgt = 0_gram;
@@ -220,25 +219,6 @@ static recipe_id select_camp_option( const std::map<recipe_id, translation> &pos
 
  /// @ref take, whether you take the item or count it
 static void apply_camp_ownership( map &here, const tripoint_bub_ms &camp_pos, int radius );
-
-/**
- * Opens the overmap so that you can select points for missions or constructions.
- * @param omt_pos where your camp is, used for calculating travel distances
- * @param min_range
- * @param range max number of OM tiles the user can select
- * @param possible_om_types requires the user to reselect if the OM picked isn't in the list
- * @param must_see whether the user can select points in the unknown/fog of war
- * @param popup_notice toggles if the user should be shown ranges before being allowed to pick
- * @param source if you are selecting multiple points this is where the OM is centered to start
- */
-static tripoint_abs_omt om_target_tile(
-    const tripoint_abs_omt &omt_pos, int min_range = 1, int range = 1,
-    const std::vector<std::string> &possible_om_types = {}, ot_match_type match_type =
-        ot_match_type::exact, bool must_see = true,
-    const tripoint_abs_omt &source = tripoint_abs_omt::invalid,
-    const std::optional<std::string> &message = std::nullopt );
-static void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes = true,
-                           const std::string &message = "Y;X: MAX RANGE" );
 
 /*
  * check if a companion survives a random encounter
@@ -2300,82 +2280,6 @@ void basecamp::make_corpse_from_group( const std::vector<MonsterGroupResult> &gr
                 place_results( result );
                 num_to_spawn--;
             } while( num_to_spawn > 0 );
-        }
-    }
-}
-
-tripoint_abs_omt om_target_tile( const tripoint_abs_omt &omt_pos, int min_range, int range,
-                                 const std::vector<std::string> &possible_om_types, ot_match_type match_type, bool must_see,
-                                 const tripoint_abs_omt &source, const std::optional<std::string> &message )
-{
-    bool errors = false;
-
-    tripoint_abs_omt where;
-    om_range_mark( omt_pos, range );
-    om_range_mark( omt_pos, min_range, true, "Y;X: MIN RANGE" );
-    const std::string &real_message = string_format(
-                                          message ? *message : _( "Select a location from %d to %d tiles away." ), min_range, range );
-    if( source.is_invalid() ) {
-        where = ui::omap::choose_point( real_message );
-    } else {
-        where = ui::omap::choose_point( real_message, source );
-    }
-    om_range_mark( omt_pos, range, false );
-    om_range_mark( omt_pos, min_range, false, "Y;X: MIN RANGE" );
-
-    if( where.is_invalid() ) {
-        return where;
-    }
-    int dist = rl_dist( where.xy(), omt_pos.xy() );
-    if( dist > range || dist < min_range ) {
-        popup( _( "You must select a target from %d to %d range.  Your selection was range %d." ),
-               min_range, range, dist );
-        errors = true;
-    }
-
-    tripoint_abs_omt omt_tgt = where;
-
-    const oter_id &omt_ref = overmap_buffer.ter( omt_tgt );
-
-    if( must_see && overmap_buffer.seen( omt_tgt ) == om_vision_level::unseen ) {
-        errors = true;
-        popup( _( "You must be able to see the target that you select." ) );
-    }
-
-    if( !errors ) {
-        if( possible_om_types.empty() ) {
-            return omt_tgt;
-        }
-
-        for( const std::string &pos_om : possible_om_types ) {
-            if( is_ot_match( pos_om, omt_ref, match_type ) ) {
-                return omt_tgt;
-            }
-        }
-    }
-
-    return om_target_tile( omt_pos, min_range, range, possible_om_types, match_type, must_see,
-                           omt_pos );
-}
-
-void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes,
-                    const std::string &message )
-{
-    std::vector<tripoint_abs_omt> note_pts;
-    note_pts.reserve( range * 8 ); // actual multiplier varies from 5.33 to 8
-    for( const tripoint_abs_omt &pos : points_on_radius_circ( origin, range ) ) {
-        note_pts.emplace_back( pos );
-    }
-
-    for( tripoint_abs_omt &pt : note_pts ) {
-        if( add_notes ) {
-            if( !overmap_buffer.has_note( pt ) ) {
-                overmap_buffer.add_note( pt, message );
-            }
-        } else {
-            if( overmap_buffer.has_note( pt ) && overmap_buffer.note( pt ) == message ) {
-                overmap_buffer.delete_note( pt );
-            }
         }
     }
 }
