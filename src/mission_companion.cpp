@@ -197,13 +197,7 @@ std::string enum_to_string<mission_kind>( mission_kind data )
         case mission_kind::Camp_Abandon: return "Camp_Abandon";
         case mission_kind::Camp_Upgrade: return "Camp_Upgrade";
         case mission_kind::Camp_Emergency_Recall: return "Camp_Emergency_Recall";
-        case mission_kind::Camp_Gather_Materials: return "Camp_Gather_Materials";
-        case mission_kind::Camp_Collect_Firewood: return "Camp_Collect_Firewood";
         case mission_kind::Camp_Menial: return "Camp_Menial";
-        case mission_kind::Camp_Survey_Field: return "Camp_Survey_Field";
-        case mission_kind::Camp_Cut_Logs: return "Camp_Cut_Logs";
-        case mission_kind::Camp_Clearcut: return "Camp_Clearcut";
-        case mission_kind::Camp_Foraging: return "Camp_Foraging";
         case mission_kind::Camp_Trapping: return "Camp_Trapping";
         case mission_kind::Camp_Hunting: return "Camp_Hunting";
         case mission_kind::Camp_Recruiting: return "Camp_Recruiting";
@@ -285,32 +279,8 @@ static const std::array < miss_data, Camp_Harvest + 1 > miss_info = { {
             to_translation( "Lost in the ether!\n" )
         },
         {
-            "Camp_Gather_Materials",
-            to_translation( "Searching for materials to upgrade the camp.\n" )
-        },
-        {
-            "Camp_Collect_Firewood",
-            to_translation( "Searching for firewood.\n" )
-        },
-        {
             "Camp_Menial",
             to_translation( "Performing menial labor…\n" )
-        },
-        {
-            "Camp_Survey_Field",
-            to_translation( "Surveying for suitable fields…\n" )
-        },
-        {
-            "Camp_Cut_Logs",
-            to_translation( "Cutting logs in the woods…\n" )
-        },
-        {
-            "Camp_Clearcut",
-            to_translation( "Clearing a forest…\n" )
-        },
-        {
-            "Camp Foraging",
-            to_translation( "Foraging for edible plants.\n" )
         },
         {
             "Camp_Trapping",
@@ -440,26 +410,8 @@ void mission_id::deserialize( const JsonValue &val )
             dir = base_camps::base_dir;
         }  //  Camp_Emergency_Recall is an immediate action, and so isn't serialized
 
-        else if( str == "_faction_camp_gathering" ) {
-            id = Camp_Gather_Materials;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_firewood" ) {
-            id = Camp_Collect_Firewood;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_menial" ) {
+          else if( str == "_faction_camp_menial" ) {
             id = Camp_Menial;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_field" ) {
-            id = Camp_Survey_Field;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_cut_log" ) {
-            id = Camp_Cut_Logs;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_clearcut" ) {
-            id = Camp_Clearcut;
-            dir = base_camps::base_dir;
-        } else if( str == "_faction_camp_foraging" ) {
-            id = Camp_Foraging;
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_trapping" ) {
             id = Camp_Trapping;
@@ -1194,13 +1146,7 @@ bool talk_function::handle_outpost_mission( const mission_entry &cur_key, npc &p
         case Camp_Abandon:
         case Camp_Upgrade:
         case Camp_Emergency_Recall:
-        case Camp_Gather_Materials:
-        case Camp_Collect_Firewood:
         case Camp_Menial:
-        case Camp_Survey_Field:
-        case Camp_Cut_Logs:
-        case Camp_Clearcut:
-        case Camp_Foraging:
         case Camp_Trapping:
         case Camp_Hunting:
         case Camp_Recruiting:

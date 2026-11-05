@@ -19,7 +19,7 @@
     "delete": { "flags": [ "LAKE" ] },
     "extend": { "flags": [ "LAKE_SHORE", "IGNORE_ROTATION_FOR_ADJACENCY" ] },
     "extras": "lake_shore",
-    "travel_cost_type": "lake shore",
+    "travel_cost_type": "shore",
     "mapgen": [ { "builtin": "lake_shore" } ]
   },
   {
@@ -58,13 +58,13 @@
     "type": "overmap_terrain",
     "id": "ocean_shore",
     "copy-from": "generic_ocean",
-    "name": "ocean shore",
+    "name": "seashore",
     "color": "light_blue",
     "looks_like": "lake_shore",
     "delete": { "flags": [ "OCEAN" ] },
     "extend": { "flags": [ "OCEAN_SHORE", "IGNORE_ROTATION_FOR_ADJACENCY" ] },
     "extras": "ocean_shore",
-    "travel_cost_type": "sea shore",
+    "travel_cost_type": "shore",
     "mapgen": [ { "builtin": "ocean_shore" } ]
   },
   {

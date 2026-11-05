@@ -2406,6 +2406,9 @@ class Character : public Creature, public visitable
         */
         units::volume small_pocket_volume( const units::volume &threshold = 1000_ml ) const;
 
+        /** The time it takes to chop down a tree or cut up a trunk. **/
+        int chop_moves( item &it ) const;
+
         /** Note that we've read a book at least once. **/
         virtual bool has_identified( const itype_id &item_id ) const = 0;
         book_mastery get_book_mastery( const item &book ) const;
