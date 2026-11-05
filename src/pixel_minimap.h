@@ -99,6 +99,8 @@ class pixel_minimap
         std::unique_ptr<shared_texture_pool> tex_pool;
 
         std::map<tripoint_abs_sm, submap_cache> cache;
+        
+        bool has_blinking_beacons_ = false;
 };
 
 #endif // CATA_SRC_PIXEL_MINIMAP_H
