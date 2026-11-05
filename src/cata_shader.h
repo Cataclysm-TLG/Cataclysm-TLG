@@ -245,6 +245,8 @@ class variant_pass
         std::array<shader, static_cast<size_t>( memory_preset::count )> memory_shaders_;
         std::array<render_state, static_cast<size_t>( memory_preset::count )>
         memory_states_;
+        shader tint_shader_;
+        render_state tint_state_;
         std::optional<memory_preset> active_memory_preset_;
         std::optional<variant_kind> currently_bound_;
         // Set after an unsafe bind transition (failed SDL_SetGPURenderState or

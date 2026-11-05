@@ -32,6 +32,8 @@
 #include <string>
 #include <vector>
 
+#include <cata_shader.h>
+
 struct point;
 
 // SDL3 type renames. Use CataFlipMode at call sites.
@@ -171,11 +173,6 @@ class gpu_handle_graveyard
 // returned handle.
 std::shared_ptr<SDL_Texture> make_gated_texture( SDL_Texture *raw, gpu_handle_graveyard::gate g );
 
-namespace cata_shader
-{
-class variant_pass;
-} // namespace cata_shader
-
 // RAII render-target swap: binds `target`, restores the prior target on
 // destruction. On SDL3 a non-null `vp` is flushed before the swap so shader
 // GPU state is not left bound across the SetRenderTarget transition. Check
@@ -209,7 +206,6 @@ class scoped_render_target
         // caches its result. Returns false if the scope was never valid, the
         // flush or SDL_SetRenderTarget fails, or recovery was already latched.
         bool restore();
-
     private:
         // Latch the global recovery embargo and clear boundary_intact_ after an
         // unsafe SDL boundary outcome.

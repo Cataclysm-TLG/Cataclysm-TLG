@@ -834,9 +834,16 @@ int main( int argc, const char *argv[] )
 
 #if defined(LOCALIZE)
     if( get_option<std::string>( "USE_LANG" ).empty() && !SystemLocale::Language().has_value() ) {
+#if defined(TILES)
+        display_buffer_draw_scope draw_scope;
+        if( !display_buffer_scope_is_invalid() ) {
+#endif
             const std::string lang = select_language();
             get_options().get_option( "USE_LANG" ).setValue( lang );
             set_language_from_options();
+#if defined(TILES)
+        }
+#endif
     }
 #endif
     replay_buffered_debugmsg_prompts();
