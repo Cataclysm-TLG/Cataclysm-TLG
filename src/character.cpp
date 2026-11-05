@@ -410,6 +410,7 @@ static const proficiency_id proficiency_prof_traps( "prof_traps" );
 static const proficiency_id proficiency_prof_trapsetting( "prof_trapsetting" );
 static const proficiency_id proficiency_prof_field_medic( "prof_field_medic" );
 
+static const quality_id qual_AXE( "AXE" );
 static const quality_id qual_DRILL( "DRILL" );
 static const quality_id qual_HAMMER( "HAMMER" );
 static const quality_id qual_LIFT( "LIFT" );
@@ -12593,6 +12594,29 @@ bool Character::unload( item_location &loc, bool bypass_activity,
     get_player_character().recoil = MAX_RECOIL;
 
     return true;
+}
+
+int Character::chop_moves( item &it ) const
+{
+    // Quality of tool.
+    const int quality = it.get_quality( qual_AXE );
+
+    // Attribute; regular tools - based on STR, powered tools - based on DEX.
+    const int attr = it.has_flag( flag_POWERED ) ? dex_cur : get_arm_str();
+
+    // Ecology skill cuts chopping time.
+    int skill_modifier = 450 - std::clamp( static_cast<int>( ( get_skill_level(
+            skill_survival ) * 40.f ) ), 0, 400 );
+
+    if( it.has_flag( flag_POWERED ) ) {
+        skill_modifier = 50 + ( skill_modifier - 50 ) * 0.5f;
+    }
+
+    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr + skill_modifier ) / std::pow( 2,
+                               quality - 1 ) );
+    const int helpersize = get_num_crafting_helpers( 3 );
+    moves *= ( 1.0f - ( helpersize / 10.0f ) );
+    return moves;
 }
 
 book_mastery Character::get_book_mastery( const item &book ) const

@@ -515,11 +515,10 @@ void fade_group( sfx::group g, int ms )
 
 void poll()
 {
-    const float slow = slow_time_predicate_active() ? SLOW_TIME_FACTOR : 1.0f;
     for( size_t i = 0; i < g_reserved_tracks.size(); ++i ) {
         MIX_Track *t = g_reserved_tracks[i];
         if( t != nullptr ) {
-            MIX_SetTrackFrequencyRatio( t, ( 1.0f / g_reserved_base_pitch[i] ) * slow );
+            MIX_SetTrackFrequencyRatio( t, ( 1.0f / g_reserved_base_pitch[i] ) );
         }
     }
     // oneshot_stopped_cb locks g_oneshots_mutex from the mixer thread while
@@ -534,7 +533,7 @@ void poll()
                 to_destroy.push_back( it->track );
                 it = g_oneshots.erase( it );
             } else {
-                to_retune.emplace_back( it->track, ( 1.0f / it->base_pitch ) * slow );
+                to_retune.emplace_back( it->track, ( 1.0f / it->base_pitch ) );
                 ++it;
             }
         }

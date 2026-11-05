@@ -2631,29 +2631,6 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
     you.activity.set_to_null();
 }
 
-static int chop_moves( Character &you, item &it )
-{
-    // Quality of tool.
-    const int quality = it.get_quality( qual_AXE );
-
-    // Attribute; regular tools - based on STR, powered tools - based on DEX.
-    const int attr = it.has_flag( flag_POWERED ) ? you.dex_cur : you.get_arm_str();
-
-    // Ecology skill cuts chopping time.
-    int skill_modifier = 450 - std::clamp( static_cast<int>( ( you.get_skill_level(
-            skill_survival ) * 40.f ) ), 0, 400 );
-
-    if( it.has_flag( flag_POWERED ) ) {
-        skill_modifier = 50 + ( skill_modifier - 50 ) * 0.5f;
-    }
-
-    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr + skill_modifier ) / std::pow( 2,
-                               quality - 1 ) );
-    const int helpersize = you.get_num_crafting_helpers( 3 );
-    moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
-}
-
 static bool mine_activity( Character &you, const tripoint_bub_ms &src_loc )
 {
     map &here = get_map();
@@ -2716,7 +2693,7 @@ static bool chop_tree_activity( Character &you, const tripoint_bub_ms &src_loc )
     if( best_qual.is_null() ) {
         return false;
     }
-    int moves = chop_moves( you, best_qual );
+    int moves = you.chop_moves( best_qual );
     if( best_qual.type->can_have_charges() ) {
         you.consume_charges( best_qual, best_qual.type->charges_to_use() );
     }

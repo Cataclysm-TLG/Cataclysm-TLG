@@ -218,44 +218,8 @@ static recipe_id select_camp_option( const std::map<recipe_id, translation> &pos
                                      const std::string &option );
 } // namespace base_camps
 
-/**** Forward declaration of utility functions */
-/**
- * Counts or destroys and drops the bash items of all terrain that matches @ref t in the map tile
- * @param comp NPC companion
- * @param omt_tgt the targeted OM tile
- * @param t terrain you are looking for
- * @param chance chance of destruction, 0 to 100
- * @param estimate if true, non-destructive count of the furniture
- * @param bring_back force the destruction of the furniture and bring back the drop items
- */
-static int om_harvest_ter( npc &comp, const tripoint_abs_omt &omt_tgt, const ter_id &t,
-                           int chance = 100,
-                           bool estimate = false, bool bring_back = true );
-// om_harvest_ter helper function that counts the furniture instances
-static int om_harvest_ter_est( npc &comp, const tripoint_abs_omt &omt_tgt, const ter_id &t,
-                               int chance = 100 );
-static int om_harvest_ter_break( npc &comp, const tripoint_abs_omt &omt_tgt, const ter_id &t,
-                                 int chance = 100 );
-/// Collects all items in @ref omt_tgt with a @ref chance between 0 - 1.0, returns total
-/// mass and volume
-/// @ref take, whether you take the item or count it
-static mass_volume om_harvest_itm( const npc_ptr &comp, const tripoint_abs_omt &omt_tgt,
-                                   int chance = 100,
-                                   bool take = true );
+ /// @ref take, whether you take the item or count it
 static void apply_camp_ownership( map &here, const tripoint_bub_ms &camp_pos, int radius );
-/*
- * Counts or cuts trees into trunks and trunks into logs
- * @param omt_tgt the targeted OM tile
- * @param chance chance of destruction, 0 to 100
- * @param estimate if true, non-destructive count of trees
- * @force_cut_trunk if true and estimate is false, chop tree trunks into logs
- */
-static int om_cutdown_trees( const tripoint_abs_omt &omt_tgt, int chance = 100,
-                             bool estimate = false,
-                             bool force_cut_trunk = true );
-static int om_cutdown_trees_est( const tripoint_abs_omt &omt_tgt, int chance = 100 );
-static int om_cutdown_trees_logs( const tripoint_abs_omt &omt_tgt, int chance = 100 );
-static int om_cutdown_trees_trunks( const tripoint_abs_omt &omt_tgt, int chance = 100 );
 
 /**
  * Opens the overmap so that you can select points for missions or constructions.
@@ -275,30 +239,6 @@ static tripoint_abs_omt om_target_tile(
     const std::optional<std::string> &message = std::nullopt );
 static void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes = true,
                            const std::string &message = "Y;X: MAX RANGE" );
-static void om_line_mark(
-    const tripoint_abs_omt &origin, const tripoint_abs_omt &dest, bool add_notes = true,
-    const std::string &message = "R;X: PATH" );
-static std::vector<tripoint_abs_omt> om_companion_path(
-    const tripoint_abs_omt &start, int range = 90 );
-/**
- * Can be used to calculate total trip time for an NPC mission or just the traveling portion.
- * Doesn't use the pathingalgorithms yet.
- * @param omt_pos start point
- * @param omt_tgt target point
- * @param work how much time the NPC will stay at the target
- * @param trips how many trips back and forth the NPC will make
- */
-static time_duration companion_travel_time_calc( const tripoint_abs_omt &pos,
-        const tripoint_abs_omt &tgt,
-        time_duration work, int trips = 1, int haulage = 0 );
-static time_duration companion_travel_time_calc(
-    const std::vector<tripoint_abs_omt> &journey, time_duration work, int trips = 1,
-    int haulage = 0 );
-/// Formats the variables into a standard looking description to be displayed in a ynquery window
-static std::string camp_trip_description( const time_duration &total_time,
-        const time_duration &working_time,
-        const time_duration &travel_time,
-        int distance, int trips, int need_food );
 
 /*
  * check if a companion survives a random encounter
@@ -346,12 +286,6 @@ static std::string mission_ui_activity_of( const mission_id &miss_id )
 
         case Camp_Recruiting:
             return dir_abbr + _( " Recruit companions" );
-
-        case Camp_Scouting:
-            return dir_abbr + _( " Scout mission" );
-
-        case Camp_Combat_Patrol:
-            return dir_abbr + _( " Combat patrol" );
 
         case Camp_Plow:
             return dir_abbr + _( " Plow fields" );
@@ -811,60 +745,6 @@ void basecamp::get_available_missions_by_dir( mission_data &mission_key, const p
         }
     }
 
-    if( has_provides( "scouting", dir ) ) {
-        const mission_id miss_id = { Camp_Scouting, "", {}, dir };
-        comp_list npc_list = get_mission_workers( miss_id );
-        entry = string_format( _( "Notes:\n"
-                                  "Send a companion out into the great unknown.  High survival "
-                                  "skills are needed to avoid combat but you should expect an "
-                                  "encounter or two.\n\n"
-                                  "Skill used: ecology\n"
-                                  "Difficulty: 3\n"
-                                  "Effects:\n"
-                                  "> Select checkpoints to customize path.\n"
-                                  "> Reveals terrain around the path.\n"
-                                  "Risk: High\n"
-                                  "Intensity: Brisk\n"
-                                  "Time: Travel\n"
-                                  "Positions: %d/3\n" ), npc_list.size() );
-        mission_key.add_start( miss_id, name_display_of( miss_id ),
-                               entry, npc_list.size() < 3 );
-        if( !npc_list.empty() ) {
-            entry = action_of( miss_id.id );
-            bool avail = update_time_left( entry, npc_list );
-            mission_key.add_return( miss_id, dir_abbr + _( " Recover Scout" ),
-                                    entry, avail );
-        }
-    }
-
-    if( has_provides( "patrolling", dir ) ) {
-        const mission_id miss_id = { Camp_Combat_Patrol, "", {}, dir };
-        comp_list npc_list = get_mission_workers( miss_id );
-        entry = string_format( _( "Notes:\n"
-                                  "Send a companion to purge the wasteland.  Their goal is to "
-                                  "kill anything hostile they encounter and return when "
-                                  "their wounds are too great or the odds are stacked against "
-                                  "them.\n\n"
-                                  "Skill used: ecology\n"
-                                  "Difficulty: 4\n"
-                                  "Effects:\n"
-                                  "> Pulls creatures encountered into combat instead of "
-                                  "fleeing.\n"
-                                  "> Select checkpoints to customize path.\n"
-                                  "Risk: Very High\n"
-                                  "Intensity: Brisk\n"
-                                  "Time: Travel\n"
-                                  "Positions: %d/3\n" ), npc_list.size() );
-        mission_key.add_start( miss_id, name_display_of( miss_id ),
-                               entry, npc_list.size() < 3 );
-        if( !npc_list.empty() ) {
-            entry = action_of( miss_id.id );
-            bool avail = update_time_left( entry, npc_list );
-            mission_key.add_return( miss_id, dir_abbr + _( " Recover Combat Patrol" ),
-                                    entry, avail );
-        }
-    }
-
     if( has_provides( "farming", dir ) ) {
         size_t plots = 0;
         const mission_id miss_id = { Camp_Plow, "", {}, dir };
@@ -1181,21 +1061,6 @@ bool basecamp::handle_mission( const ui_mission_id &miss_id )
             } else {
                 start_mission( miss_id.id, 4_days, true,
                                _( "departs to search for recruits…" ), false, {}, skill_gun, 0, MODERATE_EXERCISE );
-            }
-            break;
-
-        case Camp_Scouting:
-            if( miss_id.ret ) {
-                combat_mission_return( miss_id.id );
-            } else {
-                start_combat_mission( miss_id.id, MODERATE_EXERCISE );
-            }
-            break;
-        case Camp_Combat_Patrol:
-            if( miss_id.ret ) {
-                combat_mission_return( miss_id.id );
-            } else {
-                start_combat_mission( miss_id.id, BRISK_EXERCISE );
             }
             break;
 
@@ -1680,85 +1545,6 @@ void basecamp::start_menial_labor()
     popup( _( "%s goes off to clean toilets and sort loot." ), comp->disp_name() );
 }
 
-static void change_cleared_terrain( tripoint_abs_omt forest )
-{
-    if( om_cutdown_trees_est( forest ) < 5 ) {
-        const oter_id &omt_trees = overmap_buffer.ter( forest );
-        const std::string omt_trees_string = static_cast<std::string>( omt_trees.id() );
-
-        if( omt_trees_string.find( "dirt_road" ) != std::string::npos ) {}
-
-        if( omt_trees.id() == oter_dirt_road_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_north" ) );
-        } else if( omt_trees.id() == oter_dirt_road_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_east" ) );
-        } else if( omt_trees.id() == oter_dirt_road_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_south" ) );
-        } else if( omt_trees.id() == oter_dirt_road_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_west" ) );
-        } else if( omt_trees.id() == oter_dirt_road_3way_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_3way_north" ) );
-        } else if( omt_trees.id() == oter_dirt_road_3way_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_3way_east" ) );
-        } else if( omt_trees.id() == oter_dirt_road_3way_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_3way_south" ) );
-        } else if( omt_trees.id() == oter_dirt_road_3way_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_3way_west" ) );
-        } else if( omt_trees.id() == oter_dirt_road_turn_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_turn_north" ) );
-        } else if( omt_trees.id() == oter_dirt_road_turn_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_turn_east" ) );
-        } else if( omt_trees.id() == oter_dirt_road_turn_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_turn_south" ) );
-        } else if( omt_trees.id() == oter_dirt_road_turn_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "dirt_road_turn_west" ) );
-        }
-
-        else if( omt_trees.id() == oter_forest || omt_trees.id() == oter_forest_thick ||
-                 omt_trees.id() == oter_special_forest || omt_trees.id() == oter_special_forest_thick ||
-                 omt_trees_string.find( "forest_trail" ) != std::string::npos ) {
-            overmap_buffer.ter_set( forest, oter_id( "field" ) );
-        } else if( omt_trees.id() == oter_rural_road_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_north" ) );
-        } else if( omt_trees.id() == oter_rural_road_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_east" ) );
-        } else if( omt_trees.id() == oter_rural_road_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_south" ) );
-        } else if( omt_trees.id() == oter_rural_road_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_west" ) );
-        } else if( omt_trees.id() == oter_rural_road_3way_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_3way_north" ) );
-        } else if( omt_trees.id() == oter_rural_road_3way_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_3way_east" ) );
-        } else if( omt_trees.id() == oter_rural_road_3way_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_3way_south" ) );
-        } else if( omt_trees.id() == oter_rural_road_3way_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_3way_west" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn_north" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn_east" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn_south" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn_west" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn1_forest_north ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn1_north" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn1_forest_east ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn1_east" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn1_forest_south ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn1_south" ) );
-        } else if( omt_trees.id() == oter_rural_road_turn1_forest_west ) {
-            overmap_buffer.ter_set( forest, oter_id( "rural_road_turn1_west" ) );
-        } else {
-            popup( _( "%s isn't a recognized terrain.  Please file a bug report." ), omt_trees.id().c_str() );
-            return;
-        }
-        popup( _( "The logged tile has been cleared and cannot be logged further after this mission." ),
-               omt_trees.id().c_str() );
-    }
-}
-
 static bool farm_valid_seed( const item &itm )
 {
     return itm.is_seed() && itm.typeId() != itype_marloss_seed && itm.typeId() != itype_fungal_seeds;
@@ -2216,7 +2002,6 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
     int threat = 10;
     std::string skill_group = "gathering";
     float skill = 2 * comp->get_skill_level( skill_survival ) + comp->per_cur;
-    int checks_per_cycle = 6;
     if( miss_id.id == Camp_Trapping ) {
         task_description = _( "trapping small animals" );
         favor = 1;
@@ -2224,7 +2009,6 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
         skill_group = "trapping";
         skill = ( comp->get_skill_level( skill_survival ) + comp->get_skill_level(
                       skill_traps ) + comp->per_cur ) / 3.0;
-        checks_per_cycle = std::min( 1, static_cast<int>( skill / 3 ) );
     } else if( miss_id.id == Camp_Hunting ) {
         task_description = _( "hunting for meat" );
         danger = 15;
@@ -2233,10 +2017,8 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
         skill = ( comp->get_skill_level( skill_survival ) + comp->get_skill_level(
                       skill_gun ) + comp->per_cur ) / 3.0;
         threat = 12;
-        checks_per_cycle = std::min( 1, static_cast<int>( skill / 3 ) );
     }
 
-    time_duration mission_time = calendar::turn - comp->companion_mission_time;
     if( one_in( danger ) && !survive_random_encounter( *comp, task_description, favor, threat ) ) {
         return false;
     }
@@ -2252,11 +2034,7 @@ bool basecamp::gathering_return( const mission_id &miss_id, time_duration min_ti
         miss_id.id == Camp_Hunting ) {
         skill = std::min( 14, static_cast<int>( skill ) );
         hunting_results( skill, miss_id, std::max( 1, static_cast<int>( skill / 3 ) ), 15 );
-    } else {
-        skill = std::min( 14, static_cast<int>( skill ) );
-        search_results( skill, itemlist, checks_per_cycle * mission_time / min_time, 15 );
     }
-
     return true;
 }
 
@@ -2373,57 +2151,6 @@ void basecamp::recruit_return( const mission_id &miss_id, int score )
                               recruit->getID() ) );
     talk_function::follow( *recruit );
     g->load_npcs();
-}
-
-void basecamp::combat_mission_return( const mission_id &miss_id )
-{
-    npc_ptr comp = companion_choose_return( miss_id, 3_hours );
-    if( comp != nullptr ) {
-        bool patrolling = miss_id.id == Camp_Combat_Patrol;
-        comp_list patrol;
-        npc_ptr guy = overmap_buffer.find_npc( comp->getID() );
-        if( guy ) {
-            patrol.push_back( guy );
-        }
-        for( tripoint_abs_omt &pt : comp->companion_mission_points ) {
-            const oter_id &omt_ref = overmap_buffer.ter( pt );
-            int swim = comp->get_skill_level( skill_swimming );
-            if( is_river( omt_ref ) && swim < 2 ) {
-                if( swim == 0 ) {
-                    popup( _( "Your companion hit a river and didn't know how to swim…" ) );
-                } else {
-                    popup( _( "Your companion hit a river and didn't know how to swim well "
-                              "enough to cross…" ) );
-                }
-                break;
-            }
-            comp->death_drops = false;
-            bool outcome = talk_function::companion_om_combat_check( patrol, pt, patrolling );
-            comp->death_drops = true;
-            if( outcome ) {
-                overmap_buffer.reveal( pt, 2 );
-            } else if( comp->is_dead() ) {
-                Character &you = get_player_character();
-                // TODO: Camp morale.
-                popup( _( "%s didn't return from patrol…" ), comp->get_name() );
-                if( you.has_flag( json_flag_PSYCHOPATH ) ||  you.has_trait( trait_NUMB ) ) {
-                    popup( _( "(You wonder if your companions are fit to work on their own…)" ) );
-                } else if( you.has_trait( trait_SPIRITUAL ) ) {
-                    popup( _( "(At least they're at peace now…)" ) );
-                    you.add_morale( morale_faction_member_died, -15, -15, 2_days, 18_hours );
-                } else {
-                    popup( _( "(Gone forever, just like that…)" ) );
-                    you.add_morale( morale_faction_member_died, -20, -20, 3_days, 1_days );
-                }
-                comp->place_corpse( pt, get_player_character().get_faction()->id );
-                overmap_buffer.add_note( pt, "DEAD NPC" );
-                overmap_buffer.remove_npc( comp->getID() );
-                return;
-            }
-        }
-        const std::string msg = _( "returns from patrol…" );
-        finish_return( *comp, true, msg, skill_combat.str(), 4 );
-    }
 }
 
 bool basecamp::farm_return( const mission_id &miss_id, const point_rel_omt &dir )
@@ -2577,159 +2304,6 @@ void basecamp::make_corpse_from_group( const std::vector<MonsterGroupResult> &gr
     }
 }
 
-int om_harvest_ter_est( npc &comp, const tripoint_abs_omt &omt_tgt, const ter_id &t, int chance )
-{
-    return om_harvest_ter( comp, omt_tgt, t, chance, true, false );
-}
-int om_harvest_ter_break( npc &comp, const tripoint_abs_omt &omt_tgt, const ter_id &t, int chance )
-{
-    return om_harvest_ter( comp, omt_tgt, t, chance, false, false );
-}
-int om_harvest_ter( npc &comp, const tripoint_abs_omt &omt_tgt, const ter_id &t, int chance,
-                    bool estimate, bool bring_back )
-{
-    const ter_t &ter_tgt = t.obj();
-    tinymap target_bay;
-    target_bay.load( omt_tgt, false );
-    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
-    swap_map swap( *target_bay.cast_to_map() );
-    int harvested = 0;
-    int total = 0;
-    const tripoint_omt_ms mapmin{ 0, 0, omt_tgt.z() };
-    const tripoint_omt_ms mapmax{ 2 * SEEX - 1, 2 * SEEY - 1, omt_tgt.z() };
-    for( const tripoint_omt_ms &p : target_bay.points_in_rectangle( mapmin, mapmax ) ) {
-        if( target_bay.ter( p ) == t && x_in_y( chance, 100 ) ) {
-            total++;
-            if( estimate ) {
-                continue;
-            }
-            if( bring_back ) {
-                const std::optional<map_ter_bash_info> &bash = ter_tgt.bash;
-                if( bash ) {
-                    for( const item &itm : item_group::items_from( ter_tgt.bash->drop_group,
-                            calendar::turn ) ) {
-                        comp.companion_mission_inv.push_back( itm );
-                    }
-                    harvested++;
-                    target_bay.ter_set( p, ter_tgt.bash->ter_set );
-                }
-            }
-        }
-    }
-    target_bay.save();
-    if( bring_back ) {
-        return harvested;
-    }
-    return total;
-}
-
-int om_cutdown_trees_est( const tripoint_abs_omt &omt_tgt, int chance )
-{
-    return om_cutdown_trees( omt_tgt, chance, true, false );
-}
-int om_cutdown_trees_logs( const tripoint_abs_omt &omt_tgt, int chance )
-{
-    return om_cutdown_trees( omt_tgt, chance, false, true );
-}
-int om_cutdown_trees_trunks( const tripoint_abs_omt &omt_tgt, int chance )
-{
-    return om_cutdown_trees( omt_tgt, chance, false, false );
-}
-int om_cutdown_trees( const tripoint_abs_omt &omt_tgt, int chance, bool estimate,
-                      bool force_cut_trunk )
-{
-    smallmap target_bay;
-    // Redundant as long as map operations used aren't using get_map() transitively, but this makes it safe to do so later.
-    swap_map swap( *target_bay.cast_to_map() );
-    target_bay.load( omt_tgt, false );
-    int harvested = 0;
-    int total = 0;
-    tripoint_omt_ms mapmin{ 0, 0, omt_tgt.z() };
-    tripoint_omt_ms mapmax{ 2 * SEEX - 1, 2 * SEEY - 1, omt_tgt.z() + 1 };
-    for( const tripoint_omt_ms &p : target_bay.points_in_rectangle( mapmin, mapmax ) ) {
-        if( target_bay.ter( p ).obj().has_flag( ter_furn_flag::TFLAG_TREE ) && rng( 0, 100 ) < chance ) {
-            total++;
-            if( estimate ) {
-                continue;
-            }
-            // get a random number that is either 1 or -1
-            point_rel_ms dir( 3 * ( 2 * rng( 0, 1 ) - 1 ) + rng( -1, 1 ), 3 * rng( -1, 1 ) + rng( -1, 1 ) );
-
-            target_bay.cut_down_tree( p, dir );
-            target_bay.collapse_at( p, true, true, false );
-            harvested++;
-        }
-    }
-    if( estimate ) {
-        return total;
-    }
-    if( !force_cut_trunk ) {
-        target_bay.save();
-        return harvested;
-    }
-    // having cut down the trees, cut the trunks into logs
-    for( const tripoint_omt_ms &p : target_bay.points_in_rectangle( mapmin, mapmax ) ) {
-        const ter_id &t = target_bay.ter( p );
-        if( t == ter_t_trunk || t == ter_t_stump ) {
-            target_bay.ter_set( p, ter_t_dirt );
-            target_bay.spawn_item( p, itype_log, rng( 2, 3 ), 0, calendar::turn );
-            harvested++;
-        }
-    }
-    target_bay.save();
-    return harvested;
-}
-
-mass_volume om_harvest_itm( const npc_ptr &comp, const tripoint_abs_omt &omt_tgt, int chance,
-                            bool take )
-{
-    tinymap target_bay;
-    target_bay.load( omt_tgt, false );
-    // Redundant as long as map operations aren't using get_map() in a transitive call chain. Added for future proofing.
-    swap_map swap( *target_bay.cast_to_map() );
-    units::mass harvested_m = 0_gram;
-    units::volume harvested_v = 0_ml;
-    units::mass total_m = 0_gram;
-    units::volume total_v = 0_ml;
-    int total_num = 0;
-    int harvested_num = 0;
-    tripoint_omt_ms mapmin{ 0, 0, omt_tgt.z() };
-    tripoint_omt_ms mapmax{ 2 * SEEX - 1, 2 * SEEY - 1, omt_tgt.z() };
-    tripoint_range<tripoint_omt_ms> xxx = target_bay.points_in_rectangle( mapmin, mapmax );
-    for( const tripoint_omt_ms &p : target_bay.points_in_rectangle( mapmin, mapmax ) ) {
-        for( const item &i : target_bay.i_at( p ) ) {
-            if( !i.made_of_from_type( phase_id::LIQUID ) ) {
-                total_m += i.weight( true );
-                total_v += i.volume( true );
-                total_num += 1;
-                if( take && x_in_y( chance, 100 ) ) {
-                    if( comp ) {
-                        comp->companion_mission_inv.push_back( i );
-                    }
-                    harvested_m += i.weight( true );
-                    harvested_v += i.volume( true );
-                    harvested_num += 1;
-                }
-            }
-        }
-        if( take ) {
-            target_bay.i_clear( p );
-        }
-    }
-    target_bay.save();
-    mass_volume results;
-    if( take ) {
-        results.wgt = harvested_m;
-        results.vol = harvested_v;
-        results.count = harvested_num;
-    } else {
-        results.wgt = total_m;
-        results.vol = total_v;
-        results.count = total_num;
-    }
-    return results;
-}
-
 tripoint_abs_omt om_target_tile( const tripoint_abs_omt &omt_pos, int min_range, int range,
                                  const std::vector<std::string> &possible_om_types, ot_match_type match_type, bool must_see,
                                  const tripoint_abs_omt &source, const std::optional<std::string> &message )
@@ -2804,84 +2378,6 @@ void om_range_mark( const tripoint_abs_omt &origin, int range, bool add_notes,
             }
         }
     }
-}
-
-void om_line_mark( const tripoint_abs_omt &origin, const tripoint_abs_omt &dest, bool add_notes,
-                   const std::string &message )
-{
-    std::vector<tripoint_abs_omt> note_pts = line_to( origin, dest );
-
-    for( tripoint_abs_omt &pt : note_pts ) {
-        if( add_notes ) {
-            if( !overmap_buffer.has_note( pt ) ) {
-                overmap_buffer.add_note( pt, message );
-            }
-        } else {
-            if( overmap_buffer.has_note( pt ) && overmap_buffer.note( pt ) == message ) {
-                overmap_buffer.delete_note( pt );
-            }
-        }
-    }
-}
-
-// path and travel time
-time_duration companion_travel_time_calc( const tripoint_abs_omt &omt_pos,
-        const tripoint_abs_omt &omt_tgt, time_duration work, int trips, int haulage )
-{
-    std::vector<tripoint_abs_omt> journey = line_to( omt_pos, omt_tgt );
-    return companion_travel_time_calc( journey, work, trips, haulage );
-}
-
-time_duration companion_travel_time_calc( const std::vector<tripoint_abs_omt> &journey,
-        time_duration work, int trips, int haulage )
-{
-    int one_way = 0;
-    for( const tripoint_abs_omt &om : journey ) {
-        const oter_id &omt_ref = overmap_buffer.ter( om );
-        std::string om_id = omt_ref.id().c_str();
-        // Player walks 1 om in roughly 30 seconds
-        if( om_id == "field" ) {
-            one_way += 30 + ( 30 + haulage );
-        } else if( omt_ref->get_type_id() == oter_type_forest_trail ) {
-            one_way += 35 + ( 30 + haulage );
-        } else if( om_id == "forest_thick" ) {
-            one_way += 50 + ( 30 + haulage );
-        } else if( om_id == "forest_water" ) {
-            one_way += 60 + ( 30 + haulage );
-        } else if( is_river( omt_ref ) ) {
-            // hauling stuff over a river is slow, because you have to portage most items
-            one_way += 200 + ( 40 + haulage );
-        } else {
-            one_way += 40 + ( 30 + haulage );
-        }
-    }
-    return work + one_way * trips * 1_seconds;
-}
-
-std::vector<tripoint_abs_omt> om_companion_path( const tripoint_abs_omt &start, int range )
-{
-    std::vector<tripoint_abs_omt> scout_points;
-    tripoint_abs_omt last = start;
-    while( range > 3 ) {
-        tripoint_abs_omt spt = om_target_tile( last, 0, range, {}, ot_match_type::exact, false, last );
-        if( spt.is_invalid() ) {
-            scout_points.clear();
-            return scout_points;
-        }
-        if( last == spt ) {
-            break;
-        }
-        std::vector<tripoint_abs_omt> note_pts = line_to( last, spt );
-        scout_points.insert( scout_points.end(), note_pts.begin(), note_pts.end() );
-        om_line_mark( last, spt );
-        range -= rl_dist( spt.xy(), last.xy() );
-        last = spt;
-
-    }
-    for( tripoint_abs_omt &pt : scout_points ) {
-        om_line_mark( pt, pt, false );
-    }
-    return scout_points;
 }
 
 // camp utility functions
@@ -3044,32 +2540,6 @@ point_rel_omt talk_function::om_simple_dir( const tripoint_abs_omt &omt_pos,
 {
     point_rel_omt diff = omt_tar.xy() - omt_pos.xy();
     return { clamp( diff.x(), -1, 1 ), clamp( diff.y(), -1, 1 ) };
-}
-
-// mission descriptions
-std::string camp_trip_description( const time_duration &total_time,
-                                   const time_duration &working_time,
-                                   const time_duration &travel_time, int distance, int trips,
-                                   int need_food )
-{
-    std::string entry = "\n";
-    //A square is roughly 3 m
-    int dist_m = distance * SEEX * 2 * 3;
-    if( dist_m > 1000 ) {
-        entry += string_format( _( ">Distance:%15.2f (km)\n" ), dist_m / 1000.0 );
-        entry += string_format( _( ">One Way: %15d (trips)\n" ), trips );
-        entry += string_format( _( ">Covered: %15.2f (km)\n" ), dist_m / 1000.0 * trips );
-    } else {
-        entry += string_format( _( ">Distance:%15d (m)\n" ), dist_m );
-        entry += string_format( _( ">One Way: %15d (trips)\n" ), trips );
-        entry += string_format( _( ">Covered: %15d (m)\n" ), dist_m * trips );
-    }
-    entry += string_format( _( ">Travel:  %s\n" ), right_justify( to_string( travel_time ), 23 ) );
-    entry += string_format( _( ">Working: %s\n" ), right_justify( to_string( working_time ), 23 ) );
-    entry += "----                   ----\n";
-    entry += string_format( _( "Total:    %s\n" ), right_justify( to_string( total_time ), 23 ) );
-    entry += string_format( _( "Food:     %15d (kcal)\n\n" ), need_food );
-    return entry;
 }
 
 int basecamp::recruit_evaluation( int &sbase, int &sexpansions, int &sfaction, int &sbonus ) const
@@ -3647,12 +3117,9 @@ std::string basecamp::name_display_of( const mission_id &miss_id )
         case Camp_Abandon:
         case Camp_Emergency_Recall:
         case Camp_Menial:
-        case Camp_Survey_Field:
         case Camp_Trapping:
         case Camp_Hunting:
         case Camp_Recruiting:
-        case Camp_Scouting:
-        case Camp_Combat_Patrol:
         case Camp_Plow:
         case Camp_Plant:
         case Camp_Harvest:

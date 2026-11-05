@@ -4276,20 +4276,6 @@ std::optional<int> iuse::lumber( Character *p, item *it, const tripoint_bub_ms &
     return 1;
 }
 
-static int chop_moves( Character *p, item *it )
-{
-    // quality of tool
-    const int quality = it->get_quality( qual_AXE );
-
-    // attribute; regular tools - based on STR, powered tools - based on DEX
-    const int attr = it->has_flag( flag_POWERED ) ? p->dex_cur : p->get_arm_str();
-
-    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr ) / std::pow( 2, quality - 1 ) );
-    const int helpersize = p->get_num_crafting_helpers( 3 );
-    moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
-}
-
 std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( !p ) {
@@ -4316,16 +4302,16 @@ std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_m
     const tripoint_bub_ms &pnt = *pnt_;
     if( !f( pnt ) ) {
         if( pnt == p->pos_bub( here ) ) {
-            p->add_msg_if_player( m_info, _( "You're not stern enough to shave yourself with THIS." ) );
+            p->add_msg_if_player( m_info, _( "You cannot chop yourself down." ) );
         } else {
-            p->add_msg_if_player( m_info, _( "You can't chop down that." ) );
+            p->add_msg_if_player( m_info, _( "You can't chop that down." ) );
         }
         return std::nullopt;
     }
     if( p->is_avatar() && !g->warn_player_maybe_anger_local_faction( true ) ) {
         return std::nullopt; // player declined to anger locals
     }
-    int moves = chop_moves( p, it );
+    int moves = p->chop_moves( *it );
     const std::vector<Character *> helpers = p->get_crafting_helpers();
     for( std::size_t i = 0; i < helpers.size() && i < 3; i++ ) {
         add_msg( m_info, _( "%s helps with this task…" ), helpers[i]->get_name() );
@@ -4369,8 +4355,8 @@ std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint_bub_m
         p->add_msg_if_player( m_info, _( "You can't chop that." ) );
         return std::nullopt;
     }
-
-    int moves = chop_moves( p, it );
+    // It's a bit easier than cutting down a whole ass tree.
+    int moves = static_cast<int>( std::round( p->chop_moves( *it ) * 0.8 ) );
     const std::vector<Character *> helpers = p->get_crafting_helpers();
     for( std::size_t i = 0; i < helpers.size() && i < 3; i++ ) {
         add_msg( m_info, _( "%s helps with this task…" ), helpers[i]->get_name() );
