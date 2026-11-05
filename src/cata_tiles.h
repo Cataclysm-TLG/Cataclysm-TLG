@@ -951,6 +951,8 @@ class cata_tiles
          * Allows usage of night vision tilesets during sprite rendering.
          */
         bool nv_goggles_activated = false;
+        // Set during draw() when any tile with animated=true is rendered.
+        bool has_animated_tiles_ = false;
 
         pimpl<pixel_minimap> minimap;
 
