@@ -239,10 +239,6 @@ cata_tiles::cata_tiles( const SDL_Renderer_Ptr &renderer, const GeometryRenderer
 {
     cata_assert( renderer );
 
-#if SDL_MAJOR_VERSION >= 3
-    m_variant_pass = std::make_unique<cata_shader::variant_pass>( renderer.get() );
-#endif
-
     tile_height = 0;
     tile_width = 0;
 
@@ -270,8 +266,8 @@ void cata_tiles::on_options_changed()
     memory_map_mode = get_option <std::string>( "MEMORY_MAP_MODE" );
 
 #if SDL_MAJOR_VERSION >= 3
-    if( m_variant_pass ) {
-        m_variant_pass->select_memory_preset(
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        vp->select_memory_preset(
             cata_shader::memory_preset_from_option_value( memory_map_mode ) );
     }
 #endif
@@ -485,6 +481,8 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         return;
     }
 #endif
+
+    has_animated_tiles_ = false;
 
     {
         // Set clipping to prevent drawing over stuff we shouldn't.
@@ -1129,7 +1127,7 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                         {
                             scoped_render_target mask_scope( renderer, tint_mask_tex.get()
 #if SDL_MAJOR_VERSION >= 3
-                                                             , m_variant_pass.get()
+                                                             , get_shared_variant_pass()
 #endif
                                                            );
                             if( !mask_scope.is_valid() ) {
@@ -1377,8 +1375,10 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             draw_bullet_frame();
         }
         if( do_draw_hit ) {
-            draw_hit_frame();
             void_hit();
+            if( do_draw_hit ) {
+                draw_hit_frame();
+            }
         }
         if( do_draw_line ) {
             draw_line();
@@ -1466,11 +1466,13 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
     // Unbind any GPU render state held across sprite batches so the
     // next-frame draws see clean state. On flush failure the bind boundary
     // forbids a target switch: abort the unbind, latch recovery, and throw.
-    if( m_variant_pass && !m_variant_pass->flush() ) {
-        draw_scope.abort_unbind();
-        display_buffer_scope_signal_recovery_required();
-        throw std::runtime_error(
-            "cata_tiles::draw: variant_pass flush failed at end of frame; renderer in undefined state" );
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
+        if( !vp->flush() ) {
+            draw_scope.abort_unbind();
+            display_buffer_scope_signal_recovery_required();
+            throw std::runtime_error(
+                "cata_tiles::draw: variant_pass flush failed at end of frame; renderer in undefined state" );
+        }
     }
 #endif
 }
@@ -1485,6 +1487,23 @@ void cata_tiles::draw_minimap( const point &dest, const tripoint_bub_ms &center,
 {
     minimap->set_type( is_isometric() ? pixel_minimap_type::iso : pixel_minimap_type::ortho );
     minimap->draw( SDL_Rect{ dest.x, dest.y, width, height }, center );
+}
+
+bool cata_tiles::has_blinking_minimap() const
+{
+    return minimap->has_blinking_beacons();
+}
+
+void cata_tiles::reset_minimap()
+{
+    minimap->reset();
+}
+
+void cata_tiles::reset_tint_mask()
+{
+    tint_mask_tex.reset();
+    tint_mask_w = 0;
+    tint_mask_h = 0;
 }
 
 point cata_tiles::get_window_base_tile_counts(
@@ -2495,7 +2514,10 @@ bool cata_tiles::draw_from_id_string_internal(
         loc_rand = c;
 
         if( display_tile.animated ) {
-            auto now = std::chrono::steady_clock::now();
+            has_animated_tiles_ = true;
+            // idle animations run during the user's turn, and the animation speed
+            // needs to be defined by the tileset to look good, so we use system clock:
+            std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
             auto now_ms = std::chrono::time_point_cast<std::chrono::milliseconds>( now );
             int animation_frame = now_ms.time_since_epoch().count() / 17;
             animation_frame += loc_rand;
@@ -2575,15 +2597,18 @@ bool cata_tiles::draw_sprite_at(
     // Try the GPU shader variant first. On success the main atlas drives
     // the render and the variant transform happens per-pixel in the
     // fragment shader. On unsupported variant (NORMAL, custom MEMORY
-    // preset, late session-disable) try_begin returns false and the
-    // fallthrough below picks the matching pre-baked variant atlas.
-    if( m_variant_pass ) {
+    // preset, clean session-disable) try_begin reports use_atlas; abort_frame
+    // means undefined shader state -- latch recovery and throw.
+    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
         const cata_shader::variant_kind v =
             compute_variant_kind( rp.ll, rp.use_night_vision_tiles );
-        // Call try_begin for every variant including NORMAL. State-cached
-        // bind stays put across same-variant runs; NORMAL clears any prior
-        // shader state so it doesn't leak onto the next sprite.
-        shader_bound = m_variant_pass->try_begin( v );
+        const cata_shader::variant_pass::begin_result br = vp->try_begin( v );
+        if( br == cata_shader::variant_pass::begin_result::abort_frame ) {
+            display_buffer_scope_signal_recovery_required();
+            throw std::runtime_error(
+                "cata_tiles::draw_sprite_at: variant_pass left renderer in undefined shader-state bind" );
+        }
+        shader_bound = ( br == cata_shader::variant_pass::begin_result::bound );
     }
 #endif
 
@@ -4684,12 +4709,15 @@ void cata_tiles::init_draw_bullet( const tripoint_bub_ms &p, std::string name )
     bul_pos = p;
     bul_id = std::move( name );
 }
-void cata_tiles::init_draw_hit( const tripoint_bub_ms &p, std::string name )
+void cata_tiles::init_draw_hit( const Creature &critter )
 {
+    hit_animation hit;
+    hit.timestamp = std::chrono::steady_clock::now();
+    hit.creature_ptr = g->shared_from( critter );
     do_draw_hit = true;
-    hit_pos = p;
-    hit_entity_id = std::move( name );
+    hit_animations.push_front( hit );
 }
+
 void cata_tiles::init_draw_line( const tripoint_bub_ms &p, std::vector<tripoint_bub_ms> trajectory,
                                  std::string name, bool target_line )
 {
@@ -4797,9 +4825,24 @@ void cata_tiles::void_bullet()
 }
 void cata_tiles::void_hit()
 {
-    do_draw_hit = false;
-    hit_pos = { -1, -1, -1 };
-    hit_entity_id.clear();
+    const std::chrono::milliseconds max_age = std::chrono::milliseconds( 50 );
+    const std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    while( !hit_animations.empty() && now - hit_animations.back().timestamp > max_age ) {
+        hit_animations.pop_back();
+    }
+
+    if( hit_animations.empty() ) {
+        do_draw_hit = false;
+    }
+}
+bool cata_tiles::expire_hit_animations()
+{
+    if( !do_draw_hit ) {
+        return false;
+    }
+    const size_t before = hit_animations.size();
+    void_hit();
+    return hit_animations.size() != before;
 }
 void cata_tiles::void_line()
 {
@@ -4833,10 +4876,14 @@ void cata_tiles::void_zones()
 {
     do_draw_zones = false;
 }
-void cata_tiles::void_async_anim()
+bool cata_tiles::void_async_anim()
 {
+    if( !do_draw_async_anim ) {
+        return false;
+    }
     do_draw_async_anim = false;
     async_anim_layer.clear();
+    return true;
 }
 void cata_tiles::void_radiation_override()
 {
@@ -5058,21 +5105,26 @@ void cata_tiles::draw_hit_frame()
 {
     const std::string hit_overlay = "animation_hit";
     draw_options opts{};
-    opts.category = TILE_CATEGORY::HIT_ENTITY; // overlay/impact type
+    opts.category = TILE_CATEGORY::HIT_ENTITY; // overlay/impact type.
 
-
-
-    int height_3d = 0;
-    draw_from_id_string(
-        hit_overlay,
-        hit_pos,
-        0,
-        0,
-        lit_level::LIT,  // lighting
-        false,
-        height_3d,
-        opts
-    );
+    for( const hit_animation &hit : hit_animations ) {
+        const shared_ptr_fast<Creature> creature = hit.creature_ptr.lock();
+        if( !creature ) {
+            continue; // creature gone, skip this hit.
+        }
+        const tripoint_bub_ms draw_pos = creature->pos_bub();
+        int height_3d = 0;
+        draw_from_id_string(
+            hit_overlay,
+            draw_pos,
+            0,
+            0,
+            lit_level::LIT,  // lighting
+            false,
+            height_3d,
+            opts
+        );
+    }
 }
 void cata_tiles::draw_line()
 {

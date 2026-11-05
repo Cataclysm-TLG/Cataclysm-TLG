@@ -34,6 +34,13 @@ void DefaultGeometryRenderer::rect( const SDL_Renderer_Ptr &renderer, const SDL_
 
 ColorModulatedGeometryRenderer::ColorModulatedGeometryRenderer( const SDL_Renderer_Ptr &renderer )
 {
+    build_texture( renderer );
+}
+
+void ColorModulatedGeometryRenderer::build_texture( const SDL_Renderer_Ptr &renderer )
+{
+    tex.reset();
+
     SDL_Surface_Ptr alt_surf;
     try {
         alt_surf = create_surface_32( 1, 1 );
@@ -54,8 +61,18 @@ ColorModulatedGeometryRenderer::ColorModulatedGeometryRenderer( const SDL_Render
     if( !tex_enable ) {
         tex.reset();
     }
-    DebugLog( D_INFO, DC_ALL ) << "ColorModulatedGeometryRenderer constructor() = " <<
+    DebugLog( D_INFO, DC_ALL ) << "ColorModulatedGeometryRenderer build_texture() = " <<
                                ( tex_enable ? "SUCCESS" : "FAIL" ) << ". tex_enable = " << tex_enable;
+}
+
+void ColorModulatedGeometryRenderer::release_gpu_resources()
+{
+    tex.reset();
+}
+
+void ColorModulatedGeometryRenderer::rebuild_for_renderer( const SDL_Renderer_Ptr &renderer )
+{
+    build_texture( renderer );
 }
 
 void ColorModulatedGeometryRenderer::rect( const SDL_Renderer_Ptr &renderer, const SDL_Rect &rect,

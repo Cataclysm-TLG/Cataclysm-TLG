@@ -2,7 +2,11 @@
 #ifndef CATA_SRC_CATA_TILES_H
 #define CATA_SRC_CATA_TILES_H
 
+#include <array>
+#include <bitset>
+#include <chrono>
 #include <cstddef>
+#include <deque>
 #include <map>
 #include <memory>
 #include <string>
@@ -692,9 +696,11 @@ class cata_tiles
         void draw_bullet_frame();
         void void_bullet();
 
-        void init_draw_hit( const tripoint_bub_ms &p, std::string name );
+        void init_draw_hit( const Creature &critter );
         void draw_hit_frame();
         void void_hit();
+        // Prune expired hit animations.  Returns true if any were removed.
+        bool expire_hit_animations();
 
         void draw_footsteps_frame( const tripoint_bub_ms &center );
 
@@ -727,7 +733,7 @@ class cata_tiles
 
         void init_draw_async_anim( const tripoint_bub_ms &p, const std::string &tile_id );
         void draw_async_anim();
-        void void_async_anim();
+        bool void_async_anim();
 
         void init_draw_radiation_override( const tripoint_bub_ms &p, int rad );
         void void_radiation_override();
@@ -847,11 +853,8 @@ class cata_tiles
         tileset_cache &cache;
 
 #if SDL_MAJOR_VERSION >= 3
-        // GPU shader variant brackets per-sprite draws under USE_SDL3.
-        // Constructed eagerly in the cata_tiles constructor; the
-        // SDL_GPURenderState pipeline itself is lazy-probed on the first
-        // try_begin call.
-        std::unique_ptr<cata_shader::variant_pass> m_variant_pass;
+        // Variant pass is process-lifetime, owned alongside the renderer.
+        // Consumers reach it via get_shared_variant_pass in sdltiles.h.
 #endif
         std::shared_ptr<const tileset> tileset_ptr;
 
@@ -910,8 +913,11 @@ class cata_tiles
         tripoint_bub_ms bul_pos;
         std::string bul_id;
 
-        tripoint_bub_ms hit_pos;
-        std::string hit_entity_id;
+        struct hit_animation {
+            weak_ptr_fast<Creature> creature_ptr;
+            std::chrono::steady_clock::time_point timestamp;
+        };
+        std::deque<hit_animation> hit_animations;
 
         tripoint_bub_ms line_pos;
         bool is_target_line = false;
@@ -954,10 +960,28 @@ class cata_tiles
          * Allows usage of night vision tilesets during sprite rendering.
          */
         bool nv_goggles_activated = false;
+        // Set during draw() when any tile with animated=true is rendered.
+        bool has_animated_tiles_ = false;
 
         pimpl<pixel_minimap> minimap;
 
     public:
+        // True if the last draw() rendered any animated tiles.
+        bool has_animated_tiles() const {
+            return has_animated_tiles_;
+        }
+
+        // True if the minimap rendered critters with blinking beacons.
+        bool has_blinking_minimap() const;
+
+        // Drop the pixel minimap's renderer-owned resources and cache so
+        // they rebuild against the live renderer on the next draw.
+        void reset_minimap();
+
+        // Drop the scratch silhouette mask target so the next tinted ortho
+        // draw reallocates it against the live renderer.
+        void reset_tint_mask();
+
         // Draw caches persist data between draws and are only recalculated when dirty
         void set_draw_cache_dirty();
 

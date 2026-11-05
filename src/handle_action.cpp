@@ -320,13 +320,21 @@ input_context game::get_player_input( std::string &action )
             }
 
             if( current_turn.async_anim_timeout() ) {
-                g->void_async_anim_curses();
+                bool cleared = g->void_async_anim_curses();
 #if defined(TILES)
-                tilecontext->void_async_anim();
-#else
-                g->invalidate_main_ui_adaptor();
+                cleared |= tilecontext->void_async_anim();
 #endif
+                if( cleared ) {
+                    invalidate_main_ui_adaptor();
+                }
             }
+
+#if defined(TILES)
+            // Expire stale hit-animation overlays between draws
+            if( tilecontext->expire_hit_animations() ) {
+                invalidate_main_ui_adaptor();
+            }
+#endif
 
             if( g->has_blink_curses() && current_turn.blink_timeout() ) {
                 g->blink_active_phase = !g->blink_active_phase;
