@@ -411,24 +411,35 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
     // reset the overlay ordering from the previous loaded tileset
     tileset_mutation_overlay_ordering.clear();
 
-    tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events,
-                                      memory_map_mode, gens.instance, gens.textures );
+    {
+        // Gate drains across parse + upload + finalize so recovery cannot rebuild
+        // under an unpublished candidate (see atlas_upload_scope). A precheck does
+        // no GPU upload, so it is not gated.
+        atlas_upload_scope upload_guard( !precheck );
+        tileset_ptr = cache.load_tileset( tileset_id, renderer, precheck, force, pump_events,
+                                          memory_map_mode, gens.instance, gens.textures );
 
-    set_draw_scale( 16 );
+        set_draw_scale( 16 );
 
-    // Precalculate occlusion transparency
-    // On isometric tilesets, occlusion intensity scales with zlevel_height in tile_config.json
-    fog_alpha = is_isometric() ? std::min( std::max( int( 255.0f - 255.0f * pow( 155.0f / 255.0f,
-                                           zlevel_height / 100.0f ) ), 40 ), 150 ) : 100;
+        // Precalculate fog transparency
+        // On isometric tilesets, fog intensity scales with zlevel_height in tile_config.json
+        fog_alpha = is_isometric() ? std::min( std::max( int( 255.0f - 255.0f * pow( 155.0f / 255.0f,
+                                               zlevel_height / 100.0f ) ), 40 ), 150 ) : 100;
+    }
+    if( !precheck ) {
+        // Service recovery queued during the upload, now that the candidate is
+        // published. An exception unwind skips this, leaving recovery for the next
+        // outer boundary.
+        drain_renderer_recovery();
+    }
 }
 
 void cata_tiles::reinit()
 {
     set_draw_scale( 16 );
-    // Wrap so the clear lands on display_buffer rather than the null idle
-    // target.
+    // Wrap so the clear lands on display_buffer rather than the null idle target.
     display_buffer_draw_scope draw_scope;
-    if( display_buffer_scope_is_invalid() ) {
+    if( !draw_scope.should_draw() ) {
         return;
     }
     RenderClear( renderer );
@@ -942,8 +953,9 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
     // Multi z-level draw mode
     // Start drawing from the lowest visible z-level (some off-screen tiles
     // are considered visible here to simplify the logic.)
-    int cur_zlevel = draw_min_z;
-    while( cur_zlevel <= center.z() ) {
+    int cur_zlevel = std::max( center.z() - fov_3d_z_range, -OVERMAP_DEPTH );
+    bool draw_aborted = false;
+    while( cur_zlevel <= center.z() && !draw_aborted ) {
         const half_open_rectangle<point> &cur_any_tile_range = is_isometric()
                 ? z_any_tile_range[center.z() - cur_zlevel] : top_any_tile_range;
         // For each row
@@ -951,6 +963,13 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
         const level_cache &zlev_cache = here.access_cache( cur_zlevel );
         const bool zlev_has_color = zlev_cache.has_colored_lights;
         for( int row = cur_any_tile_range.p_min.y; row < cur_any_tile_range.p_max.y; row ++ ) {
+            if( renderer_should_abort_frame() ) {
+                // Abort emitting tiles mid-draw. Post-loop bookkeeping still runs
+                // so map memory and overrides stay consistent; invalidation kept
+                // for the next frame.
+                draw_aborted = true;
+                break;
+            }
             // --- Per-tile prepass ---
             // Initialize base height and decide which tiles need a colored light
             // tint overlay. We do this before the layer loop so that:
@@ -4657,6 +4676,22 @@ bool cata_tiles::draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d
            );
 }
 
+std::shared_ptr<tileset> tileset_cache::find_fresh_cached( const tileset_cache_key &key,
+        const uint64_t current_renderer_instance_gen, const uint64_t current_gpu_textures_gen ) const
+{
+    const auto it = tilesets_.find( key );
+    if( it == tilesets_.end() ) {
+        return nullptr;
+    }
+    std::shared_ptr<tileset> cached = it->second.lock();
+    if( cached
+        && cached->get_renderer_instance_generation_at_upload() == current_renderer_instance_gen
+        && cached->get_gpu_textures_generation_at_upload() == current_gpu_textures_gen ) {
+        return cached;
+    }
+    return nullptr;
+}
+
 std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &tileset_id,
         const SDL_Renderer_Ptr &renderer, const bool precheck, const bool force, const bool pump_events,
         const std::string &memory_map_mode,
@@ -4667,14 +4702,9 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
     };
 
     const auto get_or_create_tileset = [&]() {
-        const auto it = tilesets_.find( key );
-        if( it != tilesets_.end() ) {
-            std::shared_ptr<tileset> cached = it->second.lock();
-            if( cached
-                && cached->get_renderer_instance_generation_at_upload() == current_renderer_instance_gen
-                && cached->get_gpu_textures_generation_at_upload() == current_gpu_textures_gen ) {
-                return cached;
-            }
+        if( std::shared_ptr<tileset> fresh = find_fresh_cached( key, current_renderer_instance_gen,
+                                             current_gpu_textures_gen ) ) {
+            return fresh;
         }
         std::shared_ptr<tileset> new_ts = std::make_shared<tileset>();
         loader loader( *new_ts, renderer, memory_map_mode );

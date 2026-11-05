@@ -1189,8 +1189,15 @@ bool is_draw_tiles_mode();
 void refresh_display();
 
 /**
- * Sync OS cursor with the current ENABLE_MOUSE and HIDE_CURSOR option
- * values. No-op in curses builds.
+ * Service pending renderer-resource recovery at an outer loop boundary. No-op in
+ * curses; in SDL drains the coordinator so a target reset, device loss, or mobile
+ * foreground rebuilds before the next draw.
+ */
+void drain_renderer_recovery();
+
+/**
+ * Sync OS cursor-handling flags with the current
+ * ENABLE_MOUSE and HIDE_CURSOR option values. No-op in curses builds.
  */
 void refresh_mouse_config();
 
