@@ -792,10 +792,6 @@ void input_manager::set_timeout( const int t )
     inputdelay = t;
 }
 
-void cata_cursesport::handle_additional_window_clear( WINDOW * )
-{
-}
-
 int get_scaling_factor()
 {
     return 1;

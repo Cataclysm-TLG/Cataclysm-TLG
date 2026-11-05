@@ -70,6 +70,13 @@ class Font
         int height;
         // font palette.
         const palette_array &palette;
+        
+        /// Recreate GPU-side glyph textures against `renderer` after a device
+        /// reset. Default is a no-op for fonts whose glyphs repopulate lazily
+        /// on the next queue_char (the TTF glyph atlas).
+        virtual void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) {
+            ( void )renderer;
+        }
 };
 using Font_Ptr = std::unique_ptr<Font>;
 
@@ -147,6 +154,7 @@ class BitmapFont : public Font
                          unsigned char color, float opacity = 1.0f );
         void draw_ascii_lines( const SDL_Renderer_Ptr &renderer, const GeometryRenderer_Ptr &geometry,
                                unsigned char line_id, const point &p, unsigned char color ) const override;
+        void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
         void release_gpu_resources() override;
     protected:
         // Build the per-color glyph atlases from typeface_path against
@@ -178,6 +186,7 @@ class FontFallbackList : public Font
                          const std::string &ch,
                          const point &p,
                          unsigned char color, float opacity = 1.0f ) override;
+        void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
         void release_gpu_resources() override;
     protected:
         std::vector<std::unique_ptr<Font>> fonts;

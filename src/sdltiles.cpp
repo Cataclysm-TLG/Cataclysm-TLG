@@ -5274,7 +5274,6 @@ static void CheckMessages()
     // resizing already reinitializes the render target
     if( !resized && render_target_reset ) {
         throwErrorIf( !SetupRenderTarget(), "SetupRenderTarget failed" );
-        reinitialize_framebuffer( true );
         needupdate = true;
         restore_on_out_of_scope prev_last_input( last_input );
         // FIXME: SDL_RENDER_TARGETS_RESET only seems to be fired after the first redraw
