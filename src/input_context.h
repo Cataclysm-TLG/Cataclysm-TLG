@@ -65,7 +65,7 @@ class input_context
         // Whatever's on top is our current input context.
         static input_context_stack_impl input_context_stack;
 #endif
-        input_context() : registered_any_input( false ), category( "default" ),
+        input_context() : category( "default" ), registered_any_input( false ),
             coordinate_input_received( false ), handling_coordinate_input( false ) {
 #if defined(__ANDROID__) || defined(TILES)
             input_context_stack.push( handle );
@@ -91,6 +91,10 @@ class input_context
             register_action( "toggle_language_to_en" );
         }
 
+#if defined(__ANDROID__) || defined(TILES)
+        virtual ~input_context() = default;
+#endif
+
         // Make a persistent input_context the stack top for this scope, so the
         // Android shortcut bar (which reads the stack top) shows its actions
         // even when the screen redraws before polling input.
@@ -98,16 +102,19 @@ class input_context
         {
             public:
                 explicit scoped_activation( input_context &ctx ) {
-                    ( void )ctx;
 #if defined(__ANDROID__) || defined(TILES)
-        virtual ~input_context() = default;
+                    input_context_stack.push( ctx.handle );
+#else
+                    ( void )ctx;
 #endif
                 }
+
                 ~scoped_activation() {
 #if defined(__ANDROID__) || defined(TILES)
                     input_context_stack.pop();
 #endif
                 }
+
                 scoped_activation( const scoped_activation & ) = delete;
                 scoped_activation &operator=( const scoped_activation & ) = delete;
                 scoped_activation( scoped_activation && ) = delete;
