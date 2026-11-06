@@ -194,8 +194,16 @@ shader &shader::operator=( shader &&other ) noexcept
     }
     return *this;
 }
-
 render_state render_state::create( SDL_Renderer *renderer, const shader &fragment_shader )
+{
+    // No additional sampler/storage bindings: the atlas sampler comes from the
+    // renderer's normal textured-draw path
+    return create( renderer, fragment_shader, nullptr, 0 );
+}
+
+render_state render_state::create( SDL_Renderer *renderer, const shader &fragment_shader,
+                                   const SDL_GPUTextureSamplerBinding *bindings,
+                                   const int num_bindings )
 {
     if( !renderer || !fragment_shader.is_valid() ) {
         return render_state{};
@@ -203,9 +211,8 @@ render_state render_state::create( SDL_Renderer *renderer, const shader &fragmen
 
     SDL_GPURenderStateCreateInfo info{};
     info.fragment_shader = fragment_shader.get();
-    // No additional sampler/storage bindings: the atlas sampler comes from the
-    // renderer's normal textured-draw path, and the shaders take no uniforms
-    info.num_sampler_bindings = 0;
+    info.num_sampler_bindings = num_bindings;
+    info.sampler_bindings = bindings;
     info.num_storage_textures = 0;
     info.num_storage_buffers = 0;
 

@@ -64,6 +64,8 @@ class pixel_minimap;
 struct sprite_screen_bounds;
 struct tile_tint;
 struct tint_sprite_record;
+struct tint_sprite_record;
+struct visibility_variables;
 enum class direction : unsigned int;
 enum class lit_level : uint8_t;
 enum class visibility_type : int;
@@ -171,6 +173,9 @@ class texture
         /// Returns the width (first) and height (second) of the stored texture.
         std::pair<int, int> dimension() const {
             return std::make_pair( srcrect.w, srcrect.h );
+        }
+        const SDL_Rect &get_srcrect() const {
+            return srcrect;
         }
         /// Returns the opaque pixel bounding box relative to the sprite origin.
         const SDL_Rect &get_opaque_rect() const {

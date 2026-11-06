@@ -2507,14 +2507,6 @@ bool cata_tiles::draw_from_id_string_internal(
     restore_on_out_of_scope<bool> restore_decided( m_anchor_decided );
     restore_on_out_of_scope<std::optional<smooth_lighting::light_anchor>> restore_anchor(
                 m_shown_anchor );
-    if( !m_anchor_decided ) {
-        m_anchor_decided = true;
-        // filtered lighting needs it, and the test seam records it
-        const bool filtered = smooth_lighting_active && !lit_per_tile;
-        m_shown_anchor = filtered || test_draw_light_log != nullptr ? default_light_anchor( category, id ) :
-                         std::nullopt;
-    }
-    bool nv_color_active = apply_night_vision_goggles && get_option<bool>( "NV_GREEN_TOGGLE" );
     // Extract options from draw_options
     TILE_CATEGORY category = opts.category;
     const std::string &subcategory = opts.subcategory;
@@ -2524,6 +2516,15 @@ bool cata_tiles::draw_from_id_string_internal(
     float scale_x = opts.scale_x;
     float scale_y = opts.scale_y;
     int mirror = opts.mirror;
+    if( !m_anchor_decided ) {
+        m_anchor_decided = true;
+        // filtered lighting needs it, and the test seam records it
+        const bool filtered = smooth_lighting_active && !lit_per_tile;
+        m_shown_anchor = filtered || test_draw_light_log != nullptr ? default_light_anchor( category, id ) :
+                         std::nullopt;
+    }
+    bool nv_color_active = apply_night_vision_goggles && get_option<bool>( "NV_GREEN_TOGGLE" );
+
     // ##############################
     // uint32_t tint = opts.tint_rgba;
     // ##############################
@@ -2948,16 +2949,13 @@ bool cata_tiles::draw_from_id_string_internal(
         retract = 0;
     }
     // Draw the tile
-    const tile_render_params rp{ ll, nv_color_active };
-
-
-    //draw it!
     const tile_render_params rp{ ll, nv_color_active, pos, m_draw_light, m_shown_anchor };
     // test seam: draw_sprite_at logs under this id
     test_draw_id = test_draw_light_log ? &id : nullptr;
     draw_tile_at( display_tile, screen_pos, loc_rand, rota, rp, retract,
                   height_3d, offset, scale_x, scale_y, mirror, creature );
     return true;
+}
 
 bool cata_tiles::draw_tile_at(
     const tile_type &tile, const point &p, unsigned int loc_rand, int rota,
@@ -3170,6 +3168,7 @@ bool cata_tiles::draw_sprite_at(
     // and for recording into tint_sprites (which replays the sprite as a white
     // silhouette during the tint overlay pass). Compute them once here.
     double render_angle = 0;
+    smooth_lighting::quarter_turn render_turn = smooth_lighting::quarter_turn::none;
     CataFlipMode render_flip = SDL_FLIP_NONE;
     if( rotate_sprite ) {
         if( rota == -1 ) {
@@ -3202,7 +3201,11 @@ bool cata_tiles::draw_sprite_at(
 
     // only a bound sprite shader decodes the tint from the vertex color; with
     // no shader SDL would multiply the sprite by it
-    const bool apply_tint = m_cur_tint != nullptr && shader_bound &&
+    const cata_shader::variant_pass *const lit_vp = get_shared_variant_pass();
+    const bool lit_sprite = shader_bound && smooth_lighting_active && lit_vp &&
+                            lit_vp->lit_takes( variant );
+    // lit sprites carry the tint in the light map
+    const bool apply_tint = m_cur_tint != nullptr && shader_bound && !lit_sprite &&
                             cata_shader::variant_takes_tint( variant );
     if( apply_tint ) {
         const tint_texture_mod mod = tint_texture_mod_for( *m_cur_tint );
@@ -3559,20 +3562,18 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
             const std::string &tname = t2.id().str();
             // tile overrides are never memorized
             // tile overrides are always shown with full visibility
-            draw_options opts{};
-            opts.category = TILE_CATEGORY::TERRAIN;
             if( memorize_only ) {
                 return false;
             }
+            draw_options opts{};
+            opts.category = TILE_CATEGORY::TERRAIN;
             const lit_level lit = overridden ? lit_level::LIT : ll;
             const bool nv = overridden ? false : nv_goggles_activated;
             restore_on_out_of_scope<draw_light> restore_light( m_draw_light );
             if( overridden ) {
                 m_draw_light = draw_light::fixed;
             }
-            return memorize_only
-                   ? false
-                   :             return draw_from_id_string(
+            return draw_from_id_string(
                        tname,
                        p,
                        subtile,
@@ -3581,7 +3582,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                        nv,
                        height_3d,
                        opts
-                   );
+            );
         }
     } else if( invisible[0] ) {
         // Try drawing memory if invisible and not overridden.

@@ -143,6 +143,10 @@ class render_state
         // the renderer's normal textured-draw path and SetGPURenderStateFragmentUniforms.
         static render_state create( SDL_Renderer *renderer,
                                     const shader &fragment_shader );
+        static render_state create( SDL_Renderer *renderer,
+                                    const shader &fragment_shader,
+                                   const SDL_GPUTextureSamplerBinding *bindings,
+                                   const int num_bindings );
 
         render_state() = default;
         ~render_state();
@@ -411,6 +415,7 @@ class variant_pass
         // destructors normally to release the SDL handles.
         void clear_state_arrays( bool abandon_handles );
         SDL_GPURenderState *state_for( variant_kind v, bool tinted ) const;
+        void release_lit( bool abandon_handles );
 
         SDL_Renderer *renderer_ = nullptr;
         std::array<shader, static_cast<size_t>( variant_kind::count )> shaders_;
