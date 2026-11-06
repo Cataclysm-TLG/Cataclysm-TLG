@@ -10,7 +10,37 @@ num_jobs=3
 # We might need binaries installed via pip, so ensure that our personal bin dir is on the PATH
 export PATH=$HOME/.local/bin:$PATH
 
-if [ "$RELEASE" = "1" ]
+# enable all the switches by default
+BACKTRACE=${BACKTRACE:-1}
+LOCALIZE=${LOCALIZE:-1}
+TILES=${TILES:-1}
+SOUND=${SOUND:-1}
+cmake_sdl3=()
+make_sdl3=()
+if [ -n "${SDL3+x}" ]; then
+    cmake_sdl3=( "-DUSE_SDL3=${SDL3}" )
+    make_sdl3=( "SDL3=${SDL3}" )
+fi
+
+# create compilation database (compile_commands.json)
+mkdir -p "$build_dir"
+build_dir="$(cd "$build_dir" && pwd)"
+export CATA_BUILD_DIR="$build_dir"
+cd "$build_dir"
+cmake \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+    ${COMPILER:+-DCMAKE_CXX_COMPILER=$COMPILER} \
+    -DCMAKE_BUILD_TYPE="Release" \
+    -DBACKTRACE="${BACKTRACE}" \
+    -DLOCALIZE="${LOCALIZE}" \
+    -DTILES="${TILES}" \
+    -DSOUND="${SOUND}" \
+    "${cmake_sdl3[@]}" \
+    "$repo_root"
+cd "$repo_root"
+ln --force --symbolic "${build_dir}/compile_commands.json" .
+
+if [ ! -f "${build_dir}/tools/clang-tidy-plugin/libCataAnalyzerPlugin.so" ]
 then
     build_type=MinSizeRel
 else
@@ -90,10 +120,14 @@ then
     tidyable_cpp_files=$all_cpp_files
 else
     make \
-        -j $num_jobs \
-        ${COMPILER:+COMPILER=$COMPILER} \
-        TILES=${TILES:-0} \
-        SOUND=${SOUND:-0} \
+        --silent \
+        -j "$num_jobs" \
+        ${COMPILER:+COMPILER="$COMPILER"} \
+        BACKTRACE="${BACKTRACE}" \
+        LOCALIZE="${LOCALIZE}" \
+        TILES="${TILES}" \
+        SOUND="${SOUND}" \
+        "${make_sdl3[@]}" \
         includes
 
     tidyable_cpp_files="$( \
