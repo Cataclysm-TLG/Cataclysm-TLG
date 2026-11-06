@@ -4,7 +4,6 @@
 
 level_cache::level_cache()
 {
-    const int map_dimensions = MAPSIZE_X * MAPSIZE_Y;
     transparency_cache_dirty.set();
     outside_cache_dirty = true;
     floor_cache_dirty = false;

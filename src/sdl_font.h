@@ -84,13 +84,6 @@ class Font
         int height;
         // font palette.
         const palette_array &palette;
-        
-        /// Recreate GPU-side glyph textures against `renderer` after a device
-        /// reset. Default is a no-op for fonts whose glyphs repopulate lazily
-        /// on the next queue_char (the TTF glyph atlas).
-        virtual void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) {
-            ( void )renderer;
-        }
 };
 using Font_Ptr = std::unique_ptr<Font>;
 
@@ -181,7 +174,6 @@ class BitmapFont : public Font
                                 unsigned char color ) const override;
         void release_gpu_resources() override;
         void rebuild_for_renderer( const SDL_Renderer_Ptr &renderer ) override;
-        void release_gpu_resources() override;
     protected:
         // Queue CP437 glyph `t` from the atlas of `color`.
         void queue_index( text_batch &batch, int t, const point &p, unsigned char color,

@@ -165,17 +165,11 @@ using cata_cursesport::curseline;
 using cata_cursesport::cursecell;
 static std::vector<curseline> oversized_framebuffer;
 static std::vector<curseline> terminal_framebuffer;
-static std::weak_ptr<void> winBuffer; //tracking last drawn window to fix the framebuffer
 static int fontScaleBuffer; //tracking zoom levels to fix framebuffer w/tiles
 
 //***********************************
 //Non-curses, Window functions      *
 //***********************************
-
-static bool operator==( const cata_cursesport::WINDOW *const lhs, const catacurses::window &rhs )
-{
-    return lhs == rhs.get();
-}
 
 static void ClearScreen()
 {
@@ -3575,48 +3569,9 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
     }
 
     cata_cursesport::WINDOW *const win = w.get<cata_cursesport::WINDOW>();
-    //Keeping track of the last drawn window
-    const cata_cursesport::WINDOW *winBuffer = static_cast<cata_cursesport::WINDOW *>
-            ( ::winBuffer.lock().get() );
+
     if( !fontScaleBuffer ) {
         fontScaleBuffer = tilecontext->get_tile_width();
-    }
-    const int fontScale = tilecontext->get_tile_width();
-    //This creates a problem when map_font is different from the regular font
-    //Specifically when showing the overmap
-    //And in some instances of screen change, i.e. inventory.
-    bool oldWinCompatible = false;
-
-    // use the oversize buffer when dealing with windows that can have a different font than the main text font
-    bool use_oversized_framebuffer = g && ( w == g->w_terrain || w == g->w_overmap );
-
-    std::vector<curseline> &framebuffer = use_oversized_framebuffer ? oversized_framebuffer :
-                                          terminal_framebuffer;
-
-    /*
-    Let's try to keep track of different windows.
-    A number of windows are coexisting on the screen, so don't have to interfere.
-
-    g->w_terrain, g->w_minimap, g->w_HP, g->w_status, g->w_status2, g->w_messages,
-     g->w_location, and g->w_minimap, can be buffered if either of them was
-     the previous window.
-
-    g->w_overmap and g->w_omlegend are likewise.
-
-    Everything else works on strict equality because there aren't yet IDs for some of them.
-    */
-    if( g && ( w == g->w_terrain || w == g->w_minimap ) ) {
-        if( winBuffer == g->w_terrain || winBuffer == g->w_minimap ) {
-            oldWinCompatible = true;
-        }
-    } else if( g && ( w == g->w_overmap || w == g->w_omlegend ) ) {
-        if( winBuffer == g->w_overmap || winBuffer == g->w_omlegend ) {
-            oldWinCompatible = true;
-        }
-    } else {
-        if( win == winBuffer ) {
-            oldWinCompatible = true;
-        }
     }
 
     // TODO: Get this from UTF system to make sure it is exactly the kind of space we need
@@ -3647,15 +3602,9 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
                                     color_as_sdl( catacurses::black ) );
         update = true;
         win->line[j].touched = false;
-        // column past the last glyph span queued in this row
+// column past the last glyph span queued in this row
         int queued_span_end = 0;
         for( int i = 0; i < win->width; i++ ) {
-            const int fbx = win->pos.x + i;
-            if( fbx >= static_cast<int>( framebuffer[fby].chars.size() ) ) {
-                // prevent indexing outside the frame buffer. This might happen for some parts of the window.
-                break;
-            }
-
             const cursecell &cell = win->line[j].chars[i];
 
             const point draw( offset + point( i * font->width, j * font->height ) );
@@ -3663,15 +3612,6 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
                 // Outside of the display area, would not render anyway
                 continue;
             }
-
-            // Avoid redrawing an unchanged tile by checking the framebuffer cache
-            // TODO: handle caching when drawing normal windows over graphical tiles
-            cursecell &oldcell = framebuffer[fby].chars[fbx];
-
-            if( oldWinCompatible && cell == oldcell && fontScale == fontScaleBuffer ) {
-                continue;
-            }
-            oldcell = cell;
 
             if( cell.ch.empty() ) {
                 continue; // second cell of a multi-cell character
@@ -3700,7 +3640,7 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
                 // utf8_width() may return a negative width
                 continue;
             }
-            bool use_draw_ascii_lines_routine = get_option<bool>( "USE_DRAW_ASCII_LINES_ROUTINE" );
+            bool use_draw_ascii_lines_routine = option_use_draw_ascii_lines_routine;
             unsigned char uc = static_cast<unsigned char>( cell.ch[0] );
             switch( codepoint ) {
                 case LINE_XOXO_UNICODE:
@@ -3759,9 +3699,7 @@ static bool draw_window( Font_Ptr &font, const catacurses::window &w, const poin
         }
     }
     curses_text_batch.flush( renderer );
-    win->draw = false; //We drew the window, mark it as so
-    //Keeping track of last drawn window and tilemode zoom level
-    ::winBuffer = w.weak_ptr();
+    win->draw = false;
     fontScaleBuffer = tilecontext->get_tile_width();
 
     return update;

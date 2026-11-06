@@ -8,6 +8,7 @@
 #include "output.h"
 #include "sdl_quad_batch.h"
 #include "sdl_utils.h"
+#include "sdl_wrappers.h"
 
 #if defined(_WIN32)
 #   if 1 // HACK: Hack to prevent reordering of #include "platform_win.h" by IWYU

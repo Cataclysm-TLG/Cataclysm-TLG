@@ -1,10 +1,12 @@
 #if defined(TILES)
 
 #include "sdl_quad_batch.h"
+#include "sdl_wrappers.h"
 
 #include <algorithm>
 #include <cstddef>
 #include <iterator>
+
 
 SDL_FColor to_fcolor( const SDL_Color &color )
 {
