@@ -715,7 +715,7 @@ struct event_spec<event_type::game_avatar_new> {
 template<>
 struct event_spec<event_type::game_load> {
     static constexpr std::array<std::pair<const char *, cata_variant_type>, 1> fields = {{
-            { "cdda_version", cata_variant_type::string },
+            { "ctlg_version", cata_variant_type::string },
         }
     };
 };
@@ -723,7 +723,7 @@ struct event_spec<event_type::game_load> {
 template<>
 struct event_spec<event_type::game_begin> {
     static constexpr std::array<std::pair<const char *, cata_variant_type>, 1> fields = { {
-            { "cdda_version", cata_variant_type::string },
+            { "ctlg_version", cata_variant_type::string },
         }
     };
 };
