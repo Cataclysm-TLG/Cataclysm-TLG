@@ -4,6 +4,15 @@
 #include "sdltiles.h"
 #include "sdl_wrappers.h"
 
+#include <array>
+#include <cstdlib>
+#include <fstream>
+#include <iterator>
+#include <vector>
+
+#include "debug.h"
+#include "path_info.h"
+
 namespace cata_shader
 {
 
@@ -26,22 +35,6 @@ void clear_reprobe()
 {
     g_reprobe_requested = false;
 }
-
-} // namespace cata_shader
-
-#if SDL_MAJOR_VERSION >= 3
-
-#include <array>
-#include <cstdlib>
-#include <fstream>
-#include <iterator>
-#include <vector>
-
-#include "debug.h"
-#include "path_info.h"
-
-namespace cata_shader
-{
 
 namespace
 {
@@ -766,7 +759,5 @@ void variant_pass::rebind_renderer( SDL_Renderer *renderer )
 }
 
 } // namespace cata_shader
-
-#endif // SDL_MAJOR_VERSION >= 3
 
 #endif // TILES

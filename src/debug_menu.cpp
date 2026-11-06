@@ -35,7 +35,7 @@
 #include "calendar_ui.h"
 #include "cata_assert.h"
 #include "cata_path.h"
-#if defined(TILES) && defined(USE_SDL3)
+#if defined(TILES)
 #include "cata_shader.h"
 #endif
 #include "cata_utility.h"
@@ -4432,7 +4432,7 @@ void debug()
             break;
 
         case debug_menu_index::RELOAD_GPU_SHADERS:
-#if defined(TILES) && defined(USE_SDL3)
+#if defined(TILES)
             cata_shader::request_reprobe();
             add_msg( _( "GPU shaders will reload on next frame." ) );
 #endif

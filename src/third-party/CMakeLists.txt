@@ -58,7 +58,13 @@ target_include_directories(
         ghc-filesystem
         SYSTEM
         INTERFACE
-        ${THIRD_PARTY_SOURCE_DIR})
+        ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(
+        third-party
+        INTERFACE
+        ghc-filesystem
+        )
 
 # We use snmalloc in header only mode
 file(GLOB SNMALLOC_HEADERS snmalloc/**/*)

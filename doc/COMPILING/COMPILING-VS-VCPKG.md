@@ -1,6 +1,6 @@
 # Compilation guide for Windows (using Visual Studio and vcpkg)
 
-This guide contains steps required to allow compilation of Cataclysm-DDA on Windows using Visual Studio and vcpkg.
+This guide contains steps required to allow compilation of Cataclysm-TLG on Windows using Visual Studio and vcpkg.
 
 Steps from current guide were tested on Windows 10 (64 bit), Visual Studio 2019 (64 bit) and vcpkg, but should as well work with slight modifications for other versions of Windows and Visual Studio.
 
@@ -45,15 +45,17 @@ git checkout 3b57fb2e1ff55613db14d2aaf0a30529289c7050
 ./vcpkg.exe integrate install
 ```
 
+If during the compilation you're getting a vcpkg error along the lines of `error: no version database entry for sdl3`, that probably means that your vcpkg install is too old. Running a `git pull` in vcpkg directory should fix the issue.
+
 ## Cloning and compilation:
 
-1. Clone Cataclysm-DDA repository with following command line:
+1. Clone Cataclysm-TLG repository with following command line:
 
-**Note:** This will download the entire CDDA repository; about three gigs of data. If you're just testing you should probably add `--depth=1`.
+**Note:** This will download the entire CTLG repository; about three gigs of data. If you're just testing you should probably add `--depth=1`.
 
 ```cmd
-git clone https://github.com/CleverRaven/Cataclysm-DDA.git
-cd Cataclysm-DDA
+git clone https://github.com/Cataclysm-TLG/Cataclysm-TLG.git
+cd Cataclysm-TLG
 ```
 
 2. Open the provided solution (`msvc-full-features\Cataclysm-vcpkg-static.sln`) in `Visual Studio`.
@@ -115,24 +117,24 @@ It is possible to use ccache with Visual Studio and gain the same benefits as ot
 
 2. Extract the contents of the zip file somewhere convenient but not on $PATH.
 
-    - For example, if Cataclysm is checked out at `C:/dev/Cataclysm-DDA/`, then extract the folder and move the contents to `C:/dev/ccache/`. Verify the binary exists at `C:/dev/ccache/ccache.exe`.
+    - For example, if Cataclysm is checked out at `C:/dev/Cataclysm-TLG/`, then extract the folder and move the contents to `C:/dev/ccache/`. Verify the binary exists at `C:/dev/ccache/ccache.exe`.
 
 3. Create a copy of `ccache.exe` in the same folder, called `cl.exe`.
 
     - If you use the LLVM toolchain ("clang-cl.exe") when building, make another copy of `ccache.exe` called `clang-cl.exe`.
 
-4. Create a file called `Directory.Build.props` at the root of the Cataclysm-DDA folder with the following contents. If it already exists, merge it with the contents below. The value of `CDDA_CCACHE_PATH` should be the folder where you put `ccache.exe`. Assuming this path is `C:\dev\ccache\` (note: `\` vs `/` matters, you need to use `\` here):
+4. Create a file called `Directory.Build.props` at the root of the Cataclysm-TLG folder with the following contents. If it already exists, merge it with the contents below. The value of `CTLG_CCACHE_PATH` should be the folder where you put `ccache.exe`. Assuming this path is `C:\dev\ccache\` (note: `\` vs `/` matters, you need to use `\` here):
 
 ```
 <Project>
   <PropertyGroup>
-    <CDDA_USE_CCACHE>true</CDDA_USE_CCACHE>
-    <CDDA_CCACHE_PATH>C:\dev\ccache\</CDDA_CCACHE_PATH>
+    <CTLG_USE_CCACHE>true</CTLG_USE_CCACHE>
+    <CTLG_CCACHE_PATH>C:\dev\ccache\</CTLG_CCACHE_PATH>
   </PropertyGroup>
 </Project>
 ```
 
-5. ccache should now just work when building with Release modes in Visual Studio. Debug builds do not work because of the size of CDDA and limitations in the msvc toolchain. However, Debug builds are almost intolerably slow anyway so this limitation is not something we are going to fix right now.
+5. ccache should now just work when building with Release modes in Visual Studio. Debug builds do not work because of the size of CTLG and limitations in the msvc toolchain. However, Debug builds are almost intolerably slow anyway so this limitation is not something we are going to fix right now.
 
 ### llvm tools integration
 
@@ -142,14 +144,14 @@ It is possible to use `llvm-lib.exe` and `lld-link.exe` to speed up your local b
   - Github: Download a release from https://github.com/llvm/llvm-project/releases. You typically want the installer from the `Assets` section called eg. `LLVM-16.0.6-win64.exe`, or whatever version you are downloading.
   - Visual Studio Installer: Open the Visual Studio Installer, select 'Modify' next to your install, click the 'Individual Components' section, search for 'C++ Clang Compiler for Windows', and make sure the result is selected.
 
-2. Create a file called `Directory.Build.props` at the root of the Cataclysm-DDA folder with the following contents.
+2. Create a file called `Directory.Build.props` at the root of the Cataclysm-TLG folder with the following contents.
   - If you installed a release directly from LLVM releases, use these settings. If you installed to a non default location, set the two `_PATH` variables to the path you installed LLVM to.
 ```
 <Project>
   <PropertyGroup>
-    <CDDA_ENABLE_THIN_ARCHIVES>true</CDDA_ENABLE_THIN_ARCHIVES>
-    <CDDA_LLVM_LIB_PATH>C:\Program Files\LLVM\bin\</CDDA_LLVM_LIB_PATH>
-    <CDDA_LLD_LINK_PATH>C:\Program Files\LLVM\bin\</CDDA_LLD_LINK_PATH>
+    <CTLG_ENABLE_THIN_ARCHIVES>true</CTLG_ENABLE_THIN_ARCHIVES>
+    <CTLG_LLVM_LIB_PATH>C:\Program Files\LLVM\bin\</CTLG_LLVM_LIB_PATH>
+    <CTLG_LLD_LINK_PATH>C:\Program Files\LLVM\bin\</CTLG_LLD_LINK_PATH>
   </PropertyGroup>
 </Project>
 ```
@@ -158,7 +160,7 @@ It is possible to use `llvm-lib.exe` and `lld-link.exe` to speed up your local b
 ```
 <Project>
   <PropertyGroup>
-    <CDDA_ENABLE_THIN_ARCHIVES>true</CDDA_ENABLE_THIN_ARCHIVES>
+    <CTLG_ENABLE_THIN_ARCHIVES>true</CTLG_ENABLE_THIN_ARCHIVES>
   </PropertyGroup>
 </Project>
 ```
