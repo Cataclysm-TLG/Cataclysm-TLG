@@ -779,9 +779,13 @@ ifeq ($(TILES), 1)
     CXXFLAGS += $(shell $(PKG_CONFIG) --cflags freetype2)
     LDFLAGS += $(shell $(PKG_CONFIG) --libs freetype2)
   else ifneq ($(NATIVE),emscripten)
-    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
-    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
-    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+    ifeq ($(MSYS2),1)
+      CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3 sdl3-image sdl3-ttf freetype2)
+    else
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3))
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-image sdl3-ttf))
+      CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags freetype2))
+    endif
 
     ifeq ($(STATIC), 1)
       LDFLAGS += $(shell $(PKG_CONFIG) sdl3 --static --libs)
@@ -865,7 +869,11 @@ ifeq ($(MSYS2),1)
 endif
 
 ifeq ($(SOUND), 1)
-  CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
+  ifeq ($(MSYS2),1)
+    CXXFLAGS += $(shell $(PKG_CONFIG) --cflags sdl3-mixer)
+  else
+    CXXFLAGS += $(subst -I,-isystem ,$(shell $(PKG_CONFIG) --cflags sdl3-mixer))
+  endif
   LDFLAGS += $(shell $(PKG_CONFIG) --libs sdl3-mixer)
   ifneq ($(NATIVE),osx)
     LDFLAGS += -lpthread
