@@ -6,7 +6,7 @@
 #include <array>
 #include <bitset>
 #include <cmath>
-#include <cstdint>
+#include <cstdlib>
 #include <cstring>
 #include <functional>
 #include <iterator>
@@ -22,6 +22,7 @@
 #include "cached_options.h"
 #include "calendar.h"
 #include "cata_assert.h"
+#include "cata_scope_helpers.h"
 #include "cata_utility.h"
 #include "catacharset.h"
 #include "character.h"
@@ -71,6 +72,7 @@
 #include "string_formatter.h"
 #include "string_id.h"
 #include "submap.h"
+#include "tile_tint.h"
 #include "tileray.h"
 #include "translations.h"
 #include "trap.h"
@@ -264,12 +266,7 @@ cata_tiles::~cata_tiles() = default;
 
 void cata_tiles::on_options_changed()
 {
-    memory_map_mode = get_option <std::string>( "MEMORY_MAP_MODE" );
-
-    if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
-        vp->select_memory_preset(
-            cata_shader::memory_preset_from_option_value( memory_map_mode ) );
-    }
+    memory_map_mode = applied_tile_atlas_config().mode;
 
     pixel_minimap_settings settings;
 
@@ -400,6 +397,11 @@ bool service_mode2_upload_interrupt( const atlas_upload_interrupt interrupt,
         // The drain is about to destroy the renderer; release the quarantined
         // handles without SDL_DestroyTexture.
         quarantine.abandon_pre_lost_renderer();
+    } else if( interrupt == atlas_upload_interrupt::shader_boundary_lost ) {
+        // boundary undefined, so renderer will be replaced: release quarantined
+        // handles without SDL_DestroyTexture, queue loss
+        quarantine.abandon_pre_lost_renderer();
+        renderer_coordinator.request_recovery( renderer_recovery_severity::device_lost );
     } else if( interrupt == atlas_upload_interrupt::paused ) {
         // Wait out the background; the foreground event queues the rebuild.
         pump_until_renderer_foreground();
@@ -425,11 +427,15 @@ void cata_tiles::load_tileset( const std::string &tileset_id, const bool prechec
 {
     renderer_texture_generations gens = renderer_coordinator.texture_generations();
     // Skip the reload only when the same tileset is already bound against the
-    // current renderer and texture generations; a generation bump from a
-    // device reset or loss invalidates the bundle and must reload.
+    // current renderer, texture generations and memory-map configuration; a
+    // generation bump from a device reset or loss invalidates the bundle and
+    // must reload
     if( tileset_ptr && tileset_ptr->get_tileset_id() == tileset_id && !force
         && tileset_ptr->get_renderer_instance_generation_at_upload() == gens.instance
-        && tileset_ptr->get_gpu_textures_generation_at_upload() == gens.textures ) {
+        && tileset_ptr->get_gpu_textures_generation_at_upload() == gens.textures
+        && tileset_ptr->get_memory_map_mode_at_upload() == memory_map_mode
+        && tileset_ptr->get_filter_fingerprint_at_upload()
+        == compute_tileset_filter_fingerprint( memory_map_mode ) ) {
         return;
     }
     // Snapshot the global mutation-overlay ordering before the candidate parse
@@ -544,6 +550,14 @@ static std::map<tripoint_bub_ms, int> display_npc_attack_potential()
         effectiveness_map[effectiveness_at_point.target()] = *effectiveness_at_point.value();
     }
     return effectiveness_map;
+}
+
+// CATA_DISABLE_TINT_OVERLAY turns only the colored-light tint overlay off;
+// memory comparison can hold everything else in the draw equal. Read once.
+static bool tint_overlay_disabled()
+{
+    static const bool disabled = std::getenv( "CATA_DISABLE_TINT_OVERLAY" ) != nullptr;
+    return disabled;
 }
 
 void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int width, int height,
@@ -1019,13 +1033,23 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
     // are considered visible here to simplify the logic.)
     int cur_zlevel = std::max( center.z() - fov_3d_z_range, -OVERMAP_DEPTH );
     bool draw_aborted = false;
+    const cata_shader::variant_pass *const tint_vp = get_shared_variant_pass();
+    const bool shader_tint = tint_vp && tint_vp->tint_available();
+    std::optional<int> invalid_silhouette_sprite;
+    on_out_of_scope clear_tint_state( [this]() {
+        m_cur_tint = nullptr;
+        m_zlev_tint_bound = false;
+    } );
     while( cur_zlevel <= center.z() && !draw_aborted ) {
         const half_open_rectangle<point> &cur_any_tile_range = is_isometric()
                 ? z_any_tile_range[center.z() - cur_zlevel] : top_any_tile_range;
         // For each row
         const bool iso = is_isometric();
         const level_cache &zlev_cache = here.access_cache( cur_zlevel );
-        const bool zlev_has_color = zlev_cache.has_colored_lights;
+        // Iso has no silhouette mask path, so only the sprite shader tints it
+        const bool zlev_has_color = zlev_cache.has_colored_lights && ( shader_tint || !iso ) &&
+                                    !tint_overlay_disabled();
+        m_zlev_tint_bound = shader_tint && zlev_has_color;
         for( int row = cur_any_tile_range.p_min.y; row < cur_any_tile_range.p_max.y; row ++ ) {
             if( renderer_should_abort_frame() ) {
                 // Abort emitting tiles mid-draw. Post-loop bookkeeping still runs
@@ -1058,33 +1082,16 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                 if( !lc.is_colored() ) {
                     continue;
                 }
-                // Isolate the chromatic (saturated) component by subtracting
-                // the achromatic floor (min channel). Pure white light (equal
-                // RGB) produces zero saturation and no tint.
-                const float min_ch = std::min( { lc.r, lc.g, lc.b } );
-                const float sat_r = lc.r - min_ch;
-                const float sat_g = lc.g - min_ch;
-                const float sat_b = lc.b - min_ch;
-                const float sat_mag = std::max( { sat_r, sat_g, sat_b } );
-                if( sat_mag < 0.01f ) {
+                const std::optional<tile_tint> tint =
+                    compute_tile_tint( lc, zlev_cache.lm[p.com.pos.x()][p.com.pos.y()].max() );
+                if( !tint ) {
                     continue;
                 }
-                // Alpha: ratio of saturated energy to total scalar light.
-                // Effect is subtle under bright ambient, vivid in darkness.
-                const float scalar = zlev_cache.lm[p.com.pos.x()][p.com.pos.y()].max();
-                const float ratio = scalar > 0.1f ? std::min( 1.0f, sat_mag / scalar ) : 0.0f;
-                const Uint8 alpha = static_cast<Uint8>( ratio * 80.0f );
-                if( alpha == 0 ) {
-                    continue;
-                }
-                // Normalize saturated color to full brightness for the SDL tint.
-                p.com.tint_color = {
-                    static_cast<Uint8>( sat_r / sat_mag * 255.0f ),
-                    static_cast<Uint8>( sat_g / sat_mag * 255.0f ),
-                    static_cast<Uint8>( sat_b / sat_mag * 255.0f ),
-                    alpha
-                };
+                p.com.tint_color = *tint;
                 p.com.needs_tint = true;
+                if( shader_tint ) {
+                    continue;
+                }
                 row_tinted.push_back( &p );
                 // Ortho tiles need bounds tracking and sprite recording for the
                 // silhouette mask path. Reset per-frame state here.
@@ -1095,18 +1102,20 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             }
             // --- Layer loop ---
             // Draw all layers (terrain, furniture, items, creatures, etc.).
-            // For ortho tinted tiles, we wire up m_cur_bounds and m_cur_tint_sprites
-            // so that draw_sprite_at accumulates the screen extent and records
-            // each sprite for later silhouette replay. Zone marks and revival
-            // indicators are UI overlays that shouldn't affect tint bounds.
+            // on the shader path, m_cur_tint hands each tinted tile's tint to
+            // draw_sprite_at. on the mask path, m_cur_bounds and m_cur_tint_sprites
+            // let draw_sprite_at accumulate the screen extent and record each
+            // sprite for later silhouette replay. zone marks and revival indicators
+            // are UI overlays and take no tint
             for( auto f : drawing_layers ) {
-                const bool track_bounds = !iso &&
-                                          f != &cata_tiles::draw_zone_mark &&
-                                          f != &cata_tiles::draw_zombie_revival_indicators;
+                const bool overlay_layer = f == &cata_tiles::draw_zone_mark ||
+                                           f == &cata_tiles::draw_zombie_revival_indicators;
                 for( tile_render_info &p : here.draw_points_cache[cur_zlevel][row] ) {
-                    const bool ortho_tint = track_bounds && p.com.needs_tint;
-                    m_cur_bounds = ortho_tint ? &p.com.bounds : nullptr;
-                    m_cur_tint_sprites = ortho_tint ? &p.com.tint_sprites : nullptr;
+                    const bool tint_tile = !overlay_layer && p.com.needs_tint;
+                    const bool mask_tint = tint_tile && !shader_tint && !iso;
+                    m_cur_tint = tint_tile && shader_tint ? &p.com.tint_color : nullptr;
+                    m_cur_bounds = mask_tint ? &p.com.bounds : nullptr;
+                    m_cur_tint_sprites = mask_tint ? &p.com.tint_sprites : nullptr;
                     if( const tile_render_info::vision_effect * const
                         var = std::get_if<tile_render_info::vision_effect>( &p.var ) ) {
                         if( f == &cata_tiles::draw_terrain ) {
@@ -1143,12 +1152,14 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             }
             m_cur_bounds = nullptr;
             m_cur_tint_sprites = nullptr;
+            m_cur_tint = nullptr;
 
             // --- Colored light tint overlay ---
             // After all content layers are drawn, overlay a color tint on tiles
             // that have colored light (emergency beacons, colored fields,
             // dawn/dusk light, etc). Tint eligibility and color were precomputed
-            // in the per-tile prepass above; row_tinted holds only eligible tiles.
+            // in the per-tile prepass above; row_tinted holds only eligible tiles
+            // and stays empty on the shader path
             if( !row_tinted.empty() ) {
                 // Sprite rendering can leave a variant shader bound across same-variant
                 // runs. The tint overlay is plain renderer geometry/copy work, so it must
@@ -1253,6 +1264,12 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
                                 for( const tint_sprite_record &rec : bp->com.tint_sprites ) {
                                     const texture *sil = tileset_ptr->get_silhouette_tile( rec.sprite_index );
                                     if( !sil ) {
+                                        if( !invalid_silhouette_sprite &&
+                                            classify_silhouette_miss( tileset_ptr->get_bake_plan_at_upload(),
+                                                                      tileset_ptr->get_default_item_highlight_index(),
+                                                                      rec.sprite_index ) == silhouette_miss::invalid ) {
+                                            invalid_silhouette_sprite = rec.sprite_index;
+                                        }
                                         continue;
                                     }
                                     // Translate to mask-local coordinates.
@@ -1390,6 +1407,12 @@ void cata_tiles::draw( const point &dest, const tripoint_bub_ms &center, int wid
             }
         }
         cur_zlevel += 1;
+    }
+    m_zlev_tint_bound = false;
+    // The prompt redraws the UI, so it must run outside every render target scope
+    if( invalid_silhouette_sprite ) {
+        debugmsg( "tileset %s has no silhouette for sprite %d", tileset_ptr->get_tileset_id(),
+                  *invalid_silhouette_sprite );
     }
 
     // display number of monsters to spawn in mapgen preview
@@ -1816,6 +1839,8 @@ void cata_tiles::ensure_tint_mask_texture( const int w, const int h )
     // reallocation for slightly varying sprite sizes.
     const int alloc_w = std::max( w, tint_mask_w );
     const int alloc_h = std::max( h, tint_mask_h );
+    DebugLog( D_INFO, DC_ALL ) << "tint mask reallocation: " << tint_mask_w << "x" << tint_mask_h
+                               << " -> " << alloc_w << "x" << alloc_h;
     tint_mask_tex = CreateTexture( renderer, SDL_PIXELFORMAT_ARGB8888,
                                    SDL_TEXTUREACCESS_TARGET, alloc_w, alloc_h );
     SetTextureBlendMode( tint_mask_tex, SDL_BLENDMODE_BLEND );
@@ -2699,16 +2724,16 @@ bool cata_tiles::draw_sprite_at(
     const int sprite_index = spritelist[sprite_num];
     const texture *sprite_tex = tileset_ptr->get_tile( sprite_index );
 
+    const cata_shader::variant_kind variant =
+        compute_variant_kind( rp.ll, rp.use_night_vision_tiles );
     bool shader_bound = false;
     // Try the GPU shader variant first. On success the main atlas drives
     // the render and the variant transform happens per-pixel in the
-    // fragment shader. On unsupported variant (NORMAL, custom MEMORY
+    // fragment shader. On unsupported variant (untinted NORMAL, custom MEMORY
     // preset, clean session-disable) try_begin reports use_atlas; abort_frame
     // means undefined shader state -- latch recovery and throw.
     if( cata_shader::variant_pass *vp = get_shared_variant_pass() ) {
-        const cata_shader::variant_kind v =
-            compute_variant_kind( rp.ll, rp.use_night_vision_tiles );
-        const cata_shader::variant_pass::begin_result br = vp->try_begin( v );
+        const cata_shader::variant_pass::begin_result br = vp->try_begin( variant, m_zlev_tint_bound );
         if( br == cata_shader::variant_pass::begin_result::abort_frame ) {
             display_buffer_scope_signal_recovery_required();
             throw std::runtime_error(
@@ -2872,6 +2897,16 @@ bool cata_tiles::draw_sprite_at(
             render_angle, static_cast<int>( render_flip ) } );
     }
 
+    // only a bound sprite shader decodes the tint from the vertex color; with
+    // no shader SDL would multiply the sprite by it
+    const bool apply_tint = m_cur_tint != nullptr && shader_bound &&
+                            cata_shader::variant_takes_tint( variant );
+    if( apply_tint ) {
+        const tint_texture_mod mod = tint_texture_mod_for( *m_cur_tint );
+        SetTextureColorMod( sprite_tex->get_texture_ptr(), mod.r, mod.g, mod.b );
+        SetTextureAlphaMod( sprite_tex->get_texture_ptr(), mod.a );
+    }
+
     if( rotate_sprite ) {
         if( rota == -1 ) {
             ret = sprite_tex->render_copy_ex(
@@ -2941,8 +2976,12 @@ bool cata_tiles::draw_sprite_at(
     }
 
     printErrorIf( ret != 0, "SDL_RenderCopyEx() failed" );
-    // variant_pass unbinds on frame-end flush; nothing to do per-sprite.
-    ( void )shader_bound;
+    if( apply_tint ) {
+        // every sprite on this atlas texture shares the mod; restore the identity
+        const tint_texture_mod none = tint_texture_mod_none();
+        SetTextureColorMod( sprite_tex->get_texture_ptr(), none.r, none.g, none.b );
+        SetTextureAlphaMod( sprite_tex->get_texture_ptr(), none.a );
+    }
     // this reference passes all the way back up the call chain back to
     // cata_tiles::draw() here.draw_points_cache[z][row][col].com.height_3d
     // where we are accumulating the height of every sprite stacked up in a tile
@@ -4296,11 +4335,13 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
     }
     if( result && !is_player && show_creature_overlay_icons ) {
         // Attitude/sees-player icons are UI overlays, not body sprites.
-        // Exclude from tint bounds and tint replay tracking.
+        // exclude from tint tracking and shader tint
         sprite_screen_bounds *saved_bounds = m_cur_bounds;
         auto *saved_tint = m_cur_tint_sprites;
+        const tile_tint *saved_tile_tint = m_cur_tint;
         m_cur_bounds = nullptr;
         m_cur_tint_sprites = nullptr;
+        m_cur_tint = nullptr;
         std::string draw_id = "overlay_" + Creature::attitude_raw_string( attitude );
         if( sees_player && !you.has_trait( trait_INATTENTIVE ) ) {
             draw_id += "_sees_player";
@@ -4321,6 +4362,7 @@ bool cata_tiles::draw_critter_at( const tripoint_bub_ms &p, lit_level ll, int &h
         }
         m_cur_bounds = saved_bounds;
         m_cur_tint_sprites = saved_tint;
+        m_cur_tint = saved_tile_tint;
     }
     return result;
 }
@@ -4350,11 +4392,13 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
     const Creature &critter = *pcritter;
 
     // Shadow and attitude icons are UI overlays, not body sprites.
-    // Exclude from tint bounds and tint replay tracking.
+    // exclude from tint tracking and shader tint
     sprite_screen_bounds *saved_bounds = m_cur_bounds;
     auto *saved_tint = m_cur_tint_sprites;
+    const tile_tint *saved_tile_tint = m_cur_tint;
     m_cur_bounds = nullptr;
     m_cur_tint_sprites = nullptr;
+    m_cur_tint = nullptr;
 
     // Draw shadow
     draw_options opts{};
@@ -4416,10 +4460,12 @@ bool cata_tiles::draw_critter_above( const tripoint_bub_ms &p, lit_level ll, int
         }
         m_cur_bounds = saved_bounds;
         m_cur_tint_sprites = saved_tint;
+        m_cur_tint = saved_tile_tint;
         return true;
     } else {
         m_cur_bounds = saved_bounds;
         m_cur_tint_sprites = saved_tint;
+        m_cur_tint = saved_tile_tint;
         return false;
     }
 }
@@ -4755,17 +4801,41 @@ bool cata_tiles::draw_item_highlight( const tripoint_bub_ms &pos, int &height_3d
 std::shared_ptr<tileset> tileset_cache::find_fresh_cached( const tileset_cache_key &key,
         const uint64_t current_renderer_instance_gen, const uint64_t current_gpu_textures_gen ) const
 {
-    const auto it = tilesets_.find( key );
-    if( it == tilesets_.end() ) {
+    // Note: superseded entry is still skipped even if replacement expired
+    for( auto it = live_.rbegin(); it != live_.rend(); ++it ) {
+        if( it->superseded || !( it->key == key ) ) {
+            continue;
+        }
+        std::shared_ptr<tileset> cached = it->bundle.lock();
+        if( !cached ) {
+            continue;
+        }
+        if( cached->get_renderer_instance_generation_at_upload() == current_renderer_instance_gen
+            && cached->get_gpu_textures_generation_at_upload() == current_gpu_textures_gen ) {
+            return cached;
+        }
         return nullptr;
     }
-    std::shared_ptr<tileset> cached = it->second.lock();
-    if( cached
-        && cached->get_renderer_instance_generation_at_upload() == current_renderer_instance_gen
-        && cached->get_gpu_textures_generation_at_upload() == current_gpu_textures_gen ) {
-        return cached;
-    }
     return nullptr;
+}
+
+void tileset_cache::track_bundle( const tileset_cache_key &key,
+                                  const std::shared_ptr<tileset> &bundle )
+{
+    prune_expired();
+    for( live_entry &entry : live_ ) {
+        if( entry.key == key ) {
+            entry.superseded = true;
+        }
+    }
+    live_.push_back( live_entry{ key, bundle, false } );
+}
+
+void tileset_cache::prune_expired()
+{
+    live_.erase( std::remove_if( live_.begin(), live_.end(), []( const live_entry & e ) {
+        return e.bundle.expired();
+    } ), live_.end() );
 }
 
 std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &tileset_id,
@@ -4798,7 +4868,7 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
     // upload, so an interrupted load never replaces the live bundle in the
     // cache or in any consumer.
     std::shared_ptr<tileset> candidate = std::make_shared<tileset>();
-    loader loader( *candidate, renderer, memory_map_mode );
+    loader loader( *candidate, renderer, memory_map_mode, key.filter_fingerprint );
     const atlas_upload_interrupt interrupt =
         loader.load( tileset_id, precheck, force, pump_events,
                      current_renderer_instance_gen, current_gpu_textures_gen, poll, quarantine );
@@ -4811,22 +4881,17 @@ std::shared_ptr<const tileset> tileset_cache::load_tileset( const std::string &t
         return nullptr;
     }
     // load() recorded the generations on the bundle during upload.
-    // insert_or_assign so an expired weak_ptr at this key is replaced instead
-    // of being kept alongside a duplicate emplace attempt.
-    tilesets_.insert_or_assign( key, candidate );
+    track_bundle( key, candidate );
     return candidate;
 }
 
 void tileset_cache::release_live_atlases()
 {
-    for( auto it = tilesets_.begin(); it != tilesets_.end(); ) {
-        std::shared_ptr<tileset> ts = it->second.lock();
-        if( !ts ) {
-            it = tilesets_.erase( it );
-            continue;
+    prune_expired();
+    for( const live_entry &entry : live_ ) {
+        if( std::shared_ptr<tileset> ts = entry.bundle.lock() ) {
+            ts->release_gpu_atlases();
         }
-        ts->release_gpu_atlases();
-        ++it;
     }
 }
 
@@ -4834,28 +4899,58 @@ atlas_upload_interrupt tileset_cache::replay_live_atlases( const SDL_Renderer_Pt
         const uint64_t renderer_instance_gen, const uint64_t gpu_textures_gen,
         const atlas_upload_poll &poll, atlas_replay_quarantine &quarantine )
 {
-    for( auto it = tilesets_.begin(); it != tilesets_.end(); ) {
+    // upload with applied config, not the one each bundle last saw, so recovery
+    // never restores stale memory atlas or scale filter
+    const tile_atlas_config &applied = applied_tile_atlas_config();
+    prune_expired();
+    for( live_entry &entry : live_ ) {
         if( poll ) {
             const atlas_upload_interrupt interrupt = poll();
             if( interrupt != atlas_upload_interrupt::none ) {
                 return interrupt;
             }
         }
-        std::shared_ptr<tileset> ts = it->second.lock();
+        std::shared_ptr<tileset> ts = entry.bundle.lock();
         if( !ts ) {
-            it = tilesets_.erase( it );
             continue;
         }
+        const std::optional<atlas_bake_plan> plan = resolve_atlas_bake_plan( applied.mode );
+        if( !plan ) {
+            // probe lost the renderer boundary, so this entry keeps its old key
+            return atlas_upload_interrupt::shader_boundary_lost;
+        }
         const atlas_upload_interrupt interrupt =
-            loader::upload_atlases( *ts, renderer, ts->get_memory_map_mode_at_upload(),
-                                    ts->get_atlas_descriptors(), renderer_instance_gen,
-                                    gpu_textures_gen, false, poll, &quarantine );
+            loader::upload_atlases( *ts, renderer, applied.mode, applied.fingerprint,
+                                    *plan, ts->get_atlas_descriptors(),
+                                    renderer_instance_gen, gpu_textures_gen, false, poll,
+                                    &quarantine );
         if( interrupt != atlas_upload_interrupt::none ) {
+            // this entry keeps its old key and stays tracked for retry
             return interrupt;
         }
-        ++it;
+        // two entries may now share a key; neither becomes superseded
+        entry.key.memory_preset = applied.mode;
+        entry.key.filter_fingerprint = applied.fingerprint;
     }
     return atlas_upload_interrupt::none;
+}
+
+bool tileset_cache::any_live_bundle_needs_repair( const std::string &applied_mode,
+        const uint64_t applied_fingerprint, const bool shader_variants_available ) const
+{
+    for( const live_entry &entry : live_ ) {
+        const std::shared_ptr<tileset> ts = entry.bundle.lock();
+        if( classify_bundle( ts.get() ) != bundle_state::uploaded ) {
+            continue;
+        }
+        if( bundle_needs_repair( ts->get_bake_plan_at_upload(),
+                                 ts->get_memory_map_mode_at_upload(),
+                                 ts->get_filter_fingerprint_at_upload(), applied_mode,
+                                 applied_fingerprint, shader_variants_available ) ) {
+            return true;
+        }
+    }
+    return false;
 }
 
 

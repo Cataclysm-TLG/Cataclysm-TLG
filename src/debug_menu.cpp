@@ -37,6 +37,11 @@
 #include "cata_path.h"
 #if defined(TILES)
 #include "cata_shader.h"
+#include "sdl_utils.h"
+#include "sdltiles.h"
+#include "sdl_wrappers.h"
+#include "shader_tint_self_test.h"
+#include "tile_tint.h"
 #endif
 #include "cata_utility.h"
 #include "catacharset.h"
@@ -290,6 +295,7 @@ std::string enum_to_string<debug_menu::debug_menu_index>( debug_menu::debug_menu
         case debug_menu::debug_menu_index::TALK_TOPIC: return "TALK_TOPIC";
         case debug_menu::debug_menu_index::VEHICLE_EFFECTS: return "VEHICLE_EFFECTS";
         case debug_menu::debug_menu_index::RELOAD_GPU_SHADERS: return "RELOAD_GPU_SHADERS";
+        case debug_menu::debug_menu_index::SHADER_TINT_SELF_TEST: return "SHADER_TINT_SELF_TEST";
         // *INDENT-ON*
         case debug_menu::debug_menu_index::last:
             break;
@@ -3128,6 +3134,118 @@ static void draw_benchmark( const int max_difference )
              difference / 1000.0, 1000.0 * draw_counter / static_cast<double>( difference ) );
 }
 
+#if defined(TILES)
+// draws the self-test cases through tint.frag into an offscreen target, reads it
+// back once, and logs one line per check plus a summary
+static void run_shader_tint_self_test()
+{
+    namespace st = shader_tint_self_test;
+    cata_shader::variant_pass *vp = get_shared_variant_pass();
+    if( renderer_should_abort_frame() || !vp ||
+        vp->ensure_probed() != cata_shader::probe_state::available ) {
+        add_msg( m_bad, _( "Shader tint self-test: the shader path is unavailable." ) );
+        return;
+    }
+    const SDL_Renderer_Ptr &renderer = get_sdl_renderer();
+    const SDL_Surface_Ptr surface = create_surface_32( st::source_width, st::source_height );
+    if( !surface ) {
+        add_msg( m_bad, _( "Shader tint self-test did not run.  Details are in debug.log." ) );
+        DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: not run: no source surface";
+        return;
+    }
+    for( int y = 0; y < st::source_height; ++y ) {
+        for( int x = 0; x < st::source_width; ++x ) {
+            const int index = y * st::source_width + x;
+            const st::rgba &c = st::source_texels()[static_cast<size_t>( index )];
+            const SDL_Rect texel = { x, y, 1, 1 };
+            FillRect( surface, &texel, MapRGBA( surface, c.r, c.g, c.b, c.a ) );
+        }
+    }
+    const SDL_Texture_Ptr source = CreateTextureFromSurface( renderer, surface );
+    const SDL_Texture_Ptr target = CreateTexture( renderer, SDL_PIXELFORMAT_RGBA32,
+                                   SDL_TEXTUREACCESS_TARGET, st::target_size, st::target_size );
+    if( !source || !target ) {
+        add_msg( m_bad, _( "Shader tint self-test did not run.  Details are in debug.log." ) );
+        DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: not run: no source or target texture";
+        return;
+    }
+    // expectation assumes nearest sampling and a straight-alpha blend
+    SetTextureScaleQuality( source, "nearest" );
+    SetTextureBlendMode( source, SDL_BLENDMODE_BLEND );
+
+    std::vector<uint8_t> bytes( static_cast<size_t>( st::target_size * st::target_size * 4 ) );
+    std::string failure;
+    {
+        scoped_render_target scope( renderer, target.get(), vp );
+        if( !scope.is_valid() ) {
+            add_msg( m_bad, _( "Shader tint self-test did not run.  Details are in debug.log." ) );
+            DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: not run: target bind refused";
+            return;
+        }
+        const st::rgba clear = st::clear_color();
+        SetRenderDrawColor( renderer, clear.r, clear.g, clear.b, clear.a );
+        RenderClear( renderer );
+        for( const st::draw_case &c : st::draw_cases() ) {
+            const cata_shader::variant_pass::begin_result br =
+                vp->try_begin( cata_shader::variant_kind::NORMAL, true );
+            if( br != cata_shader::variant_pass::begin_result::bound ) {
+                if( br == cata_shader::variant_pass::begin_result::abort_frame ) {
+                    display_buffer_scope_signal_recovery_required();
+                }
+                failure = "tint.frag did not bind";
+                break;
+            }
+            SetTextureColorMod( source, c.mod.r, c.mod.g, c.mod.b );
+            SetTextureAlphaMod( source, c.mod.a );
+            const SDL_Rect dst = { c.dst.x, c.dst.y, st::source_width, st::source_height };
+            const double angle = c.xform == st::transform::rotate_90 ? 90.0 : 0.0;
+            const CataFlipMode flip = c.xform == st::transform::flip_horizontal
+                                      ? SDL_FLIP_HORIZONTAL : SDL_FLIP_NONE;
+            RenderCopyEx( renderer, source.get(), nullptr, &dst, angle, nullptr, flip );
+        }
+        const SDL_Rect whole = { 0, 0, st::target_size, st::target_size };
+        if( failure.empty() && !RenderReadPixels( renderer, &whole, SDL_PIXELFORMAT_RGBA32,
+                bytes.data(), st::target_size * 4 ) ) {
+            failure = "readback failed";
+        }
+        if( !scope.restore() && failure.empty() ) {
+            failure = "display target restore failed";
+        }
+    }
+    if( !failure.empty() ) {
+        add_msg( m_bad, _( "Shader tint self-test did not run.  Details are in debug.log." ) );
+        DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: not run: " << failure;
+        return;
+    }
+
+    std::vector<st::rgba> pixels( static_cast<size_t>( st::target_size * st::target_size ) );
+    for( size_t i = 0; i < pixels.size(); ++i ) {
+        pixels[i] = { bytes[i * 4], bytes[i * 4 + 1], bytes[i * 4 + 2], bytes[i * 4 + 3] };
+    }
+    const std::array<std::optional<st::mismatch>, st::check_count> results =
+        st::compare_readback( pixels );
+    size_t passed = 0;
+    for( size_t i = 0; i < results.size(); ++i ) {
+        const std::string check = i == st::background_index ? std::string( "background" ) :
+                                  std::string( "case " ) + st::draw_cases()[i].name;
+        if( !results[i] ) {
+            ++passed;
+            DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: " << check << " PASS";
+            continue;
+        }
+        const st::mismatch &m = *results[i];
+        DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: " << check << " FAIL at "
+                                   << m.px.to_string() << " expected " << st::rgb_string( m.expected )
+                                   << " actual " << st::rgb_string( m.actual );
+    }
+    DebugLog( D_INFO, DC_ALL ) << "shader tint self-test: " << passed << "/" << results.size()
+                               << " checks passed, gpu_backend=" << GetGPUBackendName( renderer );
+    add_msg( passed == results.size() ? m_good : m_bad,
+             _( "Shader tint self-test: %1$d of %2$d checks passed.  Details are in debug.log." ),
+             static_cast<int>( passed ), static_cast<int>( results.size() ) );
+}
+#endif
+
 static void debug_menu_game_state()
 {
     avatar &player_character = get_avatar();
@@ -3932,6 +4050,11 @@ void debug()
     avatar &player_character = get_avatar();
     map &here = get_map();
     switch( *action ) {
+#if defined(TILES)
+        case debug_menu_index::SHADER_TINT_SELF_TEST:
+            run_shader_tint_self_test();
+            break;
+#endif
         case debug_menu_index::WISH:
             debug_menu::wishitem( &player_character );
             break;
