@@ -39,6 +39,7 @@
 #include "cata_shader.h"
 #include "sdl_utils.h"
 #include "sdltiles.h"
+#include "sdl_wrappers.h"
 #include "shader_tint_self_test.h"
 #include "tile_tint.h"
 #endif
@@ -4049,6 +4050,11 @@ void debug()
     avatar &player_character = get_avatar();
     map &here = get_map();
     switch( *action ) {
+#if defined(TILES)
+        case debug_menu_index::SHADER_TINT_SELF_TEST:
+            run_shader_tint_self_test();
+            break;
+#endif
         case debug_menu_index::WISH:
             debug_menu::wishitem( &player_character );
             break;
