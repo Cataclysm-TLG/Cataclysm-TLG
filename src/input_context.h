@@ -21,8 +21,8 @@ class hotkey_queue;
 namespace catacurses
 {
 class window;
-} // namespace catacurses
 
+} // namespace catacurses
 /**
  * Represents a context in which a set of actions can be performed.
  *
@@ -33,6 +33,25 @@ class window;
  * This turns this class into an abstraction method between actual
  * input(keyboard, gamepad etc.) and game.
  */
+class input_context;
+struct input_context_handle {
+    input_context *cxtx;
+};
+
+class input_context_stack_impl
+{
+    public:
+        input_context *back();
+        void pop();
+        void push( std::shared_ptr<input_context_handle> const &context );
+
+    private:
+        std::list<std::weak_ptr<input_context_handle>> stack;
+        input_context *reap();
+
+};
+
+
 class input_context
 {
     public:

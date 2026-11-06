@@ -1218,7 +1218,7 @@ bool service_mode2_upload_interrupt( atlas_upload_interrupt interrupt,
                                      uint64_t instance_before );
 
 /**
- * Sync OS cursor and ImGui cursor-handling flags with the current
+ * Sync OS cursor-handling flags with the current
  * ENABLE_MOUSE and HIDE_CURSOR option values. No-op in curses builds.
  */
 void refresh_mouse_config();
