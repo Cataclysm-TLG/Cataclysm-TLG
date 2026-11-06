@@ -50,6 +50,7 @@
 #include "iuse.h"
 #include "json.h"
 #include "line.h"
+#include "level_cache.h"
 #include "map.h"
 #include "map_memory.h"
 #include "mapdata.h"
@@ -1212,6 +1213,12 @@ bool avatar::cant_see( const tripoint_bub_ms &p ) const
     }
 
     return aim_cache[p.x()][p.y()];
+}
+
+void avatar::mark_aim_cache_dirty()
+{
+    aim_cache_dirty = true;
+    aim_cache_generation = next_cache_generation();
 }
 
 void avatar::rebuild_aim_cache() const

@@ -97,6 +97,10 @@ void SetTextureBlendMode( const std::shared_ptr<SDL_Texture> &texture, SDL_Blend
 bool SetTextureColorMod( const SDL_Texture_Ptr &texture, Uint32 r, Uint32 g, Uint32 b );
 bool SetTextureColorMod( const std::shared_ptr<SDL_Texture> &texture, Uint32 r, Uint32 g,
                          Uint32 b );
+// Upload `pixels` (in texture's own format) to `rect` (or whole texture if
+// null). False on failure.
+bool UpdateTexture( const SDL_Texture_Ptr &texture, const SDL_Rect *rect, const void *pixels,
+                    int pitch );
 void SetRenderDrawBlendMode( const SDL_Renderer_Ptr &renderer, SDL_BlendMode blendMode );
 void GetRenderDrawBlendMode( const SDL_Renderer_Ptr &renderer, SDL_BlendMode &blend_mode );
 SDL_Surface_Ptr load_image( const char *path );
