@@ -42,11 +42,11 @@
       "variant": {
         "type": "nested_mapgen_id",
         "default": {
-          "distribution": [ [ "seedling_corn", 50 ], [ "null", 20 ], [ "seedling_wheat", 25 ], [ "seedling_oat", 1 ], [ "seedling_soybean", 4 ] ]
+          "distribution": [ [ "seedling_corn", 50 ], [ "null", 80 ], [ "seedling_wheat", 25 ], [ "seedling_oat", 1 ], [ "seedling_soybean", 4 ] ]
         }
       }
     },
-    "nested": { "#": { "chunks": [ { "param": "variant", "fallback": "seedling_corn" }, [ "null", 20 ] ] } },
+    "nested": { "#": { "chunks": [ { "param": "variant", "fallback": "seedling_corn" }, [ "null", 400 ] ] } },
     "terrain": {
       ",": "t_dirtfloor",
       ":": "t_metal_floor",
