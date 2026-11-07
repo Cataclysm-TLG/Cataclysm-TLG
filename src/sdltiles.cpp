@@ -878,7 +878,8 @@ static android_visible_frame_inbox visible_frame_inbox;
 extern "C" {
 
     JNIEXPORT void JNICALL Java_org_libsdl_app_SDLActivity_onNativeVisibleDisplayFrameChanged(
-        JNIEnv *env, jclass jcls, jint left, jint top, jint right, jint bottom )
+        JNIEnv *env, jclass jcls, jint left, jint top, jint right, jint bottom,
+        jboolean visible )
     {
         ( void )env; // unused
         ( void )jcls; // unused
@@ -5451,9 +5452,9 @@ static void CheckMessages()
         if( touch_input_context.allow_text_entry &&
             !new_input_context->allow_text_entry &&
             !is_string_input( *new_input_context ) &&
-            IsTextInputActive( window ) &&
+            IsTextInputActive( ::window.get() ) &&
             get_option<bool>( "ANDROID_AUTO_KEYBOARD" ) ) {
-            StopTextInput( window );
+            StopTextInput( ::window.get() );
         }
 
         touch_input_context = *new_input_context;
@@ -5467,7 +5468,6 @@ static void CheckMessages()
 
     // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
     if( !needupdate ) {
-
         // Check action weightings and auto-add any immediate-surrounding actions as quick shortcuts
         // This code is based heavily off action.cpp handle_action_menu() which puts common shortcuts at the top
         if( is_default_mode && get_option<bool>( "ANDROID_SHORTCUT_AUTOADD" ) ) {
@@ -5622,7 +5622,7 @@ static void CheckMessages()
                 }
 
                 // Check if we're dead tired - if so, add sleep
-                if( player_character.get_sleepiness() > sleepiness_levels::DEAD_TIRED ) {
+                if( player_character.get_fatigue() > fatigue_levels::DEAD_TIRED ) {
                     actions.insert( ACTION_SLEEP );
                 }
 
@@ -5632,7 +5632,6 @@ static void CheckMessages()
                         needupdate = true;
                     }
                 }
-
                 size_t old_size = qsl.size();
                 for( const auto &action_remove : actions_remove ) {
                     remove_action_from_quick_shortcuts( action_remove, touch_input_context.get_category() );
