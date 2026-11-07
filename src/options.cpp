@@ -2426,7 +2426,7 @@ void options_manager::add_options_graphics()
             { "classic", to_translation( "Classic" ) },
             { "smooth", to_translation( "Smooth" ) },
             { "smooth_filtered", to_translation( "Smooth filtered" ) },
-        }, "smooth", COPT_CURSES_HIDE
+        }, "smooth_filtered", COPT_CURSES_HIDE
            );
 
         add( "MEMORY_MAP_MODE", page_id, to_translation( "Memory map overlay preset" ),
