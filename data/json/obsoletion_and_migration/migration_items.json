@@ -4435,5 +4435,45 @@
     "id": "survivor_duffel_bag",
     "type": "MIGRATION",
     "replace": "long_duffelbag"
+  },
+  {
+    "id": "survivor_dry_bag",
+    "type": "MIGRATION",
+    "replace": "dry_bag_large"
+  },
+  {
+    "id": "survivor_rig",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "id": "survivor_runner_pack",
+    "type": "MIGRATION",
+    "replace": "runner_bag"
+  },
+  {
+    "id": "survivor_pack",
+    "type": "MIGRATION",
+    "replace": "backpack"
+  },
+  {
+    "id": "survivor_belt_notools",
+    "type": "MIGRATION",
+    "replace": "webbing_belt"
+  },
+  {
+    "id": "survivor_vest",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "id": "xs_survivor_vest",
+    "type": "MIGRATION",
+    "replace": "xs_chestrig"
+  },
+  {
+    "id": "xl_survivor_vest",
+    "type": "MIGRATION",
+    "replace": "xl_chestrig"
   }
 ]

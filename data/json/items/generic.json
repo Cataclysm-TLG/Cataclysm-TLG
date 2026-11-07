@@ -1967,7 +1967,7 @@
     "id": "e_scrap",
     "symbol": ",",
     "color": "green",
-    "name": { "str": "electronic components" },
+    "name": { "str_sp": "electronic components" },
     "category": "spare_parts",
     "description": "An assortment of resistors, capacitors, and diodes, essential for assembling electronics.",
     "price": "5 USD",
