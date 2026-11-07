@@ -1,8 +1,6 @@
 #if defined(TILES)
 
 #include "cata_shader.h"
-#include "sdltiles.h"
-#include "sdl_wrappers.h"
 
 #include <algorithm>
 #include <array>
@@ -195,6 +193,7 @@ shader &shader::operator=( shader &&other ) noexcept
     }
     return *this;
 }
+
 render_state render_state::create( SDL_Renderer *renderer, const shader &fragment_shader )
 {
     // No additional sampler/storage bindings: the atlas sampler comes from the
@@ -262,6 +261,7 @@ gpu_handle_graveyard &probe_texture_graveyard()
     static gpu_handle_graveyard g;
     return g;
 }
+
 
 const char *shader_basename_for( variant_kind v )
 {

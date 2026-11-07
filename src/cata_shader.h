@@ -5,6 +5,7 @@
 #if defined(TILES)
 
 #include <array>
+#include <cstdint>
 #include <memory>
 #include <optional>
 #include <string>
@@ -143,10 +144,10 @@ class render_state
         // the renderer's normal textured-draw path and SetGPURenderStateFragmentUniforms.
         static render_state create( SDL_Renderer *renderer,
                                     const shader &fragment_shader );
-        static render_state create( SDL_Renderer *renderer,
-                                    const shader &fragment_shader,
-                                    const SDL_GPUTextureSamplerBinding *bindings,
-                                    const int num_bindings );
+        // as above, with `bindings` bound after the draw's own texture, from
+        // fragment sampler slot 1 on. SDL copies them at creation.
+        static render_state create( SDL_Renderer *renderer, const shader &fragment_shader,
+                                    const SDL_GPUTextureSamplerBinding *bindings, int num_bindings );
 
         render_state() = default;
         ~render_state();
@@ -289,10 +290,9 @@ std::vector<rgb> readback_if_full_light( const probe_case &c );
 } // namespace lit_probe
 
 // Owns one SDL_GPUShader + SDL_GPURenderState per supported variant and
-// brackets bind/unbind around per-sprite draws. SDL_SetGPURenderStateFragmentUniforms
-// is not used: per-call uploads leak host memory on the GPU renderer
-// without recycling, so each variant gets its own state and the dispatch
-// is a state switch rather than a uniform mutation.
+// brackets bind/unbind around per-sprite draws. classic variants each get their
+// own state, so dispatch is a state switch, not a uniform change. only lit
+// states carry fragment uniforms, set when their parameters change.
 //
 // try_begin holds the bound state across runs of sprites that select the same
 // state, only calling SDL_SetGPURenderState when the state changes. flush() at
