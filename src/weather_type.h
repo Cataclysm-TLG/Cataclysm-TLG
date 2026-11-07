@@ -14,7 +14,6 @@
 #include "catacharset.h"
 #include "color.h"
 #include "damage.h"
-#include "field_type.h"
 #include "lightmap.h"
 #include "translation.h"
 #include "translations.h"

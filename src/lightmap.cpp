@@ -114,7 +114,7 @@ static light_color_rgb cached_weather_color()
     return cached_color;
 }
 
-light_color_rgb dawn_dusk_color_for_lightmap( dimension_id dimension )
+light_color_rgb dawn_dusk_color_for_lightmap( std::string_view dimension )
 {
     if( !dimension.empty() ) {
         return {};
