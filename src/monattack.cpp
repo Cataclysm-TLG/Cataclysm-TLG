@@ -486,7 +486,7 @@ bool mattack::absorb_items( monster *z )
             }
         }
 
-        // make sure we don't absorb the wrong types of items
+        // Make sure we don't absorb the wrong types of items.
         if( !any_materials_match ) {
             continue;
         }
@@ -496,8 +496,8 @@ bool mattack::absorb_items( monster *z )
                                 z->name(), elem.display_name() );
 
         int volume_in_ml = units::to_milliliter( elem.volume() );
-        // Allows the monster to exceed normal max HP. Split occurs as normal max HP * 2.
-        z->set_hp( z->get_hp() + std::max( volume_in_ml / ml_per_hp.value(), 1 ) );
+        // Don't heal above max HP.
+        z->heal( std::max( volume_in_ml / ml_per_hp.value(), 1 ) );
         int absorb_move_cost = static_cast<int>( z->type->absorb_move_cost_per_ml * volume_in_ml );
         absorb_move_cost = std::max( absorb_move_cost, z->type->absorb_move_cost_min );
         if( z->type->absorb_move_cost_max != -1 ) {
@@ -2227,12 +2227,10 @@ bool mattack::formblob( monster *z )
         // Hit a monster.  If it's a blob, give it our speed.  Otherwise, blobify it?
         if( othermon.type->in_species( species_SLIME ) ) {
             if( othermon.type->id == mon_blob_brain ) {
-                // Brain blobs don't get sped up, they heal at the cost of the other blob.
-                // But only if they are hurt badly.
                 const int othermon_half_hp = othermon.get_hp_max() / 2;
                 if( othermon.get_hp() < othermon_half_hp ) {
                     const int heal_value = std::min( z->get_speed_base(), othermon_half_hp - othermon.get_hp() );
-                    othermon.heal( heal_value, true );
+                    othermon.heal( heal_value );
                     if( heal_value >= z->get_speed_base() ) {
                         z->set_speed_base( 0 );
                         z->set_hp( 0 );
@@ -3263,11 +3261,11 @@ bool mattack::absorb_meat( monster *z )
             const material_id current_item_material = current_item.get_base_material().ident();
             if( current_item_material == material_flesh ||
                 current_item_material == material_hflesh ) {
-                //We have something meaty! Calculate how much it will heal the monster
+                // We have something meaty! Calculate how much it will heal the monster
                 const int ml_of_meat = units::to_milliliter<int>( current_item.volume() );
                 const int total_charges = current_item.count();
                 const int ml_per_charge = ml_of_meat / total_charges;
-                //We have a max size of meat here to avoid absorbing whole corpses.
+                // We have a max size of meat here to avoid absorbing whole corpses.
                 if( ml_per_charge > max_meat_absorbed * 1000 ) {
                     add_msg( m_info, _( "The %1$s quivers hungrily in the direction of the %2$s." ), z->name(),
                              current_item.tname() );
@@ -3277,17 +3275,17 @@ bool mattack::absorb_meat( monster *z )
                     //Choose a random amount of meat charges to absorb
                     int meat_absorbed = std::min( max_meat_absorbed, rng( 1, total_charges ) );
                     const int hp_to_heal = meat_absorbed * ml_per_charge * meat_absorption_factor;
-                    z->heal( hp_to_heal, true );
+                    z->heal( hp_to_heal );
                     here.use_charges( p, 0, current_item.type->get_id(), meat_absorbed );
                 } else {
-                    //Only absorb one meaty item
+                    // Only absorb one meaty item
                     int meat_absorbed = 1;
                     const int hp_to_heal = meat_absorbed * ml_per_charge * meat_absorption_factor;
-                    z->heal( hp_to_heal, true );
+                    z->heal( hp_to_heal );
                     here.use_amount( p, 0, current_item.type->get_id(), meat_absorbed );
                 }
                 if( player_character.sees( here, *z ) ) {
-                    add_msg( m_warning, _( "The %1$s absorbs the %2$s, growing larger." ), z->name(),
+                    add_msg( m_warning, _( "The %1$s absorbs the %2$s." ), z->name(),
                              current_item.tname() );
                     add_msg_debug( debugmode::DF_MATTACK, "The %1$s now has %2$s out of %3$s hp", z->name(),
                                    z->get_hp(),

@@ -4055,7 +4055,7 @@ void debug()
             run_shader_tint_self_test();
 #endif
             break;
-            
+
         case debug_menu_index::WISH:
             debug_menu::wishitem( &player_character );
             break;
