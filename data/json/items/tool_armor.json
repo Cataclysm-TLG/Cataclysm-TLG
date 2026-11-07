@@ -957,7 +957,7 @@
     "flags": [ "CHARGEDIM", "OVERSIZE", "BELTED", "PADDED", "ALLOWS_NATURAL_ATTACKS", "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "power_draw": "750 mW",
     "charges_per_use": 0,
-    "light": 300,
+    "light": 200,
     "revert_to": "wearable_light",
     "use_action": {
       "ammo_scale": 0,
