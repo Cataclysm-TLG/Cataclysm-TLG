@@ -927,8 +927,8 @@ SDL_Rect get_android_render_rect( float DisplayBufferWidth, float DisplayBufferH
         if( ime_right < dstrect.x + dstrect.w ) {
             dstrect.w = std::max( 1, ime_right - dstrect.x );
         }
-        if( vdf_bottom < dstrect.y + dstrect.h ) {
-            dstrect.h = vdf_bottom - dstrect.y;
+        if( ime_bottom < dstrect.y + dstrect.h ) {
+            dstrect.h = ime_bottom - dstrect.y;
         }
     }
     return dstrect;
