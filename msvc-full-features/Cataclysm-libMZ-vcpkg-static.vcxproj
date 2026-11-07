@@ -191,9 +191,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Natvis Include="..\CTLG.natvis" />
-  </ItemGroup>
-  <ItemGroup>
     <CustomBuild Include="..\data\shaders\*.frag">
       <FileType>Document</FileType>
       <SpvOutput>%(RelativeDir)%(Filename)%(Extension).spv</SpvOutput>
