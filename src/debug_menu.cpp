@@ -4050,11 +4050,12 @@ void debug()
     avatar &player_character = get_avatar();
     map &here = get_map();
     switch( *action ) {
-#if defined(TILES)
         case debug_menu_index::SHADER_TINT_SELF_TEST:
+#if defined(TILES)
             run_shader_tint_self_test();
-            break;
 #endif
+            break;
+            
         case debug_menu_index::WISH:
             debug_menu::wishitem( &player_character );
             break;
