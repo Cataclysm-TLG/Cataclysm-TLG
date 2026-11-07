@@ -1,4 +1,4 @@
-name: "Experimental Release"
+name: "Build Release"
 concurrency: release
 on:
   workflow_dispatch:
@@ -68,7 +68,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: Windows Tiles Sounds x64 MSVC
+          - name: Windows
             artifact: windows-tiles
             arch: x64
             os: windows-2022
@@ -76,7 +76,7 @@ jobs:
             content: application/zip
             tiles: 1
             sound: 1
-          - name: Linux Tiles Sounds x64
+          - name: Linux
             os: ubuntu-24.04
             android: none
             libbacktrace: 1
@@ -85,7 +85,7 @@ jobs:
             artifact: linux-tiles
             ext: tar.gz
             content: application/gzip
-          - name: Linux Curses x64
+          - name: Linux Curses
             os: ubuntu-24.04
             android: none
             libbacktrace: 1
@@ -102,7 +102,7 @@ jobs:
             artifact: osx-curses
             ext: dmg
             content: application/x-apple-diskimage
-          - name: macOS Tiles Universal Binary (x64 and arm64)
+          - name: macOS
             os: macos-15
             tiles: 1
             sound: 1
