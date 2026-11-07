@@ -30,6 +30,8 @@ Each weather type is a type of weather that occurs, and what causes it. The only
 | `condition`          | A dialog condition to determine if this weather is happening.  See Dialogue conditions section of [NPCs](NPCs.md) A context variable of `weather_location` contains the location of the current tile checking its weather.  This can be used to have weather be based on location. |
 | `priority`           | An integer.  If the condition of multiple weather types are true the one with higher priority wins. |
 | `required_weathers`  | A string array of possible weathers, it is at this point in the loop. i.e. rain can only happen if the conditions for clouds light drizzle or drizzle are present.  Required weathers need to have lower load orders to be. |
+| `tint_color`         | RBG value that sunlight is tinted, during this weather.                                          |
+| `tint_strength`      | Value between 0 and 1 that indicates how strong tint_color is, where 0 is no tint at all.        |
 
 #### `weather_type` example
 
@@ -51,6 +53,8 @@ Each weather type is a type of weather that occurs, and what causes it. The only
     "rains": true,
     "required_weathers": [ "thunder" ],
     "priority": 80,
-    "condition": { "math": [ "weather('pressure')", "<", "990" ] }
+    "condition": { "math": [ "weather('pressure') < 990" ] },
+    "tint_color": [110, 0, 0],
+    "tint_strength": 1.0
   }
 ]

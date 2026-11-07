@@ -14,6 +14,9 @@
 #include "catacharset.h"
 #include "color.h"
 #include "damage.h"
+#include "field_type.h"
+#include "lightmap.h"
+#include "translation.h"
 #include "translations.h"
 #include "type_id.h"
 
@@ -120,6 +123,10 @@ struct weather_type {
         time_duration duration_max = 0_turns;
         std::optional<std::string> debug_cause_eoc;
         std::optional<std::string> debug_leave_eoc;
+        // light color tint applied when weather is active.
+        // defaults to no color.
+        light_color_rgb tint_color{};
+        float tint_strength = 0.0f;
         void load( const JsonObject &jo, std::string_view src );
         void finalize();
         void check() const;
