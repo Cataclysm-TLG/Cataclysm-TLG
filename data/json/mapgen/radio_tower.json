@@ -278,7 +278,7 @@
       "place_furniture": [ { "furn": "f_camp_chair", "x": 1, "y": 0 } ],
       "place_monster": [ { "monster": "mon_zombie_soldier", "x": 1, "y": 0 } ],
       "place_loot": [
-        { "item": "survivor_scope", "x": 1, "y": 0, "chance": 10 },
+        { "item": "binoculars", "x": 1, "y": 0, "chance": 10 },
         { "item": "can_drink", "x": 1, "y": [ 0, 1 ], "chance": 70, "repeat": [ 1, 3 ] },
         { "item": "3006", "x": 1, "y": 0, "chance": 40 },
         { "item": "remington_700", "x": 1, "y": 0, "chance": 60, "ammo": 100 }

@@ -1135,20 +1135,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "survivor_scope",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
-    "difficulty": 4,
-    "time": "10 m",
-    "book_learn": [ [ "plastics_book", 3 ] ],
-    "proficiencies": [ { "proficiency": "prof_plasticworking" } ],
-    "using": [ [ "soldering_standard", 10 ], [ "plastic_molding", 3 ] ],
-    "components": [ [ [ "plastic_chunk", 4 ] ], [ [ "lens", 1 ] ], [ [ "lens", 1 ], [ "lens_small", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "result": "crackpipe",
     "category": "CC_OTHER",

@@ -3779,7 +3779,7 @@
     "name": "Burglar",
     "description": "This could be your lucky break.  Plenty of loot to be pilfered, and no cops to be seen.  Does it count as breaking and entering if everyone in town is undead?",
     "npc_background": "BG_survival_story_CRIMINAL",
-    "points": 2,
+    "points": 3,
     "proficiencies": [ "prof_lockpicking", "prof_safecracking" ],
     "skills": [ { "level": 6, "name": "traps" }, { "level": 2, "name": "dodge" } ],
     "items": {
@@ -3791,7 +3791,7 @@
           { "item": "hoodie" },
           { "item": "gloves_light" },
           { "item": "mask_ski" },
-          { "item": "swag_bag" },
+          { "item": "duffelbag" },
           { "item": "claw_bar" },
           { "item": "hacksaw" },
           { "item": "wristwatch" },
