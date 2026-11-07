@@ -182,9 +182,8 @@ jobs:
         if: matrix.tiles == 1
         shell: bash
         run: |
-          # Bump artifact mtimes so the Make/CMake shader rule sees them as
-          # up-to-date and skips invoking build_shaders.py.
-          touch data/shaders/build-*.stamp data/shaders/*.spv data/shaders/*.dxil data/shaders/*.msl
+          touch data/shaders/*.spv data/shaders/*.dxil data/shaders/*.msl
+          touch data/shaders/*.frag data/shaders/*.glsl
       - name: Cache vcpkg packages (Windows)
         if: runner.os == 'Windows' && matrix.tiles == 1
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
