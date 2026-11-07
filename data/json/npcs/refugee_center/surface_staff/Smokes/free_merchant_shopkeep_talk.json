@@ -303,7 +303,7 @@
   {
     "id": "TALK_FREE_MERCHANTS_MERCHANT_TroubleWithFood",
     "type": "talk_topic",
-    "dynamic_line": "Yes we are.  The center had some emergency ratiosn, but they went fast.  We're making do with what our people can bring in from the outside but it's not enough, so we're always looking to trade for more.",
+    "dynamic_line": "Yes we are.  The center had some emergency rations, but they went fast.  We're making do with what our people can bring in from the outside but it's not enough, so we're always looking to trade for more.",
     "responses": [ { "text": "I'll keep that in mind.", "topic": "TALK_FREE_MERCHANTS_MERCHANT_Talk" } ]
   },
   {

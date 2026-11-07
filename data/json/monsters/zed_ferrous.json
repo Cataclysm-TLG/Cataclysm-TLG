@@ -209,7 +209,7 @@
     "default_faction": "zombie",
     "bodytype": "human",
     "species": [ "ZOMBIE", "HUMAN" ],
-    "looks_like": "mon_zombie",
+    "looks_like": "mon_zombie_shell",
     "volume": "108500 ml",
     "weight": "120 kg",
     "hp": 145,
