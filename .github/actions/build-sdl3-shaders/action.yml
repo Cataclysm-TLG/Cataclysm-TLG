@@ -4,7 +4,7 @@ inputs:
   artifact-name:
     description: Name for the uploaded shader artifact.
     required: false
-    default: cdda-shaders
+    default: ctlg-shaders
   retention-days:
     description: Number of days to retain the uploaded artifact.
     required: false
