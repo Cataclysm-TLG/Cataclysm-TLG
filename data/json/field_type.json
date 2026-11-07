@@ -1032,8 +1032,10 @@
     "type": "field_type",
     "substance_name": "bent spacetime",
     "intensity_levels": [
-      { "name": "angular ripple", "color": "light_gray", "sym": "*", "light_emitted": 160, "concentration": 1 },
-      { "name": "angular rift", "color": "dark_gray", "concentration": 1 },
+      { "name": "angular ripple", "color": "light_gray", "sym": "*", "concentration": 1 },
+      { "name": "angular rift", "color": "dark_gray", "concentration": 1, 
+        "light_emitted": 30,
+        "light_color": [ 200, 0, 180 ] },
       {
         "name": "fractal fissure",
         "color": "magenta",
@@ -1042,9 +1044,9 @@
         "monster_spawn_chance": 15,
         "monster_spawn_count": 1,
         "monster_spawn_radius": 1,
-        "monster_spawn_group": "GROUP_TINDALOS",
-        "light_emitted": 160
-      }
+        "monster_spawn_group": "GROUP_TINDALOS", 
+        "light_emitted": 60,
+        "light_color": [ 200, 0, 180 ] }
     ],
     "priority": 9,
     "half_life": "10 seconds",
@@ -1145,6 +1147,8 @@
         "monster_spawn_chance": 600,
         "monster_spawn_count": 1,
         "monster_spawn_radius": 1,
+        "light_emitted": 30,
+        "light_color": [ 190, 0, 10 ],
         "monster_spawn_group": "GROUP_NETHER_FATIGUE_FIELD"
       }
     ],
@@ -1489,7 +1493,7 @@
     "type": "field_type",
     "substance_name": "foul fog",
     "intensity_levels": [
-      { "name": "swirl of fog", "translucency": 5, "light_emitted": 20 },
+      { "name": "swirl of fog", "translucency": 5 },
       { "name": "foul fog", "color": "cyan" },
       { "name": "thick foul fog", "color": "pink" }
     ],
