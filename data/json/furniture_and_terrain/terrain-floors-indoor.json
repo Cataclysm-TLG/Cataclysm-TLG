@@ -75,7 +75,6 @@
     "symbol": ".",
     "color": "yellow",
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "looks_like": "t_thconc_y",
     "move_cost": 2,
     "coverage": 0,
@@ -105,7 +104,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "connect_groups": [ "CONCRETE", "INDOORFLOOR" ],
     "connects_to": "CONCRETE",
@@ -133,7 +131,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "looks_like": "t_floor",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "bash": {
@@ -174,7 +171,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "looks_like": "t_dirtfloor",
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "DIGGABLE", "HIT_WITHOUT_COVER" ],
     "bash": {
@@ -202,7 +198,6 @@
     "coverage": 0,
     "light_emitted": 120,
     "flags": [ "TRANSPARENT", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
-    "light_color": [ 255, 230, 210 ],
     "bash": {
       "str_min": 2,
       "str_max": 8,
@@ -225,7 +220,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "looks_like": "t_thconc_floor_olight",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "connect_groups": [ "CONCRETE", "INDOORFLOOR" ],
@@ -254,7 +248,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "looks_like": "t_linoleum_gray",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "bash": {
@@ -281,7 +274,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 120,
-    "light_color": [ 255, 230, 210 ],
     "looks_like": "t_linoleum_white",
     "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD", "HIT_WITHOUT_COVER" ],
     "bash": {
@@ -662,7 +654,6 @@
     "move_cost": 2,
     "coverage": 0,
     "light_emitted": 240,
-    "light_color": [ 255, 245, 240 ],
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "SUPPORTS_ROOF", "COLLAPSES", "INDOORS", "FLAT", "ROAD" ],
     "bash": {
       "sound": "SMASH!",

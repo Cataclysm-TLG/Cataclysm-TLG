@@ -530,7 +530,7 @@
     "time": "1 s",
     "included": true,
     "flags": [ "BIONIC_TOGGLED" ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "LUMINATION", "add": 500 } ] } ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "LUMINATION", "add": 280 } ] } ],
     "auto_deactivates": [ "bio_flashlight" ]
   },
   {
