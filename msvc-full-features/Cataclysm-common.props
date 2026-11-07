@@ -14,6 +14,7 @@
     <_CTLG_RELEASE_BUILD>false</_CTLG_RELEASE_BUILD>
     <_CTLG_RELEASE_BUILD Condition="'$(CTLG_RELEASE_BUILD)'!=''">true</_CTLG_RELEASE_BUILD>
     <_CTLG_LLVM_BIN_PATH>$(VCInstallDir)Tools\Llvm\bin\</_CTLG_LLVM_BIN_PATH>
+    <_CTLG_LLVM_BIN_PATH Condition="'$(PreferredToolArchitecture)'=='x64'">$(VCInstallDir)Tools\Llvm\x64\bin\</_CTLG_LLVM_BIN_PATH>
     <_CTLG_LLVM_BIN_PATH Condition="'$(LLVMInstallDir)'!=''">$(LLVMInstallDir)\bin\</_CTLG_LLVM_BIN_PATH>
     <CTLG_LLVM_LIB_PATH Condition="'$(CTLG_LLVM_LIB_PATH)'==''">$(_CTLG_LLVM_BIN_PATH)</CTLG_LLVM_LIB_PATH>
     <CTLG_LLD_LINK_PATH Condition="'$(CTLG_LLD_LINK_PATH)'==''">$(_CTLG_LLVM_BIN_PATH)</CTLG_LLD_LINK_PATH>
@@ -28,9 +29,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Vcpkg">
     <VcpkgAdditionalInstallOptions>--clean-after-build</VcpkgAdditionalInstallOptions>
-    <VcpkgAdditionalInstallOptions Condition="$(_UseSDL3)">$(VcpkgAdditionalInstallOptions) --x-feature=sdl3</VcpkgAdditionalInstallOptions>
-    <VcpkgAdditionalInstallOptions Condition="!$(_UseSDL3) And !$(Configuration.Contains(NoTiles))">$(VcpkgAdditionalInstallOptions) --x-feature=sdl2</VcpkgAdditionalInstallOptions>
-    <CustomBuildAfterTargets>VcpkgInstallManifestDependencies</CustomBuildAfterTargets>
+    <VcpkgAdditionalInstallOptions>$(VcpkgAdditionalInstallOptions) --x-feature=sdl3</VcpkgAdditionalInstallOptions>    <CustomBuildAfterTargets>VcpkgInstallManifestDependencies</CustomBuildAfterTargets>
   </PropertyGroup>
   <PropertyGroup Condition="$(_CTLG_USE_CCACHE)">
     <ClToolPath>$(CTLG_CCACHE_PATH)</ClToolPath>
@@ -63,6 +62,8 @@
       <DisableSpecificWarnings>4661;4819;4146;26495;26444;26451;4068;6319;6237</DisableSpecificWarnings>
       <PreprocessorDefinitions>_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;LOCALIZE;USE_VCPKG;ZSTD_STATIC_LINKING_ONLY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <SupportJustMyCode>false</SupportJustMyCode>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <LanguageStandard_C>stdc11</LanguageStandard_C>
     </ClCompile>
     <ClCompile Condition="$(Configuration.StartsWith(Debug))">
@@ -108,10 +109,10 @@
     </Link>
     <Link Condition="$(_CTLG_USE_LLD_LINK)">
       <AdditionalLibraryDirectories Condition="$(Configuration.StartsWith(Debug))">
-        $(ProjectDir)vcpkg_installed\$(VcpkgTripet)\$(VcpkgTriplet)\debug\lib;%(AdditionalLibraryDirectories)
+        $(ProjectDir)vcpkg_installed\$(VcpkgTriplet)\$(VcpkgTriplet)\debug\lib;%(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
       <AdditionalLibraryDirectories Condition="$(Configuration.StartsWith(Release))">
-        $(ProjectDir)vcpkg_installed\$(VcpkgTripet)\$(VcpkgTriplet)\lib;%(AdditionalLibraryDirectories)
+        $(ProjectDir)vcpkg_installed\$(VcpkgTriplet)\$(VcpkgTriplet)\lib;%(AdditionalLibraryDirectories)
       </AdditionalLibraryDirectories>
  <AdditionalDependencies Condition="$(_UseSDL3)">
         brotlicommon.lib;
