@@ -40,8 +40,10 @@ enum class var_type : int {
     last
 };
 
+#if defined(__GNUC__) && !defined(__clang__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#endif
 struct var_info {
     var_info( var_type in_type, std::string in_name ): type( in_type ),
         name( std::move( in_name ) ) {}
