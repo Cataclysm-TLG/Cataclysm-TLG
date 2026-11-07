@@ -428,6 +428,65 @@ void monster::poly( const mtype_id &id )
         }
     }
 
+    creature_tracker &creatures = get_creature_tracker();
+    map &here = get_map();
+    // Duplicated from monster::die(). Should probably live in a single place like release_grapple().
+    if( has_effect_with_flag( json_flag_GRAB ) ) {
+        const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
+        Creature *grabber = nullptr;
+        for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            const efftype_id grab_id = grab.get_id();
+            // Is our grabber around?
+            for( const tripoint_bub_ms loc : surrounding ) {
+                Character *guy = creatures.creature_at<Character>( loc );
+                if( guy && guy->grab_1.victim && guy->grab_1.victim.get() == static_cast<Creature *>( this ) ) {
+                    add_msg_debug( debugmode::DF_MONSTER, "Transforming monster found grabbing character: %s",
+                                   guy->disp_name() );
+                    grabber = guy;
+                    break;
+                }
+            }
+            if( grabber == nullptr ) {
+                remove_effect( grab_id );
+                add_msg_debug( debugmode::DF_MONSTER, "Orphan grab found and removed from dead monster" );
+                continue;
+            }
+            if( grabber && !grabber->is_monster() ) {
+                grabber->as_character()->release_grapple();
+            }
+            remove_effect( grab_id );
+        }
+    }
+    if( has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        for( const tripoint_bub_ms &player_pos : here.points_in_radius( pos_bub(), 1,
+                0 ) ) {
+            Creature *you = creatures.creature_at( here.get_abs( player_pos ) );
+            if( !you || !you->has_effect_with_flag( json_flag_GRAB ) ) {
+                continue;
+            }
+            bool grabbed = false;
+            for( const tripoint_bub_ms &mon_pos : here.points_in_radius( player_pos, 1, 0 ) ) {
+                const monster *const mon = creatures.creature_at<monster>( here.get_abs( mon_pos ) );
+                if( mon && mon->has_effect_with_flag( json_flag_GRAB_FILTER ) && mon != this ) {
+                    grabbed = true;
+                    break;
+                }
+            }
+            if( !grabbed ) {
+                for( const effect &grab : you->get_effects_with_flag( json_flag_GRAB ) ) {
+                    you->remove_effect( grab.get_id() );
+                }
+                continue;
+            }
+            for( const effect &grab : you->get_effects_with_flag( json_flag_GRAB ) ) {
+                if( is_grabbing( grab.get_bp().id() ) ) {
+                    const effect_type effid = *grab.get_effect_type();
+                    you->remove_effect( effid.id, grab.get_bp() );
+                }
+            }
+        }
+    }
+
     moves = 0;
     Creature::set_speed_base( type->speed );
     anger = type->agro;
