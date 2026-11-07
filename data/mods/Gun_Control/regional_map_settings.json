@@ -369,6 +369,7 @@
     "shop_sigma": 50,
     "park_radius": 20,
     "park_sigma": 80,
+    "city_size": 8,
     "houses": [
       [ "2storyModern01", 5 ],
       [ "2storyModern02", 50 ],
