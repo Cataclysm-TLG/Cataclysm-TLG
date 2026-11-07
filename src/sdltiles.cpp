@@ -618,7 +618,6 @@ static void WinCreate()
 #if defined(SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH)
     SDL_SetHint( SDL_HINT_ANDROID_SEPARATE_MOUSE_AND_TOUCH, "1" );
 #else
-    SDL_SetHint( SDL_HINT_MOUSE_TOUCH_EVENTS, "0" );
     SDL_SetHint( SDL_HINT_TOUCH_MOUSE_EVENTS, "0" );
 #endif
 #endif
@@ -5233,6 +5232,7 @@ int get_key_event_from_string( const std::string &str )
     }
     return -1;
 }
+
 // This function is triggered on finger up events, OR by a repeating timer for touch hold events.
 void handle_finger_input( uint32_t ticks )
 {
@@ -5626,8 +5626,6 @@ static void CheckMessages()
                 }
             }
         }
-
-        bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
 
         // Don't do this logic if we already need an update, otherwise we're likely to overload the game with too much input on hold repeat events
         if( !needupdate ) {
@@ -6203,6 +6201,7 @@ static void CheckMessages()
                     }
                     break;
 
+
 #if defined(__ANDROID__)
                 case CATA_FINGERMOTION: {
                     const int slot = finger_slot_for( GetFingerID( ev ), false );
@@ -6298,7 +6297,6 @@ static void CheckMessages()
                         } else {
                             if( is_two_finger_touch ) {
                                 // handle zoom in/out
-                                bool is_default_mode = touch_input_context.get_category() == "DEFAULTMODE";
                                 if( is_default_mode ) {
                                     float x1 = ( finger_curr_x - finger_down_x );
                                     float y1 = ( finger_curr_y - finger_down_y );
@@ -6423,7 +6421,7 @@ static void CheckMessages()
                                 }
 
                             } else if( ticks - finger_down_time <= static_cast<uint32_t>(
-                                           get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
+                                get_option<int>( "ANDROID_INITIAL_DELAY" ) ) ) {
                                 handle_finger_input( ticks );
                             }
                         }
@@ -6458,7 +6456,6 @@ static void CheckMessages()
                     break;
                 }
 #endif
-
                 case CATA_QUIT:
                     quit = true;
                     break;
