@@ -100,10 +100,6 @@
 #include "worldfactory.h"
 #endif
 
-#if defined(EMSCRIPTEN)
-#include <emscripten.h>
-#endif
-
 #define dbg(x) DebugLog((x),D_SDL) << __FILE__ << ":" << __LINE__ << ": "
 
 static const oter_type_str_id oter_type_forest_trail( "forest_trail" );
@@ -579,7 +575,7 @@ static void WinCreate()
     // Track desired fullscreen mode separately; applied after window creation
     FullscreenMode desired_fullscreen = FullscreenMode::windowed;
 
-#if !defined(__ANDROID__) && !defined(EMSCRIPTEN)
+#if !defined(__ANDROID__)
     if( get_option<std::string>( "FULLSCREEN" ) == "fullscreen" ) {
         desired_fullscreen = FullscreenMode::fullscreen_exclusive;
         fullscreen = true;
@@ -594,10 +590,6 @@ static void WinCreate()
     } else if( get_option<std::string>( "FULLSCREEN" ) == "maximized" ) {
         window_flags |= CATA_WINDOW_MAXIMIZED;
     }
-#endif
-#if defined(EMSCRIPTEN)
-    // Without this, the game only displays in the top-left 1/4 of the window.
-    window_flags &= ~CATA_WINDOW_HIGH_DPI;
 #endif
 #if defined(__ANDROID__)
     // Without this, the game only displays in the top-left 1/4 of the window.
@@ -639,7 +631,7 @@ static void WinCreate()
         SetWindowFullscreen( ::window.get(), desired_fullscreen );
     }
 
-#if !defined(__ANDROID__) && !defined(EMSCRIPTEN)
+#if !defined(__ANDROID__)
     // On Android SDL seems janky in windowed mode so we're fullscreen all the time.
     // Fullscreen mode is now modified so it obeys terminal width/height, rather than
     // overwriting it with this calculation.
@@ -4430,10 +4422,6 @@ void resize_term( const int cell_w, const int cell_h )
 
 void toggle_fullscreen_window()
 {
-    // Can't enter fullscreen on Emscripten.
-#if defined(EMSCRIPTEN)
-    return;
-#endif
 
     static int restore_win_w = get_option<int>( "TERMINAL_X" ) * fontwidth * scaling_factor;
     static int restore_win_h = get_option<int>( "TERMINAL_Y" ) * fontheight * scaling_factor;
@@ -6812,7 +6800,7 @@ void input_manager::pump_events()
 
 // This is how we're actually going to handle input events, SDL getch
 // is simply a wrapper around this.
-#if !defined(EMSCRIPTEN)
+
 // time until next android touch timer CheckMessages checks, from its file statics
 static std::optional<uint32_t> android_touch_wait_ms( const uint32_t now )
 {
@@ -6850,7 +6838,6 @@ static int input_wait_ms( const std::optional<uint32_t> &input_ms )
     s.platform_ms = android_touch_wait_ms( now );
     return input_wait_timeout_ms( s );
 }
-#endif
 
 input_event input_manager::get_input_event( const keyboard_mode preferred_keyboard_mode )
 {
@@ -6889,36 +6876,6 @@ input_event input_manager::get_input_event( const keyboard_mode preferred_keyboa
         refresh_display();
     }
 
-#if defined(EMSCRIPTEN)
-    // emscripten must yield to the browser through Asyncify, which SDL_Delay does
-    if( inputdelay < 0 ) {
-        do {
-            CheckMessages();
-            if( last_input.type != input_event_t::error ) {
-                break;
-            }
-            SDL_Delay( 1 );
-        } while( last_input.type == input_event_t::error );
-    } else if( inputdelay > 0 ) {
-        uint32_t starttime = GetTicks();
-        uint32_t endtime = 0;
-        bool timedout = false;
-        do {
-            CheckMessages();
-            endtime = GetTicks();
-            if( last_input.type != input_event_t::error ) {
-                break;
-            }
-            SDL_Delay( 1 );
-            timedout = endtime >= starttime + inputdelay;
-            if( timedout ) {
-                last_input.type = input_event_t::timeout;
-            }
-        } while( !timedout );
-    } else {
-        CheckMessages();
-    }
-#else
     if( inputdelay < 0 ) {
         CheckMessages();
         while( last_input.type == input_event_t::error ) {
@@ -6941,7 +6898,6 @@ input_event input_manager::get_input_event( const keyboard_mode preferred_keyboa
     } else {
         CheckMessages();
     }
-#endif
 
     // Sample the raw mouse position (window coords) and convert into
     // display_buffer coords so canonical gameplay picking matches the
