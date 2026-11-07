@@ -145,8 +145,8 @@ class render_state
                                     const shader &fragment_shader );
         static render_state create( SDL_Renderer *renderer,
                                     const shader &fragment_shader,
-                                   const SDL_GPUTextureSamplerBinding *bindings,
-                                   const int num_bindings );
+                                    const SDL_GPUTextureSamplerBinding *bindings,
+                                    const int num_bindings );
 
         render_state() = default;
         ~render_state();

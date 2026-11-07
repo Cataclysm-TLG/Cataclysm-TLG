@@ -25,7 +25,7 @@ class vehicle;
 struct diagonal_blocks {
     bool nw;
     bool ne;
-    };
+};
 enum class lit_level : uint8_t;
 
 // process wide count: equal generations mean the same cache state, even

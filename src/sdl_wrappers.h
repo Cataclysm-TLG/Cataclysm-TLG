@@ -14,8 +14,9 @@
 #include <string>
 #include <vector>
 
-namespace cata_shader {
-    class variant_pass;
+namespace cata_shader
+{
+class variant_pass;
 }
 
 struct point;

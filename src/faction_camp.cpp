@@ -217,7 +217,7 @@ static recipe_id select_camp_option( const std::map<recipe_id, translation> &pos
                                      const std::string &option );
 } // namespace base_camps
 
- /// @ref take, whether you take the item or count it
+/// @ref take, whether you take the item or count it
 static void apply_camp_ownership( map &here, const tripoint_bub_ms &camp_pos, int radius );
 
 /*

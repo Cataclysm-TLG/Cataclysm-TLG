@@ -3124,9 +3124,9 @@ bool cata_tiles::draw_sprite_at(
                     tile_width,
                     tileset_width );
     destination.w = static_cast<int>( width * tile_width * tile.pixelscale /
-                                    tileset_width * effective_scale_x );
+                                      tileset_width * effective_scale_x );
     destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
-                                    tileset_height * effective_scale_y );
+                                      tileset_height * effective_scale_y );
 
     CataFlipMode flip = SDL_FLIP_NONE;
 
@@ -3182,7 +3182,7 @@ bool cata_tiles::draw_sprite_at(
                     break;
                 case 2:
                     render_flip = static_cast<CataFlipMode>(
-                                    flip | SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL );
+                                      flip | SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL );
                     break;
                 case 3:
                     render_angle = 90;
@@ -3586,7 +3586,7 @@ bool cata_tiles::draw_terrain( const tripoint_bub_ms &p, const lit_level ll, int
                        nv,
                        height_3d,
                        opts
-            );
+                   );
         }
     } else if( invisible[0] ) {
         // Try drawing memory if invisible and not overridden.

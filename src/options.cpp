@@ -2428,7 +2428,7 @@ void options_manager::add_options_graphics()
             { "smooth_filtered", to_translation( "Smooth filtered" ) },
         }, "smooth", COPT_CURSES_HIDE
            );
-           
+
         add( "MEMORY_MAP_MODE", page_id, to_translation( "Memory map overlay preset" ),
         to_translation( "Specify the overlay in which the memory map is drawn.  For the custom overlay, define RGB values for dark and bright colors as well as gamma." ), {
             { "color_pixel_darken", to_translation( "Darkened" ) },

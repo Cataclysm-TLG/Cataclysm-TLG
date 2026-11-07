@@ -410,7 +410,7 @@ void mission_id::deserialize( const JsonValue &val )
             dir = base_camps::base_dir;
         }  //  Camp_Emergency_Recall is an immediate action, and so isn't serialized
 
-          else if( str == "_faction_camp_menial" ) {
+        else if( str == "_faction_camp_menial" ) {
             id = Camp_Menial;
             dir = base_camps::base_dir;
         } else if( str == "_faction_camp_trapping" ) {
