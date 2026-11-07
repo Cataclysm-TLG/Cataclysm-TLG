@@ -3092,12 +3092,15 @@ bool cata_tiles::draw_sprite_at(
         }
     }
 
+    const float effective_scale_x = scale_x != 0 ? scale_x : 1.0f;
+    const float effective_scale_y = scale_y != 0 ? scale_y : 1.0f;
+
     if( scale_x != 0 ) {
-        offset_x += ( width / 2.0f ) * ( 1 - scale_x );
+        offset_x += ( width / 2.0f ) * ( 1 - effective_scale_x );
     }
 
     if( scale_y != 0 ) {
-        offset_y += height - ( height * scale_y );
+        offset_y += height - ( height * effective_scale_y );
     }
 
     point draw_offset = point(
@@ -3121,9 +3124,9 @@ bool cata_tiles::draw_sprite_at(
                     tile_width,
                     tileset_width );
     destination.w = static_cast<int>( width * tile_width * tile.pixelscale /
-                                      tileset_width * scale_x );
+                                    tileset_width * effective_scale_x );
     destination.h = static_cast<int>( height * tile_height * tile.pixelscale /
-                                      tileset_height * scale_y );
+                                    tileset_height * effective_scale_y );
 
     CataFlipMode flip = SDL_FLIP_NONE;
 
@@ -3141,12 +3144,10 @@ bool cata_tiles::draw_sprite_at(
     // load) rather than the full destination rect to avoid tinting transparent
     // padding around sprites. When the sprite is flipped, mirror the opaque
     // rect to match.
-    if( m_cur_bounds ) {
+    if( m_cur_bounds && width > 0 && height > 0 ) {
         SDL_Rect opq = sprite_tex->get_opaque_rect();
         if( opq.w > 0 && opq.h > 0 ) {
             if( rotate_sprite ) {
-                // rota == -1 is horizontal flip only.
-                // rota % 4 == 2 is 180 degrees, implemented as H+V flip.
                 if( rota == -1 || ( !iso && rota % 4 == 2 ) ) {
                     opq.x = width - opq.x - opq.w;
                 }
@@ -3154,7 +3155,7 @@ bool cata_tiles::draw_sprite_at(
                     opq.y = height - opq.y - opq.h;
                 }
             }
-            // Scale from source pixel coords to destination screen coords.
+
             m_cur_bounds->expand(
                 destination.x + opq.x * destination.w / width,
                 destination.y + opq.y * destination.h / height,
@@ -3169,20 +3170,23 @@ bool cata_tiles::draw_sprite_at(
     // silhouette during the tint overlay pass). Compute them once here.
     double render_angle = 0;
     smooth_lighting::quarter_turn render_turn = smooth_lighting::quarter_turn::none;
-    CataFlipMode render_flip = SDL_FLIP_NONE;
+    CataFlipMode render_flip = flip;
     if( rotate_sprite ) {
         if( rota == -1 ) {
-            render_flip = SDL_FLIP_HORIZONTAL;
-        } else if( !iso ) {
+            render_flip = static_cast<CataFlipMode>( flip | SDL_FLIP_HORIZONTAL );
+        } else {
             switch( rota % 4 ) {
                 case 1:
                     render_angle = -90;
+                    render_turn = smooth_lighting::quarter_turn::counterclockwise;
                     break;
                 case 2:
-                    render_flip = static_cast<CataFlipMode>( SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL );
+                    render_flip = static_cast<CataFlipMode>(
+                                    flip | SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL );
                     break;
                 case 3:
                     render_angle = 90;
+                    render_turn = smooth_lighting::quarter_turn::clockwise;
                     break;
                 default:
                     break;
