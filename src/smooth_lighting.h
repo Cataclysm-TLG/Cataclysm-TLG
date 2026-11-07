@@ -48,7 +48,7 @@ enum class quarter_turn : uint8_t {
     counterclockwise,
 };
 
-// support of the cubic B-spline in lit_sample.glsl, in cells each side
+// support of the cubic B-spline in lit_filter.glsl, in cells each side
 constexpr int filter_reach = 2;
 
 // map tiles the light map is filled for: the view range on screen, plus the
@@ -117,7 +117,7 @@ class lightmap_keys
 };
 
 // light map layout: light texels left of reach_column, reach masks from it on,
-// one strip of MAPSIZE_Y rows per z level; see lit_sample.glsl
+// one strip of MAPSIZE_Y rows per z level; see lit_common.glsl
 constexpr int reach_column = MAPSIZE_X;
 constexpr int lightmap_width = 2 * MAPSIZE_X;
 constexpr int lightmap_height = MAPSIZE_Y * OVERMAP_LAYERS;
@@ -266,8 +266,8 @@ struct filter_result {
     // only CPU checks read it: the prefilter texture has no channel for it
     float weight = 0.0f;
 };
-// filtered light of light map cell `own` on `level` at ( lx, ly ) inside it,
-// each 0 to 1
+// lit_filter.glsl's filter_light: light of light map cell `own` on `level`
+// at ( lx, ly ) inside it, each 0 to 1
 filter_result reference_filter( const lightmap_view &view, const point &own, int level, float lx,
                                 float ly );
 lit_sample finish_filter( const filter_result &r );
