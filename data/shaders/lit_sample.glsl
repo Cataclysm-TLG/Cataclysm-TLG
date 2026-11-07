@@ -9,11 +9,6 @@
 // whole stacked texture: xy is where the vertex falls on the ground plane, z
 // the column of the sprite's own cell plus the standing marker for a standing
 // sprite, w the row of its own cell.
-//
-// light texels, left of u_size.w: r light, 0 at the vision threshold to 1 at
-// full light; g and b red and green shares of the illumination color; a flag
-// bits, see u_flags. reach texels, from u_size.w on: the 25 bit mask of cells
-// within two of a cell its light may be filtered from, little endian.
 
 #include "lit_common.glsl"
 
@@ -25,64 +20,6 @@ struct lit_sample {
     // how far in sight, 0 to 1
     float visible;
 };
-
-struct lit_texel {
-    bool valid;
-    float light;
-    vec3 chroma;
-    bool detail;
-    bool barrier;
-};
-
-// light texel at `cell`, empty outside the light columns or the rows of
-// z level `level`: a sample never leaves its own level
-lit_texel fetch_light(ivec2 cell, int level)
-{
-    lit_texel o;
-    o.valid = false;
-    o.light = 0.0;
-    o.chroma = vec3(0.0);
-    o.detail = false;
-    o.barrier = false;
-    int top = level * u_size.z;
-    if (cell.x < 0 || cell.x >= u_size.w || cell.y < top || cell.y >= top + u_size.z) {
-        return o;
-    }
-    vec4 t = texelFetch(u_lightmap, cell, 0);
-    int flags = int(t.a * 255.0 + 0.5);
-    o.valid = true;
-    o.light = t.r;
-    o.chroma = vec3(t.g, t.b, max(1.0 - t.g - t.b, 0.0));
-    o.detail = (flags & u_flags.x) != 0;
-    o.barrier = (flags & u_flags.y) != 0;
-    return o;
-}
-
-// reach mask of a cell fetch_light found valid
-uint fetch_reach(ivec2 cell)
-{
-    uvec4 b = uvec4(texelFetch(u_lightmap, ivec2(cell.x + u_size.w, cell.y), 0) * 255.0 + 0.5);
-    return b.r | (b.g << 8) | (b.b << 16) | (b.a << 24);
-}
-
-bool reaches(uint mask, ivec2 d)
-{
-    return (mask & (1u << uint((d.y + FILTER_REACH) * FILTER_WINDOW + d.x + FILTER_REACH))) != 0u;
-}
-
-// cubic B-spline kernel, zero from two texels out
-float bspline(float x)
-{
-    x = abs(x);
-    if (x >= 2.0) {
-        return 0.0;
-    }
-    if (x >= 1.0) {
-        float a = 2.0 - x;
-        return a * a * a / 6.0;
-    }
-    return (4.0 - 6.0 * x * x + 3.0 * x * x * x) / 6.0;
-}
 
 vec3 chroma_hue(vec3 chroma)
 {
@@ -158,9 +95,9 @@ lit_sample sample_light(vec4 coords)
         }
     }
     local = clamp(local, 0.0, 1.0);
-    lit_texel own = fetch_light(cell, level);
     lit_sample s;
     if (u_mode.y != 0) {
+        lit_texel own = fetch_light(cell, level);
         s.light = own.light;
         s.hue = chroma_hue(own.chroma);
         s.visible = own.detail ? 1.0 : 0.0;
