@@ -644,7 +644,7 @@
     "id": "ji",
     "type": "ITEM",
     "name": { "str_sp": "ji" },
-    "description": "A bronze polearm that originated in the Shang dynasty of China, if not earlier.  It combines a long spear head with a perpendicular axe plade shaped like a crescent moon.",
+    "description": "A bronze polearm that originated in the Shang dynasty of China, if not earlier.  It combines a long spear head with a perpendicular axe blade shaped like a crescent moon.",
     "weight": "2390 g",
     "volume": "1750 ml",
     "longest_side": "280 cm",

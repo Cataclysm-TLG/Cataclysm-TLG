@@ -1279,7 +1279,7 @@
       {
         "id": "sao_tomean_flag",
         "name": { "str": "Sao Tomean flag" },
-        "description": "A horizontal tricolor flag of green, yellow and green with a red triangle based at the hoist and two five pointed black stars of in the yellow stripe.",
+        "description": "A horizontal tricolor flag of red, yellow and green with a red triangle based at the hoist and two five pointed black stars of in the yellow stripe.",
         "weight": 1,
         "append": true
       },
