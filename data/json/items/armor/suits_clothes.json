@@ -317,7 +317,7 @@
     "variants": [
       {
         "id": "standard",
-        "name": { "str": "XS long-sleeved jumpsuit" },
+        "name": { "str": "long-sleeved jumpsuit" },
         "description": "Lightweight coveralls with long sleeves and a few pockets for storage.",
         "weight": 0
       }
