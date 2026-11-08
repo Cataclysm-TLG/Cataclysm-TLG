@@ -1230,8 +1230,8 @@ static void tool_out_of_charges( Character &who, const std::string &tool_name )
     if( who.is_avatar() ) {
         who.add_msg_if_player( m_bad, _( "Your %1$s ran out of charges." ), tool_name );
     } else { // who.is_npc()
-        add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ),
-                                who.disp_name( true ), tool_name );
+        add_msg_if_player_sees( who.pos_bub(), _( "%1$s %2$s ran out of charges." ), who.disp_name( false,
+                                true ), tool_name );
     }
     who.cancel_activity();
 }
@@ -1850,9 +1850,10 @@ void read_activity_actor::do_turn( player_activity &act, Character &who )
     }
 
     if( using_ereader && !ereader->ammo_sufficient( &who ) ) {
-        who.add_msg_player_or_npc(
-            _( "Your %s ran out of batteries." ),
-            _( "<npcname>'s %s ran out of batteries." ),
+        add_msg_if_player_sees(
+            who,
+            _( "%1$s %2$s ran out of batteries." ),
+            who.disp_name( true, true ),
             item::nname( ereader->typeId() ) );
         who.cancel_activity();
         return;
@@ -3039,9 +3040,10 @@ void ebooksave_activity_actor::do_turn( player_activity &act, Character &who )
     // only consume charges every 25 pages
     if( calendar::once_every( pages_per_charge * time_per_page ) ) {
         if( !ereader->ammo_sufficient( &who ) ) {
-            who.add_msg_player_or_npc(
-                _( "Your %s ran out of batteries." ),
-                _( "<npcname>'s %s ran out of batteries." ),
+            add_msg_if_player_sees(
+                who,
+                _( "%1$s %2$s ran out of batteries." ),
+                who.disp_name( true, true ),
                 item::nname( ereader->typeId() ) );
             who.cancel_activity();
             return;
@@ -3094,7 +3096,7 @@ void ebooksave_activity_actor::finish( player_activity &act, Character &who )
                  n_gettext( "book", "books", handled_books ) );
     } else { // who.is_npc()
         add_msg_if_player_sees( who, _( "%s scans %d %s into their device." ),
-                                who.disp_name( true ), handled_books, n_gettext( "book", "books", handled_books ) );
+                                who.disp_name( false, true ), handled_books, n_gettext( "book", "books", handled_books ) );
     }
     act.set_to_null();
 }
@@ -3105,7 +3107,7 @@ void ebooksave_activity_actor::canceled( player_activity &act, Character &who )
         add_msg( m_info, _( "You stop scanning the remaining books." ) );
     } else { // who.is_npc()
         add_msg_if_player_sees( who, _( "%s stops scanning books." ),
-                                who.disp_name( true ) );
+                                who.disp_name( false, true ) );
     }
     act.set_to_null();
 }
@@ -3403,38 +3405,9 @@ void efile_activity_actor::completed_processing_current_efile( player_activity &
         }
     };
 
-    const auto add_completion_message = [&]( const std::string & player_message,
-    const std::string & npc_message ) {
-        who.add_msg_player_or_npc( m_info, player_message, npc_message,
-                                   current_efile->display_name() );
-    };
-    switch( action_type ) {
-        case EF_BROWSE:
-            add_completion_message( _( "You finish browsing a file: %s." ),
-                                    _( "<npcname> finishes browsing a file: %s." ) );
-            break;
-        case EF_READ:
-            add_completion_message( _( "You finish reading a file: %s." ),
-                                    _( "<npcname> finishes reading a file: %s." ) );
-            break;
-        case EF_MOVE_FROM_THIS:
-        case EF_MOVE_ONTO_THIS:
-            add_completion_message( _( "You finish moving a file: %s." ),
-                                    _( "<npcname> finishes moving a file: %s." ) );
-            break;
-        case EF_COPY_FROM_THIS:
-        case EF_COPY_ONTO_THIS:
-            add_completion_message( _( "You finish copying a file: %s." ),
-                                    _( "<npcname> finishes copying a file: %s." ) );
-            break;
-        case EF_WIPE:
-            add_completion_message( _( "You finish wiping a file: %s." ),
-                                    _( "<npcname> finishes wiping a file: %s." ) );
-            break;
-        case EF_INVALID:
-        case EF_ACTION_COUNT:
-            break;
-    }
+    add_msg_if_player_sees( who, m_info, string_format( _( "%s %s %s." ),
+                            who.disp_name( false, true ), efile_action_name( action_type, true, false ),
+                            current_efile->display_name() ) );
     // Helper: remove a stale item_location from selected_efiles by raw pointer.
     // Must be called BEFORE the item is removed from its pocket, while the pointer is still valid.
     auto erase_from_selected = [&]( const item_location & loc ) {
@@ -3660,7 +3633,7 @@ void efile_activity_actor::canceled( player_activity &act, Character &who )
         add_msg( m_info, _( "You stop processing the remaining devices." ) );
     } else {
         add_msg_if_player_sees( who, _( "%s stops processing devices." ),
-                                who.disp_name( true ) );
+                                who.disp_name( false, true ) );
     }
     act.set_to_null();
 }
@@ -6799,8 +6772,8 @@ void shearing_activity_actor::start( player_activity &act, Character &who )
         return;
     }
 
-    std::string pet_name_capitalized = mon->unique_name.empty() ? mon->disp_name( true ) :
-                                       mon->unique_name;
+    std::string pet_name_capitalized = mon->unique_name.empty() ? mon->disp_name( false,
+                                       true ) : mon->unique_name;
 
     if( !mon->shearable() ) {
         add_msg( _( "%1$s has nothing %2$s could shear." ), pet_name_capitalized, who.disp_name() );
@@ -6814,7 +6787,7 @@ void shearing_activity_actor::start( player_activity &act, Character &who )
     const int shearing_quality = who.max_quality( qual_SHEAR );
     if( !( shearing_quality > 0 ) ) {
         if( who.is_avatar() ) {
-            add_msg( m_info, _( "%1$s don't have a shearing tool." ), who.disp_name( true ) );
+            add_msg( m_info, _( "%1$s don't have a shearing tool." ), who.disp_name( false, true ) );
         } else { // who.is_npc
             // npcs can't shear monsters yet, this is for when they are able to
             add_msg_if_player_sees( who, _( "%1$s doesn't have a shearing tool." ), who.disp_name(),
@@ -6833,7 +6806,7 @@ void shearing_activity_actor::start( player_activity &act, Character &who )
 
     if( who.is_avatar() ) {
         add_msg( m_info,
-                 _( "%1$s start shearing %2$s." ), who.disp_name( true ), mon->disp_name() );
+                 _( "%1$s start shearing %2$s." ), who.disp_name( false, true ), mon->disp_name() );
     } else { // who.is_npc
         // npcs can't shear monsters yet, this is for when they are able to
         add_msg_if_player_sees( who, _( "%1$s starts shearing %2$s." ), who.disp_name(),
@@ -6851,7 +6824,7 @@ void shearing_activity_actor::do_turn( player_activity &, Character &who )
             add_msg(
                 m_bad,
                 _( "%1$s don't have a shearing tool anymore." ),
-                who.disp_name( true ) );
+                who.disp_name( false, true ) );
         } else {
             add_msg_if_player_sees(
                 who,
@@ -6886,7 +6859,7 @@ void shearing_activity_actor::finish( player_activity &act, Character &who )
     add_msg_if_player_sees( who,
                             string_format(
                                 _( "%1$s finished shearing %2$s and got:" ),
-                                who.disp_name( true ),
+                                who.disp_name( false, true ),
                                 mon->unique_name.empty() ? mon->disp_name() : mon->unique_name ) );
 
     const std::vector<shearing_roll> shear_roll = shear_data.roll_all( *mon );
@@ -9171,7 +9144,7 @@ void unload_loot_activity_actor::do_turn( player_activity &act, Character &you )
     }
 
     // If we got here without restarting the activity, it means we're done
-    add_msg( m_info, _( "%s sorted out every item possible." ), you.disp_name( true ) );
+    add_msg( m_info, _( "%s sorted out every item possible." ), you.disp_name( false, true ) );
     if( you.is_npc() ) {
         npc *guy = dynamic_cast<npc *>( &you );
         guy->revert_after_activity();

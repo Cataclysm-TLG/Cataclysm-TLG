@@ -658,7 +658,7 @@ static void damage_targets( const spell &sp, Creature &caster,
                 } else {
                     if( !cr->has_effect( effect_invisibility ) ) {
                         add_msg_if_player_sees( cr->pos_bub(), m_bad, _( "%1$s dodges out of the way!" ),
-                                                cr->disp_name( true ) );
+                                                cr->disp_name( false, true ) );
                     }
                 }
                 cr->on_dodge( &caster, spell_accuracy, dodge_training );
@@ -759,12 +759,8 @@ static void damage_targets( const spell &sp, Creature &caster,
             }
         } else if( sp.damage( caster ) < 0 ) {
             sp.heal( target, caster );
-            if( cr->is_avatar() ) {
-                add_msg_if_player_sees( cr->pos_bub(), m_good, _( "Your wounds are closing up!" ) );
-            } else {
-                add_msg_if_player_sees( cr->pos_bub(), m_good, _( "%s begins to heal!" ),
-                                        cr->disp_name( true ) );
-            }
+            add_msg_if_player_sees( cr->pos_bub(), m_good, _( "%s wounds are closing up!" ),
+                                    cr->disp_name( true ) );
         }
 
         // handling DOTs here
@@ -1125,10 +1121,15 @@ static void handle_remove_fd_fatigue_field( const std::pair<field, tripoint_bub_
                 caster.add_effect( effect_teleglow, 5_hours );
                 break;
             case 3:
-                const std::string message = caster.sees( here, field_position ) ?
-                                            _( "The %s pulls you in as it closes and ejects you violently!" ) :
-                                            _( "A nearby %s pulls you in as it closes and ejects you violently!" );
-                caster.add_msg_if_player( m_bad, message, intensity_name );
+                std::string message_prefix = "A nearby";
+
+                if( caster.sees( here, field_position ) ) {
+                    message_prefix = "The";
+                }
+
+                caster.add_msg_if_player( m_bad,
+                                          _( "%s %s pulls you in as it closes and ejects you violently!" ),
+                                          message_prefix, intensity_name );
                 caster.as_character()->hurtall( 10, nullptr );
                 caster.add_effect( effect_teleglow, 630_minutes );
                 teleport::teleport_creature( caster );

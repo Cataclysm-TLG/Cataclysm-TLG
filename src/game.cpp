@@ -11540,19 +11540,14 @@ void game::water_affect_items( Character &ch ) const
         }
         // check flag first because its cheaper
         if( loc->has_flag( flag_WATER_DISSOLVE ) && !loc.protected_from_liquids() ) {
-            ch.add_msg_player_or_npc( m_bad,
-                                      _( "One of your items dissolves in the water: %s!" ),
-                                      _( "<npcname> loses an item as it dissolves "
-                                         "in the water: %s!" ),
-                                      loc->display_name() );
+            add_msg_if_player_sees( ch.pos_bub(), m_bad, _( "%1$s %2$s dissolved in the water!" ),
+                                    ch.disp_name( true, true ), loc->display_name() );
             loc.remove_item();
         } else if( loc->has_flag( flag_WATER_BREAK ) && !loc->is_broken()
                    && !loc.protected_from_liquids() ) {
 
-            ch.add_msg_player_or_npc( m_bad,
-                                      _( "The water destroys one of your items: %s!" ),
-                                      _( "<npcname> loses an item to water damage: %s!" ),
-                                      loc->display_name() );
+            add_msg_if_player_sees( ch.pos_bub(), m_bad, _( "The water destroyed %1$s %2$s!" ),
+                                    ch.disp_name( true ), loc->display_name() );
             loc->deactivate();
             // TODO: Maybe different types of wet faults? But I can't think of any.
             // This just means it's still too wet to use.
@@ -11681,7 +11676,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // zed_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int zed_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( true ),
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ),
                                             critter.disp_name() );
                     c->impact( damage, pt );
                     zed_damage = std::max( 0, ( zed_damage - critter.get_armor_type( damage_bash,
@@ -11702,7 +11697,7 @@ bool game::fling_creature( Creature *c, const units::angle &dir, float flvel, bo
                     const int damage = rng( force, force * 2.0f ) / 6;
                     // guy_damage uses flvel because they take damage based on c's velocity, not their own size.
                     int guy_damage = rng( flvel, flvel * 2.0f ) / 6;
-                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( true ),
+                    add_msg_if_player_sees( pt, _( "%1s collides with %2s!" ), c->disp_name( false, true ),
                                             guy.disp_name() );
                     c->impact( damage, pt );
                     guy_damage = std::max( 0, ( guy_damage - guy.get_armor_type( damage_bash,
