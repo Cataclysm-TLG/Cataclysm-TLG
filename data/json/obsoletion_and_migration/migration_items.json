@@ -4475,5 +4475,15 @@
     "id": "xl_survivor_vest",
     "type": "MIGRATION",
     "replace": "xl_chestrig"
+  },
+  {
+    "id": "survivor_scope",
+    "type": "MIGRATION",
+    "replace": "binoculars"
+  },
+  {
+    "id": "spring_plate",
+    "type": "MIGRATION",
+    "replace": "spring"
   }
 ]
