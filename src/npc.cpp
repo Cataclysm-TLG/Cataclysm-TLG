@@ -4143,13 +4143,14 @@ std::string npc::describe_mission() const
     } // switch (mission)
 }
 
-std::string npc::display_name() const
+std::string npc::display_name( bool possessive ) const
 {
     const std::string profession = disp_profession();
     if( profession.empty() ) {
-        return get_name();
+        return possessive ? string_format( _( "%1$s's" ), get_name() ) : get_name();
     }
-    return string_format( _( "%1$s, %2$s" ), get_name(), profession );
+    return possessive ? string_format( _( "%1$s, %2$s's" ), get_name(),
+                                       profession ) : string_format( _( "%1$s, %2$s" ), get_name(), profession );
 }
 
 std::string npc::name_and_activity() const

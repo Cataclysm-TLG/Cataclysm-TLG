@@ -945,9 +945,13 @@ int avatar::print_info( const catacurses::window &w, int vStart, int, int column
                                     get_name() ) - 1;
 }
 
-std::string avatar::display_name( bool capitalize_first ) const
+std::string avatar::display_name( bool possessive, bool capitalize_first ) const
 {
-    return capitalize_first ? _( "You" ) : _( "you" );
+    if( !possessive ) {
+        return capitalize_first ? _( "You" ) : _( "you" );
+    } else {
+        return capitalize_first ? _( "Your" ) : _( "your" );
+    }
 }
 
 mfaction_id avatar::get_monster_faction() const
