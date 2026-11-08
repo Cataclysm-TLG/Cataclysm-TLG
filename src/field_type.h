@@ -213,8 +213,8 @@ struct field_type {
         description_affix desc_affix = description_affix::DESCRIPTION_AFFIX_NUM;
         std::optional<map_fd_bash_info> bash_info;
 
-        // Phrase fragment inserted after a quantity descriptor in liquid splash messages.
-        translation substance_name;
+        // Name of whatever substance makes up the field, can be used in splash attacks or other messaging.
+        translation substance_name = to_translation( "liquid" );
         fake_spell spell_data;
 
         // chance, issue, duration, speech
