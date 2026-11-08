@@ -1363,7 +1363,7 @@ ifeq ($(SDL3), 1)
 	install_name_tool -change @rpath/libSDL3_image.0.dylib @executable_path/libSDL3_image.0.dylib "$(APPRESOURCESDIR)/$(APPTARGET)"
 	install_name_tool -change @rpath/libSDL3_ttf.0.dylib @executable_path/libSDL3_ttf.0.dylib "$(APPRESOURCESDIR)/$(APPTARGET)"
 else
-  dylibbundler -of -b -x $(APPRESOURCESDIR)/$(APPTARGET) -d $(APPRESOURCESDIR)/ -p @executable_path/ $(addprefix -s ,$(DYLIBBUNDLER_SEARCH_PATHS))
+	dylibbundler -of -b -x $(APPRESOURCESDIR)/$(APPTARGET) -d $(APPRESOURCESDIR)/ -p @executable_path/ $(addprefix -s ,$(DYLIBBUNDLER_SEARCH_PATHS))
 endif
 
 dmgdistclean:
