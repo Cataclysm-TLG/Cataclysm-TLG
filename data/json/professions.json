@@ -2203,8 +2203,8 @@
           { "group": "charged_smart_phone" },
           { "group": "charged_two_way_radio" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "kevlar_harness", "container-item": "runner_bag" },
           { "item": "shirt_western" }
         ]
@@ -2234,24 +2234,22 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "pants_army" },
+          { "item": "police_breeches" },
           { "item": "socks" },
           { "item": "badge_deputy" },
           { "item": "police_belt" },
-          { "item": "boots" },
-          { "item": "wristwatch" },
-          { "item": "helmet_bike" },
-          { "item": "knee_pads" },
-          { "item": "elbow_pads" },
+          { "item": "knee_high_boots" },
+          { "item": "helmet_riding" },
+          { "item": "leather_police_jacket" },
           { "item": "baton" },
           { "group": "charged_smart_phone" },
           { "group": "charged_two_way_radio" },
-          { "group": "holster_supp_usp9", "container-item": "XL_holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp9" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "shirt_western" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
@@ -2335,7 +2333,7 @@
     "items": {
       "both": {
         "entries": [
-          { "item": "pants_army" },
+          { "item": "pants" },
           { "item": "socks" },
           { "item": "badge_deputy" },
           { "item": "police_belt" },
@@ -2346,8 +2344,8 @@
           { "group": "charged_smart_phone" },
           { "group": "charged_two_way_radio" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "shirt_western" }
         ]
       },
@@ -2373,7 +2371,6 @@
           { "item": "police_belt" },
           { "item": "badge_detective" },
           { "item": "gloves_leather" },
-          { "item": "knit_scarf" },
           { "item": "fedora" },
           { "item": "wristwatch" },
           { "item": "socks" },
@@ -2440,11 +2437,11 @@
           { "group": "charged_two_way_radio" },
           { "item": "shirt_western" },
           { "group": "army_mags_mp5" },
-          { "group": "army_mags_usp9" },
+          { "group": "army_mags_glock17" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "grenadebandolier", "contents-item": [ "flashbang", "flashbang" ] },
-          { "item": "usp_9mm", "ammo-item": "9mm", "charges": 15, "container-item": "holster" },
-          { "item": "hk_mp5", "ammo-item": "9mm", "charges": 30, "contents-item": [ "rail_laser_sight" ] }
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "hk_mp5", "ammo-item": "9mmfmj", "charges": 30, "contents-item": [ "rail_laser_sight" ] }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2490,8 +2487,8 @@
           { "group": "charged_two_way_radio" },
           { "item": "glasses_bal", "custom-flags": [ "no_auto_equip" ] },
           { "group": "charged_powered_earmuffs" },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "762_51", "charges": 20 },
           { "item": "M24", "ammo-item": "762_51", "charges": 5, "contents-item": "shoulder_strap" },
           { "item": "shirt_western" }
@@ -2537,8 +2534,8 @@
           { "item": "gasbomb" },
           { "group": "charged_two_way_radio" },
           { "group": "full_gasmask" },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "tonfa", "container-item": "police_belt" },
           { "group": "charged_tazer" }
         ]
@@ -2582,8 +2579,8 @@
           { "group": "charged_two_way_radio" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "gloves_leather", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "shirt_western" }
         ]
       },
@@ -2975,8 +2972,8 @@
           { "group": "charged_smart_phone" },
           { "group": "charged_two_way_radio" },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_usp45" },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "shirt_western" }
         ]
       },
@@ -5896,24 +5893,20 @@
           { "item": "e_tool" },
           { "item": "knife_hunting" },
           { "item": "mess_kit" },
-          { "group": "charged_two_way_radio" },
           { "item": "tank_top", "variant": "tank_top_camo" },
           { "item": "legpouch_large" },
           { "item": "tacvest", "contents-group": [ "army_mags_m2010" ] },
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "usp_45", "ammo-item": "45_acp", "charges": 12, "container-item": "holster" },
           {
             "item": "m2010",
             "ammo-item": "300_winmag",
             "charges": 5,
             "contents-item": [ "shoulder_strap", "rifle_scope", "bipod" ]
-          },
-          { "item": "usp45mag", "ammo-item": "45_acp", "charges": 12 },
-          { "item": "usp45mag", "ammo-item": "45_acp", "charges": 12 }
+          }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
   {
@@ -5927,15 +5920,13 @@
       "prof_gunsmithing_basic",
       "prof_spotting",
       "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
+      "prof_knives_familiar"
     ],
     "CBMs": [ "bio_power_storage_mkII", "bio_targeting", "bio_carbon", "bio_cqb", "bio_metabolics" ],
     "skills": [
       { "level": 4, "name": "gun" },
       { "level": 2, "name": "melee" },
-      { "level": 4, "name": "rifle" },
+      { "level": 3, "name": "smg" },
       { "level": 1, "name": "stabbing" },
       { "level": 1, "name": "dodge" }
     ],
@@ -5946,7 +5937,8 @@
           { "item": "combat_shirt" },
           { "item": "gloves_tactical" },
           { "item": "mask_ski" },
-          { "item": "tac_helmet" },
+          { "item": "helmet_army" },
+          { "group": "full_gasmask" },
           { "item": "socks" },
           { "item": "boots_combat" },
           { "item": "wristwatch" },
@@ -5955,15 +5947,13 @@
           { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
           { "item": "sheath", "contents-item": "knife_combat" },
           {
-            "item": "modular_m27_assault_rifle",
-            "variant": "modular_h&k416a5",
-            "ammo-item": "556",
-            "charges": 30,
-            "contents-item": [ "shoulder_strap", "acog_scope" ],
+            "item": "fn_p90",
+            "ammo-item": "57mm",
+            "charges": 50,
+            "contents-item": [ "shoulder_strap", "holo_sight", "suppressor_compact" ],
             "custom-flags": [ "auto_wield" ]
           },
-          { "group": "us_ballistic_vest_pristine" },
-          { "item": "legpouch_large", "contents-group": "army_mags_m4" }
+          { "group": "us_ballistic_vest_pristine" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },

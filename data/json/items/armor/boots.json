@@ -557,7 +557,7 @@
     "warmth": 10,
     "material_thickness": 3,
     "environmental_protection": 12,
-    "flags": [ "RAINPROOF", "NORMAL", "OUTER" ],
+    "flags": [ "RAINPROOF", "NORMAL", "OUTER", "VARSIZE" ],
     "armor": [
       {
         "covers": [ "foot_l", "foot_r" ],
@@ -569,7 +569,7 @@
         "covers": [ "foot_l", "foot_r" ],
         "specifically_covers": [ "foot_toes_r", "foot_toes_l", "foot_heel_r", "foot_heel_l", "foot_arch_r", "foot_arch_l" ],
         "material": [ { "type": "rubber", "covered_by_mat": 100, "thickness": 3.0 } ],
-        "encumbrance": 25,
+        "encumbrance": 34,
         "coverage": 100
       },
       {
@@ -1317,7 +1317,7 @@
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
     "name": { "str": "knee-high boots", "str_pl": "pairs of knee-high boots" },
-    "description": "Boots with a cuff that extends up to the knee.  Their heels are sensibly low, but still don't look terribly suited to running away from monsters during the end of the world.",
+    "description": "Boots with a cuff that extends up to the knee.  They provide some protection for the lower legs, but may not be ideal for sprinting away from the undead.",
     "weight": "1520 g",
     "volume": "3750 ml",
     "longest_side": "33 cm",
@@ -1340,7 +1340,7 @@
           { "type": "leather", "covered_by_mat": 100, "thickness": 0.2 }
         ],
         "coverage": 100,
-        "encumbrance": 32,
+        "encumbrance": 24,
         "layers": [ "OUTER", "NORMAL" ]
       },
       {
@@ -1364,7 +1364,7 @@
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_lower_l", "leg_lower_r" ],
         "coverage": 90,
-        "encumbrance": 20,
+        "encumbrance": 16,
         "layers": [ "OUTER" ]
       }
     ],
