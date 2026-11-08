@@ -31,6 +31,11 @@
   },
   {
     "type": "vehicle_part_migration",
+    "from": "spring_plate",
+    "to": "rebar_plate"
+  },
+  {
+    "type": "vehicle_part_migration",
     "from": "workbench_with_recharger",
     "to": "workbench"
   },
