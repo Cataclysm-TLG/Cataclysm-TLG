@@ -31,7 +31,7 @@
 #include <stdexcept>
 
 #ifdef SDL_SOUND
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #endif
 
 #include "cached_options.h"
