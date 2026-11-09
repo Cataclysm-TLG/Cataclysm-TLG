@@ -319,7 +319,7 @@
     "id": "melee_training",
     "name": "Melee Style",
     "description": "Whether for school, ren faires, or fitness, you've learned how to handle some kind of medieval weapon.  You start with a weapon-based martial arts style of your choosing.",
-    "points": 4,
+    "points": 3,
     "traits": [ "MARTIAL_ARTS_MELEE" ]
   },
   {
