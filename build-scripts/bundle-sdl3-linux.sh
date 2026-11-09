@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Bundle the SDL3 ldd closure into a Linux bindist's lib/.
 # Usage: bundle-sdl3-linux.sh <bindist_dir> <main_binary>
-# Copies non-platform deps (with SONAME symlinks), RUNPATH=$ORIGIN each.
+# Copies non-platform deps (with regular-file SONAME aliases), RUNPATH=$ORIGIN each.
 
 set -euo pipefail
 
@@ -114,43 +114,53 @@ ensure_alias() {
     local alias_path="$LIB_DIR/$alias_name"
     local real_path="$LIB_DIR/$real_base"
 
+    # Only create the alias once the real library exists.
     if [[ -e "$alias_path" ]]; then
         return
     fi
 
-    cp -L "$real_path" "$alias_path"
+    if [[ -f "$real_path" ]]; then
+        cp "$real_path" "$alias_path"
+    fi
 }
 
 walk_closure() {
     local target="$1"
-    if [[ -n "${SEEN[$target]:-}" ]]; then return; fi
+    if [[ -n "${SEEN[$target]:-}" ]]; then
+        return
+    fi
     SEEN[$target]=1
 
     local soname realpath_resolved real base_real base_path
     while IFS=$'\t' read -r soname realpath_resolved; do
         [[ -z "$soname" || -z "$realpath_resolved" ]] && continue
+
         if is_platform "$soname"; then
             continue
         fi
+
         # Resolve symlinks to the real file.
         real="$(readlink -f "$realpath_resolved")"
         base_real="$(basename "$real")"
         base_path="$(basename "$realpath_resolved")"
 
-        # Always create the soname + resolved-path aliases (independent of
-        # whether the real file was copied already on a prior alias).
-        ensure_alias "$soname" "$base_real"
-        ensure_alias "$base_path" "$base_real"
-
+        # Copy the real library first.
         if [[ -z "${COPIED[$real]:-}" ]]; then
             COPIED[$real]=1
             REAL_TO_ORIGIN[$base_real]="$real"
             cp -L "$real" "$LIB_DIR/$base_real"
-            # Walk this library's own ldd closure.
-            walk_closure "$real"
         fi
+
+        # Create regular-file aliases after the real library exists.
+        ensure_alias "$soname" "$base_real"
+        ensure_alias "$base_path" "$base_real"
+
+        # Walk this library's own dependencies.
+        walk_closure "$real"
+
     done < <(ldd "$target" 2>/dev/null | collect_libs)
 }
+
 
 walk_closure "$MAIN_BIN"
 
