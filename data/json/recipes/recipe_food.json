@@ -3248,7 +3248,7 @@
     "difficulty": 3,
     "time": "2 h",
     "batch_time_factors": [ 75, 2 ],
-    "byproducts": [ [ "tallow", 9 ] ],
+    "byproducts": [ [ "mutant_tallow", 9 ] ],
     "qualities": [ { "id": "CUT", "level": 2 }, { "id": "BOIL", "level": 2 } ],
     "tools": [ [ [ "water_boiling_heat", 20, "LIST" ] ] ],
     "book_learn": [ [ "cookbook_mexican", 2 ], [ "survival_book", 2 ] ],
