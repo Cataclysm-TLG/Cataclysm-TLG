@@ -196,6 +196,8 @@ static const material_id material_glass( "glass" );
 
 static const mtype_id mon_zombie( "mon_zombie" );
 
+static const proficiency_id proficiency_prof_driver( "prof_driver" );
+
 static const skill_id skill_driving( "driving" );
 
 static const species_id species_FERAL( "FERAL" );
@@ -1197,19 +1199,17 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
                 chance = static_cast<int>( std::round( chance / ( std::max( 1.f,
                                                        2.f - vp_wheel.info().wheel_info->offroad_rating ) ) ) );
             }
-
             add_msg_debug( debugmode::DF_VEHICLE_MOVE, "Final chance to proc rough terrain: 1 / %d.", chance );
-
             if( !one_in( chance ) ) {
                 continue;
             }
-
             float driver_skill = driver->get_skill_level( skill_driving );
             float driver_spot  = driver->spot_check();
             float avoidance = std::min(
-                                  driver_skill * 0.02f + driver_spot * 0.01f,
-                                  0.75f
-                              );
+                                driver_skill * 0.02f + driver_spot * 0.01f +
+                                ( !extra_hazard && driver->has_proficiency( proficiency_prof_driver ) ? 0.05f : 0.0f ),
+                                0.75f
+                            );
             item rough_terrain( itype_rough_terrain, calendar::turn );
             float hit_chance = vehicle::hit_probability( rough_terrain, &vp_wheel );
             float effective_hit = hit_chance * ( 1.f - avoidance );
@@ -4349,7 +4349,7 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
         return;
     }
 
-    // Keep track of how many items have been damaged, and what the first one is
+    // Keep track of how many items have been damaged, and what the first one is.
     bool item_was_damaged = false;
     int items_damaged = 0;
     int items_destroyed = 0;
