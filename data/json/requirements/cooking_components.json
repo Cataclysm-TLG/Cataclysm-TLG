@@ -524,7 +524,7 @@
     "id": "any_cracklins",
     "type": "requirement",
     "//": "multifarious cracklins",
-    "components": [ [ [ "cracklins", 1 ], [ "human_cracklins", 1 ], [ "mutant_cracklins", 1 ], [ "mutant_human_cracklins", 1 ] ] ]
+    "components": [ [ [ "cracklins", 1 ], [ "human_cracklins", 1 ], [ "mutant_cracklins", 1 ] ] ]
   },
   {
     "id": "edible_bonemarrow",

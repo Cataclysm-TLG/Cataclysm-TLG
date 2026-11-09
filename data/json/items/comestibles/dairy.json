@@ -83,7 +83,7 @@
     "material": [ "milk" ],
     "volume": "500 ml",
     "charges": 2,
-    "vitamins": [ [ "milk_allergen", 1 ] ]
+    "vitamins": [ [ "calcium", 33 ], [ "iron", 1 ], [ "milk_allergen", 1 ] ]
   },
   {
     "type": "ITEM",
@@ -98,7 +98,7 @@
     "calories": 161,
     "description": "This is cultured milk defatted either due to churning or curdling.  Spoils quickly.",
     "price": "1 cent",
-    "vitamins": [ [ "vitC", 1 ], [ "calcium", 1 ] ]
+    "vitamins": [ [ "vitC", 3 ], [ "calcium", 33 ], [ "iron", 1 ], [ "milk_allergen", 1 ] ]
   },
   {
     "type": "ITEM",
