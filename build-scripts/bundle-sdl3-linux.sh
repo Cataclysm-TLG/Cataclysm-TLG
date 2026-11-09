@@ -100,18 +100,25 @@ collect_libs() {
 
 declare -A COPIED
 declare -A SEEN
-declare -A ALIAS
 # Map of copied real lib basename -> original resolved system path. Used for
 # license attribution via dpkg -S after the walk completes.
 declare -A REAL_TO_ORIGIN
 
 ensure_alias() {
     local alias_name="$1" real_base="$2"
-    if [[ -z "$alias_name" || "$alias_name" == "$real_base" ]]; then return; fi
-    local key="$alias_name->$real_base"
-    if [[ -n "${ALIAS[$key]:-}" ]]; then return; fi
-    ALIAS[$key]=1
-    ln -sf "$real_base" "$LIB_DIR/$alias_name"
+
+    if [[ -z "$alias_name" || "$alias_name" == "$real_base" ]]; then
+        return
+    fi
+
+    local alias_path="$LIB_DIR/$alias_name"
+    local real_path="$LIB_DIR/$real_base"
+
+    if [[ -e "$alias_path" ]]; then
+        return
+    fi
+
+    cp -L "$real_path" "$alias_path"
 }
 
 walk_closure() {
@@ -259,3 +266,12 @@ for base_real in "${!REAL_TO_ORIGIN[@]}"; do
 done
 
 echo "License staging complete in $LICENSE_DIR"
+
+# Ensure the bindist contains no symlinks (Steam depot requirement).
+if find "$BINDIST_DIR" -type l -print -quit | grep -q .; then
+    echo "ERROR: symlinks remain in bindist:" >&2
+    find "$BINDIST_DIR" -type l -print >&2
+    exit 5
+fi
+
+echo "Verified: no symlinks in bindist"
