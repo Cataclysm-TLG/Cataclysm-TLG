@@ -163,5 +163,11 @@
     "type": "vehicle_part_migration",
     "from": "ap_12000_gasoline_generator",
     "to": "ap_gasoline_generator"
+  },
+  {
+    "type": "ter_furn_migration",
+    "from_ter": "t_pit_straw",
+    "to_ter": "t_dirt"
   }
 ]
+
