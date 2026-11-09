@@ -677,15 +677,13 @@
     "symbol": "*",
     "color": "dark_gray",
     "name": { "str": "petrified eye" },
-    "description": "A fist-sized eyeball with a cross-shaped pupil.  It seems to be made of stone, but doesn't look like it was carved.",
+    "description": "A small eyeball with a cross-shaped pupil.  It seems to be made of stone, but doesn't look like it was carved.",
     "price": "2000 USD",
     "price_postapoc": "10 USD",
     "material": [ "stone" ],
-    "weight": "700 g",
-    "volume": "250 ml",
-    "to_hit": -1,
-    "qualities": [ [ "HAMMER", 1 ] ],
-    "melee_damage": { "bash": 6 }
+    "weight": "300 g",
+    "volume": "100 ml",
+    "to_hit": -1
   },
   {
     "type": "ITEM",
