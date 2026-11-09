@@ -2316,45 +2316,6 @@
   },
   {
     "type": "profession",
-    "id": "cop",
-    "name": "Police Officer",
-    "description": "Just a small-town deputy, you got the call and were ready to come to the rescue.  Soon it was you who needed rescuing, and you were lucky to escape with your life.  Who's going to respect your authority when the government this badge represents might not even exist anymore?",
-    "npc_background": "BG_survival_story_POLICE",
-    "points": 4,
-    "skills": [
-      { "level": 4, "name": "gun" },
-      { "level": 4, "name": "pistol" },
-      { "level": 3, "name": "melee" },
-      { "level": 2, "name": "bashing" },
-      { "level": 2, "name": "dodge" },
-      { "level": 2, "name": "swimming" }
-    ],
-    "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "pants" },
-          { "item": "socks" },
-          { "item": "badge_deputy" },
-          { "item": "police_belt" },
-          { "item": "boots" },
-          { "item": "whistle" },
-          { "item": "wristwatch" },
-          { "item": "baton" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_two_way_radio" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
-          { "item": "shirt_western" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
     "id": "detective",
     "name": "Police Detective",
     "description": "You were on the brink of a major breakthrough in your latest homicide case when the Cataclysm struck.  Now your prime suspect is dead.  Everyone's dead.  You could really use a smoke.",
@@ -2400,121 +2361,21 @@
   },
   {
     "type": "profession",
-    "id": "swat",
-    "name": "SWAT Officer",
-    "description": "As a member of the police force's most elite division, you are more than adequately trained and equipped to survive the brutal onslaught of the apocalypse.  Unfortunately, the chain of command has broken down; your only mission now is to stay alive.",
-    "npc_background": "BG_survival_story_POLICE",
-    "points": 6,
-    "proficiencies": [ "prof_gunsmithing_basic", "prof_spotting", "prof_gun_cleaning", "prof_auto_pistols_familiar", "prof_batons_familiar" ],
-    "skills": [
-      { "level": 5, "name": "gun" },
-      { "level": 3, "name": "smg" },
-      { "level": 4, "name": "pistol" },
-      { "level": 3, "name": "shotgun" },
-      { "level": 4, "name": "melee" },
-      { "level": 1, "name": "stabbing" },
-      { "level": 4, "name": "bashing" },
-      { "level": 2, "name": "dodge" },
-      { "level": 3, "name": "throw" },
-      { "level": 1, "name": "traps" },
-      { "level": 2, "name": "swimming" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "socks" },
-          { "item": "police_belt" },
-          { "item": "tac_helmet" },
-          { "item": "boots_combat" },
-          { "item": "gloves_tactical" },
-          { "item": "badge_swat" },
-          { "item": "wristwatch" },
-          { "item": "pants_tactical" },
-          { "item": "elbow_pads" },
-          { "item": "knee_pads" },
-          { "item": "single_sling" },
-          { "group": "swat_ballistic_vest_pristine" },
-          { "group": "charged_two_way_radio" },
-          { "item": "shirt_western" },
-          { "group": "army_mags_mp5" },
-          { "group": "army_mags_glock17" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "grenadebandolier", "contents-item": [ "flashbang", "flashbang" ] },
-          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
-          { "item": "hk_mp5", "ammo-item": "9mmfmj", "charges": 30, "contents-item": [ "rail_laser_sight" ] }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "sniper_police",
-    "name": "Police Sniper",
-    "description": "Your skill as a sharpshooter served you well in the line of duty, protecting the innocent with a single, well-placed bullet.  Now your own life is on the line, and you can't afford to miss if you don't want to end up as something's dinner.",
-    "npc_background": "BG_survival_story_POLICE",
-    "points": 6,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_spotting",
-      "prof_gun_cleaning",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
-    ],
-    "skills": [
-      { "level": 7, "name": "gun" },
-      { "level": 7, "name": "rifle" },
-      { "level": 3, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "bashing" },
-      { "level": 1, "name": "dodge" },
-      { "level": 2, "name": "swimming" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "socks" },
-          { "item": "pants_army" },
-          { "item": "police_belt" },
-          { "item": "sweatshirt" },
-          { "item": "sneakers" },
-          { "item": "gloves_tactical" },
-          { "item": "hat_ball" },
-          { "item": "badge_deputy" },
-          { "item": "wristwatch" },
-          { "item": "tacvest" },
-          { "group": "charged_two_way_radio" },
-          { "item": "glasses_bal", "custom-flags": [ "no_auto_equip" ] },
-          { "group": "charged_powered_earmuffs" },
-          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
-          { "item": "762_51", "charges": 20 },
-          { "item": "M24", "ammo-item": "762_51", "charges": 5, "contents-item": "shoulder_strap" },
-          { "item": "shirt_western" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
     "id": "riot_police",
     "name": "Riot Control Officer",
     "description": "The riots were brutal, even before the dead rose and started to devour the living.  The line you were holding broke.  It was only through a bit of luck and a lot of head-bashing that you got away in one piece, and the worst is yet to come.",
     "npc_background": "BG_survival_story_POLICE",
-    "points": 5,
+    "points": 6,
     "skills": [
-      { "level": 5, "name": "melee" },
-      { "level": 4, "name": "bashing" },
-      { "level": 3, "name": "unarmed" },
+      { "level": 4, "name": "melee" },
+      { "level": 3, "name": "bashing" },
+      { "level": 2, "name": "unarmed" },
       { "level": 3, "name": "gun" },
       { "level": 2, "name": "pistol" },
-      { "level": 3, "name": "launcher" },
-      { "level": 3, "name": "throw" },
+      { "level": 2, "name": "launcher" },
+      { "level": 2, "name": "throw" },
       { "level": 1, "name": "dodge" },
-      { "level": 3, "name": "swimming" }
+      { "level": 2, "name": "swimming" }
     ],
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
     "items": {
@@ -2538,50 +2399,6 @@
           { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
           { "item": "tonfa", "container-item": "police_belt" },
           { "group": "charged_tazer" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "cop_motor",
-    "name": "Motorized Police Officer",
-    "description": "Just a small-town deputy, you got the call and were ready to ride to the rescue.  Soon it was you who needed rescuing, and you had to abandon your motorcycle to escape.  Who's going to respect your authority when the government this badge represents doesn't exist anymore?",
-    "npc_background": "BG_survival_story_POLICE",
-    "points": 4,
-    "skills": [
-      { "level": 3, "name": "gun" },
-      { "level": 4, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "bashing" },
-      { "level": 1, "name": "dodge" },
-      { "level": 3, "name": "driving" },
-      { "level": 2, "name": "swimming" }
-    ],
-    "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
-    "vehicle": "motorcycle",
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "socks" },
-          { "item": "police_breeches" },
-          { "item": "badge_deputy" },
-          { "item": "tshirt" },
-          { "item": "police_belt" },
-          { "item": "motor_police_boots" },
-          { "item": "whistle" },
-          { "item": "wristwatch" },
-          { "item": "baton" },
-          { "item": "leather_police_jacket" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_two_way_radio" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "gloves_leather", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
-          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
-          { "item": "shirt_western" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2939,6 +2756,45 @@
       "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
+ {
+    "type": "profession",
+    "id": "cop",
+    "name": "Police Officer",
+    "description": "Just a small-town deputy, you got the call and were ready to come to the rescue.  Soon it was you who needed rescuing, and you were lucky to escape with your life.  Who's going to respect your authority when the government this badge represents might not even exist anymore?",
+    "npc_background": "BG_survival_story_POLICE",
+    "points": 4,
+    "skills": [
+      { "level": 4, "name": "gun" },
+      { "level": 4, "name": "pistol" },
+      { "level": 3, "name": "melee" },
+      { "level": 2, "name": "bashing" },
+      { "level": 2, "name": "dodge" },
+      { "level": 2, "name": "swimming" }
+    ],
+    "proficiencies": [ "prof_spotting", "prof_gun_cleaning", "prof_batons_familiar", "prof_auto_pistols_familiar" ],
+    "items": {
+      "both": {
+        "entries": [
+          { "item": "pants" },
+          { "item": "socks" },
+          { "item": "badge_deputy" },
+          { "item": "police_belt" },
+          { "item": "boots" },
+          { "item": "whistle" },
+          { "item": "wristwatch" },
+          { "item": "baton" },
+          { "group": "charged_smart_phone" },
+          { "group": "charged_two_way_radio" },
+          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
+          { "item": "glock_17", "ammo-item": "9mmfmj", "charges": 22, "container-item": "holster" },
+          { "item": "legpouch_large", "contents-group": "army_mags_glock17" },
+          { "item": "shirt_western" }
+        ]
+      },
+      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
+    }
+  },
   {
     "id": "cop_car",
     "type": "profession",
@@ -2948,10 +2804,10 @@
     "points": 5,
     "skills": [
       { "level": 4, "name": "gun" },
-      { "level": 4, "name": "pistol" },
+      { "level": 3, "name": "pistol" },
       { "level": 4, "name": "driving" },
       { "level": 3, "name": "melee" },
-      { "level": 3, "name": "bashing" },
+      { "level": 2, "name": "bashing" },
       { "level": 2, "name": "dodge" },
       { "level": 2, "name": "swimming" }
     ],
@@ -4357,19 +4213,15 @@
     "name": "Naturalist",
     "description": "Over long years of self-imposed exile in the wilderness, you have come to an understanding with Mother Nature.  The world as they knew it might have ended for your forsaken species, but you can hardly tell the difference.",
     "npc_background": "BG_survival_story_RURAL",
-    "points": 6,
+    "points": 7,
     "skills": [
-      { "level": 7, "name": "survival" },
-      { "level": 6, "name": "fabrication" },
-      { "level": 6, "name": "tailor" },
-      { "level": 5, "name": "gun" },
-      { "level": 5, "name": "archery" },
-      { "level": 4, "name": "chemistry" },
-      { "level": 4, "name": "cooking" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 2, "name": "dodge" },
-      { "level": 2, "name": "swimming" }
+      { "level": 6, "name": "survival" },
+      { "level": 4, "name": "fabrication" },
+      { "level": 4, "name": "tailor" },
+      { "level": 4, "name": "archery" },
+      { "level": 3, "name": "chemistry" },
+      { "level": 2, "name": "traps" },
+      { "level": 3, "name": "cooking" }
     ],
     "proficiencies": [
       "prof_bowyery",
@@ -4861,12 +4713,12 @@
     "name": "Competitive Fencer",
     "description": "Years of training prepared you for the competitive fencing circuit, but your latest tournament was cut short when zombies invaded the piste.  The referee was eaten, so you're not sure if the rules are still in play.",
     "npc_background": "BG_survival_story_SPORTS",
-    "points": 5,
+    "points": 6,
     "skills": [
-      { "level": 6, "name": "melee" },
-      { "level": 6, "name": "stabbing" },
-      { "level": 6, "name": "dodge" },
-      { "level": 4, "name": "swimming" }
+      { "level": 4, "name": "melee" },
+      { "level": 3, "name": "stabbing" },
+      { "level": 2, "name": "dodge" },
+      { "level": 2, "name": "swimming" }
     ],
     "proficiencies": [ "prof_fencing_weapons_familiar", "prof_fencing_weapons_pro" ],
     "starting_styles": [ "style_fencing" ],
@@ -5068,17 +4920,14 @@
     "name": "Military Pilot",
     "description": "You got to see things fall apart from the sky, transporting soldiers and survivors from one holdout to the next.  You knew it was only a matter of time before the horrors patrolling the skies shot you down.",
     "npc_background": "BG_survival_story_SOLDIER",
-    "points": 5,
+    "points": 6,
     "skills": [
-      { "level": 7, "name": "driving" },
-      { "level": 4, "name": "mechanics" },
-      { "level": 3, "name": "gun" },
-      { "level": 3, "name": "pistol" },
-      { "level": 3, "name": "firstaid" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 2, "name": "dodge" },
-      { "level": 2, "name": "throw" },
+      { "level": 6, "name": "driving" },
+      { "level": 3, "name": "mechanics" },
+      { "level": 2, "name": "gun" },
+      { "level": 2, "name": "pistol" },
+      { "level": 1, "name": "firstaid" },
+      { "level": 1, "name": "throw" },
       { "level": 1, "name": "swimming" }
     ],
     "proficiencies": [ "prof_helicopter_pilot", "prof_spotting", "prof_gun_cleaning", "prof_auto_pistols_familiar" ],
@@ -5148,16 +4997,13 @@
     "npc_background": "BG_survival_story_SOLDIER",
     "points": 5,
     "skills": [
-      { "level": 6, "name": "firstaid" },
-      { "level": 4, "name": "gun" },
-      { "level": 3, "name": "rifle" },
-      { "level": 3, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
+      { "level": 4, "name": "firstaid" },
+      { "level": 3, "name": "gun" },
+      { "level": 2, "name": "rifle" },
+      { "level": 2, "name": "pistol" },
       { "level": 1, "name": "dodge" },
-      { "level": 2, "name": "throw" },
-      { "level": 2, "name": "survival" },
-      { "level": 2, "name": "swimming" }
+      { "level": 1, "name": "throw" },
+      { "level": 2, "name": "survival" }
     ],
     "proficiencies": [
       "prof_spotting",
@@ -5215,32 +5061,6 @@
   },
   {
     "type": "profession",
-    "id": "super_biker",
-    "name": { "male": "Speed King", "female": "Speed Queen" },
-    "description": "You used to rule the roads before they were filled with wrecks, undead, and unspeakable horrors.  At least there's no speed limits in the apocalypse!",
-    "npc_background": "BG_survival_story_SPORTS",
-    "points": 4,
-    "proficiencies": [ "prof_driver" ],
-    "skills": [ { "level": 8, "name": "driving" } ],
-    "vehicle": "superbike",
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "helmet_motor" },
-          { "item": "touring_suit" },
-          { "item": "under_armor" },
-          { "item": "under_armor_shorts" },
-          { "item": "socks" },
-          { "item": "motorbike_boots" },
-          { "item": "gloves_leather" },
-          { "item": "wristwatch" },
-          { "group": "charged_smart_phone" }
-        ]
-      }
-    }
-  },
-  {
-    "type": "profession",
     "id": "hazmat_unit",
     "name": "Hazmat Unit",
     "description": "You were deployed to autopsy one of the rioters showing feral behavior before being put down.  When they got back up, you knew this was out of your pay grade.",
@@ -5265,40 +5085,6 @@
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "local_drug_dealer",
-    "name": "Drug Dealer",
-    "npc_background": "BG_survival_story_CRIMINAL",
-    "description": "You were about to make your biggest sale yet, but when you met the buyer he tried to bite you.  To top it off, it seems that this wasn't some sort of bad trip, as the whole town tried going for your throat too.",
-    "points": 2,
-    "skills": [
-      { "level": 4, "name": "speech" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 2, "name": "unarmed" },
-      { "level": 1, "name": "chemistry" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "hoodie" },
-          { "item": "jeans" },
-          { "item": "mbag" },
-          { "item": "socks" },
-          { "item": "sneakers" },
-          { "item": "bandana" },
-          { "item": "gloves_medical" },
-          { "item": "switchblade" },
-          { "group": "charged_cell_phone" },
-          { "item": "crack", "count": 25, "container-item": "null", "entry-wrapper": "bag_zipper" }
-        ]
-      },
-      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    },
-    "traits": [ "LIAR" ]
   },
   {
     "type": "profession",
@@ -5611,87 +5397,6 @@
       "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER", "MISSION_FIND_RIFLE" ]
-  },
-  {
-    "type": "profession",
-    "id": "heist_driver",
-    "name": "Heist Driver",
-    "description": "For as long as you can remember, you have lived a double life: a normal driver by the day and a heist driver in the night.  Now there are no cops and no law, but even after the Cataclysm, you drive.",
-    "npc_background": "BG_survival_story_CRIMINAL",
-    "points": 4,
-    "proficiencies": [ "prof_driver", "prof_basic_engines" ],
-    "skills": [ { "level": 6, "name": "driving" }, { "level": 4, "name": "mechanics" }, { "level": 1, "name": "melee" } ],
-    "vehicle": "car_coupe_muscle",
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "tshirt" },
-          { "item": "gosling_jacket" },
-          { "item": "gloves_fingerless" },
-          { "item": "socks" },
-          { "item": "sneakers" },
-          { "item": "hammer" },
-          { "group": "charged_smart_phone" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" }, { "item": "jeans" } ] },
-      "female": {
-        "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "jeans_skinny" } ]
-      }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "explosive_ordnance_disposal",
-    "name": "Explosive Ordnance Disposal Technician",
-    "description": "Ever since you were a child you were fascinated with explosives and all things that go boom.  As soon as you turned 18 you joined the army to become an EOD technician.  While out on a call about a potential explosive in the neighboring county, your team was overrun by hordes of the undead.  You are alone, with nothing but your precious training, gear and love of explosives.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "points": 5,
-    "proficiencies": [
-      "prof_elec_circuits",
-      "prof_intro_chemistry",
-      "prof_gun_cleaning",
-      "prof_spotting",
-      "prof_traps",
-      "prof_disarming",
-      "prof_trapsetting",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
-    ],
-    "skills": [
-      { "level": 6, "name": "traps" },
-      { "level": 4, "name": "melee" },
-      { "level": 4, "name": "gun" },
-      { "level": 3, "name": "rifle" },
-      { "level": 3, "name": "pistol" },
-      { "level": 3, "name": "dodge" },
-      { "level": 3, "name": "firstaid" },
-      { "level": 3, "name": "throw" },
-      { "level": 3, "name": "survival" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "tank_top" },
-          { "item": "pants_army" },
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "attached_ear_plugs_off", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "helmet_eod" },
-          { "item": "nomex_gloves" },
-          { "item": "gloves_eod" },
-          { "item": "trousers_eod" },
-          { "item": "foot_protectors_eod" },
-          { "item": "eod_plate", "container-item": "jacket_eod" },
-          { "item": "EOD_hotstick", "custom-flags": [ "auto_wield" ] },
-          { "item": "water_clean", "container-item": "camelbak" },
-          { "item": "multitool", "container-item": "sheath" },
-          { "item": "m18", "ammo-item": "9mm", "container-item": "holster", "charges": 17 }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    }
   },
   {
     "type": "profession",
