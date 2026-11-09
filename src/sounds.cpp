@@ -648,7 +648,7 @@ void sounds::process_sound_markers( Character *you )
         if( you->controlling_vehicle ) {
             vehicle *veh = veh_pointer_or_null( here.veh_at( you->pos_abs() ) );
             const int noise = veh ? static_cast<int>( veh->vehicle_noise ) : 0;
-            you->volume = std::max( you->volume, std::min( noise, raw_volume ) );
+            you->volume = std::min( you->volume, std::min( noise, raw_volume ) );
         }
 
         // Secure the flag before wake_up() clears the effect.
