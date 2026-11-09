@@ -5972,6 +5972,9 @@ static void CheckMessages()
                         if( !IsCursorVisible() ) {
                             ShowCursor();
                         }
+
+                        // Only monitor motion when cursor is visible
+                        last_input = input_event( MouseInput::Move, input_event_t::mouse );
                     }
                     break;
 
