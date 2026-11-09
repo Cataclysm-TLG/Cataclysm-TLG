@@ -4586,8 +4586,8 @@ Creature *game::is_hostile_within( int distance, bool dangerous )
         if( critter->is_monster() ) {
             const monster *mon = critter->as_monster();
             if( u.attitude_to( *critter ) != Creature::Attitude::FRIENDLY &&
-                ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) ||
-                  mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
+                ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon->type->has_anger_trigger( mon_trigger::STALK ) 
+                || mon->type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) || mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
                 potential_danger = true;
             }
         }
@@ -4746,6 +4746,7 @@ void game::mon_info_update( )
     static time_point previous_turn = calendar::turn_zero;
     const time_duration sm_ignored_turns =
         time_duration::from_turns( get_option<int>( "SAFEMODEIGNORETURNS" ) );
+    const bool sm_realert_on_approach = get_option<bool>( "SAFEMODEIGNOREAPPROACH" );
 
     for( Creature *c : u.get_visible_creatures( MAPSIZE_X ) ) {
         monster *m = dynamic_cast<monster *>( c );
@@ -4842,7 +4843,7 @@ void game::mon_info_update( )
                         } else if( ( sm_ignored_turns == time_duration() ||
                                      ( critter.lastseen_turn &&
                                        *critter.lastseen_turn > calendar::turn - sm_ignored_turns ) ) &&
-                                   ( mon_dist > critter.ignoring / 2 || mon_dist < 6 ) ) {
+                                       ( !sm_realert_on_approach || mon_dist > critter.ignoring / 3 || mon_dist < 5 ) ) {
                             passmon = true;
                         }
                         critter.lastseen_turn = calendar::turn;
@@ -4911,7 +4912,7 @@ void game::mon_info_update( )
                                                  _( "Hostile survivor spotted!" ) );
             }
         } else {
-            cancel_activity_or_ignore_query( distraction_type::hostile_spotted_far, _( "Monsters spotted!" ) );
+            cancel_activity_or_ignore_query( distraction_type::hostile_spotted_far, _( "Hostiles spotted!" ) );
         }
         turnssincelastmon = 0_turns;
         if( safe_mode == SAFE_MODE_ON ) {
