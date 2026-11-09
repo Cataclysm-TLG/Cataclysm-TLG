@@ -1648,7 +1648,7 @@ void options_manager::add_options_general()
 
         add( "SAFEMODEIGNORETURNS", page_id, to_translation( "Turns to remember ignored monsters" ),
              to_translation( "Number of turns an ignored monster stays ignored after it is no longer seen.  0 disables this option and monsters are permanently ignored." ),
-             0, 3600, 200
+             0, 3600, 600
            );
     } );
 
