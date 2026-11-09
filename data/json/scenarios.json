@@ -821,8 +821,6 @@
       "clown",
       "spouse",
       "naked",
-      "super_biker",
-      "local_drug_dealer",
       "hitman"
     ],
     "flags": [ "CHALLENGE", "LONE_START" ]
