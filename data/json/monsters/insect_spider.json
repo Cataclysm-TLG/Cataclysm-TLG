@@ -2848,7 +2848,7 @@
     "dissect": "dissect_insect_sample_small",
     "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
     "fear_triggers": [ "FIRE", "HURT" ],
-    "fungalize_into": "mon_mantis_fungal_giant",
+    "fungalize_into": "mon_mantis_giant_fungal",
     "reproduction": { "baby_egg": "egg_mantis", "baby_count": 1, "baby_timer": 30 },
     "baby_flags": [ "SPRING", "SUMMER", "AUTUMN" ],
     "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },

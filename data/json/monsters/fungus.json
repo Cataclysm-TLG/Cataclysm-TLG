@@ -275,7 +275,7 @@
     "armor": { "bash": 1, "cut": 1, "stab": 15, "bullet": 12, "electric": 2 }
   },
     {
-    "id": "mon_mantis_fungal_giant",
+    "id": "mon_mantis_giant_fungal",
     "type": "MONSTER",
     "name": { "str": "giant fungal mantis", "str_pl": "giant fungal mantises" },
     "description": "Wobbling on four legs, what's left of this imposing predator still bears huge raptorial claws on its forelegs.  Despite the tendrils of fungus sprouting from its exoskeleton, it patiently waits for a chance to put them to use.",
