@@ -444,8 +444,8 @@ void Character::randomize( const bool random_scenario, bool play_now )
     randomize_height();
     randomize_blood();
     randomize_heartrate();
-    bool cities_enabled = overmap_buffer.get_settings(
-                              this->pos_abs_omt() ).get_settings_city().city_size != 0;
+    bool cities_enabled = overmap_buffer.get_default_settings(point_abs_om(0, 0))
+                            .get_settings_city().city_size != 0;
     if( random_scenario ) {
         std::vector<const scenario *> scenarios;
         for( const scenario &scen : scenario::get_all() ) {
@@ -3684,8 +3684,8 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 new_scens.push_back( &scen );
             }
             scenario_sorter.male = u.male;
-            scenario_sorter.cities_enabled = overmap_buffer
-                                             .get_settings( u.pos_abs_omt() ).get_settings_city().city_size != 0;
+            scenario_sorter.cities_enabled = overmap_buffer.get_default_settings(point_abs_om(0, 0))
+                                                .get_settings_city().city_size != 0;
             if( ( scens_length = filter_entries( u, cur_id, sorted_scens, new_scens, get_scenario(),
                                                  filterstring,
                                                  scenario_sorter ) ) == 0 ) {

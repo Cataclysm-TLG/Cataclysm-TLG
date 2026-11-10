@@ -802,7 +802,7 @@ void region_settings_city::finalize()
     if( city_spacing > 8 || city_spacing < 0 ) {
         debugmsg( "region_settings_city(%s) city_spacing(%d) is outside the bounds of 0 to 8", id.c_str(),
                   city_spacing );
-        city_size = std::clamp( city_spacing, 0, 8 );
+        city_spacing = std::clamp( city_spacing, 0, 8 );
     }
     houses.finalize();
     shops.finalize();
