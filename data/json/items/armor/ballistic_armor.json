@@ -1239,12 +1239,24 @@
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
         "encumbrance": 3,
-        "coverage": 80,
+        "coverage": 98,
         "covers": [ "arm_l", "arm_r" ],
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_l", "arm_upper_r" ],
+        "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l" ],
+        "volume_encumber_modifier": 0
+      },
+      {
+        "material": [
+          { "type": "nylon", "covered_by_mat": 100, "thickness": 0.5 },
+          { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
+        ],
+        "encumbrance": 3,
+        "coverage": 98,
+        "covers": [ "wing_bird_l", "wing_bird_r" ],
+        "specifically_covers": [ "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
         "volume_encumber_modifier": 0
       }
-    ]
+    ],
+    "melee_damage": { "bash": 1 }
   },
   {
     "id": "iotv_groin_plate",
@@ -1262,6 +1274,7 @@
     "material": [ "nylon", "kevlar_layered" ],
     "color": "dark_gray",
     "flags": [ "STURDY", "OUTER", "WATER_FRIENDLY", "CANT_WEAR" ],
+    "environmental_protection": 20,
     "armor": [
       {
         "material": [
@@ -1269,12 +1282,13 @@
           { "type": "kevlar_layered", "covered_by_mat": 100, "thickness": 4.4 }
         ],
         "encumbrance": 2,
-        "coverage": 75,
+        "coverage": 90,
         "covers": [ "leg_l", "leg_r" ],
         "specifically_covers": [ "leg_hip_l", "leg_hip_r" ],
         "volume_encumber_modifier": 0
       }
-    ]
+    ],
+    "melee_damage": { "bash": 1 }
   },
   {
     "id": "iotv_neck_plate",

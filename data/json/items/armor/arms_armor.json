@@ -1167,7 +1167,7 @@
         "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 2.0 } ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 4
       }
     ],
@@ -1216,7 +1216,7 @@
         "material": [ { "type": "leather", "covered_by_mat": 100, "thickness": 4 } ],
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_r", "arm_shoulder_l", "wing_bird_shoulder_r", "wing_bird_shoulder_l" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 4
       }
     ],

@@ -4586,8 +4586,10 @@ Creature *game::is_hostile_within( int distance, bool dangerous )
         if( critter->is_monster() ) {
             const monster *mon = critter->as_monster();
             if( u.attitude_to( *critter ) != Creature::Attitude::FRIENDLY &&
-                ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) || mon->type->has_anger_trigger( mon_trigger::STALK ) 
-                || mon->type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) || mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
+                ( mon->type->has_anger_trigger( mon_trigger::HOSTILE_CLOSE ) ||
+                  mon->type->has_anger_trigger( mon_trigger::STALK )
+                  || mon->type->has_anger_trigger( mon_trigger::HOSTILE_SEEN ) ||
+                  mon->type->has_anger_trigger( mon_trigger::HOSTILE_WEAK ) ) ) {
                 potential_danger = true;
             }
         }
@@ -4843,7 +4845,7 @@ void game::mon_info_update( )
                         } else if( ( sm_ignored_turns == time_duration() ||
                                      ( critter.lastseen_turn &&
                                        *critter.lastseen_turn > calendar::turn - sm_ignored_turns ) ) &&
-                                       ( !sm_realert_on_approach || mon_dist > critter.ignoring / 3 || mon_dist < 5 ) ) {
+                                   ( !sm_realert_on_approach || mon_dist > critter.ignoring / 3 || mon_dist < 5 ) ) {
                             passmon = true;
                         }
                         critter.lastseen_turn = calendar::turn;
