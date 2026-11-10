@@ -274,6 +274,50 @@
     "flags": [ "SEES", "SMELLS", "POISON", "CLIMBS" ],
     "armor": { "bash": 1, "cut": 1, "stab": 15, "bullet": 12, "electric": 2 }
   },
+    {
+    "id": "mon_mantis_fungal_giant",
+    "type": "MONSTER",
+    "name": { "str": "giant fungal mantis", "str_pl": "giant fungal mantises" },
+    "description": "Wobbling on four legs, what's left of this imposing predator still bears huge raptorial claws on its forelegs.  Despite the tendrils of fungus sprouting from its exoskeleton, it patiently waits for a chance to put them to use.",
+    "default_faction": "fungus",
+    "bodytype": "insect",
+    "species": [ "FUNGUS" ],
+    "volume": "110 L",
+    "weight": "130 kg",
+    "hp": 90,
+    "speed": 80,
+    "material": [ "iflesh" ],
+    "symbol": "M",
+    "color": "light_gray",
+    "aggression": 100,
+    "morale": 100,
+    "melee_skill": 7,
+    "melee_dice": 1,
+    "melee_dice_sides": 6,
+    "melee_damage": [ { "damage_type": "cut", "amount": 10.0, "armor_penetration": 12 } ],
+    "dodge": 2,
+    "weakpoint_sets": [ "wps_arthropod_winged" ],
+    "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_basic_bug" ],
+    "vision_day": 5,
+    "vision_night": 4,
+    "harvest": "arachnid",
+    "anger_triggers": [ "PLAYER_WEAK", "PLAYER_CLOSE" ],
+    "path_settings": { "max_dist": 10, "avoid_sharp": true, "avoid_dangerous_fields": true },
+    "grab_strength": 30,
+    "special_attacks": [
+      { "id": "ranged_pull", "cooldown": 12, "grab_data": { "pull_weight_ratio": 1.0 } },
+      {
+        "type": "bite",
+        "cooldown": 5,
+        "accuracy": 5,
+        "infection_chance": 75,
+        "damage_max_instance": [ { "damage_type": "stab", "amount": 10, "armor_penetration": 5 } ]
+      }
+    ],
+    "upgrades": { "half_life": 30, "into": "mon_mantis_mega" },
+    "flags": [ "SEES", "HEARS", "CLIMBS", "STUMBLES", "INSECTICIDEPROOF" ],
+    "armor": { "bash": 4, "cut": 6, "stab": 15, "bullet": 12, "electric": 2, "acid": 3 }
+  },
   {
     "id": "mon_spider_fungus",
     "type": "MONSTER",
@@ -287,7 +331,7 @@
     "weight": "41500 g",
     "hp": 20,
     "speed": 60,
-    "material": [ "sclerotin", "chitin", "iflesh" ],
+    "material": [  "iflesh" ],
     "symbol": "s",
     "color": "light_gray",
     "aggression": 100,
@@ -326,7 +370,7 @@
     "hp": 10,
     "speed": 70,
     "bleed_rate": 100,
-    "material": [ "sclerotin", "chitin", "iflesh" ],
+    "material": [  "iflesh" ],
     "symbol": "a",
     "color": "yellow",
     "aggression": 100,
@@ -340,7 +384,6 @@
     "vision_day": 7,
     "vision_night": 2,
     "harvest": "arachnid_wasp",
-    "dissect": "dissect_insect_sample_single",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 1 },
@@ -374,7 +417,6 @@
     "hp": 70,
     "volume": "60 L",
     "weight": "35 kg",
-    "dissect": "dissect_insect_sample_large",
     "armor": { "bash": 3, "cut": 10, "stab": 15, "bullet": 10, "electric": 2 }
   },
   {
@@ -390,7 +432,7 @@
     "hp": 70,
     "speed": 95,
     "attack_cost": 170,
-    "material": [ "sclerotin", "chitin", "iflesh" ],
+    "material": [  "iflesh" ],
     "symbol": "a",
     "color": "yellow",
     "aggression": 100,
@@ -406,7 +448,6 @@
     "vision_night": 7,
     "harvest": "arachnid_wasp",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
-    "dissect": "dissect_insect_sample_single",
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 1 },
       "corpse_type": "NO_CORPSE",
@@ -424,7 +465,6 @@
     "copy-from": "mon_wasp_fungus",
     "melee_skill": 6,
     "special_attacks": [ [ "FUNGUS_INJECT", 30 ] ],
-    "dissect": "dissect_insect_sample_small",
     "armor": { "bash": 6, "cut": 3, "stab": 15, "bullet": 14, "electric": 2 }
   },
   {
@@ -446,7 +486,6 @@
     "vision_day": 19,
     "vision_night": 5,
     "harvest": "arachnid_wasp_queen",
-    "dissect": "dissect_insect_sample_huge",
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 2 },
       "corpse_type": "NO_CORPSE",
@@ -478,7 +517,7 @@
     "weight": "40750 g",
     "hp": 20,
     "speed": 120,
-    "material": [ "sclerotin", "chitin", "iflesh" ],
+    "material": [  "iflesh" ],
     "symbol": "a",
     "color": "yellow",
     "aggression": 100,
@@ -494,7 +533,6 @@
     "vision_night": 3,
     "harvest": "arachnid_bee",
     "scents_tracked": [ "sc_fetid", "sc_human" ],
-    "dissect": "dissect_insect_sample_single",
     "flags": [ "SEES", "SMELLS", "PATH_AVOID_FIRE" ],
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 1 },
@@ -514,7 +552,6 @@
     "weight": "815 kg",
     "melee_dice": 4,
     "dodge": 3,
-    "dissect": "dissect_insect_sample_small",
     "extend": { "flags": [ "DESTROYS", "PUSH_MON", "PUSH_VEH" ] },
     "death_function": {
       "effect": { "id": "death_fungalburst", "hit_self": true, "min_level": 2 },
