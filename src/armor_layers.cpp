@@ -375,7 +375,41 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
         percent_best = portion->best_protection_chance;
         percent_worst = portion->worst_protection_chance;
     }
+    if( !worn_item.covers( used_bp ) && worn_item.is_ablative() ) {
+        for( const item_pocket *pocket : worn_item.get_all_ablative_pockets() ) {
+            if( pocket->empty() ) {
+                continue;
+            }
 
+            const item &plate = pocket->front();
+            bool covers_location = plate.get_coverage( used_bp ) > 0;
+
+            if( !covers_location ) {
+                for( const sub_bodypart_str_id &sbp : used_bp->sub_parts ) {
+                    if( plate.get_coverage( sbp ) > 0 ) {
+                        covers_location = true;
+                        break;
+                    }
+                }
+            }
+
+            if( !covers_location ) {
+                continue;
+            }
+
+            worst_res = resistances( plate, false, 99, used_bp );
+            best_res = resistances( plate, false, 0, used_bp );
+            median_res = resistances( plate, false, 50, used_bp );
+            average_res = resistances( plate, false, average_resistance, used_bp );
+
+            const armor_portion_data *plate_portion = plate.portion_for_bodypart( used_bp );
+            if( plate_portion ) {
+                percent_best = plate_portion->best_protection_chance;
+                percent_worst = plate_portion->worst_protection_chance;
+            }
+            break;
+        }
+    }
     bool display_average = percent_best < 50 && percent_worst < 50;
 
     prot.push_back( string_format( "<color_c_green>[%s]</color>", _( "Protection" ) ) );
@@ -539,10 +573,23 @@ std::vector<layering_item_info> outfit::items_cover_bp( const Character &c, cons
 {
     std::vector<layering_item_info> s;
     for( auto elem_it = worn.begin(); elem_it != worn.end(); ++elem_it ) {
-        if( elem_it->covers( bp ) ) {
+        const item *display_item = &*elem_it;
+        bool covers_bp = elem_it->covers( bp );
+
+        if( !covers_bp && elem_it->is_ablative() ) {
+            for( const item_pocket *pocket : elem_it->get_all_ablative_pockets() ) {
+                if( !pocket->empty() && pocket->front().get_coverage( bp ) > 0 ) {
+                    display_item = &pocket->front();
+                    covers_bp = true;
+                    break;
+                }
+            }
+        }
+
+        if( covers_bp ) {
             s.push_back( { get_item_penalties( elem_it, c, bp ),
                            elem_it->get_encumber( c, bp ),
-                           elem_it->tname()
+                           display_item->tname()
                          } );
         }
     }
@@ -693,7 +740,18 @@ void outfit::sort_armor( Character &guy )
         } else {
             // bp_*
             for( auto it = worn.begin(); it != worn.end(); ++it ) {
-                if( it->covers( bp ) ) {
+                bool covers_bp = it->covers( bp );
+                // Check for attachments which aren't worn on the BP they cover.
+                if( !covers_bp && it->is_ablative() ) {
+                    for( const item_pocket *pocket : it->get_all_ablative_pockets() ) {
+                        if( !pocket->empty() && pocket->front().get_coverage( bp ) > 0 ) {
+                            covers_bp = true;
+                            break;
+                        }
+                    }
+                }
+
+                if( covers_bp ) {
                     tmp_worn.push_back( it );
                 }
             }
@@ -859,7 +917,9 @@ void outfit::sort_armor( Character &guy )
                 continue;
             }
             if( curr >= rightListOffset && pos <= rightListLines ) {
-                mvwprintz( w_sort_right, point( 1, pos ), ( cover == bp ? c_yellow : c_white ),
+                mvwprintz( w_sort_right, point( 1, pos ), ( ( cover == bp || ( combine_bp( cover ) &&
+                           cover.obj().opposite_part.id() == bp ) )
+                           ? c_yellow : c_white ),
                            "%s:", body_part_name_as_heading( cover, combine_bp( cover ) ? 2 : 1 ) );
                 pos++;
             }

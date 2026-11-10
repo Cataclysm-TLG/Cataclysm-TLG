@@ -2804,10 +2804,24 @@
     "armor": [
       { "encumbrance": 7, "coverage": 85, "covers": [ "torso" ] },
       {
-        "covers": [ "arm_l", "arm_r", "wing_bird_l", "wing_bird_r" ],
+        "covers": [ "arm_l", "arm_r" ],
         "coverage": 98,
         "encumbrance": 7,
-        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r" ],
+        "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r"],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "wing_bird_l", "wing_bird_r" ],
+        "coverage": 98,
+        "encumbrance": 7,
+        "specifically_covers": [ "wing_bird_shoulder_l", "wing_bird_shoulder_r" ],
+        "layers": [ "BELTED" ]
+      },
+      {
+        "covers": [ "wing_bird_l", "wing_bird_r" ],
+        "coverage": 85,
+        "encumbrance": 0,
+        "specifically_covers": [ "wing_bird_upper_l", "wing_bird_upper_r" ],
         "layers": [ "BELTED" ]
       },
       {
@@ -2819,7 +2833,7 @@
       },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 98,
+        "coverage": 95,
         "encumbrance": 7,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "layers": [ "BELTED" ]
@@ -2868,7 +2882,7 @@
       {
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_r", "arm_upper_l", "arm_elbow_r", "arm_elbow_l" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 4
       },
       {
@@ -2885,7 +2899,7 @@
           "wing_bird_fingers_r",
           "wing_bird_fingers_l"
         ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 4
       },
       {

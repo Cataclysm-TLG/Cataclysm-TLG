@@ -466,13 +466,13 @@
       {
         "covers": [ "arm_l", "arm_r" ],
         "specifically_covers": [ "arm_shoulder_l", "arm_shoulder_r", "arm_upper_r", "arm_upper_l", "arm_elbow_r", "arm_elbow_l" ],
-        "coverage": 100,
+        "coverage": 98,
         "encumbrance": 14
       },
       { "covers": [ "arm_l", "arm_r" ], "specifically_covers": [ "arm_lower_l", "arm_lower_r" ], "coverage": 98 },
       {
         "covers": [ "cephalopod_tentacle_l", "cephalopod_tentacle_r" ],
-        "coverage": 100,
+        "coverage": 98,
         "specifically_covers": [ "cephalopod_tentacle_l_base", "cephalopod_tentacle_r_base" ],
         "encumbrance": 14
       },

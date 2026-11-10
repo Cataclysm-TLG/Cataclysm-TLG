@@ -1206,10 +1206,10 @@ vehicle *map::move_vehicle( vehicle &veh, const tripoint_rel_ms &dp, const tiler
             float driver_skill = driver->get_skill_level( skill_driving );
             float driver_spot  = driver->spot_check();
             float avoidance = std::min(
-                                driver_skill * 0.02f + driver_spot * 0.01f +
-                                ( !extra_hazard && driver->has_proficiency( proficiency_prof_driver ) ? 0.05f : 0.0f ),
-                                0.75f
-                            );
+                                  driver_skill * 0.02f + driver_spot * 0.01f +
+                                  ( !extra_hazard && driver->has_proficiency( proficiency_prof_driver ) ? 0.05f : 0.0f ),
+                                  0.75f
+                              );
             item rough_terrain( itype_rough_terrain, calendar::turn );
             float hit_chance = vehicle::hit_probability( rough_terrain, &vp_wheel );
             float effective_hit = hit_chance * ( 1.f - avoidance );

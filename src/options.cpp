@@ -1655,7 +1655,7 @@ void options_manager::add_options_general()
              to_translation( "If true, an ignored monster will trigger safe mode again once it closes to half the distance it was at when ignored.  If false, it stays ignored no matter how close it gets." ),
              true
            );
-           
+
     } );
 
     add_empty_line();

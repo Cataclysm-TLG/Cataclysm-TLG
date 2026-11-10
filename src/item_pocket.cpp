@@ -1069,7 +1069,7 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
 
     if( data->holster ) {
         info.emplace_back( "DESCRIPTION",
-                           _( "This is a <info>holster</info>, it only holds <info>one item at a time</info>." ) );
+                           _( "This pocket only holds <info>one item at a time</info>." ) );
     }
 
     if( data->extra_encumbrance > 0 ) {
@@ -1270,7 +1270,7 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
 
     if( data->holster ) {
         info.emplace_back( "DESCRIPTION",
-                           _( "This is a <info>holster</info>, it only holds <info>one item at a time</info>." ) );
+                           _( "This pocket only holds <info>one item at a time</info>." ) );
     }
 
     if( data->extra_encumbrance > 0 ) {
@@ -1358,7 +1358,7 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
         // If we have contents for an ablative pocket, display the armor data.
         if( !contents.empty() ) {
             const item &ablative_armor = contents.front();
-            info.emplace_back( arm_type_str, string_format( "%s%s", _( "Coverage:" ), space ), "",
+            info.emplace_back( arm_type_str, string_format( "%s%s", _( "<bold>Coverage:</bold>" ), space ), "",
                                iteminfo::no_newline,
                                ablative_armor.get_avg_coverage() );
             info.back().bNewLine = true;

@@ -1873,7 +1873,22 @@ void outfit::absorb_damage( Character &guy, damage_unit &elem, bodypart_id bp,
     for( auto iter = worn.rbegin(); iter != worn.rend(); ) {
         item &armor = *iter;
 
-        if( !armor.covers( bp ) ) {
+        bool is_ablative = armor.is_ablative();
+        bool ablative_covers_bp = false;
+        bool ablative_covers_sbp = false;
+        if( is_ablative ) {
+            for( const item_pocket *pocket : armor.get_all_ablative_pockets() ) {
+                if( !pocket->empty() && pocket->front().get_coverage( bp ) > 0 ) {
+                    ablative_covers_bp = true;
+                    if( pocket->front().get_coverage( sbp ) > 0 ) {
+                        ablative_covers_sbp = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if( !armor.covers( bp ) && !ablative_covers_bp ) {
             ++iter;
             continue;
         }
@@ -1897,13 +1912,13 @@ void outfit::absorb_damage( Character &guy, damage_unit &elem, bodypart_id bp,
         }
 
         if( !destroy ) {
-            // if the armor location has ablative armor apply that first
-            if( armor.is_ablative() ) {
+            // If the armor location has ablative armor, apply that first.
+            if( is_ablative && ablative_covers_sbp ) {
                 guy.ablative_armor_absorb( elem, armor, sbp, roll );
             }
-            // if not already destroyed to an armor absorb
+            // If not already destroyed to an armor absorb.
             destroy = guy.armor_absorb( elem, armor, bp, sbp, roll );
-            // for the torso we also need to consider if it hits anything hanging off the character or their neck
+            // We need to check if it hits a secondary SBP, these are usually "draped" or "hanging".
             if( secondary_sbp != sub_bodypart_id() && !destroy ) {
                 destroy = guy.armor_absorb( elem, armor, bp, secondary_sbp, roll );
             }
