@@ -7392,15 +7392,19 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
 
         // Capture the thing, if it's on the target square.
         if( const monster *const mon_ptr = get_creature_tracker().creature_at<monster>( target ) ) {
-            std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
+            // std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
             const monster &f = *mon_ptr;
-            if( bcp && !f.is_pet() ) {
-                basecamp *actual_camp = *bcp;
-                if( actual_camp->get_owner() != faction_your_followers ) {
-                    p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
-                    return std::nullopt;
-                }
+            if( !f.is_pet() ) {
+                p->add_msg_if_player( _( "%s is not a tame creature that you own." ), f.disp_name( false, true ) );
+                return std::nullopt;
             }
+            // if( bcp && !f.is_pet() ) {
+            //     basecamp *actual_camp = *bcp;
+            //     if( actual_camp->get_owner() != faction_your_followers ) {
+            //         p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
+            //         return std::nullopt;
+            //     }
+            // }
 
             if( f.get_size() > Creature::size_map.find( capacity )->second ) {
                 p->add_msg_if_player( m_info, _( "The %1$s is too big to put in your %2$s." ),
