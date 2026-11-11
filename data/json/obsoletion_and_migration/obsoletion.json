@@ -513,6 +513,15 @@
   },
   {
     "type": "mutation",
+    "id": "MANSBESTFRIEND",
+    "name": { "str": "Man's Best Friend" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false
+  },
+  {
+    "type": "mutation",
     "id": "TOUGH_MEDICAL",
     "name": { "str": "Tough (medical)" },
     "description": "Obsoleted mutation.  Medical mutants now get TOUGH1, TOUGH2, and TOUGH3.",

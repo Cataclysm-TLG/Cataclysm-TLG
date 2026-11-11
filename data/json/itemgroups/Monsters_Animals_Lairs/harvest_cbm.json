@@ -16,7 +16,7 @@
     "entries": [
       { "group": "Zomborg_CBM_harvest_charging_tools", "prob": 25 },
       {
-        "distribution": [ { "item": "bio_power_storage", "prob": 90 }, { "item": "bio_power_storage_mkII", "prob": 10 } ],
+        "distribution": [ { "item": "bio_power_storage", "prob": 95 }, { "item": "bio_power_storage_mkII", "prob": 5 } ],
         "prob": 50
       },
       { "item": "bio_power_storage", "prob": 20 },
@@ -126,7 +126,6 @@
     "subtype": "distribution",
     "entries": [
       { "item": "bio_cqb", "prob": 15 },
-      { "item": "bio_heat_absorb", "prob": 5 },
       { "item": "bio_targeting", "prob": 5 },
       { "item": "bio_adrenaline", "prob": 10 }
     ]
@@ -155,7 +154,6 @@
     "type": "item_group",
     "subtype": "distribution",
     "entries": [
-      { "item": "bio_heatsink", "prob": 20 },
       { "item": "bio_painkiller", "prob": 5 },
       { "item": "bio_scent_mask", "prob": 30 },
       { "item": "bio_shock", "prob": 5 },
@@ -189,7 +187,6 @@
       [ "bio_blood_anal", 20 ],
       [ "bio_ears", 20 ],
       [ "bio_eye_optic", 20 ],
-      [ "bio_membrane", 15 ],
       [ "bio_meteorologist", 10 ],
       [ "bio_night_vision", 1 ],
       [ "bio_ground_sonar", 2 ],
