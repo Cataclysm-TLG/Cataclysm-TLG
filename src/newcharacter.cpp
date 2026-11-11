@@ -592,8 +592,27 @@ void Character::randomize( const bool random_scenario, bool play_now )
             case 6:
             case 7:
             case 8:
-            case 9:
+            case 9: {
+                const skill_id rn_skill = Skill::random_skill();
+                if( rn_skill->obsolete() ) {
+                    break;
+                }
+                int prof_skill_level = 0;
+                for( const profession::StartingSkill &prof_skill : prof->skills() ) {
+                    if( prof_skill.first == rn_skill ) {
+                        prof_skill_level += prof_skill.second;
+                        break;
+                    }
+                }
+                const int level = get_skill_level( rn_skill );
+                if( level + prof_skill_level < 8 &&
+                    p.skill_points_left >= skill_increment_cost( *this, rn_skill ) ) {
+                    mod_skill_level( rn_skill, 1 );
+                    const int new_level = get_skill_level( rn_skill );
+                    set_knowledge_level( rn_skill, new_level );
+                }
                 break;
+            }
         }
     }
 
