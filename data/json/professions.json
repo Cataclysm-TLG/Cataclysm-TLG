@@ -3500,7 +3500,6 @@
         "entries": [
           { "item": "jacket_leather" },
           { "item": "gloves_fingerless" },
-          { "item": "socks" },
           { "item": "boots_combat" },
           { "item": "weed" },
           { "item": "tobacco" },
@@ -3511,7 +3510,7 @@
           { "item": "silver_ring" }
         ]
       },
-      "male": { "entries": [ { "item": "jeans_skinny" }, { "item": "tank_top" }, { "item": "briefs" } ] },
+      "male": { "entries": [ { "item": "jeans_skinny" }, { "item": "tank_top" }, { "group": "male_underwear_bottom" }, { "item": "socks" } ] },
       "female": {
         "entries": [
           { "item": "skirt" },
