@@ -13449,15 +13449,7 @@ void game::animate_weather()
                     continue;
                 }
 
-                const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
-                const visibility_variables &cache = m.get_visibility_variables_cache();
-                const auto &vis_cache_row = visibility_cache[mapp.x()];
-                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y()], cache );
-
                 // Don't display fog on indoor tiles when the player is indoors.
-                if( vis != visibility_type::CLEAR ) {
-                    continue;
-                }
                 if( !m.is_outside( u.pos_bub( here ) ) && !m.is_outside( mapp ) ) {
                     continue;
                 }
