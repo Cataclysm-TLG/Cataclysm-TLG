@@ -72,9 +72,44 @@
   {
     "type": "mapgen",
     "om_terrain": [ "sewer_sub_station" ],
-    "weight": 250,
     "object": {
       "fill_ter": "t_thconc_floor",
+      "palettes": [ "subway_underground" ],
+      "place_nested": [ { "chunks": [ [ "subway_station", 2 ], [ "subway_station_notools", 1 ] ], "x": 0, "y": 0 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ "sewer_sub_station_west" ],
+    "object": {
+      "fill_ter": "t_thconc_floor",
+      "palettes": [ "subway_underground" ],
+      "place_nested": [ { "chunks": [ [ "subway_station_west", 1 ] ], "x": 0, "y": 0 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ "sewer_sub_station_east" ],
+    "object": {
+      "fill_ter": "t_thconc_floor",
+      "palettes": [ "subway_underground" ],
+      "place_nested": [ { "chunks": [ [ "subway_station_east", 1 ] ], "x": 0, "y": 0 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "om_terrain": [ "sewer_sub_station_south" ],
+    "object": {
+      "fill_ter": "t_thconc_floor",
+      "palettes": [ "subway_underground" ],
+      "place_nested": [ { "chunks": [ [ "subway_station_south", 1 ] ], "x": 0, "y": 0 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "subway_station",
+    "object": {
+      "mapgensize": [ 24, 24 ],
       "rows": [
         "########################",
         "########################",
@@ -105,6 +140,150 @@
       "vendingmachines": { "J": { "item_group": "vending_drink" }, "C": { "item_group": "vending_food" } },
       "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 6, 20 ], "y": [ 4, 9 ], "repeat": [ 5, 9 ] } ],
       "place_item": [ { "item": "subwaymap", "x": 1, "y": [ 6, 7 ], "chance": 75 } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "subway_station_south",
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "########################",
+        "########################",
+        "#####IIIIIIIIIIIIII#####",
+        "##IIII<<<I>>>>I<<<IIII##",
+        "##Is     I    I     sI##",
+        "##Is     I    I     sI##",
+        "##IJ     Z    Z     JI##",
+        "##IC     z    z     CI##",
+        "##I      z    z      I##",
+        "##I  Mbb Z    Z bbM  I##",
+        "##I+IIIIII+I~~IIIIII+I##",
+        "##I     NI QQQIN     I##",
+        "##I      I  cQI      I##",
+        "##INN    +    +    NNI##",
+        "##IIIIIIIIIIIIIIIIIIII##",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################",
+        "########################"
+      ],
+      "palettes": [ "subway_underground" ],
+      "vendingmachines": { "J": { "item_group": "vending_drink" }, "C": { "item_group": "vending_food" } },
+      "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 6, 20 ], "y": [ 4, 9 ], "repeat": [ 5, 9 ] } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "subway_station_notools",
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "########################",
+        "########################",
+        "#####IIIIIIIIIIIIII#####",
+        "#####IbbCI>>>>IJbbI#####",
+        "#####I            I#####",
+        "#####I            I#####",
+        "#####I            I#####",
+        "#####I            I#####",
+        "###III            III###",
+        "##II                II##",
+        "##I      I+I~~I      I##",
+        "##I      ~    ~      I##",
+        "##IsZzzZsIQc  IsZzzZsI##",
+        "##I      ~QQQ +      I##",
+        "##IM     ~~~~~I     MI##",
+        "##IT                TI##",
+        "##IIAT            TAII##",
+        "###III            III###",
+        "#####I            I#####",
+        "#####I            I#####",
+        "#####I<<<IJbbCI<<<I#####",
+        "#####IIIIIIIIIIIIII#####",
+        "########################",
+        "########################"
+      ],
+      "palettes": [ "subway_underground" ],
+      "vendingmachines": { "J": { "item_group": "vending_drink" }, "C": { "item_group": "vending_food" } },
+      "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 6, 20 ], "y": [ 4, 9 ], "repeat": [ 5, 9 ] } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "subway_station_west",
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "########################",
+        "########################",
+        "#########IIIIII#########",
+        "#######III<<<<II########",
+        "####IIIIIA     II#######",
+        "##IIIMsIIT     JI#######",
+        "##I>    Z      dI#######",
+        "##I>    z      dI#######",
+        "##I>    z      CI#######",
+        "##II    Z    IIII#######",
+        "##IC    I+I~II##########",
+        "##Id    ~Q  I###########",
+        "##Id    ~Qc IIIIII######",
+        "##IJ    ~QQ +  NNI######",
+        "##IZzzZs~~III   NI######",
+        "##I>       bI   NI######",
+        "##I>       bI    I######",
+        "##I>        +    I######",
+        "##IIIIMsIIIIIIIIII######",
+        "#####IIII###############",
+        "########################",
+        "########################",
+        "########################",
+        "########################"
+      ],
+      "palettes": [ "subway_underground" ],
+      "vendingmachines": { "J": { "item_group": "vending_drink" }, "C": { "item_group": "vending_food" } },
+      "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 6, 20 ], "y": [ 4, 9 ], "repeat": [ 5, 9 ] } ]
+    }
+  },
+  {
+    "type": "mapgen",
+    "nested_mapgen_id": "subway_station_east",
+    "object": {
+      "mapgensize": [ 24, 24 ],
+      "rows": [
+        "########################",
+        "########################",
+        "#########IIIIII#########",
+        "########II>>>>III#######",
+        "#######II     AIIII#####",
+        "#######IJ     TIIsMIII##",
+        "#######Ib      Z    <I##",
+        "#######Ib      z    <I##",
+        "#######IC      z    <I##",
+        "#######IIII    Z    II##",
+        "##########II~I+I    CI##",
+        "###########I  Q~    bI##",
+        "######IIIIII cQ~    bI##",
+        "######INN  + QQ~    JI##",
+        "######IN   III~~sZzzZI##",
+        "######IN   Ib       <I##",
+        "######I    Ib       <I##",
+        "######I    +        <I##",
+        "######IIIIIIIIIIsMIIII##",
+        "###############IIII#####",
+        "########################",
+        "########################",
+        "########################",
+        "########################"
+      ],
+      "palettes": [ "subway_underground" ],
+      "vendingmachines": { "J": { "item_group": "vending_drink" }, "C": { "item_group": "vending_food" } },
+      "place_monster": [ { "group": "GROUP_ZOMBIE", "x": [ 6, 20 ], "y": [ 4, 9 ], "repeat": [ 5, 9 ] } ]
     }
   },
   {

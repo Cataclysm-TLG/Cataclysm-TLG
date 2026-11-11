@@ -316,7 +316,7 @@ Highway_path overmap::place_highway_reserved_path( const tripoint_om_omt &p1,
                                           om_direction::rotate( loc.p, reserved_direction );
                 ter_set( tripoint_om_omt( rotated.xy(), base_z ),
                          z0_terrain_to_place.obj().get_rotated( reserved_direction ) );
-                //prevent road bridges intersecting
+                // Prevent road bridges intersecting.
                 if( rotated.z() == base_z + 1 ) {
                     ter_set( rotated, z0_terrain_to_place.obj().get_rotated( reserved_direction ) );
                 }
