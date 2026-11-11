@@ -8098,7 +8098,11 @@ item vehicle::get_folded_item( map &here ) const
 
 bool vehicle::restore_folded_parts( const item &it )
 {
-    const JsonValue jv_parts = json_loader::from_string( it.get_var( "folded_parts" ) );
+    const std::string folded_parts = it.get_var( "folded_parts" );
+    if( folded_parts.empty() ) {
+        return false;
+    }
+    const JsonValue jv_parts = json_loader::from_string( folded_parts );
     deserialize_parts( static_cast<JsonArray>( jv_parts ) );
 
     // item should have snapshot of average part damage in item var. take difference of current
@@ -8135,7 +8139,8 @@ bool vehicle::restore_folded_parts( const item &it )
                 damage_to_apply -= applied_damage;
                 add_msg_debug( debugmode::DF_VEHICLE, "unfolding applied %d damage to %s %d left to apply",
                                applied_damage, pt.name(), damage_to_apply );
-            }
+            }    
+            refresh( );
         }
     }
 

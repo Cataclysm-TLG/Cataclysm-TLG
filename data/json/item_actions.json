@@ -732,7 +732,7 @@
   {
     "type": "item_action",
     "id": "UNFOLD_GENERIC",
-    "name": { "str": "Unfold" }
+    "name": { "str": "Deploy" }
   },
   {
     "type": "item_action",
