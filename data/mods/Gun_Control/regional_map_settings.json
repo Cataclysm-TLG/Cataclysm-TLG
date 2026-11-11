@@ -370,6 +370,7 @@
     "park_radius": 20,
     "park_sigma": 80,
     "city_size": 8,
+    "city_spacing": 4,
     "houses": [
       [ "2storyModern01", 5 ],
       [ "2storyModern02", 50 ],
