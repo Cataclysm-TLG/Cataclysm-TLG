@@ -3289,7 +3289,7 @@
   {
     "type": "bionic_migration",
     "from": "bio_membrane",
-    "replace": "bio_cable"
+    "to": "bio_cable"
   },
   {
     "type": "bionic_migration",
