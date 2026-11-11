@@ -219,7 +219,7 @@
     "volume": "500 ml",
     "price": "1000 USD",
     "price_postapoc": "15 USD",
-    "material": [ "ceramic", "superalloy" ],
+    "material": [ "plastic", "steel" ],
     "symbol": ",",
     "color": "light_gray",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "ampoule": 2 } } ],

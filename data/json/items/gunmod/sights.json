@@ -284,7 +284,7 @@
     "weight": "0 g",
     "volume": "0 ml",
     "price": "0 cent",
-    "material": [ "superalloy", "ceramic" ],
+    "material": [ "steel", "ceramic" ],
     "aim_speed_modifier": 0,
     "flags": [ "ZOOM", "IRREMOVABLE" ]
   },
