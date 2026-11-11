@@ -379,15 +379,6 @@
     "act_cost": "50 kJ"
   },
   {
-    "type": "bionic",
-    "id": "bio_emp_armgun",
-    "name": { "str": "EMP Projector" },
-    "description": "A ranged EMP generator system is implanted in your right arm and the palm of your right hand.  The system fires precise, single-target pulses that require time to aim.  Extremely effective against electronic targets but mostly useless otherwise.",
-    "occupied_bodyparts": [ [ "arm_r", 8 ], [ "hand_r", 2 ] ],
-    "fake_weapon": "bio_emp_gun",
-    "flags": [ "BIONIC_GUN" ]
-  },
-  {
     "id": "bio_evap",
     "type": "bionic",
     "name": { "str": "Aero-Evaporator" },
@@ -640,6 +631,7 @@
     "description": "While activated, your muscles will be greatly enhanced, increasing your strength by 20.",
     "occupied_bodyparts": [ [ "torso", 10 ], [ "arm_l", 8 ], [ "arm_r", 8 ], [ "leg_l", 10 ], [ "leg_r", 10 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
+    "required_bionic": "bio_weight",
     "enchantments": [
       {
         "condition": "ACTIVE",
@@ -659,6 +651,7 @@
     "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "enchantments": [ "THERMAL_VISION_GOOD" ],
+    "required_bionic": "bio_eye_optic",
     "act_cost": "5 J",
     "react_cost": "5 J",
     "time": "1 s"
@@ -762,9 +755,8 @@
   {
     "id": "bio_memory",
     "type": "bionic",
-    "name": { "str": "Enhanced Memory Banks" },
-    "description": "Your memory has been enhanced with small quantum storage drives.  While active, you learn - both through reading and practice - more quickly.  Additionally, you forget skills you've learned slower.",
-    "occupied_bodyparts": [ [ "head", 3 ] ],
+    "name": { "str": "Algorithmic Recall" },
+    "description": "A device implanted in your brain is capable of boosting your memory and learning via predictive recall, creating lasting associations before your synapses have formed connections.  This helps you learn more quickly while it's active, but it's harder to concentrate when it's unpowered.",
     "flags": [ "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
     "cant_remove_reason": "Removing this CBM would cause severe amnesia and neurological issues.",
     "active_flags": [ "CBQ_LEARN_BONUS" ],
@@ -773,7 +765,8 @@
     "trigger_cost": "25 J",
     "time": "1 s",
     "enchantments": [
-      { "condition": "ACTIVE", "values": [ { "value": "READING_EXP", "add": 2 }, { "value": "LEARNING_FOCUS", "add": 10 } ] }
+      { "condition": "ACTIVE", "values": [ { "value": "READING_EXP", "add": 2 }, { "value": "LEARNING_FOCUS", "add": 5 } ] },
+      { "condition": "INACTIVE", "values": [ { "value": "READING_EXP", "add": -4 }, { "value": "LEARNING_FOCUS", "add": -8 } ] }
     ]
   },
   {
@@ -792,7 +785,6 @@
     "type": "bionic",
     "name": { "str": "Weather Reader" },
     "description": "A multitude of scientific instruments and sensors collect environmental data.  The data is compiled and presented as a simple readout of the current weather.  It also passively tells you the local air temperature.",
-    "occupied_bodyparts": [ [ "torso", 1 ], [ "head", 1 ] ],
     "act_cost": "10 J",
     "flags": [ "THERMOMETER" ]
   },
@@ -801,7 +793,6 @@
     "type": "bionic",
     "name": { "str": "Repair Nanobots" },
     "description": "Inside your body is a fleet of tiny dormant robots.  While activated they will flit about your body, slowly repairing damage stopping bleeding at the cost of extra power and stored calories.  Excessive use of this CBM can depress the immune system.  No power is consumed if there is nothing to heal.",
-    "occupied_bodyparts": [ [ "torso", 12 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE", "BIONIC_SLEEP_FRIENDLY" ],
     "act_cost": "80 J",
     "react_cost": "40 J",
@@ -812,7 +803,6 @@
     "type": "bionic",
     "name": { "str": "Artificial Night Generator" },
     "description": "When active, this bionic eliminates all light within a 2 tile radius through destructive interference.",
-    "occupied_bodyparts": [ [ "torso", 16 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "enchantments": [ { "condition": "ACTIVE", "emitter": "emit_shadow_field" } ],
     "act_cost": "9 kJ",
@@ -824,9 +814,9 @@
     "type": "bionic",
     "name": { "str": "Implanted Night Vision" },
     "description": "When active, this bionic will amplify existing light, allowing you to see in the dark.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "NIGHT_VISION" ],
+    "required_bionic": "bio_eye_optic",
     "act_cost": "10 J",
     "react_cost": "10 J",
     "time": "1 s"
@@ -836,7 +826,6 @@
     "type": "bionic",
     "name": { "str": "Noisemaker" },
     "description": "A malfunctioning bionic.  It will occasionally emit a loud burst of noise.",
-    "occupied_bodyparts": [ [ "torso", 4 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -853,7 +842,6 @@
     "type": "bionic",
     "name": { "str": "Offensive Defense System" },
     "description": "A thin forcefield surrounds your body, continually draining power.  This field does not deflect attacks, but rather delivers a strong shock, damaging unarmed attackers and those with a conductive weapon.",
-    "occupied_bodyparts": [ [ "torso", 10 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 2 ], [ "leg_r", 2 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "act_cost": "10 J",
     "react_cost": "10 J",
@@ -865,7 +853,6 @@
     "type": "bionic",
     "name": { "str": "Sensory Dulling" },
     "description": "Your nervous system is wired to allow you to inhibit the signals of pain, allowing you to dull your senses at will.  However, the use of this system may cause delayed reaction time and drowsiness.",
-    "occupied_bodyparts": [ [ "head", 2 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "trigger_cost": "2 kJ"
   },
@@ -874,7 +861,6 @@
     "type": "bionic",
     "name": { "str": "Bionic Visual Impairment" },
     "description": "Due to a badly misplaced dielectric stylette, you are now suffering from mild optic neuropathy.  Increases eye encumbrance by ten.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "encumbrance": [ [ "eyes", 10 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
@@ -884,6 +870,7 @@
     "name": { "str": "Power Storage" },
     "capacity": "100 kJ",
     "dupes_allowed": true,
+    "occupied_bodyparts": [ [ "torso", 1 ] ],
     "description": "A Compact Bionics Module that increases your power capacity by 100 kJ.  Having at least one of these is a prerequisite to using powered bionics.  You will also need a power supply, found in various CBMs.",
     "flags": [ "BIONIC_NPC_USABLE" ]
   },
@@ -901,7 +888,6 @@
     "type": "bionic",
     "name": { "str": "Power Overload" },
     "description": "Damaged power circuits cause short-circuiting inside your muscles when your batteries are above 75% capacity, causing greatly reduced strength.  This has no effect if you have no internal batteries.",
-    "occupied_bodyparts": [ [ "torso", 3 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 2 ], [ "leg_r", 2 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -909,7 +895,6 @@
     "type": "bionic",
     "name": { "str": "Probability Travel" },
     "description": "Increases your body's wavelength, allowing you to quantum tunnel through walls, reappearing on the other side.  Power drain in standby is minimal, but each tile tunneled through costs 250 bionic power.",
-    "occupied_bodyparts": [ [ "torso", 20 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 3 ], [ "leg_r", 3 ], [ "foot_l", 1 ], [ "foot_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "act_cost": "3 J",
     "react_cost": "3 J",
@@ -921,7 +906,6 @@
     "type": "bionic",
     "name": { "str": "Air Filtration System" },
     "description": "An advanced system of filters have been surgically implanted throughout your airway.  They provide minor protection from smoke and irritants even while unpowered, and when powered will filter out most all harmful airborne compounds.",
-    "occupied_bodyparts": [ [ "torso", 5 ], [ "mouth", 1 ] ],
     "env_protec": [ [ "mouth", 8 ] ],
     "encumbrance": [ [ "mouth", 10 ] ],
     "toggled_pseudo_items": [ "armor_bio_filter" ],
@@ -935,7 +919,6 @@
     "type": "bionic",
     "name": { "str": "Infolink" },
     "description": "A compact communications device has been built into your ears, enabling you to communicate over radio waves.",
-    "occupied_bodyparts": [ [ "head", 2 ] ],
     "flags": [ "BIONIC_NPC_USABLE" ],
     "passive_pseudo_items": [ "fake_radio" ]
   },
@@ -944,7 +927,6 @@
     "type": "bionic",
     "name": { "str": "Radiation Scrubber System" },
     "description": "A system of advanced piezomechanical blood filters have been surgically implanted throughout your body, allowing you to purge yourself of absorbed radiation at the cost of some bionic power.",
-    "occupied_bodyparts": [ [ "torso", 5 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 2 ], [ "leg_r", 2 ] ],
     "flags": [ "BIONIC_NPC_USABLE" ],
     "act_cost": "4500 J"
   },
@@ -953,7 +935,6 @@
     "type": "bionic",
     "name": { "str": "Fingertip Razors" },
     "description": "You possess razor-sharp claws underneath your nails which can be deployed by flexing your fingers.  While active, they can be used in combat as long as you are unarmed and your fingers are not covered.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "toggled_pseudo_items": [ "integrated_fingertip_razors" ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_TOGGLED" ],
     "mutation_conflicts": [
@@ -972,7 +953,6 @@
     "type": "bionic",
     "name": { "str": "Recycler Unit" },
     "description": "Your urinary tract is fitted with filters and reservoirs that allow your body to reclaim water from metabolic waste while this device is powered, greatly reducing your need to hydrate.",
-    "occupied_bodyparts": [ [ "torso", 10 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
     "act_cost": "1 J",
     "react_cost": "3 J",
@@ -986,7 +966,6 @@
     "type": "bionic",
     "name": { "str": "Remote Controller" },
     "description": "A small module connected to your brain allows you to interface with nearby devices with wireless capabilities.",
-    "occupied_bodyparts": [ [ "head", 2 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "react_cost": "1 kJ",
     "time": "24 s"
@@ -996,7 +975,6 @@
     "type": "bionic",
     "name": { "str": "Sonic Resonator" },
     "description": "Your entire body may resonate at very high power, creating a short-range shockwave.  While it will not do much damage to creatures, solid objects such as walls and doors will be damaged.",
-    "occupied_bodyparts": [ [ "torso", 15 ], [ "head", 1 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 4 ], [ "leg_r", 4 ] ],
     "act_cost": "100 kJ"
   },
   {
@@ -1004,7 +982,6 @@
     "type": "bionic",
     "name": { "str": "Olfactory Mask" },
     "description": "While this system is powered, your body will produce very little odor, making it nearly impossible for creatures to track you by scent.",
-    "occupied_bodyparts": [ [ "torso", 3 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "NO_SCENT" ],
     "act_cost": "1 kJ",

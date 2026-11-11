@@ -326,18 +326,6 @@
     "difficulty": 5
   },
   {
-    "id": "bio_emp_armgun",
-    "copy-from": "bionic_general",
-    "type": "ITEM",
-    "subtypes": [ "BIONIC_ITEM" ],
-    "name": { "str": "EMP Projector CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A ranged EMP generator system that is implanted in the user's right arm and hand.  The system fires precise, single-target pulses that require time to aim.  Extremely effective against electronic targets, but mostly useless otherwise.",
-    "price": "2200 USD",
-    "price_postapoc": "15 USD",
-    "difficulty": 5
-  },
-  {
     "id": "bio_evap",
     "copy-from": "bionic_general",
     "type": "ITEM",
@@ -650,9 +638,9 @@
     "copy-from": "bionic_general",
     "type": "ITEM",
     "subtypes": [ "BIONIC_ITEM" ],
-    "name": { "str": "Enhanced Memory Banks CBM" },
+    "name": { "str": "Algorithmic Recall CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A set of highly-advanced quantum storage drives used to enhance memory.  While active, they increase the rate that the user learns skills.  Once it is installed, it will partially replace the functionality of the hippocampus, and thus cannot be removed without risk of severe permanent amnesia and difficulty forming new memories.",
+    "description": "While this tiny brain implant is active, it boosts focus and improves learning by automatically creating associations between correlated information before the user's synapses have had time to build new connections.  However when unpowered it will have the inverse effect, and once installed it cannot be removed.",
     "price": "10000 USD",
     "price_postapoc": "5 USD",
     "weight": "100 g",
