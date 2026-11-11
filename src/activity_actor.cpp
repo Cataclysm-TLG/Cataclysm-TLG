@@ -9274,11 +9274,12 @@ bool vehicle_unfolding_activity_actor::unfold_vehicle( Character &p, bool check_
     map &here = get_map();
     vehicle *veh = here.add_vehicle( vehicle_prototype_none, p.pos_bub(), 0_degrees, 0, 0, false );
     if( veh == nullptr ) {
-        p.add_msg_if_player( m_info, _( "There's no room to unfold the %s." ), it.tname() );
+        p.add_msg_if_player( m_info, _( "There's no room to deploy the %s." ), it.tname() );
         return false;
     }
     if( !veh->restore_folded_parts( it ) ) {
         here.destroy_vehicle( veh );
+        p.add_msg_if_player( m_info, _( "The %s is too damaged to be deployed." ), it.tname() );
         return false;
     }
     const bool cant_float = !veh->can_float( here );
@@ -9294,13 +9295,13 @@ bool vehicle_unfolding_activity_actor::unfold_vehicle( Character &p, bool check_
             continue;
         }
         if( invalid_pos( vp.pos_bub( here ) ) ) {
-            p.add_msg_if_player( m_info, _( "There's no room to unfold the %s." ), it.tname() );
+            p.add_msg_if_player( m_info, _( "There's no room to deploy the %s." ), it.tname() );
             here.destroy_vehicle( veh );
             return false;
         }
         for( const itype_id &tool : vp.info().get_unfolding_tools() ) {
             if( !inv.has_tools( tool, 1 ) ) {
-                p.add_msg_if_player( _( "You need %s to do it!" ), item::nname( tool ) );
+                p.add_msg_if_player( _( "You need %1s to deploy the %2s." ), item::nname( tool ), it.tname() );
                 here.destroy_vehicle( veh );
                 return false;
             }
@@ -9322,7 +9323,7 @@ bool vehicle_unfolding_activity_actor::unfold_vehicle( Character &p, bool check_
 
     std::string unfold_msg = it.get_var( "unfold_msg" );
     if( unfold_msg.empty() ) {
-        unfold_msg = _( "You unfold the %s." );
+        unfold_msg = _( "You deploy the %s." );
     } else {
         unfold_msg = _( unfold_msg );
     }
@@ -9359,7 +9360,6 @@ void vehicle_unfolding_activity_actor::do_turn( player_activity &act, Character 
 void vehicle_unfolding_activity_actor::finish( player_activity &act, Character &p )
 {
     if( !unfold_vehicle( p, /* check_only = */ false ) ) {
-        debugmsg( "failed unfolding %s", it.display_name() );
         act.canceled( p );
     }
     act.set_to_null();

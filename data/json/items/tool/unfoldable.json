@@ -69,10 +69,11 @@
     "subtypes": [ "TOOL" ],
     "copy-from": "generic_folded_vehicle",
     "name": { "str": "skateboard" },
-    "description": "A skateboard.",
+    "description": "Four wheels bolted to a wooden deck.",
     "weight": "2898 g",
     "volume": "3750 ml",
     "longest_side": "80 cm",
+    "delete": { "FLAGS": [ "ZERO_WEIGHT" ] },
     "symbol": "/",
     "color": "light_gray",
     "variables": {
@@ -104,7 +105,7 @@
       }
     ],
     "qualities": [ [ "CONTAIN", 2 ] ],
-    "material": [ "plastic" ],
+    "material": [ { "type": "plastic", "portion": 9 }, { "type": "aluminum", "portion": 1 } ],
     "symbol": ")",
     "color": "green",
     "use_action": [ "UNFOLD_GENERIC" ],
