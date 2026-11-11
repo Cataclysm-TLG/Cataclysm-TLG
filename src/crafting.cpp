@@ -2054,7 +2054,7 @@ float Character::get_recipe_weighted_skill_average( const recipe &making ) const
         !has_effect( effect_contacts ) &&
         !has_effect( effect_transition_contacts ) ) {
         float vision_penalty = 0.0f;
-        if( making.skill_used == skill_electronics || skill_traps ) {
+        if( making.skill_used == skill_electronics || making.skill_used == skill_traps ) {
             vision_penalty = 2.0f;
         } else if( making.skill_used == skill_tailor ) {
             vision_penalty = 1.0f;
