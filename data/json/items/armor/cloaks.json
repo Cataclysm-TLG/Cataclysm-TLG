@@ -2712,7 +2712,7 @@
     "price": "55000 USD",
     "price_postapoc": "100 USD",
     "to_hit": -1,
-    "material": [ "superalloy" ],
+    "material": [ "steel" ],
     "symbol": "[",
     "color": "light_gray",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 100 } } ],

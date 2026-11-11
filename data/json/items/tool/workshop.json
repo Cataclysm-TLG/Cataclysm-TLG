@@ -1245,7 +1245,7 @@
       {
         "type": "repair_item",
         "item_action_type": "repair_metal",
-        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum", "superalloy" ],
+        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum" ],
         "skill": "fabrication",
         "tool_quality": 10,
         "cost_scaling": 0.1,
@@ -1262,7 +1262,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "makeshift arc welder" },
-    "description": "A crude arc welder fashioned from a few small transformers, some wire, an improvised electrode holder, and a complete disregard for personal safety.  While it's not as efficient as a factory-made welder, it will serve in a pinch.",
+    "description": "A crude arc welder fashioned from a few small transformers, some wire, an improvised electrode holder, and a complete disregard for personal safety.  It isn't as efficient as a proper arc welder and lacks the precise current control required to work on certain metals.",
     "weight": "7250 g",
     "volume": "3500 ml",
     "price": "50 USD",
@@ -1277,7 +1277,7 @@
       {
         "type": "repair_item",
         "item_action_type": "repair_metal",
-        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum", "superalloy" ],
+        "materials": [ "steel", "steel_chain", "silver", "gold", "platinum" ],
         "skill": "fabrication",
         "tool_quality": 5,
         "cost_scaling": 0.1,
@@ -1309,7 +1309,7 @@
       {
         "type": "repair_item",
         "item_action_type": "repair_metal",
-        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum", "superalloy" ],
+        "materials": [ "iron", "steel", "steel_chain", "aluminum", "copper", "bronze", "silver", "gold", "platinum" ],
         "skill": "fabrication",
         "tool_quality": 10,
         "cost_scaling": 0.1,
