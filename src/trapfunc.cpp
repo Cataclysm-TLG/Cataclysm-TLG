@@ -1307,14 +1307,8 @@ bool trapfunc::lava( const tripoint_bub_ms &p, Creature *c, item * )
             return false;
         }
         int dam = rng( 30, 60 );
-        if( z->made_of( material_vegetable ) ) {
-            dam += 2;
-        } // Liquid resists fire, but lava makes it boil off immediately.
-        if( z->made_of( phase_id::LIQUID ) || z->made_of_any( Creature::cmat_flammable ) ) {
-            dam += 15;
-        }
-        if( z->made_of_any( Creature::cmat_flameres ) ) {
-            dam += -15;
+        if( z->get_armor_type( damage_heat, bodypart_id( "torso" ) ) > dam ) {
+            return false;
         }
         z->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_heat, dam ) );
     }

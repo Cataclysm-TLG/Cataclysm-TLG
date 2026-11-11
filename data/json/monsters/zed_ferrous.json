@@ -152,7 +152,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 1, "cut": 2, "stab": 1 }
+    "armor": { "bash": 1, "cut": 2, "stab": 1, "heat": 2 }
   },
   {
     "id": "mon_zombie_shell",
@@ -199,7 +199,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 14, "cut": 14, "stab": 14, "bullet": 14, "heat": 4 }
+    "armor": { "bash": 14, "cut": 14, "stab": 14, "bullet": 14, "acid": 1, "heat": 4 }
   },
   {
     "id": "mon_zombie_plated",
@@ -249,7 +249,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 18, "cut": 18, "stab": 18, "bullet": 18, "acid": 4, "heat": 8 }
+    "armor": { "bash": 18, "cut": 18, "stab": 18, "bullet": 18, "acid": 3, "heat": 8 }
   },
   {
     "id": "mon_zombie_urchin",
@@ -303,7 +303,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 5, "cut": 5, "stab": 5, "bullet": 5, "acid": 6, "heat": 10 }
+    "armor": { "bash": 5, "cut": 5, "stab": 5, "bullet": 5, "acid": 5, "heat": 10 }
   },
   {
     "id": "mon_zombie_hammer_hands",

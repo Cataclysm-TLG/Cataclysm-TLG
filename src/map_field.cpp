@@ -1939,9 +1939,6 @@ void map::monster_in_field( monster &z )
                     dam -= 10;
                 }
             }
-            if( z.made_of_any( Creature::cmat_flameres ) ) {
-                dam += -15;
-            }
             if( z.flies() ) {
                 dam -= 15;
             }
@@ -2064,9 +2061,6 @@ void map::monster_in_field( monster &z )
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
                 dam += 15;
             }
-            if( z.made_of_any( Creature::cmat_flameres ) ) {
-                dam += -15;
-            }
             dam += rng( 0, 8 );
             z.mod_moves( -to_moves<int>( 1_seconds ) * 0.2 );
         }
@@ -2092,9 +2086,6 @@ void map::monster_in_field( monster &z )
             if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
                 dam += 15;
             }
-            if( z.made_of_any( Creature::cmat_flameres ) ) {
-                dam += -15;
-            }
             const int intensity = cur.get_field_intensity();
             if( intensity == 1 ) {
                 dam += rng( 0, 3 );
@@ -2104,7 +2095,7 @@ void map::monster_in_field( monster &z )
                     !z.in_species( species_ROBOT_FLYING ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * 0.2 );
                 }
-                if( !z.made_of( phase_id::LIQUID ) && !z.made_of_any( Creature::cmat_flameres ) && one_in( 4 ) ) {
+                if( !z.made_of( phase_id::LIQUID ) && one_in( 4 ) ) {
                     z.add_effect( effect_onfire, rng( 1_turns, 6_turns ) );
                 }
             } else {
@@ -2113,7 +2104,7 @@ void map::monster_in_field( monster &z )
                     !z.in_species( species_ROBOT_FLYING ) ) {
                     z.mod_moves( -to_moves<int>( 1_seconds ) * 0.4 );
                 }
-                if( !z.made_of( phase_id::LIQUID ) && !z.made_of_any( Creature::cmat_flameres ) && one_in( 3 ) ) {
+                if( !z.made_of( phase_id::LIQUID ) && one_in( 3 ) ) {
                     z.add_effect( effect_onfire, rng( 6_turns, 12_turns ) );
                 }
             }

@@ -2055,8 +2055,8 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
     }
 
     if( effect == effect_onfire ) {
-        return is_immune_damage( damage_heat ) ||
-               made_of( phase_id::LIQUID ) ||
+        return is_immune_damage( damage_heat ) || get_armor_type( damage_heat, bodypart_id( "torso" ) ) > 15 ||
+               made_of( phase_id::LIQUID ) || has_flag( mon_flag_FIREPROOF ) ||
                has_flag( mon_flag_FIREY );
     }
 
@@ -2130,10 +2130,6 @@ bool monster::is_immune_damage( const damage_type_id &dt ) const
                 return true;
             }
         }
-    }
-    // FIXME: Hardcoded damage type specific immunities
-    if( dt == damage_heat && ( made_of( material_steel ) || made_of( material_stone ) ) ) {
-        return true;
     }
     if( dt == damage_electric && type->sp_defense == &mdefense::zapback ) {
         return true;
@@ -3547,7 +3543,6 @@ void monster::process_one_effect( effect &it, bool is_new )
     }
 
     const efftype_id &id = it.get_id();
-    // TODO: MATERIALS use fire resistance
     if( it.impairs_movement() ) {
         effect_cache[MOVEMENT_IMPAIRED] = true;
     } else if( id == effect_onfire ) {
@@ -3557,7 +3552,6 @@ void monster::process_one_effect( effect &it, bool is_new )
         } else if( made_of( material_flesh ) || made_of( material_iflesh ) ) {
             dam = rng( 1, 8 );
         }
-
         dam -= get_armor_type( damage_heat, bodypart_id( "torso" ) );
         if( dam > 0 ) {
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), dam );

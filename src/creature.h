@@ -787,7 +787,6 @@ class Creature : public viewer
         static const std::set<material_id> cmat_flesh;
         static const std::set<material_id> cmat_fleshnveg;
         static const std::set<material_id> cmat_flammable;
-        static const std::set<material_id> cmat_flameres;
         virtual field_type_id bloodType() const = 0;
         virtual field_type_id gibType() const = 0;
         // TODO: replumb this to use a std::string along with monster flags.

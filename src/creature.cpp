@@ -180,9 +180,6 @@ const std::set<material_id> Creature::cmat_flammable{
     material_paper, material_powder,
     material_cotton, material_wool
 };
-const std::set<material_id> Creature::cmat_flameres{
-    material_stone, material_kevlar, material_steel
-};
 
 Creature::Creature()
 {
