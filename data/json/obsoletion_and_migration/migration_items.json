@@ -3307,6 +3307,46 @@
     "to": "bio_weight"
   },
   {
+    "type": "bionic_migration",
+    "from": "bio_emp_armgun",
+    "to": "bio_emp"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_earplugs",
+    "to": "bio_ears"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_heatsink",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_ads",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_emp_armgun",
+    "replace": "bio_emp"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_earplugs",
+    "replace": "bio_ears"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_heatsink",
+    "replace": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_ads",
+    "replace": "bio_carbon"
+  },
+  {
     "type": "MIGRATION",
     "id": "internal_ethanol_tank",
     "replace": "wristwatch"

@@ -976,6 +976,8 @@
     "name": "Scoundrel",
     "description": "Your flexible outlook on the law, the scuffles you've been in (and avoided) at the bar, and your impressive ability to weasel your way out of the consequences of your actions - all these skills have helped ensure your survival.  How much longer will they hold out?",
     "npc_background": "BG_survival_story_CRIMINAL",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 2,
     "proficiencies": [ "prof_lockpicking", "prof_knives_familiar", "prof_unarmed_familiar" ],
     "skills": [
@@ -1167,6 +1169,8 @@
     "name": "Vandal",
     "description": "When the riots started, you took to the streets to join in the mayhem.  Now the old world is gone, and you're ready to bring havoc to the new one.",
     "npc_background": "BG_survival_story_CRIMINAL",
+    "bonus_aggression": { "rng": [ 4, 6 ] },
+    "bonus_bravery": { "rng": [ 2, 4 ] },
     "points": 3,
     "skills": [ { "level": 3, "name": "traps" }, { "level": 1, "name": "fabrication" } ],
     "items": {
@@ -1199,6 +1203,8 @@
     "name": "Major General",
     "description": "You worked your way up through the ranks from a no-name private to a big shot Major General, respected and decorated.  On the downside, years of desk duty have left your shooting skills rusty, and all the medals in the world won't protect you now.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 4,
     "proficiencies": [ "prof_gunsmithing_basic", "prof_gun_cleaning" ],
     "skills": [
@@ -1244,6 +1250,8 @@
     "name": { "male": "Marine Infantryman", "female": "Marine Infantrywoman" },
     "description": "You are one of the few and the proud: a member of the US Marine Corps.  Now that military command has collapsed in on itself as far as you can tell, you suppose that it falls to you to carry the memory of the Corps forward into the future.  Semper fi.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 4, 6 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 5,
     "proficiencies": [
       "prof_gunsmithing_basic",
@@ -1306,6 +1314,8 @@
     "name": "Navy Sailor",
     "description": "You're a sailor of the US Navy, and spent the last few years working shipside aboard an aircraft carrier.  Though you're trained in combat, maintenance of the vessel has been your primary duty.  After some event beyond your understanding, the carrier has become a floating graveyard in the middle of nowhere.  This is going to take more than a cup of coffee and a monkey wrench to fix.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 4,
     "proficiencies": [
       "prof_pneumatics",
@@ -1360,6 +1370,8 @@
     "name": "Navy Diver",
     "description": "You were a member of a Naval Special Warfare diving group, a skilled soldier adept at underwater infiltration and marine combat.  You were suiting up for a practice dive when the aircraft carrier you were stationed on was somehow flung from the Yellow Sea to who knows where.  You seem to be the only one who survived with your sanity intact, but it's not safe to stay here.  At least you're already dressed to abandon ship.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 5,
     "proficiencies": [
       "prof_spotting",
@@ -1410,6 +1422,8 @@
     "name": "Military Veteran",
     "description": "After being discharged from the armed forces, you were sent to a veterans' hospital for treatment.  Just when you thought you'd overcome your traumas and readjusted to civilian life, the world has come to an end and your worst nightmare has become a reality: life in an endless battlefield.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 3,
     "proficiencies": [ "prof_gunsmithing_basic", "prof_gun_cleaning" ],
     "skills": [
@@ -1445,6 +1459,8 @@
     "name": "Military Recruit",
     "description": "Joining the military has been your dream for years.  You finally got in, just in time for your training to get interrupted by some sort of national emergency.  As far as you can tell, military command abandoned you in this hellhole when you missed the emergency evac.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 2, 4 ] },
+    "bonus_bravery": { "rng": [ 2, 4 ] },
     "points": 3,
     "proficiencies": [
       "prof_gunsmithing_basic",
@@ -1503,6 +1519,8 @@
     "name": "Combat Mechanic",
     "description": "Early in your military career, you were hand-picked for extra training in the mechanic's trade, keeping the armor running.  It's been years since you last touched a rifle, and the dead men are marching again…",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 2, 4 ] },
+    "bonus_bravery": { "rng": [ 2, 4 ] },
     "points": 5,
     "proficiencies": [ "prof_gunsmithing_basic", "prof_metalworking", "prof_welding_basic", "prof_welding", "prof_gun_cleaning" ],
     "skills": [
@@ -1553,6 +1571,8 @@
     "name": "Combat Engineer",
     "description": "Your job was simple: Keep the army moving.  You built bridges, you built roads, you destroyed fortifications, and you cleared mines.  It has been years since you last handled a rifle in basic training; now might be the time to dust off those skills.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 2, 4 ] },
+    "bonus_bravery": { "rng": [ 2, 4 ] },
     "points": 7,
     "proficiencies": [ "prof_gunsmithing_basic", "prof_traps", "prof_trapsetting", "prof_disarming", "prof_spotting", "prof_gun_cleaning" ],
     "skills": [
@@ -1600,6 +1620,8 @@
     "name": "Non-Commissioned Officer",
     "description": "You're a veteran of several peacekeeping missions.  You led your squad as a sort of parental figure, and they relied on you to give orders and keep them alive.  You failed them.  And now you're alone.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 2, 3 ] },
+    "bonus_bravery": { "rng": [ 2, 3 ] },
     "points": 6,
     "proficiencies": [
       "prof_gunsmithing_basic",
@@ -1610,17 +1632,15 @@
       "prof_auto_pistols_familiar"
     ],
     "skills": [
-      { "level": 6, "name": "speech" },
-      { "level": 5, "name": "gun" },
-      { "level": 3, "name": "rifle" },
-      { "level": 4, "name": "shotgun" },
-      { "level": 2, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 1, "name": "stabbing" },
-      { "level": 1, "name": "dodge" },
-      { "level": 3, "name": "firstaid" },
-      { "level": 3, "name": "survival" },
-      { "level": 3, "name": "throw" },
+      { "level": 5, "name": "speech" },
+      { "level": 3, "name": "gun" },
+      { "level": 2, "name": "rifle" },
+      { "level": 2, "name": "shotgun" },
+      { "level": 1, "name": "pistol" },
+      { "level": 1, "name": "melee" },
+      { "level": 1, "name": "firstaid" },
+      { "level": 2, "name": "survival" },
+      { "level": 2, "name": "throw" },
       { "level": 3, "name": "swimming" }
     ],
     "items": {
@@ -1661,6 +1681,8 @@
     "name": "Rifleman",
     "description": "When you were young, you dreamed of being a soldier.  War is hell and hell is war, but you never thought it would be this bad.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 5,
     "proficiencies": [
       "prof_gunsmithing_basic",
@@ -1720,6 +1742,8 @@
     "name": "Navy SEAL",
     "description": "You were a member of the SEALs; a key component of the US Navy's special forces and a proficient combatant in both maritime and ground operations.  'The only easy day was yesterday', and with the chain of command in ruins, you may fulfill your final mission in any way you see fit.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 7,
     "proficiencies": [
       "prof_gunsmithing_basic",
@@ -1914,6 +1938,8 @@
     "name": "Gangster",
     "description": "The boss always said he could rely on you to pull through on the tough jobs.  Shame he got himself smoked.  No problem; the world's always got a place for someone with your kind of talents.",
     "npc_background": "BG_survival_story_CRIMINAL",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 4,
     "proficiencies": [ "prof_knives_familiar", "prof_unarmed_familiar", "prof_shivs_familiar" ],
     "skills": [
@@ -2176,6 +2202,8 @@
     "name": "K9 Officer",
     "description": "You spent your career busting drug smugglers with your faithful canine companion.  Now the world has ended, and none of that matters anymore.  Your loyal dog is still at your side, though, ready to face the Cataclysm with you.",
     "npc_background": "BG_survival_story_POLICE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 5,
     "skills": [
       { "level": 4, "name": "gun" },
@@ -2219,6 +2247,8 @@
     "name": "Mounted Police Officer",
     "description": "You have spent many long years forging a bond with your equine companion, from running down common thugs, to entertaining kids when you ride on by.  The cataclysm is upon you, but at least you have each other.",
     "npc_background": "BG_survival_story_POLICE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 5,
     "skills": [
       { "level": 5, "name": "survival" },
@@ -2320,6 +2350,8 @@
     "name": "Police Detective",
     "description": "You were on the brink of a major breakthrough in your latest homicide case when the Cataclysm struck.  Now your prime suspect is dead.  Everyone's dead.  You could really use a smoke.",
     "npc_background": "BG_survival_story_POLICE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 3,
     "proficiencies": [ "prof_spotting", "prof_gun_cleaning" ],
     "items": {
@@ -2365,6 +2397,8 @@
     "name": "Riot Control Officer",
     "description": "The riots were brutal, even before the dead rose and started to devour the living.  The line you were holding broke.  It was only through a bit of luck and a lot of head-bashing that you got away in one piece, and the worst is yet to come.",
     "npc_background": "BG_survival_story_POLICE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 6,
     "skills": [
       { "level": 4, "name": "melee" },
@@ -2762,6 +2796,8 @@
     "name": "Police Officer",
     "description": "Just a small-town deputy, you got the call and were ready to come to the rescue.  Soon it was you who needed rescuing, and you were lucky to escape with your life.  Who's going to respect your authority when the government this badge represents might not even exist anymore?",
     "npc_background": "BG_survival_story_POLICE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 4,
     "skills": [
       { "level": 4, "name": "gun" },
@@ -2801,6 +2837,8 @@
     "name": "Police Interceptor",
     "description": "An on-duty officer, you received the call and were ready to respond to the robbery.  It all went to shit, your backup got eaten, and you were lucky to escape with your life and patrol car.",
     "npc_background": "BG_survival_story_POLICE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": 5,
     "skills": [
       { "level": 4, "name": "gun" },
@@ -3211,6 +3249,8 @@
     "name": "Test Subject",
     "description": "You were a human guinea pig, used by laboratory technicians to understand the immense power of mutation.  You are determined to live on, if only to spite them for what they did to you.",
     "npc_background": "BG_survival_story_EVACUEE",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "points": -1,
     "items": {
       "both": [ "subsuit_xl" ],
@@ -3632,6 +3672,7 @@
     "name": "Burglar",
     "description": "This could be your lucky break.  Plenty of loot to be pilfered, and no cops to be seen.  Does it count as breaking and entering if everyone in town is undead?",
     "npc_background": "BG_survival_story_CRIMINAL",
+    "bonus_bravery": { "rng": [ 1, 2 ] },
     "points": 3,
     "proficiencies": [ "prof_lockpicking", "prof_safecracking" ],
     "skills": [ { "level": 6, "name": "traps" }, { "level": 2, "name": "dodge" } ],
@@ -4044,6 +4085,8 @@
     "description": "The government activated your National Guard unit to deal with the growing epidemics.  Despite your best efforts, you were unable to form up before all communications ceased and you found yourself alone amongst the dead.",
     "points": 4,
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "skills": [
       { "level": 4, "name": "gun" },
       { "level": 4, "name": "rifle" },
@@ -4129,6 +4172,8 @@
     "name": "Military Holdout",
     "description": "You must have paid attention to your survival training in boot camp; otherwise, you would never have lived long enough to outlast the chain of command and find yourself in this predicament.  The only mission now is to survive.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 6,
     "proficiencies": [
       "prof_gunsmithing_basic",
@@ -4861,6 +4906,8 @@
     "id": "mil_auto_rifleman",
     "name": "Military Automatic Rifleman",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "description": "You were trusted with a big-ass, belt-fed machine gun and plenty of ammo to lay down suppressing fire for your team.  Now that it's going to be much harder to resupply, you should probably be more selective with the ol' spray-and-pray.",
     "points": 5,
     "proficiencies": [
@@ -4920,6 +4967,8 @@
     "name": "Military Pilot",
     "description": "You got to see things fall apart from the sky, transporting soldiers and survivors from one holdout to the next.  You knew it was only a matter of time before the horrors patrolling the skies shot you down.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 6,
     "skills": [
       { "level": 6, "name": "driving" },
@@ -4995,6 +5044,8 @@
     "name": "Combat Medic",
     "description": "You were on the front lines when everything happened, patching up the wounded and providing support.  But they wouldn't stop coming.  Now you're on your own.",
     "npc_background": "BG_survival_story_SOLDIER",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 5,
     "skills": [
       { "level": 4, "name": "firstaid" },
@@ -5255,6 +5306,8 @@
     "description": "You were the best undercover agent they had, with a mission so vital that you had to take it even with the riots going on.  Your target seems to have turned feral as well as your contact, you are all alone now.",
     "points": 5,
     "npc_background": "BG_survival_story_CRIMINAL",
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "skills": [
       { "level": 4, "name": "gun" },
       { "level": 4, "name": "pistol" },
@@ -5520,13 +5573,16 @@
     "name": "Bionic Patient",
     "description": "When the diagnosis came back positive, you signed up for a series of experimental bionic surgeries that saved your life.  The problem is, they needed power, and now the power's out.  Find a new place to charge your batteries or you might wind up worse off than before.",
     "points": 5,
+    "traits": [ "NOHEAL" ],
     "CBMs": [
+      "bio_power_storage",
       "bio_power_storage",
       "bio_leukocyte",
       "bio_blood_anal",
       "bio_blood_filter",
       "bio_nanobots",
       "bio_cable",
+      "bio_synlungs",
       "bio_sleep_shutdown"
     ],
     "items": {
@@ -5569,11 +5625,11 @@
       "bio_torsionratchet",
       "bio_night_vision"
     ],
-    "bonus_aggression": { "rng": [ 1, 2 ] },
-    "bonus_bravery": { "rng": [ 2, 5 ] },
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "skills": [
-      { "level": 5, "name": "gun" },
-      { "level": 5, "name": "rifle" },
+      { "level": 3, "name": "gun" },
+      { "level": 3, "name": "rifle" },
       { "level": 2, "name": "pistol" },
       { "level": 2, "name": "survival" },
       { "level": 2, "name": "chemistry" },
@@ -5621,6 +5677,8 @@
     "npc_background": "BG_survival_story_SOLDIER",
     "description": "You are the result of one of the military's last research programs: a prototype cyborg soldier.  The wars they expected you to fight have become obsolete, but war never changes.",
     "points": 6,
+    "bonus_aggression": { "rng": [ 3, 5 ] },
+    "bonus_bravery": { "rng": [ 4, 6 ] },
     "proficiencies": [
       "prof_gunsmithing_basic",
       "prof_spotting",
@@ -5671,6 +5729,8 @@
     "name": "Bionic Agent",
     "description": "Your body conceals several bionic components, worth millions of dollars in public taxes.  The government turned you into an infiltration and recon specialist: you have night vision, an alarm, lock picking capabilities and a hacking module.",
     "points": 4,
+    "bonus_aggression": { "rng": [ 2, 4 ] },
+    "bonus_bravery": { "rng": [ 2, 4 ] },
     "CBMs": [
       "bio_power_storage_mkII",
       "bio_fingerhack",
@@ -5704,6 +5764,8 @@
     "name": "Prototype Cyborg",
     "description": "You were normal once.  Before the tests, before the procedures, before they stripped away every outward sign of your humanity.  You're more machine than human now, but that might prove to be an advantage against the horrors that await.",
     "points": -2,
+    "bonus_aggression": { "rng": [ 2, 4 ] },
+    "bonus_bravery": { "rng": [ 3, 5 ] },
     "CBMs": [
       "bio_power_storage",
       "bio_dis_shock",
@@ -5747,6 +5809,7 @@
     "npc_background": "BG_survival_story_WORKER_PUBLIC",
     "description": "You've been stomping, gassing, and baiting bugs since before they started eating people's pets.  Now the world's gone to hell, but you still have a job to do.",
     "points": 4,
+    "bonus_bravery": { "rng": [ 3, 4 ] },
     "skills": [
       { "level": 2, "name": "chemistry" },
       { "level": 1, "name": "traps" },
