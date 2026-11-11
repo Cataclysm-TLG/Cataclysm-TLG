@@ -1926,16 +1926,18 @@ void map::monster_in_field( monster &z )
             cur.set_field_intensity( 0 );
         }
         if( cur_field_type == fd_fire ) {
-            // TODO: MATERIALS Use fire resistance
             if( z.has_flag( mon_flag_FIREPROOF ) || z.has_flag( mon_flag_FIREY ) ) {
                 return;
             }
-            // TODO: Replace the section below with proper json values
             if( z.made_of( material_vegetable ) ) {
                 dam += 2;
             }
-            if( z.made_of( phase_id::LIQUID ) || z.made_of_any( Creature::cmat_flammable ) ) {
-                dam += 15;
+            if( z.made_of( phase_id::LIQUID ) ) {
+                if( z.made_of_any( Creature::cmat_flammable ) ) {
+                    dam += 15;
+                } else {
+                    dam -= 10;
+                }
             }
             if( z.made_of_any( Creature::cmat_flameres ) ) {
                 dam += -15;

@@ -9008,7 +9008,7 @@ bool item::efiles_all_browsed() const
 static int count_valid_recipes( const std::string_view csv )
 {
     // Match get_saved_recipes() semantics: deduplicate via set so a malformed
-    // CSV like ",balclava,balclava," returns 1, not 2.
+    // CSV like ",balaclava,balclava," returns 1, not 2.
     std::set<recipe_id> seen;
     for( const std::string &rid_str : string_split( csv, ',' ) ) {
         const recipe_id rid( rid_str );
