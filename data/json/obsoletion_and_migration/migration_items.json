@@ -3288,6 +3288,11 @@
   },
   {
     "type": "bionic_migration",
+    "from": "bio_membrane",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
     "from": "bio_fuel_cell_gasoline",
     "to": "bio_cable"
   },
@@ -3310,6 +3315,11 @@
     "type": "bionic_migration",
     "from": "bio_emp_armgun",
     "to": "bio_emp"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_heat_absorb",
+    "to": "bio_cable"
   },
   {
     "type": "bionic_migration",
@@ -3338,8 +3348,18 @@
   },
   {
     "type": "MIGRATION",
+    "id": "bio_membrane",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
     "id": "bio_heatsink",
     "replace": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_heatabsorb",
+    "replace": "bio_cable"
   },
   {
     "type": "MIGRATION",

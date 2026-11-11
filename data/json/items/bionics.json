@@ -68,7 +68,7 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Integrated AR System CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "This bionic module integrates augmented reality interface into user's eyes.",
+    "description": "An upgrade for a pair of bionic eyes, this implant allows the user to browse media hands-free using a visual interface that only they can see.",
     "price": "5000 USD",
     "weight": "100 g",
     "difficulty": 6
@@ -468,31 +468,6 @@
     "difficulty": 5
   },
   {
-    "id": "bio_heat_absorb",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "ITEM",
-    "subtypes": [ "BIONIC_ITEM" ],
-    "name": { "str": "Heat Drain CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "While fighting unarmed against a warm-blooded opponent, there is a chance that a successful hit will drain body heat, inflicting a small amount of extra damage and recharging the user's bionic power reserves slightly.",
-    "price": "5500 USD",
-    "price_postapoc": "10 USD",
-    "weight": "500 g",
-    "difficulty": 5
-  },
-  {
-    "id": "bio_heatsink",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "ITEM",
-    "subtypes": [ "BIONIC_ITEM" ],
-    "name": { "str": "Thermal Dissipation CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "A set of powerful heatsinks and supermaterials woven into the user's flesh.  While powered, this system will prevent external heat damage up to 2000 degrees Fahrenheit.  Note that this does not affect the internal body temperature.",
-    "price": "3500 USD",
-    "price_postapoc": "20 USD",
-    "difficulty": 3
-  },
-  {
     "id": "bio_hydraulics",
     "copy-from": "bionic_general_npc_usable",
     "type": "ITEM",
@@ -511,7 +486,7 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Infrared Vision CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "A bionic module that extends the user's range of vision into the infrared, allowing them to see warm-blooded creatures in the dark and through smoke.",
+    "description": "A bionic module that extends the user's range of vision into the infrared, allowing them to see warm-blooded creatures in the dark and through smoke.  It requires bionic eyes to be installed.",
     "price": "4500 USD",
     "price_postapoc": "60 USD",
     "weight": "500 g",
@@ -608,19 +583,6 @@
     "difficulty": 2
   },
   {
-    "id": "bio_membrane",
-    "copy-from": "bionic_general_npc_usable",
-    "type": "ITEM",
-    "subtypes": [ "BIONIC_ITEM" ],
-    "name": { "str": "Nictitating Membrane CBM" },
-    "looks_like": "bio_int_enhancer",
-    "description": "Thin membranes that cover the user's eyes while underwater, negating any vision penalties.",
-    "price": "4500 USD",
-    "price_postapoc": "3 USD",
-    "weight": "1 g",
-    "difficulty": 6
-  },
-  {
     "id": "bio_memory",
     "copy-from": "bionic_general",
     "type": "ITEM",
@@ -691,7 +653,7 @@
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Implanted Night Vision CBM" },
     "looks_like": "bio_int_enhancer",
-    "description": "This bionic module modifies the user's eyes to amplify existing light, allowing them to see in the dark.",
+    "description": "This bionic module modifies the user's eyes to amplify existing light, allowing them to see in the dark.  It requires bionic eyes to be installed.",
     "price": "9000 USD",
     "price_postapoc": "40 USD",
     "weight": "100 g",
@@ -1161,6 +1123,15 @@
     "type": "ITEM",
     "subtypes": [ "BIONIC_ITEM" ],
     "name": { "str": "Bionic-Induced Deformity CBM" },
+    "description": "A jumble of broken metal pieces that were removed during reconstructive surgery.",
+    "difficulty": 5
+  },
+  {
+    "id": "bio_nonfunctional",
+    "copy-from": "bionic_general_faulty",
+    "type": "ITEM",
+    "subtypes": [ "BIONIC_ITEM" ],
+    "name": { "str": "Nonfunctional CBM" },
     "description": "A jumble of broken metal pieces that were removed during reconstructive surgery.",
     "difficulty": 5
   },

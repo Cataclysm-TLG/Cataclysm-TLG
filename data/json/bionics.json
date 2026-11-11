@@ -4,7 +4,6 @@
     "type": "bionic",
     "name": { "str": "Adrenaline Pump" },
     "description": "A stimulator system has been surgically implanted alongside your adrenal glands, allowing you to trigger your body's adrenaline response at the cost of some bionic power.",
-    "occupied_bodyparts": [ [ "torso", 4 ] ],
     "activated_eocs": [ "EOC_bio_adrenaline" ],
     "act_cost": "5 J"
   },
@@ -13,7 +12,6 @@
     "type": "bionic",
     "name": { "str": "Alarm System" },
     "description": "A motion-detecting alarm system will notice almost all movement within a fifteen-foot radius, and will silently alert you.  This is very useful during sleep, or if you suspect a cloaked pursuer.",
-    "occupied_bodyparts": [ [ "torso", 2 ], [ "head", 1 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY" ],
     "act_cost": "1 J",
     "react_cost": "1 J",
@@ -25,7 +23,6 @@
     "type": "bionic",
     "name": { "str": "Squeaky Ankles" },
     "description": "In a cruel twist of fate, a poorly executed CBM surgery has given you a pair of useless bionics which make squeaking noises when you walk.",
-    "occupied_bodyparts": [ [ "leg_l", 3 ], [ "leg_r", 3 ] ],
     "enchantments": [ "SQUEAKY_ANKLES" ],
     "mutation_conflicts": [ "LEG_TENTACLES", "LEG_TENT_BRACE", "GASTROPOD_FOOT", "GASTROPOD_BALANCE", "AMORPHOUS" ],
     "flags": [ "BIONIC_FAULTY" ]
@@ -34,9 +31,8 @@
     "id": "bio_ar",
     "type": "bionic",
     "name": { "str": "Integrated AR System" },
-    "description": "Extremely thin lenses provide user with augmented reality overlay allowing the user to zoom, and it displays handy information about local topology.",
-    "//": "Basically implanted contact lenses with AR capabilities",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
+    "description": "An upgrade for bionic eyes which allows the user to browse media files without needing a screen.",
+    "required_bionic": "bio_eye_optic",
     "flags": [ "USES_BIONIC_POWER" ],
     "mutation_conflicts": [ "COMPOUND_EYES", "CEPH_VISION", "CEPH_EYES", "EYEBULGE", "EYESTALKS1", "EYESTALKS2" ],
     "passive_pseudo_items": [ "integrated_ar" ]
@@ -46,7 +42,6 @@
     "type": "bionic",
     "name": { "str": "Protective Lenses" },
     "description": "Frames along your cheekbones and eyesockets can, at a moment's notice, deploy protective lenses which seal your eyes behind polarized ballistic glass, providing protection from glare, bright flashes, physical attacks, and even environmental sources.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "mutation_conflicts": [ "COMPOUND_EYES", "EYESTALKS1", "EYESTALKS2", "EYESTALKS_RIGID" ],
     "social_modifiers": { "intimidate": 5 },
     "toggled_pseudo_items": [ "armor_bio_eyes" ],
@@ -59,7 +54,6 @@
     "type": "bionic",
     "name": { "str": "Cranial Reinforcement" },
     "description": "Largely subdermal, your skull is protected by titanium plates that provide a modicum of protection against all sorts of trauma.",
-    "occupied_bodyparts": [ [ "head", 3 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "passive_pseudo_items": [ "integrated_cranial_reinforcement_cbm" ],
     "mutation_conflicts": [ "HUGE", "HUGE_OK", "SMALL_OK", "HORNS", "HORNS_CURLED", "HORNS_POINTED", "ANTLERS", "SMALL2", "SMALL_OK" ]
@@ -69,7 +63,6 @@
     "type": "bionic",
     "name": { "str": "Visceral Armorgel" },
     "description": "Your abdominal and thoracic cavities are internally padded with thin pockets of a biocompatible gel that hardens on impact to protect your spine and organs.  While this doesn't prevent superficial injury, it should make you a bit tougher overall, at least as far as your torso is concerned.",
-    "occupied_bodyparts": [ [ "torso", 10 ] ],
     "encumbrance": [ [ "torso", 2 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "//": "Should conflict with anything that dramatically alters the torso's shape/internal anatomy or stuffs it full of something else.",
@@ -80,7 +73,6 @@
     "type": "bionic",
     "name": { "str": "Battery System" },
     "description": "You have a battery draining attachment, and thus can make use of the energy contained in normal, everyday batteries.  Use bionic menu to drain charge from a battery.  Can be toggled on and off at will.",
-    "occupied_bodyparts": [ [ "torso", 20 ] ],
     "fuel_options": [ "battery" ],
     "fuel_efficiency": 1,
     "time": "1 s",
@@ -91,9 +83,16 @@
     "id": "bio_blade",
     "type": "bionic",
     "name": { "str": "Monomolecular Blade" },
-    "description": "A deadly foot-long blade made of advanced material now resides inside your forearm, capable of being extended through the back of your wrist at the cost of a small amount of power.  Though exceptionally sharp, it will prevent you from holding anything else while extended.",
-    "occupied_bodyparts": [ [ "arm_r", 7 ], [ "hand_r", 1 ] ],
-    "encumbrance": [ [ "arm_r", 2 ] ],
+    "description": "A deadly half-meter blade is concealed within your forearm, capable of being extended through the back of your wrist at the cost of a small amount of power.  Though exceptionally sharp, it will prevent you from holding anything else while extended.",
+    "encumbrance": [ [ "arm_r", 3 ] ],
+    "mutation_conflicts": [
+      "ARM_TENTACLES",
+      "SMALL_NATURAL",
+      "SMALL",
+      "CRUSTACEAN_CLAW",
+      "SMALL2",
+      "SMALL_OK"
+    ],
     "act_cost": "50 J",
     "fake_weapon": "bio_blade_weapon",
     "flags": [ "BIONIC_TOGGLED", "BIONIC_WEAPON", "BIONIC_NPC_USABLE" ]
@@ -102,9 +101,16 @@
     "id": "bio_shotgun",
     "type": "bionic",
     "name": { "str": "Shotgun Arm" },
-    "description": "Concealed in your left arm is a single shot 12 gauge shotgun.  Activate the bionic to fire and reload the shotgun.",
-    "occupied_bodyparts": [ [ "arm_l", 12 ] ],
+    "description": "The bones in your forearm have been replaced with a 12 gauge shotgun that can pop out on command.",
     "encumbrance": [ [ "arm_l", 5 ] ],
+    "mutation_conflicts": [
+      "ARM_TENTACLES",
+      "SMALL_NATURAL",
+      "SMALL",
+      "CRUSTACEAN_CLAW",
+      "SMALL2",
+      "SMALL_OK"
+    ],
     "act_cost": "50 J",
     "fake_weapon": "bio_shotgun_gun",
     "flags": [ "BIONIC_TOGGLED", "BIONIC_WEAPON", "NO_UNWIELD" ]
@@ -123,7 +129,6 @@
     "type": "bionic",
     "name": { "str": "Blood Analysis" },
     "description": "Small sensors have been surgically implanted around your kidneys, allowing you to analyze your blood.  This will detect many illnesses, drugs, and other conditions.",
-    "occupied_bodyparts": [ [ "torso", 4 ] ],
     "act_cost": "100 J"
   },
   {
@@ -131,7 +136,6 @@
     "type": "bionic",
     "name": { "str": "Blood Filter" },
     "description": "A filtration system near your liver allows you to actively filter out chemical impurities, primarily drugs.  It will have limited impact on viruses.  Note that it is not a targeted filter; ALL drugs in your system will be affected.",
-    "occupied_bodyparts": [ [ "torso", 5 ] ],
     "activated_eocs": [ "EOC_bio_blood_filter" ],
     "act_cost": "600 J"
   },
@@ -140,7 +144,6 @@
     "type": "bionic",
     "name": { "str": "Cable Charger System" },
     "description": "You have a complex port surgically mounted above your hip.  While active, it will recharge bionic power when connected to a power source via jumper cable.",
-    "occupied_bodyparts": [ [ "torso", 7 ] ],
     "is_remote_fueled": true,
     "time": "1 s",
     "fuel_efficiency": 1,
@@ -151,19 +154,6 @@
     "type": "bionic",
     "name": { "str": "Subdermal Carbon Filament" },
     "description": "Lying just beneath your skin is a thin armor made of carbon nanotubes.  This has no impact on blunt trauma but offers a small amount of protection against cutting, stabbing, and even ballistic damage.",
-    "occupied_bodyparts": [
-      [ "torso", 6 ],
-      [ "head", 2 ],
-      [ "arm_l", 2 ],
-      [ "arm_r", 2 ],
-      [ "leg_l", 3 ],
-      [ "leg_r", 3 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "mouth", 1 ]
-    ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "protec": [
       [ "torso", { "cut": 2, "bullet": 4, "stab": 2 } ],
@@ -184,7 +174,6 @@
     "type": "bionic",
     "name": { "str": "Chain Lightning" },
     "description": "Your body is equipped with a chain lightning generator, allowing you to emit a blast of lightning at a target, leaving a trail of lightning in its wake, jumping to additional targets within 4 tiles of the previous target.",
-    "occupied_bodyparts": [ [ "torso", 16 ], [ "arm_l", 4 ] ],
     "fake_weapon": "bio_lightning",
     "flags": [ "BIONIC_GUN", "BIONIC_NPC_USABLE" ]
   },
@@ -193,18 +182,6 @@
     "type": "bionic",
     "name": { "str": "Internal Climate Control" },
     "description": "Throughout your body lies a network of thermal piping, which eases the effects of high and low ambient temperatures when activated.",
-    "occupied_bodyparts": [
-      [ "torso", 8 ],
-      [ "head", 2 ],
-      [ "arm_l", 2 ],
-      [ "arm_r", 2 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 3 ],
-      [ "leg_r", 3 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
     "act_cost": "100 J",
     "react_cost": "100 J",
     "time": "1 s",
@@ -221,18 +198,6 @@
     "type": "bionic",
     "name": { "str": "Cloaking System" },
     "description": "This high-power system uses a set of cameras and LEDs to make you blend into your background, rendering you fully invisible to normal vision.  However, you may be detected by infrared, sonar, etc.",
-    "occupied_bodyparts": [
-      [ "torso", 8 ],
-      [ "head", 2 ],
-      [ "arm_l", 3 ],
-      [ "arm_r", 3 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 4 ],
-      [ "leg_r", 4 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
     "act_cost": "30 kJ",
     "react_cost": "30 kJ",
     "time": "1 s",
@@ -244,7 +209,6 @@
     "type": "bionic",
     "name": { "str": "Close Quarters Battle" },
     "description": "Your nervous system is wired to a combat controller program pre-loaded with its own melee protocols.  While active, your actions in melee combat will be guided by the implant, which has above-average skill and its own martial art style, but you will not learn from this experience.",
-    "occupied_bodyparts": [ [ "head", 3 ] ],
     "act_cost": "20 J",
     "react_cost": "20 J",
     "time": "1 s",
@@ -256,16 +220,22 @@
     "type": "bionic",
     "name": { "str": "Bionic-Induced Deformity" },
     "description": "A combination of poor surgical installation and unpleasant scarring has lead to the malfunctioning bionic catastrophe you call your face.  People who mind that you look like a dime-store Frankenstein will react poorly to your appearance.",
-    "occupied_bodyparts": [ [ "head", 4 ], [ "mouth", 1 ] ],
     "flags": [ "BIONIC_FAULTY" ],
     "social_modifiers": { "persuade": -50, "intimidate": 20 }
+  },
+    {
+    "id": "bio_nonfunctional",
+    "type": "bionic",
+    "name": { "str": "Nonfunctional Implant" },
+    "description": "An bionic device which has shorted out and broken.  It isn't doing anything harmful, but takes up valuable space that might otherwise be used for power storage units.",
+    "flags": [ "BIONIC_FAULTY" ],
+    "occupied_bodyparts": [ [ "torso", 2 ] ]
   },
   {
     "id": "bio_dex_enhancer",
     "type": "bionic",
     "name": { "str": "Wired Reflexes" },
     "description": "Implanted nerve stimulators grant you a +2 bonus to dexterity while this bionic is active, but a -1 penalty when it is not.",
-    "occupied_bodyparts": [ [ "head", 3 ], [ "torso", 6 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 7 ], [ "leg_r", 7 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       { "condition": "ACTIVE", "values": [ { "value": "DEXTERITY", "add": 2 } ] },
@@ -280,7 +250,6 @@
     "type": "bionic",
     "name": { "str": "Expanded Digestive System" },
     "description": "You have been outfitted with three synthetic stomachs and industrial-grade intestines.  Not only can you extract much more nutrition from food, but you are highly resistant to foodborne illness, and can sometimes eat rotten food.",
-    "occupied_bodyparts": [ [ "torso", 20 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF", "PARAIMMUNE", "IMMUNE_SPOIL" ],
     "enchantments": [ { "values": [ { "value": "KCAL", "multiply": 0.5 }, { "value": "VITAMIN_ABSORB_MOD", "multiply": 0.5 } ] } ],
     "cant_remove_reason": "The CBM has replaced the patient's digestive organs and cannot be removed.",
@@ -310,7 +279,6 @@
     "type": "bionic",
     "name": { "str": "Acidic Discharge" },
     "description": "A malfunctioning bionic which occasionally discharges acid into your muscles, causing sharp pain and minor damage.",
-    "occupied_bodyparts": [ [ "torso", 3 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 2 ], [ "leg_r", 2 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -318,7 +286,6 @@
     "type": "bionic",
     "name": { "str": "Electrical Discharge" },
     "description": "A malfunctioning bionic which occasionally discharges electricity through your body, causing pain and brief paralysis but no damage.",
-    "occupied_bodyparts": [ [ "torso", 6 ] ],
     "flags": [ "BIONIC_FAULTY" ],
     "trigger_cost": "10 kJ"
   },
@@ -327,7 +294,6 @@
     "type": "bionic",
     "name": { "str": "Electrical Drain" },
     "description": "A malfunctioning bionic.  It doesn't perform any useful function, but will occasionally draw power from your batteries.",
-    "occupied_bodyparts": [ [ "torso", 2 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -335,7 +301,6 @@
     "type": "bionic",
     "name": { "str": "Enhanced Hearing" },
     "description": "When this bionic is active, your hearing will be drastically improved, allowing you to hear over three times better than the average person, even if you were previously deaf or hard of hearing.  Additionally, high-intensity sounds will be automatically dampened before they can damage your hearing.  When it is unpowered, you will be unable to hear at all.",
-    "occupied_bodyparts": [ [ "head", 2 ] ],
     "//": "BATEARS is better than this bionic, even if you combine the bionic with any existing hearing mutation.",
     "mutation_conflicts": [ "BATEARS" ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED" ],
@@ -351,7 +316,6 @@
     "type": "bionic",
     "name": { "str": "Directional EMP" },
     "description": "Surgically mounted in your left arm and the palm of your left hand are small parabolic EMP field generators.  You may use power to fire a wide but short-ranged blast that will disable electronics and robots.",
-    "occupied_bodyparts": [ [ "arm_l", 6 ], [ "hand_l", 1 ] ],
     "act_cost": "50 kJ"
   },
   {
@@ -359,7 +323,6 @@
     "type": "bionic",
     "name": { "str": "Aero-Evaporator" },
     "description": "This unit draws moisture from the surrounding air, which slowly trickles directly into your blood stream.  It may fail in very dry environments.",
-    "occupied_bodyparts": [ [ "torso", 5 ] ],
     "react_cost": "60 J",
     "time": "1 s",
     "flags": [ "BIONIC_TOGGLED" ]
@@ -370,7 +333,6 @@
     "name": { "str": "Thalamic Buffer" },
     "description": "A microcomputer wired to the thalamus that assists the brain in sorting and prioritizing sensory input.  It grants +2 perception when active, but -1 when not.",
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
     "enchantments": [
       { "condition": "ACTIVE", "values": [ { "value": "PERCEPTION", "add": 2 } ] },
       { "condition": "INACTIVE", "values": [ { "value": "PERCEPTION", "add": -1 } ] }
@@ -385,7 +347,6 @@
     "type": "bionic",
     "name": { "str": "Bionic Eyes" },
     "description": "The eyes have been entirely replaced by a pair of implanted cameras which provide clear, high-resolution vision and come with a built-in zoom that allows the user to see long distances and treat all ranged weapons as though they had a scope.  If unpowered, the user will be completely blind.",
-    "occupied_bodyparts": [ [ "eyes", 2 ] ],
     "flags": [ "ENHANCED_VISION", "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY", "BIONIC_NPC_USABLE" ],
     "cant_remove_reason": "This bionic has completely replaced the patient's eyes.  Removing it would cause blindness.",
     "enchantments": [ { "condition": "INACTIVE", "ench_effects": [ { "effect": "blind", "intensity": 1 } ] } ],
@@ -422,7 +383,6 @@
     "type": "bionic",
     "name": { "str": "Facial Distortion" },
     "description": "Through controlled application of electrochemical impulses, you are capable of altering your facial structure so as to subtly affect the reactions of others.  This grants a bonus to all social interactions.",
-    "occupied_bodyparts": [ [ "head", 3 ], [ "mouth", 1 ] ],
     "social_modifiers": { "persuade": 10, "lie": 20, "intimidate": 10 }
   },
   {
@@ -430,18 +390,6 @@
     "type": "bionic",
     "name": { "str": "Dielectric Capacitance System" },
     "description": "Throughout your body lies a network of miniature piezoelectric capacitors which can be charged with bionic power to temporarily protect you from external electrical discharge.",
-    "occupied_bodyparts": [
-      [ "torso", 8 ],
-      [ "head", 2 ],
-      [ "arm_l", 2 ],
-      [ "arm_r", 2 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 3 ],
-      [ "leg_r", 3 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "active_flags": [ "ELECTRIC_IMMUNE" ],
     "act_cost": "5 J",
@@ -453,7 +401,6 @@
     "type": "bionic",
     "name": { "str": "Fingerhack" },
     "description": "One of your fingers has an electrohack surgically embedded in it; an all-purpose hacking unit used to override control panels and the like (but not computers).  Skill in computers is important, and a failed use may damage your circuits.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ] ],
     "toggled_pseudo_items": [ "electrohack" ],
     "flags": [ "BIONIC_TOGGLED", "USES_BIONIC_POWER" ]
   },
@@ -462,15 +409,13 @@
     "type": "bionic",
     "name": { "str": "Calorie Tracker" },
     "description": "A module implanted in your body measures your calorie intake and expenditure at all times.",
-    "flags": [ "CALORIE_BURN" ],
-    "occupied_bodyparts": [ [ "torso", 1 ] ]
+    "flags": [ "CALORIE_BURN" ]
   },
   {
     "id": "bio_flashbang",
     "type": "bionic",
     "name": { "str": "Flashbang Generator" },
     "description": "Light emitting diodes surgically integrated into your skin can release a flash comparable to a flashbang grenade, blinding nearby enemies.  Speakers integrated into your body mimic the loud sound, deafening those nearby.",
-    "occupied_bodyparts": [ [ "torso", 18 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 3 ], [ "leg_r", 3 ] ],
     "act_cost": "10 kJ"
   },
   {
@@ -478,7 +423,6 @@
     "type": "bionic",
     "name": { "str": "Cranial Flashlight" },
     "description": "Surgically mounted between your eyes is a small but powerful LED flashlight.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
     "act_cost": "250 mJ",
     "react_cost": "250 mJ",
     "time": "1 s",
@@ -524,7 +468,6 @@
     "type": "bionic",
     "name": { "str": "Radiation Biomonitor" },
     "description": "Tiny sensors implanted in your body are able to detect acute radiation syndrome through a gamma-H2AX assay, cross-checking blood cell counts to rapidly inform you of the severity of your exposure.  A separate sensor also scans your immediate environment to alert you to the presence of ionizing radiation.",
-    "occupied_bodyparts": [ [ "torso", 2 ], [ "head", 1 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ] ],
     "act_cost": "10 kJ"
   },
   {
@@ -532,7 +475,6 @@
     "type": "bionic",
     "name": { "str": "Terranian Sonar" },
     "description": "Your feet are equipped with precision sonar equipment, allowing you to detect the movements of creatures below the ground, buried traps, and unstable terrain.",
-    "occupied_bodyparts": [ [ "foot_l", 3 ], [ "foot_r", 3 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "enchantments": [
       {
@@ -558,54 +500,10 @@
     "time": "1 s"
   },
   {
-    "id": "bio_heat_absorb",
-    "type": "bionic",
-    "name": { "str": "Heat Drain" },
-    "description": "While fighting unarmed against a warm-blooded opponent, there is a chance that a successful hit will drain body heat, inflicting a small amount of extra damage, and increasing your power reserves slightly.",
-    "occupied_bodyparts": [
-      [ "torso", 6 ],
-      [ "head", 3 ],
-      [ "arm_l", 3 ],
-      [ "arm_r", 3 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 5 ],
-      [ "leg_r", 5 ],
-      [ "foot_l", 2 ],
-      [ "foot_r", 2 ]
-    ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "trigger_cost": "3 kJ"
-  },
-  {
-    "id": "bio_heatsink",
-    "type": "bionic",
-    "name": { "str": "Thermal Dissipation" },
-    "description": "Powerful heatsinks and supermaterials are surgically woven into your flesh.  While powered, this system will prevent heat damage up to 2000 degrees Fahrenheit.  Note that this does not affect your internal temperature.",
-    "occupied_bodyparts": [
-      [ "torso", 10 ],
-      [ "head", 2 ],
-      [ "arm_l", 2 ],
-      [ "arm_r", 2 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 3 ],
-      [ "leg_r", 3 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
-    "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
-    "active_flags": [ "HEATSINK" ],
-    "act_cost": "1 kJ",
-    "react_cost": "1 kJ",
-    "time": "1 s"
-  },
-  {
     "id": "bio_hydraulics",
     "type": "bionic",
     "name": { "str": "Hydraulic Muscles" },
     "description": "While activated, your muscles will be greatly enhanced, increasing your strength by 20.",
-    "occupied_bodyparts": [ [ "torso", 10 ], [ "arm_l", 8 ], [ "arm_r", 8 ], [ "leg_l", 10 ], [ "leg_r", 10 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "required_bionic": "bio_weight",
     "enchantments": [
@@ -624,7 +522,6 @@
     "type": "bionic",
     "name": { "str": "Infrared Vision" },
     "description": "Your range of vision extends into the infrared, allowing you to see warm-blooded creatures in the dark or through smoke.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "enchantments": [ "THERMAL_VISION_GOOD" ],
     "required_bionic": "bio_eye_optic",
@@ -638,7 +535,6 @@
     "name": { "str": "Cerebral Booster" },
     "description": "Your brain has been enhanced with bionic coprocessors, giving you a +2 bonus to intelligence when this implant is active, and a -1 penalty when it is not.",
     "cant_remove_reason": "The bionic is now critical to the continued functionality of the user's brain.",
-    "occupied_bodyparts": [ [ "head", 6 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       { "condition": "ACTIVE", "values": [ { "value": "INTELLIGENCE", "add": 2 } ] },
@@ -653,7 +549,6 @@
     "type": "bionic",
     "name": { "str": "Itchy Metal Thing" },
     "description": "A bionic of some sort, so badly installed that you cannot even tell what it was originally supposed to be.  Sometimes it itches horribly.",
-    "occupied_bodyparts": [ [ "torso", 3 ], [ "head", 2 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -661,7 +556,6 @@
     "type": "bionic",
     "name": { "str": "Finger-Mounted Laser" },
     "description": "One of your fingers has a small high-powered laser surgically embedded in it.  This long range weapon is not incredibly damaging, but is very accurate, and has the potential to start fires.",
-    "occupied_bodyparts": [ [ "hand_r", 1 ] ],
     "fake_weapon": "bio_laser_gun",
     "flags": [ "BIONIC_GUN", "BIONIC_NPC_USABLE" ]
   },
@@ -670,7 +564,6 @@
     "type": "bionic",
     "name": { "str": "Leaky Bionic" },
     "description": "This botched piece of bionic hardware slowly leaks electrolytic compounds, piezoelectric nanomaterials, and other high-tech contaminants into your bloodstream.  Needless to say, this is not good for your health.",
-    "occupied_bodyparts": [ [ "torso", 5 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -678,7 +571,6 @@
     "type": "bionic",
     "name": { "str": "Leukocyte Breeder System" },
     "description": "You are equipped with bionic stimulators which augment your haematopoiesis system, allowing you to accelerate white blood cell production using bionic power.  It is supposed to run continuously and may cause unpleasant side effects when turned off.",
-    "occupied_bodyparts": [ [ "torso", 10 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_SLEEP_FRIENDLY", "BIONIC_NPC_USABLE" ],
     "act_cost": "5 J",
     "react_cost": "5 J",
@@ -699,7 +591,6 @@
     "type": "bionic",
     "name": { "str": "Finger Lighter" },
     "description": "The index finger of your left hand has a fire starter that can extend from the tip.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ] ],
     "flags": [ "USES_BIONIC_POWER" ],
     "passive_pseudo_items": [ "crude_firestarter" ],
     "act_cost": "1500 J"
@@ -709,7 +600,6 @@
     "type": "bionic",
     "name": { "str": "Fingerpick" },
     "description": "One of your fingers has an electronic lockpick surgically embedded in it.  This automatic system will quickly unlock all but the most advanced key locks without any skill required on the part of the user.",
-    "occupied_bodyparts": [ [ "hand_l", 2 ] ],
     "act_cost": "50 J"
   },
   {
@@ -717,16 +607,7 @@
     "type": "bionic",
     "name": { "str": "Electromagnetic Unit" },
     "description": "Surgically embedded in your left arm is a powerful electromagnet, allowing you to use your own strength to pull all nearby magnetic objects towards you.  Unlucky bystanders might be injured or killed by flying objects.",
-    "occupied_bodyparts": [ [ "arm_l", 9 ] ],
     "act_cost": "15 kJ"
-  },
-  {
-    "id": "bio_membrane",
-    "type": "bionic",
-    "name": { "str": "Nictitating Membrane" },
-    "description": "Your eyes are equipped with thin membranes that cover your eyes while underwater, negating any vision penalties.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
-    "flags": [ "BIONIC_NPC_USABLE", "EYE_MEMBRANE" ]
   },
   {
     "id": "bio_memory",
@@ -742,7 +623,7 @@
     "time": "1 s",
     "enchantments": [
       { "condition": "ACTIVE", "values": [ { "value": "READING_EXP", "add": 2 }, { "value": "LEARNING_FOCUS", "add": 5 } ] },
-      { "condition": "INACTIVE", "values": [ { "value": "READING_EXP", "add": -4 }, { "value": "LEARNING_FOCUS", "add": -8 } ] }
+      { "condition": "INACTIVE", "values": [ { "value": "READING_EXP", "add": -2 }, { "value": "LEARNING_FOCUS", "add": -5 } ] }
     ]
   },
   {
@@ -750,7 +631,6 @@
     "type": "bionic",
     "name": { "str": "Metabolic Interchange" },
     "description": "Your digestive system and power supply are interconnected; bionic energy is replenished by burning calories.  Can be toggled on and off at will.",
-    "occupied_bodyparts": [ [ "torso", 20 ] ],
     "fuel_options": [ "metabolism" ],
     "fuel_efficiency": 0.25,
     "time": "1 s",
@@ -809,7 +689,6 @@
     "type": "bionic",
     "name": { "str": "Bionic Nostril" },
     "description": "You're really not sure how the CBM ended up in your nose, but no matter how it got there this badly misplaced bionic makes it difficult to breathe.  Increases mouth encumbrance by ten.",
-    "occupied_bodyparts": [ [ "head", 2 ], [ "mouth", 1 ] ],
     "encumbrance": [ [ "mouth", 10 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
@@ -837,7 +716,6 @@
     "type": "bionic",
     "name": { "str": "Bionic Visual Impairment" },
     "description": "Due to a badly misplaced dielectric stylette, you are now suffering from mild optic neuropathy.  Increases eye encumbrance by ten.",
-    "encumbrance": [ [ "eyes", 10 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -856,6 +734,7 @@
     "name": { "str": "Power Storage Mk. II" },
     "capacity": "250 kJ",
     "dupes_allowed": true,
+    "occupied_bodyparts": [ [ "torso", 1 ] ],
     "description": "A Compact Bionics Module that increases your power capacity by 250 kJ.",
     "flags": [ "BIONIC_NPC_USABLE" ]
   },
@@ -969,7 +848,6 @@
     "type": "bionic",
     "name": { "str": "Bionic Short Circuit" },
     "description": "A poorly-wired bionic which fails to serve its intended purpose, this malfunctioning device periodically short-circuits, causing systemic muscle tremors.",
-    "occupied_bodyparts": [ [ "torso", 1 ], [ "arm_l", 2 ], [ "arm_r", 2 ], [ "leg_l", 3 ], [ "leg_r", 3 ] ],
     "flags": [ "BIONIC_FAULTY" ],
     "trigger_cost": "25 kJ"
   },
@@ -980,7 +858,6 @@
     "description": "An electromagnetic stimulator has been surgically implanted on the back of your head and along your spine, continually draining power.  As long as it's active, you will not suffer from sleep deprivation, although you may still feel sleepy; and if you're sleep deprived already, it will gradually reduce the symptoms of lacking sleep.",
     "flags": [ "BIONIC_TOGGLED" ],
     "active_flags": [ "STOP_SLEEP_DEPRIVATION" ],
-    "occupied_bodyparts": [ [ "head", 1 ], [ "torso", 1 ] ],
     "react_cost": "1 kJ",
     "time": "100 s"
   },
@@ -989,7 +866,6 @@
     "type": "bionic",
     "name": { "str": "Electroshock Unit" },
     "description": "While fighting unarmed, or with a weapon that conducts electricity, there is a chance that a successful hit will shock your opponent, inflicting extra damage and disabling them temporarily at the cost of some energy.",
-    "occupied_bodyparts": [ [ "torso", 8 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "trigger_cost": "2 kJ"
   },
@@ -998,7 +874,6 @@
     "type": "bionic",
     "name": { "str": "Shockwave Generator" },
     "description": "You generate a powerful shockwave, knocking back all nearby creatures.  Targets are stunned briefly, take damage and additional stun upon impact with impassable terrain, and knockback any creatures they collide with.",
-    "occupied_bodyparts": [ [ "torso", 20 ] ],
     "act_cost": "250 kJ"
   },
   {
@@ -1006,7 +881,6 @@
     "type": "bionic",
     "name": { "str": "Endocrine Enervator" },
     "description": "Through a combination of psychochemical manipulation and old fashioned electrical nerve stimulation, this malfunctioning bionic alters your brain chemistry in such a way as to cause fatigue.  You will find yourself tiring a bit faster than before.",
-    "occupied_bodyparts": [ [ "head", 2 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -1014,7 +888,6 @@
     "type": "bionic",
     "name": { "str": "Motor Control Overstimulator" },
     "description": "One piezoelectric solenoid surgically installed backwards, two crossed wires, and four burned-out capacitors later you started falling on your face and writhing around at the least convenient times.  This incorrectly-configured bionic periodically stuns you for a short duration.",
-    "occupied_bodyparts": [ [ "head", 3 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -1022,17 +895,6 @@
     "type": "bionic",
     "name": { "str": "Synaptic Accelerator" },
     "description": "Your nervous system has been enhanced with bionic stimulators, giving you a 10% boost to your speed.",
-    "occupied_bodyparts": [
-      [ "torso", 8 ],
-      [ "arm_l", 3 ],
-      [ "arm_r", 3 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 6 ],
-      [ "leg_r", 6 ],
-      [ "foot_l", 2 ],
-      [ "foot_r", 2 ]
-    ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "SPEED", "multiply": 0.1 } ] } ],
     "act_cost": "10 J",
@@ -1044,7 +906,6 @@
     "type": "bionic",
     "name": { "str": "Wire-Induced Stiffness" },
     "description": "Improperly installed wires cause a physical stiffness in most of your body, causing increased encumbrance.",
-    "occupied_bodyparts": [ [ "torso", 2 ], [ "arm_l", 1 ], [ "arm_r", 1 ], [ "leg_l", 1 ], [ "leg_r", 1 ], [ "foot_l", 1 ], [ "foot_r", 1 ] ],
     "encumbrance": [
       [ "torso", 10 ],
       [ "arm_l", 10 ],
@@ -1061,7 +922,6 @@
     "type": "bionic",
     "name": { "str": "Muscle Augmentation" },
     "description": "Your muscules have been surgically enhanced with synthetic myomer fibers, giving you a +2 bonus to strength when this implant is active and a -1 penalty when it is not.",
-    "occupied_bodyparts": [ [ "torso", 6 ], [ "arm_l", 4 ], [ "arm_r", 4 ], [ "leg_l", 8 ], [ "leg_r", 8 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_TOGGLED", "BIONIC_NPC_USABLE" ],
     "enchantments": [
       { "condition": "ACTIVE", "values": [ { "value": "STRENGTH", "add": 2 } ] },
@@ -1076,7 +936,6 @@
     "type": "bionic",
     "name": { "str": "Autonomous Surgical Scalpels" },
     "description": "A system of surgical grade scalpels is implanted in your forearms, extending from just above your wrists.  They allow you to make automated precise cuts and can also be used as a high-quality butchering tool.",
-    "occupied_bodyparts": [ [ "arm_r", 2 ], [ "arm_l", 2 ] ],
     "fake_weapon": "bio_scalpel",
     "flags": [ "BIONIC_TOGGLED", "BIONIC_WEAPON" ]
   },
@@ -1085,7 +944,6 @@
     "type": "bionic",
     "name": { "str": "Synthetic Lungs" },
     "description": "You have highly efficient artificial lungs which greatly increase your oxygen intake.  If they are not powered you will suffocate, and they weaken your immune system somewhat.",
-    "occupied_bodyparts": [ [ "torso", 5 ] ],
     "flags": [ "BIONIC_SLEEP_FRIENDLY", "BIONIC_SHOCKPROOF", "BIONIC_TOGGLED" ],
     "act_cost": "3 J",
     "react_cost": "3 J",
@@ -1103,7 +961,6 @@
     "type": "bionic",
     "name": { "str": "Targeting System" },
     "description": "While active, this bionic provides a visual HUD synced to sensors in your hands that greatly aid in targeting ranged weapons.",
-    "occupied_bodyparts": [ [ "eyes", 1 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "act_cost": "25 J",
     "react_cost": "25 J",
@@ -1117,7 +974,6 @@
     "type": "bionic",
     "name": { "str": "Subaquatic Navigation System" },
     "description": "While active, a tiny device in your inner ear periodically generates ultrasonic pulses which aid in navigation, provided you are underwater and able to hear.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
     "act_cost": "1 J",
     "trigger_cost": "5 J",
     "flags": [ "BIONIC_TOGGLED" ],
@@ -1129,7 +985,6 @@
     "type": "bionic",
     "name": { "str": "Implanted Stun Gun" },
     "description": "You have a powerful stun gun built into your hand.  Activate to attempt to zap an adjacent enemy.",
-    "occupied_bodyparts": [ [ "hand_r", 3 ] ],
     "flags": [ "BIONIC_NPC_USABLE" ],
     "activated_close_ui": true,
     "act_cost": "2500 J"
@@ -1139,7 +994,6 @@
     "type": "bionic",
     "name": { "str": "Teleportation Unit" },
     "description": "This highly experimental unit folds space over short distances, instantly transporting your body up to 25 feet at the cost of much power.  Note that prolonged or frequent use may have dangerous side effects.",
-    "occupied_bodyparts": [ [ "torso", 16 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 4 ], [ "leg_r", 4 ] ],
     "act_cost": "250 kJ"
   },
   {
@@ -1147,7 +1001,6 @@
     "type": "bionic",
     "name": { "str": "Self-Locking Thumbs" },
     "description": "Self-locking thumbs hold tight (even when you really don't want them to) and don't let go (even when you'd rather they did).  Increases hand encumbrance by ten, while failing to improve your ability to hold objects whatsoever.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "encumbrance": [ [ "hand_l", 10 ], [ "hand_r", 10 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
@@ -1157,18 +1010,6 @@
     "name": { "str": "Time Dilation" },
     "description": "At the cost of all stored bionic power, you may increase your body speed and reactions dramatically, essentially freezing time.  You are still delicate, however, and violent or rapid movements may damage you due to friction.",
     "activated_eocs": [ "EOC_time_freeze" ],
-    "occupied_bodyparts": [
-      [ "torso", 12 ],
-      [ "head", 3 ],
-      [ "arm_l", 3 ],
-      [ "arm_r", 3 ],
-      [ "hand_l", 1 ],
-      [ "hand_r", 1 ],
-      [ "leg_l", 4 ],
-      [ "leg_r", 4 ],
-      [ "foot_l", 1 ],
-      [ "foot_r", 1 ]
-    ],
     "act_cost": "50 kJ"
   },
   {
@@ -1176,7 +1017,6 @@
     "type": "bionic",
     "name": { "str": "Integrated Multitool" },
     "description": "Surgically implanted in your hands and forearms is a set of compact tools and a welder that runs off your internal power banks.",
-    "occupied_bodyparts": [ [ "hand_l", 2 ], [ "hand_r", 2 ], [ "arm_l", 2 ], [ "arm_r", 2 ] ],
     "passive_pseudo_items": [ "toolset", "integrated_welder" ],
     "flags": [ "BIONIC_SHOCKPROOF", "BIONIC_NPC_USABLE" ]
   },
@@ -1185,7 +1025,6 @@
     "type": "bionic",
     "name": { "str": "Integrated Multimeter" },
     "description": "Your fingers and arms have been implanted with retractable electrical probes connected to a multimeter embedded in your arm, allowing you to measure electrical voltage, resistance, and current by touch.  This also provides your hands and arms with a modicum of protection against electric shocks.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "passive_pseudo_items": [ "integrated_multimeter" ],
     "flags": [ "BIONIC_SHOCKPROOF", "BIONIC_NPC_USABLE" ],
     "protec": [
@@ -1201,7 +1040,6 @@
     "type": "bionic",
     "name": { "str": "Integrated Circuitry Toolset" },
     "description": "Your fingers and arms have been implanted a soldering iron, a multimeter, and a set of small screwdrivers, providing all the tools required for working with bench-scale electrical circuits.  This also provides your hands and arms with a modicum of protection against electric shocks.",
-    "occupied_bodyparts": [ [ "hand_l", 2 ], [ "hand_r", 2 ] ],
     "passive_pseudo_items": [ "integrated_electrokit", "integrated_multimeter" ],
     "flags": [ "BIONIC_SHOCKPROOF", "BIONIC_NPC_USABLE" ],
     "protec": [
@@ -1217,7 +1055,6 @@
     "type": "bionic",
     "name": { "str": "Joint Torsion Ratchet" },
     "description": "Your joints have been surgically equipped with torsion ratchets that slowly generate power when you move.  Whilst this is toggled, moving will require more effort, though more power will be generated.",
-    "occupied_bodyparts": [ [ "arm_l", 8 ], [ "arm_r", 8 ], [ "leg_l", 12 ], [ "leg_r", 12 ] ],
     "fuel_options": [ "muscle" ],
     "fuel_efficiency": 0.125,
     "passive_fuel_efficiency": 0.00625,
@@ -1240,7 +1077,6 @@
     "type": "bionic",
     "name": { "str": "Joint Servo" },
     "description": "Your leg joints have been equipped with servomotors that provide power-assisted movement.  Movement takes less effort when this bionic is online.  However, when it's offline it will hamper your movement, as you struggle against its moving parts.",
-    "occupied_bodyparts": [ [ "leg_l", 12 ], [ "leg_r", 12 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "mutation_conflicts": [ "LEG_TENTACLES", "LEG_TENT_BRACE", "GASTROPOD_FOOT", "GASTROPOD_BALANCE", "AMORPHOUS" ],
     "enchantments": [
@@ -1255,7 +1091,6 @@
     "type": "bionic",
     "name": { "str": "Visual Disruptor" },
     "description": "A malfunctioning bionic which causes occasional visual distortion and pixelation.",
-    "occupied_bodyparts": [ [ "eyes", 1 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -1263,7 +1098,6 @@
     "type": "bionic",
     "name": { "str": "Uncanny Dodge" },
     "description": "Your nervous system has been augmented with bionic processors, allowing you to dodge attacks beyond normal human capability.",
-    "occupied_bodyparts": [ [ "torso", 12 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 5 ], [ "leg_r", 5 ], [ "foot_l", 1 ], [ "foot_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "act_cost": "6 J",
     "react_cost": "6 J",
@@ -1275,7 +1109,6 @@
     "type": "bionic",
     "name": { "str": "Device Charger" },
     "description": "You have a port that allows devices which can use a power bank to draw directly from your bionic power supply.",
-    "occupied_bodyparts": [ [ "torso", 5 ] ],
     "flags": [ "BIONIC_TOGGLED" ]
   },
   {
@@ -1283,7 +1116,6 @@
     "type": "bionic",
     "name": { "str": "Bionic Voicebox" },
     "description": "Rather than vocal cords, you speak through an electronic system which gives you what can best be described as a \"creepy robot voice.\"",
-    "occupied_bodyparts": [ [ "torso", 2 ], [ "mouth", 1 ] ],
     "flags": [ "BIONIC_FAULTY" ],
     "social_modifiers": { "persuade": -20, "lie": 10, "intimidate": 20 },
     "//": "bird mutants might have an entirely different vocal chord structure rather than just a different tone of voice",
@@ -1295,7 +1127,6 @@
     "type": "bionic",
     "name": { "str": "Internal Chronometer" },
     "description": "You have been equipped with an internal atomic clock, ensuring that you will always know the current time.  Additionally, it includes a silent alarm clock function.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
     "flags": [ "WATCH", "ALARMCLOCK" ]
   },
   {
@@ -1303,7 +1134,6 @@
     "type": "bionic",
     "name": { "str": "Water Extraction Unit" },
     "description": "Nanotubes surgically embedded in the palm of your hand will pump any available fluid out of a dead body, cleanse it of impurities and convert it into drinkable water.  You must, however, have a container to store the water in.",
-    "occupied_bodyparts": [ [ "arm_l", 3 ], [ "hand_l", 1 ] ],
     "act_cost": "20 kJ"
   },
   {
@@ -1311,7 +1141,6 @@
     "type": "bionic",
     "name": { "str": "Intravenous Needletip" },
     "description": "The flesh of the inside of your middle finger has been replaced with a tube leading into your arteries, with a retractable needle extending out of the tip of the finger when clenched.  This lets you pump intravenous drugs like morphine directly into your bloodstream without needing to carry a syringe.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ] ],
     "passive_pseudo_items": [ "syringe" ]
   },
   {
@@ -1319,7 +1148,6 @@
     "type": "bionic",
     "name": { "str": "Titanium Skeletal Bracing" },
     "description": "Titanium bracing has been installed onto your elbows, knees, and spine, making them far better at handling strain.  Your carrying capacity is increased by 20 kilograms, or about 44 pounds, and you receive slightly less bashing damage to your arms, legs and torso.",
-    "occupied_bodyparts": [ [ "torso", 8 ], [ "arm_l", 3 ], [ "arm_r", 3 ], [ "leg_l", 3 ], [ "leg_r", 3 ] ],
     "enchantments": [ { "values": [ { "value": "CARRY_WEIGHT", "add": 20000 } ] } ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "protec": [
@@ -1355,7 +1183,6 @@
     "type": "bionic",
     "name": { "str": "Taste Modifier" },
     "description": "A set of highly sensitive sensors is installed in your mouth, and a small yet sophisticated analyzer is installed in the cavity of your skull.  The active bionic will nullify the taste of all comestibles with negative enjoyment value at the cost of draining bionic power.",
-    "occupied_bodyparts": [ [ "head", 1 ], [ "mouth", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ]
   },
   {
@@ -1371,7 +1198,6 @@
     "id": "bio_faulty_grossfood",
     "type": "bionic",
     "name": { "str": "Emetic Inducer" },
-    "occupied_bodyparts": [ [ "torso", 1 ], [ "mouth", 1 ] ],
     "description": "A malfunctioning bionic attached to your digestive system causes intermittent nausea, making it difficult to keep food down.",
     "flags": [ "BIONIC_FAULTY" ]
   },
@@ -1380,7 +1206,6 @@
     "type": "bionic",
     "name": { "str": "Radioactive Leak" },
     "description": "This damaged CBM occasionally leaks radiation.",
-    "occupied_bodyparts": [ [ "torso", 4 ] ],
     "flags": [ "BIONIC_FAULTY" ]
   },
   {
@@ -1388,9 +1213,8 @@
     "type": "bionic",
     "name": { "str": "Recoil Compensators" },
     "description": "Reactive shock absorbers installed in your wrists and elbows which greatly reduce felt recoil.",
-    "occupied_bodyparts": [ [ "arm_l", 4 ], [ "arm_r", 4 ], [ "hand_l", 2 ], [ "hand_r", 2 ] ],
     "flags": [ "BIONIC_TOGGLED", "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
-    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "RECOIL_MODIFIER", "multiply": -0.35 } ] } ],
+    "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "RECOIL_MODIFIER", "multiply": -0.25 } ] } ],
     "act_cost": "20 J",
     "react_cost": "20 J",
     "time": "1 s"
@@ -1400,7 +1224,6 @@
     "type": "bionic",
     "name": { "str": "Sleep Mode" },
     "description": "A set of miniscule devices are embedded in your brain stem and hypothalamus.  When active, they allow the user to fall asleep almost instantly and at-will.  The downside, however, is that the user will remain asleep no matter what happens to their body until they complete their natural sleep cycle, unless a sleep alarm from a differet bionic device is triggered.",
-    "occupied_bodyparts": [ [ "head", 1 ] ],
     "flags": [ "BIONIC_SHOCKPROOF", "BIONIC_TOGGLED" ],
     "act_cost": "2 J",
     "enchantments": [ { "condition": "ACTIVE", "values": [ { "value": "SLEEPY", "add": 30 } ] } ]
@@ -1410,7 +1233,6 @@
     "type": "bionic",
     "name": { "str": "Throwing Assist" },
     "description": "An implant that works on simple physics rather than electronics, this CBM replaces the ulnar collateral ligaments with assistive biocompatible tethers that automatically constrict and relax to improve the user's throwing distance and accuracy.",
-    "occupied_bodyparts": [ [ "arm_l", 1 ], [ "arm_r", 1 ] ],
     "flags": [ "BIONIC_NPC_USABLE", "BIONIC_SHOCKPROOF" ],
     "enchantments": [ { "condition": "ALWAYS", "skills": [ { "value": "throw", "add": 2 } ] } ]
   },
@@ -1419,7 +1241,6 @@
     "type": "bionic",
     "name": { "str": "Magnetic Repulsor" },
     "description": "A powerful electromagnetic system housed in the palms which, when powered up, will expend power to greatly increasing the force of thrown magnetic objects.",
-    "occupied_bodyparts": [ [ "hand_l", 1 ], [ "hand_r", 1 ] ],
     "flags": [ "BIONIC_TOGGLED" ],
     "act_cost": "2 J",
     "react_cost": "1 J",

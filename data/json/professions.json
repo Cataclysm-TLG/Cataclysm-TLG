@@ -5781,6 +5781,7 @@
       "bio_leaky",
       "bio_sleepy",
       "bio_deformity",
+      "bio_nonfunctional",
       "bio_voice",
       "bio_pokedeye",
       "bio_ankles",

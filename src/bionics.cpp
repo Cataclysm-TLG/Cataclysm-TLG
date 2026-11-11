@@ -2866,9 +2866,6 @@ int Character::get_used_bionics_slots( const bodypart_id &bp ) const
 std::map<bodypart_id, int> Character::bionic_installation_issues( const bionic_id &bioid ) const
 {
     std::map<bodypart_id, int> issues;
-    if( !get_option < bool >( "CBM_SLOTS_ENABLED" ) ) {
-        return issues;
-    }
     for( const std::pair<const string_id<body_part_type>, size_t> &elem : bioid->occupied_bodyparts ) {
         const int lacked_slots = elem.second - get_free_bionics_slots( elem.first );
         if( lacked_slots > 0 ) {

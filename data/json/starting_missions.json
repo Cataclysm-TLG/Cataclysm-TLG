@@ -597,6 +597,7 @@
         "or": [
           { "u_has_bionics": "bio_ankles" },
           { "u_has_bionics": "bio_deformity" },
+          { "u_has_bionics": "bio_nonfunctional" },
           { "u_has_bionics": "bio_dis_acid" },
           { "u_has_bionics": "bio_dis_shock" },
           { "u_has_bionics": "bio_drain" },

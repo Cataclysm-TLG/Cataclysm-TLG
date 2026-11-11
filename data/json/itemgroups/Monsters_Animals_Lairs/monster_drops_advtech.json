@@ -105,6 +105,7 @@
       { "item": "bio_leaky", "prob": 1 },
       { "item": "bio_sleepy", "prob": 1 },
       { "item": "bio_deformity", "prob": 1 },
+      { "item": "bio_nonfunctional", "prob": 1 },
       { "item": "bio_voice", "prob": 1 },
       { "item": "bio_pokedeye", "prob": 1 },
       { "item": "bio_ankles", "prob": 1 },
@@ -141,6 +142,7 @@
       { "item": "bio_leaky", "prob": 1 },
       { "item": "bio_sleepy", "prob": 1 },
       { "item": "bio_deformity", "prob": 1 },
+      { "item": "bio_nonfunctional", "prob": 1 },
       { "item": "bio_voice", "prob": 1 },
       { "item": "bio_pokedeye", "prob": 1 },
       { "item": "bio_ankles", "prob": 1 },
@@ -153,7 +155,6 @@
       { "item": "bio_radleak", "prob": 1 },
       { "group": "bionics_common", "prob": 10 },
       { "group": "bionics_mil", "prob": 5 },
-      { "item": "bio_power_storage_mkII", "prob": 2 },
       { "item": "bio_power_storage", "prob": 2 }
     ]
   },
