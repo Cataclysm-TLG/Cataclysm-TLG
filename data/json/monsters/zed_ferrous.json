@@ -119,7 +119,7 @@
     "weight": "90 kg",
     "hp": 80,
     "speed": 65,
-    "material": [ "flesh", "steel" ],
+    "material": [ "flesh" ],
     "symbol": "Z",
     "color": "brown",
     "aggression": 100,
@@ -166,7 +166,7 @@
     "weight": "90 kg",
     "hp": 100,
     "speed": 50,
-    "material": [ "flesh", "steel" ],
+    "material": [ "flesh" ],
     "symbol": "Z",
     "color": "brown",
     "aggression": 100,
@@ -199,7 +199,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 14, "cut": 14, "stab": 14, "bullet": 14 }
+    "armor": { "bash": 14, "cut": 14, "stab": 14, "bullet": 14, "heat": 4 }
   },
   {
     "id": "mon_zombie_plated",
@@ -214,7 +214,7 @@
     "weight": "120 kg",
     "hp": 145,
     "speed": 60,
-    "material": [ "flesh", "steel" ],
+    "material": [ "flesh" ],
     "symbol": "Z",
     "color": "brown",
     "scents_tracked": [ "sc_human", "sc_fetid" ],
@@ -249,7 +249,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 18, "cut": 18, "stab": 18, "bullet": 18 }
+    "armor": { "bash": 18, "cut": 18, "stab": 18, "bullet": 18, "acid": 4, "heat": 8 }
   },
   {
     "id": "mon_zombie_urchin",
@@ -263,7 +263,7 @@
     "weight": "90 kg",
     "hp": 100,
     "speed": 60,
-    "material": [ "flesh", "steel" ],
+    "material": [ "flesh" ],
     "symbol": "Z",
     "color": "brown",
     "scents_tracked": [ "sc_human", "sc_fetid" ],
@@ -303,7 +303,7 @@
       "PUSH_MON",
       "FILTHY"
     ],
-    "armor": { "bash": 5, "cut": 5, "stab": 5, "bullet": 5 }
+    "armor": { "bash": 5, "cut": 5, "stab": 5, "bullet": 5, "acid": 6, "heat": 10 }
   },
   {
     "id": "mon_zombie_hammer_hands",
@@ -317,7 +317,7 @@
     "weight": "90 kg",
     "hp": 120,
     "speed": 75,
-    "material": [ "flesh", "steel" ],
+    "material": [ "flesh" ],
     "symbol": "Z",
     "looks_like": "mon_zombie_brute",
     "color": "brown",
@@ -361,7 +361,7 @@
       "PUSH_VEH",
       "FILTHY"
     ],
-    "armor": { "bash": 8, "cut": 8, "stab": 8, "bullet": 8 }
+    "armor": { "bash": 8, "cut": 8, "stab": 8, "bullet": 8, "acid": 4, "heat": 8 }
   },
   {
     "id": "mon_zombie_slag_hulk",
@@ -376,7 +376,7 @@
     "weight": "500 kg",
     "hp": 480,
     "speed": 85,
-    "material": [ "flesh" ],
+    "material": [ "flesh", "slag" ],
     "symbol": "G",
     "color": "white",
     "scents_tracked": [ "sc_human", "sc_fetid" ],
