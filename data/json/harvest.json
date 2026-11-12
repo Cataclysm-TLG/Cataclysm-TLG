@@ -38,7 +38,7 @@
   {
     "id": "burdock_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raw_burdock", "base_num": [ 1, 3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "raw_burdock", "base_num": [ 1, 3 ], "difficulty": 9 } ]
   },
   {
     "id": "burdock_summer_harv",
@@ -201,7 +201,7 @@
   {
     "id": "bamboo_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raw_bamboo", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "raw_bamboo", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
   },
   {
     "id": "shrub_rose_harv",
@@ -211,17 +211,17 @@
   {
     "id": "shrub_autumn_olive_harv",
     "type": "harvest",
-    "entries": [ { "drop": "autumn_olive", "base_num": [ 1, 7 ], "scale_num": [ 0, 0.5 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "autumn_olive", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.5 ], "difficulty": 8 } ]
   },
   {
     "id": "shrub_chokeberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "chokeberries", "base_num": [ 1, 7 ], "scale_num": [ 0, 0.5 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "chokeberries", "base_num": [ 1, 5 ], "scale_num": [ 0, 0.5 ], "difficulty": 8 } ]
   },
   {
     "id": "shrub_spicebush_harv",
     "type": "harvest",
-    "entries": [ { "drop": "spicebush_berries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ] } ]
+    "entries": [ { "drop": "spicebush_berries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ] } ]
   },
   {
     "id": "shrub_grape_harv",
@@ -234,12 +234,12 @@
   {
     "id": "shrub_raspberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "raspberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "raspberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
   },
   {
     "id": "shrub_huckleberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "huckleberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "huckleberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
   },
   {
     "id": "shrub_blackberry_harv",
@@ -249,12 +249,12 @@
   {
     "id": "shrub_strawberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "strawberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "strawberries", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "shrub_blueberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "blueberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "blueberries", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "shrub_hobblebush_harv",
@@ -333,57 +333,57 @@
   {
     "id": "nannyberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "nannyberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "nannyberries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "tupelo_harv",
     "type": "harvest",
-    "entries": [ { "drop": "tupelo_fruit", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "tupelo_fruit", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "mulberry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "mulberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "mulberries", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "plum_harv",
     "type": "harvest",
-    "entries": [ { "drop": "plums", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "plums", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "apricot_harv",
     "type": "harvest",
-    "entries": [ { "drop": "apricot", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "apricot", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "peach_harv",
     "type": "harvest",
-    "entries": [ { "drop": "peach", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "peach", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "juniper_harv",
     "type": "harvest",
-    "entries": [ { "drop": "juniper", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "juniper", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "cherry_harv",
     "type": "harvest",
-    "entries": [ { "drop": "cherries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "cherries", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "coffee_harv",
     "type": "harvest",
-    "entries": [ { "drop": "coffee_pod", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "coffee_pod", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "pear_harv",
     "type": "harvest",
-    "entries": [ { "drop": "pear", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "pear", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "apple_harv",
     "type": "harvest",
-    "entries": [ { "drop": "apple", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "apple", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "crabapple_harv",
@@ -399,7 +399,7 @@
     "id": "oak_harv",
     "type": "harvest",
     "//": "Acorn production varies wildly by year.",
-    "entries": [ { "drop": "acorns", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "acorns", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "cottonwood_harv",
@@ -409,17 +409,17 @@
   {
     "id": "beech_harv",
     "type": "harvest",
-    "entries": [ { "drop": "beech_nuts", "base_num": [ 1, 6 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "beech_nuts", "base_num": [ 1, 3 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "hazelnut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "hazelnut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "hazelnut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "chestnut_harv",
     "type": "harvest",
-    "entries": [ { "drop": "chestnut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "chestnut", "base_num": [ 1, 4 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 } ]
   },
   {
     "id": "blackjack_harv",
@@ -462,18 +462,18 @@
   {
     "id": "japanese_knotweed_harv",
     "type": "harvest",
-    "entries": [ { "drop": "japanese_knotweed_stem", "base_num": [ 1, 2 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "japanese_knotweed_stem", "base_num": [ 1, 2 ], "difficulty": 9 } ]
   },
   {
     "id": "wild_rice_harv",
     "type": "harvest",
-    "entries": [ { "drop": "wild_rice", "base_num": [ 2, 4 ], "difficulty": 8 } ]
+    "entries": [ { "drop": "wild_rice", "base_num": [ 2, 4 ], "difficulty": 9 } ]
   },
   {
     "id": "wintergreen_harv",
     "type": "harvest",
     "entries": [
-      { "drop": "wintergreen_berry", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ], "difficulty": 8 },
+      { "drop": "wintergreen_berry", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ], "difficulty": 9 },
       { "drop": "wintergreen_leaves", "base_num": [ 1, 2 ], "scale_num": [ 0, 0.3 ], "difficulty": 3 }
     ]
   },
@@ -485,17 +485,17 @@
   {
     "id": "kelp_sugar_harv",
     "type": "harvest",
-    "entries": [ { "drop": "kelp_sugar", "difficulty": 8 } ]
+    "entries": [ { "drop": "kelp_sugar", "difficulty": 9 } ]
   },
   {
     "id": "bladderwrack_harv",
     "type": "harvest",
-    "entries": [ { "drop": "bladderwrack", "difficulty": 8 } ]
+    "entries": [ { "drop": "bladderwrack", "difficulty": 9 } ]
   },
   {
     "id": "sea_lettuce_harv",
     "type": "harvest",
-    "entries": [ { "drop": "sea_lettuce", "difficulty": 8 } ]
+    "entries": [ { "drop": "sea_lettuce", "difficulty": 9 } ]
   },
   {
     "id": "fish_tiny",

@@ -57,9 +57,36 @@
     "type": "palette",
     "id": "orchard_tree_apple",
     "terrain": {
-      " ": "t_region_groundcover_forest",
-      "*": "t_region_soil",
-      "7": [ [ "t_tree_apple", 3 ], [ "t_tree_young", 3 ], [ "t_tree_dead", 4 ], "t_stump" ]
+      " ": [ [ "t_region_groundcover", 20 ], [ "t_region_groundcover_forest", 100 ], [ "t_trunk", 1 ] ],
+      "*": [ [ "t_region_groundcover", 6 ], [ "t_region_soil", 200 ], [ "t_trunk", 1 ] ],
+      "7": [ [ "t_region_groundcover", 1 ], [ "t_tree_apple", 2 ], [ "t_tree_very_dead", 1 ], [ "t_tree_young", 3 ], [ "t_tree_dead", 4 ], "t_stump" ]
+    }
+  },
+  {
+    "type": "palette",
+    "id": "orchard_tree_bare",
+    "terrain": {
+      " ": [ [ "t_region_groundcover", 50 ], [ "t_region_groundcover_barren", 5 ], [ "t_trunk", 2 ] ],
+      "*": [ [ "t_region_groundcover", 2 ], [ "t_region_soil", 200 ], [ "t_region_groundcover_barren", 4 ], [ "t_trunk", 1 ] ],
+      "7": [ [ "t_region_groundcover", 10 ], [ "t_tree_apple", 1 ], [ "t_tree_very_dead", 16 ], [ "t_tree_young", 12 ], [ "t_tree_dead", 12 ], [ "t_stump", 32 ] ]
+    }
+  },
+  {
+    "type": "palette",
+    "id": "orchard_tree_pear",
+    "terrain": {
+      " ": [ [ "t_region_groundcover", 20 ], [ "t_region_groundcover_forest", 100 ], [ "t_trunk", 1 ] ],
+      "*": [ [ "t_region_groundcover", 6 ], [ "t_region_soil", 200 ], [ "t_trunk", 1 ] ],
+      "7": [ [ "t_region_groundcover", 1 ], [ "t_tree_pear", 2 ], [ "t_tree_very_dead", 1 ], [ "t_tree_young", 3 ], [ "t_tree_dead", 4 ], "t_stump" ]
+    }
+  },
+  {
+    "type": "palette",
+    "id": "tree_farm",
+    "terrain": {
+      " ": [ [ "t_region_groundcover", 20 ], [ "t_region_groundcover_forest", 100 ], [ "t_trunk", 1 ] ],
+      "*": [ [ "t_region_groundcover", 6 ], [ "t_region_soil", 200 ], [ "t_trunk", 1 ] ],
+      "7": [ [ "t_region_groundcover", 1 ], [ "t_tree_pine", 5 ], [ "t_tree_very_dead", 1 ], [ "t_tree_young", 3 ], [ "t_tree_deadpine", 3 ], "t_stump" ]
     }
   }
 ]

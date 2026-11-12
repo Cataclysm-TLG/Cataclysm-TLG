@@ -223,6 +223,42 @@
   },
   {
     "type": "overmap_terrain",
+    "id": "orchard_tree_bare",
+    "copy-from": "generic_rural_building",
+    "name": "apple orchard",
+    "sym": "T",
+    "color": "light_green",
+    "vision_levels": "first_glance_forest",
+    "looks_like": "forest",
+    "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 1, 4 ], "chance": 2 },
+    "mondensity": 3
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "orchard_tree_pear",
+    "copy-from": "generic_rural_building",
+    "name": "pear orchard",
+    "sym": "T",
+    "color": "light_green",
+    "vision_levels": "first_glance_forest",
+    "looks_like": "forest",
+    "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 1, 4 ], "chance": 5 },
+    "mondensity": 3
+  },
+  {
+    "type": "overmap_terrain",
+    "id": "tree_farm",
+    "copy-from": "generic_rural_building",
+    "name": "tree farm",
+    "sym": "T",
+    "color": "light_green",
+    "vision_levels": "first_glance_forest",
+    "looks_like": "forest",
+    "spawns": { "group": "GROUP_WASP_FORAGER", "population": [ 1, 2 ], "chance": 3 },
+    "mondensity": 3
+  },
+  {
+    "type": "overmap_terrain",
     "id": "orchard_processing",
     "copy-from": "generic_rural_building",
     "name": "orchard processing",
