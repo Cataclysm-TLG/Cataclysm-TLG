@@ -144,10 +144,12 @@
       "palettes": [ "orchard_tree_apple" ],
       "place_monster": [
         { "group": "GROUP_PEST", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 9 },
-        { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 6 },
-        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 6 },
-        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 7 },
-        { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 3 }
+        { "group": "GROUP_WORM", "x": [ 0, 22 ], "y": [ 0, 22 ], "chance": 2 },
+        { "group": "GROUP_WORM", "x": [ 27, 34 ], "y": [ 27, 34 ], "chance": 2 },
+        { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 3 },
+        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 3 },
+        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 4 },
+        { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 2 }
       ]
     }
   },
@@ -186,10 +188,12 @@
       "palettes": [ "orchard_tree_pear" ],
       "place_monster": [
         { "group": "GROUP_PEST", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 9 },
-        { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 6 },
-        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 6 },
-        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 7 },
-        { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 3 }
+        { "group": "GROUP_WORM", "x": [ 0, 22 ], "y": [ 0, 22 ], "chance": 2 },
+        { "group": "GROUP_WORM", "x": [ 27, 34 ], "y": [ 27, 34 ], "chance": 2 },
+        { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 3 },
+        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 3 },
+        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 4 },
+        { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 2 }
       ]
     }
   },
@@ -227,11 +231,13 @@
       ],
       "palettes": [ "orchard_tree_bare" ],
       "place_monster": [
-        { "group": "GROUP_PEST", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 3 },
-        { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 1 },
-        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 1 },
-        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 3 },
-        { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 1 }
+        { "group": "GROUP_PEST", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 9 },
+        { "group": "GROUP_WORM", "x": [ 0, 22 ], "y": [ 0, 22 ], "chance": 2 },
+        { "group": "GROUP_WORM", "x": [ 27, 34 ], "y": [ 27, 34 ], "chance": 2 },
+        { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 3 },
+        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 3 },
+        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 4 },
+        { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 2 }
       ]
     }
   },
@@ -269,10 +275,12 @@
       ],
       "palettes": [ "tree_farm" ],
       "place_monster": [
-        { "group": "GROUP_PEST", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 3 },
+        { "group": "GROUP_PEST", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 2 },
+        { "group": "GROUP_WORM", "x": [ 0, 22 ], "y": [ 0, 22 ], "chance": 1 },
+        { "group": "GROUP_WORM", "x": [ 27, 34 ], "y": [ 27, 34 ], "chance": 1 },
         { "group": "GROUP_DOMESTIC", "x": [ 1, 10 ], "y": [ 1, 10 ], "chance": 1 },
-        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 2 },
-        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 4 },
+        { "group": "GROUP_SAFE", "x": [ 10, 20 ], "y": [ 10, 20 ], "chance": 1 },
+        { "group": "GROUP_ZOMBIE", "x": [ 10, 22 ], "y": [ 10, 22 ], "repeat": [ 1, 4 ], "chance": 1 },
         { "group": "GROUP_FUNGI_FLOWERS", "x": [ 6, 22 ], "y": [ 6, 22 ], "repeat": [ 1, 4 ], "chance": 1 }
       ]
     }
