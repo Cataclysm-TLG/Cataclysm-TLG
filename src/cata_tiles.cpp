@@ -5851,9 +5851,10 @@ void cata_tiles::draw_custom_explosion_frame()
                 rotation = 3;
                 break;
             case N_NO_NEIGHBORS:
+                subtile = unconnected;
+                break;
             case N_WEST | N_EAST | N_NORTH | N_SOUTH:
-                // Needs some special tile
-                subtile = edge;
+                subtile = center;
                 break;
         }
 
@@ -5876,10 +5877,8 @@ void cata_tiles::draw_custom_explosion_frame()
 
         draw_options opts{};
         opts.category = TILE_CATEGORY::NONE;
-
-
         int height_3d = 0;
-        draw_from_id_string( explosion_tile_id, p, subtile, rotation, lit_level::LIT, true, height_3d,
+        draw_from_id_string( explosion_tile_id, p, subtile, rotation, lit_level::LIT, nv_goggles_activated, height_3d,
                              opts );
     }
 }
