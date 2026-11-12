@@ -2055,7 +2055,8 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
     }
 
     if( effect == effect_onfire ) {
-        return is_immune_damage( damage_heat ) || get_armor_type( damage_heat, bodypart_id( "torso" ) ) > 15 ||
+        return is_immune_damage( damage_heat ) ||
+               get_armor_type( damage_heat, bodypart_id( "torso" ) ) > 15 ||
                made_of( phase_id::LIQUID ) || has_flag( mon_flag_FIREPROOF ) ||
                has_flag( mon_flag_FIREY );
     }

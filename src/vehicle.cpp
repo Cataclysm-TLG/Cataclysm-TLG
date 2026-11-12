@@ -8139,7 +8139,7 @@ bool vehicle::restore_folded_parts( const item &it )
                 damage_to_apply -= applied_damage;
                 add_msg_debug( debugmode::DF_VEHICLE, "unfolding applied %d damage to %s %d left to apply",
                                applied_damage, pt.name(), damage_to_apply );
-            }    
+            }
             refresh( );
         }
     }

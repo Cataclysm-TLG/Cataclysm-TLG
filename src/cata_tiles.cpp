@@ -5797,42 +5797,61 @@ void cata_tiles::draw_explosion_frame()
     }
 }
 
+
 void cata_tiles::draw_custom_explosion_frame()
 {
-    // TODO: Make the drawing code handle all the missing tiles: <^>v and *
-    // TODO: Add more explosion tiles, like "strong explosion", so that it displays more info
     static const std::string exp_strong = "explosion";
     static const std::string exp_medium = "explosion_medium";
     static const std::string exp_weak = "explosion_weak";
-    int subtile = 0;
-    int rotation = 0;
 
     for( const auto &pr : custom_explosion_layer ) {
-        const explosion_neighbors ngh = pr.second.neighborhood;
+        const tripoint_bub_ms &p = pr.first;
         const nc_color col = pr.second.color;
 
+        /** Explosions are calculated as an expanding series of "shells" which are
+         * then drawn as a series of "layers", each layer being the entire footprint 
+         * of the explosion on a given frame. So here we calculate neighbors for the
+         * entire footprint so that we get the subtiles every time the drawing
+         * is updated. **/
+        explosion_neighbors ngh = N_NO_NEIGHBORS;
+
+        if( custom_explosion_layer.count( p + point::north ) ) {
+            ngh = static_cast<explosion_neighbors>( ngh | N_NORTH );
+        }
+        if( custom_explosion_layer.count( p + point::south ) ) {
+            ngh = static_cast<explosion_neighbors>( ngh | N_SOUTH );
+        }
+        if( custom_explosion_layer.count( p + point::west ) ) {
+            ngh = static_cast<explosion_neighbors>( ngh | N_WEST );
+        }
+        if( custom_explosion_layer.count( p + point::east ) ) {
+            ngh = static_cast<explosion_neighbors>( ngh | N_EAST );
+        }
+
+        int subtile = unconnected;
+        int rotation = 0;
+
         switch( ngh ) {
+            case N_NO_NEIGHBORS:
+                subtile = unconnected;
+                break;
             case N_NORTH:
             case N_SOUTH:
                 subtile = edge;
-                rotation = 1;
+                rotation = 0;
                 break;
             case N_WEST:
             case N_EAST:
                 subtile = edge;
-                rotation = 0;
-                break;
-            case N_NORTH | N_SOUTH:
-            case N_NORTH | N_SOUTH | N_WEST:
-            case N_NORTH | N_SOUTH | N_EAST:
-                subtile = edge;
                 rotation = 1;
                 break;
-            case N_WEST | N_EAST:
-            case N_WEST | N_EAST | N_NORTH:
-            case N_WEST | N_EAST | N_SOUTH:
+            case N_NORTH | N_SOUTH:
                 subtile = edge;
                 rotation = 0;
+                break;
+            case N_WEST | N_EAST:
+                subtile = edge;
+                rotation = 1;
                 break;
             case N_SOUTH | N_EAST:
                 subtile = corner;
@@ -5850,17 +5869,27 @@ void cata_tiles::draw_custom_explosion_frame()
                 subtile = corner;
                 rotation = 3;
                 break;
-            case N_NO_NEIGHBORS:
-                subtile = unconnected;
+            case N_NORTH | N_SOUTH | N_WEST:
+                subtile = t_connection;
+                rotation = 3;
                 break;
-            case N_WEST | N_EAST | N_NORTH | N_SOUTH:
+            case N_NORTH | N_SOUTH | N_EAST:
+                subtile = t_connection;
+                rotation = 1;
+                break;
+            case N_WEST | N_EAST | N_NORTH:
+                subtile = t_connection;
+                rotation = 2;
+                break;
+            case N_WEST | N_EAST | N_SOUTH:
+                subtile = t_connection;
+                rotation = 0;
+                break;
+            default:
                 subtile = center;
                 break;
         }
-
-        const tripoint_bub_ms &p = pr.first;
         std::string explosion_tile_id;
-        // Use target sprite if exist, otherwise col will determine fallback sprite
         if( pr.second.tile_name &&
             find_tile_looks_like( *pr.second.tile_name, TILE_CATEGORY::NONE, "" ) ) {
             explosion_tile_id = *pr.second.tile_name;
@@ -5869,19 +5898,18 @@ void cata_tiles::draw_custom_explosion_frame()
         } else if( col == c_yellow ) {
             explosion_tile_id = exp_medium;
         } else if( col == c_black ) {
-            // c_black results in no fallback sprite
-            return;
+            continue;
         } else {
             explosion_tile_id = exp_weak;
         }
-
         draw_options opts{};
         opts.category = TILE_CATEGORY::NONE;
         int height_3d = 0;
-        draw_from_id_string( explosion_tile_id, p, subtile, rotation, lit_level::LIT, nv_goggles_activated, height_3d,
-                             opts );
+        draw_from_id_string( explosion_tile_id, p, subtile, rotation,
+                             lit_level::LIT, nv_goggles_activated, height_3d, opts );
     }
 }
+
 void cata_tiles::draw_bullet_frame()
 {
     draw_options opts{};

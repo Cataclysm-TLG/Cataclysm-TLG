@@ -414,9 +414,9 @@ static void draw_description( const catacurses::window &win, const bionic &bio,
     }
     ypos += 1 + fold_and_print( win, point( 0, ypos ), width, c_light_blue, "%s", bio.id->description );
 
-        const bool each_bp_on_new_line = ypos + num_of_bp + 1 < getmaxy( win );
-        ypos += fold_and_print( win, point( 0, ypos ), width, c_light_gray, list_occupied_bps( bio.id,
-                                _( "This bionic occupies the following body parts:" ), each_bp_on_new_line ) );
+    const bool each_bp_on_new_line = ypos + num_of_bp + 1 < getmaxy( win );
+    ypos += fold_and_print( win, point( 0, ypos ), width, c_light_gray, list_occupied_bps( bio.id,
+                            _( "This bionic occupies the following body parts:" ), each_bp_on_new_line ) );
 
     if( bio.has_weapon() ) {
         fold_and_print( win, point( 0, ypos ), width, c_light_gray,
