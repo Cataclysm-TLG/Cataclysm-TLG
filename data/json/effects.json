@@ -1132,7 +1132,7 @@
     "//": "In formal usage, 'nauseous' technically means 'to cause nausea [in others],' not 'feeling sick.'",
     "miss_messages": [ [ "Your stomach bothers you.", 1 ] ],
     "rating": "bad",
-    "resist_traits": [ "POISRESIST", "VOMITSTOMACH" ],
+    "resist_traits": [ "VOMITSTOMACH" ],
     "base_mods": {
       "per_mod": [ -1 ],
       "dex_mod": [ -1 ],

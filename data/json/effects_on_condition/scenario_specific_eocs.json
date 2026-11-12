@@ -5,6 +5,8 @@
     "effect": [
       { "u_add_effect": "flu", "intensity": 1, "duration": "1000 minutes" },
       { "u_add_effect": "drunk", "intensity": 1, "duration": "270 minutes" },
+      { "math": [ "u_vitamin('ethanol') = 100" ] },
+      { "math": [ "u_vitamin('BAC') = 1400" ] },
       {
         "u_add_morale": "morale_feeling_bad",
         "bonus": -100,
