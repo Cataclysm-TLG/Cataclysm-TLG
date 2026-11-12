@@ -198,5 +198,10 @@
     "id": "score_skill_levels_gained",
     "type": "score",
     "statistic": "num_gains_skill_level"
+  },
+  {
+    "id": "score_broken_torso",
+    "type": "score",
+    "statistic": "num_broken_torso"
   }
 ]
