@@ -13434,26 +13434,36 @@ void game::animate_weather()
     creature_tracker &creatures = get_creature_tracker();
 
     if( weather_info.static_overlay && use_tiles ) {
-        const int width = iEnd.x + 1 - iStart.x;
-        const int height = iEnd.y + 1 - iStart.y;
-        const int max_x = width + iStart.x;
-        const int max_y = height + iStart.y;
+        const int max_x = iEnd.x + 1;
+        const int max_y = iEnd.y + 1;
+
+        const auto &visibility_cache = m.get_cache_ref( u.posz() ).visibility_cache;
+        const visibility_variables &cache = m.get_visibility_variables_cache();
+
+        const bool player_outside = m.is_outside( u.pos_bub( here ) );
+        // FIXME: Why are we special casing underground roofed here?
+        const bool underground_roofed = u.pos_bub().z() < 0 &&
+                                        m.is_roofed( u.pos_bub( here ) );
 
         for( int local_y = iStart.y; local_y <= max_y; ++local_y ) {
             for( int local_x = iStart.x; local_x <= max_x; ++local_x ) {
                 const point_bub_ms screen_point( local_x, local_y );
                 const point_bub_ms map_point = screen_point + offset;
                 const tripoint_bub_ms mapp( map_point, u.posz() );
-
+                if( underground_roofed ) {
+                    continue;
+                }
                 if( !m.inbounds( mapp ) ) {
                     continue;
                 }
-
                 // Don't display fog on indoor tiles when the player is indoors.
-                if( !m.is_outside( u.pos_bub( here ) ) && !m.is_outside( mapp ) ) {
+                if( !player_outside && !m.is_outside( mapp ) ) {
                     continue;
                 }
-                if( u.pos_bub().z() < 0 && m.is_roofed( u.pos_bub( here ) ) ) {
+                const auto &vis_cache_row = visibility_cache[mapp.x()];
+                const visibility_type vis = m.get_visibility( vis_cache_row[mapp.y()], cache );
+                if( vis != visibility_type::CLEAR &&
+                    !u.has_memory_at( m.get_abs( mapp ) ) ) {
                     continue;
                 }
                 wPrint.vdrops.emplace_back( screen_point.x(), screen_point.y() );
@@ -13463,8 +13473,6 @@ void game::animate_weather()
         // Ensure that rain doesn't animate faster than it's supposed to.
         static std::chrono::steady_clock::time_point last_reroll = std::chrono::steady_clock::now();
         static std::vector<std::pair<int, int>> cached_drops;
-
-
         const auto now = std::chrono::steady_clock::now();
         if( now - last_reroll >= std::chrono::milliseconds( 125 ) ) {
             last_reroll = now;
