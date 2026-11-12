@@ -5809,7 +5809,7 @@ void cata_tiles::draw_custom_explosion_frame()
         const nc_color col = pr.second.color;
 
         /** Explosions are calculated as an expanding series of "shells" which are
-         * then drawn as a series of "layers", each layer being the entire footprint 
+         * then drawn as a series of "layers", each layer being the entire footprint
          * of the explosion on a given frame. So here we calculate neighbors for the
          * entire footprint so that we get the subtiles every time the drawing
          * is updated. **/

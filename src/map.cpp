@@ -3297,9 +3297,6 @@ void map::drop_items( const tripoint_bub_ms &p )
             continue;
         }
 
-        units::mass wt_dropped = i.weight();
-        units::volume vol_dropped = i.volume();
-
         if( max_height_fallen <= 0 ) {
             debugmsg( "Tried to calculate damage for falling item, but item somehow fell less than one z-level!" );
             max_height_fallen = 1;
@@ -3326,49 +3323,32 @@ void map::drop_items( const tripoint_bub_ms &p )
         // In meters per second.
         double velocity_at_impact = gravity_acceleration_constant * falling_time;
 
-        double density = to_kilogram( wt_dropped ) / to_liter( vol_dropped );
+        double impact_energy = to_kilogram( i.weight() ) * std::pow( velocity_at_impact, 2.0 ) / 2.0;
 
-        // Adjust the damage so e.g. a table and a bowling ball don't hit the same.
-        double adjusted_mass = to_kilogram( wt_dropped ) * std::min( density, 1.0 );
-
-        // In joules.
-        double impact_energy = adjusted_mass * std::pow( velocity_at_impact, 2.0 ) / 2.0;
-
-        // In faces smashed (parts per hundred).
-        double damage = sqrt( impact_energy );
+        double damage = std::sqrt( impact_energy ) * 1.2;
+        if( i.is_soft() ) {
+            damage /= 5.0;
+        }
         damage_total += damage;
 
         add_item_or_charges( below, i );
 
         // Bash creature standing below
-        if( creature_below ) {
+        if( creature_below && damage > 1.0 ) {
             // creature's dodge modifier
             float dodge_mod = creature_below->dodge_roll();
-
             // Most of the threat comes from the projectile going very fast before it enters a creature's vertical FOV
             // or e.g. it fell from so high up that there was no indication of something coming down before it (possibly) hits
             float hit_mod = velocity_at_impact / ( dodge_mod + 5 );
-            // 200 here so it just misses 25%+ of the time.
+            // We have to go bigger than 0-100 or the hit chance is weirdly high.
             int creature_hit_chance = rng( 0, 150 );
             double avoid_chance = hit_mod * occupied_tile_fraction( creature_below->get_size() );
             // We use sqrt here because it trends back towards 1. Spectacularly low hit_mod will still have SOME chance to hit while
             // hits of >1 avoid_chance are not always going to strike the head
             creature_hit_chance /= sqrt( avoid_chance );
             bodypart_id hit_part;
-            if( creature_hit_chance < 15 ) {
-                hit_part = creature_below->get_random_body_part_of_type( body_part_type::type::head );
-            } else if( creature_hit_chance < 30 ) {
-                hit_part = creature_below->get_random_body_part_of_type( body_part_type::type::torso );
-            } else if( creature_hit_chance < 90 ) {
-                hit_part = creature_below->get_random_body_part_of_type( body_part_type::type::arm );
-            } else if( creature_hit_chance < 100 ) {
-                hit_part = creature_below->get_random_body_part_of_type( body_part_type::type::leg );
-            } else {
-                add_msg_if_player_sees( creature_below->pos_bub(), _( "Falling %1$s misses %2$s!" ), i.tname(),
-                                        creature_below->disp_name() );
-            }
-            // Did we hit at all? Then run the message.
             if( creature_hit_chance < 100 ) {
+                hit_part = creature_below->get_random_body_part( true );
                 if( hit_part.is_valid() && !creature_below->is_monster() ) {
                     //~First positional argument: Item name. Second: Name of a person (e.g. "Jane") or player (e.g. "you"). Third: Body part name, accusative.
                     const std::string msg = _( "Falling %1$s hits %2$s on the %3$s for %4$i damage!" );
@@ -3380,9 +3360,12 @@ void map::drop_items( const tripoint_bub_ms &p )
                                             i.tname(), creature_below->disp_name(),
                                             static_cast<int>( damage ) );
                 }
-
-                // FIXME: Hardcoded damage type!
-                creature_below->deal_damage( nullptr, hit_part, damage_instance( damage_bash, damage ) );
+            // FIXME: Hardcoded damage type!
+            creature_below->deal_damage( nullptr, hit_part, damage_instance( damage_bash, damage ) );
+            } else {
+                add_msg_if_player_sees( creature_below->pos_bub(), _( "Falling %1$s misses %2$s!" ), i.tname(),
+                                        creature_below->disp_name() );
+                continue;
             }
         }
     }
@@ -4407,8 +4390,12 @@ void map::smash_items( const tripoint_bub_ms &p, int power, const std::string &c
         if( i->has_flag( flag_FRAGILE ) || i->has_flag( flag_FRAGILE_MELEE ) ) {
             material_factor *= 0.5f;
         }
-        if( i->has_flag( flag_SOFT ) ) {
-            material_factor *= 3.f;
+        if( i->is_soft() ) {
+            material_factor *= 2.f;
+        }
+        // FIXME: This should have more complex behavior.
+        if( i->has_flag( flag_PULPED ) ) {
+            material_factor *= 4.f;
         }
         if( i->has_flag( flag_DURABLE_MELEE ) || i->has_flag( flag_STURDY ) ) {
             material_factor *= 1.5f;
@@ -4535,8 +4522,7 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
     if( !has_items( p ) || has_flag_ter_or_furn( ter_furn_flag::TFLAG_PLANT, p ) ) {
         return;
     }
-
-    // Keep track of how many items have been damaged, and what the first one is
+    // Keep track of how many items have been damaged, and what the first one is.
     bool item_was_damaged = false;
     bool done = false;
     int items_damaged = 0;
@@ -4573,6 +4559,10 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         if( i->is_soft() ) {
             material_factor *= 2.f;
         }
+        // FIXME: This should have more complex behavior.
+        if( i->has_flag( flag_PULPED ) ) {
+            material_factor *= 4.f;
+        }
         if( i->has_flag( flag_DURABLE_MELEE ) || i->has_flag( flag_STURDY ) ) {
             material_factor *= 1.5f;
         }
@@ -4589,8 +4579,7 @@ void map::manually_smash_items( const tripoint_bub_ms &p, const int power, bool 
         params.did_bash = true;
         params.bashed_solid = true;
         const bool by_charges = i->count_by_charges();
-
-        // See if they were damaged
+        // See if they were damaged.
         if( by_charges ) {
             damage_chance *= std::max( 1, i->charges_per_volume( 250_ml ) );
             while( ( damage_chance > material_factor ||
