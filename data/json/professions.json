@@ -5336,8 +5336,8 @@
           { "item": "suppressor" },
           { "item": "rail_laser_sight" },
           { "group": "charged_cell_phone" },
-          { "item": "sig_p230", "ammo-item": "32_acp_jhp", "charges": 8 },
-          { "item": "sigp230mag", "ammo-item": "32_acp_jhp", "charges": 8, "container-item": "bbholster" }
+          { "item": "sig_p230", "ammo-item": "32_acp_jhp", "charges": 8, "container-item": "bbholster" },
+          { "item": "sigp230mag", "ammo-item": "32_acp_jhp", "charges": 8 }
         ]
       },
       "male": {

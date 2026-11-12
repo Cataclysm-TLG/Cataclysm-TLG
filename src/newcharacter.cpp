@@ -38,6 +38,7 @@
 #include "magic_enchantment.h"
 #include "make_static.h"
 #include "mapsharing.h"
+#include "messages.h"
 #include "martialarts.h"
 #include "mission.h"
 #include "mod_manager.h"
@@ -670,21 +671,40 @@ void Character::add_profession_items()
         }
     };
 
-    //storage items may not be added first, so a second attempt is needed
-    attempt_add_items( prof_items, try_adding_again );
-    if( !try_adding_again.empty() ) {
-        prof_items.clear();
-        attempt_add_items( try_adding_again, prof_items );
-        //if there's one item left that still can't be added, attempt to wield it
-        if( prof_items.size() == 1 ) {
-            item last_item = prof_items.front();
-            if( !has_wield_conflicts( last_item ) ) {
-                bool success_wield = wield( last_item );
-                if( success_wield ) {
-                    prof_items.pop_front();
-                }
-            }
+    // Wields one leftover item, preferring containers since they may hold the rest.
+    auto wield_a_leftover = [this]( std::list<item> &leftovers ) {
+        if( is_armed() ) {
+            return false;
         }
+        std::list<item>::iterator candidate = std::find_if( leftovers.begin(), leftovers.end(),
+        []( const item & it ) {
+            return it.is_container();
+        } );
+        if( candidate == leftovers.end() ) {
+            candidate = leftovers.begin();
+        }
+        if( !wield( *candidate ) ) {
+            return false;
+        }
+        leftovers.erase( candidate );
+        return true;
+    };
+
+    // Storage items may come after the items meant to go inside them, so keep retrying while
+    // that places something. When stuck, wield a leftover and retry.
+    attempt_add_items( prof_items, try_adding_again );
+    while( !try_adding_again.empty() ) {
+        std::list<item> still_left;
+        attempt_add_items( try_adding_again, still_left );
+        const bool placed_something = still_left.size() < try_adding_again.size();
+        try_adding_again = std::move( still_left );
+        if( !placed_something && !wield_a_leftover( try_adding_again ) ) {
+            break;
+        }
+    }
+    for( const item &lost : try_adding_again ) {
+        add_msg_debug( debugmode::DF_CHARACTER, "Profession %s: no room for starting item %s",
+                       prof->ident().str(), lost.typeId().str() );
     }
 
     recalc_sight_limits();
