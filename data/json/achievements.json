@@ -1033,27 +1033,10 @@
     "hidden_by": [ "achievement_lvl_7_throw" ]
   },
   {
-    "id": "achievement_lvl_7_melee",
-    "type": "achievement",
-    "name": "Brawler",
-    "description": "Bottle in left hand, chair leg in right hand.",
-    "requirements": [ { "event_statistic": "num_gains_melee_level_7", "is": ">=", "target": 1, "description": "Gain melee skill level 7" } ]
-  },
-  {
-    "id": "achievement_lvl_10_melee",
-    "type": "achievement",
-    "name": "Street Fighter",
-    "description": "It's winning that matters, not the style.",
-    "requirements": [
-      { "event_statistic": "num_gains_melee_level_10", "is": ">=", "target": 1, "description": "Gain melee skill level 10" }
-    ],
-    "hidden_by": [ "achievement_lvl_7_melee" ]
-  },
-  {
     "id": "achievement_lvl_7_bashing",
     "type": "achievement",
-    "name": "Beater",
-    "description": "If you beat them enough, they stay down.",
+    "name": "Neanderthal",
+    "description": "BONK.",
     "requirements": [
       {
         "event_statistic": "num_gains_bashing_level_7",
