@@ -157,8 +157,8 @@
         }
       },
       "place_monster": [ { "monster": "mon_feral_human_tool", "chance": 13, "repeat": [ 1, 2 ], "x": [ 4, 7 ], "y": [ 5, 8 ] } ],
-      "gaspumps": { "@": { "fuel": "gasoline", "amount": [ 100, 500 ] }, "$": { "fuel": "diesel", "amount": [ 100, 500 ] } },
-      "vehicles": { "Ø": { "vehicle": "tatra_truck", "chance": 50, "fuel": 40 } },
+      "gaspumps": { "@": { "fuel": "gasoline", "amount": [ 0, 500 ] }, "$": { "fuel": "diesel", "amount": [ 0, 500 ] } },
+      "vehicles": { "Ø": { "vehicle": "tatra_truck", "chance": 30, "fuel": 30 } },
       "nested": { "`": { "chunks": [ [ "mechanical_fluid", 10 ], [ "gasoline_diesel_motor_oil", 80 ], [ "null", 80 ] ] } },
       "liquids": { "W": { "liquid": "water_clean", "amount": [ 0, 80 ] } }
     }
