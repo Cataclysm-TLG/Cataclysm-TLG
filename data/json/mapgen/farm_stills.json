@@ -304,8 +304,8 @@
       },
       "place_vehicles": [ { "vehicle": "bikeshop", "x": 22, "y": 19, "chance": 70, "rotation": 90 } ],
       "liquids": {
-        "X": { "liquid": "hb_beer", "amount": [ 10, 200 ], "chance": 70 },
-        "W": { "liquid": "dandelion_wine", "amount": [ 10, 200 ], "chance": 30 }
+        "X": { "liquid": "hb_beer", "amount": [ 4, 200 ], "chance": 70 },
+        "W": { "liquid": "dandelion_wine", "amount": [ 4, 200 ], "chance": 30 }
       },
       "items": {
         "%": { "item": "wines_worthy", "chance": 60, "repeat": [ 1, 2 ] },

@@ -214,19 +214,19 @@
     "items": [
       [ "null", 100 ],
       { "item": "glass_shard", "prob": 50, "charges": [ 8, 100 ] },
-      { "item": "bottle_glass", "prob": 50, "count": [ 1, 6 ] },
-      { "item": "wine_cabernet", "prob": 14, "count": [ 1, 12 ] },
-      { "item": "wine_riesling", "prob": 12, "count": [ 1, 12 ] },
-      { "item": "wine_chardonnay", "prob": 10, "count": [ 1, 12 ] },
-      { "item": "wine_marsala", "prob": 8, "count": [ 1, 12 ] },
-      { "item": "wine_vermouth", "prob": 13, "count": [ 1, 12 ] },
-      { "item": "single_pot_whiskey", "prob": 10, "count": [ 1, 12 ] },
-      { "item": "canadian_whiskey", "prob": 10, "count": [ 1, 12 ] },
-      { "item": "sherry", "prob": 10, "count": [ 1, 12 ] },
-      { "item": "bristol_sherry", "prob": 10, "count": [ 1, 12 ] },
-      { "item": "madeira", "prob": 10, "count": [ 1, 12 ] },
-      { "item": "wine_noir", "prob": 8, "count": [ 1, 12 ] },
-      { "item": "fruit_wine", "prob": 6, "count": [ 1, 12 ] }
+      { "item": "bottle_glass", "prob": 50, "count": [ 1, 8 ] },
+      { "item": "wine_cabernet", "prob": 14, "count": [ 1, 8 ] },
+      { "item": "wine_riesling", "prob": 12, "count": [ 1, 8 ] },
+      { "item": "wine_chardonnay", "prob": 10, "count": [ 1, 8 ] },
+      { "item": "wine_marsala", "prob": 8, "count": [ 1, 8 ] },
+      { "item": "wine_vermouth", "prob": 13, "count": [ 1, 8 ] },
+      { "item": "single_pot_whiskey", "prob": 10, "count": [ 1, 8 ] },
+      { "item": "canadian_whiskey", "prob": 10, "count": [ 1, 8 ] },
+      { "item": "sherry", "prob": 10, "count": [ 1, 8 ] },
+      { "item": "bristol_sherry", "prob": 10, "count": [ 1, 8 ] },
+      { "item": "madeira", "prob": 10, "count": [ 1, 8 ] },
+      { "item": "wine_noir", "prob": 8, "count": [ 1, 8 ] },
+      { "item": "fruit_wine", "prob": 6, "count": [ 1, 8 ] }
     ]
   },
   {
@@ -247,12 +247,12 @@
     "subtype": "distribution",
     "items": [
       [ "wooden_barrel", 100 ],
-      { "item": "wine_cabernet", "prob": 40, "container-item": "wooden_barrel" },
-      { "item": "wine_riesling", "prob": 30, "container-item": "wooden_barrel" },
-      { "item": "wine_chardonnay", "prob": 20, "container-item": "wooden_barrel" },
-      { "item": "wine_marsala", "prob": 15, "container-item": "wooden_barrel" },
-      { "item": "wine_noir", "prob": 10, "container-item": "wooden_barrel" },
-      { "item": "fruit_wine", "prob": 5, "container-item": "wooden_barrel" }
+      { "item": "wine_cabernet", "prob": 40, "charges": [ 1, 200 ], "container-item": "wooden_barrel" },
+      { "item": "wine_riesling", "prob": 30, "charges": [ 1, 200 ], "container-item": "wooden_barrel" },
+      { "item": "wine_chardonnay", "prob": 20, "charges": [ 1, 200 ], "container-item": "wooden_barrel" },
+      { "item": "wine_marsala", "prob": 15, "charges": [ 1, 200 ], "container-item": "wooden_barrel" },
+      { "item": "wine_noir", "prob": 10, "charges": [ 1, 200 ], "container-item": "wooden_barrel" },
+      { "item": "fruit_wine", "prob": 5, "charges": [ 1, 200 ], "container-item": "wooden_barrel" }
     ]
   },
   {
