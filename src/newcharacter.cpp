@@ -2263,7 +2263,8 @@ static std::string assemble_profession_details( const avatar &u, const input_con
     // Display Origin
     const std::string mod_src = enumerate_as_string( sorted_profs[cur_id]->src, [](
     const std::pair<profession_id, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
+    return source.second == mod_id( "tlg" ) ? std::string() :
+        string_format( "'%s'", source.second->name() );
     }, enumeration_conjunction::arrow );
     assembled += string_format( _( "Origin: %s" ), mod_src ) + "\n";
 
@@ -3468,10 +3469,18 @@ static std::string assemble_scenario_details( const avatar &u, const input_conte
 {
     std::string assembled;
     // Display Origin
-    const std::string mod_src = enumerate_as_string( current_scenario->src,
-    []( const std::pair<string_id<scenario>, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
-    }, enumeration_conjunction::arrow );
+    std::vector<std::pair<string_id<scenario>, mod_id>> filtered_src;
+    std::copy_if( current_scenario->src.begin(), current_scenario->src.end(),
+                std::back_inserter( filtered_src ), []( const auto &source ) {
+            return source.second != mod_id( "tlg" );
+        } );
+
+    const std::string mod_src = enumerate_as_string(
+        filtered_src,
+        []( const std::pair<string_id<scenario>, mod_id> &source ) {
+            return string_format( "'%s'", source.second->name() );
+        }, enumeration_conjunction::arrow );
+
     assembled += string_format( _( "Origin: %s" ), mod_src ) + "\n";
 
     std::string scenario_name = current_scenario->gender_appropriate_name( !u.male );

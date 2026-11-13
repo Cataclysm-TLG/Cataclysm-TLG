@@ -1019,23 +1019,25 @@ std::string monster::speed_description( float mon_speed_rating,
 int monster::print_info( const catacurses::window &w, int vStart, int vLines, int column ) const
 {
     const map &here = get_map();
-
     const int vEnd = vStart + vLines;
     const int max_width = getmaxx( w ) - column - 1;
     std::ostringstream oss;
-
-    oss << get_tag_from_color( c_white ) << _( "Origin: " );
-    oss << enumerate_as_string( type->src.begin(),
-    type->src.end(), []( const std::pair<mtype_id, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
-    }, enumeration_conjunction::arrow );
-    oss << "</color>" << "\n";
-
-    if( debug_mode ) {
-        oss << colorize( type->id.str(), c_white );
+    std::vector<std::pair<mtype_id, mod_id>> filtered_src;
+    std::copy_if( type->src.begin(), type->src.end(),
+                std::back_inserter( filtered_src ), []( const auto &source ) {
+            return source.second != mod_id( "tlg" );
+        } );
+    if( !filtered_src.empty() ) {
+        oss << get_tag_from_color( c_white ) << _( "Origin: " );
+        oss << enumerate_as_string( filtered_src,
+        []( const std::pair<mtype_id, mod_id> &source ) {
+            return string_format( "'%s'", source.second->name() );
+        }, enumeration_conjunction::arrow );
+        oss << "</color>\n";
     }
-    oss << "\n";
-
+    if( debug_mode ) {
+        oss << colorize( type->id.str(), c_white ) << "\n";
+    }
     // Print health bar, monster name, then statuses on the first line.
     nc_color bar_color = c_white;
     std::string bar_str;
@@ -1128,32 +1130,24 @@ std::string monster::extended_description() const
     Character &pc = get_player_character();
     const bool player_knows = !pc.has_trait( trait_INATTENTIVE );
     const std::pair<std::string, nc_color> att = get_attitude();
-
     std::string att_colored = colorize( att.first, att.second );
     std::string difficulty_str;
     if( debug_mode ) {
         difficulty_str = _( "Difficulty " ) + std::to_string( type->difficulty );
-    } else {
-        if( type->difficulty < 3 ) {
-            difficulty_str = _( "<color_light_gray>Minimal threat.</color>" );
-        } else if( type->difficulty < 10 ) {
-            difficulty_str = _( "<color_light_gray>Mildly dangerous.</color>" );
-        } else if( type->difficulty < 20 ) {
-            difficulty_str = _( "<color_light_red>Dangerous.</color>" );
-        } else if( type->difficulty < 30 ) {
-            difficulty_str = _( "<color_red>Very dangerous.</color>" );
-        } else if( type->difficulty < 50 ) {
-            difficulty_str = _( "<color_red>Extremely dangerous.</color>" );
-        } else {
-            difficulty_str = _( "<color_red>Fatally dangerous!</color>" );
-        }
     }
+    std::vector<std::pair<mtype_id, mod_id>> filtered_src;
+    std::copy_if( type->src.begin(), type->src.end(),
+                std::back_inserter( filtered_src ), []( const auto &source ) {
+            return source.second != mod_id( "tlg" );
+        } );
 
-    ss += _( "Origin: " );
-    ss += enumerate_as_string( type->src.begin(),
-    type->src.end(), []( const std::pair<mtype_id, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
-    }, enumeration_conjunction::arrow );
+    if( !filtered_src.empty() ) {
+        ss += _( "Origin: " );
+        ss += enumerate_as_string( filtered_src,
+        []( const std::pair<mtype_id, mod_id> &source ) {
+            return string_format( "'%s'", source.second->name() );
+        }, enumeration_conjunction::arrow );
+    }
 
     ss += "\n--\n";
 
