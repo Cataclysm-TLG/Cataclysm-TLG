@@ -1241,16 +1241,16 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      [ "keg", 100 ],
-      { "item": "beer", "prob": 40, "container-item": "keg" },
-      { "item": "drink_hard_seltzer", "prob": 40, "container-item": "keg" },
-      { "item": "belgian_ale", "prob": 30, "container-item": "keg" },
-      { "item": "european_pilsner", "prob": 20, "container-item": "keg" },
-      { "item": "wine_barley", "prob": 17, "container-item": "keg" },
-      { "item": "india_pale_ale", "prob": 20, "container-item": "keg" },
-      { "item": "pale_ale", "prob": 20, "container-item": "keg" },
-      { "item": "stout", "prob": 10, "container-item": "keg" },
-      { "item": "imperial_stout", "prob": 5, "container-item": "keg" }
+      [ "keg", 800 ],
+      { "item": "beer", "prob": 40, "charges": [ 1, 100], "container-item": "keg" },
+      { "item": "drink_hard_seltzer", "charges": [ 1, 100], "prob": 40, "container-item": "keg" },
+      { "item": "belgian_ale", "charges": [ 1, 100], "prob": 30, "container-item": "keg" },
+      { "item": "european_pilsner", "charges": [ 1, 100], "prob": 20, "container-item": "keg" },
+      { "item": "wine_barley", "charges": [ 1, 100], "prob": 17, "container-item": "keg" },
+      { "item": "india_pale_ale", "charges": [ 1, 100], "prob": 20, "container-item": "keg" },
+      { "item": "pale_ale", "charges": [ 1, 100], "prob": 20, "container-item": "keg" },
+      { "item": "stout", "charges": [ 1, 100], "prob": 10, "container-item": "keg" },
+      { "item": "imperial_stout", "charges": [ 1, 100], "prob": 5, "container-item": "keg" }
     ]
   },
   {
@@ -1258,7 +1258,7 @@
     "type": "item_group",
     "subtype": "distribution",
     "items": [
-      [ "flask_hip", 100 ],
+      [ "flask_hip", 1000 ],
       { "item": "whiskey", "prob": 40, "container-item": "flask_hip" },
       { "item": "single_pot_whiskey", "prob": 20, "container-item": "flask_hip" },
       { "item": "cheap_whiskey", "prob": 40, "container-item": "flask_hip" },

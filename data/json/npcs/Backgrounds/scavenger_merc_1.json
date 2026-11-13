@@ -5,7 +5,7 @@
     "dynamic_line": {
       "npc_has_effect": "player_BGSS_SAIDYES",
       "yes": {
-        "gendered_line": "Like I said, you want me to tell you a story, you gotta pony up the whisky.  A full bottle, mind you.",
+        "gendered_line": "Like I said, you want me to tell you a story, you gotta pony up the whiskey.",
         "relevant_genders": [ "npc" ]
       },
       "no": "Listen.  I'm gonna cut this off short.  I work for you, okay?  I'm not interested in getting attached.  You didn't pay me to be your friend."
@@ -28,8 +28,8 @@
         "failure": { "topic": "BGSS_SCAVENGER_MERC_1_NICETRY" }
       },
       {
-        "text": "Is this enough whisky for you?",
-        "condition": { "and": [ { "u_has_item": "whiskey" }, { "npc_has_effect": "player_BGSS_SAIDYES" } ] },
+        "text": "Is this enough whiskey for you?",
+        "condition": { "and": [ { "or": [ { "u_has_item": "whiskey" }, { "u_has_item": "cheap_whiskey" }, { "u_has_item": "single_malt_whiskey" }, { "u_has_item": "single_pot_whiskey" }, { "u_has_item": "canadian_whiskey" } ] }, { "npc_has_effect": "player_BGSS_SAIDYES" } ] },
         "topic": "BGSS_SCAVENGER_MERC_1_STORY2"
       },
       { "text": "Fine.  Let's talk business, then.", "topic": "TALK_NONE" },
@@ -111,7 +111,7 @@
   {
     "id": "BGSS_SCAVENGER_MERC_1_STORY2",
     "type": "talk_topic",
-    "dynamic_line": "Oh, yeah, this is a good choice.  Hold on to it for me, let's have a drink later.  Right now we're practically swimming in good whisky, but some day the last bottle will get drunk.  It's gonna be a long time before any of us is brewing nice scotch, and we ain't never gettin' peat from Islay ever again.  Makes me shed a tear just thinking about it.",
+    "dynamic_line": "Yeah, yeah.  That'll do.  Hold onto it for me and we'll have a drink later.",
     "speaker_effect": { "opinion": { "trust": 1, "value": 1 } },
     "responses": [
       {
