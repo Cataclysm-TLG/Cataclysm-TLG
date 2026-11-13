@@ -3069,7 +3069,11 @@ void ebooksave_activity_actor::completed_scanning_current_book( player_activity 
     books.pop_back();
     if( scanned_book ) {
 
-        ereader->put_in( *scanned_book, pocket_type::E_FILE_STORAGE );
+        // Store a content-free copy; books that are also containers (e.g. cement bags)
+        // would otherwise duplicate their contents into the e-file.
+        item efile = *scanned_book;
+        efile.clear_items();
+        ereader->put_in( efile, pocket_type::E_FILE_STORAGE );
 
         if( who.is_avatar() ) {
             if( scanned_book->is_identifiable() && !who.has_identified( scanned_book->typeId() ) ) {
