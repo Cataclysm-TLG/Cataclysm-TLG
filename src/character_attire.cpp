@@ -909,11 +909,6 @@ static void layer_item( std::map<bodypart_id, encumbrance_data> &vals, const ite
     }
 }
 
-/*
- * Layers an item, then the items in its ablative pockets as though they were worn
- * at the same position. Ablative items only count on body parts the parent doesn't
- * cover; on shared parts the parent's own encumbrance already accounts for them.
- */
 static void layer_item_with_ablatives( std::map<bodypart_id, encumbrance_data> &vals,
                                        const item &it, std::map<sub_bodypart_id, layer_level> &highest_layer_so_far,
                                        const Character &c )
