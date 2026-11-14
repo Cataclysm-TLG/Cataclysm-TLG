@@ -174,7 +174,6 @@
     "components": [
       [
         [ "egg_spider_cellar", 1 ],
-        [ "egg_spider_jumping", 1 ],
         [ "egg_spider_trapdoor", 1 ],
         [ "egg_spider_web", 1 ],
         [ "egg_spider_widow", 1 ],

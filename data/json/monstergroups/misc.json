@@ -113,7 +113,7 @@
     "type": "monstergroup",
     "name": "GROUP_SUBWAY",
     "//": "Z-2 subways, some lost nether things but otherwise mostly normal mobs",
-    "default": "mon_spider_jumping_small",
+    "default": "mon_spider_cellar_small",
     "monsters": [
       { "group": "GROUP_NETHER_UNVIABLE", "weight": 300, "cost_multiplier": 0 },
       { "monster": "mon_woodlouse", "weight": 300, "pack_size": [ 1, 3 ] },

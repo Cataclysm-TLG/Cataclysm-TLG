@@ -415,16 +415,6 @@
   {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "id": "egg_spider_jumping",
-    "name": "jumping spider egg",
-    "description": "The egg of a giant jumping spider.",
-    "looks_like": "ant_egg",
-    "copy-from": "egg_insect",
-    "rot_spawn": { "group": "GROUP_EGG_SPIDER_JUMPING", "chance": 30 }
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
     "id": "egg_spider_trapdoor",
     "name": "trapdoor spider egg",
     "description": "The egg of a giant trapdoor spider.",

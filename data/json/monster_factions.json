@@ -471,11 +471,6 @@
   },
   {
     "type": "MONSTER_FACTION",
-    "name": "spider_jumping",
-    "base_faction": "spider"
-  },
-  {
-    "type": "MONSTER_FACTION",
     "name": "spider_trapdoor",
     "base_faction": "spider"
   },
