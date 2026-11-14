@@ -1534,20 +1534,11 @@ int worldfactory::show_worldgen_basic( WORLD *world )
                              namebar_pos + point( name_txt_width, 0 ) ) );
         }
 
-        // Content scrollbar
-        scrollbar()
-        .border_color( BORDER_COLOR )
-        .offset_x( 0 )
-        .offset_y( 1 )
-        .viewport_pos( top_opt * 3 )
-        .viewport_size( content_height )
-        .apply( w_confirmation );
-
         // Bottom box
         wattron( w_confirmation, BORDER_COLOR );
         mvwaddch( w_confirmation, point( 0,             win_height - 10 ), LINE_XXXO );
-        mvwhline( w_confirmation, point( 1,             win_height - 10 ), LINE_OXOX, win_width - 2 );
-        mvwaddch( w_confirmation, point( win_width - 1, win_height - 10 ), LINE_XOXX );
+        mvwhline( w_confirmation, point( 1,             win_height - 10 ), LINE_OXOX, win_width );
+        mvwaddch( w_confirmation, point( win_width + 1, win_height - 10 ), LINE_XOXX );
         wattroff( w_confirmation, BORDER_COLOR );
 
         // Hint text
