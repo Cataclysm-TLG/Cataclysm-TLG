@@ -4545,5 +4545,10 @@
     "id": "spring_plate",
     "type": "MIGRATION",
     "replace": "spring"
+  },
+  {
+    "id": "egg_spider_jumping",
+    "type": "MIGRATION",
+    "replace": "egg_spider_wolf"
   }
 ]

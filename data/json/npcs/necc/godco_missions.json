@@ -319,7 +319,6 @@
     "goal_condition": {
       "u_has_items_sum": [
         { "item": "egg_spider_cellar", "amount": 1 },
-        { "item": "egg_spider_jumping", "amount": 1 },
         { "item": "egg_spider_trapdoor", "amount": 1 },
         { "item": "egg_spider_web", "amount": 1 },
         { "item": "egg_spider_widow", "amount": 1 },
@@ -347,7 +346,6 @@
         {
           "u_consume_item_sum": [
             { "item": "egg_spider_cellar", "amount": 1 },
-            { "item": "egg_spider_jumping", "amount": 1 },
             { "item": "egg_spider_trapdoor", "amount": 1 },
             { "item": "egg_spider_web", "amount": 1 },
             { "item": "egg_spider_widow", "amount": 1 },

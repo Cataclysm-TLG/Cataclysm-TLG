@@ -498,7 +498,6 @@
       ],
       "place_monster": [
         { "monster": "mon_bobcat", "x": 8, "y": 5, "chance": 30 },
-        { "monster": "mon_spider_jumping_small", "x": 18, "y": 9 },
         { "monster": "mon_bat", "x": 18, "y": 12 },
         { "monster": "mon_opossum", "x": 9, "y": 13, "chance": 30 },
         { "monster": "mon_opossum", "x": 8, "y": 16, "chance": 30 },

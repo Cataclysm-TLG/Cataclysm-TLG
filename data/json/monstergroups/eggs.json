@@ -180,11 +180,6 @@
     "monsters": [ { "monster": "mon_spider_cellar_giant_s" } ]
   },
   {
-    "name": "GROUP_EGG_SPIDER_JUMPING",
-    "type": "monstergroup",
-    "monsters": [ { "monster": "mon_spider_jumping_giant_s" } ]
-  },
-  {
     "name": "GROUP_EGG_SPIDER_TRAPDOOR",
     "type": "monstergroup",
     "monsters": [ { "monster": "mon_spider_trapdoor_s" } ]

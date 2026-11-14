@@ -438,19 +438,6 @@
     "shape": "blast"
   },
   {
-    "id": "death_explosion_mon_spider_jumping_mega",
-    "type": "SPELL",
-    "name": { "str": "Death Explosion - Huge" },
-    "valid_targets": [ "self", "ally", "hostile", "ground" ],
-    "description": "Big boom.",
-    "effect": "explosion",
-    "min_aoe": 8,
-    "max_aoe": 8,
-    "min_damage": 26,
-    "max_damage": 26,
-    "shape": "blast"
-  },
-  {
     "id": "death_explosion_mon_spawn_raptor_unstable",
     "type": "SPELL",
     "name": { "str": "Death Explosion - Tiny" },
