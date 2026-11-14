@@ -1485,7 +1485,7 @@ int worldfactory::show_worldgen_basic( WORLD *world )
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
 
-        const int window_height = TERMY / 4;
+        const int window_height = std::max( 12, TERMY / 4 );
         const int offset_y = ( TERMY - window_height ) / 2;
 
         w_confirmation = catacurses::newwin(

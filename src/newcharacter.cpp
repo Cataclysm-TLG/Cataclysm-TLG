@@ -345,13 +345,11 @@ static std::string pools_to_string( const avatar &u, pool_type pool )
     switch( pool ) {
         case pool_type::MULTI_POOL: {
             multi_pool p( u );
-            bool is_valid = p.stat_points_left >= 0 && p.trait_points_left >= 0 && p.skill_points_left >= 0;
             return string_format(
-                       _( "Stats: <color_%s>%d</color>  Traits: <color_%s>%d</color>  Skills: <color_%s>%d</color>\n  Total: <color_%s>%d</color>" ),
+                       _( "Stats: <color_%s>%d</color>  Traits: <color_%s>%d</color>  Skills: <color_%s>%d</color>" ),
                        p.stat_points_left >= 0 ? "light_gray" : "red", p.stat_points_left,
                        p.trait_points_left >= 0 ? "light_gray" : "red", std::abs( p.trait_points_left ),
-                       p.skill_points_left >= 0 ? "light_gray" : "red",  p.pure_skill_points,
-                       is_valid ? "light_gray" : "red", p.skill_points_left );
+                       p.skill_points_left >= 0 ? "light_gray" : "red",  p.pure_skill_points );
         }
         case pool_type::ONE_POOL: {
             return string_format( _( "Points left: %4d" ), point_pool_total() - points_used_total( u ) );
@@ -1146,6 +1144,14 @@ static void draw_points( const catacurses::window &w, pool_type pool, const avat
     int pMsg_length = utf8_width( remove_color_tags( points_msg ), true );
     nc_color color = c_light_gray;
     print_colored_text( w, point( 2, 3 ), color, c_light_gray, points_msg );
+    if( pool == pool_type::MULTI_POOL ) {
+        multi_pool p( u );
+        bool is_valid = p.stat_points_left >= 0 && p.trait_points_left >= 0 && p.skill_points_left >= 0;
+        std::string total_msg = string_format(
+                _( "Total: <color_%s>%d</color>" ),
+                is_valid ? "light_gray" : "red", p.skill_points_left );
+        print_colored_text( w, point( 2, 4 ), color, c_light_gray, total_msg );
+    }
     if( pool != pool_type::FREEFORM ) {
         if( netPointCost > 0 ) {
             mvwprintz( w, point( pMsg_length + 2, 3 ), c_red, " (-%d)", std::abs( netPointCost ) );
@@ -4104,7 +4110,7 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
             w_stats = catacurses::newwin( 6, 20, point( 2, 10 ) );
             w_traits = catacurses::newwin( TERMY - 11, ncol2, point( beginx2, 10 ) );
             w_calendar = catacurses::newwin( 6, ncol3, point( beginx3, 10 ) );
-            w_bionics = catacurses::newwin( TERMY - 16, ncol3, point( beginx3, 17 ) );
+            w_bionics = catacurses::newwin( TERMY - 18, ncol3, point( beginx3, 17 ) );
             w_proficiencies = catacurses::newwin( TERMY - 21, 19, point( 2, 16 ) );
             // Extra - 11 to avoid overlap with long text in w_guide.
             w_hobbies = catacurses::newwin( TERMY - 11 - 11, ncol4, point( beginx4, 10 ) );
