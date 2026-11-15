@@ -68,6 +68,13 @@ struct level_cache_default_zero_members {
     // units: "transparency" (see LIGHT_TRANSPARENCY_OPEN_AIR)
     cata::mdarray<float, point_bub_ms>transparency_cache;
 
+    // true when light entering a tile diagonally is blocked by the walls of a turned vehicle. The direction is the direction that the light must be travelling.
+    // check the nw value of x+1, y+1 to find the se value of a tile and the ne of x-1, y+1 for sw
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obscured_cache;
+
+    // same as above but for obstruction rather than light
+    cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obstructed_cache;
+
     // materialized  (transparency_cache[i][j] > LIGHT_TRANSPARENCY_SOLID)
     // doesn't consider fields (i.e. if tile is covered in thick smoke, it's still
     // considered transparent for the purpuses of this cache)
@@ -142,67 +149,8 @@ struct level_cache : level_cache_default_zero_members {
         // This is a single value indicating that the entire level is floored.
         bool no_floor_gaps = false;
 
-        cata::mdarray<four_quadrants, point_bub_ms> lm;
-        cata::mdarray<float, point_bub_ms> sm;
-        // Accumulated colored light energy per tile. Populated during generate_lightmap
-        // alongside lm/sm. Zero = uncolored (white) light only.
-        cata::mdarray<light_color_rgb, point_bub_ms> light_color_cache;
-        // Bulk light source buffer. Scalar luminance uses max() for dedup;
-        // color accumulates additively. Only valid during generate_lightmap.
-        struct buffered_light_source {
-            float luminance = 0.0f;
-            light_color_rgb color;
-        };
-        cata::mdarray<buffered_light_source, point_bub_ms> light_source_buffer;
-
         // Cache of natural light level is useful if it needs to be in sync with the light cache.
         float natural_light_level_cache;
-
-        // if false, means tile is under the roof ("inside"), true means tile is "outside"
-        // "inside" tiles are protected from sun, rain, etc. (see ter_furn_flag::TFLAG_INDOORS flag)
-        cata::mdarray<bool, point_bub_ms> outside_cache;
-
-        // true when vehicle below has "ROOF" or "OPAQUE" part, furniture below has ter_furn_flag::TFLAG_SUN_ROOF_ABOVE
-        //      or terrain doesn't have ter_furn_flag::TFLAG_NO_FLOOR flag
-        // false otherwise
-        // i.e. true == has floor
-        cata::mdarray<bool, point_bub_ms> floor_cache;
-
-        // stores cached transparency of the tiles
-        // units: "transparency" (see LIGHT_TRANSPARENCY_OPEN_AIR)
-        cata::mdarray<float, point_bub_ms>transparency_cache;
-
-        // true when light entering a tile diagonally is blocked by the walls of a turned vehicle. The direction is the direction that the light must be travelling.
-        // check the nw value of x+1, y+1 to find the se value of a tile and the ne of x-1, y+1 for sw
-        cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obscured_cache;
-
-        // same as above but for obstruction rather than light
-        cata::mdarray<diagonal_blocks, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> vehicle_obstructed_cache;
-
-        // materialized  (transparency_cache[i][j] > LIGHT_TRANSPARENCY_SOLID)
-        // doesn't consider fields (i.e. if tile is covered in thick smoke, it's still
-        // considered transparent for the purpuses of this cache)
-        // true, if tile is not opaque
-        std::array<std::bitset<MAPSIZE_Y>, MAPSIZE_X> transparent_cache_wo_fields;
-
-        // stores "adjusted transparency" of the tiles
-        // initial values derived from transparency_cache, uses same units
-        // examples of adjustment: changed transparency on player's tile and special case for crouching
-        cata::mdarray<float, point_bub_ms> vision_transparency_cache;
-
-        // stores "visibility" of the tiles to the player
-        // values range from 1 (fully visible to player) to 0 (not visible)
-        cata::mdarray<float, point_bub_ms> seen_cache;
-
-        // same as `seen_cache` (same units) but contains values for cameras and mirrors
-        // effective "visibility_cache" is calculated as "max(seen_cache, camera_cache)"
-        cata::mdarray<float, point_bub_ms> camera_cache;
-
-        // stores resulting apparent brightness to player, calculated by map::apparent_light_at
-        cata::mdarray<lit_level, point_bub_ms> visibility_cache;
-        std::bitset<MAPSIZE_X *MAPSIZE_Y> map_memory_cache_dec;
-        std::bitset<MAPSIZE_X *MAPSIZE_Y> map_memory_cache_ter;
-        std::bitset<MAPSIZE *MAPSIZE> field_cache;
 
         std::set<vehicle *> vehicle_list;
         std::set<vehicle *> zone_vehicles;
