@@ -833,11 +833,12 @@ bool Character::is_wearing_active_optcloak() const
 }
 
 static void layer_item( std::map<bodypart_id, encumbrance_data> &vals, const item &it,
-                        std::map<sub_bodypart_id, layer_level> &highest_layer_so_far, const Character &c )
+                        std::map<sub_bodypart_id, layer_level> &highest_layer_so_far, const Character &c,
+                        const body_part_set &skip_parts = body_part_set() )
 {
     body_part_set covered_parts = it.get_covered_body_parts();
     for( const bodypart_id &bp : c.get_all_body_parts() ) {
-        if( !covered_parts.test( bp.id() ) ) {
+        if( !covered_parts.test( bp.id() ) || skip_parts.test( bp.id() ) ) {
             continue;
         }
 
@@ -908,6 +909,24 @@ static void layer_item( std::map<bodypart_id, encumbrance_data> &vals, const ite
     }
 }
 
+static void layer_item_with_ablatives( std::map<bodypart_id, encumbrance_data> &vals,
+                                       const item &it, std::map<sub_bodypart_id, layer_level> &highest_layer_so_far,
+                                       const Character &c )
+{
+    layer_item( vals, it, highest_layer_so_far, c );
+    if( !it.is_ablative() ) {
+        return;
+    }
+    const body_part_set parent_parts = it.get_covered_body_parts();
+    for( const item_pocket *pocket : it.get_all_ablative_pockets() ) {
+        for( const item *pocketed : pocket->all_items_top() ) {
+            if( !pocketed->is_null() ) {
+                layer_item( vals, *pocketed, highest_layer_so_far, c, parent_parts );
+            }
+        }
+    }
+}
+
 /*
  * Encumbrance logic:
  * Some clothing is intrinsically encumbering, such as heavy jackets, backpacks, body armor, etc.
@@ -933,63 +952,15 @@ void outfit::item_encumb( std::map<bodypart_id, encumbrance_data> &vals,
     // Track highest layer observed so far to penalize out-of-order items.
     std::map<sub_bodypart_id, layer_level> highest_layer_so_far;
 
-    // First, handle normal worn items + new_item insertion.
+    // Handle worn items (and their ablative inserts) plus new_item insertion.
     for( auto w_it = worn.begin(); w_it != worn.end(); ++w_it ) {
         if( w_it == new_item_position ) {
-            layer_item( vals, new_item, highest_layer_so_far, guy );
+            layer_item_with_ablatives( vals, new_item, highest_layer_so_far, guy );
         }
-        layer_item( vals, *w_it, highest_layer_so_far, guy );
+        layer_item_with_ablatives( vals, *w_it, highest_layer_so_far, guy );
     }
     if( worn.end() == new_item_position && !new_item.is_null() ) {
-        layer_item( vals, new_item, highest_layer_so_far, guy );
-    }
-
-    // Handle ablative pockets.
-    for( const item &worn_item : worn ) {
-        if( !worn_item.is_ablative() ) {
-            continue; // Skip items without ablative pockets.
-        }
-
-        // Iterate over first-order ablative pockets.
-        for( const item_pocket *pocket_ptr : worn_item.get_all_ablative_pockets() ) {
-            const item_pocket &pocket = *pocket_ptr;
-
-            // Iterate over top-level items in pocket.
-            for( const item *pocketed_ptr : pocket.all_items_top() ) {
-                const item &pocketed = *pocketed_ptr;
-                if( pocketed.is_null() ) {
-                    continue;
-                }
-                // Compute encumbrance in a temporary map.
-                std::map<bodypart_id, encumbrance_data> temp_vals;
-                std::map<sub_bodypart_id, layer_level> dummy_highest_layer;
-                layer_item( temp_vals, pocketed, dummy_highest_layer, guy );
-                // Merge only to bodyparts NOT covered by the parent.
-                for( const auto &pair : temp_vals ) {
-                    const bodypart_id &bp = pair.first;
-                    // Check if parent covers this bodypart.
-                    bool overlaps = false;
-                    for( const string_id<body_part_type> &bpt : worn_item.get_covered_body_parts() ) {
-                        if( bpt == bp.id() ) {
-                            overlaps = true;
-                            break;
-                        }
-                    }
-                    // We don't need to special-case overlapping coverage, it works already.
-                    if( overlaps ) {
-                        continue;
-                    }
-                    encumbrance_data &elem = vals[bp];
-                    elem.armor_encumbrance += pair.second.armor_encumbrance;
-                    elem.layer_penalty += pair.second.layer_penalty;
-                    // Copy layer details.
-                    const auto &src = pair.second.layer_penalty_details;
-                    for( size_t i = 0; i < src.size(); i++ ) {
-                        elem.layer_penalty_details[i] = src[i];
-                    }
-                }
-            }
-        }
+        layer_item_with_ablatives( vals, new_item, highest_layer_so_far, guy );
     }
 
     // Final sanity check and aggregation.
