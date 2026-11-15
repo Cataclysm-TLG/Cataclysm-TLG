@@ -465,7 +465,7 @@ class input_context
     public:
         // If true, prevent virtual keyboard from dismissing after a key press while this input context is active.
         // NOTE: This won't auto-bring up the virtual keyboard, for that use sdltiles.cpp is_string_input()
-        bool allow_text_entry;
+        bool allow_text_entry = false;
     private:
         input_event next_action;
         int timeout = -1;
