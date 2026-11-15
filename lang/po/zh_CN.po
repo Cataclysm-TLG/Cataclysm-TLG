@@ -411294,7 +411294,7 @@ msgstr "你不能再用这种方法改进你的 %s 了。"
 
 #: src/iuse.cpp:4964
 msgid "You need a devices skill of 2 to repair firearms."
-msgstr "你需要 2 级机械技能才能修理枪械。"
+msgstr "你需要 2 级操控装置技能才能修理枪械。"
 
 #: src/iuse.cpp:4970 src/iuse.cpp:4975
 #, c-format
