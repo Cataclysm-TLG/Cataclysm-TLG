@@ -8412,18 +8412,20 @@ void map::draw_from_above( const catacurses::window &w, const tripoint_bub_ms &p
     }
 }
 
-// Wrapper for sees_full. Helps prevent redundant calls.
+// Wrapper 1 for sees_full, when we don't have a slope candidate. Helps prevent redundant calls, and returns a bool.
 bool map::sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, const int range,
                 bool with_fields, bool allow_cached ) const
 {
     return sees_full( F, T, range, with_fields, allow_cached ).visible;
 }
 
+// Internal function used by Wrapper 1.
 visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T,
                                   const int range,
                                   bool with_fields, bool allow_cached ) const
 {
-    int dummy = 0;
+    // INT_MIN p
+    int dummy = INT_MIN;
     return sees_full( F, T, range, dummy, with_fields, allow_cached );
 }
 
@@ -8465,7 +8467,6 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     if( std::abs( F.z() - T.z() ) > fov_3d_z_range ||
         ( range >= 0 && range < rl_dist( F, T ) ) ||
         !inbounds( T ) || !inbounds( F ) ) {
-        bresenham_slope = 0;
         return result; // Out of range. Visible is already false, no further checks needed.
     }
     const point key = sees_cache_key( F, T );
@@ -8480,13 +8481,15 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
     int found_concealment = -1;
     int lowest_concealment = -1;
 
-    const point a( std::abs( F.x() - T.x() ) * 2, std::abs( F.y() - T.y() ) * 2 );
-    int offset = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
+    if( bresenham_slope == INT_MIN ) {
+        const point a( std::abs( F.x() - T.x() ) * 2, std::abs( F.y() - T.y() ) * 2 );
+        bresenham_slope = std::min( a.x, a.y ) - ( std::max( a.x, a.y ) / 2 );
+    }
 
     // 2D Bresenham
     if( F.z() == T.z() ) {
         point_bub_ms last_point = F.xy();
-        bresenham( F.xy(), T.xy(), offset,
+        bresenham( F.xy(), T.xy(), bresenham_slope,
                    [this, f_transparent, &visible, &T, &F, &found_concealment,
               &lowest_concealment, &allow_cached, &last_point]( const point_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.
@@ -8555,7 +8558,7 @@ visibility_result map::sees_full( const tripoint_bub_ms &F, const tripoint_bub_m
         // 3D Bresenham
     } else {
         tripoint_bub_ms last_point = F;
-        bresenham( F, T, offset, 0,
+        bresenham( F, T, bresenham_slope, 0,
                    [this, f_transparent, &visible, &T, &F, &last_point,
               &found_concealment, &lowest_concealment, &allow_cached]( const tripoint_bub_ms & new_point ) {
             // Skip starting position, stop before checking target tile.

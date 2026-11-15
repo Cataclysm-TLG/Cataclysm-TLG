@@ -711,12 +711,11 @@ class map
          */
         double ranged_target_size( const tripoint_bub_ms &p ) const;
 
-        // Sees:
-        /**
-        * Returns whether `F` sees `T` with a view range of `range`.
-        */
+        
+        // Wrapper 1 for sees_full, when we don't have a slope candidate. Helps prevent redundant calls, and returns a bool.
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
                    bool with_fields = true, bool allow_cached = true ) const;
+        // Internal function used by Wrapper 1. Gives the private sees_full a dummy slope candidate so it gets its own slope.
         visibility_result sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
                                      bool with_fields = true, bool allow_cached = true ) const;
         // Same but for IR, checking for solid obstructions etc
