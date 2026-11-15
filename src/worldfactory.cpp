@@ -958,16 +958,6 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*p
         WORLD *world,
         bool with_tabs )
 {
-    // Draw a new window because the main one is too small.
-    const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
-    const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ?
-                         ( TERMX - iMinScreenWidth ) / 2 : 0;
-
-    catacurses::window win = catacurses::newwin(
-                                 TERMY,
-                                 iMinScreenWidth,
-                                 point( iOffsetX, 0 )
-                             );
     // Use active_mod_order of the world,
     // saves us from writing 'world->active_mod_order' all the time.
     std::vector<mod_id> &active_mod_order = world->active_mod_order;
@@ -1009,6 +999,8 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*p
     std::unique_ptr<string_input_popup> fpopup;
     bool recalc_start = false;
 
+    // Draw a new window because the main one is too small.
+    catacurses::window win;
     catacurses::window w_header1;
     catacurses::window w_header2;
     catacurses::window w_shift;
@@ -1024,6 +1016,8 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*p
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
 
+        win           = catacurses::newwin( TERMY, iMinScreenWidth,
+                                            point( iOffsetX, 0 ) );
         w_header1     = catacurses::newwin( 1, iMinScreenWidth / 2 - 5,
                                             point( 1 + iOffsetX, 3 ) );
         w_header2     = catacurses::newwin( 1, iMinScreenWidth / 2 - 4,
@@ -1485,7 +1479,7 @@ int worldfactory::show_worldgen_basic( WORLD *world )
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
 
-        const int window_height = TERMY / 4;
+        const int window_height = std::max( 12, TERMY / 4 );
         const int offset_y = ( TERMY - window_height ) / 2;
 
         w_confirmation = catacurses::newwin(
@@ -1534,20 +1528,11 @@ int worldfactory::show_worldgen_basic( WORLD *world )
                              namebar_pos + point( name_txt_width, 0 ) ) );
         }
 
-        // Content scrollbar
-        scrollbar()
-        .border_color( BORDER_COLOR )
-        .offset_x( 0 )
-        .offset_y( 1 )
-        .viewport_pos( top_opt * 3 )
-        .viewport_size( content_height )
-        .apply( w_confirmation );
-
         // Bottom box
         wattron( w_confirmation, BORDER_COLOR );
         mvwaddch( w_confirmation, point( 0,             win_height - 10 ), LINE_XXXO );
-        mvwhline( w_confirmation, point( 1,             win_height - 10 ), LINE_OXOX, win_width - 2 );
-        mvwaddch( w_confirmation, point( win_width - 1, win_height - 10 ), LINE_XOXX );
+        mvwhline( w_confirmation, point( 1,             win_height - 10 ), LINE_OXOX, win_width );
+        mvwaddch( w_confirmation, point( win_width + 1, win_height - 10 ), LINE_XOXX );
         wattroff( w_confirmation, BORDER_COLOR );
 
         // Hint text
@@ -1659,8 +1644,6 @@ void worldfactory::draw_modselection_borders( const catacurses::window &win,
     std::array<bool, 5> hv = {{true, true, true, false, false}}; // horizontal line = true, vertical line = false
 
     wattron( win, BORDER_COLOR );
-    mvwhline( win, point( 1, 0 ), LINE_OXOX, iMinScreenWidth - 2 );
-    mvwhline( win, point( 1, getmaxy( win ) - 1 ), LINE_OXOX, iMinScreenWidth - 2 );
     for( int i = 0; i < 5; ++i ) {
         const point p( xs[i], ys[i] );
         if( hv[i] ) {
