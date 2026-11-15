@@ -9652,7 +9652,6 @@ msgstr "热能防护"
 msgid ""
 "This bionic has completely replaced the patient's eyes.  Removing it would "
 "cause blindness."
-msgstr ""
 msgstr "这个生化插件已完全取代患者的双眼。拆除它会导致失明。"
 
 #. ~ Description of bionic "Leaky Bionic"
@@ -9838,7 +9837,6 @@ msgid ""
 "if you were previously deaf or hard of hearing.  Additionally, high-"
 "intensity sounds will be automatically dampened before they can damage your "
 "hearing."
-msgstr ""
 msgstr "启用此生化插件后，你的听力会大幅增强，听觉灵敏度可达到普通人的三倍以上；即使你原本失聪或听力受损，也能获得这一效果。此外，高强度声音会在损伤听力前自动减弱。"
 
 #. ~ Description of bionic "Hydraulic Muscles"
@@ -18591,7 +18589,6 @@ msgstr "显形"
 #. ~ Name of effect type id "revived_marker"
 #: data/json/effects.json
 msgid "Revived"
-msgstr ""
 msgstr "复苏"
 
 #. ~ Blood analysis description of effect type "Common Cold Antibodies"
@@ -25105,7 +25102,7 @@ msgstr "%s上有一道很严重的裂缝。最好在它完全断裂之前把这�
 
 #. ~ Description of fault "Broken"
 #: data/json/faults/faults_melee.json
-#, c-format
+#, no-c-format
 msgid "This % is completely broken."
 msgstr "这个 % 已经完全损坏。"
 
@@ -27143,7 +27140,6 @@ msgstr "这件装备不会妨碍你的<info>变异或生化肢体</info>进行�
 #. ~ Description of JSON flag "BATTERY_LIGHT"
 #: data/json/flags/flags.json
 msgid "This fits in items that use alkaline batteries."
-msgstr ""
 msgstr "适用于使用碱性电池的物品。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
@@ -28135,7 +28131,6 @@ msgid ""
 "This weapon must be manually cocked before each shot, which <bad>takes "
 "additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with "
 "marksmanship and this type of weapon will reduce this penalty."
-msgstr ""
 msgstr "每次射击前都必须手动扳起击锤，这会<bad>增加操作时间</bad>，并且<bad>可能需要重新瞄准</bad>。提升枪械射击技能和此类武器的熟练度，可以减轻这一惩罚。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
@@ -28155,7 +28150,6 @@ msgid ""
 "This weapon requires pumping a sliding grip to cycle each round, which "
 "<bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  "
 "Skill with marksmanship and this type of weapon will reduce this penalty."
-msgstr ""
 msgstr "每次射击前都必须滑动护木完成泵动循环，这会<bad>增加操作时间</bad>，并且<bad>可能需要重新瞄准</bad>。提升枪械射击技能和此类武器的熟练度，可以减轻这一惩罚。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
@@ -28165,7 +28159,6 @@ msgid ""
 "This weapon uses a manual lever to chamber each round, which <bad>takes "
 "additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with "
 "marksmanship and this type of weapon will reduce this penalty."
-msgstr ""
 msgstr "每次射击前都必须手动扳动杠杆，将下一发子弹送入膛内，这会<bad>增加操作时间</bad>，并且<bad>可能需要重新瞄准</bad>。提升枪械射击技能和此类武器的熟练度，可以减轻这一惩罚。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
@@ -28175,14 +28168,12 @@ msgid ""
 "This weapon utilizes a turn-bolt to manually cycle each round, which "
 "<bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  "
 "Skill with marksmanship and this type of weapon will reduce this penalty."
-msgstr ""
 msgstr "每次射击前都必须手动转动枪机完成循环，这会<bad>增加操作时间</bad>，并且<bad>可能需要重新瞄准</bad>。提升枪械射击技能和此类武器的熟练度，可以减轻这一惩罚。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
 #. ~ Description of JSON flag "NEEDS_UNFOLD"
 #: data/json/flags/flags.json
 msgid "This weapon will take <bad>longer to wield</bad> than usual."
-msgstr ""
 msgstr "这件武器的展开操作会比平时<bad>花费更长时间</bad>。"
 
 #. ~ Please leave anything in <angle brackets> unchanged.
@@ -28341,7 +28332,6 @@ msgstr "无论雪有多深，你的移动速度都不会降低。"
 #: data/json/flags/flags.json data/json/items/battery.json
 msgid "alkaline battery"
 msgid_plural "alkaline batteries"
-msgstr[0] ""
 msgstr[0] "碱性电池"
 
 #. ~ Name of JSON flag "GASFILTER_SM"
@@ -32621,7 +32611,6 @@ msgstr ""
 msgid ""
 "A gigantic sac of spider eggs, each one larger than your fist.  It might be "
 "your imagination, but some of them might be moving around."
-msgstr ""
 msgstr "一个装满巨型蜘蛛卵的巨大卵囊，每颗卵都比你的拳头还大。或许只是你的错觉，但其中有些卵似乎在动。"
 
 #. ~ Description of furniture "spider egg sac"
@@ -46572,7 +46561,6 @@ msgid ""
 "Trains used to chug along on these.  These rail tracks sit flush with the "
 "road.  You could probably reclaim lengths of the track with a powerful metal "
 "cutting tool like an angle grinder or acetylene torch."
-msgstr ""
 msgstr "火车曾经在这些轨道上隆隆驶过。这些轨道嵌在路面中，与路面齐平。你或许能用角磨机或乙炔焊炬之类的强力金属切割工具拆下部分轨道。"
 
 #. ~ Description of terrain "railroad track"
@@ -51713,7 +51701,7 @@ msgstr "创造出一个持续时间很短的充气玩具。"
 
 #. ~ Description of spell "Debug Kill Creature"
 #: data/json/item_spell_effects.json
-#, c-format
+#, no-c-format
 msgid "Deal damage equal to 100% of monster's HP."
 msgstr "造成相当于怪物生命值100%的伤害。"
 
@@ -61400,7 +61388,6 @@ msgstr[0] "幸存者风衣"
 msgid ""
 "An enormous custom-built backpack, designed for something far larger than "
 "human."
-msgstr ""
 msgstr "一个巨大的定制背包，原本是为远比人类巨大的生物设计的。"
 
 #. ~ Description of a pocket in item "backpack"
@@ -61431,7 +61418,6 @@ msgstr "固定在压缩带下或工具挂环上。"
 #: data/json/items/armor/bespoke_armor/custom_storage.json
 msgid "rucksack"
 msgid_plural "rucksacks"
-msgstr[0] ""
 msgstr[0] "背包"
 
 #. ~ Description of "nomad bodymesh"
@@ -61661,7 +61647,6 @@ msgstr "一双以耐用尼龙帆布制成的靴子，人造毛皮衬里用于保
 msgid ""
 "Boots with a cuff that extends up to the knee.  They provide some protection "
 "for the lower legs, but may not be ideal for sprinting away from the undead."
-msgstr ""
 msgstr "靴筒高至膝部的长靴。能为小腿提供一定防护，但穿着它们逃离不死生物时恐怕不太方便。"
 
 #. ~ Description of "disposable bowling socks"
@@ -63397,7 +63382,6 @@ msgstr ""
 msgid ""
 "A horizontal tricolor flag of red, yellow and green with a red triangle "
 "based at the hoist and two five pointed black stars of in the yellow stripe."
-msgstr ""
 msgstr "一面红、黄、绿三色横旗，旗杆侧有一个红色三角形，黄色条纹上有两颗黑色五角星。"
 
 #. ~ Description of variant "Venezuelan flag" of item "national flag"
@@ -70628,7 +70612,6 @@ msgstr "脚上长着镰刀般弯曲的利爪，极适合发出致命一击。"
 msgid ""
 "Dagger-sharp fangs, articulated to fold away when not in use.  They are "
 "easier to use against prey that is vulnerable or webbed."
-msgstr ""
 msgstr "一对锋利如匕首的尖牙，带有关节结构，不用时可以折叠收起。对付容易受伤或被蛛网缠住的猎物时，它们更容易发挥作用。"
 
 #. ~ Description of "protective lenses"
@@ -70803,7 +70786,6 @@ msgstr[0] "生化过滤系统"
 
 #. ~ Item name
 #: data/json/items/armor/integrated.json
-#, fuzzy
 msgid "carapace"
 msgid_plural "carapace"
 msgstr[0] "甲壳"
@@ -70905,7 +70887,6 @@ msgstr[0] "初生鹿角"
 #: data/json/items/armor/integrated.json
 msgid "fresh carapace"
 msgid_plural "fresh carapace"
-msgstr[0] ""
 msgstr[0] "新蜕甲壳"
 
 #. ~ Item name
@@ -71018,7 +70999,6 @@ msgstr[0] "软木皮层"
 #: data/json/items/armor/integrated.json
 msgid "pincer"
 msgid_plural "pincer"
-msgstr[0] ""
 msgstr[0] "螯"
 
 #. ~ Item name
@@ -76024,7 +76004,6 @@ msgstr ""
 msgid ""
 "A small pouch that can be worn on the upper arm using buckled straps.  Use "
 "it to adjust it to fit your leg."
-msgstr ""
 msgstr "一个小袋，可用带扣绑带佩戴在上臂。使用它可以调整绑带，让它适合佩戴在腿上。"
 
 #. ~ Description of "thigh pouch"
@@ -76032,7 +76011,6 @@ msgstr "一个小袋，可用带扣绑带佩戴在上臂。使用它可以调整
 msgid ""
 "A small purse that can be worn on the upper leg using buckled straps.  Use "
 "it to adjust it to fit your arm."
-msgstr ""
 msgstr "一个小挎包，可用带扣绑带佩戴在大腿上。使用它可以调整绑带，让它适合佩戴在手臂上。"
 
 #. ~ Description of "golf bag"
@@ -76592,7 +76570,6 @@ msgstr[0] "战术储存袋"
 #: data/json/items/armor/storage.json
 msgid "thigh pouch"
 msgid_plural "thigh pouchs"
-msgstr[0] ""
 msgstr[0] "大腿袋"
 
 #. ~ Item name
@@ -78746,7 +78723,6 @@ msgid ""
 "An oddly balanced long-sleeved shirt with a thin, breathable torso and "
 "thicker sleeves.  The arms are covered in a camouflage pattern and have two "
 "shoulder pockets.  It has a pocket for your pen!"
-msgstr ""
 msgstr "一件款式搭配有些古怪的长袖衬衫：躯干部位轻薄透气，袖子则更厚实。袖子采用迷彩图案，肩部各有一个口袋。还专门留了笔袋！"
 
 #. ~ Description of "buckskin shirt"
@@ -79780,7 +79756,6 @@ msgid ""
 "A rechargeable lithium battery small enough to fit in many handheld devices "
 "but powerful enough to run complex electronics.  These are newer and can "
 "store much more power than the old alkaline batteries."
-msgstr ""
 msgstr "一种可充电锂电池，体积小巧，能装入许多手持设备，功率却足以驱动复杂电子设备。它是较新的型号，储电量远高于旧式碱性电池。"
 
 #. ~ Description of magazine "alkaline battery"
@@ -79802,7 +79777,6 @@ msgstr "一块小型电池，类似于电视遥控器或闹钟里使用的类型
 #: data/json/items/battery.json
 msgid "disposable alkaline battery"
 msgid_plural "disposable alkaline batteries"
-msgstr[0] ""
 msgstr[0] "一次性碱性电池"
 
 #. ~ Item name
@@ -81517,7 +81491,6 @@ msgid ""
 "person, even if they were previously deaf or hard of hearing.  Additionally, "
 "high-intensity sounds will be automatically dampened before they can damage "
 "the user's hearing."
-msgstr ""
 msgstr "启用此生化插件后，使用者的听力会大幅增强，听觉灵敏度可达到普通人的三倍以上；即使使用者原本失聪或听力受损，也能获得这一效果。此外，高强度声音会在损伤听力前自动减弱。"
 
 #. ~ Description of "Olfactory Mask CBM"
@@ -97657,7 +97630,6 @@ msgstr "一种由比利时修士酿造的啤酒，风味丰富，喝着也饱腹
 #. ~ Description of "sherry"
 #: data/json/items/comestibles/alcohol.json
 msgid "A fortified wine made from white grapes."
-msgstr ""
 msgstr "一种用白葡萄酿制的加强型葡萄酒。"
 
 #. ~ Description of "beer"
@@ -97770,13 +97742,11 @@ msgstr ""
 #. ~ Description of "stout"
 #: data/json/items/comestibles/alcohol.json
 msgid "A tasty craft beer, dark and bitter with a creamy finish."
-msgstr ""
 msgstr "一种美味的精酿世涛啤酒，颜色深、口感苦，余味绵密。"
 
 #. ~ Description of "American pale ale"
 #: data/json/items/comestibles/alcohol.json
 msgid "A tasty domestic craft beer.  Best served cold in a glass."
-msgstr ""
 msgstr "一种美味的本地精酿啤酒，冰镇后装杯饮用最佳。"
 
 #. ~ Description of "imperial stout"
@@ -97792,7 +97762,6 @@ msgstr ""
 #. ~ Description of "India pale ale"
 #: data/json/items/comestibles/alcohol.json
 msgid "A very flavorful microbrewed beer.  Best served cold in a glass."
-msgstr ""
 msgstr "一种风味浓郁的微型酒厂精酿啤酒，冰镇后装杯饮用最佳。"
 
 #. ~ Description of "Marloss wine"
@@ -103203,67 +103172,56 @@ msgstr "一颗蝉卵。通常在树木附近发现。"
 #. ~ Description of "black widow egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant black widow."
-msgstr ""
 msgstr "巨型黑寡妇蜘蛛的卵。"
 
 #. ~ Description of "cellar spider egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant cellar spider."
-msgstr ""
 msgstr "巨型家幽灵蛛的卵。"
 
 #. ~ Description of "earthworm egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant earthworm."
-msgstr ""
 msgstr "巨型蚯蚓的卵。"
 
 #. ~ Description of "jumping spider egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant jumping spider."
-msgstr ""
 msgstr "巨型跳蛛的卵。"
 
 #. ~ Description of "mosquito egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant mosquito."
-msgstr ""
 msgstr "巨型蚊子的卵。"
 
 #. ~ Description of "slug egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant slug."
-msgstr ""
 msgstr "巨型蛞蝓的卵。"
 
 #. ~ Description of "snail egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant snail."
-msgstr ""
 msgstr "巨型蜗牛的卵。"
 
 #. ~ Description of "trapdoor spider egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant trapdoor spider."
-msgstr ""
 msgstr "巨型地穴蛛的卵。"
 
 #. ~ Description of "web spider egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant web spider."
-msgstr ""
 msgstr "巨型结网蛛的卵。"
 
 #. ~ Description of "wolf spider egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a giant wolf spider."
-msgstr ""
 msgstr "巨型狼蛛的卵。"
 
 #. ~ Description of "fly egg"
 #: data/json/items/comestibles/egg.json
 msgid "The egg of a gigantic fly."
-msgstr ""
 msgstr "巨型苍蝇的卵。"
 
 #. ~ Description of "moth egg"
@@ -107872,7 +107830,6 @@ msgstr[0] "面拖炸鱼"
 #: data/json/items/comestibles/meat_dishes.json
 msgid "beastly burrito"
 msgid_plural "beastly burritos"
-msgstr[0] ""
 msgstr[0] "怪兽卷饼"
 
 #. ~ Conditional name for "bologna" when COMPONENT_ID_SUBSTRING matches mutant
@@ -113142,7 +113099,6 @@ msgstr "一份甲壳粉，可以用来制造肥料和其他物品。"
 #: data/json/items/comestibles/other.json
 msgid ""
 "This is a human brain soaked in a solution of highly toxic formaldehyde."
-msgstr ""
 msgstr "这是一颗浸泡在剧毒甲醛溶液中的人脑。"
 
 #. ~ Description of "wet cat food"
@@ -121433,7 +121389,6 @@ msgstr[0] "急救箱"
 #: data/json/items/containers/containers.json
 msgid "flask"
 msgid_plural "flasks"
-msgstr[0] ""
 msgstr[0] "烧瓶"
 
 #. ~ Item name
@@ -127475,7 +127430,6 @@ msgstr "一套微小的齿轮和其他钟表机械零件。"
 msgid ""
 "An assortment of resistors, capacitors, and diodes, essential for assembling "
 "electronics."
-msgstr ""
 msgstr "一批电阻、电容和二极管，是组装电子设备的必备元件。"
 
 #. ~ Description of "cash register"
@@ -128547,7 +128501,6 @@ msgstr[0] "胶带钱包"
 #: data/json/items/generic.json
 msgid "electronic components"
 msgid_plural "electronic components"
-msgstr[0] ""
 msgstr[0] "电子元件"
 
 #. ~ Item name
@@ -130546,7 +130499,6 @@ msgid ""
 "A hundred certified notes held together by an improvised currency strap.  "
 "These can be exchanged for food, water, and other services at the Refugee "
 "Center."
-msgstr ""
 msgstr "一百张用临时纸币束带捆在一起的商会币，可在难民中心兑换食物、水和其他服务。"
 
 #. ~ Description of "fifty-dollar currency strap"
@@ -130659,7 +130611,6 @@ msgid ""
 "A thousand certified notes held together by an improvised currency strap.  "
 "These can be exchanged for food, water, and other services at the Refugee "
 "Center."
-msgstr ""
 msgstr "一千张用临时纸币束带捆在一起的商会币，可在难民中心兑换食物、水和其他服务。"
 
 #. ~ Description of "fifty-dollar currency bundle"
@@ -130773,7 +130724,6 @@ msgid ""
 "'merch', is a currency based on old American bills.  Fifty dollar bills and "
 "larger are printed with a promissory note signed by the broker at the "
 "Refugee Center and stamped with a complex design."
-msgstr ""
 msgstr "自由商会的认证纸币，也称“百元券”或“商会币”，是一种以旧版美元钞票为基础的货币。面额50美元及以上的钞票上印有难民中心经纪人签署的本票，并盖有复杂图案。"
 
 #. ~ Description of "American Buffalo coin"
@@ -132146,7 +132096,7 @@ msgstr[0] "5美金礼品卡"
 
 #. ~ Variant name of item "gift card"
 #: data/json/items/generic/mail.json
-#, c-format
+#, no-c-format
 msgid "5% discount card"
 msgid_plural "5% discount cards"
 msgstr[0] "九五折折扣卡"
@@ -132396,7 +132346,7 @@ msgstr "这张礼品卡可以在本地一家理发店兑换一次免费理发。
 
 #. ~ Description of variant "5% discount card" of item "gift card"
 #: data/json/items/generic/mail.json
-#, c-format
+#, no-c-format
 msgid ""
 "This gift card gives you a 5% discount for purchases at your local shopping "
 "mall.  Can only be redeemed once."
@@ -135259,7 +135209,6 @@ msgstr[0] "雷明顿700步枪"
 msgid ""
 "A bolt-action sniper rifle chambered in the powerful .300 Winchester Magnum "
 "round.  The M2010 had completely replaced the M24 rifle series by 2017."
-msgstr ""
 msgstr "一支使用威力强劲的 .300 温切斯特马格南弹的栓动式狙击步枪。到2017年，M2010已全面取代M24步枪系列。"
 
 #. ~ Item name
@@ -135546,7 +135495,6 @@ msgstr ""
 #: data/json/items/gun/303.json
 msgid "Enfield No. 1 Mk III rifle"
 msgid_plural "Enfield No. 1 Mk III rifles"
-msgstr[0] ""
 msgstr[0] "李-恩菲尔德 No.1 Mk III 步枪"
 
 #. ~ Item name
@@ -137500,7 +137448,6 @@ msgid ""
 "hardware more than a firearm.  Designed for economy and scale rather than "
 "individual performance, it nonetheless played its part in carrying the "
 "Allies to victory."
-msgstr ""
 msgstr "这是一款二战期间为美国研制的冲锋枪，因为外形比起枪械更像一件五金工具而被亲切地称为“注油枪”。它追求经济性和量产能力，而非单支武器的性能，但仍为盟军赢得胜利贡献了一份力量。"
 
 #. ~ Description of variant "Thompson submachine gun" of gun "Thompson M1928A1 SMG"
@@ -138046,7 +137993,6 @@ msgstr ""
 msgid ""
 "A single-shot bolt-action rifle made by Serbu Firearms, the BFG-50 is a very "
 "affordable firearm for those wishing to shoot .50 BMG."
-msgstr ""
 msgstr "Serbu Firearms 制造的单发栓动步枪，价格非常亲民，适合想要射击 .50 BMG 弹药的人。"
 
 #. ~ Item name
@@ -138861,7 +138807,6 @@ msgid ""
 "The Model 44 is a carbine-sized variant of the iconic Russian bolt-action "
 "rifle, with a shorter barrel for easy carry and an integrated side-folding "
 "bayonet for close-quarters engagements."
-msgstr ""
 msgstr "这款莫辛-纳甘 M44 是经典俄式栓动步枪的卡宾枪型，枪管较短，便于携带，并配有一把侧折式刺刀，适合近距离交战。"
 
 #. ~ Description of gun "Mosin-Nagant 1891/30 rifle"
@@ -138870,7 +138815,6 @@ msgstr "这款莫辛-纳甘 M44 是经典俄式栓动步枪的卡宾枪型，枪
 msgid ""
 "The Mosin-Nagant 1891/30 is a bolt-action military rifle, developed by the "
 "Russian Empire and later used and perfected by the Soviet Union."
-msgstr ""
 msgstr "莫辛-纳甘 1891/30 是一款军用栓动步枪，最初由俄罗斯帝国研发，后来由苏联沿用并改进。"
 
 #. ~ Description of gun "PSL rifle"
@@ -139919,7 +139863,6 @@ msgid ""
 "The Makarov was developed by the Soviet Union to replace the Red Army's "
 "obsolete WWII-era handguns.  It's chambered in 9x18mm, a cartridge still in "
 "use among various former Soviet countries."
-msgstr ""
 msgstr "马卡洛夫由苏联研发，用于替代红军过时的二战手枪。该枪使用9×18毫米弹药，这种弹药至今仍在多个前苏联国家使用。"
 
 #. ~ Description of gun "Pressin pistol"
@@ -143636,7 +143579,6 @@ msgstr ""
 msgid ""
 "A lightweight stock that can be extended for greater control while firing.  "
 "It's currently collapsed, making the weapon harder to handle."
-msgstr ""
 msgstr "这种轻型金属杆枪托可以伸出，以便射击时更好地控制武器。目前枪托处于收起状态，因此武器更难操控。"
 
 #. ~ Description of gun mod "wire stock"
@@ -143645,7 +143587,6 @@ msgstr "这种轻型金属杆枪托可以伸出，以便射击时更好地控制
 msgid ""
 "A lightweight stock that collapse closely against the body of the weapon for "
 "easy storage.  It's currently extended, offering greater control."
-msgstr ""
 msgstr "这种轻型金属杆枪托可以向内折叠，紧贴枪身，便于收纳。目前枪托处于伸展状态，能提供更好的操控性。"
 
 #. ~ Description of gun mod "modular folding stock (folded)"
@@ -143723,7 +143664,6 @@ msgid ""
 "a brace attached to it.  Wielding the weapon will take much longer as the "
 "brace must be affixed to the user's forearm, but once in hand it will offer "
 "greater stability."
-msgstr ""
 msgstr "一种适用于手枪和冲锋枪的枪托，带有贴腮托。持枪时需要将托架固定在前臂上，因此会花费更长时间；装好后则能提供更稳定的支撑。"
 
 #. ~ Description of gun mod "butt hook"
@@ -143791,7 +143731,6 @@ msgstr ""
 #. ~ "msg" action message of item "wire stock"
 #: data/json/items/gunmod/stock.json
 msgid "You extend the stock."
-msgstr ""
 msgstr "你伸展开枪托。"
 
 #. ~ "msg" action message of item "folding stock"
@@ -143825,13 +143764,11 @@ msgstr ""
 #. ~ "msg" action message of item "under-folding stock (folded)"
 #: data/json/items/gunmod/stock.json
 msgid "You unfold the stock."
-msgstr ""
 msgstr "你展开枪托。"
 
 #. ~ "msg" action message of item "wire stock"
 #: data/json/items/gunmod/stock.json
 msgid "You you collapse the stock."
-msgstr ""
 msgstr "你收起枪托。"
 
 #. ~ Item name
@@ -143974,7 +143911,6 @@ msgstr[0] "下折叠枪托（折叠）"
 #: data/json/items/gunmod/stock.json
 msgid "wire stock"
 msgid_plural "wire stocks"
-msgstr[0] ""
 msgstr[0] "金属杆枪托"
 
 #. ~ Item name
@@ -144776,7 +144712,6 @@ msgid ""
 "protocol for using it; this could grant access at a card reader, if you can "
 "find one.  It also lists the addresses of nearby facilities; activate it to "
 "add their locations to your map if any are close enough."
-msgstr ""
 msgstr "某处设施的访客通行证。背面写着使用方法；如果能找到读卡器，或许可以凭它进入设施。上面还列有附近设施的地址；若设施离得足够近，激活通行证即可将其位置标记到地图上。"
 
 #. ~ Description of "LIXA ID badge"
@@ -148474,7 +148409,6 @@ msgstr "一个标准容量的弹匣，可用于 FN Five-seveN 手枪。"
 msgid ""
 "A translucent 50-round box magazine, for use with the p90 and other large "
 "weapons chambering the proprietary 5.7x28mm cartridge."
-msgstr ""
 msgstr "一个半透明的50发弹匣，适用于P90及其他使用专用5.7×28毫米弹药的大型武器。"
 
 #. ~ Variant name of magazine "5.7mm 20-round pistol magazine"
@@ -149745,7 +149679,6 @@ msgstr[0] "卡利科 50发螺旋弹匣"
 #: data/json/items/magazine/9mm.json
 msgid "Glock 9x19mm 10-round magazine"
 msgid_plural "Glock 9x19mm 10-round magazines"
-msgstr[0] ""
 msgstr[0] "格洛克 9×19 毫米 10 发弹匣"
 
 #. ~ Item name
@@ -149977,7 +149910,6 @@ msgstr "一个为格洛克 17 设计的非原厂弹匣，看起来很廉价，�
 #. ~ Description of "Glock 9x19mm 17-round magazine"
 #: data/json/items/magazine/9mm.json
 msgid "Made for the Glock 17, this magazine holds 10 rounds."
-msgstr ""
 msgstr "这是为格洛克17设计的弹匣，可装10发子弹。"
 
 #. ~ Description of magazine "Glock 9x19mm 17-round magazine"
@@ -153202,7 +153134,6 @@ msgid ""
 "A bronze polearm that originated in the Shang dynasty of China, if not "
 "earlier.  It combines a long spear head with a perpendicular axe blade "
 "shaped like a crescent moon."
-msgstr ""
 msgstr "一种青铜长柄武器，早在中国商代便已出现。它结合了长矛形的矛头和一片与矛杆垂直、形似新月的斧刃。"
 
 #. ~ Description of "wooden javelin"
@@ -161007,13 +160938,11 @@ msgid ""
 "eventually returning to vertical alignment due to one plate being heavier "
 "than the other.  You can use it for target practice when stationary targets "
 "become too easy."
-msgstr ""
 msgstr "一根管子上装着两块钢板，组成双面桨状靶，固定在带旋转机构的坚固框架上。击中后靶子会旋转，并因两块钢板重量不同而最终回到竖直位置。固定靶练习变得太容易时，可以用它来练习射击。"
 
 #. ~ "done_message" action message of item "spinner target"
 #: data/json/items/tool/deployable.json
 msgid "You set up the spinner target."
-msgstr ""
 msgstr "你架好了旋转靶。"
 
 #. ~ "done_message" action message of item "cot"
@@ -161039,7 +160968,6 @@ msgstr[0] "可展开天线"
 #: data/json/items/tool/deployable.json data/json/traps.json
 msgid "spinner target"
 msgid_plural "spinner targets"
-msgstr[0] ""
 msgstr[0] "旋转靶"
 
 #. ~ Description of "professional camera"
@@ -161853,13 +161781,11 @@ msgstr[0] "60毫米迫击炮发射药"
 #. ~ Description of "Active Test Grenade"
 #: data/json/items/tool/explosives.json
 msgid "A basic grenade for testing (it's active)."
-msgstr ""
 msgstr "一枚用于测试的基础手榴弹（已启动）。"
 
 #. ~ Description of "Test Grenade"
 #: data/json/items/tool/explosives.json
 msgid "A basic grenade for testing."
-msgstr ""
 msgstr "一枚用于测试的基础手榴弹。"
 
 #. ~ Description of "live C-4 explosive"
@@ -162229,7 +162155,6 @@ msgstr ""
 #: data/json/items/tool/explosives.json
 msgid "Active Test Grenade"
 msgid_plural "Active Test Grenades"
-msgstr[0] ""
 msgstr[0] "已启动的测试手榴弹"
 
 #. ~ Description of "packed M72 LAW"
@@ -162376,7 +162301,6 @@ msgstr[0] "燃烧瓶"
 #. ~ "menu_text" action message of item "Test Grenade"
 #: data/json/items/tool/explosives.json
 msgid "Push buttons"
-msgstr ""
 msgstr "按下按钮"
 
 #. ~ Item name
@@ -162394,19 +162318,16 @@ msgstr "几根捆在一起的炸药棒，装有导火索。"
 #: data/json/items/tool/explosives.json
 msgid "Test Grenade"
 msgid_plural "Test Grenades"
-msgstr[0] ""
 msgstr[0] "测试手榴弹"
 
 #. ~ Spell name
 #: data/json/items/tool/explosives.json
 msgid "Test grenade spell"
-msgstr ""
 msgstr "测试手榴弹法术"
 
 #. ~ Description of spell "Test grenade spell"
 #: data/json/items/tool/explosives.json
 msgid "Test spell for grenade explosions"
-msgstr ""
 msgstr "用于测试手榴弹爆炸的法术。"
 
 #. ~ Description of "SADM mininuke"
@@ -162638,7 +162559,6 @@ msgstr "你打开了 %s 的排气阀。"
 #. ~ "msg" action message of item "Test Grenade"
 #: data/json/items/tool/explosives.json
 msgid "You press the buttons on the sides of the null grenade."
-msgstr ""
 msgstr "你按下了虚无手榴弹侧面的按钮。"
 
 #. ~ "msg" action message of item "packed M72 LAW"
@@ -170018,7 +169938,6 @@ msgid ""
 "A pair of metal snips, resembling a sturdy pair of scissors with beefy "
 "blades designed to cut through thin sheet metal or wire.  These cannot cut "
 "through thick metals like a hacksaw can, but are quick and precise."
-msgstr ""
 msgstr "一把金属剪，外形像一把结实的大剪刀，厚实的刀刃专为剪薄金属板或金属丝设计。它剪不动钢锯能锯开的厚金属，但剪得又快又准。"
 
 #. ~ Description of "locking pliers"
@@ -170166,7 +170085,6 @@ msgid ""
 "A small pair of needle-nosed pliers.  They're more useful for crafts than "
 "mechanical work, but the inclusion of a wire cutter has made them a mainstay "
 "in many a toolbox or junk drawer."
-msgstr ""
 msgstr "一把小号尖嘴钳。它更适合手工活而非机械维修；不过由于带有剪线刃，许多工具箱和杂物抽屉里都少不了它。"
 
 #. ~ Description of "claw bar"
@@ -171254,7 +171172,6 @@ msgid ""
 "A pair of eyeglasses with an integrated camera and a display built into its "
 "adaptive lenses.  Though tiny, this wearable computer can be a useful device "
 "for hands-free reading or gaming."
-msgstr ""
 msgstr "一副集成了摄像头的眼镜，自适应镜片内置显示屏。虽然体积小巧，这台可穿戴电脑仍很适合免手持阅读或游戏。"
 
 #. ~ Description of "thermal electric gloves (on)"
@@ -172368,7 +172285,6 @@ msgstr[0] "小型潜水气罐（开）"
 #: data/json/items/tool_armor.json
 msgid "smart glasses"
 msgid_plural "smart glasses"
-msgstr[0] ""
 msgstr[0] "智能眼镜"
 
 #. ~ Item name
@@ -178772,7 +178688,6 @@ msgstr "圣约翰乳业。每日农场参观。"
 #. ~ Signage placed on map TreeFarm_1a, TreeFarm_1b
 #: data/json/mapgen/farm_tree.json
 msgid "<given_name>'s Tree Farm"
-msgstr ""
 msgstr "<given_name>的树木农场"
 
 #. ~ Signage placed on map TreeFarm_1a, TreeFarm_1b
@@ -184834,7 +184749,6 @@ msgstr "三硝基甲苯"
 #. ~ Name of material
 #: data/json/materials.json
 msgid "Tainted Bone"
-msgstr ""
 msgstr "受污之骨"
 
 #. ~ Name of material
@@ -192873,7 +192787,6 @@ msgid ""
 "A giant wasp infested with fungus that extends fruiting bodies into the air "
 "like clusters of new antennae. It moves in fits and starts, its stinger "
 "constantly jabbing at the air around it."
-msgstr ""
 msgstr "一只受真菌感染的巨型胡蜂，菌体向空中伸展，子实体像一簇簇新生的触角。它行动时走走停停，毒刺不停地朝周围刺去。"
 
 #. ~ Description of monster "giant fungal wasp"
@@ -192881,7 +192794,6 @@ msgstr "一只受真菌感染的巨型胡蜂，菌体向空中伸展，子实体
 msgid ""
 "A gigantic wasp worker, Its body now a host for a devouring mold.  Its "
 "abdomen glows with a faint blue light."
-msgstr ""
 msgstr "一只巨型工蜂，身体已成为吞噬性霉菌的宿主。它的腹部泛着微弱的蓝光。"
 
 #. ~ Description of monster "fungal wasp"
@@ -192923,7 +192835,6 @@ msgstr ""
 msgid ""
 "A mutated wasp queen that has been half consumed by a sickly gray mold.  Its "
 "gaping spiracles emit puffs of spores as it struggles to breathe."
-msgstr ""
 msgstr "一只变异蜂后，半边身体已被病态的灰色霉菌侵蚀。它张开的气门不断喷出孢子，仿佛正挣扎着呼吸。"
 
 #. ~ Description of monster "giant fungal bee"
@@ -192956,7 +192867,6 @@ msgid ""
 "A wasp worker split down the middle.  Though it's held together by masses of "
 "stringy mold and its wings have been eaten away, it still seems intent on "
 "violence."
-msgstr ""
 msgstr "一只被从中剖开的工蜂。大量丝状霉菌勉强将它的身体粘在一起，翅膀也已被啃光，但它似乎仍然满怀敌意。"
 
 #. ~ Description of monster "giant fungal blossom"
@@ -193049,7 +192959,6 @@ msgid ""
 "the silky white exoskeleton.  Her batch of eggs has decayed due to lack of "
 "proper care, yet they seem to twitch, as if something within is attempting "
 "to break free from the slime-covered shells."
-msgstr ""
 msgstr "这只巨型蜂后的头部似乎只靠几根细丝连着，摇摇欲坠；丝绸般洁白的外骨骼上还不断长出额外的卷须。由于缺乏照料，它的一窝卵已经腐坏，却仍在抽动，仿佛有什么东西正试图破开覆满黏液的卵壳。"
 
 #. ~ Description of monster "alpha fungal bee"
@@ -194128,7 +194037,6 @@ msgstr "一只体型和狗一般大小的变异蜜蜂。"
 msgid ""
 "A mutant cockroach the size of a coffee table.  This size advantage is "
 "apparently all it needed to start regarding humans as food."
-msgstr ""
 msgstr "一只咖啡桌大小的变异蟑螂。显然，光是体型上的优势，就足以让它开始把人类当成食物。"
 
 #. ~ Description of monster "pregnant giant cockroach"
@@ -194757,7 +194665,6 @@ msgid ""
 "started to mutate chaotically.  Extra limbs and growths sprout from its "
 "thorax, and it is notably aggressive even to creatures much larger than "
 "itself."
-msgstr ""
 msgstr "这只巨型昆虫以不死生物为食已有一段时间，如今开始发生混乱的变异。额外的肢体和增生组织从它的胸部冒出；即使面对体型大得多的生物，它也格外好斗。"
 
 #. ~ Description of monster "fire ant queen"
@@ -194950,7 +194857,6 @@ msgstr[0] "巨型蝉幼体"
 #: data/json/monsters/insect_spider.json
 msgid "cockroach"
 msgid_plural "cockroachs"
-msgstr[0] ""
 msgstr[0] "蟑螂"
 
 #. ~ Monster name
@@ -195353,7 +195259,6 @@ msgstr[0] "月后飞蛾"
 #: data/json/monsters/insect_spider.json
 msgid "malformed cockroach"
 msgid_plural "malformed cockroachs"
-msgstr[0] ""
 msgstr[0] "畸变蟑螂"
 
 #. ~ Monster name
@@ -195673,7 +195578,6 @@ msgid ""
 "together into this lurching, shape, half the size of a man but with twice "
 "the limbs.  Its myriad roughly-formed mouths susurrate in a chorus of "
 "sibilant groans and whispers."
-msgstr ""
 msgstr "许多生物身上搏动的器官融合成一团，形成这个蹒跚的怪物。它只有人的一半高，四肢却有两倍之多。它那数不清、粗略成形的嘴巴齐声发出嘶哑的呻吟和耳语。"
 
 #. ~ Monster name
@@ -203537,13 +203441,11 @@ msgstr "蹲"
 #. ~ Successfully switched to movement mode "crouch" with animal steed
 #: data/json/move_modes.json
 msgid "If you see this, it is a bug, you can't crouch on an animal."
-msgstr ""
 msgstr "如果你看到这条提示，那是个错误：骑乘动物时不能切换为蹲伏姿势。"
 
 #. ~ Successfully switched to movement mode "prone" with animal steed
 #: data/json/move_modes.json
 msgid "If you see this, it is a bug, you can't go prone on an animal."
-msgstr ""
 msgstr "如果你看到这条提示，那是个错误：骑乘动物时不能切换为卧倒姿势。"
 
 #. ~ Character displayed in the panel for movement mode "prone"
@@ -208563,7 +208465,6 @@ msgstr "左侧第二基节"
 #. ~ Name of sub body part
 #: data/json/mutations/mutation_limbs.json
 msgid "left second dactyl"
-msgstr ""
 msgstr "左侧第二指"
 
 #. ~ Name of sub body part
@@ -216673,7 +216574,6 @@ msgid ""
 "more HP and 15% more carry capacity.  You are slightly resistant to bash "
 "damage, but your higher weight makes attacking and moving 5% slower and "
 "hinders your ability to dodge and swim."
-msgstr ""
 msgstr "你的骨骼格外致密坚韧，强健的体魄使生命值提高5%、负重能力提高15%。你对钝击伤害略有抗性，但体重增加会使攻击和移动速度降低5%，也会妨碍闪避和游泳。"
 
 #. ~ Description of mutation "Hollow Bones"
@@ -218852,7 +218752,6 @@ msgstr "<CWH_intro_question>"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/Backgrounds/backgrounds_table_of_contents.json
 msgid "How did you come to work for the refugee center, anyway?"
-msgstr ""
 msgstr "你当初是怎么到难民中心工作的？"
 
 #. ~ Response to NPC dialogue
@@ -231118,7 +231017,6 @@ msgid ""
 "know when to not pick a fight, so I didn't get killed.  Wound up recruited "
 "by the refugee center early on, and then the Old Guard for a bit, but I was "
 "getting itchy feet when you came by with an offer.  Here I am."
-msgstr ""
 msgstr "我主要是想从你这儿弄点苏格兰威士忌。真没什么特别的故事。很多年前我在海军陆战队服役，后来做过安保承包工作。末日降临小镇时，我正在一座破仓库外站岗。我在镇子边缘，手里有枪，也知道什么时候不该惹事，所以才没丧命。后来难民中心很早就招募了我，我又在旧世守护者那里待了一阵子。不过你带着提议找来时，我已经待不住、想到处走走了。于是我就跟你来了。"
 
 #. ~ NPC dialogue line
@@ -231134,7 +231032,6 @@ msgid ""
 "know when to not pick a fight, so I didn't get killed.  Wound up recruited "
 "by the refugee center early on, and then the Old Guard for a bit, but I was "
 "getting itchy feet when you came by with an offer.  Here I am."
-msgstr ""
 msgstr "我主要是想从你这儿弄点苏格兰威士忌。真没什么特别的故事。很多年前我在海军陆战队服役，后来做过安保承包工作。末日降临小镇时，我正在一座破仓库外站岗。我在镇子边缘，手里有枪，也知道什么时候不该惹事，所以才没丧命。后来难民中心很早就招募了我，我又在旧世守护者那里待了一阵子。不过你带着提议找来时，我已经待不住、想到处走走了。于是我就跟你来了。"
 
 #. ~ NPC dialogue line
@@ -231150,7 +231047,6 @@ msgid ""
 "know when to not pick a fight, so I didn't get killed.  Wound up recruited "
 "by the refugee center early on, and then the Old Guard for a bit, but I was "
 "getting itchy feet when you came by with an offer.  Here I am."
-msgstr ""
 msgstr "我主要是想从你这儿弄点苏格兰威士忌。真没什么特别的故事。很多年前我在海军陆战队服役，后来做过安保承包工作。末日降临小镇时，我正在一座破仓库外站岗。我在镇子边缘，手里有枪，也知道什么时候不该惹事，所以才没丧命。后来难民中心很早就招募了我，我又在旧世守护者那里待了一阵子。不过你带着提议找来时，我已经待不住、想到处走走了。于是我就跟你来了。"
 
 #. ~ NPC dialogue line
@@ -231218,7 +231114,6 @@ msgstr "为旧世守护者工作是什么样的？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/Backgrounds/scavenger_merc_1.json
 msgid "What was working for the refugee center like?"
-msgstr ""
 msgstr "在难民中心工作是什么感觉？"
 
 #. ~ Response to NPC dialogue
@@ -242348,7 +242243,6 @@ msgstr "叛变的同伴"
 msgid ""
 "An outpost farm project started in hopes of providing food for the people at "
 "the refugee center."
-msgstr ""
 msgstr "一项前哨农场计划，旨在为难民中心的人们提供食物。"
 
 #. ~ Description of NPC faction "The Wasteland Scavengers"
@@ -242444,7 +242338,6 @@ msgstr "旧世守护者"
 #. ~ NPC faction name
 #: data/json/npcs/factions.json
 msgid "The Refugee Center"
-msgstr ""
 msgstr "难民中心"
 
 #. ~ NPC faction name
@@ -248049,7 +247942,6 @@ msgstr "我现在没带着硬盘；等我拿到了就给你。"
 msgid ""
 "I have a delivery from the refugee center.  You requested a hard drive from "
 "them."
-msgstr ""
 msgstr "我从难民中心送来一样东西。他们说你订了一块硬盘。"
 
 #. ~ Response to NPC dialogue
@@ -262691,7 +262583,6 @@ msgstr "他们在哪里？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/random_encounters/free_merchant_caravans.json
 msgid "A group?  Where at?"
-msgstr ""
 msgstr "一个团体？在哪儿？"
 
 #. ~ Response to NPC dialogue
@@ -262726,7 +262617,6 @@ msgstr "你有什么可以交易的吗？"
 msgid ""
 "Here, I'll mark it on your map.  Feel free to come by and trade, or if "
 "you're the type, we might have use for your services."
-msgstr ""
 msgstr "来，我在你的地图上标出来。欢迎过来交易；如果你愿意接活，我们也可能有事需要你帮忙。"
 
 #. ~ NPC dialogue line
@@ -262743,7 +262633,6 @@ msgstr "我怎么去那里？"
 #. ~ NPC dialogue line
 #: data/json/npcs/random_encounters/free_merchant_caravans.json
 msgid "Huh?  Hey, I'm trying to sleep here."
-msgstr ""
 msgstr "嗯？喂，我正想睡觉呢。"
 
 #. ~ Response to NPC dialogue
@@ -262757,7 +262646,6 @@ msgid ""
 "I'm good for the moment, but there are a couple other guys like me who hang "
 "around the center looking for work.  Check the side offices if you go by, "
 "they don't like us hanging around in the living area."
-msgstr ""
 msgstr "我暂时还不缺活儿，不过中心附近还有几个和我一样找工作的人。你要是过去，看看侧边办公室吧。我们在起居区闲逛，他们可不乐意。"
 
 #. ~ Response to NPC dialogue
@@ -262817,7 +262705,6 @@ msgstr "当然，我们交易吧。"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/random_encounters/free_merchant_caravans.json
 msgid "Thank you.  Let's trade."
-msgstr ""
 msgstr "谢谢，来交易吧。"
 
 #. ~ Response to NPC dialogue
@@ -262883,7 +262770,6 @@ msgstr ""
 msgid ""
 "We're out looking for food and supplies for a group of survivors.  I'm just "
 "hired help."
-msgstr ""
 msgstr "我们出来替一群幸存者找食物和物资。我只是受雇帮忙的。"
 
 #. ~ NPC dialogue line
@@ -262891,7 +262777,6 @@ msgstr "我们出来替一群幸存者找食物和物资。我只是受雇帮忙
 msgid ""
 "We're with a larger group of survivors.  We've been out scavenging for "
 "supplies and we're on the way back now."
-msgstr ""
 msgstr "我们属于一大群幸存者。我们出去搜寻物资，现在正要返回。"
 
 #. ~ NPC dialogue line
@@ -262941,7 +262826,6 @@ msgid ""
 "early part of <the_cataclysm>.  They're full up but they need supplies, so "
 "they send out foraging parties.  I come along for protection in exchange for "
 "a cut of the loot.  With any luck nobody dies and we all get to eat."
-msgstr ""
 msgstr "是啊，这帮人在<the_cataclysm>初期占下了一座FEMA疏散掩体。里面已经住满了，不过还缺物资，所以他们会派出搜寻队。我跟着他们负责保护，作为交换分一份战利品。运气好的话，大家都能活着回来，还有东西吃。"
 
 #. ~ Response to NPC dialogue
@@ -266014,7 +265898,6 @@ msgstr ""
 #. ~ NPC dialogue line
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Aleesha_Seward.json
 msgid "I don't know what's up.  I'm not sure what we've even doing here."
-msgstr ""
 msgstr "我也不知道怎么回事。我甚至不确定我们到底在这里做什么。"
 
 #. ~ NPC dialogue line
@@ -267074,7 +266957,6 @@ msgstr ""
 msgid ""
 "It seems like carpentry work would be something the center needs.  Why are "
 "you so bored?"
-msgstr ""
 msgstr "木工活应该是中心需要的吧。你为什么这么无聊？"
 
 #. ~ NPC dialogue line
@@ -267612,7 +267494,6 @@ msgid ""
 "Huh.  I've made a few friends here, but not so much as I'd stick around here "
 "with no future prospects.  It does sound nice, if they're looking for more "
 "workers."
-msgstr ""
 msgstr "嗯。我在这儿交了几个朋友，不过要是看不到什么前途，我也不会一直待下去。如果他们还招人，听起来倒是不错。"
 
 #. ~ Dialogue line in mission "Find Dana's family sourdough culture"
@@ -268779,7 +268660,6 @@ msgid ""
 "plenty out there not gettin' any love these days.  Whattya say?  Help an old "
 "man play some blues?  Would be good to have some real music around this "
 "place.  Be good for PEOPLE, you know what I'm sayin'?"
-msgstr ""
 msgstr "你信吗，他们居然没有！整个地方一把吉他都没有。喂，你不会打算一直待在这儿吧？在我看来，你是个到处漂泊的人，不是定居者。我能不能求你、劝你帮我留意一把新吉他？外面肯定还有不少吉他，如今都没人珍惜。怎么样？帮帮一位老人，让我能弹几段布鲁斯？这里要是能有真正的音乐就好了。对大家都有好处，你懂我的意思吧？"
 
 #. ~ Response to NPC dialogue
@@ -268976,7 +268856,6 @@ msgid ""
 "women doing triage and processing had a bit of a hang-up about particular, "
 "um, colors of people being allowed into the center.  I almost didn't get a "
 "bed, but in the end somebody got her to shut up."
-msgstr ""
 msgstr "我当时正准备去伯灵顿探望父母，在公交车站等车，疏散通知突然响了起来。我有段时间没怎么关注外界，不知道骚乱已经变得这么严重。公交车到了之后被改成了疏散车辆，把我送到了这里。我……我以前并不算虔诚，信仰只是与生俱来的东西；但发生这一切之后，我开始更多地思考上帝，也很感激祂帮助我活了下来。眼下日子依然艰难，不过想到祂为我安排了某种计划，心里就好受些。\n\n总之，我坐的是第二辆抵达的公交车，那时他们刚开始安排伤员分诊和登记。我和阮宛一起负责协助伤员。后来出了点怪事……负责分诊和登记的一名女性，似乎特别介意某些，呃，肤色的人能不能进入中心。我差点连床位都没分到，不过最后总算有人让她闭了嘴。"
 
 #. ~ Dialogue line in mission "Find a copy of the Quran"
@@ -269676,7 +269555,6 @@ msgstr "能和我说说关于其他人的事吗？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_refugees/NPC_Jenny_Forcette.json
 msgid "Can you tell me about the refugee center?"
-msgstr ""
 msgstr "能跟我说说难民中心吗？"
 
 #. ~ Response to NPC dialogue
@@ -270120,7 +269998,6 @@ msgid ""
 "scavenging or keeping the lights on.  I shouldn't complain though, before "
 "they figured out how to ration everything out it was chaos.  There was a lot "
 "of fighting."
-msgstr ""
 msgstr "呃，算是吧。这里有点像合作社。我们都是成员，但大多数人并不参与管理。大家尽可能出力，就能领到代用券，再用它买食物和物资。问题是食物不够分；如果不出去搜寻物资，或是不负责维持供电，通常也拿不到多少报酬。不过我不该抱怨，在他们想出配给办法之前，这里乱成一团，打架的人可不少。"
 
 #. ~ Response to NPC dialogue
@@ -271066,7 +270943,6 @@ msgid ""
 "here on vacation when, well, you know.  To tell you the truth I'm still "
 "coming to terms with the fact that I'll probably never know how my family "
 "and my band are doing."
-msgstr ""
 msgstr "说来话长。我不是本地人，其实来自加拿大西部很远的地方。我一直想看看新英格兰，大灾变发生时，我正好在这里度假。说实话，我还没能接受自己大概永远不知道家人和乐队近况这件事。"
 
 #. ~ Response to NPC dialogue
@@ -271501,7 +271377,6 @@ msgstr "找到60剂抗抑郁药"
 msgid ""
 "Find 60 doses of fluoxetine for Uyen Tran in the refugee center, in exchange "
 "for <reward_count:FMCNote> merch."
-msgstr ""
 msgstr "为难民中心的阮宛找来60剂氟西汀，作为交换可获得<reward_count:FMCNote>商会币。"
 
 #. ~ Dialogue line in mission "Find 60 doses of antidepressant"
@@ -271509,7 +271384,6 @@ msgstr "为难民中心的阮宛找来60剂氟西汀，作为交换可获得<rew
 msgid ""
 "Fluoxetine is an antidepressant.  They were really common.  You can probably "
 "find them in medicine cabinets and pharmacies."
-msgstr ""
 msgstr "氟西汀是一种抗抑郁药，以前很常见。你大概能在药柜和药房里找到。"
 
 #. ~ Response to NPC dialogue
@@ -271531,7 +271405,6 @@ msgid ""
 "people having to starve to pay for them.  Three month's worth - about 6 "
 "bottles - would last us a little while.  The pills we want are called "
 "fluoxetine."
-msgstr ""
 msgstr "我可能不该擅自开药，不过这里有很多人需要帮助才能睡好。如果你能帮我们找些抗抑郁药，我和莱泽尔应该能妥善分发给大家，不至于让人饿着肚子来换药。三个月的用量，大约六瓶，够大家用一阵子了。我们要的药叫氟西汀。"
 
 #. ~ NPC dialogue line
@@ -272374,7 +272247,6 @@ msgid ""
 "services in exchange for food rations and other trade goods, but we've been "
 "using them with suppliers we regularly trade with as well, those that have "
 "faith in us."
-msgstr ""
 msgstr "我们把这种钱叫作“商会币”。我们刚到这里没多久就开始在钞票上签名，表明它代表着我们可以交易的实际商品和服务。几天之内，我们就把这套制度组织起来；后来它逐渐变成了一种现金。内部可以用它交换劳务和服务，换取口粮及其他物资；我们也把它用于和那些经常交易、信任我们的供应商做买卖。"
 
 #. ~ NPC dialogue line
@@ -272704,7 +272576,6 @@ msgstr "谢谢！我要走了。"
 msgid ""
 "Well mostly no.  Just don't go around robbing others and starting fights and "
 "you will be all set."
-msgstr ""
 msgstr "基本没什么规矩。只要别去抢别人东西，也别挑起打架，就没问题。"
 
 #. ~ NPC dialogue line
@@ -273542,7 +273413,6 @@ msgid ""
 "Clear out the barricaded back area in the refugee center and lay the former "
 "leader of the refugee center to rest in exchange for the local currency: A "
 "wad of scrip that the people at the center call Merch."
-msgstr ""
 msgstr "清理难民中心被路障封住的后区，并安葬难民中心的前任领袖；报酬是当地货币，也就是中心的人所说的一沓“商会币”代用券。"
 
 #. ~ Dialogue line in mission "Clear Back Bay"
@@ -273562,7 +273432,6 @@ msgstr "有机会的话你记得要回来哦，我们确实需要夺回这片区
 msgid ""
 "Deliver 10 solar panel arrays to help the refugee center set up a renewable "
 "power grid in exchange for a reward."
-msgstr ""
 msgstr "运送10套太阳能板阵列，帮助难民中心建立可再生能源电网，作为交换可获得报酬。"
 
 #. ~ Description of mission "In a Pickle"
@@ -273570,7 +273439,6 @@ msgstr "运送10套太阳能板阵列，帮助难民中心建立可再生能源�
 msgid ""
 "Deliver 100 0.5 L glass jars to the refugee center to kickstart their food "
 "storage plans."
-msgstr ""
 msgstr "运送100个0.5升玻璃罐到难民中心，帮助他们启动食品储存计划。"
 
 #. ~ Description of mission "Unknown Recipient"
@@ -274320,7 +274188,6 @@ msgstr "那么，10升……换300商会币，怎么样？"
 #. ~ Response to NPC dialogue
 #: data/json/npcs/refugee_center/surface_staff/Smokes/free_merchant_shopkeep_talk.json
 msgid "What's with these bank notes?"
-msgstr ""
 msgstr "这些纸币是怎么回事？"
 
 #. ~ Response to NPC dialogue
@@ -274349,7 +274216,6 @@ msgid ""
 "Yes we are.  The center had some emergency rations, but they went fast.  "
 "We're making do with what our people can bring in from the outside but it's "
 "not enough, so we're always looking to trade for more."
-msgstr ""
 msgstr "是啊，确实如此。中心原本有些应急口粮，但很快就用完了。我们只能靠自己人从外面带回东西勉强维持，可还是不够，所以一直在想办法交易换取更多物资。"
 
 #. ~ NPC dialogue line
@@ -274524,7 +274390,6 @@ msgid ""
 "amount of actual work that got done, or actual supplies that were traded.  "
 "Keeping ledgers is still a headache, but it's a lot more convenient for you "
 "than trying to pay for everything in cans of chili."
-msgstr ""
 msgstr "哦，商会币。它们最初是发给工人的代用券，后来我们发现也能把它们当现金用，毕竟理论上每张券都代表着已经完成的一定量工作，或是已经换来的实物物资。记账还是挺头疼的，不过对你来说，用它买东西总比拿一罐罐辣椒来付账方便多了。"
 
 #. ~ NPC dialogue line
@@ -275121,7 +274986,6 @@ msgid ""
 "raid will be held under orders of the U.S. Marshals Service and by agreeing "
 "to the mission you will become a marshal, swearing to assist the federal "
 "government in regaining order."
-msgstr ""
 msgstr "一伙敌对幸存者一直袭击返回中心的搜寻队。我们对这个“帮派”的指挥结构几乎一无所知，所以得派人潜进去除掉头目。这次突袭将由美国法警局指挥；你若接受任务，就会成为一名法警，并宣誓协助联邦政府恢复秩序。"
 
 #. ~ Description of mission "Investigate Disappearance"
@@ -275130,7 +274994,6 @@ msgid ""
 "A member of a scavenger group vanished on their way back to the center.  "
 "Whoever or whatever is responsible must be quick and quiet - investigate the "
 "route and eliminate the threat."
-msgstr ""
 msgstr "一名搜寻队成员在返回中心的路上失踪了。不管是谁或什么东西干的，行动都很迅速、隐蔽。去调查那条路线，消灭威胁。"
 
 #. ~ Description of mission "Kill Bandits"
@@ -275180,7 +275043,6 @@ msgstr ""
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_visitors/NPC_old_guard_representative.json
 msgid "Assassinate Bandit Leaser"
-msgstr ""
 msgstr "刺杀匪帮头目"
 
 #. ~ Dialogue line in mission "Install radio repeater mod"
@@ -275326,7 +275188,6 @@ msgid ""
 "important element in rebuilding the world.  We do what we can to keep the "
 "center in good shape and in return they have provided us with spare men and "
 "supplies when they can."
-msgstr ""
 msgstr "我负责确保这里的居民获得生存所需，并能保护自己免遭掠夺者袭击。要重建世界，维持某种法律秩序至关重要。我们尽力维持中心的良好秩序；作为回报，他们有余力时会给我们人手和物资。"
 
 #. ~ Response to NPC dialogue
@@ -275354,7 +275215,6 @@ msgstr "我想问你一些关于这个提议的事情。"
 msgid ""
 "I'd recommend having two deputies… it would be a death trap if you got "
 "surrounded."
-msgstr ""
 msgstr "我建议带上两名副手……要是被包围了，那可就成了死地。"
 
 #. ~ Response to NPC dialogue
@@ -275395,7 +275255,6 @@ msgstr "安装无线电中继器模块"
 #. ~ Mission name
 #: data/json/npcs/refugee_center/surface_visitors/NPC_old_guard_representative.json
 msgid "Investigate Disappearance"
-msgstr ""
 msgstr "调查失踪事件"
 
 #. ~ Response to NPC dialogue
@@ -275432,7 +275291,6 @@ msgstr "小家伙"
 msgid ""
 "Marshal, you continue to impress us.  There may be some hope yet for these "
 "people."
-msgstr ""
 msgstr "法警，你一直让我们刮目相看。这些人或许还有希望。"
 
 #. ~ Response to NPC dialogue
@@ -275542,7 +275400,6 @@ msgstr "第二舰队？"
 msgid ""
 "The Old Guard have located a bandit camp that's been coordinating attacks on "
 "scavenging parties.  Pay them a visit and execute the area leadership."
-msgstr ""
 msgstr "旧世守护者找到了一个匪帮营地，他们一直在策划袭击搜寻队。去一趟，除掉当地的头目。"
 
 #. ~ Dialogue line in mission "Kill Bandits"
@@ -276116,7 +275973,6 @@ msgid ""
 "Merch is what they call their money.  If you want to buy stuff around here "
 "and you don't want to barter, you can use merch instead.  It's a lot easier "
 "to carry around."
-msgstr ""
 msgstr "他们把自己的钱叫作“商会币”。如果你想在这附近买东西，又不想以物易物，就可以用商会币。带着它们方便多了。"
 
 #. ~ Response to NPC dialogue
@@ -289533,7 +289389,6 @@ msgstr "一套密封件和垫圈，能让枪械在浸没于水中时仍可靠运
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Advanced Fungal Anatomy"
-msgstr ""
 msgstr "高级真菌解剖学"
 
 #. ~ "msg" action message of item "blanching acorns (obsolete)"
@@ -289571,7 +289426,6 @@ msgstr "易怒"
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Basic Fungal Anatomy"
-msgstr ""
 msgstr "基础真菌解剖学"
 
 #. ~ Proficiency name
@@ -289652,7 +289506,6 @@ msgstr "蜂鸟喙"
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Hymenoptera Anatomy"
-msgstr ""
 msgstr "膜翅目解剖学"
 
 #. ~ Mutation name
@@ -289822,7 +289675,6 @@ msgstr "已废弃的特性。现为肤色：苍白"
 #. ~ Description of proficiency "Advanced Fungal Anatomy"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Obsoleted weakpoint proficiency.  You may safely ignore this."
-msgstr ""
 msgstr "已废弃的弱点识别专长，可放心忽略。"
 
 #. ~ Description of proficiency "Alien Abominations"
@@ -289834,7 +289686,6 @@ msgstr "已废弃的弱点识别专长，可放心忽略。"
 #. ~ Description of proficiency "Basic Fungal Anatomy"
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Obsoleted weakpont proficiency.  You can safely ignore this."
-msgstr ""
 msgstr "已废弃的弱点识别专长，可放心忽略。"
 
 #. ~ Mutation name
@@ -289967,7 +289818,6 @@ msgstr "滑冰高手"
 #. ~ Proficiency name
 #: data/json/obsoletion_and_migration/obsoletion.json
 msgid "Small Humanoid Anatomy"
-msgstr ""
 msgstr "小型人形生物解剖学"
 
 #. ~ Mutation name
@@ -290951,7 +290801,6 @@ msgstr "一个黄蜂巢。"
 #. ~ Description of map extra "Jetski"
 #: data/json/overmap/map_extras.json
 msgid "An abandoned jetski."
-msgstr ""
 msgstr "一辆被遗弃的水上摩托艇。"
 
 #. ~ Description of map extra "Beehive"
@@ -291125,7 +290974,6 @@ msgstr "一片日本虎杖在这里生长。"
 #. ~ Name of map extra
 #: data/json/overmap/map_extras.json
 msgid "Jetski"
-msgstr ""
 msgstr "水上摩托艇"
 
 #. ~ Name of map extra
@@ -295778,25 +295626,21 @@ msgstr "海洋"
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_waterbody.json
 msgid "seabed"
-msgstr ""
 msgstr "海床"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_waterbody.json
 msgid "seashore"
-msgstr ""
 msgstr "海岸"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_waterbody.json
 msgid "undersea"
-msgstr ""
 msgstr "海底"
 
 #. ~ Overmap terrain name
 #: data/json/overmap/overmap_terrain/overmap_terrain_waterbody.json
 msgid "underwater"
-msgstr ""
 msgstr "水下"
 
 #. ~ Overmap terrain name
@@ -295960,7 +295804,6 @@ msgstr "接受手术"
 #: data/json/player_activities.json
 msgctxt "butchery activity"
 msgid "bleeding"
-msgstr ""
 msgstr "放血"
 
 #. ~ Verb in activity "ACT_MULTIPLE_BUTCHER"
@@ -296336,7 +296179,6 @@ msgstr "逗宠物"
 #. ~ Verb in activity "ACT_TARGET_PRACTICE"
 #: data/json/player_activities.json
 msgid "practicing marksmanship"
-msgstr ""
 msgstr "练习枪法"
 
 #. ~ Verb in activity "ACT_GENERIC_EOC"
@@ -304088,7 +303930,6 @@ msgid ""
 "to do this very quickly and with a good deal of force, but this expanded "
 "xylem is vulnerable to attack, provided you know where it is, and at this "
 "point you have got a pretty good idea."
-msgstr ""
 msgstr "所有会活动的植物，无论是向日葵、捕蝇草还是巨型食人怪物，都遵循同一原理：液压。它们没有肌肉，而是利用体内液压伸展或收缩身体部位。树人有特殊的维管系统，能以极快的速度和强大的力量完成这些动作；但只要你知道扩大的木质部在哪里，就能攻击这一弱点。现在你已经大致摸清了。"
 
 #. ~ Proficiency name
@@ -304175,7 +304016,6 @@ msgstr "无脊椎生物学"
 #. ~ Proficiency name
 #: data/json/proficiencies/weakpoints.json
 msgid "Mi-go anatomy"
-msgstr ""
 msgstr "米戈解剖学"
 
 #. ~ Description of proficiency "Mi-go anatomy"
@@ -304185,13 +304025,11 @@ msgid ""
 "vary widely in density and hardness.  There aren't really distinct vital "
 "organs per se, but basic physics still apply, and you now know where their "
 "outer shells are weakest and their \"bones\" are thinnest."
-msgstr ""
 msgstr "米戈似乎完全由同一种组织构成，只是密度和硬度变化很大。它们并没有明确的要害器官，不过基本的物理规律依然适用；现在你已经知道它们外壳的薄弱处，以及“骨骼”最薄的地方。"
 
 #. ~ Proficiency name
 #: data/json/proficiencies/weakpoints.json
 msgid "Mi-go armor"
-msgstr ""
 msgstr "米戈护甲"
 
 #. ~ Proficiency name
@@ -304217,7 +304055,6 @@ msgid ""
 "force is applied, making them significantly more vulnerable to all attacks.  "
 "Knowing this, you're more likely to be able to be able to crack one open on "
 "purpose provided you are willing to get that close."
-msgstr ""
 msgstr "那些在乡野间肆虐的诡异粉色怪物，身上覆盖着坚硬的外壳；但只要施加足够的钝击，外壳就会开裂，使它们更容易受到各种攻击。你既然知道了这一点，只要愿意靠近，就更有把握有意击裂它们的外壳。"
 
 #. ~ Description of proficiency "Undead Anatomy"
@@ -304237,7 +304074,6 @@ msgid ""
 "lot of good in combat to attack and others that are too dense to easily "
 "harm, but any movable joint is a weak point you can disable with a well-"
 "placed strike."
-msgstr ""
 msgstr "这些巨型食肉植物身上，有些部位在战斗中不太有用，有些则过于坚实，不易造成伤害；但任何可活动的关节都是弱点，只要一击得当，就能使其失去作用。"
 
 #. ~ Description of proficiency "Anatomy of Amalgamations"
@@ -305560,7 +305396,6 @@ msgstr "链甲裙甲"
 #. ~ name of the nested group
 #: data/json/recipes/nested.json
 msgid "chainmail vests"
-msgstr ""
 msgstr "链甲背心"
 
 #. ~ name of the nested group
@@ -306313,7 +306148,6 @@ msgstr "使用球、石头或其他易于投掷的物体练习基本的投掷技
 #: data/json/recipes/practice/ranged.json
 msgid ""
 "The best way to train firearm skill is to shoot a firearm.  Do exactly that."
-msgstr ""
 msgstr "训练枪械技能最好的方法就是开枪。照做便是。"
 
 #. ~ Description of practice "launchers (beginner)"
@@ -306329,7 +306163,6 @@ msgstr "发射器（入门）"
 #. ~ Custom name for recipe crafting "EOC_START_TARGET_PRACTICE"
 #: data/json/recipes/practice/ranged.json
 msgid "target practice"
-msgstr ""
 msgstr "射击练习"
 
 #. ~ Practice name
@@ -314614,7 +314447,6 @@ msgid ""
 "abiding citizens, the commune's leadership remained loyal to the interests "
 "of the refugee center.  Hard labor for little reward remained the price to "
 "be paid for those who sought the safety of the community."
-msgstr ""
 msgstr "    尽管外部威胁从未间断，公社这些年来仍迅速发展。公社领导层努力维持其庇护守法居民的声誉，同时始终忠于难民中心的利益。想要在这里获得安全，就得付出艰苦劳动，而回报却很少。"
 
 #. ~ Snippet in category "epilogue_factions"
@@ -314624,7 +314456,6 @@ msgid ""
 "threats combined with low crop yields caused the refugee center to withdraw "
 "their support.  When the exhausted migrants returned to the refugee center "
 "they were turned away to face the world on their own."
-msgstr ""
 msgstr "    几个月后，这座刚起步的前哨站被遗弃了。外部威胁加上收成不佳，迫使难民中心撤回支持。筋疲力尽的移民回到难民中心时，却被拒之门外，只能独自面对这个世界。"
 
 #. ~ Snippet in category "epilogue_factions"
@@ -314676,7 +314507,6 @@ msgid ""
 "squalor and filth the first generations born after the Cataclysm are told "
 "stories of the old days when food was abundant and the children were allowed "
 "to play in the sun…"
-msgstr ""
 msgstr "    难民中心的人们多年来一直艰难求生，努力让自己吃饱；但他们曾经获利丰厚的贸易路线被土匪洗劫一空。灾变后出生的第一代人生活在贫困与污秽之中，听着旧日故事：那时食物充足，孩子们还能在阳光下玩耍……"
 
 #. ~ Snippet in category "epilogue_factions"
@@ -314917,7 +314747,6 @@ msgstr ""
 msgid ""
 "     Became obsessed with drugs and died of an overdose a few months after "
 "your death."
-msgstr ""
 msgstr "     她沉迷于毒品，在你死后几个月因吸毒过量而死。"
 
 #. ~ Snippet in category "epilogue_npc_male"
@@ -315058,7 +314887,6 @@ msgstr ""
 msgid ""
 "     Got drunk one night and threw herself into a portal.  No one knows what "
 "happened after that."
-msgstr ""
 msgstr "     一天晚上，她喝醉后跳进了传送门。从那以后，再也没人知道她的下落。"
 
 #. ~ Snippet in category "epilogue_npc_male"
@@ -315218,7 +315046,6 @@ msgid ""
 "     He wandered alone for days before finding a survivor settlement.  He "
 "spent a few years with them, often drinking himself half blind until one day "
 "he up and vanished."
-msgstr ""
 msgstr "     他独自流浪了好几天，才找到一个幸存者聚居地。他在那里待了几年，经常喝得半瞎；直到有一天，他突然消失了。"
 
 #. ~ Snippet in category "epilogue_npc_male"
@@ -315228,7 +315055,6 @@ msgid ""
 "eventually becoming a skilled mechanic.  Employed by the refugee center, he "
 "lived a comfortable, if rather uneventful life, dying of cancer, a rare "
 "luxury these days."
-msgstr ""
 msgstr "     你死后，他在荒地上四处流浪、搜寻物资多年，最终成了一名熟练的机械师。他受雇于难民中心，过着舒适却相当平淡的生活，最后死于癌症。在如今这个世道，能死于癌症都算难得的奢侈。"
 
 #. ~ Snippet in category "epilogue_npc_female"
@@ -315369,7 +315195,6 @@ msgstr ""
 msgid ""
 "     Months later, he fell through a hole in the world and was never seen "
 "again."
-msgstr ""
 msgstr "     几个月后，他掉进了世界的一个洞里，从此再也没人见过他。"
 
 #. ~ Snippet in category "epilogue_npc_male"
@@ -315403,7 +315228,6 @@ msgstr ""
 msgid ""
 "     Obsessed with the idea of settling down, he eventually found love and "
 "retired to a farm in the middle of nowhere."
-msgstr ""
 msgstr "     他一心想安定下来，最终找到了爱情，在偏远农场退休度日。"
 
 #. ~ Snippet in category "epilogue_npc_male"
@@ -315451,7 +315275,6 @@ msgid ""
 "     She became a runner for the Old Guard and was eventually permitted to "
 "join.  She died some years later fighting in service to a federal government "
 "that might not have even existed anymore."
-msgstr ""
 msgstr "     她成了旧世守护者的信使，后来终于获准加入。几年后，她在为联邦政府效力时战死；那个政府当时或许早已不复存在。"
 
 #. ~ Snippet in category "epilogue_npc_female"
@@ -315485,7 +315308,6 @@ msgstr ""
 msgid ""
 "     She continued traveling for several months, but one day became "
 "hopelessly lost and wound up dying of exposure."
-msgstr ""
 msgstr "     她继续旅行了几个月，但有一天彻底迷了路，最终因暴露在恶劣环境中而死。"
 
 #. ~ Snippet in category "epilogue_npc_female"
@@ -315558,7 +315380,6 @@ msgstr ""
 msgid ""
 "     She lived on a houseboat for a few years, but eventually drowned when "
 "it capsized during a storm."
-msgstr ""
 msgstr "     她在一艘船屋上住了几年，后来船屋在暴风雨中倾覆，她也溺水身亡。"
 
 #. ~ Snippet in category "epilogue_npc_female"
@@ -315604,13 +315425,11 @@ msgstr ""
 msgid ""
 "     She woke up one night to see herself standing over her bed, looking "
 "down at her with a face that wasn't quite right."
-msgstr ""
 msgstr "     一天夜里，她醒来时发现另一个自己正站在床边，低头看着她；那张脸却有些不对劲。"
 
 #. ~ Snippet in category "epilogue_npc_female"
 #: data/json/snippets/epilogue_npc.json
 msgid "     Shortly after your death she died of a mysterious illness."
-msgstr ""
 msgstr "     你死后不久，她便死于一种神秘疾病。"
 
 #. ~ Snippet in category "epilogue_npc_female"
@@ -315858,7 +315677,6 @@ msgstr ""
 msgid ""
 "     Wandered the wasteland for years before dying in a gunfight with an "
 "unusually well-armed bandit gang."
-msgstr ""
 msgstr "     她在荒地上流浪多年，最后在与一伙装备异常精良的土匪交火时丧命。"
 
 #. ~ Snippet in category "epilogue_npc_female"
@@ -324182,7 +324000,6 @@ msgid ""
 "IF YOU SEE THIS PERSON OR THINK YOU HAVE SEEN HER PLEASE CALL 911 "
 "IMMEDIATELY\n"
 "Visit www.cdc.gov/ctlg-advisory for more information."
-msgstr ""
 msgstr "特别通报\n失踪人员\n有危险，可能具有危险性\n\n【照片：一名身穿病号服的女性的模糊监控截图。】\n\n姓名：奥布里·D·威廉姆斯\n年龄：33岁\n种族：白人\n性别：女性\n发色：棕色\n瞳色：绿色\n身高：5英尺11英寸\n体重：185磅\n\n奥布里·D·威廉姆斯最后一次露面是在5月14日约19:50。她当时正处于精神科留置观察期间，随后离开了斯普林菲尔德山顶街3927号的圣文森特医院。她身穿蓝色病号服，戴着手铐。\n\n如果你看到此人，或认为自己曾见过她，请立即拨打911。\n访问 www.cdc.gov/ctlg-advisory 获取更多信息。"
 
 #. ~ Snippet in category "missing_adult"
@@ -330436,7 +330253,6 @@ msgstr "当时是在某种秘密政府机构中"
 #: data/json/snippets/npc_story.json
 msgctxt "mercenary story subject"
 msgid "zombie moose"
-msgstr ""
 msgstr "丧尸驼鹿"
 
 #. ~ Snippet in category "wallet_photos"
@@ -339491,7 +339307,6 @@ msgstr ""
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s applauds your recoil management."
-msgstr ""
 msgstr "%s称赞你对后坐力的控制。"
 
 #. ~ Snippet in category "target_practice_coaching_advanced"
@@ -339500,21 +339315,18 @@ msgstr "%s称赞你对后坐力的控制。"
 msgid ""
 "%s commends the speed at which you ready your weapon, while noting subtle "
 "redundancies in your moves."
-msgstr ""
 msgstr "%s称赞你备枪动作迅速，同时指出你的动作中有些细微的多余之处。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s demonstrates how to quickly draw your gun."
-msgstr ""
 msgstr "%s示范如何快速拔枪。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s demonstrates to you how to handle a weapon without hurting yourself."
-msgstr ""
 msgstr "%s向你示范如何安全地操作武器。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
@@ -339522,28 +339334,24 @@ msgstr "%s向你示范如何安全地操作武器。"
 #, no-c-format
 msgid ""
 "%s describes situations wherein single-eye shooting is the preferable option."
-msgstr ""
 msgstr "%s介绍了哪些情况下单眼瞄准更合适。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s explains how to aim with both eyes open."
-msgstr ""
 msgstr "%s讲解如何睁开双眼瞄准。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s explains to you how to properly use the sights."
-msgstr ""
 msgstr "%s向你讲解如何正确使用瞄具。"
 
 #. ~ Snippet in category "target_practice_coaching_advanced"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s points out slight inconsistencies in your stance."
-msgstr ""
 msgstr "%s指出你的站姿有些小问题。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
@@ -339552,7 +339360,6 @@ msgstr "%s指出你的站姿有些小问题。"
 msgid ""
 "%s points out that you tense up too much before taking a shot, and explains "
 "how confidence affects accuracy."
-msgstr ""
 msgstr "%s指出你射击前太过紧张，并解释自信如何影响命中率。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
@@ -339561,34 +339368,29 @@ msgstr "%s指出你射击前太过紧张，并解释自信如何影响命中率�
 msgid ""
 "%s points out that you're flinching before the shot, pushing the gun "
 "downwards in anticipation."
-msgstr ""
 msgstr "%s指出你会在开枪前畏缩，预判后坐力时把枪口压低了。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s shows you how to grip the weapon."
-msgstr ""
 msgstr "%s向你示范如何握持武器。"
 
 #. ~ Snippet in category "target_practice_coaching_beginner"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s shows you how to position your body properly."
-msgstr ""
 msgstr "%s向你示范如何摆好身体姿势。"
 
 #. ~ Snippet in category "target_practice_coaching_advanced"
 #: data/json/snippets/target_practice.json
 #, no-c-format
 msgid "%s suggest improvements for using the sights."
-msgstr ""
 msgstr "%s建议你改进瞄具的使用方法。"
 
 #. ~ Snippet in category "target_practice_novice"
 #: data/json/snippets/target_practice.json
 msgid "The sound startles you, and you almost drop your gun."
-msgstr ""
 msgstr "声音吓了你一跳，你差点把枪掉在地上。"
 
 #. ~ Snippet in category "target_practice_spinner"
@@ -339596,7 +339398,6 @@ msgstr "声音吓了你一跳，你差点把枪掉在地上。"
 msgid ""
 "The target spins chaotically, making it harder to strike.  This is harder "
 "than it seems."
-msgstr ""
 msgstr "旋转靶胡乱转动，更难命中。这可比看起来难多了。"
 
 #. ~ Snippet in category "target_practice_spinner"
@@ -339604,56 +339405,47 @@ msgstr "旋转靶胡乱转动，更难命中。这可比看起来难多了。"
 msgid ""
 "You attempt to land several hits on the same side of the spinner targets in "
 "one go."
-msgstr ""
 msgstr "你试着一口气连续命中旋转靶的同一侧。"
 
 #. ~ Snippet in category "target_practice_common"
 #: data/json/snippets/target_practice.json
 msgid "You control your breath to keep your aim steady."
-msgstr ""
 msgstr "你调整呼吸，让瞄准保持稳定。"
 
 #. ~ Snippet in category "target_practice_common"
 #: data/json/snippets/target_practice.json
 msgid "You grip the firearm a bit tighter this time."
-msgstr ""
 msgstr "这次你把枪握得更紧了些。"
 
 #. ~ Snippet in category "target_practice_novice"
 #: data/json/snippets/target_practice.json
 msgid "You hear a click.  You forgot the safety."
-msgstr ""
 msgstr "你听到一声咔嗒。你忘了关保险。"
 
 #. ~ Snippet in category "target_practice_novice"
 #: data/json/snippets/target_practice.json
 msgid "You hesitate as you pull the trigger, moving your aim off-target."
-msgstr ""
 msgstr "你扣动扳机时犹豫了一下，枪口偏离了目标。"
 
 #. ~ Snippet in category "target_practice_common"
 #: data/json/snippets/target_practice.json
 msgid "You picture a zombie as you fire."
-msgstr ""
 msgstr "你想象着丧尸的模样，扣下扳机。"
 
 #. ~ Snippet in category "target_practice_common"
 #: data/json/snippets/target_practice.json
 msgid ""
 "You pull the trigger slowly, feeling the different stages of the trigger."
-msgstr ""
 msgstr "你缓缓扣动扳机，感受着扳机行程中的各个阶段。"
 
 #. ~ Snippet in category "target_practice_spinner"
 #: data/json/snippets/target_practice.json
 msgid "You track the spinning target, gauging the best moment to shoot."
-msgstr ""
 msgstr "你盯着旋转靶，估算最佳射击时机。"
 
 #. ~ Snippet in category "target_practice_common"
 #: data/json/snippets/target_practice.json
 msgid "You try a different grip for a bit, before deciding it's uncomfortable."
-msgstr ""
 msgstr "你试着换一种握法，过了一会儿还是觉得不舒服。"
 
 #. ~ Snippet in category "target_practice_common"
@@ -339661,7 +339453,6 @@ msgstr "你试着换一种握法，过了一会儿还是觉得不舒服。"
 msgid ""
 "Your focus sharpens, and you can feel the hammer fall before you feel the "
 "recoil of the round."
-msgstr ""
 msgstr "你渐渐集中精神，甚至能在感受到子弹后坐力之前，先察觉到击锤落下。"
 
 #. ~ Snippet in category "<triffid_harvest>"
@@ -340377,7 +340168,6 @@ msgid ""
 "\n"
 "To continue the tutorial, please reload the flashlight by pressing <keybind:"
 "reload_item>.  Take it with you and move to the stairs."
-msgstr ""
 msgstr "架子上放着一支<color_light_cyan>手电筒</color>和一节<color_light_cyan>碱性电池</color>。手电筒非常实用，能让你在黑暗中看清东西。\n\n要继续教程，请按<keybind:reload_item>给手电筒装上电池。拿上它，然后前往楼梯。"
 
 #. ~ Snippet in category "tutorial_messages"
@@ -352732,7 +352522,7 @@ msgstr "空行"
 
 #. ~ Text in UI widget "spacebar_legend_bar_2"
 #: data/json/ui/spacebar/spacebar_body_and_health_block.json
-#, c-format
+#, no-c-format
 msgid " = splinted, % broken, B bite, I infected  "
 msgstr " = 夹板固定，% 骨折，B 咬伤，I 感染"
 
@@ -358739,13 +358529,11 @@ msgstr "独木舟"
 #. ~ Vehicle name
 #: data/json/vehicles/boats.json
 msgid "electric jetski"
-msgstr ""
 msgstr "电动水上摩托艇"
 
 #. ~ Vehicle name
 #: data/json/vehicles/boats.json
 msgid "jetski"
-msgstr ""
 msgstr "水上摩托艇"
 
 #. ~ Vehicle name
@@ -368644,7 +368432,6 @@ msgstr ""
 #: data/mods/Sky_Island/furniture_and_terrain.json
 msgid ""
 "A red wall emitting otherworldly glow, enough to be noticeable at night."
-msgstr ""
 msgstr "一面散发着异界光芒的红墙，夜间也足够醒目。"
 
 #. ~ Description of furniture "infinity ore"
@@ -368821,7 +368608,6 @@ msgstr[0] "附近的折跃方尖碑"
 #. ~ Terrain name
 #: data/mods/Sky_Island/furniture_and_terrain.json
 msgid "red glowing wall"
-msgstr ""
 msgstr "红色发光墙"
 
 #. ~ Terrain name
@@ -369628,7 +369414,6 @@ msgid ""
 "customize your home island, unlock upgrades, and be prudent about what you "
 "take on any given outing.  Be aware that 'PLAY NOW' will NOT work, you MUST "
 "make a custom character."
-msgstr ""
 msgstr "注意：这是TGW模组的过时版本，在更新前可能会导致问题，请谨慎使用！这是一个全新的CTLG玩法尝试，灵感来自《逃离塔科夫》和《Dark and Darker》等游戏。你将从天空中的浮岛出发，传送到地面上的随机地点，搜寻所需物品。永久死亡机制已取消：死亡后你会返回浮岛，但会失去身上携带的所有物品。逐步积累库存，完成任务以获取独特奖励，定制你的家园岛屿，解锁升级，并谨慎选择每次出行要挑战的内容。请注意：“立即开始”无法使用，你必须创建自定义角色。"
 
 #. ~ MOD name
@@ -369817,7 +369602,6 @@ msgstr "随机神器"
 #. ~ Name of JSON flag "SKY_ISLAND"
 #: data/mods/Sky_Island/region_settings.json
 msgid "Sky Island Specials"
-msgstr ""
 msgstr "天空岛特别内容"
 
 #. ~ Description of scenario "Warper" for female
@@ -370698,7 +370482,7 @@ msgstr ""
 
 #. ~ Description of mission "Upgrade: Stability 3"
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Completing this mission will unlock a permanent upgrade for all future "
 "expeditions.\n"
@@ -370795,7 +370579,7 @@ msgstr ""
 
 #. ~ Description of mission "Upgrade: Stability 2"
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Completing this mission will unlock a permanent upgrade for all future "
 "expeditions.\n"
@@ -370914,7 +370698,7 @@ msgstr ""
 
 #. ~ Description of mission "Upgrade: Stability 1"
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Completing this mission will unlock a permanent upgrade for all future "
 "expeditions.\n"
@@ -371033,7 +370817,7 @@ msgstr ""
 
 #. ~ Description of mission "Upgrade: Stability 4"
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Completing this mission will unlock a permanent upgrade for all future "
 "expeditions.\n"
@@ -371927,7 +371711,7 @@ msgstr ""
 
 #. ~ Player message in an effect
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Somehow, you understand the statue is calling out for something that can "
 "strengthen its power.\n"
@@ -371946,7 +371730,7 @@ msgstr ""
 
 #. ~ Player message in an effect
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Somehow, you understand the statue is calling out for something that can "
 "strengthen its power.\n"
@@ -371965,7 +371749,7 @@ msgstr ""
 
 #. ~ Player message in an effect
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Somehow, you understand the statue is calling out for something that can "
 "strengthen its power.\n"
@@ -371984,7 +371768,7 @@ msgstr ""
 
 #. ~ Player message in an effect
 #: data/mods/Sky_Island/upgrade_missions.json
-#, c-format
+#, no-c-format
 msgid ""
 "Somehow, you understand the statue is calling out for something that can "
 "strengthen its power.\n"
@@ -373893,7 +373677,6 @@ msgid ""
 "brain.  Getting bitten is fatal.  However, zombies don't evolve, and when "
 "they're down, they're down.  Removes the sci-fi and interdimensional aspects "
 "of CTLG."
-msgstr ""
 msgstr "使游戏变成罗梅罗式的经典丧尸游戏。你必须摧毁大脑；被咬即死。不过丧尸不会进化，倒下后就不会再站起来。此模组会移除CTLG的科幻和跨维度元素。"
 
 #. ~ Message describing the effect of hitting the "leg_mangled" weakpoint
@@ -380457,7 +380240,6 @@ msgstr "修理部件"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Repeat last special ability"
-msgstr ""
 msgstr "重复上次特殊能力"
 
 #. ~ Key binding name
@@ -380593,7 +380375,6 @@ msgstr "向下滚动载具部件说明"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Scroll item description down"
-msgstr ""
 msgstr "向下滚动物品描述"
 
 #. ~ Key binding name
@@ -380974,7 +380755,6 @@ msgstr "特性列表排序"
 #. ~ Key binding name
 #: data/raw/keybindings.json
 msgid "Special Abilities"
-msgstr ""
 msgstr "特殊能力"
 
 #. ~ Key binding name
@@ -382033,7 +381813,6 @@ msgstr "尝试"
 
 #: src/action.cpp:787
 msgid "Actions for this tile"
-msgstr ""
 msgstr "此地块可执行的操作"
 
 #: src/action.cpp:904 src/action.cpp:933
@@ -382085,7 +381864,6 @@ msgstr "你的%s已经彻底毁了，再也无法开火了。"
 #: src/activity_actor.cpp:403
 #, c-format
 msgid "You manually cycle your %s and load a new round."
-msgstr ""
 msgstr "你手动操作%s的枪机，并装入一发新子弹。"
 
 #: src/activity_actor.cpp:410
@@ -382096,7 +381874,6 @@ msgstr "你迅速修复了故障的 %s。"
 #: src/activity_actor.cpp:416
 #, c-format
 msgid "Your %s malfunctions."
-msgstr ""
 msgstr "你的%s发生故障。"
 
 #: src/activity_actor.cpp:425
@@ -382585,130 +382362,106 @@ msgstr "你完成了钓鱼。"
 
 #: src/activity_actor.cpp:3957
 msgid "You need to be able to see for target practice."
-msgstr ""
 msgstr "射击练习需要能够看见目标。"
 
 #: src/activity_actor.cpp:3963
 msgid "And how exactly are you planning on doing that underwater?"
-msgstr ""
 msgstr "你打算怎么在水下射击？"
 
 #: src/activity_actor.cpp:3969
 msgid "Both your arms are broken!  You can't do target practice."
-msgstr ""
 msgstr "你的双臂都断了！无法进行射击练习。"
 
 #: src/activity_actor.cpp:4004
 msgid ""
 "Even with a broken limb, you can still get some useful practice with this "
 "weapon."
-msgstr ""
 msgstr "即使有肢体受伤，你仍然可以用这件武器进行一些有益的练习。"
 
 #: src/activity_actor.cpp:4007
 msgid "You are in no shape to practice with this weapon."
-msgstr ""
 msgstr "你现在的状态不适合用这件武器练习。"
 
 #: src/activity_actor.cpp:4035
 msgid "You need hearing protection, basic earplugs would do."
-msgstr ""
 msgstr "你需要听力防护用品，普通耳塞就可以。"
 
 #: src/activity_actor.cpp:4044
 msgid "Enter the number of rounds (500 max):"
-msgstr ""
 msgstr "输入射击发数（最多500发）："
 
 #: src/activity_actor.cpp:4071 src/activity_actor.cpp:4097
 msgid "You cannot see the target!"
-msgstr ""
 msgstr "你看不见目标！"
 
 #: src/activity_actor.cpp:4076
 msgid "You cannot practice shooting if target is this close."
-msgstr ""
 msgstr "目标太近，无法练习射击。"
 
 #: src/activity_actor.cpp:4089
 msgid "The target is out of range!"
-msgstr ""
 msgstr "目标超出射程！"
 
 #: src/activity_actor.cpp:4150
 msgid "You begin target practice with a spinner target."
-msgstr ""
 msgstr "你开始使用旋转靶练习射击。"
 
 #: src/activity_actor.cpp:4152
 msgid "You begin practicing your marksmanship."
-msgstr ""
 msgstr "你开始练习枪法。"
 
 #: src/activity_actor.cpp:4161
 #, c-format
 msgid "%s offers to coach you during your practice."
-msgstr ""
 msgstr "%s提出在你练习时担任教练。"
 
 #: src/activity_actor.cpp:4171
 msgid "Your weapon is no longer available."
-msgstr ""
 msgstr "你的武器已不可用。"
 
 #: src/activity_actor.cpp:4176
 msgid "You aren't holding your weapon anymore."
-msgstr ""
 msgstr "你已经不再拿着武器了。"
 
 #: src/activity_actor.cpp:4201
 msgid "You ran out of ammunition."
-msgstr ""
 msgstr "你的弹药用完了。"
 
 #: src/activity_actor.cpp:4211
 msgid "Failed to reload."
-msgstr ""
 msgstr "装填失败。"
 
 #: src/activity_actor.cpp:4361
 msgid ""
 "At your level, you could benefit from a spinner target to better refine your "
 "skills."
-msgstr ""
 msgstr "以你目前的水平，使用旋转靶练习能更好地打磨枪法。"
 
 #: src/activity_actor.cpp:4369
 msgid "Your weapon is gone!"
-msgstr ""
 msgstr "你的武器不见了！"
 
 #: src/activity_actor.cpp:4392
 msgid "You finish your target practice session because you've run out of ammo."
-msgstr ""
 msgstr "弹药用完了，你结束了射击练习。"
 
 #: src/activity_actor.cpp:4419
 msgid "You finish your target practice session."
-msgstr ""
 msgstr "你结束了射击练习。"
 
 #: src/activity_actor.cpp:4420
 #, c-format
 msgid "Rounds fired: %d/%d"
-msgstr ""
 msgstr "已发射：%d/%d发"
 
 #: src/activity_actor.cpp:4433
 #, c-format
 msgid "%d / %d rounds"
-msgstr ""
 msgstr "%d / %d发"
 
 #: src/activity_actor.cpp:4435
 #, c-format
 msgid "%d rounds"
-msgstr ""
 msgstr "%d发"
 
 #: src/activity_actor.cpp:4646
@@ -383376,17 +383129,14 @@ msgstr "你的砸毁作业被中断了。"
 
 #: src/activity_actor.cpp:9749
 msgid "Knowing more about basic biology would make this easier."
-msgstr ""
 msgstr "多了解一些基础生物学知识，会让这件事更容易。"
 
 #: src/activity_actor.cpp:9751
 msgid "Knowing more about undead anatomy would make this easier."
-msgstr ""
 msgstr "多了解一些不死生物的解剖结构，会让这件事更容易。"
 
 #: src/activity_actor.cpp:9753
 msgid "More skill in medicine would make this a little easier."
-msgstr ""
 msgstr "医学技能再高一些，会让这件事容易一点。"
 
 #: src/activity_actor.cpp:9758
@@ -395119,20 +394869,17 @@ msgstr "渲染 %d 次，花费 %.3f 秒。（平均 %.3f fps）"
 
 #: src/debug_menu.cpp:3146
 msgid "Shader tint self-test: the shader path is unavailable."
-msgstr ""
 msgstr "着色器色调自检：着色器路径不可用。"
 
 #: src/debug_menu.cpp:3152 src/debug_menu.cpp:3168 src/debug_menu.cpp:3181
 #: src/debug_menu.cpp:3216
 msgid "Shader tint self-test did not run.  Details are in debug.log."
-msgstr ""
 msgstr "着色器色调自检未运行。详情见 debug.log。"
 
 #: src/debug_menu.cpp:3244
 #, c-format
 msgid ""
 "Shader tint self-test: %1$d of %2$d checks passed.  Details are in debug.log."
-msgstr ""
 msgstr "着色器色调自检：%1$d项检查中有%2$d项通过。详情见 debug.log。"
 
 #: src/debug_menu.cpp:3258
@@ -395502,7 +395249,6 @@ msgstr "写于：%s"
 
 #: src/debug_menu.cpp:4561
 msgid "GPU shaders will reload on next frame."
-msgstr ""
 msgstr "GPU着色器将在下一帧重新加载。"
 
 #: src/descriptions.cpp:90
@@ -398727,7 +398473,6 @@ msgstr "上楼"
 
 #: src/game.cpp:2697
 msgid "Interact with tile"
-msgstr ""
 msgstr "与地块互动"
 
 #: src/game.cpp:2907 src/game.cpp:2928
@@ -398989,17 +398734,14 @@ msgstr "你需要戴上老花镜才能看清屏幕。"
 
 #: src/game.cpp:5246
 msgid "Without hands, you can't use a computer."
-msgstr ""
 msgstr "没有手就无法使用电脑。"
 
 #: src/game.cpp:5250
 msgid "You lack the substance to use the computer."
-msgstr ""
 msgstr "你没有实体，无法使用电脑。"
 
 #: src/game.cpp:5254
 msgid "You don't have any idea how to use this thing."
-msgstr ""
 msgstr "你完全不知道该怎么用这东西。"
 
 #: src/game.cpp:5262
@@ -399104,7 +398846,6 @@ msgstr "那里没有交通工具。"
 
 #: src/game.cpp:6165
 msgid "No vehicle controls found there."
-msgstr ""
 msgstr "这里没有可用的载具操控装置。"
 
 #: src/game.cpp:6201
@@ -399989,7 +399730,6 @@ msgstr "找不到抓着的东西。"
 
 #: src/game.cpp:10311
 msgid "You cannot board a vehicle while riding."
-msgstr ""
 msgstr "骑乘时无法登上载具。"
 
 #: src/game.cpp:10318
@@ -400012,7 +399752,6 @@ msgstr "直接走进 %1$s 很危险。如果你想进去的话，切换至蹲伏
 
 #: src/game.cpp:10376
 msgid "You cannot pass obstacles while mounted."
-msgstr ""
 msgstr "骑乘时无法穿过障碍物。"
 
 #: src/game.cpp:10438 src/game.cpp:10442
@@ -401327,17 +401066,14 @@ msgstr "锯短枪托"
 
 #: src/game_inventory.cpp:2448
 msgid "Pick a gun to practice with"
-msgstr ""
 msgstr "选择一把用于练习的枪"
 
 #: src/game_inventory.cpp:2449
 msgid "You don't have any gun to practice with."
-msgstr ""
 msgstr "你没有可用于练习的枪械。"
 
 #: src/game_inventory.cpp:2450
 msgid "Choose a weapon to practice with"
-msgstr ""
 msgstr "选择用于练习的武器"
 
 #: src/game_inventory.cpp:2467
@@ -401722,7 +401458,6 @@ msgstr "抓取位置没有载具。"
 #: src/grab.cpp:36
 #, c-format
 msgid "You cannot move this vehicle while your %s is harnessed!"
-msgstr ""
 msgstr "你的%s套着挽具时，无法移动这辆载具！"
 
 #: src/grab.cpp:152
@@ -406064,541 +405799,451 @@ msgstr "F24"
 #: src/input.cpp:596
 msgctxt "key name"
 msgid "0"
-msgstr ""
 msgstr "0"
 
 #: src/input.cpp:597
 msgctxt "key name"
 msgid "1"
-msgstr ""
 msgstr "1"
 
 #: src/input.cpp:598
 msgctxt "key name"
 msgid "2"
-msgstr ""
 msgstr "2"
 
 #: src/input.cpp:599
 msgctxt "key name"
 msgid "3"
-msgstr ""
 msgstr "3"
 
 #: src/input.cpp:600
 msgctxt "key name"
 msgid "4"
-msgstr ""
 msgstr "4"
 
 #: src/input.cpp:601
 msgctxt "key name"
 msgid "5"
-msgstr ""
 msgstr "5"
 
 #: src/input.cpp:602
 msgctxt "key name"
 msgid "6"
-msgstr ""
 msgstr "6"
 
 #: src/input.cpp:603
 msgctxt "key name"
 msgid "7"
-msgstr ""
 msgstr "7"
 
 #: src/input.cpp:604
 msgctxt "key name"
 msgid "8"
-msgstr ""
 msgstr "8"
 
 #: src/input.cpp:605
 msgctxt "key name"
 msgid "9"
-msgstr ""
 msgstr "9"
 
 #: src/input.cpp:606
 msgctxt "key name"
 msgid "10"
-msgstr ""
 msgstr "10"
 
 #: src/input.cpp:607
 msgctxt "key name"
 msgid "11"
-msgstr ""
 msgstr "11"
 
 #: src/input.cpp:608
 msgctxt "key name"
 msgid "12"
-msgstr ""
 msgstr "12"
 
 #: src/input.cpp:609
 msgctxt "key name"
 msgid "13"
-msgstr ""
 msgstr "13"
 
 #: src/input.cpp:610
 msgctxt "key name"
 msgid "14"
-msgstr ""
 msgstr "14"
 
 #: src/input.cpp:611
 msgctxt "key name"
 msgid "15"
-msgstr ""
 msgstr "15"
 
 #: src/input.cpp:612
 msgctxt "key name"
 msgid "16"
-msgstr ""
 msgstr "16"
 
 #: src/input.cpp:613
 msgctxt "key name"
 msgid "17"
-msgstr ""
 msgstr "17"
 
 #: src/input.cpp:614
 msgctxt "key name"
 msgid "18"
-msgstr ""
 msgstr "18"
 
 #: src/input.cpp:615
 msgctxt "key name"
 msgid "19"
-msgstr ""
 msgstr "19"
 
 #: src/input.cpp:616
 msgctxt "key name"
 msgid "20"
-msgstr ""
 msgstr "20"
 
 #: src/input.cpp:617
 msgctxt "key name"
 msgid "21"
-msgstr ""
 msgstr "21"
 
 #: src/input.cpp:618
 msgctxt "key name"
 msgid "22"
-msgstr ""
 msgstr "22"
 
 #: src/input.cpp:619
 msgctxt "key name"
 msgid "23"
-msgstr ""
 msgstr "23"
 
 #: src/input.cpp:620
 msgctxt "key name"
 msgid "24"
-msgstr ""
 msgstr "24"
 
 #: src/input.cpp:621
 msgctxt "key name"
 msgid "25"
-msgstr ""
 msgstr "25"
 
 #: src/input.cpp:622
 msgctxt "key name"
 msgid "26"
-msgstr ""
 msgstr "26"
 
 #: src/input.cpp:623
 msgctxt "key name"
 msgid "27"
-msgstr ""
 msgstr "27"
 
 #: src/input.cpp:624
 msgctxt "key name"
 msgid "28"
-msgstr ""
 msgstr "28"
 
 #: src/input.cpp:625
 msgctxt "key name"
 msgid "29"
-msgstr ""
 msgstr "29"
 
 #: src/input.cpp:626
 msgctxt "key name"
 msgid "30"
-msgstr ""
 msgstr "30"
 
 #: src/input.cpp:629
 msgctxt "key name"
 msgid "LS_LEFT"
-msgstr ""
 msgstr "左摇杆向左"
 
 #: src/input.cpp:630
 msgctxt "key name"
 msgid "LS_RIGHT"
-msgstr ""
 msgstr "左摇杆向右"
 
 #: src/input.cpp:631
 msgctxt "key name"
 msgid "LS_UP"
-msgstr ""
 msgstr "左摇杆向上"
 
 #: src/input.cpp:632
 msgctxt "key name"
 msgid "LS_DOWN"
-msgstr ""
 msgstr "左摇杆向下"
 
 #: src/input.cpp:633
 msgctxt "key name"
 msgid "LS_UP_LEFT"
-msgstr ""
 msgstr "左摇杆左上"
 
 #: src/input.cpp:635
 msgctxt "key name"
 msgid "LS_DOWN_LEFT"
-msgstr ""
 msgstr "左摇杆左下"
 
 #: src/input.cpp:637
 msgctxt "key name"
 msgid "LS_UP_RIGHT"
-msgstr ""
 msgstr "左摇杆右上"
 
 #: src/input.cpp:639
 msgctxt "key name"
 msgid "LS_DOWN_RIGHT"
-msgstr ""
 msgstr "左摇杆右下"
 
 #: src/input.cpp:641
 msgctxt "key name"
 msgid "RS_LEFT"
-msgstr ""
 msgstr "右摇杆向左"
 
 #: src/input.cpp:642
 msgctxt "key name"
 msgid "RS_RIGHT"
-msgstr ""
 msgstr "右摇杆向右"
 
 #: src/input.cpp:643
 msgctxt "key name"
 msgid "RS_UP"
-msgstr ""
 msgstr "右摇杆向上"
 
 #: src/input.cpp:644
 msgctxt "key name"
 msgid "RS_DOWN"
-msgstr ""
 msgstr "右摇杆向下"
 
 #: src/input.cpp:645
 msgctxt "key name"
 msgid "RS_UP_LEFT"
-msgstr ""
 msgstr "右摇杆左上"
 
 #: src/input.cpp:647
 msgctxt "key name"
 msgid "RS_DOWN_LEFT"
-msgstr ""
 msgstr "右摇杆左下"
 
 #: src/input.cpp:649
 msgctxt "key name"
 msgid "RS_UP_RIGHT"
-msgstr ""
 msgstr "右摇杆右上"
 
 #: src/input.cpp:651
 msgctxt "key name"
 msgid "RS_DOWN_RIGHT"
-msgstr ""
 msgstr "右摇杆右下"
 
 #: src/input.cpp:653
 msgctxt "key name"
 msgid "A"
-msgstr ""
 msgstr "A"
 
 #: src/input.cpp:654
 msgctxt "key name"
 msgid "B"
-msgstr ""
 msgstr "B"
 
 #: src/input.cpp:655
 msgctxt "key name"
 msgid "X"
-msgstr ""
 msgstr "X"
 
 #: src/input.cpp:656
 msgctxt "key name"
 msgid "Y"
-msgstr ""
 msgstr "Y"
 
 #: src/input.cpp:657
 msgctxt "key name"
 msgid "LB"
-msgstr ""
 msgstr "LB"
 
 #: src/input.cpp:658
 msgctxt "key name"
 msgid "RB"
-msgstr ""
 msgstr "RB"
 
 #: src/input.cpp:659
 msgctxt "key name"
 msgid "LT"
-msgstr ""
 msgstr "LT"
 
 #: src/input.cpp:660
 msgctxt "key name"
 msgid "RT"
-msgstr ""
 msgstr "RT"
 
 #: src/input.cpp:661
 msgctxt "key name"
 msgid "LS"
-msgstr ""
 msgstr "左摇杆按下"
 
 #: src/input.cpp:662
 msgctxt "key name"
 msgid "RS"
-msgstr ""
 msgstr "右摇杆按下"
 
 #: src/input.cpp:668
 msgctxt "key name"
 msgid "START"
-msgstr ""
 msgstr "开始"
 
 #: src/input.cpp:669
 msgctxt "key name"
 msgid "BACK"
-msgstr ""
 msgstr "返回"
 
 #: src/input.cpp:672
 msgctxt "key name"
 msgid "ALT_A"
-msgstr ""
 msgstr "备用 A 键"
 
 #: src/input.cpp:673
 msgctxt "key name"
 msgid "ALT_B"
-msgstr ""
 msgstr "备用 B 键"
 
 #: src/input.cpp:674
 msgctxt "key name"
 msgid "ALT_X"
-msgstr ""
 msgstr "备用 X 键"
 
 #: src/input.cpp:675
 msgctxt "key name"
 msgid "ALT_Y"
-msgstr ""
 msgstr "备用 Y 键"
 
 #: src/input.cpp:676
 msgctxt "key name"
 msgid "ALT_RB"
-msgstr ""
 msgstr "备用 RB 键"
 
 #: src/input.cpp:677
 msgctxt "key name"
 msgid "ALT_LB"
-msgstr ""
 msgstr "备用 LB 键"
 
 #: src/input.cpp:678
 msgctxt "key name"
 msgid "ALT_RT"
-msgstr ""
 msgstr "备用 RT 键"
 
 #: src/input.cpp:679
 msgctxt "key name"
 msgid "ALT_LS"
-msgstr ""
 msgstr "备用左摇杆键"
 
 #: src/input.cpp:680
 msgctxt "key name"
 msgid "ALT_RS"
-msgstr ""
 msgstr "备用右摇杆键"
 
 #: src/input.cpp:682
 msgctxt "key name"
 msgid "ALT_UP"
-msgstr ""
 msgstr "备用方向键上"
 
 #: src/input.cpp:684
 msgctxt "key name"
 msgid "ALT_DOWN"
-msgstr ""
 msgstr "备用方向键下"
 
 #: src/input.cpp:686
 msgctxt "key name"
 msgid "ALT_LEFT"
-msgstr ""
 msgstr "备用方向键左"
 
 #: src/input.cpp:688
 msgctxt "key name"
 msgid "ALT_RIGHT"
-msgstr ""
 msgstr "备用方向键右"
 
 #: src/input.cpp:689
 msgctxt "key name"
 msgid "ALT_START"
-msgstr ""
 msgstr "备用开始键"
 
 #: src/input.cpp:690
 msgctxt "key name"
 msgid "ALT_BACK"
-msgstr ""
 msgstr "备用返回键"
 
 #: src/input.cpp:694
 msgctxt "key name"
 msgid "L_RADIAL_N"
-msgstr ""
 msgstr "左摇杆轮盘：北"
 
 #: src/input.cpp:696
 msgctxt "key name"
 msgid "L_RADIAL_NE"
-msgstr ""
 msgstr "左摇杆轮盘：东北"
 
 #: src/input.cpp:698
 msgctxt "key name"
 msgid "L_RADIAL_E"
-msgstr ""
 msgstr "左摇杆轮盘：东"
 
 #: src/input.cpp:700
 msgctxt "key name"
 msgid "L_RADIAL_SE"
-msgstr ""
 msgstr "左摇杆轮盘：东南"
 
 #: src/input.cpp:702
 msgctxt "key name"
 msgid "L_RADIAL_S"
-msgstr ""
 msgstr "左摇杆轮盘：南"
 
 #: src/input.cpp:704
 msgctxt "key name"
 msgid "L_RADIAL_SW"
-msgstr ""
 msgstr "左摇杆轮盘：西南"
 
 #: src/input.cpp:706
 msgctxt "key name"
 msgid "L_RADIAL_W"
-msgstr ""
 msgstr "左摇杆轮盘：西"
 
 #: src/input.cpp:708
 msgctxt "key name"
 msgid "L_RADIAL_NW"
-msgstr ""
 msgstr "左摇杆轮盘：西北"
 
 #: src/input.cpp:712
 msgctxt "key name"
 msgid "R_RADIAL_N"
-msgstr ""
 msgstr "右摇杆轮盘：北"
 
 #: src/input.cpp:714
 msgctxt "key name"
 msgid "R_RADIAL_NE"
-msgstr ""
 msgstr "右摇杆轮盘：东北"
 
 #: src/input.cpp:716
 msgctxt "key name"
 msgid "R_RADIAL_E"
-msgstr ""
 msgstr "右摇杆轮盘：东"
 
 #: src/input.cpp:718
 msgctxt "key name"
 msgid "R_RADIAL_SE"
-msgstr ""
 msgstr "右摇杆轮盘：东南"
 
 #: src/input.cpp:720
 msgctxt "key name"
 msgid "R_RADIAL_S"
-msgstr ""
 msgstr "右摇杆轮盘：南"
 
 #: src/input.cpp:722
 msgctxt "key name"
 msgid "R_RADIAL_SW"
-msgstr ""
 msgstr "右摇杆轮盘：西南"
 
 #: src/input.cpp:724
 msgctxt "key name"
 msgid "R_RADIAL_W"
-msgstr ""
 msgstr "右摇杆轮盘：西"
 
 #: src/input.cpp:726
 msgctxt "key name"
 msgid "R_RADIAL_NW"
-msgstr ""
 msgstr "右摇杆轮盘：西北"
 
 #: src/input.cpp:729
@@ -407045,7 +406690,6 @@ msgstr "* 这份食物看上去 <bad>已经陈旧</bad>。很快就会腐坏且�
 msgid ""
 "* This food looks <info>fine</info>.  If you were more skilled in cooking, "
 "you might be able to make a better estimation."
-msgstr ""
 msgstr "这份食物看起来<info>没问题</info>。如果你的烹饪技能更高，或许能做出更准确的判断。"
 
 #. ~ here, %s is an approximate time span, e.g., "over 2 weeks" or "about 1 season"
@@ -408474,7 +408118,7 @@ msgid "less than "
 msgstr "少于 "
 
 #: src/item.cpp:5493
-#, c-format
+#, no-c-format
 msgid "% stamina to swing."
 msgstr "% 的耐力用于挥动。"
 
@@ -410502,7 +410146,6 @@ msgstr "这只 %s 不想要这种食物。"
 #: src/iuse.cpp:1505
 #, c-format
 msgid "That animal belongs to %s."
-msgstr ""
 msgstr "那只动物属于%s。"
 
 #: src/iuse.cpp:1517
@@ -411402,13 +411045,11 @@ msgstr "从 %s 抽血？"
 #: src/iuse.cpp:4189
 #, c-format
 msgid "You draw blood from the %s…"
-msgstr ""
 msgstr "你从%s身上抽取血液……"
 
 #: src/iuse.cpp:4210
 #, c-format
 msgid "…but the acidic blood melts the %s, destroying it!"
-msgstr ""
 msgstr "……但酸性血液融化了%s，将它毁掉了！"
 
 #: src/iuse.cpp:4298
@@ -411421,12 +411062,10 @@ msgstr "附近没有可以砍倒的树。"
 
 #: src/iuse.cpp:4305
 msgid "You cannot chop yourself down."
-msgstr ""
 msgstr "你不能把自己砍倒。"
 
 #: src/iuse.cpp:4307
 msgid "You can't chop that down."
-msgstr ""
 msgstr "你砍不倒那个。"
 
 #: src/iuse.cpp:4349
@@ -411713,7 +411352,6 @@ msgstr "你看不懂计算机屏幕！"
 
 #: src/iuse.cpp:5176
 msgid "You don't have any idea how to operate that."
-msgstr ""
 msgstr "你完全不知道该怎么操作它。"
 
 #: src/iuse.cpp:5188
@@ -411782,7 +411420,6 @@ msgstr "优秀"
 
 #: src/iuse.cpp:5355
 msgid "You push some buttons but have no idea how to get it to work."
-msgstr ""
 msgstr "你按了几个按钮，却不知道该怎么让它运作。"
 
 #: src/iuse.cpp:5389
@@ -412624,7 +412261,6 @@ msgstr "附近没有可以捕获的生物。"
 #: src/iuse.cpp:7400
 #, c-format
 msgid "That belongs to %s."
-msgstr ""
 msgstr "那属于%s。"
 
 #: src/iuse.cpp:7406
@@ -412645,7 +412281,6 @@ msgstr "%1$s 躲开了你，未能被你装进 %2$s。"
 #: src/iuse.cpp:7430
 #, c-format
 msgid "The %s can't capture something if it isn't there."
-msgstr ""
 msgstr "目标不存在时，%s也无从捕捉。"
 
 #: src/iuse.cpp:7457
@@ -412901,7 +412536,6 @@ msgstr "检测到的共振大约等于 %i 个单位。"
 
 #: src/iuse.cpp:8339
 msgid "You push some buttons but it's all meaningless to you."
-msgstr ""
 msgstr "你按了几个按钮，但完全不明白这有什么意义。"
 
 #: src/iuse.cpp:8357
@@ -413284,7 +412918,6 @@ msgstr "%s 上并没有什么新的东西。"
 #: src/iuse_actor.cpp:1479
 #, c-format
 msgid "The %s is unreadable."
-msgstr ""
 msgstr "%s无法读取。"
 
 #: src/iuse_actor.cpp:1494
@@ -416778,7 +416411,7 @@ msgstr "哔。"
 msgid "Pointed in your direction, the %s emits an IFF warning beep."
 msgid_plural ""
 "Pointed in your direction, the %s emits %d annoyed sounding beeps."
-msgstr[0] "%s指向你的方向，发出了敌我识别警告的哔声。"
+msgstr[0] "%s指向你的方向，会发出%d声略显不耐烦的敌我识别警告音。"
 
 #: src/mattack_actors.cpp:1375
 msgid "You're not sure why you've got a laser dot on you…"
@@ -417131,14 +416764,12 @@ msgstr "这把武器太过笨重，无法用来攻击！"
 msgid ""
 "<color_light_red>Attacking with your %s will take a long time.  Are you sure "
 "you want to continue?</color>"
-msgstr ""
 msgstr "<color_light_red>用你的%s攻击会花费很长时间。确定要继续吗？</color>"
 
 #: src/melee.cpp:653
 msgid ""
 "<color_light_red>Attacking unarmed will take a long time.  Are you sure you "
 "want to continue?</color>"
-msgstr ""
 msgstr "<color_light_red>徒手攻击会花费很长时间。确定要继续吗？</color>"
 
 #: src/melee.cpp:718
@@ -420412,7 +420043,6 @@ msgstr "%1$s饥渴地朝着 %2$s 蠕动。"
 #: src/monattack.cpp:3288
 #, c-format
 msgid "The %1$s absorbs the %2$s."
-msgstr ""
 msgstr "%1$s吸收了%2$s。"
 
 #: src/monattack.cpp:3329
@@ -421110,7 +420740,6 @@ msgstr "给 %s 套上拴绳"
 #: src/monexamine.cpp:655
 #, c-format
 msgid "You need a short rope of any kind to leash %s"
-msgstr ""
 msgstr "你需要一段任意材质的短绳才能拴住%s。"
 
 #: src/monexamine.cpp:660
@@ -422001,7 +421630,6 @@ msgstr "专注值平衡点："
 #: src/move_mode.cpp:68 src/move_mode.cpp:70 src/move_mode.cpp:72
 #: src/move_mode.cpp:142
 msgid "Seeing this message is a bug.  Please report it."
-msgstr ""
 msgstr "如果你看到这条消息，那就是程序错误。请提交错误报告。"
 
 #: src/mtype.cpp:565
@@ -427026,22 +426654,18 @@ msgid ""
 "How the map shows light levels.  Classic: lit or shadowed tiles.  Smooth: "
 "more shades of light per tile.  Smooth filtered: shades blend across tiles.  "
 "The smooth modes need the GPU renderer.  Without it the map uses Classic."
-msgstr ""
 msgstr "地图光照的显示方式。经典：地块只显示明亮或阴影状态。平滑：每个地块显示更多亮度层次。平滑过滤：亮度层次在地块之间融合过渡。平滑模式需要GPU渲染器；没有GPU渲染器时，地图会使用经典模式。"
 
 #: src/options.cpp:2426
 msgid "Classic"
-msgstr ""
 msgstr "经典"
 
 #: src/options.cpp:2427
 msgid "Smooth"
-msgstr ""
 msgstr "平滑"
 
 #: src/options.cpp:2428
 msgid "Smooth filtered"
-msgstr ""
 msgstr "平滑过滤"
 
 #: src/options.cpp:2432
@@ -427052,7 +426676,6 @@ msgstr "地图记忆色彩模式"
 msgid ""
 "Specify the overlay in which the memory map is drawn.  For the custom "
 "overlay, define RGB values for dark and bright colors as well as gamma."
-msgstr ""
 msgstr "指定记忆地图所使用的叠加层。选择自定义叠加层时，可设置暗色和亮色的RGB值以及伽马值。"
 
 #: src/options.cpp:2434
@@ -427073,7 +426696,6 @@ msgstr "暗蓝色"
 
 #: src/options.cpp:2442
 msgid "Blend light into memory"
-msgstr ""
 msgstr "将光照混入记忆地图"
 
 #: src/options.cpp:2443
@@ -427081,7 +426703,6 @@ msgid ""
 "If true, Smooth filtered lighting fades the edge of sight into the memory "
 "map overlay, and remembered tiles next to it blend back toward what you "
 "see.  If false, the edge of sight fades into darkness."
-msgstr ""
 msgstr "启用时，平滑过滤光照会让视野边缘逐渐融入记忆地图叠加层，邻近视野的已记忆地块也会逐渐过渡到当前所见。禁用时，视野边缘则逐渐暗入黑暗。"
 
 #: src/options.cpp:2449
@@ -427533,7 +427154,6 @@ msgstr ""
 
 #: src/options.cpp:2808
 msgid "Confine display to safe area"
-msgstr ""
 msgstr "将画面限制在安全区域内"
 
 #: src/options.cpp:2809
@@ -427541,7 +427161,6 @@ msgid ""
 "If true, keep the game within the screen's safe area so it does not draw "
 "under the camera cutout or other unsafe edges.  If false, the game fills the "
 "entire screen."
-msgstr ""
 msgstr "启用时，游戏画面会限制在屏幕安全区域内，避开摄像头开孔及其他不适合显示的边缘区域。禁用时，游戏画面会铺满整个屏幕。"
 
 #: src/options.cpp:2816
@@ -430733,7 +430352,7 @@ msgid "Cost: %s %s (Current: %s)"
 msgstr "消耗：%s%s（当前：%s）"
 
 #: src/ranged.cpp:4564
-#, c-format
+#, no-c-format
 msgid "0.0 % Failure Chance"
 msgstr "0.0% 失败率"
 
