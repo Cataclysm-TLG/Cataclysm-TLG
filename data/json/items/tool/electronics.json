@@ -22,7 +22,7 @@
     "charges_per_use": 1,
     "etransfer_rate": "30 MB",
     "e_port": "laptop",
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "CAN_USE_IN_DARK" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "CAN_USE_IN_DARK", "USE_UPS" ],
     "melee_damage": { "bash": 6 },
     "tool_ammo": "battery"
   },
@@ -612,7 +612,6 @@
       },
       { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }
     ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 200 } },
       {
@@ -648,7 +647,7 @@
     ],
     "tick_action": [ "EPIC_MUSIC" ],
     "light": 15,
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ]
+    "extend": { "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ] }
   },
   {
     "id": "mp3",
