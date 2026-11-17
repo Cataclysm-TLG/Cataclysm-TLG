@@ -4550,5 +4550,10 @@
     "id": "egg_spider_jumping",
     "type": "MIGRATION",
     "replace": "egg_spider_wolf"
+  },
+  {
+    "id": "laptop_screen_lit",
+    "type": "MIGRATION",
+    "replace": "laptop_on"
   }
 ]
