@@ -14,17 +14,92 @@
     "tool_ammo": [ "battery" ]
   },
   {
-    "abstract": "abstract_laptop",
+    "id": "laptop",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "laptop" },
+    "symbol": ",",
+    "description": "A portable computer, currently powered off.",
     "material": [ { "type": "aluminum", "portion": 75 }, { "type": "plastic", "portion": 25 } ],
     "charges_per_use": 1,
+    "weight": "1319 g",
+    "volume": "703 ml",
+    "longest_side": "322 mm",
+    "price": "1049 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "tool_ammo": [ "battery" ],
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATER_BREAK", "ELECTRONIC", "USE_UPS" ],
+    "use_action": [
+      { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" },
+      {
+        "target": "laptop_on",
+        "msg": "You turn on the laptop.",
+        "menu_text": "Power on",
+        "need_charges": 1,
+        "need_charges_msg": "The laptop's batteries need more charge.",
+        "type": "transform"
+      }
+    ],
+    "pocket_data": [
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 200 } },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0.0,
+        "ememory_max": "1 TB"
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+ {
+    "id": "laptop_on",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "category": "tools",
+    "name": { "str": "laptop (on)" },
+    "description": "A portable computer.  It is currently powered on, giving off a small amount of light and consuming precious battery life.",
+    "symbol": ",",
+    "color": "dark_gray",
     "etransfer_rate": "30 MB",
+    "power_draw": "8 W",
+    "revert_to": "laptop",
     "e_port": "laptop",
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "CAN_USE_IN_DARK" ],
-    "melee_damage": { "bash": 6 },
-    "tool_ammo": "battery"
+    "//": "CAN_USE_IN_DARK is applied here because while the screen only provides very dim illumination, it is backlit and therefore perfectly fine to read from.",
+    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "USE_UPS", "TRADER_AVOID", "SPAWN_ACTIVE", "CAN_USE_IN_DARK" ],
+    "material": [ { "type": "aluminum", "portion": 75 }, { "type": "plastic", "portion": 25 } ],
+    "weight": "1319 g",
+    "volume": "703 ml",
+    "longest_side": "322 mm",
+    "price": "1049 USD",
+    "price_postapoc": "2 USD 50 cent",
+    "tool_ammo": [ "battery" ],
+    "use_action": [
+      "E_FILE_DEVICE",
+      "EBOOKSAVE",
+      "PORTABLE_GAME",
+      { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" },
+      {
+        "target": "laptop",
+        "msg": "You turn the laptop off.",
+        "menu_text": "Power off",
+        "type": "transform"
+      }
+    ],
+    "pocket_data": [
+      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 200 } },
+      {
+        "pocket_type": "E_FILE_STORAGE",
+        "rigid": true,
+        "max_contains_volume": "1 ml",
+        "max_contains_weight": "1 g",
+        "weight_multiplier": 0.0,
+        "ememory_max": "1 TB"
+      }
+    ],
+    "light": 6,
+    "tick_action": [ "EPIC_MUSIC" ]
   },
   {
     "abstract": "abstract_smart_phone",
@@ -579,76 +654,6 @@
       }
     ],
     "tool_ammo": [ "battery" ]
-  },
-  {
-    "id": "laptop",
-    "copy-from": "abstract_laptop",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "category": "tools",
-    "name": { "str": "laptop computer" },
-    "description": "A portable computer, ubiquitous tool both before and after the cataclysm.  While it is little you can do with it nowadays, mostly from lack of internet, you still can load it with books (or even scan using frontal camera)",
-    "//": "https://www.amazon.com/dp/B0D6Z664QC, battery is FRANGWAT01",
-    "symbol": ",",
-    "color": "dark_gray",
-    "material": [ { "type": "aluminum", "portion": 75 }, { "type": "plastic", "portion": 25 } ],
-    "weight": "1319 g",
-    "volume": "703 ml",
-    "longest_side": "322 mm",
-    "price": "1049 USD",
-    "price_postapoc": "2 USD 50 cent",
-    "tool_ammo": [ "battery" ],
-    "use_action": [
-      "E_FILE_DEVICE",
-      "EBOOKSAVE",
-      "PORTABLE_GAME",
-      {
-        "target": "laptop_screen_lit",
-        "msg": "You light up the screen.",
-        "menu_text": "Light up the screen",
-        "need_charges": 1,
-        "need_charges_msg": "The laptop's batteries need more charge.",
-        "type": "transform"
-      },
-      { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }
-    ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE" ],
-    "pocket_data": [
-      { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "battery": 200 } },
-      {
-        "pocket_type": "E_FILE_STORAGE",
-        "rigid": true,
-        "max_contains_volume": "1 ml",
-        "max_contains_weight": "1 g",
-        "weight_multiplier": 0.0,
-        "ememory_max": "1 TB"
-      }
-    ]
-  },
-  {
-    "id": "laptop_screen_lit",
-    "copy-from": "laptop",
-    "type": "ITEM",
-    "subtypes": [ "TOOL" ],
-    "name": { "str": "laptop computer - lit screen", "str_pl": "laptop computers - lit screen" },
-    "power_draw": "1 W",
-    "revert_to": "laptop",
-    "use_action": [
-      "E_FILE_DEVICE",
-      "EBOOKSAVE",
-      "PORTABLE_GAME",
-      {
-        "ammo_scale": 0,
-        "target": "laptop",
-        "msg": "You stop lighting up the screen.",
-        "menu_text": "Turn off",
-        "type": "transform"
-      },
-      { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }
-    ],
-    "tick_action": [ "EPIC_MUSIC" ],
-    "light": 15,
-    "flags": [ "NO_UNLOAD", "NO_RELOAD", "WATCH", "TRADER_AVOID", "WATER_BREAK", "ELECTRONIC", "ALLOWS_REMOTE_USE", "SPAWN_ACTIVE" ]
   },
   {
     "id": "mp3",
