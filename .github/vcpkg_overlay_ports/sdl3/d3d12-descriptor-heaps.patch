@@ -4,7 +4,7 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 @@ -1033,6 +1033,7 @@ struct D3D12CommandBuffer
      bool needFragmentStorageBufferBind;
      bool needFragmentUniformBufferBind[MAX_UNIFORM_BUFFERS_PER_STAGE];
-
+ 
 +    bool needComputeReadWriteStorageBind;
      bool needComputeSamplerBind;
      bool needComputeReadOnlyStorageTextureBind;
@@ -41,12 +41,12 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 +        D3D12_INTERNAL_SetGPUDescriptorHeaps(commandBuffer);
 +    }
  }
-
+ 
  static void D3D12_INTERNAL_WriteGPUDescriptors(
 @@ -5043,14 +5071,8 @@ static void D3D12_INTERNAL_WriteGPUDescriptors(
      D3D12DescriptorHeap *heap;
      D3D12_CPU_DESCRIPTOR_HANDLE gpuHeapCpuHandle;
-
+ 
 -    /* Descriptor overflow, acquire new heaps */
 -    if (commandBuffer->gpuDescriptorHeaps[heapType]->currentDescriptorIndex >= commandBuffer->gpuDescriptorHeaps[heapType]->maxDescriptors) {
 -        D3D12_INTERNAL_SetGPUDescriptorHeaps(commandBuffer);
@@ -58,7 +58,7 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 +    SDL_assert(resourceHandleCount <= heap->maxDescriptors - heap->currentDescriptorIndex);
      gpuHeapCpuHandle.ptr = heap->descriptorHeapCPUStart.ptr + (heap->currentDescriptorIndex * heap->descriptorSize);
      gpuBaseDescriptor->ptr = heap->descriptorHeapGPUStart.ptr + (heap->currentDescriptorIndex * heap->descriptorSize);
-
+ 
 @@ -5075,11 +5097,15 @@ static void D3D12_INTERNAL_BindGraphicsResources(
      D3D12CommandBuffer *commandBuffer)
  {
@@ -77,13 +77,13 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 +        (commandBuffer->needFragmentStorageTextureBind ? graphicsPipeline->header.num_fragment_storage_textures : 0) +
 +        (commandBuffer->needFragmentStorageBufferBind ? graphicsPipeline->header.num_fragment_storage_buffers : 0);
 +    D3D12_INTERNAL_ReserveGPUDescriptors(commandBuffer, viewCount, samplerCount);
-
+ 
      D3D12_CPU_DESCRIPTOR_HANDLE cpuHandles[MAX_TEXTURE_SAMPLERS_PER_STAGE];
      D3D12_GPU_DESCRIPTOR_HANDLE gpuDescriptorHandle;
 @@ -5463,8 +5489,8 @@ static void D3D12_BeginComputePass(
      d3d12CommandBuffer->computeReadWriteStorageTextureSubresourceCount = numStorageTextureBindings;
      d3d12CommandBuffer->computeReadWriteStorageBufferCount = numStorageBufferBindings;
-
+ 
 -    /* Read-write resources will be actually bound in BindComputePipeline
 -     * after the root signature is set.
 +    /* Read-write resources will be bound before dispatch, after the root
@@ -94,7 +94,7 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 @@ -5514,14 +5540,7 @@ static void D3D12_BindComputePipeline(
  {
      D3D12CommandBuffer *d3d12CommandBuffer = (D3D12CommandBuffer *)commandBuffer;
-
+ 
 -    /* Acquire GPU descriptor heaps if we haven't yet */
 -    if (d3d12CommandBuffer->gpuDescriptorHeaps[0] == NULL) {
 -        D3D12_INTERNAL_SetGPUDescriptorHeaps(d3d12CommandBuffer);
@@ -103,21 +103,21 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
      D3D12ComputePipeline *pipeline = (D3D12ComputePipeline *)computePipeline;
 -    D3D12_CPU_DESCRIPTOR_HANDLE cpuHandles[MAX_TEXTURE_SAMPLERS_PER_STAGE];
 -    D3D12_GPU_DESCRIPTOR_HANDLE gpuDescriptorHandle;
-
+ 
      ID3D12GraphicsCommandList_SetPipelineState(
          d3d12CommandBuffer->graphicsCommandList,
 @@ -5533,6 +5552,7 @@ static void D3D12_BindComputePipeline(
-
+ 
      d3d12CommandBuffer->currentComputePipeline = pipeline;
-
+ 
 +    d3d12CommandBuffer->needComputeReadWriteStorageBind = true;
      d3d12CommandBuffer->needComputeSamplerBind = true;
      d3d12CommandBuffer->needComputeReadOnlyStorageTextureBind = true;
      d3d12CommandBuffer->needComputeReadOnlyStorageBufferBind = true;
 @@ -5550,42 +5570,7 @@ static void D3D12_BindComputePipeline(
-
+ 
      D3D12_INTERNAL_TrackComputePipeline(d3d12CommandBuffer, pipeline);
-
+ 
 -    // Bind write-only resources after setting root signature
 -    if (pipeline->header.numReadWriteStorageTextures > 0) {
 -        for (Uint32 i = 0; i < pipeline->header.numReadWriteStorageTextures; i += 1) {
@@ -136,7 +136,7 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 -            d3d12CommandBuffer->currentComputePipeline->rootSignature->readWriteStorageTextureRootIndex,
 -            gpuDescriptorHandle);
 -    }
-
+ 
 -    if (pipeline->header.numReadWriteStorageBuffers > 0) {
 -        for (Uint32 i = 0; i < pipeline->header.numReadWriteStorageBuffers; i += 1) {
 -            cpuHandles[i] = d3d12CommandBuffer->computeReadWriteStorageBufferDescriptorHandles[i];
@@ -155,7 +155,7 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 -            gpuDescriptorHandle);
 -    }
  }
-
+ 
  static void D3D12_BindComputeSamplers(
 @@ -5715,15 +5700,56 @@ static void D3D12_INTERNAL_BindComputeResources(
      D3D12CommandBuffer *commandBuffer)
@@ -173,10 +173,10 @@ diff --git a/src/gpu/d3d12/SDL_gpu_d3d12.c b/src/gpu/d3d12/SDL_gpu_d3d12.c
 +        (commandBuffer->needComputeReadWriteStorageBind ?
 +            computePipeline->header.numReadWriteStorageTextures + computePipeline->header.numReadWriteStorageBuffers : 0);
 +    D3D12_INTERNAL_ReserveGPUDescriptors(commandBuffer, viewCount, samplerCount);
-
+ 
      D3D12_CPU_DESCRIPTOR_HANDLE cpuHandles[MAX_TEXTURE_SAMPLERS_PER_STAGE];
      D3D12_GPU_DESCRIPTOR_HANDLE gpuDescriptorHandle;
-
+ 
 +    if (commandBuffer->needComputeReadWriteStorageBind) {
 +        if (computePipeline->header.numReadWriteStorageTextures > 0) {
 +            for (Uint32 i = 0; i < computePipeline->header.numReadWriteStorageTextures; i += 1) {
