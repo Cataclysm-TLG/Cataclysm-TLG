@@ -63,7 +63,7 @@
     "symbol": ",",
     "color": "dark_gray",
     "etransfer_rate": "30 MB",
-    "power_draw": "1 W",
+    "power_draw": "8 W",
     "revert_to": "laptop",
     "e_port": "laptop",
     "//": "CAN_USE_IN_DARK is applied here because while the screen only provides very dim illumination, it is backlit and therefore perfectly fine to read from.",
