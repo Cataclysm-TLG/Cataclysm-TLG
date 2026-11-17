@@ -1273,7 +1273,8 @@
   },
   {
     "id": "BOMB",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "Makes the item immediately go off if activated by radio mod."
   },
   {
     "id": "BYPRODUCT",
@@ -1693,7 +1694,8 @@
   },
   {
     "id": "NPC_THROW_NOW",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "An NPC will immediately throw this item if they have it."
   },
   {
     "id": "NVG_GREEN",
@@ -2004,11 +2006,13 @@
   {
     "id": "GRENADE",
     "type": "json_flag",
-    "restriction": "Item must be a grenade"
+    "restriction": "Item must be a grenade",
+    "//": "Used for grenade-like items so grenade pouches etc. can find them."
   },
   {
     "id": "JAVELIN",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "Used for javelin-like items so javelin bags etc. can find them."
   },
   {
     "id": "LEAK_ALWAYS",
@@ -2018,11 +2022,13 @@
     "id": "MAG_COMPACT",
     "type": "json_flag",
     "info": "This item has a small profile consistent with a compact magazine.",
-    "restriction": "Item must be a compact magazine"
+    "restriction": "Item must be a compact magazine",
+    "//": "Used for small mags so ammo pouches etc. can find them."
   },
   {
     "id": "NOGIB",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "This ammo won't damage monster corpses if it overkills them."
   },
   {
     "id": "PUMP_RAIL_COMPATIBLE",

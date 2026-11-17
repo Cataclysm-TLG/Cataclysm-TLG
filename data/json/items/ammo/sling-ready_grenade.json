@@ -54,7 +54,7 @@
       "menu_text": "Activate grenade",
       "type": "transform"
     },
-    "flags": [ "BOMB", "GRENADE" ],
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ],
     "ammo_type": "sling-ready_grenade",
     "damage": { "damage_type": "bash", "amount": 6 },
     "//": "Total range with staff sling 35 - 5 more than can be thrown by a player with 10 strength",
@@ -86,8 +86,8 @@
       "menu_text": "Light fuse",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ],
-    "ammo_type": "rock",
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ],
+    "ammo_type": "sling-ready_grenade",
     "//": "Same damage and ranged values as the normal grenade",
     "effects": [ "COOKOFF", "NEVER_MISFIRES", "NON_FOULING", "EXPLOSIVE_SMALL_HOMEMADE_GRENADE_1" ]
   },
@@ -138,8 +138,8 @@
       "menu_text": "Light fuse",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ],
-    "ammo_type": "rock",
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ],
+    "ammo_type": "sling-ready_grenade",
     "//": "Same damage and ranged values as the normal grenade",
     "effects": [ "COOKOFF", "NEVER_MISFIRES", "NON_FOULING", "EXPLOSIVE_SMALL_HOMEMADE_GRENADE_2" ]
   },
