@@ -14,5 +14,8 @@
     { "name": "glslang", "features": [ "tools" ] },
     "sdl3-shadercross"
   ],
-  "builtin-baseline": "a1cae005c39be7b18ba319fced856b68d7276271"
+  "builtin-baseline": "a1cae005c39be7b18ba319fced856b68d7276271",
+  "vcpkg-configuration": {
+    "overlay-ports": [ "../.github/vcpkg_overlay_ports" ]
+  }
 }

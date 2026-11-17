@@ -194,7 +194,7 @@ jobs:
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: msvc-full-features/vcpkg_installed
-          key: vcpkg-installed-sdl3-${{ hashFiles('msvc-full-features/vcpkg.json', '.github/vcpkg_triplets/x64-windows-static.cmake') }}-a1cae005c39be7b18ba319fced856b68d7276271
+          key: vcpkg-installed-sdl3-${{ hashFiles('msvc-full-features/vcpkg.json', '.github/vcpkg_triplets/x64-windows-static.cmake', '.github/vcpkg_overlay_ports/**') }}-a1cae005c39be7b18ba319fced856b68d7276271
       - name: Install dependencies (Linux, curses)
         if: runner.os == 'Linux' && matrix.android == 'none' && !matrix.wasm && matrix.tiles != 1
         run: |
