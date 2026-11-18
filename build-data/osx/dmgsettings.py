@@ -35,7 +35,7 @@ def icon_from_app(app_path):
 # volume_name = 'Test'
 
 # Volume format (see hdiutil create -help)
-format = defines.get('format', 'ULMO')
+format = defines.get('format', 'UDZO')
 
 # Volume size (must be large enough for your files)
 size = defines.get('size', '500M')
