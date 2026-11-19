@@ -97,7 +97,13 @@
 #include "weather_gen.h"
 #include "weather_type.h"
 
-class character_id;
+#ifdef TILES
+#include "cached_options.h"
+#include "cata_tiles.h"
+#endif // TILES
+
+enum class cube_direction : int;
+class JsonObject;
 
 static const activity_id ACT_AUTODRIVE( "ACT_AUTODRIVE" );
 static const activity_id ACT_TRAVELLING( "ACT_TRAVELLING" );
@@ -1199,8 +1205,8 @@ static void draw_om_sidebar( ui_adaptor &ui,
 
     wattron( wbar, c_magenta );
     mvwprintw( wbar, point( 1, ++lines ), _( "Use movement keys to pan." ) );
-    mvwprintw( wbar, point( 1, ++lines ), _( string_format( "Press %s to preview route.",
-               inp_ctxt.get_desc( "CHOOSE_DESTINATION" ) ) ) );
+    mvwprintw( wbar, point( 1, ++lines ), string_format( pgettext( "overmap route preview",
+               "Press %s to preview route." ), inp_ctxt.get_desc( "CHOOSE_DESTINATION" ) ) );
     mvwprintw( wbar, point( 1, ++lines ), _( "Press again to confirm." ) );
     lines += 2;
     wattroff( wbar, c_magenta );
@@ -1942,6 +1948,24 @@ static bool try_travel_to_destination( avatar &player_character, const tripoint_
     return false;
 }
 
+bool map_redraw_needed( const std::string &action, const map_view_state &drawn,
+                        const map_view_state &now, const bool animated_tiles )
+{
+    return action != "TIMEOUT" || animated_tiles || drawn.cursor != now.cursor ||
+           drawn.show_overlays != now.show_overlays;
+}
+
+// animated overmap tiles cycle frames by wall clock, so every pass draws
+static bool overmap_tiles_animated()
+{
+#if defined(TILES)
+    return use_tiles && use_tiles_overmap && overmap_tilecontext &&
+           overmap_tilecontext->has_animated_tiles();
+#else
+    return false;
+#endif
+}
+
 static tripoint_abs_omt display()
 {
     // HACK: Remove saved land use code uistate for people who might have accidentally turned it on previously, before it was debug-only
@@ -2058,8 +2082,15 @@ static tripoint_abs_omt display()
         draw( g->overmap_data );
     } );
 
+    bool map_dirty = true;
     do {
+        if( map_dirty ) {
+            ui->invalidate_ui();
+        }
         ui_manager::redraw();
+        const map_view_state drawn{ curs, uistate.overmap_show_overlays };
+        // a pass that leaves through `continue` redraws the map next time
+        map_dirty = true;
 #if (defined TILES || defined _WIN32 || defined WINDOWS )
         int scroll_timeout = get_option<int>( "EDGE_SCROLL" );
         // If EDGE_SCROLL is disabled, it will have a value of -1.
@@ -2262,6 +2293,9 @@ static tripoint_abs_omt display()
             }
             last_blink = now;
         }
+        map_dirty = map_redraw_needed( action, drawn,
+                                       map_view_state{ curs, uistate.overmap_show_overlays },
+                                       overmap_tiles_animated() );
     } while( action != "QUIT" && action != "CONFIRM" );
     if( !keep_overmap_ui ) {
         ui::omap::force_quit();
@@ -2412,7 +2446,7 @@ std::pair<std::string, nc_color> oter_symbol_and_color( const tripoint_abs_omt &
                                opts.sight_points ) || debug_horde ;
     const bool show_hordes = blink && opts.showhordes && can_see_horde;
     const int horde_size = show_hordes ? overmap_buffer.get_horde_size( omp,
-                           horde_map_flavors::active ) : 0;
+                           horde_map_flavors::active | horde_map_flavors::idle ) : 0;
 
     if( blink && opts.show_pc && !opts.hilite_pc && omp == get_avatar().pos_abs_omt() ) {
         // Display player pos, should always be visible
@@ -2482,8 +2516,37 @@ std::pair<std::string, nc_color> oter_symbol_and_color( const tripoint_abs_omt &
         ret.first = "&";
     } else if( horde_size >= HORDE_VISIBILITY_SIZE ) {
         // Display Hordes only when within player line-of-sight
-        ret.second = c_green;
-        ret.first = horde_size > 16 ? "Z" : "z";
+        if( horde_size < 5 ) {
+            ret.second = c_light_green;
+            ret.first = "z";
+        } else if( horde_size < 13 ) {
+            ret.second = c_light_green;
+            ret.first = "Z";
+        } else if( horde_size < 27 ) {
+            ret.second = c_green;
+            ret.first = "z";
+        } else if( horde_size < 47 ) {
+            ret.second = c_green;
+            ret.first = "Z";
+        } else if( horde_size < 73 ) {
+            ret.second = c_yellow;
+            ret.first = "z";
+        } else if( horde_size < 106 ) {
+            ret.second = c_yellow;
+            ret.first = "Z";
+        } else if( horde_size < 147 ) {
+            ret.second = c_light_red;
+            ret.first = "z";
+        } else if( horde_size < 195 ) {
+            ret.second = c_light_red;
+            ret.first = "Z";
+        } else if( horde_size < 251 ) {
+            ret.second = c_red;
+            ret.first = "z";
+        } else {
+            ret.second = c_red;
+            ret.first = "Z";
+        }
     } else if( blink && overmap_buffer.has_vehicle( omp ) ) {
         ret.second = c_cyan;
         ret.first = overmap_buffer.get_vehicle_ter_sym( omp );

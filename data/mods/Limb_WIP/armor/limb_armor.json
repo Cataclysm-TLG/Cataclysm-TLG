@@ -61,7 +61,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "to_hit": 1,
-    "material": [ "kevlar_rigid", "superalloy" ],
+    "material": [ "kevlar_rigid", "steel" ],
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 0,
@@ -72,7 +72,7 @@
       {
         "material": [
           { "type": "kevlar_rigid", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "arm_bionic_basic_l", "arm_bionic_basic_r", "hand_bionic_basic_l", "hand_bionic_basic_r" ],
         "specifically_covers": [
@@ -110,7 +110,7 @@
       {
         "material": [
           { "type": "kevlar_rigid", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "arm_bionic_basic_l", "arm_bionic_basic_l" ],
         "specifically_covers": [
@@ -139,7 +139,7 @@
       {
         "material": [
           { "type": "kevlar_rigid", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "arm_bionic_basic_r", "arm_bionic_basic_r" ],
         "specifically_covers": [
@@ -168,7 +168,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "to_hit": 1,
-    "material": [ "kevlar_rigid", "superalloy" ],
+    "material": [ "kevlar_rigid", "steel" ],
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 0,
@@ -179,7 +179,7 @@
       {
         "material": [
           { "type": "kevlar_rigid", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "leg_bionic_basic_l", "leg_bionic_basic_r", "foot_bionic_basic_l", "foot_bionic_basic_r" ],
         "specifically_covers": [
@@ -219,7 +219,7 @@
       {
         "material": [
           { "type": "kevlar_rigid", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "leg_bionic_basic_l", "foot_bionic_basic_l" ],
         "specifically_covers": [
@@ -249,7 +249,7 @@
       {
         "material": [
           { "type": "kevlar_rigid", "covered_by_mat": 100, "thickness": 1.0 },
-          { "type": "superalloy", "covered_by_mat": 95, "thickness": 1.0 }
+          { "type": "steel", "covered_by_mat": 95, "thickness": 1.0 }
         ],
         "covers": [ "leg_bionic_basic_r", "foot_bionic_basic_r" ],
         "specifically_covers": [
@@ -280,7 +280,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "to_hit": 1,
-    "material": [ "superalloy", "rubber", "steel" ],
+    "material": [ "rubber", "steel" ],
     "symbol": "[",
     "color": "dark_gray",
     "warmth": 0,
@@ -301,14 +301,12 @@
     "armor": [
       {
         "material": [
-          { "type": "superalloy", "covered_by_mat": 100, "thickness": 4.0 },
-          { "type": "steel", "covered_by_mat": 95, "thickness": 4.0 }
+          { "type": "steel", "covered_by_mat": 100, "thickness": 4.0 }
         ],
         "covers": [ "leg_bionic_treads" ],
         "specifically_covers": [ "bionic_treads_body" ],
-        "coverage": 100,
-        "encumbrance": [ 0, 0 ],
-        "cover_vitals": 100
+        "coverage": 95,
+        "encumbrance": [ 0, 0 ]
       },
       {
         "material": [
@@ -318,8 +316,7 @@
         "covers": [ "leg_bionic_treads" ],
         "specifically_covers": [ "bionic_treads_treads" ],
         "coverage": 100,
-        "encumbrance": [ 0, 0 ],
-        "cover_vitals": 100
+        "encumbrance": [ 0, 0 ]
       }
     ]
   }

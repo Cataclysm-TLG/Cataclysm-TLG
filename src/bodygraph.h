@@ -35,6 +35,7 @@ struct bodygraph_part {
 struct bodygraph_info {
     std::vector<std::string> worn_names;
     resistances worst_case;
+    resistances average_case;
     resistances median_case;
     resistances best_case;
     std::string parent_bp_name;

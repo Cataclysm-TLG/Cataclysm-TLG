@@ -10,3 +10,6 @@ def parse_fault(json, origin):
     if "item_prefix" in json:
         write_text(json["item_prefix"], origin,
                    comment="Prefix for item's name \"{}\"".format(name))
+    if "item_suffix" in json:
+        write_text(json["item_suffix"], origin,
+                   comment="Suffix for item's name \"{}\"".format(name))

@@ -7,6 +7,9 @@
 #include "input.h"
 #include "point.h"
 #include "translations.h"
+#if defined(SDL_SOUND)
+#include "sound_backend.h"
+#endif
 
 // ncurses can define some functions as macros, but we need those identifiers
 // to be unchanged by the preprocessor, as we use them as function names.
@@ -28,7 +31,7 @@
 #include <stdexcept>
 
 #ifdef SDL_SOUND
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #endif
 
 #include "cached_options.h"
@@ -181,7 +184,18 @@ void catacurses::refresh()
 
 void refresh_display()
 {
+#if defined(SDL_SOUND)
+    sound_backend::poll();
+#endif
     catacurses::doupdate();
+}
+
+void drain_renderer_recovery()
+{
+}
+
+void refresh_mouse_config()
+{
 }
 
 void catacurses::doupdate()

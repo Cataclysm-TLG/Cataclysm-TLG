@@ -741,7 +741,7 @@
     "attack_upper": false,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "math": [ "n_val('size')", "!=", "1" ] },
         { "not": { "u_has_flag": "GRAB_FILTER" } },
         { "not": { "u_has_flag": "GRAB" } },

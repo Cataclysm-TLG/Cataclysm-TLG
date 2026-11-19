@@ -144,7 +144,7 @@
     "barrel_volume": "1250 ml",
     "default_mods": [ "rifle_scope" ],
     "built_in_mods": [ "bipod", "muzzle_brake", "high_end_folding_stock" ],
-    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "tac50mag" ] } ],
     "melee_damage": { "bash": 12 }
   },
@@ -155,7 +155,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Serbu BFG-50 rifle" },
-    "description": "A single-shot, bolt-action rifle made by Serbu Firearms, the BFG-50 is a very affordable firearm for those wishing to shoot .50 BMG.",
+    "description": "A single-shot bolt-action rifle made by Serbu Firearms, the BFG-50 is a very affordable firearm for those wishing to shoot .50 BMG.",
     "weight": "8500 g",
     "volume": "4000 ml",
     "longest_side": "1315 mm",
@@ -183,7 +183,7 @@
     "default_mods": [ "rifle_scope" ],
     "built_in_mods": [ "bipod", "muzzle_brake" ],
     "clip_size": 1,
-    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "NEVER_JAMS", "RELOAD_EJECT", "EASY_CLEAN", "NO_TURRET", "BOLT_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "50": 1 } } ],
     "melee_damage": { "bash": 12 }
   }

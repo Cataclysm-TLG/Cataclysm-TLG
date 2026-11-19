@@ -109,7 +109,7 @@
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
     "name": { "str": "makeshift .40 20-round magazine" },
-    "description": "An improvised magazine that is mostly compatible with a homemade 'Luty' submachine gun, with a simplified feed system.  It looks like it might feed 20 rounds of .40S&W.",
+    "description": "An improvised magazine that is mostly compatible with a homemade 'Luty' submachine gun, with a simplified feed system.  It looks like it might feed 20 rounds of .40 S&W.",
     "weight": "207 g",
     "volume": "172 ml",
     "longest_side": "24 cm",

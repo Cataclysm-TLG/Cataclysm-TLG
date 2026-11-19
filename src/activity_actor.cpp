@@ -105,11 +105,13 @@
 #include "skill.h"
 #include "sounds.h"
 #include "string_formatter.h"
+#include "text_snippets.h"
 #include "translation.h"
 #include "translations.h"
 #include "trap.h"
 #include "try_parse_integer.h"
 #include "ui.h"
+#include "type_id.h"
 #include "uistate.h"
 #include "units.h"
 #include "value_ptr.h"
@@ -176,6 +178,7 @@ static const activity_id ACT_RELOAD( "ACT_RELOAD" );
 static const activity_id ACT_SHAVE( "ACT_SHAVE" );
 static const activity_id ACT_SHEARING( "ACT_SHEARING" );
 static const activity_id ACT_STASH( "ACT_STASH" );
+static const activity_id ACT_TARGET_PRACTICE( "ACT_TARGET_PRACTICE" );
 static const activity_id ACT_TENT_DECONSTRUCT( "ACT_TENT_DECONSTRUCT" );
 static const activity_id ACT_TENT_PLACE( "ACT_TENT_PLACE" );
 static const activity_id ACT_TIDY_UP( "ACT_TIDY_UP" );
@@ -214,6 +217,8 @@ static const efftype_id effect_worked_on( "worked_on" );
 
 static const faction_id faction_your_followers( "your_followers" );
 
+static const fault_id fault_fail_to_feed( "fault_fail_to_feed" );
+
 static const flag_id json_flag_ALWAYS_AIMED( "ALWAYS_AIMED" );
 static const flag_id json_flag_NO_RELOAD( "NO_RELOAD" );
 
@@ -231,13 +236,19 @@ static const item_group_id Item_spawn_data_forage_winter( "forage_winter" );
 static const item_group_id Item_spawn_data_trash_forest( "trash_forest" );
 
 static const itype_id itype_2x4( "2x4" );
+static const itype_id itype_attachable_ear_muffs( "attachable_ear_muffs" );
+static const itype_id itype_attached_ear_plugs_off( "attached_ear_plugs_off" );
 static const itype_id itype_detergent( "detergent" );
 static const itype_id itype_disassembly( "disassembly" );
 static const itype_id itype_efile_junk( "efile_junk" );
 static const itype_id itype_efile_photos( "efile_photos" );
+static const itype_id itype_flight_helmet( "flight_helmet" );
 static const itype_id itype_liquid_soap( "liquid_soap" );
 static const itype_id itype_log( "log" );
+static const itype_id itype_makeshift_ear_plugs_off( "makeshift_ear_plugs_off" );
 static const itype_id itype_paper( "paper" );
+static const itype_id itype_powered_earmuffs( "powered_earmuffs" );
+static const itype_id itype_powered_earplugs( "powered_earplugs" );
 static const itype_id itype_pseudo_bio_picklock( "pseudo_bio_picklock" );
 static const itype_id itype_soap( "soap" );
 static const itype_id itype_splinter( "splinter" );
@@ -247,6 +258,7 @@ static const itype_id itype_water_clean( "water_clean" );
 
 static const json_character_flag json_flag_BLIND_READ_FAST( "BLIND_READ_FAST" );
 static const json_character_flag json_flag_BLIND_READ_SLOW( "BLIND_READ_SLOW" );
+static const json_character_flag json_flag_IMMUNE_HEARING_DAMAGE( "IMMUNE_HEARING_DAMAGE" );
 static const json_character_flag json_flag_SAFECRACK_NO_TOOL( "SAFECRACK_NO_TOOL" );
 
 static const mongroup_id GROUP_FISH( "GROUP_FISH" );
@@ -262,9 +274,11 @@ static const move_mode_id move_mode_walk( "walk" );
 
 static const mtype_id mon_manhack( "mon_manhack" );
 
+static const proficiency_id proficiency_prof_intro_biology( "prof_intro_biology" );
 static const proficiency_id proficiency_prof_lockpicking( "prof_lockpicking" );
 static const proficiency_id proficiency_prof_lockpicking_expert( "prof_lockpicking_expert" );
 static const proficiency_id proficiency_prof_safecracking( "prof_safecracking" );
+static const proficiency_id proficiency_prof_wp_zombie( "prof_wp_zombie" );
 
 static const quality_id qual_CUT( "CUT" );
 static const quality_id qual_FISHING_ROD( "FISHING_ROD" );
@@ -278,12 +292,16 @@ static const quality_id qual_SHEAR( "SHEAR" );
 static const skill_id skill_computer( "computer" );
 static const skill_id skill_electronics( "electronics" );
 static const skill_id skill_fabrication( "fabrication" );
+static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_gun( "gun" );
 static const skill_id skill_mechanics( "mechanics" );
 static const skill_id skill_survival( "survival" );
 static const skill_id skill_traps( "traps" );
 
 static const species_id species_ZOMBIE( "ZOMBIE" );
+
+static const std::string flag_NO_FAIL( "NO_FAIL" );
+static const std::string flag_NO_TRAIN( "NO_TRAIN" );
 
 static const ter_str_id ter_t_card_reader_broken( "t_card_reader_broken" );
 static const ter_str_id ter_t_dirt( "t_dirt" );
@@ -302,6 +320,8 @@ static const ter_str_id ter_t_underbrush_harvested_winter( "t_underbrush_harvest
 static const trait_id trait_NUMB( "NUMB" );
 static const trait_id trait_PSYCHOPATH( "PSYCHOPATH" );
 static const trait_id trait_SCHIZOPHRENIC( "SCHIZOPHRENIC" );
+
+static const trap_str_id tr_target_spinner( "tr_target_spinner" );
 
 static const vproto_id vehicle_prototype_none( "none" );
 
@@ -380,13 +400,20 @@ bool aim_activity_actor::check_gun_ability_to_shoot( Character &who, item &it )
         who.recoil = MAX_RECOIL;
         if( one_in( std::max( 7.0f, ( 15.0f - ( 4.0f * who.get_skill_level( skill_gun ) ) ) ) ) ) {
             who.add_msg_if_player( m_good,
+                                   _( "You manually cycle your %s and load a new round." ),
+                                   it.tname() );
+            it.remove_fault( fault_fail_to_feed );
+            it.set_var( "u_know_round_in_chamber", true );
+        } else if( one_in( std::max( 7.0f,
+                                     ( 15.0f - ( 4.0f * who.get_skill_level( skill_gun ) ) ) ) ) ) {
+            who.add_msg_if_player( m_good,
                                    _( "You quickly fix your malfunctioning %s." ),
                                    it.tname() );
             it.remove_single_fault_of_type( gun_mechanical_simple );
             it.set_var( "u_know_round_in_chamber", true );
         } else {
             who.add_msg_if_player( m_bad,
-                                   _( "Your %s has a mechanical malfunction.  You try to quickly fix it, but fail!" ),
+                                   _( "Your %s malfunctions." ),
                                    it.tname() );
             return false;
         }
@@ -859,6 +886,8 @@ enum class hack_type : int {
     GAS,
     NONE
 };
+
+class snippet_library;
 
 static int hack_level( const Character &who, item_location &tool )
 {
@@ -2041,7 +2070,8 @@ bool read_activity_actor::player_readma( avatar &you )
     skill_id skill_used = style_to_learn->primary_skill;
 
     int difficulty = std::max( 1, style_to_learn->learn_difficulty );
-    difficulty = std::max( 1, 20 + difficulty * 2 - you.get_knowledge_level( skill_used ) * 2 );
+    difficulty = std::max( 1, 20 + difficulty * 2 - static_cast<int>
+                           ( you.get_greater_skill_or_knowledge_level( skill_used ) ) * 2 );
     add_msg_debug( debugmode::DF_ACT_READ, "Chance to learn one in: %d", difficulty );
 
     if( one_in( difficulty ) ) {
@@ -3039,7 +3069,11 @@ void ebooksave_activity_actor::completed_scanning_current_book( player_activity 
     books.pop_back();
     if( scanned_book ) {
 
-        ereader->put_in( *scanned_book, pocket_type::E_FILE_STORAGE );
+        // Store a content-free copy; books that are also containers (e.g. cement bags)
+        // would otherwise duplicate their contents into the e-file.
+        item efile = *scanned_book;
+        efile.clear_items();
+        ereader->put_in( efile, pocket_type::E_FILE_STORAGE );
 
         if( who.is_avatar() ) {
             if( scanned_book->is_identifiable() && !who.has_identified( scanned_book->typeId() ) ) {
@@ -3815,6 +3849,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
                     GROUP_FISH, true );
         const mtype_id fish_mon = random_entry_ref( fish_group );
         caught_corpse( who, here, fish_mon.obj() );
+        who.practice( skill_survival, 10, 5 );
     } else {
         monster *chosen_fish = random_entry( fishables );
         chosen_fish->fish_population -= 1;
@@ -3826,6 +3861,7 @@ static void rod_fish( Character &who, const std::vector<monster *> &fishables )
                 caught_corpse( who, here, *( chosen_fish->type ) );
             }
         }
+        who.practice( skill_survival, 10, 5 );
     }
 }
 
@@ -3879,8 +3915,8 @@ void fish_activity_actor::do_turn( player_activity &, Character &who )
         who.add_msg_if_player( m_good, _( "You feel a tug on your line!" ) );
         rod_fish( who, fishables );
     }
-    if( calendar::once_every( 60_minutes ) ) {
-        who.practice( skill_survival, rng( 1, 3 ) );
+    if( calendar::once_every( 10_minutes ) ) {
+        who.practice( skill_survival, 10, 5 );
     }
 }
 
@@ -3914,6 +3950,523 @@ std::unique_ptr<activity_actor> fish_activity_actor::deserialize( JsonValue &jsi
     data.read( "fishing_zone", actor.fishing_zone );
     data.read( "fishing_rod", actor.fishing_rod );
     data.read( "fishing_duration", actor.fishing_duration );
+
+    return actor.clone();
+}
+
+bool target_practice_activity_actor::check_character( Character &who )
+{
+    if( who.is_blind() ) {
+        who.add_msg_if_player( m_bad,
+                               _( "You need to be able to see for target practice." ) );
+        return false;
+    }
+
+    if( who.cant_do_underwater() ) {
+        who.add_msg_if_player( m_bad,
+                               _( "And how exactly are you planning on doing that underwater?" ) );
+        return false;
+    }
+
+    if( who.is_limb_broken( body_part_arm_l ) && who.is_limb_broken( body_part_arm_r ) ) {
+        who.add_msg_if_player( m_bad,
+                               _( "Both your arms are broken!  You can't do target practice." ) );
+        return false;
+    }
+
+    return true;
+}
+
+bool target_practice_activity_actor::get_gun( Character &who )
+{
+    const item_location g = game_menus::inv::pick_target_practice_gun( who );
+
+    // check if location is valid
+    if( !g ) {
+        return false;
+    }
+
+    gun_loc = g;
+    return true;
+}
+
+bool target_practice_activity_actor::check_character_and_gun( Character &who )
+{
+
+    if( !who.can_use( *gun_loc ) ) {
+        return false;
+    }
+
+    // todo: move this to pick_target_practice_gun() maybe?
+    // todo2: limb scores boogalo
+    if( who.is_limb_broken( body_part_arm_l ) || who.is_limb_broken( body_part_arm_r ) ) {
+        const bool is_pistol = ( gun_loc->gun_type() == gun_type_type( "smg" ) ||
+                                 gun_loc->gun_type() == gun_type_type( "pistol" ) );
+
+        if( is_pistol ) {
+            who.add_msg_if_player( m_good,
+                                   _( "Even with a broken limb, you can still get some useful practice with this weapon." ) );
+        } else {
+            who.add_msg_if_player( m_bad,
+                                   _( "You are in no shape to practice with this weapon." ) );
+            return false;
+        }
+    }
+
+    static const std::set<itype_id> transforms_into_hearing_protection = {
+        itype_attachable_ear_muffs,
+        itype_powered_earmuffs,
+        itype_powered_earplugs,
+        itype_flight_helmet,
+        itype_attached_ear_plugs_off,
+        itype_makeshift_ear_plugs_off
+    };
+
+    const bool has_hearing_protection =
+        who.cache_has_item_with( flag_DEAF ) || who.cache_has_item_with( flag_PARTIAL_DEAF ) ||
+    who.has_item_with( [&]( const item & held_item ) {
+        return transforms_into_hearing_protection.count( held_item.typeId() ) > 0;
+    } );
+
+    // FIXME: check the actual volume of the gun+ammo.
+    const bool immune = who.has_flag( json_flag_IMMUNE_HEARING_DAMAGE );
+    const bool gun_is_quiet = gun_loc->has_flag( flag_PRIMITIVE_RANGED_WEAPON ) ||
+                              gun_loc->gun_type() == gun_type_type( "bow" ) ||
+                              gun_loc->gun_type() == gun_type_type( "crossbow" );
+
+    if( !has_hearing_protection && !immune && !gun_is_quiet ) {
+        who.add_msg_if_player( m_bad,
+                               _( "You need hearing protection, basic earplugs would do." ) );
+        return false;
+    }
+
+    return true;
+}
+
+bool target_practice_activity_actor::get_round_qty()
+{
+    const char *msg = _( "Enter the number of rounds (500 max):" );
+    std::string popupmsg = string_format( msg );
+    int amount = 45;
+    query_int( amount, false, popupmsg );
+    if( amount <= 0 ) {
+        return false;
+    }
+    rounds_planned = std::min( amount, 500 );
+    return true;
+}
+
+bool target_practice_activity_actor::get_trajectory( Character &who )
+{
+    const int range = gun_loc->gun_range();
+    target_handler::trajectory traj = target_handler::mode_select_only( *who.as_avatar(), range );
+
+    if( traj.empty() ) {
+        return false;
+    }
+
+    const tripoint_bub_ms target_local = traj.back();
+
+    target_position = get_map().get_abs( target_local );
+
+    map &here = get_map();
+
+    if( !who.sees( here, target_local ) ) {
+        who.add_msg_if_player( m_bad, _( "You cannot see the target!" ) );
+        return false;
+    }
+
+    if( rl_dist( who.pos_bub(), target_local ) < 5 ) {
+        who.add_msg_if_player( m_bad, _( "You cannot practice shooting if target is this close." ) );
+        return false;
+    }
+
+    return true;
+}
+
+bool target_practice_activity_actor::check_target_valid( Character &who )
+{
+    const int range = gun_loc->gun_range();
+    const int distance = rl_dist( who.pos_abs(), target_position );
+
+    if( distance > range ) {
+        who.add_msg_if_player( m_bad, _( "The target is out of range!" ) );
+        return false;
+    }
+
+    map &here = get_map();
+    const tripoint_bub_ms target_local = here.get_bub( target_position );
+
+    if( !who.sees( here, target_local ) ) {
+        who.add_msg_if_player( m_bad, _( "You cannot see the target!" ) );
+        return false;
+    }
+
+    return true;
+}
+
+void target_practice_activity_actor::start( player_activity &act, Character &who )
+{
+    // if( gun_loc->ammo_remaining() == 0 ) {
+    //     who.add_msg_if_player( m_bad,
+    //                            _( "You need a loaded gun to start target practice." ) );
+    //     return act.set_to_null();
+    //     return;
+    // }
+
+    if( !check_character( who ) ) {
+        act.set_to_null();
+        return;
+    }
+
+    if( !get_gun( who ) ) {
+        act.set_to_null();
+        return;
+    }
+
+    if( !check_character_and_gun( who ) ) {
+        act.set_to_null();
+        return;
+    }
+
+    if( !get_round_qty() ) {
+        act.set_to_null();
+        return;
+    }
+
+    if( !get_trajectory( who ) ) {
+        act.set_to_null();
+        return;
+    }
+
+    if( !who.is_wielding( *gun_loc ) ) {
+        who.wield( gun_loc );
+        // who.wield() invalidates location, so locate it back
+        gun_loc = who.get_wielded_item();
+    }
+
+    map &here = get_map();
+    tripoint_bub_ms target_local = here.get_bub( target_position );
+    is_spinner_target = ( here.tr_at( target_local ).id == tr_target_spinner );
+
+    if( is_spinner_target ) {
+        who.add_msg_if_player( m_info,
+                               _( "You begin target practice with a spinner target." ) );
+    } else {
+        who.add_msg_if_player( m_info, _( "You begin practicing your marksmanship." ) );
+    }
+
+
+    // Try to employ a follower as a coach
+    const skill_id weapon_skill = gun_loc.get_item()->gun_skill();
+    npc *found_coach = find_coach( who, weapon_skill );
+    if( found_coach ) {
+        coach_id = found_coach->getID();
+        who.add_msg_if_player( m_good, _( "%s offers to coach you during your practice." ),
+                               found_coach->get_name() );
+    }
+
+}
+
+bool target_practice_activity_actor::check_weapon_valid( Character &who )
+{
+    item *gun = gun_loc.get_item();
+    if( !gun ) {
+        who.add_msg_if_player( m_bad, _( "Your weapon is no longer available." ) );
+        return false;
+    }
+
+    if( !who.is_wielding( *gun ) ) {
+        who.add_msg_if_player( m_bad, _( "You aren't holding your weapon anymore." ) );
+        return false;
+    }
+
+    return true;
+}
+
+bool target_practice_activity_actor::attempt_reload( Character &who )
+{
+    item *gun = gun_loc.get_item();
+
+    std::vector<item_location> ammo_locs;
+    item_location reload_target = gun_loc;
+
+    // Try to find compatible loaded magazines, or ammo for guns without detachable magazines
+    ammo_locs = who.find_ammo( *gun, false, 3 );
+
+    // Didn't find loaded magazines, try to find loose ammo for the magazine inside the gun
+    if( ammo_locs.empty() && gun->magazine_current() ) {
+        const item *mag = gun->magazine_current();
+        ammo_locs = who.find_ammo( *mag, false, 3 );
+        reload_target = item_location( gun_loc, const_cast<item *>( mag ) );
+    }
+
+    if( ammo_locs.empty() ) {
+        who.add_msg_if_player( m_bad, _( "You ran out of ammunition." ) );
+        return false;
+    }
+
+    item_location ammo_loc = ammo_locs.front();
+    item *ammo = ammo_loc.get_item();
+
+    int quantity_to_reload = reload_target->ammo_capacity( ammo->ammo_type() );
+
+    if( !reload_target->reload( who, ammo_loc, quantity_to_reload ) ) {
+        who.add_msg_if_player( m_bad, _( "Failed to reload." ) );
+        return false;
+    }
+
+    return true;
+}
+
+void target_practice_activity_actor::fire_shot( Character &who, player_activity &act )
+{
+    item *gun = gun_loc.get_item();
+    map &here = get_map();
+    tripoint_bub_ms target_local = here.get_bub( target_position );
+
+    // Simulate max aim
+    who.recoil = 0;
+
+    int shots_fired = who.fire_gun( here, target_local, 1, *gun );
+
+    if( shots_fired > 0 ) {
+        rounds_fired++;
+    } else {
+        // Firing failed, check if it requires player attention to fix
+        // otherwise it's a simple misfire that can be fixed by firing again
+        if( gun->has_fault_of_type( gun_mechanical_simple ) ) {
+            finish( act, who );
+        }
+    }
+}
+
+void target_practice_activity_actor::show_flavor_message( Character &who,
+        float effective_skill ) const
+{
+    if( one_in( 2 ) ) {
+        return;
+    }
+
+    if( effective_skill < 3.0f && one_in( 2 ) ) {
+        who.add_msg_if_player( m_warning,
+                               SNIPPET.random_from_category( "target_practice_novice" ).value_or( translation() ).translated() );
+    } else {
+        who.add_msg_if_player( m_good,
+                               SNIPPET.random_from_category( "target_practice_common" ).value_or( translation() ).translated() );
+    }
+
+    if( is_spinner_target && one_in( 5 ) ) {
+        who.add_msg_if_player( m_good,
+                               SNIPPET.random_from_category( "target_practice_spinner" ).value_or( translation() ).translated() );
+    }
+}
+
+npc *target_practice_activity_actor::find_coach( Character &who, const skill_id &weapon_skill )
+{
+    map &here = get_map();
+    const float trainee_marksmanship_skill = who.get_skill_level( skill_gun );
+    const float trainee_weapon_skill = who.get_skill_level( weapon_skill );
+
+    std::vector<npc *> potential_coaches = g->get_npcs_if( [&]( const npc & npc ) {
+        if( !npc.is_player_ally() || !npc.is_following() ) {
+            return false;
+        }
+
+        if( !who.sees( here, npc ) || !npc.sees( here, who ) ) {
+            return false;
+        }
+
+        const float npc_marksmanship_skill = npc.get_skill_level( skill_gun );
+        const float npc_weapon_skill = npc.get_skill_level( weapon_skill );
+
+        return npc_marksmanship_skill > trainee_marksmanship_skill ||
+               npc_weapon_skill > trainee_weapon_skill;
+    } );
+
+    npc *best_coach = nullptr;
+    float best_coach_skill = 0.0f;
+
+    // Find the best coach
+    for( npc *coach : potential_coaches ) {
+        const float coach_skill = coach->get_skill_level( skill_gun ) +
+                                  coach->get_skill_level( weapon_skill );
+        if( coach_skill > best_coach_skill ) {
+            best_coach = coach;
+            best_coach_skill = coach_skill;
+        }
+    }
+
+    return best_coach;
+}
+
+void target_practice_activity_actor::apply_coaching( Character &who,
+        const skill_id &weapon_skill )
+{
+    if( coach_id.is_valid() ) {
+        npc *coach_ptr = g->critter_by_id<npc>( coach_id );
+
+        if( !coach_ptr ) {
+            return;
+        }
+
+        const float coach_marksmanship_skill = coach_ptr->get_knowledge_level( skill_gun );
+        const float coach_weapon_skill = coach_ptr->get_knowledge_level( weapon_skill );
+        const float trainee_marksmanship_skill = who.get_skill_level( skill_gun );
+        const float trainee_weapon_skill = who.get_skill_level( weapon_skill );
+
+        // Scale the XP bonus based on the skill delta between the coach and trainee
+        // 1XP (+20%) for each point of skill difference
+        // For reference, the normal XP gain for 1 shot is 5XP, with a bonus 5XP for hitting a living target
+        const int marksmanship_bonus = std::max( 0,
+                                       static_cast<int>( coach_marksmanship_skill - trainee_marksmanship_skill ) );
+        const int weapon_bonus = std::max( 0,
+                                           static_cast<int>( coach_weapon_skill - trainee_weapon_skill ) );
+
+        if( marksmanship_bonus > 0 ) {
+            who.practice( skill_gun, marksmanship_bonus );
+        }
+        if( weapon_bonus > 0 ) {
+            who.practice( weapon_skill, weapon_bonus );
+        }
+
+        // Show coaching flavour messages every ~10th shot
+        if( !one_in( 10 ) ) {
+            return;
+        }
+
+        const std::string message_category = ( trainee_marksmanship_skill < 2.0f ||
+                                               trainee_weapon_skill < 2.0f )
+                                             ? "target_practice_coaching_beginner" : "target_practice_coaching_advanced";
+        who.add_msg_if_player( m_good,
+                               SNIPPET.random_from_category( message_category ).value_or( translation() ).translated(),
+                               coach_ptr->get_name() );
+    }
+}
+
+void target_practice_activity_actor::apply_skill_modifiers( Character &who,
+        const skill_id &weapon_skill, float effective_skill ) const
+{
+    // Boost XP gain from using spinner target by 2XP (+40%) when you're skilled, and by 0.5XP (+10%) when you're noob
+    // For reference, the normal XP gain for 1 shot is 5XP, with a bonus 5XP for hitting a living target
+    if( is_spinner_target ) {
+        if( effective_skill > 4 ) {
+            who.practice( weapon_skill, 2 );
+            who.practice( skill_gun, 2 );
+        } else if( one_in( 2 ) ) {
+            who.practice( weapon_skill, 1 );
+            who.practice( skill_gun, 1 );
+        }
+    }
+
+    // Give a hint every ~50 shots
+    if( !is_spinner_target && ( effective_skill > 4 ) && one_in( 50 ) ) {
+        who.add_msg_if_player( m_neutral,
+                               _( "At your level, you could benefit from a spinner target to better refine your skills." ) );
+    }
+}
+
+void target_practice_activity_actor::do_turn( player_activity &act, Character &who )
+{
+    if( !check_weapon_valid( who ) ) {
+        finish( act, who );
+        who.add_msg_if_player( m_bad, _( "Your weapon is gone!" ) );
+        return;
+    }
+
+    // Process artificial/flavor delay between shots
+    if( delay_between_shots > 0 ) {
+        const int moves_this_turn = std::min( delay_between_shots, who.get_moves() );
+        delay_between_shots -= moves_this_turn;
+        who.mod_moves( -moves_this_turn );
+        return;
+    }
+
+    // Fired the planned amount of rounds? C'est fini
+    if( rounds_fired >= rounds_planned ) {
+        finish( act, who );
+        return;
+    }
+
+    // Need a reload?
+    item *gun = gun_loc.get_item();
+    if( gun->ammo_remaining() == 0 ) {
+        if( !attempt_reload( who ) ) {
+            who.add_msg_if_player( m_info,
+                                   _( "You finish your target practice session because you've run out of ammo." ) );
+            finish( act, who );
+            return;
+        }
+    }
+
+    if( !check_target_valid( who ) ) {
+        finish( act, who );
+        return;
+    }
+
+    const skill_id &weapon_skill = gun->gun_skill();
+    const float effective_skill = who.get_skill_level( weapon_skill ) +
+                                  ( who.get_skill_level( skill_gun ) * 0.5f );
+    apply_coaching( who, weapon_skill );
+    apply_skill_modifiers( who, weapon_skill, effective_skill );
+    show_flavor_message( who, effective_skill );
+    fire_shot( who, act );
+
+    // Artificial delay between shots; 100 = 1 second
+    constexpr int base_delay = 2000;
+
+    delay_between_shots = base_delay;
+}
+
+void target_practice_activity_actor::finish( player_activity &act, Character &who )
+{
+    who.add_msg_if_player( m_good, _( "You finish your target practice session." ) );
+    who.add_msg_if_player( m_info, _( "Rounds fired: %d/%d" ), rounds_fired, rounds_planned );
+
+    act.set_to_null();
+}
+
+void target_practice_activity_actor::canceled( player_activity &act, Character &who )
+{
+    finish( act, who );
+}
+
+std::string target_practice_activity_actor::get_progress_message( const player_activity & ) const
+{
+    if( rounds_planned >= 0 ) {
+        return string_format( _( "%d / %d rounds" ), rounds_fired, rounds_planned );
+    }
+    return string_format( _( "%d rounds" ), rounds_fired );
+}
+
+void target_practice_activity_actor::serialize( JsonOut &jsout ) const
+{
+    jsout.start_object();
+
+    jsout.member( "gun_loc", gun_loc );
+    jsout.member( "target_position", target_position );
+    jsout.member( "rounds_planned", rounds_planned );
+    jsout.member( "rounds_fired", rounds_fired );
+    jsout.member( "delay_between_shots", delay_between_shots );
+    jsout.member( "coach_id", coach_id );
+    jsout.member( "is_spinner_target", is_spinner_target );
+
+    jsout.end_object();
+}
+
+std::unique_ptr<activity_actor> target_practice_activity_actor::deserialize( JsonValue &jsin )
+{
+    target_practice_activity_actor actor;
+
+    JsonObject data = jsin.get_object();
+
+    data.read( "gun_loc", actor.gun_loc );
+    data.read( "target_position", actor.target_position );
+    data.read( "rounds_planned", actor.rounds_planned );
+    data.read( "rounds_fired", actor.rounds_fired );
+    data.read( "delay_between_shots", actor.delay_between_shots );
+    data.read( "coach_id", actor.coach_id );
+    data.read( "is_spinner_target", actor.is_spinner_target );
 
     return actor.clone();
 }
@@ -4457,6 +5010,8 @@ void craft_activity_actor::start( player_activity &act, Character &crafter )
     cached_crafting_speed = 0;
     cached_workbench_multiplier = 0;
     use_cached_workbench_multiplier = false;
+    craft_trains = !craft_item.get_item()->get_making().has_flag( flag_NO_TRAIN );
+    can_fail = !craft_item.get_item()->get_making().has_flag( flag_NO_FAIL );
     act.targets.clear();
     act.targets.push_back( craft_item );
 }
@@ -4690,29 +5245,31 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
         rewind_turn();
         return;
     }
-
-    // This nominal craft time is also how many practice ticks to perform
-    // spread out evenly across the actual duration.
-    const double total_practice_ticks = rec.time_to_craft_moves( crafter, {},
-                                        recipe_time_flag::ignore_proficiencies ) / 100.0;
-
-    const int ticks_per_practice = 10000000.0 / total_practice_ticks;
-    int num_practice_ticks = craft.item_counter / ticks_per_practice -
-                             old_counter / ticks_per_practice;
     bool level_up = false;
-    if( num_practice_ticks > 0 ) {
-        level_up |= crafter.craft_skill_gain( craft, num_practice_ticks );
-    }
-    // Proficiencies and tools are gained/consumed after every 5% progress
-    int five_percent_steps = craft.item_counter / 500000 - old_counter / 500000;
-    if( five_percent_steps > 0 ) {
-        // Divide by 100 for seconds, 20 for 5%
-        const time_duration pct_time = time_duration::from_seconds( base_total_moves / 2000 );
-        level_up |= crafter.craft_proficiency_gain( craft, pct_time * five_percent_steps );
-        // Invalidate the crafting time cache because proficiencies may have changed
-        cached_crafting_speed = 0;
-        // Also reset the multiplier
-        use_cached_workbench_multiplier = false;
+
+    if( craft_trains ) {
+        // This nominal craft time is also how many practice ticks to perform
+        // spread out evenly across the actual duration.
+        const double total_practice_ticks = rec.time_to_craft_moves( crafter, {},
+                                            recipe_time_flag::ignore_proficiencies ) / 100.0;
+
+        const int ticks_per_practice = 10000000.0 / total_practice_ticks;
+        int num_practice_ticks = craft.item_counter / ticks_per_practice -
+                                 old_counter / ticks_per_practice;
+        if( num_practice_ticks > 0 ) {
+            level_up |= crafter.craft_skill_gain( craft, num_practice_ticks );
+        }
+        // Proficiencies and tools are gained/consumed after every 5% progress
+        int five_percent_steps = craft.item_counter / 500000 - old_counter / 500000;
+        if( five_percent_steps > 0 ) {
+            // Divide by 100 for seconds, 20 for 5%
+            const time_duration pct_time = time_duration::from_seconds( base_total_moves / 2000 );
+            level_up |= crafter.craft_proficiency_gain( craft, pct_time * five_percent_steps );
+            // Invalidate the crafting time cache because proficiencies may have changed
+            cached_crafting_speed = 0;
+            // Also reset the multiplier
+            use_cached_workbench_multiplier = false;
+        }
     }
 
 
@@ -4748,14 +5305,16 @@ void craft_activity_actor::do_turn( player_activity &act, Character &crafter )
             }
         }
 
-        if( craft.item_counter >= craft.get_next_failure_point() ) {
-            bool destroy = craft.handle_craft_failure( crafter );
-            // If the craft needs to be destroyed, do it and stop crafting.
-            if( destroy ) {
-                crafter.add_msg_player_or_npc( _( "There is nothing left of the %s to craft from." ),
-                                               _( "There is nothing left of the %s <npcname> was crafting." ), craft.tname() );
-                craft_item.remove_item();
-                crafter.cancel_activity();
+        if( can_fail ) {
+            if( craft.item_counter >= craft.get_next_failure_point() ) {
+                bool destroy = craft.handle_craft_failure( crafter );
+                // If the craft needs to be destroyed, do it and stop crafting.
+                if( destroy ) {
+                    crafter.add_msg_player_or_npc( _( "There is nothing left of the %s to craft from." ),
+                                                   _( "There is nothing left of the %s <npcname> was crafting." ), craft.tname() );
+                    craft_item.remove_item();
+                    crafter.cancel_activity();
+                }
             }
         }
     }
@@ -5268,7 +5827,7 @@ void harvest_activity_actor::start( player_activity &act, Character &who )
     if( harvest.is_null() || harvest->empty() ) {
         if( !auto_forage ) {
             who.add_msg_if_player( m_info,
-                                   _( "Nothing can be harvested from this plant in the current season." ) );
+                                   _( "Nothing can be harvested here in the current season." ) );
         }
 
         if( who.manual_examine ) {
@@ -5584,7 +6143,7 @@ static void stop_grab( Character &who )
     if( avatar *a = dynamic_cast<avatar *>( &who ) ) {
         a->grab( object_type::NONE );
     } else {
-        debugmsg( "who in grabbing is not an avatar??" );
+        debugmsg( "A non-player character is grabbing somehow." );
     }
 }
 
@@ -6830,13 +7389,13 @@ void play_with_pet_activity_actor::finish( player_activity &act, Character &who 
     if( !who.has_trait( trait_PSYCHOPATH ) && !who.has_trait( trait_NUMB ) ) {
         who.add_morale( morale_play_with_pet, 10, 10, 5_hours, 25_minutes );
         if( !playstr.empty() ) {
-            who.add_msg_if_player( m_good, playstr, pet_name );
+            who.add_msg_if_player( m_good, _( playstr ), pet_name );
         }
         who.add_msg_if_player( m_good, _( "Playing with your %s has lifted your spirits a bit." ),
                                pet_name );
     } else {
         if( !playstr.empty() ) {
-            who.add_msg_if_player( m_good, playstr, pet_name );
+            who.add_msg_if_player( m_good, _( playstr ), pet_name );
         }
         who.add_msg_if_player( _( "Your %s seems to enjoy the interaction, but you feel nothing." ),
                                pet_name );
@@ -7527,6 +8086,7 @@ void chop_logs_activity_actor::finish( player_activity &act, Character &who )
             who.may_activity_occupancy_after_end_items_loc.push_back( loc );
         }
     }
+    who.practice( skill_survival, 5, 4 );
     here.ter_set( pos, ter_t_dirt );
     who.add_msg_if_player( m_good, _( "You finish chopping wood." ) );
 
@@ -7681,7 +8241,7 @@ void chop_tree_activity_actor::finish( player_activity &act, Character &who )
             }
         }
     }
-    who.practice( skill_survival, 3, 3 );
+    who.practice( skill_survival, 20, 4 );
     here.cut_down_tree( pos, direction.xy() );
 
     who.add_msg_if_player( m_good, _( "You finish chopping down a tree." ) );
@@ -8718,11 +9278,12 @@ bool vehicle_unfolding_activity_actor::unfold_vehicle( Character &p, bool check_
     map &here = get_map();
     vehicle *veh = here.add_vehicle( vehicle_prototype_none, p.pos_bub(), 0_degrees, 0, 0, false );
     if( veh == nullptr ) {
-        p.add_msg_if_player( m_info, _( "There's no room to unfold the %s." ), it.tname() );
+        p.add_msg_if_player( m_info, _( "There's no room to deploy the %s." ), it.tname() );
         return false;
     }
     if( !veh->restore_folded_parts( it ) ) {
         here.destroy_vehicle( veh );
+        p.add_msg_if_player( m_info, _( "The %s is too damaged to be deployed." ), it.tname() );
         return false;
     }
     const bool cant_float = !veh->can_float( here );
@@ -8738,13 +9299,13 @@ bool vehicle_unfolding_activity_actor::unfold_vehicle( Character &p, bool check_
             continue;
         }
         if( invalid_pos( vp.pos_bub( here ) ) ) {
-            p.add_msg_if_player( m_info, _( "There's no room to unfold the %s." ), it.tname() );
+            p.add_msg_if_player( m_info, _( "There's no room to deploy the %s." ), it.tname() );
             here.destroy_vehicle( veh );
             return false;
         }
         for( const itype_id &tool : vp.info().get_unfolding_tools() ) {
             if( !inv.has_tools( tool, 1 ) ) {
-                p.add_msg_if_player( _( "You need %s to do it!" ), item::nname( tool ) );
+                p.add_msg_if_player( _( "You need %1s to deploy the %2s." ), item::nname( tool ), it.tname() );
                 here.destroy_vehicle( veh );
                 return false;
             }
@@ -8766,7 +9327,7 @@ bool vehicle_unfolding_activity_actor::unfold_vehicle( Character &p, bool check_
 
     std::string unfold_msg = it.get_var( "unfold_msg" );
     if( unfold_msg.empty() ) {
-        unfold_msg = _( "You unfold the %s." );
+        unfold_msg = _( "You deploy the %s." );
     } else {
         unfold_msg = _( unfold_msg );
     }
@@ -8803,7 +9364,6 @@ void vehicle_unfolding_activity_actor::do_turn( player_activity &act, Character 
 void vehicle_unfolding_activity_actor::finish( player_activity &act, Character &p )
 {
     if( !unfold_vehicle( p, /* check_only = */ false ) ) {
-        debugmsg( "failed unfolding %s", it.display_name() );
         act.canceled( p );
     }
     act.set_to_null();
@@ -9095,10 +9655,13 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
     int adjusted_cut  = static_cast<int>( std::round( ( weap_cut * ratio_cut ) / 1.25 ) );
     int adjusted_stab = static_cast<int>( std::round( ( weap_stab * ratio_stab ) / 3.0 ) );
 
-    float pulp_power = sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
+    float pulp_power = std::sqrt( adjusted_bash + adjusted_cut + adjusted_stab + you.get_arm_str() );
 
-    // Multiplier to get the chance right + some bonus for ecology skill.
-    pulp_power *= 20 + you.get_skill_level( skill_survival ) * 5;
+    // Multiplier to get the chance right + some bonus for proficiencies and medicine.  You don't learn profs this way as that requires more careful examination.
+    float medicine = std::min( 10.f, you.get_skill_level( skill_firstaid ) );
+    float biology = you._proficiencies->pct_practiced( proficiency_prof_intro_biology );
+    float anatomy = you._proficiencies->pct_practiced( proficiency_prof_wp_zombie );
+    pulp_power *= 20 + medicine * 2 + biology * 10 + anatomy * 20;
     int moves = 0;
     for( auto pos_iter = placement.cbegin(); pos_iter != placement.end();/*left - out*/ ) {
         const tripoint_bub_ms &pos = here.get_bub( *pos_iter );
@@ -9159,14 +9722,9 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
                 }
 
                 // Mix of Isaac Clarke stomps and swinging your weapon.
-                you.burn_energy_all( -you.get_standard_stamina_cost() );
+                you.burn_energy_all( you.get_base_melee_stamina_cost() );
 
                 you.recoil = MAX_RECOIL;
-
-                if( one_in( 5 ) ) {
-                    // Smashing may not be butchery, but it involves some zombie anatomy.
-                    you.practice( skill_survival, 2, 2 );
-                }
 
                 item weap = you.get_wielded_item() ? *you.get_wielded_item() : null_item_reference();
                 moves += ( ( you.attack_speed( weap ) * 2 ) / you.exertion_adjusted_move_multiplier(
@@ -9190,6 +9748,15 @@ void pulp_activity_actor::do_turn( player_activity &act, Character &you )
         return;
     }
     // TODO: Factor in how long it took to do the smashing.
+    if( you.is_avatar() ) {
+        if( biology < 1.f && one_in( 30 ) ) {
+            you.add_msg_if_player( m_info, _( "Knowing more about basic biology would make this easier." ) );
+        } else if( anatomy < 1.f && one_in( 30 ) ) {
+            you.add_msg_if_player( m_info, _( "Knowing more about undead anatomy would make this easier." ) );
+        } else if( medicine < 5.f && one_in( 30 ) ) {
+            you.add_msg_if_player( m_info, _( "More skill in medicine would make this a little easier." ) );
+        }
+    }
     you.add_msg_player_or_npc( n_gettext( "The corpse is thoroughly pulped.",
                                           "The corpses are thoroughly pulped.", num_corpses ),
                                n_gettext( "<npcname> finished pulping the corpse.",
@@ -9339,6 +9906,7 @@ deserialize_functions = {
     { ACT_SHAVE, &shave_activity_actor::deserialize },
     { ACT_SHEARING, &shearing_activity_actor::deserialize },
     { ACT_STASH, &stash_activity_actor::deserialize },
+    { ACT_TARGET_PRACTICE, &target_practice_activity_actor::deserialize },
     { ACT_TENT_DECONSTRUCT, &tent_deconstruct_activity_actor::deserialize },
     { ACT_TENT_PLACE, &tent_placement_activity_actor::deserialize },
     { ACT_TRY_SLEEP, &try_sleep_activity_actor::deserialize },

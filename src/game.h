@@ -37,8 +37,6 @@
 #include "units_fwd.h"
 #include "weather.h"
 
-constexpr int DEFAULT_TILESET_ZOOM = 16;
-
 // The reference to the one and only game instance.
 class game;
 
@@ -194,7 +192,7 @@ class game
         void load_world_modfiles( loading_ui &ui );
         /**
          *  Load content packs
-         *  @param msg string to display whilst loading prompt
+         *  @param msg string to display while loading prompt
          *  @param packs content packs to load in correct dependent order
          *  @param ui structure for load progress display
          */
@@ -269,7 +267,7 @@ class game
         void init_draw_async_anim_curses( const tripoint_bub_ms &p, const std::string &ncstr,
                                           const nc_color &nccol );
         void draw_async_anim_curses();
-        void void_async_anim_curses();
+        bool void_async_anim_curses();
     protected:
         std::map<tripoint_bub_ms, std::pair <std::string, nc_color>>
                 async_anim_layer_curses; // NOLINT(cata-serialize)
@@ -386,7 +384,7 @@ class game
         monster *place_critter_at( const shared_ptr_fast<monster> &mon, const tripoint_bub_ms &p );
         monster *place_critter_around( const mtype_id &id, const tripoint_bub_ms &center, int radius );
         monster *place_critter_around( const shared_ptr_fast<monster> &mon, const tripoint_bub_ms &center,
-                                       int radius, bool forced = false );
+                                       int radius, bool forced = false, bool avoid_vehicle = false );
         monster *place_critter_within( const mtype_id &id, const tripoint_range<tripoint_bub_ms> &range );
         monster *place_critter_within( const shared_ptr_fast<monster> &mon,
                                        const tripoint_range<tripoint_bub_ms> &range );
@@ -757,6 +755,7 @@ class game
         void reenter_fullscreen();
         void zoom_in_overmap();
         void zoom_out_overmap();
+        void set_overmap_zoom( int level );
         void zoom_in();
         void zoom_out();
         void reset_zoom();
@@ -821,7 +820,7 @@ class game
         void draw_bullet( const tripoint_bub_ms &t, int i, const std::vector<tripoint_bub_ms> &trajectory,
                           char bullet );
         void draw_hit_mon( const tripoint_bub_ms &p, const monster &m, bool dead = false );
-        void draw_hit_player( const Character &p, int dam );
+        void draw_hit_player( const Character &p, int dam ) const;
         void draw_line( const tripoint_bub_ms &p, const tripoint_bub_ms &center_point,
                         const std::vector<tripoint_bub_ms> &points, bool noreveal = false );
         void draw_line( const tripoint_bub_ms &p, const std::vector<tripoint_bub_ms> &points );
@@ -935,7 +934,8 @@ class game
         bool grabbed_move( const tripoint_rel_ms &dp, bool via_ramp );
         bool grabbed_veh_move( const tripoint_rel_ms &dp );
 
-        void control_vehicle(); // Use vehicle controls  '^'
+        void control_vehicle( const std::optional<tripoint_bub_ms> &p =
+                                  std::nullopt ); // Use vehicle controls  '^'
         // Examine nearby terrain 'e', with or without picking up items
         void examine( const tripoint_bub_ms &p, bool with_pickup = false );
         void examine( bool with_pickup = true );
@@ -945,10 +945,11 @@ class game
         // Pick up items from all nearby tiles
         void pickup_all();
 
-        void unload_container(); // Unload a container w/ direction  'd'
+        void unload_container( const std::optional<tripoint_bub_ms> &p =
+                                   std::nullopt ); // Unload a container w/ direction  'd'
         void drop_in_direction( const tripoint_bub_ms &pnt ); // Drop w/ direction  'D'
 
-        void butcher(); // Butcher a corpse  'B'
+        void butcher( const std::optional<tripoint_bub_ms> &p = std::nullopt ); // Butcher a corpse  'B'
 
         void reload( item_location &loc, bool prompt = false, bool empty = true );
     public:
@@ -989,9 +990,8 @@ class game
                                     std::vector<std::string> *harmful_stuff = nullptr ) const;
         // Pick up items from the given point
         void pickup( const tripoint_bub_ms &p );
+        void chat( const std::optional<tripoint_bub_ms> &p = std::nullopt ); // Talk to a nearby NPC  'C'
     private:
-
-        void chat(); // Talk to a nearby NPC  'C'
 
         // Internal methods to show "look around" info
         void print_fields_info( const tripoint_bub_ms &lp, const catacurses::window &w_look, int column,
@@ -1263,10 +1263,6 @@ class game
 
         // Times the user has input an action
         int user_action_counter = 0; // NOLINT(cata-serialize)
-
-        /** How far the tileset should be zoomed out, 16 is default. 32 is zoomed in by x2, 8 is zoomed out by x0.5 */
-        int tileset_zoom = 0; // NOLINT(cata-serialize)
-        int overmap_tileset_zoom = DEFAULT_TILESET_ZOOM; // NOLINT(cata-serialize)
 
         /** Seed for all the random numbers that should have consistent randomness (weather). */
         unsigned int seed = 0; // NOLINT(cata-serialize)

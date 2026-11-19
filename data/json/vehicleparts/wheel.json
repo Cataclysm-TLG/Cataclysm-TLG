@@ -276,7 +276,7 @@
       "repair": { "skills": [ [ "mechanics", 5 ] ], "time": "10 m", "using": [ [ "adhesive_rubber", 1 ], [ "tire_rubber", 1 ] ] }
     },
     "flags": [ "WHEEL", "UNSTABLE_WHEEL", "NEEDS_JACKING", "NEEDS_WHEEL_MOUNT_HEAVY" ],
-    "damage_reduction": { "bash": 60, "cut": 65, "stab": 65, "bullet": 16 },
+    "damage_reduction": { "bash": 30, "cut": 40, "stab": 38, "bullet": 16 },
     "variants": [ { "symbols": "0", "symbols_broken": "x" } ]
   },
   {
@@ -461,13 +461,13 @@
   {
     "id": "wheel_10",
     "type": "vehicle_part",
-    "name": { "str": "wheels" },
+    "name": { "str": "large casters" },
     "item": "wheel_10",
     "location": "under",
     "categories": [ "movement" ],
     "color": "dark_gray",
     "durability": 120,
-    "description": "A set of 10\" wheels with tough rubber tires.",
+    "description": "A set of little wheels with tough rubber tires.",
     "folded_volume": "2500 ml",
     "breaks_into": [
       { "item": "steel_chunk", "prob": 50 },

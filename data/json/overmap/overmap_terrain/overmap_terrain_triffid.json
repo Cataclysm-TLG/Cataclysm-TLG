@@ -30,6 +30,7 @@
     "sym": "T",
     "color": "light_red",
     "see_cost": "full_high",
+    "looks_like": "solid_earth",
     "mondensity": 2,
     "spawns": { "group": "GROUP_TRIFFID", "population": [ 40, 45 ], "chance": 80 },
     "flags": [ "KNOWN_UP", "KNOWN_DOWN", "RISK_EXTREME" ]

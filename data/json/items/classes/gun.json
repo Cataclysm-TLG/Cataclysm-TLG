@@ -151,7 +151,7 @@
     "name": { "str": "cap & ball revolver" },
     "reload": 150,
     "range": 2,
-    "extend": { "flags": [ "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "RELOAD_ONE", "NO_UNLOAD", "EASY_CLEAN", "SINGLE_ACTION" ] },
     "//": "Slower reloads, no unloading.  Base, unskilled person should take 1.5 seconds per chamber.  No underbarrel mods, that's where the ram goes.",
     "valid_mod_locations": [ [ "barrel", 1 ], [ "grip", 1 ], [ "stock", 1 ], [ "rail mount", 1 ], [ "sights mount", 1 ] ],
     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
@@ -273,7 +273,7 @@
     "subtypes": [ "GUN" ],
     "name": { "str": "pump-action shotgun" },
     "reload_noise": "chuk chuk.",
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "PUMP_ACTION" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "PUMP_ACTION", "PUMP_RAIL" ],
     "faults": [ { "fault": "fault_gun_blackpowder" }, { "fault": "fault_gun_dirt" } ]
   },
   {

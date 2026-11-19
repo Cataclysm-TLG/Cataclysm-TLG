@@ -356,7 +356,13 @@
     "difficulty": 1,
     "time": "22 s",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "cotton_sheet", 7 ] ], [ [ "cotton_patch", 4 ] ], [ [ "sheet", 4 ] ], [ [ "spring", 4 ] ], [ [ "wire", 20 ] ] ]
+    "components": [
+      [ [ "nylon_sheet", 12 ] ],
+      [ [ "nylon_patch", 96 ] ],
+      [ [ "synthetic_fluff", 2000 ] ],
+      [ [ "spring", 9 ] ],
+      [ [ "wire", 20 ] ]
+    ]
   },
   {
     "result": "character_sheet",
@@ -449,9 +455,10 @@
     "result": "rubber_slug",
     "type": "uncraft",
     "activity_level": "MODERATE_EXERCISE",
-    "time": "10 s",
+    "time": "1 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "chunk_rubber", 1 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_HARD" ]
   },
   {
     "result": "parachute_mil",

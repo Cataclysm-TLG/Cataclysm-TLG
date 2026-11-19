@@ -2866,9 +2866,6 @@ int Character::get_used_bionics_slots( const bodypart_id &bp ) const
 std::map<bodypart_id, int> Character::bionic_installation_issues( const bionic_id &bioid ) const
 {
     std::map<bodypart_id, int> issues;
-    if( !get_option < bool >( "CBM_SLOTS_ENABLED" ) ) {
-        return issues;
-    }
     for( const std::pair<const string_id<body_part_type>, size_t> &elem : bioid->occupied_bodyparts ) {
         const int lacked_slots = elem.second - get_free_bionics_slots( elem.first );
         if( lacked_slots > 0 ) {
@@ -3419,9 +3416,9 @@ void Character::introduce_into_anesthesia( const time_duration &duration, Charac
         add_msg_if_player( m_mixed,
                            _( "You feel a tiny pricking sensation in your right arm, and lose all sensation before abruptly blacking out." ) );
 
-        //post-threshold medical mutants with Deadened don't need anesthesia due to their inability to feel pain
+        // Post-threshold medical mutants with Deadened don't need anesthesia due to their inability to feel pain
     } else {
-        //post-threshold medical mutants do not fear operations.
+        // Post-threshold medical mutants do not fear operations.
         if( has_trait( trait_THRESH_MEDICAL ) ) {
             add_msg_if_player( m_mixed,
                                _( "You feel excited as the Autodoc slices painlessly into you.  You enjoy the sight of scalpels slicing you apart." ) );
@@ -3431,7 +3428,7 @@ void Character::introduce_into_anesthesia( const time_duration &duration, Charac
         }
     }
 
-    //Pain junkies feel sorry about missed pain from operation.
+    // Pain junkies feel sorry about missed pain from operation.
     if( has_trait( trait_MASOCHIST_MED ) || has_trait( trait_CENOBITE ) ) {
         add_msg_if_player( m_mixed,
                            _( "As your consciousness slips away, you feel regret that you won't be able to enjoy the operation." ) );

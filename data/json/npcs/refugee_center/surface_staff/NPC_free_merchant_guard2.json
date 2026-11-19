@@ -32,17 +32,8 @@
   {
     "type": "talk_topic",
     "id": "TALK_EVAC_GUARD2_RULES",
-    "dynamic_line": "Well mostly no.  Just don't go around robbing others and starting fights and you will be all set.  Also, don't go into the basement.  Outsiders are not allowed in there.",
-    "responses": [
-      { "text": "Ok, thanks.", "topic": "TALK_EVAC_GUARD2" },
-      { "text": "So uhhh, why not?", "topic": "TALK_EVAC_GUARD2_RULES_BASEMENT" }
-    ]
-  },
-  {
-    "type": "talk_topic",
-    "id": "TALK_EVAC_GUARD2_RULES_BASEMENT",
-    "dynamic_line": "In short, we had a problem when a sick refugee died and turned into a zombie.  We had to expel the refugees and most of our surviving group now stays to the basement to prevent it from happening again.  Unless you really prove your worth I don't foresee any exceptions to that rule.",
-    "responses": [ { "text": "…", "topic": "TALK_EVAC_GUARD2" } ]
+    "dynamic_line": "Well mostly no.  Just don't go around robbing others and starting fights and you will be all set.",
+    "responses": [ { "text": "Ok, thanks.", "topic": "TALK_EVAC_GUARD2" } ]
   },
   {
     "type": "talk_topic",

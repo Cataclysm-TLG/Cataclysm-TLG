@@ -1303,22 +1303,12 @@ bool trapfunc::lava( const tripoint_bub_ms &p, Creature *c, item * )
         if( z->has_effect( effect_ridden ) ) {
             add_msg( m_bad, _( "Your %s is burned by the lava!" ), z->get_name() );
         }
-        // TODO: MATERIALS use fire resistance
-        int dam = 30;
-        if( z->made_of_any( Creature::cmat_flesh ) ) {
-            dam = 50;
+        if( z->has_flag( mon_flag_FIREPROOF ) || z->has_flag( mon_flag_FIREY ) ) {
+            return false;
         }
-        if( z->made_of( material_vegetable ) ) {
-            dam = 80;
-        }
-        if( z->made_of( phase_id::LIQUID ) || z->made_of_any( Creature::cmat_flammable ) ) {
-            dam = 200;
-        }
-        if( z->made_of( material_stone ) ) {
-            dam = 15;
-        }
-        if( z->made_of( material_kevlar ) || z->made_of( material_steel ) ) {
-            dam = 5;
+        int dam = rng( 30, 60 );
+        if( z->get_armor_type( damage_heat, bodypart_id( "torso" ) ) > dam ) {
+            return false;
         }
         z->deal_damage( nullptr, bodypart_id( "torso" ), damage_instance( damage_heat, dam ) );
     }

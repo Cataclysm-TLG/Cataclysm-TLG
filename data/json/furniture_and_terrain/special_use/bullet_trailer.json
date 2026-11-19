@@ -4,7 +4,6 @@
     "type": "terrain",
     "id": "t_bullettrailer_brownfloor",
     "name": "brown laminate floor",
-    "roof": "t_metal_flat_roof",
     "description": "A section of flooring made out of a tough, smooth material, colored in an atrocious mottled brown.",
     "symbol": ".",
     "color": "brown",
@@ -25,7 +24,7 @@
     "description": "A smooth wall of gleaming chrome, slightly dusty from the road.",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND" ],
+    "flags": [ "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ],
     "symbol": "#",
     "color": "light_gray"
   },
@@ -44,7 +43,7 @@
     "looks_like": "t_window",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "MINEABLE", "BLOCK_WIND", "TRANSPARENT" ],
+    "flags": [ "SUPPORTS_ROOF", "WALL", "REDUCE_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND", "TRANSPARENT" ],
     "copy-from": "t_bullettrailer_nwall_westcorner"
   },
   {
@@ -82,7 +81,7 @@
     "symbol": "#",
     "color": "light_gray",
     "name": "bullet trailer interior wall",
-    "description": "A simple wall panelled in a coarsely textured grey laminate of some sort."
+    "description": "A simple wall panelled in a coarsely textured gray laminate of some sort."
   },
   {
     "type": "terrain",
@@ -116,7 +115,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "open": "t_bullettrailer_swall_door_o",
     "copy-from": "t_bullettrailer_swall_westcorner"
   },
@@ -130,7 +129,7 @@
     "connect_groups": "WALL",
     "connects_to": "WALL",
     "rotates_to": "INDOORFLOOR",
-    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "MINEABLE", "BLOCK_WIND", "SUPPORTS_ROOF" ],
+    "flags": [ "TRANSPARENT", "DOOR", "NOITEM", "BLOCK_WIND", "SUPPORTS_ROOF" ],
     "copy-from": "t_bullettrailer_swall_westcorner",
     "close": "t_bullettrailer_swall_door"
   },

@@ -1,13 +1,6 @@
 [
   {
     "type": "EXTERNAL_OPTION",
-    "name": "CBM_SLOTS_ENABLED",
-    "//": "Enables CBM slots mechanics.  If true CBM slots are enabled.",
-    "stype": "bool",
-    "value": false
-  },
-  {
-    "type": "EXTERNAL_OPTION",
     "name": "SPAWN_CITY_HORDE_THRESHOLD",
     "//": "Minimum city size to guarantee extra zombies are spawned in cities.  0 means all cities spawn extra zombies.  Negative values disable extra city zombies.",
     "stype": "int",
@@ -201,12 +194,5 @@
     "//": "The maximum number of overmaps that an intersection can deviate from its gridded position. Cannot be greater than or equal to row / 2 or column / 2, may cause bugs for > row / 4, column / 4.",
     "stype": "int",
     "value": 2
-  },
-  {
-    "type": "EXTERNAL_OPTION",
-    "name": "MEGACITY",
-    "//": "If true, mapgen will be overwritten to place several large overlapping cities on every overmap. Intended for use only in the megacity mod, using it in other circumstances may cause strange behavior.",
-    "stype": "bool",
-    "value": false
   }
 ]

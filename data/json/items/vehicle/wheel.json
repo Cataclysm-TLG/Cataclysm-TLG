@@ -153,8 +153,8 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel",
-    "name": { "str": "17\" car tire" },
-    "description": "A standard 17\" car tire for fitting to a medium steel rim.",
+    "name": { "str": "car tire" },
+    "description": "A standard car tire for fitting to a medium steel rim.",
     "weight": "3600 g",
     "volume": "10 L",
     "longest_side": "432 mm",
@@ -172,8 +172,8 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel_slick",
-    "name": { "str": "16\" racing tire" },
-    "description": "A slick 16\" racing car tire for fitting to a medium steel rim.",
+    "name": { "str": "racing tire" },
+    "description": "A car tire for fitting to a medium steel rim.  Its smooth surface is terrible offroad, but on dry pavement it can outperform other types of tire.",
     "weight": "7355 g",
     "volume": "13750 ml",
     "longest_side": "407 mm",
@@ -191,8 +191,8 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel_motorbike",
-    "name": { "str": "16\" motorbike tire" },
-    "description": "A 16\" motorbike tire for fitting to a steel motorbike rim.",
+    "name": { "str": "motorbike tire" },
+    "description": "A motorbike tire for fitting to a steel motorbike rim.",
     "weight": "2443 g",
     "volume": "8250 ml",
     "longest_side": "407 mm",
@@ -209,8 +209,8 @@
     "id": "tire_motorbike_or",
     "copy-from": "tire_motorbike",
     "type": "ITEM",
-    "name": { "str": "20\" off-road motorbike tire" },
-    "description": "A 20\" off-road motorbike tire for fitting to a steel motorbike rim.",
+    "name": { "str": "off-road motorbike tire" },
+    "description": "An off-road motorbike tire for fitting to a steel motorbike rim.",
     "longest_side": "508 mm"
   },
   {
@@ -218,7 +218,7 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel_wide",
-    "name": { "str": "24\" wide tire" },
+    "name": { "str": "wide tire" },
     "description": "A wide tire for fitting to a wide steel rim.",
     "weight": "15000 g",
     "volume": "17500 ml",
@@ -236,7 +236,7 @@
     "id": "tire_wide_or",
     "copy-from": "tire_wide",
     "type": "ITEM",
-    "name": { "str": "24\" off-road wide tire" },
+    "name": { "str": "off-road wide tire" },
     "description": "A wide tire for fitting to a wide steel rim.  It's studded to provide better grip off-road at the cost of some performance on pavement."
   },
   {
@@ -244,7 +244,7 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel_bicycle",
-    "name": { "str": "27\" bicycle tire" },
+    "name": { "str": "bicycle tire" },
     "description": "A bicycle tire for fitting to a bicycle rim.",
     "weight": "750 g",
     "volume": "2 L",
@@ -262,7 +262,7 @@
     "id": "tire_bicycle_or",
     "copy-from": "tire_bicycle",
     "type": "ITEM",
-    "name": { "str": "27\" off-road bicycle tire" },
+    "name": { "str": "off-road bicycle tire" },
     "description": "A wide, studded bicycle tire intended to be fitted to a bicycle rim for off-road biking."
   },
   {
@@ -270,7 +270,7 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel",
-    "name": { "str": "deflated 17\" wheel" },
+    "name": { "str": "deflated wheel" },
     "description": "A car wheel.  It is currently deflated and will need to be inflated to be used on a vehicle.",
     "weight": "8845 g",
     "volume": "28 L",
@@ -288,7 +288,7 @@
     "type": "ITEM",
     "category": "veh_parts",
     "looks_like": "wheel_slick",
-    "name": { "str": "deflated 16\" racing wheel" },
+    "name": { "str": "deflated racing wheel" },
     "description": "A wide, smooth wheel intended for racing.  It is currently deflated and will need to be inflated to be used on a vehicle.",
     "weight": "12600 g",
     "volume": "28 L",
@@ -305,7 +305,7 @@
     "id": "deflated_wheel_motorbike",
     "type": "ITEM",
     "category": "veh_parts",
-    "name": { "str": "deflated 16\" motorbike wheel" },
+    "name": { "str": "deflated motorbike wheel" },
     "description": "A motorbike wheel.  It is currently deflated and will need to be inflated to be used on a vehicle.",
     "weight": "5443 g",
     "volume": "12 L",
@@ -322,7 +322,7 @@
     "id": "deflated_wheel_motorbike_or",
     "copy-from": "deflated_wheel_motorbike",
     "type": "ITEM",
-    "name": { "str": "deflated 20\" off-road motorbike wheel" },
+    "name": { "str": "deflated off-road motorbike wheel" },
     "longest_side": "508 mm",
     "description": "A motorbike wheel, studded for improved off-road performance.  It is currently deflated and will need to be inflated to be used on a vehicle."
   },
@@ -330,8 +330,8 @@
     "id": "deflated_wheel_wide",
     "type": "ITEM",
     "category": "veh_parts",
-    "name": { "str": "deflated 24\" wide wheel" },
-    "description": "A wide wheel.  \\o/ This wide.  It is currently deflated and will need to be inflated to be used on a vehicle.",
+    "name": { "str": "deflated wide wheel" },
+    "description": "A wide wheel.  It is currently deflated and will need to be inflated to be used on a vehicle.",
     "weight": "22600 g",
     "volume": "70 L",
     "longest_side": "610 mm",
@@ -347,14 +347,14 @@
     "id": "deflated_wheel_wide_or",
     "copy-from": "deflated_wheel_wide",
     "type": "ITEM",
-    "name": { "str": "deflated 24\" off-road wide wheel" },
-    "description": "A wide wheel.  \\o/ This wide.  It's studded to provide better grip off-road at the cost of some performance on pavement.  It is currently deflated and will need to be inflated to be used on a vehicle."
+    "name": { "str": "deflated off-road wide wheel" },
+    "description": "A wide wheel with deeply grooved tread to endure off-road conditions at the cost of some performance on pavement.  It is currently deflated and will need to be inflated to be used on a vehicle."
   },
   {
     "id": "deflated_wheel_bicycle",
     "type": "ITEM",
     "category": "veh_parts",
-    "name": { "str": "deflated 27\" bicycle wheel" },
+    "name": { "str": "deflated bicycle wheel" },
     "description": "A bicycle wheel.  It is currently deflated and will need to be inflated to be used on a vehicle.",
     "weight": "1500 g",
     "volume": "11 L",
@@ -371,7 +371,7 @@
     "id": "deflated_wheel_bicycle_or",
     "copy-from": "deflated_wheel_bicycle",
     "type": "ITEM",
-    "name": { "str": "deflated 27\" off-road bicycle wheel" },
+    "name": { "str": "deflated off-road bicycle wheel" },
     "description": "A wide, studded, bicycle wheel intended for off-road biking.  It is currently deflated and will need to be inflated to be used on a vehicle."
   },
   {
@@ -381,6 +381,26 @@
     "category": "veh_parts",
     "name": { "str": "wheel" },
     "description": "A car wheel.",
+    "weight": "8845 g",
+    "volume": "28 L",
+    "longest_side": "432 mm",
+    "price": "100 USD",
+    "price_postapoc": "7 USD 50 cent",
+    "to_hit": -1,
+    "material": [ "steel", "rubber" ],
+    "symbol": "]",
+    "color": "dark_gray",
+    "diameter": 17,
+    "width": 9,
+    "melee_damage": { "bash": 12 }
+  },
+  {
+    "id": "wheel_or",
+    "type": "ITEM",
+    "subtypes": [ "WHEEL" ],
+    "category": "veh_parts",
+    "name": { "str": "wheel" },
+    "description": "A car wheel, deeply grooved to better endure offroad conditions.",
     "weight": "8845 g",
     "volume": "28 L",
     "longest_side": "432 mm",
@@ -480,7 +500,7 @@
     "type": "ITEM",
     "subtypes": [ "WHEEL" ],
     "name": { "str": "off-road bicycle wheel" },
-    "description": "A wide, studded bicycle wheel intended for off-road biking."
+    "description": "A bicycle wheel intended for off-road biking.  Its tread is deeply grooved to better endure offroad conditions."
   },
   {
     "id": "wheel_small_pair",
@@ -645,7 +665,7 @@
     "name": { "str": "off-road motorbike wheel" },
     "diameter": 20,
     "longest_side": "508 mm",
-    "description": "A motorbike wheel, studded for improved off-road performance."
+    "description": "A motorbike wheel, deeply grooved to better endure offroad conditions."
   },
   {
     "id": "hd_steel_drum",
@@ -772,7 +792,7 @@
     "subtypes": [ "WHEEL" ],
     "category": "veh_parts",
     "name": { "str": "wide wheel" },
-    "description": "A wide wheel.  \\o/ This wide.",
+    "description": "A wide wheel.",
     "weight": "22600 g",
     "volume": "70 L",
     "longest_side": "610 mm",
@@ -792,7 +812,7 @@
     "type": "ITEM",
     "subtypes": [ "WHEEL" ],
     "name": { "str": "off-road wide wheel" },
-    "description": "A wide wheel.  \\o/ This wide.  It's studded to provide better grip off-road at the cost of some performance on pavement."
+    "description": "A wide wheel.  It's studded to provide better grip off-road at the cost of some performance on pavement."
   },
   {
     "id": "wheel_wood",

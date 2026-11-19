@@ -38,6 +38,7 @@
 #include "magic_enchantment.h"
 #include "make_static.h"
 #include "mapsharing.h"
+#include "messages.h"
 #include "martialarts.h"
 #include "mission.h"
 #include "mod_manager.h"
@@ -46,6 +47,7 @@
 #include "options.h"
 #include "output.h"
 #include "overmap_ui.h"
+#include "overmapbuffer.h"
 #include "path_info.h"
 #include "pimpl.h"
 #include "profession.h"
@@ -53,6 +55,8 @@
 #include "proficiency.h"
 #include "recipe.h"
 #include "recipe_dictionary.h"
+#include "regional_settings.h"
+#include "ret_val.h"
 #include "rng.h"
 #include "scenario.h"
 #include "skill.h"
@@ -61,6 +65,8 @@
 #include "string_formatter.h"
 #include "string_input_popup.h"
 #include "text_snippets.h"
+#include "trait_group.h"
+#include "translation.h"
 #include "translations.h"
 #include "type_id.h"
 #include "ui.h"
@@ -79,6 +85,9 @@ static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
 static const json_character_flag json_flag_BIONIC_TOGGLED( "BIONIC_TOGGLED" );
 
 static const matype_id style_none( "style_none" );
+
+static const trait_group::Trait_group_tag
+Trait_group_NPC_starting_traits( "NPC_starting_traits" );
 
 static const trait_id trait_SMELLY( "SMELLY" );
 static const trait_id trait_WEAKSCENT( "WEAKSCENT" );
@@ -336,13 +345,11 @@ static std::string pools_to_string( const avatar &u, pool_type pool )
     switch( pool ) {
         case pool_type::MULTI_POOL: {
             multi_pool p( u );
-            bool is_valid = p.stat_points_left >= 0 && p.trait_points_left >= 0 && p.skill_points_left >= 0;
             return string_format(
-                       _( "Stats: <color_%s>%d</color>  Traits: <color_%s>%d</color>  Skills: <color_%s>%d</color>\n  Total: <color_%s>%d</color>" ),
+                       _( "Stats: <color_%s>%d</color>  Traits: <color_%s>%d</color>  Skills: <color_%s>%d</color>" ),
                        p.stat_points_left >= 0 ? "light_gray" : "red", p.stat_points_left,
                        p.trait_points_left >= 0 ? "light_gray" : "red", std::abs( p.trait_points_left ),
-                       p.skill_points_left >= 0 ? "light_gray" : "red",  p.pure_skill_points,
-                       is_valid ? "light_gray" : "red", p.skill_points_left );
+                       p.skill_points_left >= 0 ? "light_gray" : "red",  p.pure_skill_points );
         }
         case pool_type::ONE_POOL: {
             return string_format( _( "Points left: %4d" ), point_pool_total() - points_used_total( u ) );
@@ -436,7 +443,8 @@ void Character::randomize( const bool random_scenario, bool play_now )
     randomize_height();
     randomize_blood();
     randomize_heartrate();
-    bool cities_enabled = world_generator->active_world->WORLD_OPTIONS["CITY_SIZE"].getValue() != "0";
+    bool cities_enabled = overmap_buffer.get_default_settings( point_abs_om( 0, 0 ) )
+                          .get_settings_city().city_size != 0;
     if( random_scenario ) {
         std::vector<const scenario *> scenarios;
         for( const scenario &scen : scenario::get_all() ) {
@@ -583,8 +591,27 @@ void Character::randomize( const bool random_scenario, bool play_now )
             case 6:
             case 7:
             case 8:
-            case 9:
+            case 9: {
+                const skill_id rn_skill = Skill::random_skill();
+                if( rn_skill->obsolete() ) {
+                    break;
+                }
+                int prof_skill_level = 0;
+                for( const profession::StartingSkill &prof_skill : prof->skills() ) {
+                    if( prof_skill.first == rn_skill ) {
+                        prof_skill_level += prof_skill.second;
+                        break;
+                    }
+                }
+                const int level = get_skill_level( rn_skill );
+                if( level + prof_skill_level < 8 &&
+                    p.skill_points_left >= skill_increment_cost( *this, rn_skill ) ) {
+                    mod_skill_level( rn_skill, 1 );
+                    const int new_level = get_skill_level( rn_skill );
+                    set_knowledge_level( rn_skill, new_level );
+                }
                 break;
+            }
         }
     }
 
@@ -594,11 +621,17 @@ void Character::randomize( const bool random_scenario, bool play_now )
     reset_cardio_acc();
 
     if( is_npc() ) {
+        for( const trait_and_var &cur : trait_group::traits_from( Trait_group_NPC_starting_traits ) ) {
+            if( !has_conflicting_trait( cur.trait ) ) {
+                set_mutation( cur.trait, cur.trait->variant( cur.variant ) );
+            }
+        }
         as_npc()->randomize_personality();
         as_npc()->generate_personality_traits();
         initialize();
         add_profession_items();
         as_npc()->catchup_skills();
+
     }
 }
 
@@ -623,7 +656,6 @@ void Character::add_profession_items()
             item *wield_or_wear = nullptr;
             // TODO: debugmsg if food that isn't a seed is inedible
             if( it.has_flag( json_flag_no_auto_equip ) ) {
-                it.unset_flag( json_flag_no_auto_equip );
                 success = try_add( it, nullptr, nullptr, false );
             } else if( it.has_flag( json_flag_auto_wield ) ) {
                 it.unset_flag( json_flag_auto_wield );
@@ -656,21 +688,40 @@ void Character::add_profession_items()
         }
     };
 
-    //storage items may not be added first, so a second attempt is needed
-    attempt_add_items( prof_items, try_adding_again );
-    if( !try_adding_again.empty() ) {
-        prof_items.clear();
-        attempt_add_items( try_adding_again, prof_items );
-        //if there's one item left that still can't be added, attempt to wield it
-        if( prof_items.size() == 1 ) {
-            item last_item = prof_items.front();
-            if( !has_wield_conflicts( last_item ) ) {
-                bool success_wield = wield( last_item );
-                if( success_wield ) {
-                    prof_items.pop_front();
-                }
-            }
+    // Wields one leftover item, preferring containers since they may hold the rest.
+    auto wield_a_leftover = [this]( std::list<item> &leftovers ) {
+        if( is_armed() ) {
+            return false;
         }
+        std::list<item>::iterator candidate = std::find_if( leftovers.begin(), leftovers.end(),
+        []( const item & it ) {
+            return it.is_container();
+        } );
+        if( candidate == leftovers.end() ) {
+            candidate = leftovers.begin();
+        }
+        if( !wield( *candidate ) ) {
+            return false;
+        }
+        leftovers.erase( candidate );
+        return true;
+    };
+
+    // Storage items may come after the items meant to go inside them, so keep retrying while
+    // that places something. When stuck, wield a leftover and retry.
+    attempt_add_items( prof_items, try_adding_again );
+    while( !try_adding_again.empty() ) {
+        std::list<item> still_left;
+        attempt_add_items( try_adding_again, still_left );
+        const bool placed_something = still_left.size() < try_adding_again.size();
+        try_adding_again = std::move( still_left );
+        if( !placed_something && !wield_a_leftover( try_adding_again ) ) {
+            break;
+        }
+    }
+    for( const item &lost : try_adding_again ) {
+        add_msg_debug( debugmode::DF_CHARACTER, "Profession %s: no room for starting item %s",
+                       prof->ident().str(), lost.typeId().str() );
     }
 
     recalc_sight_limits();
@@ -1001,6 +1052,12 @@ void Character::initialize( bool learn_recipes )
     reset_cardio_acc();
 
     recalc_speed_bonus();
+
+    for( bionic &bio : *my_bionics ) {
+        if( bio.id->activated_on_install ) {
+            activate_bionic( bio );
+        }
+    }
 }
 
 void avatar::initialize( character_type type )
@@ -1087,6 +1144,14 @@ static void draw_points( const catacurses::window &w, pool_type pool, const avat
     int pMsg_length = utf8_width( remove_color_tags( points_msg ), true );
     nc_color color = c_light_gray;
     print_colored_text( w, point( 2, 3 ), color, c_light_gray, points_msg );
+    if( pool == pool_type::MULTI_POOL ) {
+        multi_pool p( u );
+        bool is_valid = p.stat_points_left >= 0 && p.trait_points_left >= 0 && p.skill_points_left >= 0;
+        std::string total_msg = string_format(
+                                    _( "Total: <color_%s>%d</color>" ),
+                                    is_valid ? "light_gray" : "red", p.skill_points_left );
+        print_colored_text( w, point( 2, 4 ), color, c_light_gray, total_msg );
+    }
     if( pool != pool_type::FREEFORM ) {
         if( netPointCost > 0 ) {
             mvwprintz( w, point( pMsg_length + 2, 3 ), c_red, " (-%d)", std::abs( netPointCost ) );
@@ -2204,7 +2269,8 @@ static std::string assemble_profession_details( const avatar &u, const input_con
     // Display Origin
     const std::string mod_src = enumerate_as_string( sorted_profs[cur_id]->src, [](
     const std::pair<profession_id, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
+        return source.second == mod_id( "tlg" ) ? std::string() :
+               string_format( "'%s'", source.second->name() );
     }, enumeration_conjunction::arrow );
     assembled += string_format( _( "Origin: %s" ), mod_src ) + "\n";
 
@@ -3409,10 +3475,18 @@ static std::string assemble_scenario_details( const avatar &u, const input_conte
 {
     std::string assembled;
     // Display Origin
-    const std::string mod_src = enumerate_as_string( current_scenario->src,
+    std::vector<std::pair<string_id<scenario>, mod_id>> filtered_src;
+    std::copy_if( current_scenario->src.begin(), current_scenario->src.end(),
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
+
+    const std::string mod_src = enumerate_as_string(
+                                    filtered_src,
     []( const std::pair<string_id<scenario>, mod_id> &source ) {
         return string_format( "'%s'", source.second->name() );
     }, enumeration_conjunction::arrow );
+
     assembled += string_format( _( "Origin: %s" ), mod_src ) + "\n";
 
     std::string scenario_name = current_scenario->gender_appropriate_name( !u.male );
@@ -3656,7 +3730,6 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
 
     do {
         if( recalc_scens ) {
-            options_manager::options_container &wopts = world_generator->active_world->WORLD_OPTIONS;
             std::vector<const scenario *> new_scens;
             for( const scenario &scen : scenario::get_all() ) {
                 if( scen.scen_is_blacklisted() ) {
@@ -3665,7 +3738,8 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
                 new_scens.push_back( &scen );
             }
             scenario_sorter.male = u.male;
-            scenario_sorter.cities_enabled = wopts["CITY_SIZE"].getValue() != "0";
+            scenario_sorter.cities_enabled = overmap_buffer.get_default_settings( point_abs_om( 0, 0 ) )
+                                             .get_settings_city().city_size != 0;
             if( ( scens_length = filter_entries( u, cur_id, sorted_scens, new_scens, get_scenario(),
                                                  filterstring,
                                                  scenario_sorter ) ) == 0 ) {
@@ -3723,34 +3797,54 @@ void set_scenario( tab_manager &tabs, avatar &u, pool_type pool )
             cur_id = rng( 0, scens_length - 1 );
         } else if( action == "CHANGE_START_OF_CATACLYSM" ) {
             const scenario *scen = sorted_scens[cur_id];
+
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 scen = get_scenario();
             }
             scen->change_start_of_cataclysm( calendar_ui::select_time_point( scen->start_of_cataclysm(),
                                              _( "Cataclysm start date (affects items)" ), calendar_ui::granularity::day ) );
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         } else if( action == "CHANGE_FALL_OF_CIVILIZATION" ) {
             const scenario *scen = sorted_scens[cur_id];
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 scen = get_scenario();
             }
             scen->change_fall_of_civilization( calendar_ui::select_time_point( scen->fall_of_civilization(),
                                                _( "Fall of civilization date (affects monsters)" ), calendar_ui::granularity::day ) );
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         } else if( action == "CHANGE_START_OF_GAME" ) {
             const scenario *scen = sorted_scens[cur_id];
+
+
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 scen = get_scenario();
             }
             scen->change_start_of_game( calendar_ui::select_time_point( scen->start_of_game(),
                                         _( "Select game start date" ), calendar_ui::granularity::hour ) );
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         } else if( action == "RESET_CALENDAR" ) {
             const scenario *scen = sorted_scens[cur_id];
+
+            bool eternal = calendar::eternal_season();
+            calendar::set_eternal_season( false );
             if( cur_id != id_for_curr_description ) {
                 get_scenario()->reset_calendar();
             }
             scen->reset_calendar();
+
+            calendar::set_eternal_season( eternal );
             details_recalc = true;
         }
 
@@ -4016,7 +4110,7 @@ void set_description( tab_manager &tabs, avatar &you, const bool allow_reroll,
             w_stats = catacurses::newwin( 6, 20, point( 2, 10 ) );
             w_traits = catacurses::newwin( TERMY - 11, ncol2, point( beginx2, 10 ) );
             w_calendar = catacurses::newwin( 6, ncol3, point( beginx3, 10 ) );
-            w_bionics = catacurses::newwin( TERMY - 16, ncol3, point( beginx3, 17 ) );
+            w_bionics = catacurses::newwin( TERMY - 18, ncol3, point( beginx3, 17 ) );
             w_proficiencies = catacurses::newwin( TERMY - 21, 19, point( 2, 16 ) );
             // Extra - 11 to avoid overlap with long text in w_guide.
             w_hobbies = catacurses::newwin( TERMY - 11 - 11, ncol4, point( beginx4, 10 ) );

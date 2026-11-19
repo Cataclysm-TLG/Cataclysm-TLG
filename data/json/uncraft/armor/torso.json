@@ -228,7 +228,7 @@
     "result": "jacket_light",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
-    "time": "4 m",
+    "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
     "components": [ [ [ "zipper_long_plastic", 1 ] ], [ [ "cotton_sheet", 5 ] ], [ [ "cotton_patch", 5 ] ] ]
   },
@@ -236,8 +236,8 @@
     "result": "blazer",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
-    "time": "4 m",
+    "time": "10 m",
     "qualities": [ { "id": "FABRIC_CUT", "level": 1 }, { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "felt_patch", 38 ] ], [ [ "felt_sheet", 20 ] ], [ [ "button_plastic", 5 ] ] ]
+    "components": [ [ [ "felt_patch", 12 ] ], [ [ "felt_sheet", 2 ] ], [ [ "button_plastic", 2 ] ] ]
   }
 ]

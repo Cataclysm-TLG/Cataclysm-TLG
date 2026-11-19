@@ -1,7 +1,6 @@
 [
   {
     "id": "pressurized_tank",
-    "//": "Tileset whitelist for flame or chemical throwers.",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
     "name": { "str": "8 L pressurized fuel tank" },

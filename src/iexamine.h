@@ -17,6 +17,8 @@
 class item;
 class JsonObject;
 class Character;
+class item_location;
+class map;
 class time_point;
 class vpart_reference;
 struct itype;
@@ -131,9 +133,9 @@ void ledge_ramp( Character &you, const tripoint_bub_ms &examp );
 void autodoc( Character &you, const tripoint_bub_ms &examp );
 void attunement_altar( Character &you, const tripoint_bub_ms &examp );
 void translocator( Character &you, const tripoint_bub_ms &examp );
-void on_smoke_out( const tripoint_bub_ms &examp,
+void on_smoke_out( map &here, const tripoint_bub_ms &examp,
                    const time_point &start_time ); //activates end of smoking effects
-void mill_finalize( Character &, const tripoint_bub_ms &examp );
+void mill_finalize( Character &, map &here, const tripoint_bub_ms &examp );
 void quern_examine( Character &you, const tripoint_bub_ms &examp );
 void smoker_options( Character &you, const tripoint_bub_ms &examp );
 void open_safe( Character &you, const tripoint_bub_ms &examp );

@@ -38,7 +38,7 @@
               "id": "EOC_DAMAGE_ITEM_simple",
               "effect": [
                 { "math": [ "_hp_before = n_hp('ALL')" ] },
-                { "math": [ "n_hp('ALL')", "-=", "1000" ] },
+                { "math": [ "n_hp('ALL') -= 1000" ] },
                 { "math": [ "_hp_after = n_hp('ALL')" ] },
                 { "u_message": "<npc_name> have had <context_val:hp_before> hp, now has <context_val:hp_after> hp." }
               ]
@@ -71,7 +71,7 @@
             "true_eocs": {
               "id": "EOC_DAMAGE_ITEM",
               "effect": [
-                { "math": [ "n_hp('ALL')", "-=", "num_input('Amount of damage, 1000 is one bar of damage.', 1000)" ] },
+                { "math": [ "n_hp('ALL') -= num_input('Amount of damage, 1000 is one bar of damage.', 1000)" ] },
                 { "u_message": "Dealt damage to all items." }
               ]
             }
@@ -172,5 +172,49 @@
         }
       ]
     }
+  },
+  {
+    "id": "debug_timer",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "category": "tools",
+    "name": { "str_sp": "debug timer", "//~": "NO_I18N" },
+    "description": {
+      "str": "Start before performing some action.  Activate again to see the amount of in-game time that passed.",
+      "//~": "NO_I18N"
+    },
+    "weight": "1 g",
+    "volume": "1 ml",
+    "material": [ "plastic" ],
+    "symbol": ";",
+    "color": "light_gray",
+    "use_action": {
+      "type": "effect_on_conditions",
+      "menu_text": { "str": "start or pause timer", "//~": "NO_I18N" },
+      "effect_on_conditions": [ "EOC_DEBUG_TIMER" ]
+    }
+  },
+  {
+    "type": "effect_on_condition",
+    "id": "EOC_DEBUG_TIMER",
+    "effect": [
+      {
+        "if": { "math": [ "n_set_time == 0" ] },
+        "then": [
+          { "math": [ "n_set_time = time('now')" ] },
+          { "message": { "//~": "NO_I18N", "str": "Debug timer starts counting." } }
+        ],
+        "else": [
+          { "math": [ "_ret = time('now') - n_set_time" ] },
+          {
+            "message": {
+              "//~": "NO_I18N",
+              "str": "<context_val:ret> seconds has passed since activation of a timer.  The timer has been reset."
+            }
+          },
+          { "math": [ "n_set_time = 0" ] }
+        ]
+      }
+    ]
   }
 ]

@@ -25,8 +25,7 @@
 
 #if defined(__ANDROID__)
 #include <jni.h>
-#include <SDL_keyboard.h>
-
+#include "options.h"
 #endif
 
 catacurses::window new_centered_win( int nlines, int ncols )
@@ -1037,8 +1036,8 @@ void uilist::query( bool loop, int timeout, bool allow_unfiltered_hotkeys )
             calc_data();
             started = true;
         }
-        JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-        jobject activity = ( jobject )SDL_AndroidGetActivity();
+        JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+        jobject activity = ( jobject )GetAndroidActivity();
         jclass clazz( env->GetObjectClass( activity ) );
         jmethodID get_nativeui_method_id = env->GetMethodID( clazz, "getNativeUI",
                                            "()Lcom/cataclysmtlg/cataclysmtlg/NativeUI;" );

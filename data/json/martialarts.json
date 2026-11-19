@@ -1193,7 +1193,7 @@
         "description": "The eye of the storm,\na fleeting moment of peace,\ngone without a trace.\n\n+2 accuracy, Dodging skill increased by 50% of Perception.\nLasts 2 seconds.",
         "melee_allowed": true,
         "buff_duration": 2,
-        "flat_bonuses": [ { "stat": "hit", "scale": 2.0 }, { "stat": "dodge", "scaling-stat": "per", "scale": 0.5 } ]
+        "flat_bonuses": [ { "stat": "hit", "scale": 2.0 }, { "stat": "dodge", "scaling-stat": "per", "scale": 0.33 } ]
       }
     ],
     "techniques": [ "niten_water_cut", "niten_red_leaf", "niten_stone_cut", "niten_timing_attack", "niten_feint" ],

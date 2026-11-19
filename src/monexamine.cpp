@@ -652,7 +652,7 @@ bool monexamine::pet_menu( monster &z )
         if( player_character.cache_has_item_with( json_flag_TIE_UP ) ) {
             amenu.addentry( leash, true, 't', _( "Attach leash to %s" ), pet_name );
         } else {
-            amenu.addentry( leash, false, 't', _( "You need any type of rope to leash %s" ),
+            amenu.addentry( leash, false, 't', _( "You need a short rope of any kind to leash %s" ),
                             pet_name );
         }
     }

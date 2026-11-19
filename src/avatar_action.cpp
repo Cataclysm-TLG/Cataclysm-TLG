@@ -214,18 +214,21 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         }
         return false;
     }
+    const bool is_riding = you.is_mounted();
+    const tripoint_bub_ms you_pos = you.pos_bub();
+    tripoint_bub_ms dest_loc = you_pos + d;
+    const bool is_swimming = here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you_pos ) &&
+                             !you.in_vehicle;
 
-    // If any leg broken without crutches and not already on the ground topple over
-    if( ( !you.enough_working_legs() && !you.is_prone() &&
-          !( you.get_wielded_item() && you.get_wielded_item()->has_flag( flag_CRUTCHES ) ) ) ) {
+    // If you don't have crutches and you have a broken leg, fall over, unless you're in the water or riding something.
+    if( !you.enough_working_legs() && !you.is_prone() &&
+        !is_riding &&
+        !is_swimming &&
+        !( you.get_wielded_item() && you.get_wielded_item()->has_flag( flag_CRUTCHES ) ) ) {
         you.set_movement_mode( move_mode_prone );
         you.add_msg_if_player( m_bad,
                                _( "Your injured legs can't hold your weight, and you collapse in a heap." ) );
     }
-
-    const bool is_riding = you.is_mounted();
-    const tripoint_bub_ms you_pos = you.pos_bub();
-    tripoint_bub_ms dest_loc = you_pos + d;
 
     if( here.obstructed_by_vehicle_rotation( you_pos, dest_loc ) ) {
         return false;
@@ -259,27 +262,14 @@ bool avatar_action::move( avatar &you, map &m, const tripoint_rel_ms &d )
         via_ramp = true;
     }
 
-    item_location weapon = you.get_wielded_item();
-    if( m.has_flag( ter_furn_flag::TFLAG_MINEABLE, dest_loc ) &&
-        !you.get_mon_visible().has_dangerous_creature_in_proximity &&
-        get_option<bool>( "AUTO_FEATURES" ) && get_option<bool>( "AUTO_MINING" ) &&
-        !m.veh_at( dest_loc ) && !you.is_underwater() && !you.has_effect( effect_stunned ) &&
-        !you.has_effect( effect_psi_stunned ) && !is_riding && !you.has_effect( effect_incorporeal ) &&
-        !m.impassable_field_at( dest_loc ) && !you.has_flag( json_flag_CANNOT_MOVE ) ) {
-        if( weapon && weapon->has_flag( flag_DIG_TOOL ) ) {
-            if( weapon->type->can_use( "PICKAXE" ) ) {
-                you.invoke_item( &*weapon, "PICKAXE", dest_loc );
-                // don't move into the tile until done mining
-                you.defer_move( dest_loc );
-                return true;
-            }
-        }
-    }
-
-    // by this point we're either walking, running, crouching, or attacking, so update the activity level to match
-    if( !is_riding ) {
+    // By this point we're either walking, running, crouching, or attacking, so update the activity level to match.
+    if( !is_riding && !is_swimming ) {
         you.set_activity_level( you.enchantment_cache->modify_value(
                                     enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER, you.current_movement_mode()->exertion_level() ) );
+    } else if( you.get_steed_type() == steed_type::ANIMAL ) {
+        you.set_activity_level( you.enchantment_cache->modify_value(
+                                    enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER,
+                                    you.current_movement_mode()->exertion_level_animal_riding() ) );
     }
 
     // If the player is *attempting to* move on the X axis, update facing direction of their sprite to match.
@@ -606,11 +596,12 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
             }
         }
     }
+    you.reset_move_mode();
     g->water_affect_items( you );
 
     int movecost = you.swim_speed();
     int capped_movecost = std::min( movecost, 500 );
-    you.practice_proficiency( proficiency_prof_swimming, 1_seconds * ( 1 / movecost ) );
+    you.practice_proficiency( proficiency_prof_swimming, 1_seconds * ( capped_movecost / 100 ) );
     you.practice( skill_swimming, you.is_underwater() ? 2 : 1 );
     if( movecost >= 500 || you.has_effect( effect_winded ) ) {
         if( !you.is_underwater() &&
@@ -650,11 +641,17 @@ void avatar_action::swim( map &m, avatar &you, const tripoint_bub_ms &p )
     if( m.veh_at( you.pos_bub() ).part_with_feature( VPFLAG_BOARDABLE, true ) ) {
         m.board_vehicle( you.pos_bub(), &you );
     }
+    bool mounted = you.is_mounted();
+    // Set activity level before modifying moves so that we get the proper exertion amount.
+    if( !mounted ) {
+        you.set_activity_level( you.enchantment_cache->modify_value(
+                                    enchant_vals::mod::MOVEMENT_EXERTION_MODIFIER, EXTRA_EXERCISE ) );
+    }
     // 500 means we can't swim, so for now that's the cap.
     you.mod_moves( -( ( capped_movecost ) * ( diagonal ? M_SQRT2 : 1 ) ) );
     you.inv->rust_iron_items();
-
-    if( !you.is_mounted() ) {
+    // Burn stamina after modifying moves so that we don't exhaust ourselves before we even go anywhere.
+    if( !mounted ) {
         you.burn_move_stamina( movecost );
     }
 }
@@ -726,7 +723,7 @@ bool avatar_action::can_fire_weapon( avatar &you, const map &m, const item &weap
     }
 
     if( !you.try_break_relax_gas( _( "Your eyes steel, and you raise your weapon!" ),
-                                  _( "You can't fire your weapon, it's too heavy…" ) ) ) {
+                                  _( "You can't bring yourself to fire your weaponZ…" ) ) ) {
         return false;
     }
 
@@ -1029,12 +1026,12 @@ void avatar_action::plthrow( avatar &you, item_location loc,
             }
             if( range <= 1 || you.get_stamina_max() < ( -1 * stamina_mod ) ||
                 their_size - your_size > you.get_arm_str() / 10 ) {
-                you.add_msg_if_player( ( "You can't muster the strength to throw %s." ),
+                you.add_msg_if_player( _( "You can't muster the strength to throw %s." ),
                                        you.grab_1.victim->disp_name() );
                 return;
             }
             if( ( you.get_stamina() ) < ( stamina_mod ) ) {
-                you.add_msg_if_player( ( "You're too exhausted to throw %s." ), you.grab_1.victim->disp_name() );
+                you.add_msg_if_player( _( "You're too exhausted to throw %s." ), you.grab_1.victim->disp_name() );
                 return;
             }
             if( ( you.grab_1.victim->has_effect_with_flag( json_flag_GRAB_FILTER ) &&

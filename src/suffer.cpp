@@ -580,12 +580,15 @@ void suffer::while_awake( Character &you )
     }
 
     if( you.has_trait( trait_SHOUT1 ) && one_turn_in( 6_hours ) ) {
+        you.add_msg_if_player( _( "You shout loudly!" ) );
         you.shout();
     }
     if( you.has_trait( trait_SHOUT2 ) && one_turn_in( 4_hours ) ) {
+        you.add_msg_if_player( _( "You scream loudly!" ) );
         you.shout();
     }
     if( you.has_trait( trait_SHOUT3 ) && one_turn_in( 3_hours ) ) {
+        you.add_msg_if_player( _( "You let out a piercing howl!" ) );
         you.shout();
     }
     if( you.has_trait( trait_M_SPORES ) && one_turn_in( 4_hours ) ) {
@@ -675,7 +678,7 @@ void suffer::from_asthma( Character &you )
         bool nearby_use = auto_use || map_inv.has_charges( itype_inhaler, 1 ) ||
                           map_inv.has_charges( itype_oxygen_tank, 1 ) ||
                           map_inv.has_charges( itype_smoxygen_tank, 1 );
-        if( auto_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
+        if( auto_use  && !you.has_active_bionic( bio_sleep_shutdown ) ) {
             if( you.use_charges_if_avail( itype_inhaler, 1 ) ) {
                 you.add_msg_if_player( m_info, _( "You use your inhaler and go back to sleep." ) );
                 you.add_effect( effect_took_antiasthmatic, rng( 6_hours, 12_hours ) );
@@ -684,7 +687,7 @@ void suffer::from_asthma( Character &you )
                 you.add_msg_if_player( m_info, _( "You take a deep breath from your oxygen tank "
                                                   "and go back to sleep." ) );
             }
-        } else if( nearby_use  && !you.has_bionic( bio_sleep_shutdown ) ) {
+        } else if( nearby_use  && !you.has_active_bionic( bio_sleep_shutdown ) ) {
             // create new variable to resolve a reference issue
             int amount = 1;
             if( !here.use_charges( you.pos_bub(), 2, itype_inhaler, amount ).empty() ) {
@@ -698,7 +701,7 @@ void suffer::from_asthma( Character &you )
         } else {
             you.add_effect( effect_asthma, rng( 5_minutes, 20_minutes ) );
             if( you.has_effect( effect_sleep ) ) {
-                if( !you.has_bionic( bio_sleep_shutdown ) ) {
+                if( !you.has_active_bionic( bio_sleep_shutdown ) ) {
                     you.wake_up();
                 }
             } else {
@@ -817,21 +820,21 @@ void suffer::in_sunlight( Character &you, outfit &worn )
             rarm_leaf_surface = .0;
         }
         if( you.has_trait( trait_VINES1 ) ) {
-            vine_leaf_surface = vine_leaf_surface * 0.5;
+            vine_leaf_surface = vine_leaf_surface * 0.5f;
         }
         if( !you.has_trait( trait_VINES1 ) && !you.has_trait( trait_VINES2 ) &&
             !you.has_trait( trait_VINES3 ) ) {
-            vine_leaf_surface = 0;
+            vine_leaf_surface = 0.f;
         }
         const float weather_factor = std::min( incident_sun_irradiance( get_weather().weather_id,
                                                calendar::turn ) / irradiance::moderate, 1.f );
         const int player_local_temp = units::to_fahrenheit( get_weather().get_temperature(
                                           position ) );
-        int flux = ( player_local_temp - 32 ) / 5;
+        float flux = ( player_local_temp - 32 ) / 5;
         // Efficiency rapidly falls off when it's too hot due to photosynthesis being an enzymatic process.
         // Some tropical plants can overcome this with specific adaptations, but that would probably be its own mutation.
         if( player_local_temp > 104 ) {
-            flux -= ( player_local_temp - 104 ) * 3;
+            flux -= ( player_local_temp - 104 ) * 3.f;
         }
         if( you.has_trait( trait_LEAVES ) ) {
             head_leaf_surface *= .5;
@@ -843,22 +846,23 @@ void suffer::in_sunlight( Character &you, outfit &worn )
             head_leaf_surface *= 1.75;
         }
         if( you.has_trait( trait_LEAVES2_FALL ) || you.has_trait( trait_LEAVES3_FALL ) ) {
-            vine_leaf_surface *= .9;
-            larm_leaf_surface *= .9;
-            rarm_leaf_surface *= .9;
-            head_leaf_surface *= .9;
+            vine_leaf_surface *= .9f;
+            larm_leaf_surface *= .9f;
+            rarm_leaf_surface *= .9f;
+            head_leaf_surface *= .9f;
         }
         if( !you.has_trait( trait_LEAVES ) && !you.has_trait( trait_LEAVES2 ) &&
             !you.has_trait( trait_LEAVES2_FALL ) && !you.has_trait( trait_LEAVES3 ) &&
             !you.has_trait( trait_LEAVES3_FALL ) ) {
             head_leaf_surface = 0;
         }
-        sunlight_nutrition += ( ( 20 + flux ) * weather_factor ) * ( ( head_leaf_surface +
-                              phelloderm_surface ) / 200 );
+        sunlight_nutrition += static_cast<int>( std::round( ( ( 20 + flux ) * weather_factor ) * ( (
+                head_leaf_surface +
+                phelloderm_surface ) / 200 ) ) );
         if( leafier || leafiest ) {
-            const int rate = std::max( round( 7 * ( ( larm_leaf_surface + rarm_leaf_surface +
-                                                    vine_leaf_surface ) / 2 ) + flux ), 0.0f ) * 2;
-            sunlight_nutrition += rate * ( leafiest ? 1.75 : 1.5 ) * weather_factor;
+            const int rate = std::max( std::round( 7.f * ( ( larm_leaf_surface + rarm_leaf_surface +
+                                                   vine_leaf_surface ) / 2.f ) + flux ), 0.0f ) * 2;
+            sunlight_nutrition += rate * ( leafiest ? 1.75f : 1.5f ) * weather_factor;
         }
         you.get_size();
         // Multiply by the proportional difference in average height, as height roughly determines armspan,

@@ -1137,7 +1137,7 @@ class Character : public Creature, public visitable
         int footstep_sound() const;
         // the sound clattering items dangling off you can make
         int clatter_sound() const;
-        void make_footstep_noise() const;
+        void make_footstep_noise( const tripoint_bub_ms pos ) const;
         void make_clatter_sound() const;
 
         bool can_switch_to( const move_mode_id &mode ) const;
@@ -1581,7 +1581,7 @@ class Character : public Creature, public visitable
           */
         bool enough_working_legs() const;
         /** Returns the number of functioning legs */
-        int get_working_leg_count() const;
+        int get_working_leg_count( bool quadruped_allowed = true ) const;
         /** Returns true if the limb is broken */
         bool is_limb_broken( const bodypart_id &limb ) const;
         /** source of truth of whether a Character can run */
@@ -2404,6 +2404,9 @@ class Character : public Creature, public visitable
         */
         units::volume small_pocket_volume( const units::volume &threshold = 1000_ml ) const;
 
+        /** The time it takes to chop down a tree or cut up a trunk. **/
+        int chop_moves( item &it ) const;
+
         /** Note that we've read a book at least once. **/
         virtual bool has_identified( const itype_id &item_id ) const = 0;
         book_mastery get_book_mastery( const item &book ) const;
@@ -2506,6 +2509,8 @@ class Character : public Creature, public visitable
         void invalidate_inventory_validity_cache();
 
         void invalidate_weight_carried_cache();
+
+        void invalidate_flag_caches();
         /** Returns all items that must be taken off before taking off this item */
         std::list<item *> get_dependent_worn_items( const item &it );
         /** Drops an item to the specified location */
@@ -3300,6 +3305,7 @@ class Character : public Creature, public visitable
          *  @param target where the first shot is aimed at (may vary for later shots)
          *  @param shots maximum number of shots to fire (less may be fired in some circumstances)
          *  @param gun item to fire (which does not necessary have to be in the players possession)
+         *  @param ammo item_location of ammunition for RAS (reload after shot) weapon like arrows
          *  @return number of shots actually fired
          */
         int fire_gun( map &here, const tripoint_bub_ms &target, int shots, item &gun,
@@ -3403,9 +3409,9 @@ class Character : public Creature, public visitable
         float speed_rating() const override;
 
         // Put corpse+inventory on map at the place where this is.
-        void place_corpse( map *here );
+        void place_corpse( map *here, const faction_id faction );
         // Put corpse+inventory on defined om tile
-        void place_corpse( const tripoint_abs_omt &om_target );
+        void place_corpse( const tripoint_abs_omt &om_target, const faction_id faction );
 
         /** Modifies the movement cost and returns a list of effects */
         std::vector<run_cost_effect> run_cost_effects( float &movecost ) const;
@@ -3868,8 +3874,6 @@ class Character : public Creature, public visitable
         const std::function<int( int )> &charges_required_modifier = []( int i ) {
             return i;
         } );
-        /** Consume tools for the next multiplier * 5% progress of the craft */
-        bool craft_consume_tools( item &craft, int multiplier, bool start_craft );
         /** Advance per-step tool consumption so each step's allocations match its
          *  current progress.  Returns false (consuming nothing) if charges are short.
          *  When cost_ctx is supplied, it is reused for step budgets instead of

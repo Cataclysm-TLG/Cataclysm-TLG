@@ -218,6 +218,9 @@ struct dealt_damage_instance {
     int total_damage() const;
 };
 
+struct average_resistance_t {};
+inline constexpr average_resistance_t average_resistance {};
+
 struct resistances {
     std::unordered_map<damage_type_id, float> resist_vals;
 
@@ -227,6 +230,8 @@ struct resistances {
     explicit resistances( const item &armor, bool to_self = false, int roll = 0,
                           const bodypart_id &bp = bodypart_id() );
     explicit resistances( const item &armor, bool to_self, int roll, const sub_bodypart_id &bp );
+    resistances( const item &armor, bool to_self, average_resistance_t, const bodypart_id &bp );
+    resistances( const item &armor, bool to_self, average_resistance_t, const sub_bodypart_id &bp );
     explicit resistances( monster &monster );
     void set_resist( const damage_type_id &dt, float amount );
     float type_resist( const damage_type_id &dt ) const;
@@ -244,6 +249,7 @@ struct resistances {
     resistances operator*( float mod ) const;
     resistances operator/( float mod ) const;
 };
+
 
 resistances extend_resistances_instance( resistances ret, const JsonObject &jo );
 resistances load_resistances_instance( const JsonObject &jo,

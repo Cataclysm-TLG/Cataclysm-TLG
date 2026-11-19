@@ -251,8 +251,8 @@ bool Character::handle_melee_wear( item_location shield, float wear_multiplier )
     int damage_chance = static_cast<int>( ( stat_factor * material_factor /
                                             ( wear_multiplier * enchant_multiplier ) ) );
     // STURDY items are also durable for unarmed attack purposes.
-    if( shield->has_flag( flag_DURABLE_MELEE ) || ( unarmed_attack() &&
-            shield->has_flag( flag_STURDY ) ) ) {
+    if( ( shield->has_flag( flag_DURABLE_MELEE ) || ( unarmed_attack() &&
+            shield->has_flag( flag_STURDY ) ) ) && !shield->has_flag( flag_REPLICA_EQUIPMENT ) ) {
         damage_chance *= 2;
     }
 
@@ -455,10 +455,9 @@ std::string Character::get_miss_reason()
     if( wound_factor != 0.0f ) {
         add_miss_reason( _( "Your injuries make it hard to keep fighting." ), wound_factor );
     }
-    if( enc > 10 ) {
-        const float scaled = enc < 25 ? static_cast<float>( enc ) / 25.0f : static_cast<float>
-                             ( enc ) / 10.0f;
-        add_miss_reason( _( "Your torso encumbrance throws you off-balance." ), roll_remainder( scaled ) );
+    if( enc > 19 ) {
+        const float scaled = ( static_cast<float>( enc ) - 20.0f ) / 20.0f * 0.9f + 0.1f;
+        add_miss_reason( _( "Your torso encumbrance throws you off balance." ), roll_remainder( scaled ) );
     }
     const int farsightedness = 2 * ( has_flag( json_flag_HYPEROPIC ) &&
                                      !worn_with_flag( flag_FIX_FARSIGHT ) &&
@@ -646,12 +645,12 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
     std::string weapon_string;
     if( !cur_weap.is_null() ) {
         weapon_string = string_format(
-                            _( "<color_light_red>Attacking your %s will take a long time. Are you sure you want to continue?</color>" ),
+                            _( "<color_light_red>Attacking with your %s will take a long time.  Are you sure you want to continue?</color>" ),
                             cur_weap.display_name()
                         );
     } else {
         weapon_string =
-            _( "<color_light_red>Attacking unarmed will take a long time. Are you sure you want to continue?</color>" );
+            _( "<color_light_red>Attacking unarmed will take a long time.  Are you sure you want to continue?</color>" );
     }
 
     if( is_avatar() && move_cost >= 500 && calendar::turn > melee_warning_turn ) {
@@ -706,7 +705,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
 
         if( is_avatar() ) { // Only display messages if this is the player.
 
-            if( one_in( 2 ) ) {
+            if( one_in( 3 ) ) {
                 const std::string reason_for_miss = get_miss_reason();
                 if( !reason_for_miss.empty() ) {
                     add_msg( reason_for_miss );
@@ -829,7 +828,7 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
             perform_technique( technique, t, d, move_cost, cur_weapon );
         }
 
-        // Player has a very small chance, based on their intelligence, to learn a style whilst using the CQB bionic
+        // Player has a very small chance, based on their intelligence, to learn a style while using the CQB bionic
         if( has_active_bionic( bio_cqb ) && !martial_arts_data->knows_selected_style() ) {
             /** @EFFECT_INT slightly increases chance to learn techniques when using CQB bionic */
             // Enhanced Memory Banks bionic doubles chance to learn martial art
@@ -1055,6 +1054,9 @@ bool Character::melee_attack_abstract( Creature &t, bool allow_special,
         dealt_projectile_attack dp = dealt_projectile_attack();
         t.as_character()->on_hit( &here, this, bodypart_str_id::NULL_ID().id(), 0.0f, &dp );
     }
+    if( reach_attacking ) {
+        t.react_to_ranged( this );
+    }
     if( drop_weapon && !cur_weap.is_null() && !cur_weap.has_flag( flag_INTEGRATED ) ) {
         map &here = get_map();
         item your_weapon = remove_weapon();
@@ -1129,9 +1131,12 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost,
         if( inter != nullptr &&
             !x_in_y( ( target_size * target_size + 1 ) * skill,
                      ( inter->get_size() * inter->get_size() + 1 ) * 10 ) ) {
-            // Even if we miss here, low roll means weapon is pushed away or something like that
-            if( inter->has_effect( effect_pet ) || ( inter->is_npc() &&
-                    inter->as_npc()->is_friendly( get_player_character() ) ) ) {
+            // Even if we miss here, low roll means weapon is pushed away or something like that.
+            if( inter->has_effect( effect_pet ) || ( inter->is_monster() &&
+                    ( inter->attitude_to( *this ) == Attitude::FRIENDLY ||
+                      ( inter->attitude_to( *this ) == Attitude::NEUTRAL && ( critter->is_monster() &&
+                              critter->attitude_to( *this ) != Attitude::NEUTRAL ) ) ) ) || ( inter->is_npc() &&
+                                      !inter->as_npc()->is_enemy() && !inter->as_npc()->guaranteed_hostile() ) ) {
                 if( query_yn( _( "Your attack may cause accidental injury, continue?" ) ) ) {
                     critter = inter;
                     break;
@@ -1196,8 +1201,7 @@ void Character::reach_attack( const tripoint_bub_ms &p, int forced_movecost,
         mod_moves( forced_movecost >= 0 ? -forced_movecost : -move_cost );
         return;
     }
-
-    reach_attacking = true;
+    reach_attacking = !is_adjacent( this, critter );
     melee_attack_abstract( *critter, true, force_technique, false, forced_movecost );
     last_target_pos = std::nullopt;
     shared_ptr_fast<Creature> last_target = this->last_target.lock();
@@ -1575,6 +1579,7 @@ void Character::roll_damage( const damage_type_id &dt, bool crit, damage_instanc
         di.add_damage( dt, other_dam, arpen, armor_mult, other_mul );
     }
 }
+
 std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id> Character::pick_technique(
     Creature const &t, const item_location &weap, bool crit,
     bool dodge_counter, bool block_counter, const std::vector<matec_id> &blacklist ) const
@@ -1630,6 +1635,7 @@ std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id> Character::pick_tech
                                               sub_bodypart_str_id::NULL_ID() ) );
     }
 }
+
 std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
         Character::evaluate_technique( const matec_id &tec_id, Creature const &t, const item_location &weap,
                                        std::vector<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>> &fallbacks,
@@ -1751,9 +1757,11 @@ std::optional<std::tuple<matec_id, attack_vector_id, sub_bodypart_str_id>>
             add_msg_debug( debugmode::DF_MELEE,
                            "Negative tech weighting failed roll, attack %s discarded", tec_id->name );
         } else {
-            // Fallback techs should always fire in place of tec_none if possible, even if they failed their roll.
-            if( tec_id->is_valid_character( *this ) ) {
-                // We still need a valid vector to make a fallback attack.
+            // Fallback techs should be available when unarmed, even if the selected
+            // style normally requires a weapon. They should not override an invalid weapon.
+            const bool unarmed = !is_armed();
+            const bool valid_character = tec_id->is_valid_character( *this );
+            if( unarmed || valid_character ) {
                 std::optional<std::pair<attack_vector_id, sub_bodypart_str_id>> vector;
                 vector = martial_arts_data->choose_attack_vector( *this, tec_id );
                 if( vector ) {

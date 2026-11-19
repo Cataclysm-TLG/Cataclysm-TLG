@@ -143,5 +143,21 @@
     "attitude": 0,
     "mission": 3,
     "chat": "TALK_DONE"
+  },
+  {
+    "type": "npc",
+    "id": "MILITIA_GUARD1",
+    "class": "MILITIA_GUARD1",
+    "attitude": 0,
+    "mission": 8,
+    "chat": "TALK_DONE"
+  },
+  {
+    "type": "npc",
+    "id": "MILITIA_MERCHANT",
+    "class": "MILITIA_MERCHANT",
+    "attitude": 0,
+    "mission": 3,
+    "chat": "TALK_DONE"
   }
 ]

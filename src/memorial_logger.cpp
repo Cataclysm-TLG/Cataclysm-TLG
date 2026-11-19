@@ -709,23 +709,8 @@ void memorial_logger::notify( const cata::event &e )
         case event_type::dies_from_drug_overdose: {
             character_id ch = e.get<character_id>( "character" );
             if( ch == avatar_id ) {
-                efftype_id effect = e.get<efftype_id>( "effect" );
-                if( effect == effect_datura ) {
-                    add( pgettext( "memorial_male", "Died of datura overdose." ),
-                         pgettext( "memorial_female", "Died of datura overdose." ) );
-                } else if( effect == effect_jetinjector ) {
-                    add( pgettext( "memorial_male", "Died of a healing stimulant overdose." ),
-                         pgettext( "memorial_female", "Died of a healing stimulant overdose." ) );
-                } else if( effect == effect_adrenaline ) {
-                    add( pgettext( "memorial_male", "Died of adrenaline overdose." ),
-                         pgettext( "memorial_female", "Died of adrenaline overdose." ) );
-                } else if( effect == effect_drunk ) {
-                    add( pgettext( "memorial_male", "Died of an alcohol overdose." ),
-                         pgettext( "memorial_female", "Died of an alcohol overdose." ) );
-                } else {
-                    add( pgettext( "memorial_male", "Died of a drug overdose." ),
-                         pgettext( "memorial_female", "Died of a drug overdose." ) );
-                }
+                add( pgettext( "memorial_male", "Died of a drug overdose." ),
+                     pgettext( "memorial_female", "Died of a drug overdose." ) );
             }
             break;
         }

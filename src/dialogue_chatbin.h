@@ -147,8 +147,9 @@ struct dialogue_chatbin_snippets {
     translation snip_give_nope = to_translation( "Nope." );
     translation snip_give_to_hallucination = to_translation( "No thanks, I'm good." );
     translation snip_give_cancel = to_translation( "Changed your mind?" );
-    translation snip_give_dangerous = to_translation( "Are you <swear> insane!?" );
+    translation snip_give_dangerous = to_translation( "No, that's dangerous!" );
     translation snip_give_wield = to_translation( "Thanks, I'll wield that now." );
+    translation snip_give_wield_cant = to_translation( "I am unable to wield that." );
     translation snip_give_weapon_weak = to_translation( "My current weapon is better than this.\n" );
     translation snip_give_carry = to_translation( "Thanks, I'll carry that now." );
     translation snip_give_carry_cant = to_translation( "I have no space to store it." );

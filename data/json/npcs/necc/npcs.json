@@ -286,7 +286,7 @@
   {
     "type": "npc",
     "id": "FM_godco_merchant_random",
-    "//": "Random NPC, can direct you to the free merchants and sell you things.",
+    "//": "Random NPC, can direct you to the refugee center and sell you things.",
     "name_suffix": "Caravan Merchant",
     "class": "NC_EVAC_GODCO_TRADER",
     "attitude": 0,

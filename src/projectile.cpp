@@ -236,8 +236,8 @@ void multi_projectile_hit_message( Creature *critter, int hit_count, int damage_
         // Building a phrase to summarize the fragment effects.
         // Target, Number of impacts, total amount of damage, proportion of deflected fragments.
         std::map<int, std::string> impact_count_descriptions = {
-            { 1, _( "a" ) }, { 2, _( "several" ) }, { 5, _( "many" ) },
-            { 20, _( "a large number of" ) }, { 100, _( "a huge number of" ) },
+            { 1, _( "a" ) }, { 2, _( "multiple" ) }, { 5, _( "several" ) },
+            { 20, _( "many" ) }, { 100, _( "a hail of" ) },
             { std::numeric_limits<int>::max(), _( "an immense number of" ) }
         };
         std::string impact_count = std::find_if(

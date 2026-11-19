@@ -234,6 +234,7 @@ static const skill_id skill_firstaid( "firstaid" );
 static const skill_id skill_social( "social" );
 static const skill_id skill_survival( "survival" );
 
+static const species_id species_ABERRATION( "ABERRATION" );
 static const species_id species_FERAL( "FERAL" );
 static const species_id species_HUMAN( "HUMAN" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
@@ -665,7 +666,7 @@ static void set_up_butchery( player_activity &act, Character &you, butcher_type 
             // If it's player doing the butchery, ask them first.
             if( you.is_avatar() ) {
                 if( do_cannibalism_piss_people_off( you ) ) {
-                    //give the player a random message showing their disgust and cause morale penalty.
+                    // Give the player a random message showing their disgust and cause morale penalty.
                     switch( rng( 1, 3 ) ) {
                         case 1:
                             you.add_msg_if_player( m_bad, _( "You clench your teeth at the prospect of this gruesome job." ) );
@@ -1204,14 +1205,14 @@ static bool butchery_drops_harvest( item *corpse_item, const mtype &mt, Characte
         }
 
         if( drop != nullptr ) {
-            // divide total dropped weight by drop's weight to get amount
+            // Divide total dropped weight by drop's weight to get amount.
             if( entry.mass_ratio != 0.00f ) {
-                // apply skill before converting to items, but only if mass_ratio is defined
-                roll *= butchery_dissect_yield_mult( skill_level, std::min( you.per_cur, you.dex_cur ),
-                                                     tool_quality );
+                // Apply skill before converting to items, but only if mass_ratio is defined.
+                roll *= butchery_dissect_yield_mult( skill_level, you.get_dex(), tool_quality );
                 monster_weight_remaining -= roll;
-                roll = std::ceil( static_cast<double>( roll ) /
-                                  to_gram( drop->weight ) );
+                // Use milligrams to avoid truncation for sub-gram items.
+                roll = std::ceil( static_cast<double>( roll ) * 1000.0 /
+                                  to_milligram( drop->weight ) );
             } else {
                 monster_weight_remaining -= roll * to_gram( drop->weight );
             }
@@ -1497,6 +1498,16 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                                          random_entry( here.points_in_radius( you->pos_bub(),
                                                        std::max( 1, ( corpse->size - 1 ) ) ) ) );
             }
+            // Prevent organ farming.
+            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) &&
+                corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 2 ) ) {
+                add_msg_if_player_sees( you->pos_bub(),
+                                        _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
+                here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
+                corpse_item.set_damage( 4000 );
+                corpse_item.set_flag( flag_PULPED );
+            }
             if( !act->targets.empty() ) {
                 act->targets.pop_back();
             }
@@ -1515,11 +1526,13 @@ void activity_handlers::butcher_finish( player_activity *act, Character *you )
                          translation() ).translated() );
             corpse_item.set_flag( flag_BLED );
             // Prevent blood farming.
-            if( corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
-                one_in( corpse->size * 3 ) ) {
+            if( ( corpse->in_species( species_ZOMBIE ) || corpse->in_species( species_ABERRATION ) ) &&
+                corpse->has_flag( mon_flag_REVIVES ) && !corpse_item.has_flag( flag_PULPED ) &&
+                one_in( corpse->size * 2 ) ) {
                 add_msg_if_player_sees( you->pos_bub(),
                                         _( "The corpse spasms one final time and bursts apart in a shower of gore." ) );
                 here.add_splatter( type_gib, you->pos_bub(), corpse->size + 0 );
+                corpse_item.set_damage( 4000 );
                 corpse_item.set_flag( flag_PULPED );
             }
             if( !act->targets.empty() ) {
@@ -1895,8 +1908,7 @@ void activity_handlers::pickaxe_finish( player_activity *act, Character *you )
     act->set_to_null();
     if( you->is_avatar() ) {
         const int helpersize = get_player_character().get_num_crafting_helpers( 3 );
-        if( here.is_bashable( pos ) && here.has_flag( ter_furn_flag::TFLAG_SUPPORTS_ROOF, pos ) &&
-            here.ter( pos ) != ter_t_tree ) {
+        if( here.is_bashable( pos ) && here.ter( pos ) != ter_t_tree ) {
             // Tunneling through solid rock is sweaty, backbreaking work
             // Betcha wish you'd opted for the J-Hammer
             if( you->has_trait( trait_STOCKY_TROGLO ) ) {
@@ -2186,12 +2198,17 @@ void activity_handlers::vehicle_finish( player_activity *act, Character *you )
     // is to be examined again.
     if( act->is_null() ) {
         if( npc *guy = dynamic_cast<npc *>( you ) ) {
-            guy->revert_after_activity();
-            guy->set_moves( 0 );
+            if( !resume_for_multi_activities( *you ) ) {
+                guy->revert_after_activity();
+                guy->set_moves( 0 );
+            }
         }
         return;
     }
     act->set_to_null();
+    if( resume_for_multi_activities( *you ) ) {
+        return;
+    }
     if( !you->is_npc() ) {
         if( act->values.size() < 7 ) {
             dbg( D_ERROR ) << "game:process_activity: invalid ACT_VEHICLE values: "

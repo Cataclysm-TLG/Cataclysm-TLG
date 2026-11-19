@@ -14,6 +14,7 @@ void play_music( const std::string &playlist );
 void stop_music();
 void update_music_volume();
 void load_soundset();
+// Publish time dilation state for SDL's audio callback.
 extern bool sound_init_success;
 
 #else
@@ -28,7 +29,6 @@ inline void play_music( const std::string &/*playlist*/ )
 }
 inline void update_music_volume() { }
 inline void load_soundset() { }
-
 #endif
 
 #endif // CATA_SRC_SDLSOUND_H

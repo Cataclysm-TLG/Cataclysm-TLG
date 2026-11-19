@@ -88,6 +88,9 @@ def parse_npc(json, origin):
     if "name_suffix" in json:
         write_text(json["name_suffix"], origin,
                    comment=["Name suffix of {} NPC".format(gender), comment])
+    if "temp_suffix" in json:
+        write_text(json["temp_suffix"], origin,
+                   comment=["Temporary profession of {} NPC".format(gender), comment])
     for snip in chatbin_snippets:
         if snip in json:
             write_text(json[snip], origin,

@@ -1,6 +1,9 @@
 #include "mattack_actors.h"
 
 #include <algorithm>
+#include <cstdlib>
+#include <functional>
+#include <iterator>
 #include <limits>
 #include <memory>
 #include <optional>
@@ -28,6 +31,7 @@
 #include "line.h"
 #include "map.h"
 #include "map_iterator.h"
+#include "melee.h"
 #include "messages.h"
 #include "monster.h"
 #include "mtype.h"
@@ -335,10 +339,14 @@ bool mon_spellcasting_actor::call( monster &mon ) const
 
     if( !spell_data.self && !allow_no_target ) {
         Creature *tgt_creature = get_creature_tracker().creature_at( target_pos );
+        map &here = get_map();
+        // Prevent monsters from attacking through terrain if they are submerged under it & target isn't.
         if( tgt_creature && mon.is_underwater() && !tgt_creature->is_underwater() &&
-            get_map().has_flag_ter_or_furn( ter_furn_flag::TFLAG_SWIM_UNDER, mon.pos_bub() ) ) {
+            ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, mon.pos_bub() ) ||
+              here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, tgt_creature->pos_bub() ) ) ) {
             return false;
         }
+
     }
 
     // Bail out if the target is out of range.
@@ -494,6 +502,10 @@ Creature *melee_actor::find_target( monster &z ) const
         return nullptr;
     }
 
+    if( range == 1 && !z.is_adjacent( target, /*bool allow_z_levels =*/ false ) ) {
+        return nullptr;
+    }
+
     if( range > 1 ) {
         bool in_range = false;
 
@@ -505,17 +517,37 @@ Creature *melee_actor::find_target( monster &z ) const
                                trig_dist_precise(
                                    z.pos_bub(), target->pos_bub() ) ) ) <= range;
         }
-
+        // Prevent attacking through terrain if the target isn't underwater.
+        if( in_range ) {
+            if( z.is_underwater() && !target->is_underwater() &&
+                ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ||
+                  here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, target->pos_bub() ) ) ) {
+                in_range = false;
+            }
+        }
         if( !in_range ||
-            !z.sees( here, *target ) ||
-            !here.clear_path( z.pos_bub( here ), target->pos_bub( here ),
-                              range, 1, 200 ) ) {
+            !z.sees( here, *target ) ) {
             return nullptr;
+        }
+
+        std::vector<tripoint_bub_ms> path = line_to( z.pos_bub(), target->pos_bub(), 0, 0 );
+        path.pop_back(); // Last point is our target
+
+        // Scaled-down reimplementation of Character::reach_attack() with character-specific values removed.
+        for( const tripoint_bub_ms &path_point : path ) {
+            Creature *collateral_damage = get_creature_tracker().creature_at( path_point );
+            if( collateral_damage ) {
+                return nullptr; // Something else in the way, can't attack.
+            }
+            // FIXME: All melee specials with range > 1 are currently considered to be "spear" type attacks or otherwise capable of passing through thin obstacles.
+            if( here.impassable( path_point ) &&
+                !here.has_flag( ter_furn_flag::TFLAG_THIN_OBSTACLE, path_point ) ) {
+                return nullptr;
+            }
         }
     } else if( !z.is_adjacent( target, false ) ) {
         return nullptr;
     }
-
     return target;
 }
 
@@ -793,8 +825,10 @@ bool melee_actor::call( monster &z ) const
         return false;
     }
 
+    // Prevent attacking through terrain if the target isn't underwater.
     if( z.is_underwater() && !target->is_underwater() &&
-        here.has_flag_ter_or_furn( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ) {
+        ( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, z.pos_bub() ) ||
+          here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, target->pos_bub() ) ) ) {
         return false;
     }
 
@@ -824,7 +858,7 @@ bool melee_actor::call( monster &z ) const
     // Dodge check
 
     const int acc = accuracy >= 0 ? accuracy : z.type->melee_skill;
-    int hitspread = target->deal_melee_attack( &z, dice( acc, 10 ) );
+    int hitspread = target->deal_melee_attack( &z, melee::melee_hit_range( acc ) );
 
     // Pick body part
     bodypart_str_id bp_hit = body_parts.empty() ?

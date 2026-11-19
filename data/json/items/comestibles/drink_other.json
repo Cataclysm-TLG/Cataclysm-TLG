@@ -297,7 +297,7 @@
     "comestible_type": "FOOD",
     "container": "jar_glass_sealed",
     "sealed": false,
-    "quench": -10,
+    "quench": -5,
     "calories": 30,
     "charges": 48,
     "fun": -20,

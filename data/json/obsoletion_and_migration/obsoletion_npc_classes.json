@@ -96,5 +96,19 @@
     "name": { "str": "Scrap Merchant" },
     "job_description": "Obsolete class from removed scrap merchant.",
     "common": false
+  },
+  {
+    "type": "npc_class",
+    "id": "MILITIA_GUARD1",
+    "name": { "str": "Militia Guard" },
+    "job_description": "Obsolete class from removed faction.",
+    "common": false
+  },
+  {
+    "type": "npc_class",
+    "id": "MILITIA_MERCHANT",
+    "name": { "str": "Militia Merchant" },
+    "job_description": "Obsolete class from removed faction.",
+    "common": false
   }
 ]

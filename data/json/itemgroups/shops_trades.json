@@ -3,9 +3,8 @@
     "id": "ceramics_workroom",
     "type": "item_group",
     "items": [
-      [ "cooking_oil", 15 ],
-      { "item": "cooking_oil_coconut", "prob": 5 },
-      { "item": "tallow", "prob": 5 },
+      { "group": "oil_shortening_used", "prob": 10 },
+      { "group": "oil_shortening_unused", "prob": 1 },
       [ "mag_fabrication", 15 ],
       [ "manual_fabrication", 5 ],
       [ "mag_survival", 10 ],
@@ -16,7 +15,7 @@
       [ "wax_paraffin", 30 ],
       [ "straw_pile", 15 ],
       { "group": "charcoal_bag_part", "prob": 25 },
-      [ "clay_lump", 100 ]
+      [ "clay_lump", 150 ]
     ]
   },
   {
@@ -108,7 +107,7 @@
         "collection": [
           { "item": "hairpin", "prob": 25, "count": [ 3, 4 ] },
           { "item": "touristmap", "prob": 2, "count": [ 0, 1 ] },
-          { "item": "UPS_OFF", "prob": 5, "count": [ 0, 2 ] },
+          { "item": "UPS_off", "prob": 5, "count": [ 0, 2 ] },
           { "item": "pockknife", "prob": 20, "count": [ 0, 5 ] },
           { "item": "fork", "prob": 60, "count": [ 3, 10 ] },
           { "item": "spoon", "prob": 60, "count": [ 3, 10 ] },

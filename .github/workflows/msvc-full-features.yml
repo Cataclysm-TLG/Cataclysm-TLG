@@ -86,11 +86,20 @@ jobs:
       id: runvcpkg
       with:
         vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
-        vcpkgGitCommitId: '3b57fb2e1ff55613db14d2aaf0a30529289c7050'
+        vcpkgGitCommitId: 'a1cae005c39be7b18ba319fced856b68d7276271'
 
-    - name: Integrate vcpkg
+   - name: Integrate vcpkg
       run: |
-        vcpkg integrate install --vcpkg-root '${{ runner.workspace }}\b\vcpkg'
+        vcpkg integrate install --vcpkg-root "$env:RUNNER_WORKSPACE\b\vcpkg"
+      env:
+        RUNNER_WORKSPACE: ${{ runner.workspace }}
+
+    - name: Cache vcpkg installed packages
+      uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      with:
+        path: msvc-full-features/vcpkg_installed
+        key: vcpkg-installed-sdl3-${{ hashFiles('msvc-full-features/vcpkg.json', '.github/vcpkg_triplets/x64-windows-static.cmake', '.github/vcpkg_overlay_ports/**') }}-a1cae005c39be7b18ba319fced856b68d7276271
+
 
     - name: Download ccache
       uses: robinraju/release-downloader@v1.9
@@ -137,8 +146,7 @@ jobs:
 
     - name: Build
       run: |
-          msbuild -m -p:Configuration=Release -p:Platform=x64 "-target:Cataclysm-vcpkg-static;JsonFormatter-vcpkg-static" msvc-full-features/Cataclysm-vcpkg-static.sln
-     #     msbuild -m -p:Configuration=Release -p:Platform=x64 "-target:Cataclysm-vcpkg-static;Cataclysm-test-vcpkg-stati;JsonFormatter-vcpkg-static;zzip" msvc-full-features/Cataclysm-vcpkg-static.sln
+          msbuild -m -p:Configuration=Release -p:Platform=x64 -p:UseSDL3=true "-target:Cataclysm-vcpkg-static;Cataclysm-test-vcpkg-static;JsonFormatter-vcpkg-static;zzip" msvc-full-features/Cataclysm-vcpkg-static.sln
 
     - name: Get ccache cache age cutoff
       id: get-cache-age
@@ -151,12 +159,12 @@ jobs:
     - name: Post-build ccache manipulation
       if: ${{ !failure() }}
       run: |
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -s -v
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe --evict-older-than ${{ steps.get-ccache-age.outputs.ccache-age }}
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -s -v
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -M ${{ env.CCACHE_LIMIT }}
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -c
-        ${{ env.CDDA_CCACHE_PATH }}\ccache.exe -s -v
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -s -v
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe --evict-older-than ${{ steps.get-ccache-age.outputs.ccache-age }}
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -s -v
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -M ${{ env.CCACHE_LIMIT }}
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -c
+        ${{ env.CTLG_CCACHE_PATH }}\ccache.exe -s -v
 
     - name: clear ccache on PRs
       if: ${{ github.ref_name != 'master' }}
@@ -197,7 +205,7 @@ jobs:
   #  - name: Run tests
   #    if: ${{ github.ref_name != 'master' }}
   #    run: |
-  #        .\Cataclysm-test-vcpkg-static-Release-x64.exe --min-duration 20 --rng-seed time
+  #        .\Cataclysm-test-vcpkg-static-Release.exe --min-duration 20 --rng-seed time
 
     - name: Dump disk usage logs if job failed
       if: failure()

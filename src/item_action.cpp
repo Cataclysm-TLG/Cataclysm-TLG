@@ -306,8 +306,7 @@ void game::item_action_menu( item_location loc )
     std::transform( iactions.begin(), iactions.end(), std::back_inserter( menu_items ),
     []( const std::pair<item_action_id, item *> &elem ) {
         std::string ss = elem.second->display_name();
-        if( elem.second->ammo_required() ) {
-
+        if( elem.second->ammo_required() && !elem.second->is_comestible() ) {
             if( elem.second->has_flag( flag_USES_BIONIC_POWER ) ) {
                 ss += string_format( "(%d kJ)", elem.second->ammo_required() );
             } else {
@@ -315,9 +314,7 @@ void game::item_action_menu( item_location loc )
                 ss += string_format( "(-%d)", elem.second->ammo_required() * ( iter ==
                                      elem.second->type->ammo_scale.end() ? 1 : iter->second ) );
             }
-
         }
-
         const use_function *method = elem.second->get_use( elem.first );
         if( method ) {
             return std::make_tuple( method->get_type(), method->get_name(), ss, method->get_description() );

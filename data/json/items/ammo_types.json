@@ -93,7 +93,7 @@
     "type": "ammunition_type",
     "id": "bolt",
     "name": "bolts",
-    "default": "bolt_wood"
+    "default": "bolt_wood_broadhead"
   },
   {
     "type": "ammunition_type",

@@ -831,11 +831,6 @@ ret_val<edible_rating> Character::can_eat( const item &food ) const
         return ret_val<edible_rating>::make_failure( _( "That doesn't look edible in its current form." ) );
     }
 
-    if( food.has_own_flag( flag_DIRTY ) ) {
-        return ret_val<edible_rating>::make_failure(
-                   _( "This is full of dirt after being on the ground." ) );
-    }
-
     const bool eat_verb  = food.has_flag( flag_USE_EAT_VERB );
     const bool edible    = eat_verb ||  comest->comesttype == comesttype_FOOD;
     const bool drinkable = !eat_verb && comest->comesttype == comesttype_DRINK;
@@ -1490,16 +1485,17 @@ void Character::modify_morale( item &food, const int nutr )
         }
         int strength_adjusted = enchantment_cache->modify_value( enchant_vals::mod::STRENGTH_NATURAL,
                                 get_str_base() );
-        if( strength_adjusted > 10 ) {
-            nausea_chance -= ( std::min( get_str(), strength_adjusted ) / 2 );
+        // Nausea chance is not reduced at strength 9.
+        // Nausea chance reduction ranges from 1 to 10 for strength 10 through 19.
+        nausea_chance -= std::clamp( std::min( get_str(), strength_adjusted ) - 9, 0, 10 );
+        if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {
+            const double nausea_severity = nausea_chance * rng_float( 1.25, 0.5 );
+            // 15 minutes is the max duration, and the effect's intensity automatically scales with duration.
+            // Max duration is reached when nausea_severity is 1/0.15=6.667.
+            add_effect( effect_nausea, std::min( 100.0, nausea_severity ) * 0.15 * 15_minutes );
+            add_msg_player_or_npc( _( "You're not sure you're going to be able to keep that down." ),
+                                   _( "<npcname> looks about ready to puke." ) );
         }
-    }
-    if( nausea_chance > 0 && x_in_y( std::min( 100, nausea_chance ), 100 ) ) {
-        nausea_chance = static_cast<int>( nausea_chance * rng_float( 1.25, 0.5 ) );
-        // 15 minutes is the max duration, and the effect's intensity automatically scales with duration.
-        add_effect( effect_nausea, ( 1 / ( std::min( 100, nausea_chance ) * .15 ) ) * 15_minutes );
-        add_msg_player_or_npc( _( "You're not sure you're going to be able to keep that down." ),
-                               _( "<npcname> looks about ready to puke." ) );
     }
 }
 
@@ -1524,8 +1520,7 @@ double Character::compute_effective_food_volume_ratio( const item &food ) const
 // These maths are made easier by the fact that 1 g = 1 mL. Thanks, metric system.
 std::pair<units::volume, units::volume> Character::masticated_volume( const item &food ) const
 {
-    units::volume water_vol = ( food.get_comestible()->quench > 0 ) ? food.get_comestible()->quench *
-                              5_ml : 0_ml;
+    units::volume water_vol = food.get_comestible()->quench * 5_ml;
     units::mass water_weight = units::from_gram( units::to_milliliter( water_vol ) );
     // handle the division by zero exception when the food count is 0 with std::max()
     units::mass food_dry_weight = food.weight() / std::max( 1, food.count() ) - water_weight;
@@ -1716,6 +1711,10 @@ bool Character::consume_effects( item &food )
     // GET IN MAH BELLY!
     stomach.ingest( ingested );
 
+    if( ingested.water < 0_ml ) {
+        mod_thirst( -units::to_milliliter( ingested.water ) / 5 );
+    }
+
     // update speculative values
     if( is_avatar() ) {
         get_avatar().add_ingested_kcal( ingested.nutr.calories / 1000 );
@@ -1731,8 +1730,7 @@ bool Character::consume_effects( item &food )
 
 bool Character::can_estimate_rot() const
 {
-    return get_greater_skill_or_knowledge_level( skill_cooking ) >= 3 ||
-           get_greater_skill_or_knowledge_level( skill_survival ) >= 4;
+    return get_greater_skill_or_knowledge_level( skill_cooking ) >= 3;
 }
 
 bool Character::can_consume_as_is( const item &it ) const
@@ -1836,10 +1834,7 @@ time_duration Character::get_consume_time( const item &it ) const
                                   get_modifier( character_modifier_solid_consume_mod );
     }
 
-    // Minimum consumption time, without mutations, is always 1 second.
-    time = std::max( 1_seconds, time );
-
-    return time * consume_time_modifier;
+    return std::max( 1_seconds, time * consume_time_modifier );
 }
 
 static bool query_consume_ownership( item &target, Character &p )
@@ -1892,7 +1887,7 @@ static bool consume_med( item &target, Character &you )
     // Otherwise injecting someone will give us addictions etc.
     if( target.has_flag( flag_NO_INGEST ) ) {
         const islot_comestible &comest = *target.get_comestible();
-        // Assume that parenteral meds don't spoil, so don't apply rot
+        // Assume that parenteral meds don't spoil, so don't apply rot.
         you.modify_health( comest );
         you.modify_fatigue( comest );
         you.modify_addiction( comest );

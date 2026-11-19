@@ -184,7 +184,6 @@
       "CAMO2",
       "MUCUS_SECRETION",
       "MUCUS_SECRETION2",
-      "PALE",
       "SLIME_SPRAY",
       "SNAIL_TRAIL",
       "SORES",
@@ -420,7 +419,7 @@
     "triggers": [
       [
         {
-          "condition": { "math": [ "u_val('morale')", "<", "-50" ] },
+          "condition": { "math": [ "u_val('morale') < -50" ] },
           "msg_on": { "text": "Everything is terrible and this makes you so ANGRY!", "rating": "mixed" }
         }
       ],
@@ -612,7 +611,7 @@
     "category": [ "INSECT", "TROGLOBITE", "RAT" ],
     "enchantments": [
       {
-        "condition": { "math": [ "u_val('pos_z')", "<", "0" ] },
+        "condition": { "math": [ "u_val('pos_z') < 0" ] },
         "values": [ { "value": "BONUS_BLOCK", "add": 1 }, { "value": "BONUS_DODGE", "add": 1 } ]
       }
     ]
@@ -766,7 +765,7 @@
     "id": "POISRESIST",
     "name": { "str": "Poison Resistant" },
     "points": 1,
-    "description": "Your system is rather tolerant of poisons and toxins, and most will affect you less.",
+    "description": "While not fully immune, your system is rather tolerant to many types of poison and venom.",
     "starting_trait": true,
     "leads_to": [ "EATPOISON" ],
     "category": [
@@ -1531,7 +1530,6 @@
     "name": { "str": "Fiber Intolerance" },
     "points": -2,
     "description": "You have problems with eating vegetables.  It's possible for you to eat them, but you will suffer morale penalties and obtain less nutrition from them.",
-    "valid": false,
     "starting_trait": true,
     "vitamins_absorb_multi": [ [ "vegetable", [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ] ] ] ],
     "changes_to": [ "CARNIVORE" ],
@@ -1880,8 +1878,8 @@
     "starting_trait": true,
     "changes_to": [ "SUNBURN" ],
     "category": [ "TROGLOBITE", "MOUSE", "RABBIT" ],
-    "flags": [ "ALBINO" ],
-    "types": [ "skin_tone" ]
+    "prereqs": [ "SKIN_PALE" ],
+    "flags": [ "ALBINO" ]
   },
   {
     "type": "mutation",
@@ -2058,18 +2056,6 @@
     "leads_to": [ "CEPH_VISION" ],
     "flags": [ "EYE_MEMBRANE" ],
     "category": [ "CEPHALOPOD" ]
-  },
-  {
-    "type": "mutation",
-    "id": "MANSBESTFRIEND",
-    "name": { "str": "Man's Best Friend" },
-    "points": 1,
-    "description": "Man's oldest and most well known friends are all Lupines.  You've got some of that dog in you now, making it a bit easier to get along with them, but harder to lie.",
-    "types": [ "EYES" ],
-    "prereqs": [ "LUPINE_FUR", "LUPINE_FUR_SUMMER" ],
-    "category": [ "LUPINE" ],
-    "mixed_effect": true,
-    "social_modifiers": { "lie": -10, "persuade": 10 }
   },
   {
     "type": "mutation",
@@ -3066,7 +3052,7 @@
     "ugliness": 4,
     "bodytemp_modifiers": [ 100, 150 ],
     "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.1 } ] } ],
-    "description": "You've developed some sort of bristly hair growing out of parts of your chitin.  It provides a bit of warmth.",
+    "description": "You've developed some sort of bristly hair growing out of parts of your chitin.  It's unsightly, but provides a bit of warmth.",
     "types": [ "BODY_ARMOR_MOD" ],
     "prereqs": [ "CHITIN", "CHITIN2", "CHITIN2_MOLTED", "CRUSTACEAN_CARAPACE", "CRUSTACEAN_CARAPACE_MOLTED" ],
     "category": [ "SPIDER", "INSECT" ],
@@ -3078,10 +3064,10 @@
     "name": { "str": "Furred Chitin" },
     "points": 4,
     "visibility": 10,
-    "ugliness": 4,
+    "ugliness": -1,
     "bodytemp_modifiers": [ 150, 250 ],
     "enchantments": [ { "values": [ { "value": "BODYTEMP_SLEEP", "add": 0.15 } ] } ],
-    "description": "Your chitin hair has thickened and spread across your body.  It provides a bit of warmth and helps you sense nearby vibrations.",
+    "description": "Your chitin is partly covered in a layer of downy fuzz.  It provides a bit of warmth and may appear less frightening to humans than it did before.",
     "types": [ "BODY_ARMOR_MOD" ],
     "prereqs": [ "CHITIN2", "CHITIN2_MOLTED", "CRUSTACEAN_CARAPACE", "CRUSTACEAN_CARAPACE_MOLTED" ],
     "prereqs2": [ "CHITIN" ],
@@ -3410,14 +3396,14 @@
     "points": 2,
     "visibility": 10,
     "ugliness": -4,
-    "description": "You've started blooming where your scalp used to be.  Your blossoms have a pleasant aroma, are visually striking, and are quite sensitive.",
+    "description": "Flowers bloom from your scalp.  Your blossoms have a pleasant aroma, are visually striking, and are quite sensitive.",
     "prereqs": [ "PLANTSKIN", "BARK", "BARK2_a", "BARK2_b", "BARK2_c" ],
     "prereqs2": [ "HAIRROOTS" ],
     "types": [ "SCENT" ],
     "threshreq": [ "THRESH_PLANT", "THRESH_ELFA" ],
+    "scent_type": "sc_flower",
     "category": [ "PLANT", "ELFA" ],
     "changes_to": [ "ROSEBUDS" ],
-    "enchantments": [ { "values": [ { "value": "SCENT_MASK", "add": -200 } ] } ],
     "social_modifiers": { "lie": 10 },
     "prevented_by": [ "FLOWERS_WINTER", "ROSEBUDS_SUMMER", "ROSEBUDS_FALL", "ROSEBUDS_WINTER", "ROSEBUDS_FALL_PICKED" ]
   },
@@ -3446,6 +3432,7 @@
     "cancels": [ "SMELLY", "SMELLY2", "FLOWERS_WINTER" ],
     "threshreq": [ "THRESH_PLANT", "THRESH_ELFA" ],
     "category": [ "PLANT", "ELFA" ],
+    "scent_type": "sc_flower",
     "social_modifiers": { "lie": 10, "persuade": 8 },
     "prevented_by": [ "ROSEBUDS_SUMMER", "ROSEBUDS_FALL", "ROSEBUDS_FALL_PICKED", "ROSEBUDS_WINTER" ]
   },
@@ -3460,6 +3447,7 @@
     "types": [ "SCENT" ],
     "valid": false,
     "cancels": [ "SMELLY", "SMELLY2" ],
+    "scent_type": "sc_flower",
     "threshreq": [ "THRESH_PLANT", "THRESH_ELFA" ],
     "social_modifiers": { "lie": 15, "persuade": 12 }
   },
@@ -3478,6 +3466,7 @@
     "types": [ "SCENT" ],
     "prereqs": [ "FLOWERS" ],
     "cancels": [ "SMELLY", "SMELLY2" ],
+    "scent_type": "sc_flower",
     "activated_eocs": [ "picked_rosebuds_fall" ],
     "threshreq": [ "THRESH_PLANT" ]
   },
@@ -3489,6 +3478,7 @@
     "description": "You've picked all your fruit and no longer have any, as such this mutation is not supposed to be visible.",
     "types": [ "SCENT" ],
     "cancels": [ "SMELLY", "SMELLY2", "ROSEBUDS_FALL" ],
+    "scent_type": "sc_flower",
     "threshreq": [ "THRESH_PLANT" ],
     "player_display": false,
     "valid": false
@@ -3783,7 +3773,7 @@
     "id": "MUTAGEN_AVOID",
     "name": { "str": "Mutagenic Aversion" },
     "points": 0,
-    "description": "Ever since you had that life-threatening reaction to those mutagen and purifier things, you can't bear the thought of ever using them again!",
+    "description": "Ever since you had that life-threatening reaction to mutagen, you can't bear the thought of ever using it again!",
     "purifiable": false,
     "valid": false
   },
@@ -3792,7 +3782,7 @@
     "id": "PHEROMONE_INSECT",
     "name": { "str": "Insect Pheromones" },
     "points": 2,
-    "description": "Your body produces low-level pheromones, identifying you as a friend to many species of insects.  Insects will attack you much less.",
+    "description": "Your body produces low-level pheromones that insects use to recognize their own kind.  It's no guarantee, but they may be less inclined to attack you.",
     "prereqs": [ "SMELLY2" ],
     "types": [ "PHEROMONE" ],
     "threshreq": [ "THRESH_INSECT" ],
@@ -3803,7 +3793,7 @@
     "id": "PHEROMONE_AMPHIBIAN",
     "name": { "str": "Amphibian Pheromones" },
     "points": 2,
-    "description": "Your body produces low-level pheromones, identifying you as a friend to many species of amphibian.  Amphibians will attack you much less.",
+    "description": "Your body produces low-level pheromones that amphibians use to recognize their own kind.  It's no guarantee, but they may be less inclined to attack you.",
     "prereqs": [ "SMELLY2" ],
     "types": [ "PHEROMONE" ],
     "threshreq": [ "THRESH_BATRACHIAN" ],
@@ -3814,7 +3804,7 @@
     "id": "PHEROMONE_MAMMAL",
     "name": { "str": "Mammal Pheromones" },
     "points": 2,
-    "description": "Your body produces low-level pheromones which put mammals at ease.  They will be less likely to attack or flee from you.",
+    "description": "Your body produces low-level pheromones that mammals use to recognize their own kind.  It's no guarantee, but they may be less inclined to flee from you.",
     "prereqs": [ "SMELLY2", "LEGS_BAT" ],
     "types": [ "PHEROMONE" ],
     "category": [ "BEAST", "CATTLE", "CHIROPTERAN" ],
@@ -4120,7 +4110,7 @@
         "ench_effects": [ { "effect": "natural_stance", "intensity": 1 } ]
       },
       {
-        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "condition": { "and": [ { "not": { "u_has_move_mode": "prone" } }, { "not": "u_is_on_liquid" }, { "not": "u_is_underwater" } ] },
         "values": [ { "value": "MOVE_COST", "multiply": 0.38 } ]
       }
     ]
@@ -4189,6 +4179,21 @@
     "prereqs2": [ "STRONG_LEGS" ],
     "threshreq": [ "THRESH_FELINE" ],
     "category": [ "FELINE" ]
+  },
+  {
+    "type": "mutation",
+    "id": "INSECT_LEAP",
+    "name": { "str": "Insect Flight" },
+    "points": 1,
+    "description": "With powerful legs and buzzing wings, you can leap and fly a fair distance, provided you have enough room to do so.",
+    "active": true,
+    "kcal": true,
+    "cost": 4,
+    "activated_is_setup": false,
+    "activated_eocs": [ "EOC_INSECT_LEAP" ],
+    "prereqs": [ "WINGS_INSECT" ],
+    "category": [ "INSECT" ],
+    "threshreq": [ "THRESH_INSECT" ]
   },
   {
     "type": "mutation",
@@ -4884,9 +4889,9 @@
     "type": "effect_on_condition",
     "id": "PAINREC1_EOC",
     "recurrence": "1 m",
-    "condition": { "and": [ { "math": [ "u_pain()", ">", "0" ] }, { "u_has_trait": "PAINREC1" } ] },
+    "condition": { "and": [ { "math": [ "u_pain() > 0" ] }, { "u_has_trait": "PAINREC1" } ] },
     "deactivate_condition": { "not": { "u_has_trait": "PAINREC1" } },
-    "effect": [ { "math": [ "u_pain()", "-=", "3" ] } ]
+    "effect": [ { "math": [ "u_pain() -= 3" ] } ]
   },
   {
     "type": "mutation",
@@ -4903,9 +4908,9 @@
     "type": "effect_on_condition",
     "id": "PAINREC2_EOC",
     "recurrence": "1 m",
-    "condition": { "and": [ { "math": [ "u_pain()", ">", "0" ] }, { "u_has_trait": "PAINREC2" } ] },
+    "condition": { "and": [ { "math": [ "u_pain() > 0" ] }, { "u_has_trait": "PAINREC2" } ] },
     "deactivate_condition": { "not": { "u_has_trait": "PAINREC2" } },
-    "effect": [ { "math": [ "u_pain()", "-=", "4" ] } ]
+    "effect": [ { "math": [ "u_pain() -= 4" ] } ]
   },
   {
     "type": "mutation",
@@ -4921,9 +4926,9 @@
     "type": "effect_on_condition",
     "id": "PAINREC3_EOC",
     "recurrence": "1 m",
-    "condition": { "and": [ { "math": [ "u_pain()", ">", "0" ] }, { "u_has_trait": "PAINREC3" } ] },
+    "condition": { "and": [ { "math": [ "u_pain() > 0" ] }, { "u_has_trait": "PAINREC3" } ] },
     "deactivate_condition": { "not": { "u_has_trait": "PAINREC3" } },
-    "effect": [ { "math": [ "u_pain()", "-=", "5" ] } ]
+    "effect": [ { "math": [ "u_pain() -= 5" ] } ]
   },
   {
     "type": "mutation",
@@ -5035,7 +5040,6 @@
       "THRESH_SPIDER",
       "THRESH_BATRACHIAN"
     ],
-    "cancels": [ "MANSBESTFRIEND" ],
     "category": [ "BEAST", "RAPTOR", "CHIMERA", "LUPINE", "FELINE", "URSINE", "LIZARD", "SPIDER", "BATRACHIAN" ],
     "flags": [ "PRED1" ]
   },
@@ -5146,7 +5150,8 @@
     "prereqs2": [ "PRED3" ],
     "threshreq": [ "THRESH_LUPINE" ],
     "category": [ "LUPINE" ],
-    "flags": [ "PRED3" ]
+    "flags": [ "PRED3" ],
+    "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "COMBAT_CATCHUP", "multiply": 2.0 } ] } ]
   },
   {
     "type": "mutation",
@@ -6410,18 +6415,6 @@
   },
   {
     "type": "mutation",
-    "id": "PALE",
-    "name": { "str": "Pale Skin" },
-    "points": 0,
-    "visibility": 3,
-    "ugliness": 1,
-    "description": "Your skin is rather pale.",
-    "changes_to": [ "ALBINO" ],
-    "category": [ "LUPINE", "TROGLOBITE", "MOUSE", "RABBIT", "BEAST" ],
-    "types": [ "skin_tone" ]
-  },
-  {
-    "type": "mutation",
     "id": "SPOTS",
     "name": { "str": "Spots" },
     "points": 0,
@@ -6686,7 +6679,7 @@
     "name": { "str": "Dense Bones" },
     "points": 1,
     "mixed_effect": true,
-    "description": "Your bones are particularly dense and durable.  Your tougher frame grants 5% more HP and 15% more carry capacity plus bashing attacks injure you less, but your higher weight makes attacking and moving 5% slower.  Also, dodging and swimming are harder.",
+    "description": "Your bones are particularly dense and durable.  Your tougher frame grants 5% more HP and 15% more carry capacity.  You are slightly resistant to bash damage, but your higher weight makes attacking and moving 5% slower and hinders your ability to dodge and swim.",
     "types": [ "BONES" ],
     "category": [ "URSINE", "CATTLE", "CHIMERA", "BEAST", "LIZARD", "CRUSTACEAN", "PLANT" ],
     "enchantments": [
@@ -6970,6 +6963,7 @@
     "prereqs": [ "ALBINO" ],
     "prereqs2": [ "TROGLO2", "TROGLO3" ],
     "category": [ "TROGLOBITE" ],
+    "cancels": [ "SUNLIGHT_DEPENDENT" ],
     "flags": [ "SUNBURN" ],
     "types": [ "skin_tone" ]
   },
@@ -7419,6 +7413,7 @@
     "points": -5,
     "description": "You feel very sluggish when not in direct sunlight.  You suffer a 5% drop in speed when in shade, and a 10% drop in speed when in the dark.",
     "types": [ "SUNLIGHT" ],
+    "cancels": [ "SUNBURN" ],
     "category": [ "PLANT" ]
   },
   {
@@ -7574,9 +7569,7 @@
     "prereqs": [ "ROOTS3" ],
     "prereqs2": [ "SAPROPHAGE" ],
     "threshreq": [ "THRESH_PLANT" ],
-    "cancels": [ "SMELLY", "SMELLY2" ],
     "category": [ "PLANT" ],
-    "scent_type": "sc_flower",
     "encumbrance_covered": [ [ "foot_l", 10 ], [ "foot_r", 10 ] ],
     "flags": [ "TOUGH_FEET", "ROOTS3" ],
     "comfort": [
@@ -7930,7 +7923,7 @@
         "ench_effects": [ { "effect": "wall_crawl", "intensity": 1 } ]
       },
       {
-        "condition": { "not": { "u_has_move_mode": "prone" } },
+        "condition": { "and": [ { "not": { "u_has_move_mode": "prone" } }, { "not": "u_is_on_liquid" }, { "not": "u_is_underwater" } ] },
         "values": [ { "value": "MOVE_COST", "multiply": 0.4 }, { "value": "MOVECOST_OBSTACLE_MOD", "multiply": -0.5 } ]
       }
     ]
@@ -9141,12 +9134,7 @@
         }
       ]
     ],
-    "enchantments": [
-      "ench_quadruped_movement_bipedal",
-      "ench_quadruped_movement_full_crouch",
-      "ench_quadruped_movement_full_run",
-      { "values": [ { "value": "CARRY_WEIGHT", "multiply": -0.2 } ] }
-    ]
+    "enchantments": [ "ench_quadruped_movement_bipedal", "ench_quadruped_movement_full_crouch", "ench_quadruped_movement_full_run" ]
   },
   {
     "type": "mutation",
@@ -9346,6 +9334,7 @@
     "description": "You fare better than most in warmer climates and are less bothered by hotter temperatures.  Note that while it will take more heat and exposure for you to suffer the effects of sunstroke, you aren't any better at dealing with the symptoms.",
     "starting_trait": true,
     "changes_to": [ "STRONGER_RESISTWARM" ],
+    "types": [ "ACCLIMATIZATION" ],
     "category": [ "LIZARD", "PLANT", "FELINE" ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "CLIMATE_CONTROL_CHILL", "add": 10 } ] } ]
   },
@@ -9357,8 +9346,9 @@
     "description": "You are now even less bothered by the heat and it is harder for you to overheat or even sweat.  When you do though, it'll hit just as hard as it did before.",
     "prereqs": [ "RESISTWARM" ],
     "types": [ "ACCLIMATIZATION" ],
+    "changes_to": [ "RESISTCHILL_RESISTWARM" ],
     "category": [ "LIZARD", "PLANT" ],
-    "threshreq": [ "THRESH_FISH", "THRESH_CEPHALOPOD", "THRESH_GASTROPOD", "THRESH_LIZARD", "THRESH_BATRACHIAN" ],
+    "threshreq": [ "THRESH_LIZARD", "THRESH_PLANT"  ],
     "enchantments": [ { "condition": "ALWAYS", "values": [ { "value": "CLIMATE_CONTROL_CHILL", "add": 25 } ] } ]
   },
   {
@@ -9409,7 +9399,7 @@
     "name": { "str": "Temperature Tolerance" },
     "points": 5,
     "description": "You are now not at all bothered by the heat and it is harder for you to overheat or freeze at all.  When you do though, it'll hit just as hard as it did before.",
-    "prereqs": [ "RESISTWARM" ],
+    "prereqs": [ "STRONGER_RESISTWARM" ],
     "types": [ "ACCLIMATIZATION" ],
     "category": [ "PLANT" ],
     "threshreq": [ "THRESH_PLANT" ],

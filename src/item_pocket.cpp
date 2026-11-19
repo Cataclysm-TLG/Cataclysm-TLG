@@ -1069,7 +1069,7 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
 
     if( data->holster ) {
         info.emplace_back( "DESCRIPTION",
-                           _( "This is a <info>holster</info>, it only holds <info>one item at a time</info>." ) );
+                           _( "This pocket only holds <info>one item at a time</info>." ) );
     }
 
     if( data->extra_encumbrance > 0 ) {
@@ -1140,16 +1140,6 @@ void item_pocket::general_info( std::vector<iteminfo> &info, int pocket_number,
                 }
             }
         }
-    }
-    if( !no_rigid.empty() ) {
-        std::vector<sub_bodypart_id> no_rigid_vec( no_rigid.begin(), no_rigid.end() );
-        std::set<translation, localized_comparator> to_print = body_part_type::consolidate( no_rigid_vec );
-        std::string bps = enumerate_as_string( to_print.begin(),
-        to_print.end(), []( const translation & t ) {
-            return t.translated();
-        } );
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Can't put hard armor on: %s</bold>:" ),
-                           bps ) );
     }
 }
 
@@ -1280,7 +1270,7 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
 
     if( data->holster ) {
         info.emplace_back( "DESCRIPTION",
-                           _( "This is a <info>holster</info>, it only holds <info>one item at a time</info>." ) );
+                           _( "This pocket only holds <info>one item at a time</info>." ) );
     }
 
     if( data->extra_encumbrance > 0 ) {
@@ -1352,16 +1342,6 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
             }
         }
     }
-    if( !no_rigid.empty() ) {
-        std::vector<sub_bodypart_id> no_rigid_vec( no_rigid.begin(), no_rigid.end() );
-        std::set<translation, localized_comparator> to_print = body_part_type::consolidate( no_rigid_vec );
-        std::string bps = enumerate_as_string( to_print.begin(),
-        to_print.end(), []( const translation & t ) {
-            return t.translated();
-        } );
-        info.emplace_back( "DESCRIPTION", string_format( _( "<bold>Can't put hard armor on: %s</bold>:" ),
-                           bps ) );
-    }
 
     if( contents.empty() ) {
         info.emplace_back( "DESCRIPTION", _( "This pocket is empty." ) );
@@ -1375,10 +1355,10 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
     const std::string arm_type_str = string_format( "{%d}ARMOR", pocket_number );
 
     if( is_ablative() ) {
-        // if we have contents for an ablative pocket display the armor data
+        // If we have contents for an ablative pocket, display the armor data.
         if( !contents.empty() ) {
             const item &ablative_armor = contents.front();
-            info.emplace_back( arm_type_str, string_format( "%s%s", _( "Coverage:" ), space ), "",
+            info.emplace_back( arm_type_str, string_format( "%s%s", _( "<bold>Coverage:</bold>" ), space ), "",
                                iteminfo::no_newline,
                                ablative_armor.get_avg_coverage() );
             info.back().bNewLine = true;
@@ -1421,7 +1401,7 @@ void item_pocket::contents_info( std::vector<iteminfo> &info, int pocket_number,
                            colorize( _( "This pocket is over capacity and will spill if moved!" ), c_red ) );
     }
 
-    // ablative pockets have their contents displayed earlier in the UI
+    // Ablative pockets have their contents displayed earlier in the UI.
     if( !is_ablative() ) {
         std::vector<std::pair<const item *, int>> counted_contents = get_item_duplicate_counts(
                 all_items_top() );
@@ -2173,8 +2153,8 @@ void item_pocket::leak( map &here, Character *carrier, const tripoint_bub_ms &po
                 here.add_item_or_charges( pos, *iter );
                 if( carrier != nullptr ) {
                     carrier->invalidate_weight_carried_cache();
-                    carrier->add_msg_if_player( _( "Liquid leaked out from the %s and dripped onto the ground!" ),
-                                                this->get_name() );
+                    carrier->add_msg_if_player( _( "%S leaks from the %s." ),
+                                                iter->tname(), this->get_name() );
                 }
             }
             iter = contents.erase( iter );

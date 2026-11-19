@@ -23,7 +23,17 @@
     "special_attacks": [
       {
         "type": "gun",
-        "condition": { "not": { "u_has_effect": "blind" } },
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "hk_mp5",
@@ -114,7 +124,17 @@
     "special_attacks": [
       {
         "type": "gun",
-        "condition": { "not": { "u_has_effect": "blind" } },
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m2browning",
@@ -176,7 +196,17 @@
     "special_attacks": [
       {
         "type": "gun",
-        "condition": { "not": { "u_has_effect": "blind" } },
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m249",
@@ -238,7 +268,17 @@
     "special_attacks": [
       {
         "type": "gun",
-        "condition": { "not": { "u_has_effect": "blind" } },
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "m240",
@@ -302,11 +342,21 @@
     "special_attacks": [
       {
         "type": "gun",
-        "condition": { "not": { "u_has_effect": "blind" } },
         "cooldown": 1,
         "move_cost": 150,
         "gun_type": "pseudo_m203",
         "ammo_type": "40x46mm_m1006",
+        "condition": {
+          "and": [
+            { "test_eoc": "is_disarmed" },
+            { "not": { "u_has_effect": "maimed_arm" } },
+            { "not": { "u_has_flag": "grab" } },
+            { "not": { "u_has_flag": "grab_filter" } },
+            { "not": { "u_has_effect": "blind" } },
+            { "not": { "u_has_flag": "webbed" } },
+            { "not": { "u_has_flag": "downed" } }
+          ]
+        },
         "fake_skills": [ [ "gun", 6 ], [ "rifle", 6 ], [ "launcher", 6 ] ],
         "fake_dex": 12,
         "ranges": [ [ 0, 30, "DEFAULT" ] ],

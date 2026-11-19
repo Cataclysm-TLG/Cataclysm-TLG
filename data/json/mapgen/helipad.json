@@ -57,7 +57,7 @@
       ],
       "palettes": [ "helipad_palette" ],
       "toilets": { "&": {  } },
-      "gaspumps": { "$": { "fuel": "jp8", "amount": [ 2000, 10000 ] } },
+      "gaspumps": { "$": { "fuel": "jp8", "amount": [ 200, 10000 ] } },
       "items": {
         "B": {
           "item": {

@@ -591,7 +591,7 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
@@ -600,7 +600,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1.5,
         "duration": 60,
@@ -609,7 +609,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 1,
         "dmg_scale_increment": 1,
         "duration": 60,
@@ -701,29 +701,29 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "stab",
         "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 60,
+        "duration_dmg_scaling": 30,
         "max_duration": 1500
-      },
-      {
-        "id": "bleed",
-        "dmg_type": "stab",
-        "dmg_threshold": 5,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 90,
-        "max_duration": 1200
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 5,
+        "dmg_scale_increment": 2,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 1,
         "duration": 60,
-        "duration_dmg_scaling": 90,
+        "duration_dmg_scaling": 60,
         "max_duration": 1200
       },
       {
@@ -816,29 +816,29 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "stab",
         "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 60,
+        "duration_dmg_scaling": 30,
         "max_duration": 1500
-      },
-      {
-        "id": "bleed",
-        "dmg_type": "stab",
-        "dmg_threshold": 5,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 90,
-        "max_duration": 1200
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 5,
+        "dmg_scale_increment": 2,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 1,
         "duration": 60,
-        "duration_dmg_scaling": 90,
+        "duration_dmg_scaling": 60,
         "max_duration": 1200
       },
       {
@@ -926,7 +926,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "left",
@@ -949,30 +949,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1056,7 +1056,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "left",
@@ -1078,30 +1078,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1185,7 +1185,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "left",
@@ -1207,30 +1207,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1314,7 +1314,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "right",
@@ -1336,30 +1336,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1443,7 +1443,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "right",
@@ -1465,30 +1465,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1572,7 +1572,7 @@
       [ "balance", 0.04 ],
       [ "swim", 0.16 ],
       [ "crawl", 0.16 ],
-      [ "move_speed", 0.13 ],
+      [ "move_speed", 0.11 ],
       [ "footing", 0.16 ]
     ],
     "side": "right",
@@ -1594,30 +1594,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1723,30 +1723,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1840,30 +1840,30 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
-        "dmg_threshold": 6,
-        "dmg_scale_increment": 2,
-        "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1200
-      },
-      {
-        "id": "bleed",
         "dmg_type": "stab",
-        "dmg_threshold": 6,
+        "dmg_threshold": 7,
         "dmg_scale_increment": 2,
         "duration": 60,
         "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "max_duration": 1500
       },
       {
         "id": "bleed",
         "dmg_type": "bullet",
         "dmg_threshold": 6,
+        "dmg_scale_increment": 3,
+        "duration": 60,
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "cut",
+        "dmg_threshold": 5,
         "dmg_scale_increment": 2,
         "duration": 60,
-        "duration_dmg_scaling": 30,
-        "max_duration": 1400
+        "duration_dmg_scaling": 60,
+        "max_duration": 1200
       },
       {
         "id": "staggered_character",
@@ -1928,7 +1928,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -1949,7 +1949,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 8,
+        "dmg_scale_increment": 6,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 1800
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 5,
         "duration": 60,
@@ -1958,7 +1967,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -1967,7 +1976,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -2100,7 +2109,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -2121,7 +2130,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 8,
+        "dmg_scale_increment": 6,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 1800
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 5,
         "duration": 60,
@@ -2130,7 +2148,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -2139,7 +2157,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -2249,7 +2267,7 @@
     "side": 1,
     "opposite": "crab_leg_4_dactyl",
     "name_multiple": "dactyli",
-    "name": "left second propodus"
+    "name": "left second dactyl"
   },
   {
     "id": "crab_leg_3",
@@ -2271,7 +2289,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -2292,7 +2310,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 8,
+        "dmg_scale_increment": 6,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 1800
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 5,
         "duration": 60,
@@ -2301,7 +2328,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -2310,7 +2337,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -2443,7 +2470,7 @@
     "limb_types": [ [ "leg", 1.0 ], [ "foot", 1.0 ] ],
     "limb_scores": [
       [ "manip", 0.05, 0.1 ],
-      [ "move_speed", 0.4 ],
+      [ "move_speed", 0.3 ],
       [ "swim", 0.26 ],
       [ "block", 0.8 ],
       [ "crawl", 0.2 ],
@@ -2464,7 +2491,16 @@
     "effects_on_hit": [
       {
         "id": "bleed",
-        "dmg_type": "cut",
+        "dmg_type": "bash",
+        "dmg_threshold": 8,
+        "dmg_scale_increment": 6,
+        "duration": 60,
+        "duration_dmg_scaling": 30,
+        "max_duration": 1800
+      },
+      {
+        "id": "bleed",
+        "dmg_type": "stab",
         "dmg_threshold": 5,
         "dmg_scale_increment": 5,
         "duration": 60,
@@ -2473,7 +2509,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "stab",
+        "dmg_type": "bullet",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,
@@ -2482,7 +2518,7 @@
       },
       {
         "id": "bleed",
-        "dmg_type": "bullet",
+        "dmg_type": "cut",
         "dmg_threshold": 3,
         "dmg_scale_increment": 4,
         "duration": 60,

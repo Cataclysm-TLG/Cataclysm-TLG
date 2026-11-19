@@ -138,7 +138,7 @@ bool cleanup_at_end()
                                 .get<cata_variant_type::string>() );
         get_memorial().clear();
         std::vector<std::string> characters = g->list_active_saves();
-        // remove current player from the active characters list, as they are dead
+        // Remove current player from the active characters list, as they are dead.
         std::vector<std::string>::iterator curchar = std::find( characters.begin(),
                 characters.end(), u.get_save_id() );
         if( curchar != characters.end() ) {
@@ -146,55 +146,14 @@ bool cleanup_at_end()
         }
 
         if( characters.empty() ) {
-            bool queryDelete = false;
-            bool queryReset = false;
-
-            if( get_option<std::string>( "WORLD_END" ) == "query" ) {
-                bool decided = false;
-                std::string buffer = _( "Warning: NPC interactions and some other global flags "
-                                        "will not all reset when starting a new character in an "
-                                        "already-played world.  This can lead to some strange "
-                                        "behavior.\n\n"
-                                        "Are you sure you wish to keep this world?"
-                                      );
-
-                while( !decided ) {
-                    uilist smenu;
-                    smenu.allow_cancel = false;
-                    smenu.addentry( 0, true, 'r', "%s", _( "Reset world" ) );
-                    smenu.addentry( 1, true, 'd', "%s", _( "Delete world" ) );
-                    smenu.addentry( 2, true, 'k', "%s", _( "Keep world" ) );
-                    smenu.query();
-
-                    switch( smenu.ret ) {
-                        case 0:
-                            queryReset = true;
-                            decided = true;
-                            break;
-                        case 1:
-                            queryDelete = true;
-                            decided = true;
-                            break;
-                        case 2:
-                            decided = query_yn( buffer );
-                            break;
-                    }
-                }
-            }
-
-            if( queryDelete || get_option<std::string>( "WORLD_END" ) == "delete" ) {
-                world_generator->delete_world( world_generator->active_world->world_name, true );
-
-            } else if( queryReset || get_option<std::string>( "WORLD_END" ) == "reset" ) {
-                world_generator->delete_world( world_generator->active_world->world_name, false );
-            }
-        } else if( get_option<std::string>( "WORLD_END" ) != "keep" ) {
+            world_generator->delete_world( world_generator->active_world->world_name, true );
+        } else {
             std::string tmpmessage;
             for( auto &character : characters ) {
                 tmpmessage += "\n  ";
                 tmpmessage += character;
             }
-            popup( _( "World retained.  Characters remaining:%s" ), tmpmessage );
+            popup( _( "Characters remaining:%s" ), tmpmessage );
         }
         if( g->gamemode ) {
             g->gamemode = std::make_unique<special_game>(); // null gamemode or something..
@@ -452,6 +411,8 @@ bool do_turn()
         return turn_handler::cleanup_at_end();
     }
 
+    drain_renderer_recovery();
+
     weather_manager &weather = get_weather();
     // Actual stuff
     if( g->new_game ) {
@@ -530,6 +491,9 @@ bool do_turn()
 
     weather.update_weather();
     g->reset_light_level();
+    for( int z = -OVERMAP_DEPTH; z <= OVERMAP_HEIGHT; z++ ) {
+        m.set_lightmap_cache_dirty( z );
+    }
 
     g->perhaps_add_random_npc( /* ignore_spawn_timers_and_rates = */ false );
     while( u.get_moves() > 0 && u.activity ) {

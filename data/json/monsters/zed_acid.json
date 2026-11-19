@@ -30,7 +30,7 @@
       {
         "type": "spell",
         "spell_data": { "id": "acid_barf", "min_level": 4 },
-        "monster_message": "The %s barfs acid!",
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": {
           "and": [
@@ -98,7 +98,7 @@
     "special_attacks": [
       {
         "type": "spell",
-        "spell_data": { "id": "acid_spit", "min_level": 6 },
+        "spell_data": { "id": "acid_spit", "min_level": 7 },
         "monster_message": "The %s spews acid!",
         "cooldown": 10,
         "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
@@ -162,7 +162,7 @@
     "special_attacks": [
       {
         "type": "spell",
-        "spell_data": { "id": "acid_spit", "min_level": 4 },
+        "spell_data": { "id": "acid_spit", "min_level": 5 },
         "monster_message": "The %s spews acid!",
         "cooldown": 10,
         "condition": { "and": [ { "not": { "u_is_underwater": "true" } }, { "not": { "npc_is_underwater": "true" } } ] }
@@ -226,7 +226,7 @@
       {
         "type": "spell",
         "spell_data": { "id": "acid_barf", "min_level": 3 },
-        "monster_message": "The %s pukes acid!",
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": {
           "and": [
@@ -293,7 +293,7 @@
       {
         "type": "spell",
         "spell_data": { "id": "acid_barf", "min_level": 3 },
-        "monster_message": "The %s barfs acid!",
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": {
           "and": [
@@ -353,7 +353,7 @@
       {
         "type": "spell",
         "spell_data": { "id": "acid_barf", "min_level": 6 },
-        "monster_message": "The %s barfs acid!",
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": {
           "and": [

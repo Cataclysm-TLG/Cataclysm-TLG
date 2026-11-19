@@ -1005,6 +1005,12 @@
     "value_constraints": { "part": { "equals": [ "body_part", "arm_l" ] } }
   },
   {
+    "id": "avatar_broken_torso",
+    "type": "event_transformation",
+    "event_type": "broken_bone",
+    "value_constraints": { "part": { "equals": [ "body_part", "torso" ] } }
+  },
+  {
     "id": "num_broken_right_leg",
     "type": "event_statistic",
     "stat_type": "count",
@@ -1031,6 +1037,13 @@
     "stat_type": "count",
     "event_transformation": "avatar_broken_left_arm",
     "description": { "str_sp": "broken left arm" }
+  },
+  {
+    "id": "num_broken_torso",
+    "type": "event_statistic",
+    "stat_type": "count",
+    "event_transformation": "avatar_broken_torso",
+    "description": { "str_sp": "dead" }
   },
   {
     "id": "avatar_gains_skill_level",

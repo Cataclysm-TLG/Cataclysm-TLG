@@ -20,7 +20,7 @@
       "bury_question": "Bury the beartrap?",
       "bury": { "trap": "tr_beartrap_buried", "moves": 275, "practice": 7, "done_message": "You bury the beartrap." },
       "trap": "tr_beartrap",
-      "moves": 200,
+      "moves": 1000,
       "practice": 4,
       "done_message": "You set the beartrap."
     },
@@ -96,7 +96,7 @@
     "use_action": {
       "type": "place_trap",
       "trap": "tr_boobytrap",
-      "moves": 200,
+      "moves": 600,
       "practice": 4,
       "done_message": "You set the booby trap up and activate the grenade."
     },
@@ -194,7 +194,7 @@
     "use_action": {
       "type": "place_trap",
       "trap": "tr_crossbow",
-      "moves": 200,
+      "moves": 600,
       "practice": 4,
       "done_message": "You set the crossbow trap."
     },
@@ -246,7 +246,7 @@
     "use_action": {
       "type": "place_trap",
       "trap": "tr_shotgun_2",
-      "moves": 225,
+      "moves": 600,
       "practice": 5,
       "done_message": "You set the shotgun trap."
     },
@@ -272,7 +272,7 @@
       "type": "place_trap",
       "needs_solid_neighbor": true,
       "trap": "tr_tripwire",
-      "moves": 175,
+      "moves": 400,
       "practice": 3,
       "done_message": "You string up the tripwire."
     },

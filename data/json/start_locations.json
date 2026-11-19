@@ -3,7 +3,7 @@
     "type": "start_location",
     "id": "sloc_fort",
     "name": "Bastion Fort",
-    "terrain": [ { "om_terrain": "fort", "om_terrain_match_type": "PREFIX" } ]
+    "terrain": [ "fort_2a", "fort_1c_1" ]
   },
   {
     "type": "start_location",

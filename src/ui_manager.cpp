@@ -25,6 +25,9 @@ static bool showing_debug_message = false;
 static bool restart_redrawing = false;
 #if defined( TILES )
 static std::optional<SDL_Rect> prev_clip_rect;
+// renderer_resource_generation() sampled when prev_clip_rect was saved, so the
+// restore can be skipped if a recovery rebuilt the renderer in between.
+static uint64_t prev_clip_rect_generation = 0;
 #endif
 static ui_stack_t ui_stack;
 
@@ -56,19 +59,26 @@ ui_adaptor::ui_adaptor( ui_adaptor::debug_message_ui ) : disabling_uis_below( tr
     // alone does not prevent the graphics from becoming borked in other ways,
     // but `ui_manager` will redo the entire redrawing as soon as the redraw
     // callback returns.
-    const SDL_Renderer_Ptr &renderer = get_sdl_renderer();
-    if( SDL_RenderIsClipEnabled( renderer.get() ) ) {
-        prev_clip_rect = SDL_Rect();
-        SDL_RenderGetClipRect( renderer.get(), &prev_clip_rect.value() );
-        SDL_RenderSetClipRect( renderer.get(), nullptr );
-    } else {
+    if( renderer_should_abort_frame() ) {
+        // A recovery/pause/resize is queued; the renderer is about to be rebuilt.
+        // Skip the clip-rect query and reset, and clear any saved rect so the
+        // destructor does not restore a stale one onto the rebuilt renderer.
         prev_clip_rect = std::nullopt;
+    } else {
+        const SDL_Renderer_Ptr &renderer = get_sdl_renderer();
+        if( RenderIsClipEnabled( renderer ) ) {
+            prev_clip_rect = SDL_Rect();
+            RenderGetClipRect( renderer, &prev_clip_rect.value() );
+            RenderSetClipRect( renderer, nullptr );
+            prev_clip_rect_generation = renderer_resource_generation();
+        } else {
+            prev_clip_rect = std::nullopt;
+        }
     }
 #endif
     // The debug message might be shown during a normal UI's redraw callback,
     // so we need to invalidate the frame buffer so it does not interfere
     // with the display of the debug message.
-    reinitialize_framebuffer( true );
     ui_stack.emplace_back( *this );
 }
 
@@ -81,10 +91,13 @@ ui_adaptor::~ui_adaptor()
         cata_assert( showing_debug_message );
         showing_debug_message = false;
 #if defined( TILES )
-        // See ui_adaptor( debug_message_ui )
-        if( prev_clip_rect.has_value() ) {
+        // See ui_adaptor( debug_message_ui ). Skip the restore when a recovery is
+        // queued now, or when one rebuilt the renderer since the rect was saved:
+        // the saved rect belongs to the pre-rebuild renderer.
+        if( prev_clip_rect.has_value() && !renderer_should_abort_frame()
+            && renderer_resource_generation() == prev_clip_rect_generation ) {
             const SDL_Renderer_Ptr &renderer = get_sdl_renderer();
-            SDL_RenderSetClipRect( renderer.get(), &prev_clip_rect.value() );
+            RenderSetClipRect( renderer, &prev_clip_rect.value() );
         }
 #endif
     }
@@ -220,6 +233,11 @@ static bool overlap( const rectangle<point> &lhs, const rectangle<point> &rhs )
            rhs.p_min.x < lhs.p_max.x && rhs.p_min.y < lhs.p_max.y;
 }
 
+size_t ui_adaptor::ui_stack_size()
+{
+    return ui_stack.size();
+}
+
 // This function does two things:
 // 1. Ensure that any UI that would be overwritten by redrawing a lower invalidated
 //    UI also gets redrawn.
@@ -338,6 +356,18 @@ void ui_adaptor::redraw_invalidated()
     if( test_mode || ui_stack.empty() ) {
         return;
     }
+#if defined(TILES)
+    display_buffer_draw_scope draw_scope;
+    if( !draw_scope.should_draw() ) {
+        // Return before the redraw callbacks clear their invalidation flags, so a
+        // queued recovery, a failed bind, or a watcher race all leave invalidation
+        // intact for the next drain to replay the full UI.
+        return;
+    }
+    int buf_w = 0;
+    int buf_h = 0;
+    get_display_buffer_dims( &buf_w, &buf_h );
+#endif
 
     restore_on_out_of_scope prev_redraw_in_progress( redraw_in_progress );
     restore_on_out_of_scope prev_restart_redrawing( restart_redrawing );
@@ -393,8 +423,6 @@ void ui_adaptor::redraw_invalidated()
                     }
                 }
             }
-            // Callbacks may have changed window sizes; reinitialize the frame buffer.
-            reinitialize_framebuffer();
         }
 
         // Redraw invalidated UIs.

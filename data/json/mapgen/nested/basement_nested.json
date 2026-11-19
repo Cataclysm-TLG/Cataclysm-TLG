@@ -199,7 +199,7 @@
       "items": {
         "!": { "item": "wetbar_fridge", "chance": 100, "repeat": [ 1, 10 ] },
         "e": { "item": "pool_table", "chance": 5 },
-        "C": [ { "item": "wetbar_stack", "chance": 25 }, { "item": "wetbar_counter", "chance": 25 } ],
+        "C": [ { "item": "wetbar_stack", "chance": 25 }, { "item": "wetbar_counter", "chance": 15 } ],
         "M": [ { "item": "antique", "chance": 65 }, { "item": "antique_rare", "chance": 1 } ],
         "$": { "item": "pool_table", "chance": 100, "repeat": [ 1, 6 ] }
       }

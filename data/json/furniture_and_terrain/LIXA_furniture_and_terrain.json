@@ -37,7 +37,7 @@
     "concealment": 50,
     "connect_groups": [ "INDOORFLOOR", "LIXATUBE" ],
     "connects_to": "LIXATUBE",
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE", "MINEABLE", "UNSTABLE", "INDOORS" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE", "UNSTABLE", "INDOORS" ],
     "bash": {
       "str_min": 30,
       "str_max": 210,
@@ -91,7 +91,7 @@
     "symbol": "{",
     "color": "light_gray",
     "light_emitted": 120,
-    "looks_like": "f_machinery_electronic",
+    "looks_like": "t_cvdmachine",
     "move_cost": 0,
     "coverage": 50,
     "concealment": 50,
@@ -114,7 +114,7 @@
     "concealment": 50,
     "connect_groups": [ "INDOORFLOOR", "LIXATUBE" ],
     "connects_to": "LIXATUBE",
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "INDOORS", "THIN_OBSTACLE", "UNSTABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "INDOORS", "THIN_OBSTACLE", "UNSTABLE" ],
     "bash": {
       "str_min": 7,
       "str_max": 17,
@@ -138,7 +138,7 @@
     "concealment": 50,
     "connect_groups": [ "INDOORFLOOR", "LIXATUBE" ],
     "connects_to": "LIXATUBE",
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "INDOORS", "THIN_OBSTACLE", "UNSTABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "INDOORS", "THIN_OBSTACLE", "UNSTABLE" ],
     "emissions": [ "emit_congealed_light" ]
   },
   {
@@ -150,8 +150,7 @@
     "symbol": ".",
     "color": "cyan",
     "move_cost": 2,
-    "roof": "t_concrete_roof",
-    "flags": [ "TRANSPARENT", "SUPPORTS_ROOF", "INDOORS", "FLAT", "ROAD" ],
+    "flags": [ "TRANSPARENT", "INDOORS", "FLAT", "ROAD" ],
     "connect_groups": [ "CONCRETE", "INDOORFLOOR" ],
     "connects_to": "CONCRETE"
   },
@@ -166,10 +165,9 @@
     "move_cost": 0,
     "coverage": 100,
     "concealment": 100,
-    "roof": "t_concrete_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "SUPPORTS_ROOF", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ]
+    "flags": [ "NOITEM", "WALL", "NO_SCENT", "AUTO_WALL_SYMBOL", "BLOCK_WIND" ]
   },
   {
     "type": "terrain",
@@ -359,7 +357,7 @@
     "type": "furniture",
     "id": "f_LIXA_machinery_electronic",
     "name": "unfolded machinery",
-    "looks_like": "t_machinery_electronic",
+    "looks_like": "f_machinery_electronic",
     "description": "This inscrutable device is filled with wires, boards, and connections.  You can see every one of them, and it gives you a headache.",
     "symbol": "$",
     "color": "yellow",
@@ -373,7 +371,7 @@
     "type": "furniture",
     "id": "f_LIXA_electrical_conduit",
     "name": "photonic conduit",
-    "looks_like": "f_electrical_conduit",
+    "looks_like": "f_ground_cable",
     "description": "You can see through the metal casing of this tube, into the blazing light coursing through it.",
     "symbol": "|",
     "color": "light_gray",

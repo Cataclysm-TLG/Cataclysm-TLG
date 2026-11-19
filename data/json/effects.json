@@ -1132,7 +1132,7 @@
     "//": "In formal usage, 'nauseous' technically means 'to cause nausea [in others],' not 'feeling sick.'",
     "miss_messages": [ [ "Your stomach bothers you.", 1 ] ],
     "rating": "bad",
-    "resist_traits": [ "POISRESIST", "VOMITSTOMACH" ],
+    "resist_traits": [ "VOMITSTOMACH" ],
     "base_mods": {
       "per_mod": [ -1 ],
       "dex_mod": [ -1 ],
@@ -1252,7 +1252,7 @@
     "type": "effect_type",
     "id": "mutagen",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1289,7 +1289,7 @@
     "scaling_mods": { "vomit_chance": [ -450 ], "hurt_chance": [ -240, -50 ], "hurt_tick": [ -25 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Alpha Mutagen"
+    "blood_analysis_description": "Human Tissue"
   },
   {
     "type": "effect_type",
@@ -1320,7 +1320,7 @@
     "scaling_mods": { "vomit_chance": [ -425 ], "thirst_tick": [ -400 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Frog Mutagen"
+    "blood_analysis_description": "Batrachian Tissue"
   },
   {
     "type": "effect_type",
@@ -1349,7 +1349,7 @@
     "scaling_mods": { "hunger_tick": [ -200 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Beast Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1375,7 +1375,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Bird Mutagen"
+    "blood_analysis_description": "Avian Tissue"
   },
   {
     "type": "effect_type",
@@ -1403,7 +1403,7 @@
     "scaling_mods": { "vomit_chance": [ -450 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -5 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Bovine Mutagen"
+    "blood_analysis_description": "Bovoid Tissue"
   },
   {
     "type": "effect_type",
@@ -1432,7 +1432,7 @@
     "scaling_mods": { "thirst_tick": [ -400 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Cephalopod Mutagen"
+    "blood_analysis_description": "Cephalopod Tissue"
   },
   {
     "type": "effect_type",
@@ -1461,7 +1461,7 @@
     "scaling_mods": { "hunger_tick": [ -120 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Chimera Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1487,7 +1487,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -15 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Elf-A Mutagen"
+    "blood_analysis_description": "Human Tissue"
   },
   {
     "type": "effect_type",
@@ -1513,7 +1513,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Feline Mutagen"
+    "blood_analysis_description": "Feline Tissue"
   },
   {
     "type": "effect_type",
@@ -1542,7 +1542,7 @@
     "scaling_mods": { "thirst_tick": [ -400 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Fish Mutagen"
+    "blood_analysis_description": "Piscine Tissue"
   },
   {
     "type": "effect_type",
@@ -1559,7 +1559,7 @@
     "scaling_mods": { "speed_mod": [ -7.5 ], "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Gastropod Mutagen"
+    "blood_analysis_description": "Gastropod Tissue"
   },
   {
     "type": "effect_type",
@@ -1604,7 +1604,7 @@
     "scaling_mods": { "vomit_chance": [ -420 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Insect Mutagen"
+    "blood_analysis_description": "Insect Tissue"
   },
   {
     "type": "effect_type",
@@ -1612,7 +1612,7 @@
     "name": [ "Reptilian Mutation", "Reptilian Transformation", "Reptilian Metamorphosis" ],
     "desc": [
       "You consumed reptilian mutagen.",
-      "Your skin feels dry and too small.  You'll have to molt soon.",
+      "You feel unusually limber.",
       "Your limbs slump, almost ready to tear right out of their sockets."
     ],
     "max_intensity": 3,
@@ -1630,7 +1630,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Reptilian Mutagen"
+    "blood_analysis_description": "Reptilian Tissue"
   },
   {
     "type": "effect_type",
@@ -1660,7 +1660,7 @@
     "scaling_mods": { "hunger_tick": [ -175 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Canine Mutagen"
+    "blood_analysis_description": "Canine Tissue"
   },
   {
     "type": "effect_type",
@@ -1686,7 +1686,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -16 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Medical Mutagen"
+    "blood_analysis_description": "Circulating Tumor DNA"
   },
   {
     "type": "effect_type",
@@ -1713,7 +1713,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Murine Mutagen"
+    "blood_analysis_description": "Murine Tissue"
   },
   {
     "type": "effect_type",
@@ -1730,7 +1730,7 @@
     "scaling_mods": { "str_mod": [ 1.5 ], "dex_mod": [ 1.5 ], "int_mod": [ -1 ], "speed_mod": [ -7.5 ], "hurt_chance": [ 21, 0 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Plant Mutagen"
+    "blood_analysis_description": "Plant Tissue"
   },
   {
     "type": "effect_type",
@@ -1759,7 +1759,7 @@
     "scaling_mods": { "hunger_tick": [ -200 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Raptor Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1785,7 +1785,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -15 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Lagomorph Mutagen"
+    "blood_analysis_description": "Lagomorph Tissue"
   },
   {
     "type": "effect_type",
@@ -1811,7 +1811,7 @@
     "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Rattine Mutagen"
+    "blood_analysis_description": "Rattine Tissue"
   },
   {
     "type": "effect_type",
@@ -1837,7 +1837,7 @@
     "scaling_mods": { "dex_mod": [ 1 ], "int_mod": [ -2 ], "speed_mod": [ 3.5 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Chiropteran Mutagen"
+    "blood_analysis_description": "Chiropteran Tissue"
   },
   {
     "type": "effect_type",
@@ -1859,7 +1859,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Slime Mutagen"
+    "blood_analysis_description": "Unknown Matter"
   },
   {
     "type": "effect_type",
@@ -1885,7 +1885,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -25 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Spider Mutagen"
+    "blood_analysis_description": "Aranean Tissue"
   },
   {
     "type": "effect_type",
@@ -1911,7 +1911,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Troglobite Mutagen"
+    "blood_analysis_description": "Foreign Tissue"
   },
   {
     "type": "effect_type",
@@ -1939,7 +1939,7 @@
     "scaling_mods": { "fatigue_chance": [ -500 ], "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Ursine Mutagen"
+    "blood_analysis_description": "Ursine Tissue"
   },
   {
     "type": "effect_type",
@@ -1965,7 +1965,7 @@
     "scaling_mods": { "hurt_chance": [ 21, 0 ], "pain_chance": [ -30 ] },
     "rating": "bad",
     "flags": [ "MUTAGEN_EFFECT" ],
-    "blood_analysis_description": "Crustacean Mutagen"
+    "blood_analysis_description": "Crustacean Tissue"
   },
   {
     "type": "effect_type",
@@ -2815,6 +2815,14 @@
   },
   {
     "type": "effect_type",
+    "id": "revived_marker",
+    "//COMMENT": "Hardcoded dummy effect to track a monster as revived. Applied and checked in C++ only.",
+    "name": [ "Revived" ],
+    "desc": [ "" ],
+    "show_in_info": false
+  },
+  {
+    "type": "effect_type",
     "id": "slimed",
     "name": [ "Slimed" ],
     "desc": [ "You're covered in thick goo!" ],
@@ -2883,21 +2891,22 @@
   {
     "type": "effect_type",
     "id": "chafing",
-    "name": [ "Uncomfortable" ],
-    "desc": [ "Your %s is uncomfortable.  Wearing something soft under your hard armor would help." ],
+    "name": [ "Chafing" ],
+    "desc": [ "Rigid equipment worn over your %s is causing discomfort.  Wearing something soft underneath it would help." ],
     "max_intensity": 1,
     "part_descs": true,
     "immune_bp_flags": [ "BIONIC_LIMB" ],
     "base_mods": { "speed_mod": [ -4 ], "pain_min": [ 1 ], "pain_chance": [ 2 ], "pain_max_val": [ 15 ] },
     "limb_score_mods": [
-      { "limb_score": "manip", "modifier": -0.05 },
-      { "limb_score": "grip", "modifier": -0.05 },
-      { "limb_score": "block", "modifier": -0.05 },
-      { "limb_score": "lift", "modifier": -0.05 },
-      { "limb_score": "move_speed", "modifier": -0.05 },
-      { "limb_score": "balance", "modifier": -0.05 },
-      { "limb_score": "swimming", "modifier": -0.05 },
-      { "limb_score": "crawl", "modifier": -0.05 }
+      { "limb_score": "manip", "modifier": 0.8 },
+      { "limb_score": "grip", "modifier": 0.8 },
+      { "limb_score": "block", "modifier": 0.8 },
+      { "limb_score": "lift", "modifier": 0.8 },
+      { "limb_score": "move_speed", "modifier": 0.8 },
+      { "limb_score": "balance", "modifier": 0.8 },
+      { "limb_score": "swimming", "modifier": 0.8 },
+      { "limb_score": "crawl", "modifier": 0.8 },
+      { "limb_score": "reaction", "modifier": 0.8 }
     ],
     "flags": [ "EFFECT_LIMB_SCORE_MOD_LOCAL" ]
   },
@@ -2955,8 +2964,8 @@
     "max_intensity": 2,
     "scaling_mods": { "speed_mod": [ -5 ] },
     "limb_score_mods": [
-      { "limb_score": "manip", "modifier": 0 },
-      { "limb_score": "grip", "modifier": 0 },
+      { "limb_score": "manip", "modifier": 0.5, "scaling": -0.25 },
+      { "limb_score": "grip", "modifier": 0.5, "scaling": -0.25 },
       { "limb_score": "block", "modifier": 0.5, "scaling": -0.25 },
       { "limb_score": "lift", "modifier": 0.5, "scaling": -0.25 },
       { "limb_score": "move_speed", "modifier": 0.75, "scaling": -0.25 },
@@ -3509,6 +3518,7 @@
     ],
     "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 25000 ] ],
     "death_msg": "You have a heart attack!",
+    "death_event": "dies_from_drug_overdose",
     "max_intensity": 4,
     "base_mods": {
       "focus_min": [ 1 ],
@@ -3594,10 +3604,10 @@
     "base_mods": {
       "int_mod": [ -1 ],
       "speed_mod": [ -10 ],
-      "fatigue_min": [ 2 ],
-      "fatigue_max": [ 60 ],
+      "fatigue_min": [ 1 ],
+      "fatigue_max": [ 15 ],
       "fatigue_chance": [ 60 ],
-      "fatigue_max_val": [ 500 ]
+      "fatigue_max_val": [ 400 ]
     },
     "blood_analysis_description": "Zolpidem"
   },
@@ -3692,6 +3702,7 @@
     "miss_messages": [ [ "You feel woozy.", 1 ] ],
     "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 25000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
+    "death_event": "dies_from_drug_overdose",
     "base_mods": {
       "vomit_chance": [ -20 ],
       "vomit_chance_bot": [ 1000 ],
@@ -4505,6 +4516,7 @@
     "miss_messages": [ [ "You feel numb.", 1 ] ],
     "chance_kill": [ [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ -1, 1 ], [ 1, 500000 ], [ 1, 100000 ], [ 1, 5000 ] ],
     "death_msg": "Your breathing grows weaker and weaker, and then you are gone.",
+    "death_event": "dies_from_drug_overdose",
     "pkill_addict_reduces": true,
     "base_mods": {
       "vomit_chance": [ 2500 ],

@@ -47,6 +47,8 @@
 #include "visitable.h"
 #include "vpart_position.h"
 
+static const flag_id json_flag_no_auto_equip( "no_auto_equip" );
+
 void Character::handle_contents_changed( const std::vector<item_location> &containers )
 {
     if( containers.empty() ) {
@@ -282,6 +284,10 @@ item_location Character::try_add( item it, const item *avoid, const item *origin
         ret->on_pickup( *this );
     }
     cached_info.erase( "reloadables" );
+
+    // This flag is no longer needed in any event.
+    it.unset_flag( json_flag_no_auto_equip );
+
     return ret;
 }
 

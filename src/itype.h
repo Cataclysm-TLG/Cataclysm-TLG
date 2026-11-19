@@ -386,13 +386,13 @@ struct armor_portion_data {
     // if left the default -1 the value will be recalculated,
     int breathability = -1; // NOLINT(cata-serialize)
 
-    // if this item is rigid, can't be worn with other rigid items
+    // If this item is rigid, can't be worn with other rigid items.
     bool rigid = false; // NOLINT(cata-serialize)
 
-    // if this item only conflicts with rigid items that share a direct layer with it
-    bool rigid_layer_only = false;
+    // If this item only conflicts only with rigid items that share a layer with it.
+    bool rigid_layer_only = true;
 
-    // if this item is comfortable to wear without other items bellow it
+    // If this item is comfortable to wear without other items bellow it.
     bool comfortable = false; // NOLINT(cata-serialize)
 
     /**

@@ -13,7 +13,7 @@
     "condition": {
       "and": [
         { "not": { "u_has_effect": "caffeine_eff" } },
-        { "math": [ "rand(2000)", "<=", "addiction_rational(2000, 20, u_addiction_intensity('caffeine'))" ] }
+        { "math": [ "rand(2000) <= addiction_rational(2000, 20, u_addiction_intensity('caffeine'))" ] }
       ]
     },
     "effect": [
@@ -22,8 +22,8 @@
       {
         "if": {
           "and": [
-            { "math": [ "u_val('fatigue')", ">", "u_addiction_intensity('caffeine') * -10" ] },
-            { "math": [ "rand(10)", "<", "u_addiction_intensity('caffeine')" ] }
+            { "math": [ "u_val('fatigue') > u_addiction_intensity('caffeine') * -10" ] },
+            { "math": [ "rand(10) < u_addiction_intensity('caffeine')" ] }
           ]
         },
         "then": { "math": [ "u_val('fatigue')", "--" ] }
@@ -31,8 +31,8 @@
       {
         "if": {
           "and": [
-            { "math": [ "u_addiction_intensity('caffeine')", ">=", "8" ] },
-            { "math": [ "rand(392)", "<", "u_addiction_intensity('caffeine')" ] }
+            { "math": [ "u_addiction_intensity('caffeine') >= 8" ] },
+            { "math": [ "rand(392) < u_addiction_intensity('caffeine')" ] }
           ]
         },
         "then": [
@@ -46,37 +46,37 @@
     "type": "effect_on_condition",
     "id": "EOC_SLEEP_ADDICTION",
     "//": "Actual effects processed in player::can_sleep().  Here, only prolong this addiction longer than usual.",
-    "condition": { "and": [ { "one_in_chance": 2 }, { "math": [ "u_addiction_turns('sleeping pill')", "<", "0" ] } ] },
+    "condition": { "and": [ { "one_in_chance": 2 }, { "math": [ "u_addiction_turns('sleeping pill') < 0" ] } ] },
     "effect": { "math": [ "u_addiction_turns('sleeping pill')", "++" ] }
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MARLOSS_R_ADDICTION",
-    "condition": { "math": [ "rand(800)", "<=", "addiction_rational(800, 20, u_addiction_intensity('marloss_r'))" ] },
+    "condition": { "math": [ "rand(800) <= addiction_rational(800, 20, u_addiction_intensity('marloss_r'))" ] },
     "effect": [
       { "u_add_morale": "morale_craving_marloss", "bonus": -5, "max_bonus": -30 },
       { "u_message": "You daydream about luscious pink berries as big as your fist.", "type": "info" },
-      { "if": { "math": [ "u_val('focus')", ">", "40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
+      { "if": { "math": [ "u_val('focus') > 40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
     ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MARLOSS_B_ADDICTION",
-    "condition": { "math": [ "rand(800)", "<=", "addiction_rational(800, 20, u_addiction_intensity('marloss_b'))" ] },
+    "condition": { "math": [ "rand(800) <= addiction_rational(800, 20, u_addiction_intensity('marloss_b'))" ] },
     "effect": [
       { "u_add_morale": "morale_craving_marloss", "bonus": -5, "max_bonus": -30 },
       { "u_message": "You daydream about nutty cyan seeds as big as your hand.", "type": "info" },
-      { "if": { "math": [ "u_val('focus')", ">", "40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
+      { "if": { "math": [ "u_val('focus') > 40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
     ]
   },
   {
     "type": "effect_on_condition",
     "id": "EOC_MARLOSS_Y_ADDICTION",
-    "condition": { "math": [ "rand(800)", "<=", "addiction_rational(800, 20, u_addiction_intensity('marloss_y'))" ] },
+    "condition": { "math": [ "rand(800) <= addiction_rational(800, 20, u_addiction_intensity('marloss_y'))" ] },
     "effect": [
       { "u_add_morale": "morale_craving_marloss", "bonus": -5, "max_bonus": -30 },
       { "u_message": "You daydream about succulent, pale golden gel, sweet but light.", "type": "info" },
-      { "if": { "math": [ "u_val('focus')", ">", "40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
+      { "if": { "math": [ "u_val('focus') > 40" ] }, "then": { "math": [ "u_val('focus')", "--" ] } }
     ]
   },
   {

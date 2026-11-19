@@ -530,7 +530,7 @@ recipe &recipe_dictionary::load( const JsonObject &jo, const std::string &src,
             return string_format( "'%s'", source.second->name() );
         }, enumeration_conjunction::arrow );
 
-        const std::string base_json = string_format( "'%s'", _( "Dark Days Ahead" ) );
+        const std::string base_json = string_format( "'%s'", _( "The Last Generation" ) );
         if( old_mod_src == base_json && new_mod_src != base_json ) {
             // Assume the mod developer knows what they're doing
         } else if( old_mod_src == new_mod_src ) {

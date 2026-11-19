@@ -177,7 +177,7 @@
     "//condition": "Basic size filtering, if the target is grabbing you contested roll of strength vs grab strength",
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -262,10 +262,10 @@
     "//condition": "Similar size, no tripping tiny or very nonstandard targets",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         {
-          "or": [ { "math": [ "u_val('intelligence')", ">", "rand(14)" ] }, { "math": [ "u_val('strength')", ">", "rand(14)" ] } ]
+          "or": [ { "math": [ "u_val('intelligence') > rand(14)" ] }, { "math": [ "u_val('strength') > rand(14)" ] } ]
         },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -290,10 +290,10 @@
     "//condition": "Similar size, no tripping tiny or very nonstandard targets",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         {
-          "or": [ { "math": [ "u_val('intelligence')", ">", "rand(12)" ] }, { "math": [ "u_val('strength')", ">", "rand(12)" ] } ]
+          "or": [ { "math": [ "u_val('intelligence') > rand(12)" ] }, { "math": [ "u_val('strength') > rand(12)" ] } ]
         },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -322,8 +322,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -368,7 +368,7 @@
     "//condition": "Living creatures of similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -443,7 +443,7 @@
     "//condition": "Living creatures of similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -479,8 +479,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -522,8 +522,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -576,8 +576,8 @@
     "//condition": "No flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -622,8 +622,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -691,8 +691,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -720,8 +720,8 @@
     "//condition": "Similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "stunned" } },
         { "not": { "npc_bodytype": "blob" } }
       ]
@@ -826,7 +826,7 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -865,8 +865,8 @@
     "//condition": "Things of similar size in both directions that keep their heads high",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size') - 1", "<=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') - 1 <= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         { "not": { "npc_has_effect": "downed" } },
         {
@@ -968,7 +968,7 @@
     "condition": {
       "and": [
         { "not": { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] } },
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_has_effect": "stunned" } },
         { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
@@ -988,8 +988,8 @@
     "condition": {
       "and": [
         { "not": { "and": [ { "u_has_flag": "GRAB_FILTER" }, { "npc_has_flag": "GRAB" } ] } },
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "u_val('size') - 1", "<=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "u_val('size') - 1 <= n_val('size')" ] },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
         { "not": { "npc_bodytype": "snake" } },
@@ -1055,8 +1055,8 @@
     "weighting": 2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "u_val('size') - 1", "<=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "u_val('size') - 1 <= n_val('size')" ] },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
         { "not": { "npc_bodytype": "snake" } },
@@ -1084,7 +1084,7 @@
     "required_buffs_all": [ "buff_capoeira_onmove" ],
     "weighting": 2,
     "crit_tec": true,
-    "condition": { "and": [ { "math": [ "u_val('size')", ">=", "n_val('size')" ] }, { "not": { "npc_has_effect": "stunned" } } ] },
+    "condition": { "and": [ { "math": [ "u_val('size') >= n_val('size')" ] }, { "not": { "npc_has_effect": "stunned" } } ] },
     "condition_desc": "* Only works on a <info>non-stunned</info> target of <info>similar or smaller</info> size",
     "stun_dur": 1,
     "mult_bonuses": [
@@ -1115,7 +1115,7 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -1157,7 +1157,7 @@
     "//condition": "TODO: differentiate the stun from the damage, though 1.5x flat is excessive",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -1210,8 +1210,8 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "u_val('size') - 1", "<=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "u_val('size') - 1 <= n_val('size')" ] },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
         { "not": { "npc_bodytype": "snake" } },
@@ -1303,7 +1303,7 @@
     "//condition": "Living creatures of similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -1335,8 +1335,8 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -1414,7 +1414,7 @@
     "crit_ok": true,
     "weighting": 2,
     "//condition": "Living creatures of similar size",
-    "condition": { "and": [ { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] }, { "not": { "npc_has_effect": "immobile" } } ] },
+    "condition": { "and": [ { "math": [ "u_val('size') + 1 >= n_val('size')" ] }, { "not": { "npc_has_effect": "immobile" } } ] },
     "tech_effects": [ { "id": "staggered", "chance": 80, "duration": 200, "on_damage": true, "message": "%s is knocked off-balance!" } ],
     "condition_desc": "* Only works on a <info>mobile</info> target of <info>similar or smaller</info> size",
     "mult_bonuses": [
@@ -1437,8 +1437,8 @@
     "weighting": 2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -1506,8 +1506,8 @@
     "weighting": 2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -1553,8 +1553,8 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", "<=", "n_val('size')" ] },
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') <= n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         { "not": { "npc_has_effect": "downed" } },
@@ -1589,8 +1589,8 @@
     ],
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", "<=", "n_val('size')" ] },
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') <= n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         { "not": { "npc_has_effect": "downed" } },
@@ -1617,8 +1617,8 @@
     "side_switch": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", "<=", "n_val('size')" ] },
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') <= n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         { "not": { "npc_has_effect": "downed" } },
@@ -1655,7 +1655,7 @@
     "//condition": "Living creatures of similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -1733,8 +1733,8 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -1862,7 +1862,7 @@
     "unarmed_allowed": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -1896,8 +1896,8 @@
     "//condition": "Things of similar size in both directions that keep their heads high",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size') - 1", "<=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') - 1 <= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         { "not": { "npc_has_effect": "downed" } },
         {
@@ -1982,7 +1982,7 @@
     "weighting": 2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -2030,7 +2030,7 @@
     "weighting": 2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2056,7 +2056,7 @@
         { "npc_has_effect": "downed" },
         { "npc_has_effect": "stunned" },
         { "or": [ { "npc_has_species": "HUMAN" }, { "npc_has_species": "FERAL" } ] },
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_bodytype": "human" }
       ]
     },
@@ -2106,7 +2106,7 @@
     "//condition": "Living creatures of similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -2163,7 +2163,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2197,7 +2197,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2303,7 +2303,7 @@
     "unarmed_allowed": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -2337,7 +2337,7 @@
     "stun_dur": 1,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -2453,7 +2453,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2478,7 +2478,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2504,8 +2504,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2530,7 +2530,7 @@
     "condition": {
       "and": [
         { "npc_has_effect": "downed" },
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -2592,7 +2592,7 @@
     "melee_allowed": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2612,7 +2612,7 @@
     "skill_requirements": [ { "name": "melee", "level": 5 } ],
     "melee_allowed": true,
     "crit_tec": true,
-    "condition": { "and": [ { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] } ] },
+    "condition": { "and": [ { "math": [ "u_val('size') + 1 >= n_val('size')" ] } ] },
     "tech_effects": [ { "id": "staggered", "chance": 100, "duration": 300 } ],
     "condition_desc": "* Only works on a target of <info>similar or smaller</info> size",
     "mult_bonuses": [
@@ -2669,8 +2669,8 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2732,7 +2732,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2772,7 +2772,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "stunned" } },
         {
           "and": [
@@ -2883,7 +2883,7 @@
     "knockback_dist": 1,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -2921,7 +2921,7 @@
     "weighting": -2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -2992,7 +2992,7 @@
     "//condition": "Humanoids of similar size and no flying",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -3035,7 +3035,7 @@
     "unarmed_allowed": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -3069,7 +3069,7 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -3135,7 +3135,7 @@
     "required_buffs_all": [ "buff_tai_chi_onpause" ],
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -3174,7 +3174,7 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -3199,7 +3199,7 @@
     "//condition": "Living creatures of similar size",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "staggered" } },
         { "not": { "npc_has_effect": "immobile" } },
         {
@@ -3252,7 +3252,7 @@
     "unarmed_allowed": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -3342,7 +3342,7 @@
     "weighting": 2,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -3381,7 +3381,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_bodytype": "blob" } },
         { "not": { "npc_bodytype": "fish" } },
@@ -3410,7 +3410,7 @@
     "crit_tec": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size')", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') >= n_val('size')" ] },
         {
           "or": [
             {
@@ -3518,8 +3518,8 @@
     "//condition": "Humanoids of similar size and no flying, must be grappling",
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
-        { "math": [ "n_val('size')", "!=", "1" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
+        { "math": [ "n_val('size') != 1" ] },
         { "not": { "npc_has_effect": "downed" } },
         { "not": { "npc_has_flag": "immobile" } },
         { "not": { "u_has_effect": "downed" } },
@@ -3621,7 +3621,7 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         {

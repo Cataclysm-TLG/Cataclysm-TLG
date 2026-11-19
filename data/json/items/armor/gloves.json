@@ -39,7 +39,7 @@
     "warmth": 20,
     "material_thickness": 4,
     "environmental_protection": 3,
-    "flags": [ "VARSIZE", "OVERSIZE", "STURDY", "MITTS", "RAINPROOF" ],
+    "flags": [ "OVERSIZE", "STURDY", "MITTS", "RAINPROOF" ],
     "armor": [ { "encumbrance": 70, "coverage": 98, "covers": [ "hand_l", "hand_r" ] } ]
   },
   {
@@ -89,15 +89,6 @@
     "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
-    "id": "chainmail_junk_gloves",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_gloves",
-    "name": { "str": "chainmail gloves", "str_pl": "pairs of chainmail gloves" },
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "description": "A pair of gloves made of interlocking rings of low-quality steel wire."
-  },
-  {
     "id": "fire_gauntlets",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -138,21 +129,19 @@
     "color": "light_gray",
     "warmth": 5,
     "material_thickness": 2,
-    "flags": [ "STURDY", "DURABLE_MELEE", "OUTER" ],
+    "flags": [ "STURDY", "DURABLE_MELEE", "OUTER", "MITTS", "ALLOWS_NATURAL_ATTACKS" ],
     "armor": [
       {
         "encumbrance": 7,
         "coverage": 95,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ]
       },
       {
         "encumbrance": 6,
         "coverage": 70,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "melee_damage": { "bash": 6 }
@@ -193,20 +182,19 @@
     "color": "green",
     "warmth": 5,
     "material_thickness": 3,
-    "flags": [ "STURDY", "DURABLE_MELEE", "NORMAL", "OUTER", "ALLOWS_NATURAL_ATTACKS" ],
+    "flags": [ "STURDY", "DURABLE_MELEE", "NORMAL", "OUTER", "ALLOWS_NATURAL_ATTACKS", "MITTS" ],
     "armor": [
       {
-        "encumbrance": 16,
+        "encumbrance": 6,
         "coverage": 95,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r", "hand_palm_l", "hand_palm_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_back_l", "hand_back_r", "hand_wrist_l", "hand_wrist_r" ]
       },
       {
-        "coverage": 50,
+        "encumbrance": 6,
+        "coverage": 70,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "melee_damage": { "bash": 3 }
@@ -337,28 +325,19 @@
     "warmth": 15,
     "material_thickness": 3,
     "environmental_protection": 1,
-    "flags": [ "VARSIZE", "STURDY", "ALLOWS_NATURAL_ATTACKS", "DURABLE_MELEE", "NORMAL" ],
+    "flags": [ "VARSIZE", "STURDY", "ALLOWS_NATURAL_ATTACKS", "DURABLE_MELEE", "NORMAL", "MITTS" ],
     "armor": [
       {
-        "encumbrance": 18,
-        "coverage": 100,
+        "encumbrance": 6,
+        "coverage": 95,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_palm_l", "hand_palm_r", "hand_back_l", "hand_back_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_wrist_l", "hand_wrist_r", "hand_back_l", "hand_back_r" ]
       },
       {
-        "encumbrance": 0,
-        "coverage": 98,
+        "encumbrance": 6,
+        "coverage": 70,
         "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_wrist_l", "hand_wrist_r" ],
-        "rigid_layer_only": true
-      },
-      {
-        "encumbrance": 0,
-        "coverage": 50,
-        "covers": [ "hand_l", "hand_r" ],
-        "specifically_covers": [ "hand_fingers_l", "hand_fingers_r" ],
-        "rigid_layer_only": true
+        "specifically_covers": [ "hand_palm_l", "hand_palm_r" ]
       }
     ],
     "melee_damage": { "bash": 2 }
@@ -462,8 +441,7 @@
         "material": [
           { "type": "steel", "covered_by_mat": 100, "thickness": 0.4 },
           { "type": "leather", "covered_by_mat": 80, "thickness": 0.5 }
-        ],
-        "rigid_layer_only": true
+        ]
       },
       {
         "encumbrance": 18,

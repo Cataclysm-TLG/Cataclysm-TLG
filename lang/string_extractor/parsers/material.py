@@ -14,6 +14,10 @@ def parse_material(json, origin):
         write_text(json["cut_dmg_verb"], origin,
                    comment="Cut damage verb of material {}".format(name))
 
+    if "acid_dmg_verb" in json:
+        write_text(json["acid_dmg_verb"], origin,
+                   comment="acid damage verb of material {}".format(name))
+
     if "dmg_adj" in json:
         for i in range(4):
             write_text(json["dmg_adj"][i], origin,

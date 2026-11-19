@@ -153,14 +153,28 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath knife", "holster_msg": "You sheath your %s" },
-    "flags": [ "BELTED", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
+    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
     "armor": [
       {
+        "coverage": 15,
         "covers": [ "leg_l", "leg_r" ],
-        "coverage": 50,
         "encumbrance": 4,
         "volume_encumber_modifier": 0.25,
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 4,
+        "volume_encumber_modifier": 0.25,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 4,
+        "coverage": 4,
+        "volume_encumber_modifier": 0.25,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -192,7 +206,7 @@
       }
     ],
     "use_action": { "type": "holster", "holster_prompt": "Sheath knife", "holster_msg": "You sheath your %s" },
-    "flags": [ "SKINTIGHT", "VARSIZE", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
+    "flags": [ "SKINTIGHT", "OVERSIZE", "WATER_FRIENDLY", "NONCONDUCTIVE" ],
     "armor": [
       {
         "covers": [ "leg_l", "leg_r" ],
@@ -200,6 +214,20 @@
         "encumbrance": 4,
         "volume_encumber_modifier": 0.3,
         "specifically_covers": [ "leg_upper_r", "leg_upper_l" ]
+      },
+      {
+        "encumbrance": 4,
+        "volume_encumber_modifier": 0.3,
+        "coverage": 15,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": 4,
+        "volume_encumber_modifier": 0.3,
+        "coverage": 15,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },
@@ -255,7 +283,7 @@
     "price": "12 USD",
     "price_postapoc": "1 USD 50 cent",
     "to_hit": -1,
-    "material": [ "wood" ],
+    "material": [ "dry_plant" ],
     "symbol": "[",
     "looks_like": "bootsheath",
     "color": "brown",
@@ -605,7 +633,7 @@
     "volume": "500 ml",
     "price": "15 USD",
     "price_postapoc": "2 USD",
-    "material": [ "wood" ],
+    "material": [ "dry_plant" ],
     "symbol": "|",
     "looks_like": "sheath",
     "color": "brown",
@@ -636,6 +664,18 @@
         "coverage": 3,
         "covers": [ "gastropod_foot" ],
         "specifically_covers": [ "gastropod_foot_upper" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 4,
+        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
+        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ]
+      },
+      {
+        "encumbrance": [ 1, 2 ],
+        "coverage": 4,
+        "covers": [ "crab_leg_1", "crab_leg_3" ],
+        "specifically_covers": [ "crab_leg_1_merus", "crab_leg_3_merus" ]
       }
     ]
   },

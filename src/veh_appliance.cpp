@@ -547,8 +547,8 @@ void veh_app_interact::toggle_hide_wiring( map &here )
     vehicle_part &vp = veh->part( part_idx );
     const bool should_hide = !vp.hidden;
     vp.hidden = should_hide;
-    if( query_yn( string_format( "Also %s all the wiring on this floor?",
-                                 should_hide ? "hide" : "unhide" ) ) ) {
+    if( query_yn( should_hide ? _( "Also hide all the wiring on this floor?" ) :
+                  _( "Also unhide all the wiring on this floor?" ) ) ) {
         for( const tripoint_bub_ms &target : here.points_on_zlevel() ) {
             if( auto target_vpart_position = here.veh_at( target ) ) {
                 if( auto target_vpart_reference = target_vpart_position.part_with_feature( flag_WIRING, false ) ) {
@@ -614,7 +614,7 @@ void veh_app_interact::populate_app_actions( map &here )
         app_actions.emplace_back( [&here, this]() {
             toggle_hide_wiring( here );
         } );
-        imenu.addentry( -1, true, 0, string_format( _( "%s wiring" ), vp->hidden ? "Unhide" : "Hide" ) );
+        imenu.addentry( -1, true, 0, vp->hidden ? _( "Unhide wiring" ) : _( "Hide wiring" ) );
     }
 #endif
 

@@ -394,15 +394,23 @@ std::optional<int> iuse_transform::use( Character *p, item &it, map *,
         }
     }
 
+    const bool was_replica = it.has_flag( flag_REPLICA_EQUIPMENT );
+
     if( transform.target_group.is_empty() &&
         it.count_by_charges() != transform.target->count_by_charges() &&
         it.count() > 1 ) {
         item take_one = it.split( 1 );
         transform.transform( p, take_one );
+        if( was_replica ) {
+            take_one.set_flag( flag_REPLICA_EQUIPMENT );
+        }
         // TODO: Change to map aware operation when available
         p->i_add_or_drop( take_one );
     } else {
         transform.transform( p, it, true );
+        if( was_replica ) {
+            it.set_flag( flag_REPLICA_EQUIPMENT );
+        }
     }
 
     if( set_timer ) {
@@ -1459,8 +1467,21 @@ std::optional<int> reveal_map_actor::use( Character *p, item &it, map *,
         p->add_msg_if_player( _( "It's too dark to read." ) );
         return std::nullopt;
     }
-    const tripoint_abs_omt center( coords::project_to<coords::omt>( it.get_var( "reveal_map_center",
-                                   p->pos_abs() ) ) );
+
+    const tripoint_abs_ms map_pos_ms = it.get_var( "spawn_location", tripoint_abs_ms::invalid );
+    city_reference closest_city = city_reference::invalid;
+    if( !map_pos_ms.is_invalid() ) {
+        const tripoint_abs_omt map_pos_omt = project_to<coords::omt>( map_pos_ms );
+        const tripoint_abs_sm map_pos = project_to<coords::sm>( map_pos_omt );
+        closest_city = overmap_buffer.closest_city( map_pos );
+    }
+    if( closest_city.city == nullptr ) {
+        p->add_msg_if_player( _( "The %s is unreadable." ), it.tname() );
+        return std::nullopt;
+    }
+
+    const tripoint_abs_omt center( project_to<coords::omt>( closest_city.abs_sm_pos ) );
+
     // Clear highlight on previously revealed OMTs before revealing new ones
     p->map_revealed_omts.clear();
     for( const auto &omt : omt_types ) {
@@ -1468,13 +1489,14 @@ std::optional<int> reveal_map_actor::use( Character *p, item &it, map *,
             reveal_targets( tripoint_abs_omt( center.xy(), z ), omt, 0 );
         }
     }
-    if( !message.empty() ) {
-        p->add_msg_if_player( m_good, "%s", message );
-    }
+
     if( p->map_revealed_omts.empty() ) {
         p->add_msg_if_player( _( "You didn't learn anything new from the %s." ), it.tname() );
+    } else if( !message.empty() ) {
+        p->add_msg_if_player( m_good, "%s", message );
     }
     it.mark_as_used_by_player( *p );
+
     return 0;
 }
 
@@ -1759,12 +1781,6 @@ static void visit_salvage_products( const item &it,
     }
 }
 
-static units::mass proportional_weight( const item &it, int material_portions )
-{
-    int total_portions = std::max( 1, it.type->mat_portion_total );
-    return it.weight() * material_portions / total_portions;
-}
-
 // Helper to determine if there's enough of any material to even produce a result when cut up.
 static bool can_produce_results( const item &it )
 {
@@ -1774,7 +1790,7 @@ static bool can_produce_results( const item &it )
             if( material.count_by_charges() ) {
                 material.charges = 1;
             }
-            if( material.weight() <= proportional_weight( it, mat.second ) ) {
+            if( material.weight() <= material.proportional_weight( mat.second ) ) {
                 return true;
             }
         }
@@ -1839,31 +1855,6 @@ bool salvage_actor::valid_to_cut_up( const Character *const p, const item &it ) 
     return true;
 }
 
-// Find a recipe that can be used to craft item x. Searches craft and uncraft recipes
-// Used only by salvage_actor::cut_up
-static std::optional<recipe> find_uncraft_recipe( const item &x )
-{
-    auto is_valid_uncraft = [&x]( const recipe & curr ) -> bool {
-        return !( curr.obsolete || curr.result() != x.typeId()
-                  || curr.makes_amount() > 1 || curr.is_null() );
-    };
-
-    // Check uncraft first, then crafting recipes if none was found
-    recipe uncraft = recipe_dictionary::get_uncraft( x.typeId() );
-    if( is_valid_uncraft( uncraft ) ) {
-        return uncraft;
-    }
-
-    auto iter = std::find_if( recipe_dict.begin(), recipe_dict.end(),
-    [&]( const std::pair<const recipe_id, recipe> &curr ) {
-        return is_valid_uncraft( curr.second );
-    } );
-    if( iter != recipe_dict.end() ) {
-        return iter->second;
-    }
-    return std::nullopt;
-}
-
 void salvage_actor::cut_up( Character &p, item_location &cut ) const
 {
     map &here = get_map();
@@ -1898,7 +1889,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
     auto distribute_uniformly = [&mat_to_weight]( const item & x, float num_adjusted ) -> void {
         for( const auto &type : x.made_of() )
         {
-            mat_to_weight[type.first] += proportional_weight( x, type.second ) * num_adjusted;
+            mat_to_weight[type.first] += x.proportional_weight( type.second ) * num_adjusted;
         }
     };
 
@@ -1943,7 +1934,7 @@ void salvage_actor::cut_up( Character &p, item_location &cut ) const
         }
 
         // Try to find an available recipe and "restore" its components
-        std::optional<recipe> uncraft = find_uncraft_recipe( curr );
+        std::optional<recipe> uncraft = curr.find_uncraft_recipe();
         if( uncraft )
         {
             const requirement_data requirements = uncraft->simple_requirements();
@@ -2984,34 +2975,6 @@ bool repair_item_actor::can_use_tool( const Character &p, const item &tool, bool
     }
 
     return true;
-}
-
-static item_location get_item_location( Character &p, item &it, map *here,
-                                        const tripoint_bub_ms &pos )
-{
-    // Item on a character
-    if( p.has_item( it ) ) {
-        return item_location( p, &it );
-    }
-
-    // Item in a vehicle
-    if( const optional_vpart_position &vp = here->veh_at( pos ) ) {
-        vehicle_cursor vc( vp->vehicle(), vp->part_index() );
-        bool found_in_vehicle = false;
-        vc.visit_items( [&]( const item * e, item * ) {
-            if( e == &it ) {
-                found_in_vehicle = true;
-                return VisitResponse::ABORT;
-            }
-            return VisitResponse::NEXT;
-        } );
-        if( found_in_vehicle ) {
-            return item_location( vc, &it );
-        }
-    }
-
-    // Item on the map
-    return item_location( map_cursor( here, pos ), &it );
 }
 
 std::optional<int> repair_item_actor::use( Character *p, item &it,

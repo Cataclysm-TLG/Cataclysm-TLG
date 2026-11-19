@@ -81,6 +81,7 @@
 #include "player_activity.h"
 #include "projectile.h"
 #include "ranged.h"
+#include "regional_settings.h"
 #include "ret_val.h"
 #include "rng.h"
 #include "sleep.h"
@@ -109,6 +110,7 @@ static const activity_id ACT_MULTIPLE_READ( "ACT_MULTIPLE_READ" );
 static const bionic_id bio_ads( "bio_ads" );
 static const bionic_id bio_blade( "bio_blade" );
 static const bionic_id bio_chain_lightning( "bio_chain_lightning" );
+static const bionic_id bio_eye_optic( "bio_eye_optic" );
 static const bionic_id bio_faraday( "bio_faraday" );
 static const bionic_id bio_heat_absorb( "bio_heat_absorb" );
 static const bionic_id bio_heatsink( "bio_heatsink" );
@@ -128,10 +130,12 @@ static const damage_type_id damage_bullet( "bullet" );
 static const damage_type_id damage_cut( "cut" );
 static const damage_type_id damage_stab( "stab" );
 
+static const efftype_id effect_anemia( "anemia" );
 static const efftype_id effect_asthma( "asthma" );
 static const efftype_id effect_bandaged( "bandaged" );
 static const efftype_id effect_bite( "bite" );
 static const efftype_id effect_bleed( "bleed" );
+static const efftype_id effect_blind( "blind" );
 static const efftype_id effect_bouldering( "bouldering" );
 static const efftype_id effect_catch_up( "catch_up" );
 static const efftype_id effect_cramped_space( "cramped_space" );
@@ -147,6 +151,7 @@ static const efftype_id effect_npc_flee_player( "npc_flee_player" );
 static const efftype_id effect_npc_player_still_looking( "npc_player_still_looking" );
 static const efftype_id effect_npc_run_away( "npc_run_away" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_scurvy( "scurvy" );
 static const efftype_id effect_stumbled_into_invisible( "stumbled_into_invisible" );
 static const efftype_id effect_stunned( "stunned" );
 
@@ -164,21 +169,30 @@ static const itype_id itype_water_clean( "water_clean" );
 
 static const json_character_flag json_flag_CANNIBAL( "CANNIBAL" );
 static const json_character_flag json_flag_BLOODFEEDER( "BLOODFEEDER" );
+static const json_character_flag json_flag_IMMUNE_SPOIL( "IMMUNE_SPOIL" );
+static const json_character_flag json_flag_PARAIMMUNE( "PARAIMMUNE" );
 
 static const npc_class_id NC_EVAC_SHOPKEEP( "NC_EVAC_SHOPKEEP" );
 
 static const skill_id skill_firstaid( "firstaid" );
 
-static const trait_id trait_ALCMET( "ALCMET" );
 static const string_id<behavior::node_t> behavior_node_t_npc_homeostasis( "npc_homeostasis" );
 static const string_id<behavior::node_t> behavior_node_t_npc_decision( "npc_decision" );
 static const string_id<behavior::node_t> behavior_node_t_npc_needs( "npc_needs" );
 
+static const trait_id trait_ALCMET( "ALCMET" );
+static const trait_id trait_EATDEAD( "EATDEAD" );
+static const trait_id trait_GOURMAND( "GOURMAND" );
 static const trait_id trait_IGNORE_SOUND( "IGNORE_SOUND" );
 static const trait_id trait_RETURN_TO_START_POS( "RETURN_TO_START_POS" );
+static const trait_id trait_SAPROPHAGE( "SAPROPHAGE" );
+static const trait_id trait_SAPROVORE( "SAPROVORE" );
 
 static const vitamin_id vitamin_ethanol( "ethanol" );
 static const vitamin_id vitamin_human_flesh_vitamin( "human_flesh_vitamin" );
+static const vitamin_id vitamin_calcium( "calcium" );
+static const vitamin_id vitamin_iron( "iron" );
+static const vitamin_id vitamin_vitC( "vitC" );
 
 static const zone_type_id zone_type_NO_NPC_PICKUP( "NO_NPC_PICKUP" );
 static const zone_type_id zone_type_NPC_NO_GO( "NPC_NO_GO" );
@@ -1469,7 +1483,7 @@ void npc::move()
     }
 
     Character &player_character = get_player_character();
-    //faction opinion determines if it should consider you hostile
+    // Faction opinion determines if it should consider you hostile.
     if( !is_enemy() && guaranteed_hostile() && sees( here, player_character ) ) {
         if( is_player_ally() ) {
             mutiny();
@@ -2656,72 +2670,96 @@ npc_action npc::address_needs( float danger )
     // and swing into action with alarming alacrity.
     // no sometimes they are just looking the other way, sometimes they hestitate.
     // ( also we can get huge performance boosts )
-    if( one_in( 5 ) ) {
-        healing_options try_to_fix_me = patient_assessment( *this );
-        if( try_to_fix_me.any_true() ) {
-            if( !use_bionic_by_id( bio_nanobots ) ) {
-                ai_cache.can_heal = has_healing_options( try_to_fix_me );
-                if( ai_cache.can_heal.any_true() ) {
-                    return npc_heal;
-                }
-            }
-        } else {
-            deactivate_bionic_by_id( bio_nanobots );
-        }
-        // The danger check here is redundant, but serves as an early exit to save some cycles.
-        if( rules.has_flag( ally_rule::heal_others ) && danger < 0.01 ) {
-            if( is_player_ally() ) {
-                healing_options try_to_fix_other = patient_assessment( player_character );
-                if( try_to_fix_other.any_true() ) {
-                    ai_cache.can_heal = has_healing_options( try_to_fix_other );
+    switch( rng( 1, 15 ) ) {
+        case 1:
+        case 2:
+        case 3: { // 20% chance to try to heal ourself.
+            healing_options try_to_fix_me = patient_assessment( *this );
+            if( try_to_fix_me.any_true() ) {
+                if( !use_bionic_by_id( bio_nanobots ) ) {
+                    ai_cache.can_heal = has_healing_options( try_to_fix_me );
                     if( ai_cache.can_heal.any_true() ) {
-                        ai_cache.ally = g->shared_from( player_character );
-                        return npc_heal_player;
+                        return npc_heal;
+                    }
+                }
+            } else {
+                deactivate_bionic_by_id( bio_nanobots );
+            }
+            // The danger check here is redundant, but serves as an early exit to save some cycles.
+            if( rules.has_flag( ally_rule::heal_others ) && danger < 0.01 ) {
+                if( is_player_ally() ) {
+                    healing_options try_to_fix_other = patient_assessment( player_character );
+                    if( try_to_fix_other.any_true() ) {
+                        ai_cache.can_heal = has_healing_options( try_to_fix_other );
+                        if( ai_cache.can_heal.any_true() ) {
+                            ai_cache.ally = g->shared_from( player_character );
+                            return npc_heal_player;
+                        }
+                    }
+                }
+                for( const npc &guy : g->all_npcs() ) {
+                    if( &guy == this || !guy.is_ally( *this ) || guy.posz() != posz() ||
+                        !sees( here, guy ) ) {
+                        continue;
+                    }
+                    healing_options try_to_fix_other = patient_assessment( guy );
+                    if( try_to_fix_other.any_true() ) {
+                        ai_cache.can_heal = has_healing_options( try_to_fix_other );
+                        if( ai_cache.can_heal.any_true() ) {
+                            ai_cache.ally = g->shared_from( guy );
+                            return npc_heal_player;
+                        }
                     }
                 }
             }
-            for( const npc &guy : g->all_npcs() ) {
-                if( &guy == this || !guy.is_ally( *this ) || guy.posz() != posz() || !sees( here, guy ) ) {
-                    continue;
+            break;
+        }
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8: { // 33% chance to address our pain.
+            if( get_perceived_pain() >= 15 ) {
+                if( !activate_bionic_by_id( bio_painkiller ) && has_painkiller() &&
+                    !took_painkiller() ) {
+                    return npc_use_painkiller;
                 }
-                healing_options try_to_fix_other = patient_assessment( guy );
-                if( try_to_fix_other.any_true() ) {
-                    ai_cache.can_heal = has_healing_options( try_to_fix_other );
-                    if( ai_cache.can_heal.any_true() ) {
-                        ai_cache.ally = g->shared_from( guy );
-                        return npc_heal_player;
-                    }
+            } else {
+                deactivate_bionic_by_id( bio_painkiller );
+            }
+            break;
+        }
+        case 9:
+        case 10:
+        case 11:
+        case 12:
+        case 13: { // 33% chance to try reloading.
+            if( can_reload_current() ) {
+                return npc_reload;
+            } else {
+                add_msg_debug( debugmode::DF_NPC_ITEMAI,
+                               "%s decided to look into reloading items.", name );
+                item_location reloadable = find_reloadable();
+                if( reloadable ) {
+                    do_reload( reloadable );
+                    return npc_noop;
                 }
             }
+            break;
         }
-    }
 
-    if( one_in( 3 ) ) {
-        if( get_perceived_pain() >= 15 ) {
-            if( !activate_bionic_by_id( bio_painkiller ) && has_painkiller() && !took_painkiller() ) {
-                return npc_use_painkiller;
-            }
-        } else {
-            deactivate_bionic_by_id( bio_painkiller );
-        }
-    }
-
-    if( one_in( 3 ) && can_reload_current() ) {
-        return npc_reload;
-    }
-
-    if( one_in( 3 ) ) {
-        add_msg_debug( debugmode::DF_NPC_ITEMAI, "%s decided to look into reloading items.", name );
-        item_location reloadable = find_reloadable();
-        if( reloadable ) {
-            do_reload( reloadable );
-            return npc_noop;
-        }
+        default: // 13.3% - none
+            break;
     }
 
     // Hallucinations have a chance of disappearing each turn.
     if( is_hallucination() && one_in( 25 ) ) {
         die( &here, nullptr );
+    }
+
+    // Try turning on our eyes if they're off.
+    if( has_effect( effect_blind ) && has_bionic( bio_eye_optic ) ) {
+        use_bionic_by_id( bio_eye_optic );
     }
 
     // Warmth: wearing clothes costs a turn but hypothermia is life-threatening.
@@ -2743,7 +2781,8 @@ npc_action npc::address_needs( float danger )
     // Extreme food/water pathing: the pre-gate block only consumed adjacent
     // resources. If extreme need persists and we passed the danger gate,
     // path to distant ground food or water deterministically.
-    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ) {
+    if( get_thirst() > 80 || get_stored_kcal() + stomach.get_calories() < get_healthy_kcal() * 0.75 ||
+        has_effect( effect_scurvy ) || has_effect( effect_anemia ) ) {
         if( consume_food_from_camp() ) {
             add_msg_debug( debugmode::DF_NPC_NEEDS,
                            "NPC %s consuming food or drink from camp due to extreme need.", get_name() );
@@ -3355,9 +3394,13 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
             return;
         }
 
+        // FIXME: Unify avatar/npc behavior, filter "I want to go attack a monster
+        // but I'm following avatar at 2/4 paces and am not allowed to do my own pathing"
         if( critter->is_avatar() ) {
             if( sees( here, *critter ) ) {
-                say( chat_snippets().snip_let_me_pass.translated() );
+                if( one_in( 10 ) ) {
+                    say( chat_snippets().snip_let_me_pass.translated() );
+                }
             } else {
                 stumble_invis( *critter );
             }
@@ -3379,7 +3422,9 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
             // other npcs should not try to move into this npc anymore,
             // so infinite loop can be avoided.
             realnomove->insert( pos );
-            say( chat_snippets().snip_let_me_pass.translated() );
+            if( one_in( 10 ) ) {
+                say( chat_snippets().snip_let_me_pass.translated() );
+            }
             np->move_away_from( pos, true, realnomove );
             // if we moved NPC, readjust their path, so NPCs don't jostle each other out of their activity paths.
             if( np->attitude == NPCATT_ACTIVITY ) {
@@ -3483,7 +3528,7 @@ void npc::move_to( const tripoint_bub_ms &pt, bool no_bashing, std::set<tripoint
     }
 
     if( moved ) {
-        make_footstep_noise();
+        make_footstep_noise( pt );
         const tripoint_bub_ms old_pos = pos;
         setpos( here, p );
         if( old_pos.x() - p.x() < 0 ) {
@@ -3580,8 +3625,7 @@ void npc::avoid_friendly_fire()
 
     tripoint_bub_ms center = midpoint_round_to_nearest( fr_pts );
 
-    std::vector<tripoint_bub_ms> candidates = closest_points_first( pos_bub(), 1 );
-    candidates.erase( candidates.begin() );
+    std::vector<tripoint_bub_ms> candidates = closest_points_first( pos_bub(), 1, 1 );
     std::sort( candidates.begin(), candidates.end(),
     [&tar, &center]( const tripoint_bub_ms & l, const tripoint_bub_ms & r ) {
         return ( trig_dist( l, tar ) - trig_dist( l, center ) ) <
@@ -3776,7 +3820,7 @@ void npc::worker_downtime()
 void npc::move_pause()
 
 {
-    // make sure we're using the best weapon
+    // Make sure we're using the best weapon.
     if( calendar::once_every( 1_hours ) ) {
         deactivate_bionic_by_id( bio_sleep_shutdown );
         for( const bionic_id &bio_id : health_cbms ) {
@@ -4287,15 +4331,16 @@ std::list<item> npc::pick_up_item_vehicle( vehicle &veh, int part_index )
 bool npc::find_corpse_to_pulp()
 {
     map &here = get_map();
+    if( is_hallucination() ) {
+        return false;
+    }
 
-    Character &player_character = get_player_character();
     if( is_player_ally() ) {
         if( !rules.has_flag( ally_rule::allow_pulp ) ||
-            player_character.in_vehicle || is_hallucination() ) {
+            get_player_character().in_vehicle ) {
             return false;
         }
     }
-
     // Pathing with overdraw can get expensive, limit it
     int path_counter = 4;
     const auto check_tile = [this, &path_counter, &here]( const tripoint_bub_ms & p ) -> const item * {
@@ -4316,19 +4361,16 @@ bool npc::find_corpse_to_pulp()
                 if( is_dangerous_field( field_entry( it.get_mtype()->bloodType(), 1, 0_turns ) ) ) {
                     return nullptr;
                 }
-
                 found = &it;
                 break;
             }
         }
-
         if( found != nullptr )
         {
             path_counter--;
             // Only return corpses we can path to
             return update_path( p, false, false ) ? found : nullptr;
         }
-
         return nullptr;
     };
     // TODO: I'm not sure whether this should be farther.
@@ -4342,12 +4384,12 @@ bool npc::find_corpse_to_pulp()
         corpse = check_tile( here.get_bub( *pulp_location ) );
     }
 
-    // Find the old target to avoid spamming
+    // Find the old target to avoid spamming.
     const item *old_target = corpse;
 
     if( corpse == nullptr ) {
-        // If we're following the player, don't wander off to pulp corpses
-        const tripoint_bub_ms around = is_walking_with() ? player_character.pos_bub( here ) : pos_bub(
+        // If we're following the player, don't wander off to pulp corpses.
+        const tripoint_bub_ms around = is_walking_with() ? get_player_character().pos_bub( here ) : pos_bub(
                                            here );
         for( const item_location &location : here.get_active_items_in_radius( around, range,
                 special_item_type::corpse ) ) {
@@ -4533,7 +4575,7 @@ item *npc::evaluate_best_weapon() const
 
 bool npc::wield_better_weapon()
 {
-    // These are also assigned here so npc::evaluate_best_weapon() can be called by itself
+    // These are also assigned here so npc::evaluate_best_weapon() can be called by itself.
     bool can_use_gun = !is_player_ally() || rules.has_flag( ally_rule::use_guns );
     bool use_silent = is_player_ally() && rules.has_flag( ally_rule::use_silent );
 
@@ -4553,7 +4595,7 @@ bool npc::wield_better_weapon()
     add_msg_debug( debugmode::DF_NPC, "Wielding %s at value %.1f", better_weapon->type->get_id().str(),
                    evaluate_weapon( *better_weapon, can_use_gun, use_silent ) );
 
-    // Always returns true, but future proof
+    // Always returns true, but future proof.
     bool wield_success = wield( *better_weapon );
     if( !wield_success ) {
         debugmsg( "NPC failed to wield better weapon %s", better_weapon->tname() );
@@ -4886,37 +4928,121 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
                       int want_quench )
 {
     const auto &food = it.get_comestible();
-    if( !food ) {
-        return 0.0f;
-    }
 
-    // Don't eat it if it's filled with parasites
-    if( food->parasites && !it.has_flag( flag_NO_PARASITES ) ) {
+    // Don't eat it if it's filled with parasites, unless we're immune.
+    if( food->parasites && !has_flag( json_flag_PARAIMMUNE ) && !it.has_flag( flag_NO_PARASITES ) ) {
         return 0.0;
     }
 
     // TODO: Use the actual nutrition for this food, rather than the default?
-    int nutr = food->get_default_nutr();
+    nutrients food_nutrients = compute_effective_nutrients( it );
+    const units::volume water_vol = masticated_volume( it ).first;
+    units::volume food_vol = masticated_volume( it ).second;
+    const double ratio = compute_effective_food_volume_ratio( it );
+    const int nutr = nutrition_for( it );
+    const int fun = fun_for( it, false ).first;
+
+    // Ballpark our chance to get sick and bail if it seems like we will.
+    // TODO: Starving people should be less picky about this, and maybe they could pace themselves.
+    float modified_fun = fun;
+    if( has_trait( trait_GOURMAND ) && modified_fun < -1.f ) {
+        modified_fun *= 0.75f;
+    }
+    if( modified_fun < -5.f ) {
+        return 0;
+    }
+
     int quench = food->quench;
 
-    if( nutr <= 0 && quench <= 0 ) {
+    food_summary to_eat{
+        water_vol,
+        food_vol * ratio,
+        food_nutrients
+    };
+    // Vitamin checks might more comfortably fit in npc::consume_food(), but these are
+    // also where we'll need to manage addictions, and it would be hard to put that in scope
+    // unless we added an extra int for vitamin need and ran this function for each
+    // deficient/wanted vitamin.
+    int calcium_estimate = 0;
+    int iron_estimate = 0;
+    int vitC_estimate = 0;
+    for( const auto &v : food_nutrients.vitamins() ) {
+        // Update the estimated values for daily vitamins.
+        // Actual vitamins happen during digestion.
+        if( v.first == vitamin_calcium ) {
+            calcium_estimate = v.second;
+        }
+        if( v.first == vitamin_iron ) {
+            iron_estimate = v.second;
+        }
+        if( v.first == vitamin_vitC ) {
+            vitC_estimate = v.second;
+        }
+    }
+
+    for( const auto &method : it.type->use_methods ) {
+        const auto *drug = dynamic_cast<const consume_drug_iuse *>(
+                               method.second.get_actor_ptr()
+                           );
+
+        if( !drug ) {
+            continue;
+        }
+
+        for( const auto &v : drug->vitamins ) {
+            const int lo = v.first->RDA_to_default( v.second.first );
+            const int high = v.first->RDA_to_default( v.second.second );
+            const int estimate = ( lo + high ) / 2;
+
+            if( v.first == vitamin_calcium ) {
+                calcium_estimate += estimate;
+            } else if( v.first == vitamin_iron ) {
+                iron_estimate += estimate;
+            } else if( v.first == vitamin_vitC ) {
+                vitC_estimate += estimate;
+            }
+        }
+    }
+
+    int calcium_deficiency = vitamin_calcium.obj().severity( vitamin_get( vitamin_calcium ) );
+    int iron_deficiency = vitamin_iron.obj().severity( vitamin_get( vitamin_iron ) );
+    int vitC_deficiency = vitamin_vitC.obj().severity( vitamin_get( vitamin_vitC ) );
+
+    float weight = 0.0f;
+
+    // Check our three main vitamins and the food's nutritional value. Add weights now so we skip checks below.
+    if( calcium_deficiency > 0 && calcium_estimate > 0 ) {
+        weight = 10.f;
+    }
+    if( iron_deficiency > 0 && iron_estimate > 0 ) {
+        weight = 10.f;
+    }
+    if( vitC_deficiency > 0 && vitC_estimate > 0 ) {
+        weight = 10.f;
+    }
+
+    if( weight <= 0.f && nutr <= 0 && quench <= 0 ) {
         // Not food - may be salt, drugs etc.
         return 0.0f;
     }
 
-    if( !it.type->use_methods.empty() ) {
-        // TODO: Get a good method of telling apart:
-        // raw meat (parasites - don't eat unless mutant)
-        // zed meat (poison - don't eat unless mutant)
-        // caffeine (fine to consume, but expensive and prevents sleep)
-        // hallucination mushrooms (NPCs don't hallucinate, so don't eat those)
-        // honeycomb (harmless iuse)
-        // royal jelly (way too expensive to eat as food)
-        // mutagenic crap (don't eat, we want player to micromanage muties)
-        // marloss (NPCs don't turn fungal)
-        // seeds (too expensive)
+    // Don't eat medicine as food (NPC self-medication is handled in use_painkiller)
+    if( food->comesttype == "MED" ) {
+        return 0.0f;
+    }
 
-        // For now skip all of those
+    // Reject marloss/mycus items -- player should control the fungal path
+    if( it.has_flag( flag_MYCUS_OK ) ||
+        it.type->use_methods.count( "MARLOSS" ) ||
+        it.type->use_methods.count( "MARLOSS_SEED" ) ||
+        it.type->use_methods.count( "MARLOSS_GEL" ) ) {
+        return 0.0f;
+    }
+
+    // Reject tainted/poisonous items (saprophages/saprovores can handle it)
+    if( ( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) ||
+            !it.rotten() ) ) || ( it.type->use_methods.count( "POISON_TAINTED" ) &&
+                                  !who.has_trait( trait_EATDEAD ) ) ) {
         return 0.0f;
     }
 
@@ -4937,8 +5063,6 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     }
 
     double relative_rot = it.get_relative_rot();
-    float weight = 0.0f;
-
     if( relative_rot >= 1.0f ) {
         if( !( who.can_consume_rot() ) ) {
             return 0.0f;
@@ -4951,12 +5075,8 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
         weight = std::max( 1.0f, static_cast<float>( 10.0 * relative_rot ) );
     }
 
-    // TODO: I feel like we should exclude *really* un-fun foods (flour, hot sauce, etc)
-    //       rather than discount them. Eating cooked liver is fine, eating raw flour... :/
-    //       Likewise, *fun* foods should be boosted in attractiveness.
-    if( it.get_comestible_fun() < 0 ) {
-        // This helps to avoid eating stuff like flour
-        weight /= ( -it.get_comestible_fun() ) + 1;
+    if( fun < 0 ) {
+        weight /= ( -fun ) + 1;
     }
 
     // NPCs will avoid unhealthy foods.
@@ -4978,7 +5098,6 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
     }
 
     if( nutr > want_nutr ) {
-
         // Discount fresh foods that are bigger than our hunger.
         if( relative_rot < 0.9f ) {
             weight /= nutr - want_nutr;
@@ -4987,7 +5106,12 @@ float npc::rate_food( const Character &who, const item &it, int want_nutr,
 
     // NPCs won't eat poison food unless it's only a little poisoned
     if( it.poison > 0 ) {
-        weight -= it.poison;
+        // Reject tainted/poisonous items (saprophages/saprovores can handle it)
+        if( !( it.type->use_methods.count( "POISON" ) && ( !who.has_flag( json_flag_IMMUNE_SPOIL ) ||
+                !it.rotten() ) ) && !( it.type->use_methods.count( "POISON_TAINTED" ) &&
+                                       !who.has_trait( trait_EATDEAD ) ) ) {
+            weight -= it.poison;
+        }
     }
 
     // Quench surplus and other penalties can make weight negative for
@@ -5078,7 +5202,10 @@ bool npc::consume_food()
     int want_hunger = std::max( 0, get_hunger() );
     int want_quench = std::max( 0, get_thirst() );
 
-    const std::vector<item *> inv_food = cache_get_items_with( "is_food", &item::is_food );
+    // Add medication to our food list so we can eat vitamins.
+    std::vector<item *> inv_food = cache_get_items_with( "is_medication", &item::is_medication );
+    const auto food = cache_get_items_with( "is_food", &item::is_food );
+    inv_food.insert( inv_food.end(), food.begin(), food.end() );
 
     if( inv_food.empty() ) {
         if( !needs_food() ) {
@@ -5334,8 +5461,9 @@ void npc::set_omt_destination()
     if( needs.empty() ) { // We don't need anything in particular.
         needs.push_back( need_none );
 
-        // also, don't bother looking if the CITY_SIZE is 0, just go somewhere at random
-        const int city_size = get_option<int>( "CITY_SIZE" );
+        // also, don't bother looking if the city_size is 0, just go somewhere at random
+        const int city_size = overmap_buffer.get_settings(
+                                  this->pos_abs_omt() ).get_settings_city().city_size;
         if( city_size == 0 ) {
             goal = surface_omt_loc + point( rng( -90, 90 ), rng( -90, 90 ) );
             return;

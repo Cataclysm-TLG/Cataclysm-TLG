@@ -40,7 +40,7 @@
     "reversible": true,
     "autolearn": true,
     "using": [ [ "sewing_standard", 12 ] ],
-    "components": [ [ [ "cotton_patch", 60 ] ], [ [ "down_feather", 1160 ] ] ]
+    "components": [ [ [ "nylon_sheet", 12 ] ], [ [ "nylon_patch", 96 ] ], [ [ "down_feather", 1160 ] ] ]
   },
   {
     "type": "recipe",
@@ -351,7 +351,7 @@
     "decomp_learn": 3,
     "book_learn": [ [ "textbook_tailor", 3 ], [ "manual_tailor", 3 ] ],
     "using": [ [ "soldering_standard", 5 ] ],
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "//": "The tailoring kit is an expanded sewing kit, so a bone/wood needle is inappropriate.",
     "components": [
       [ [ "sewing_kit", 1 ] ],
@@ -870,7 +870,7 @@
     "time": "2 m",
     "reversible": true,
     "decomp_learn": 0,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "book_learn": [ [ "adv_chemistry", 1 ], [ "textbook_chemistry", 1 ] ],
     "components": [
       [ [ "glasses_safety", 1 ], [ "glass_goggles", 1 ] ],
@@ -885,8 +885,8 @@
     "result": "chemistry_set",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
-    "skills_required": [ "chemistry", 2 ],
+    "skill_used": "electronics",
+    "skills_required": [ [ "chemistry", 3 ] ],
     "time": "3 m",
     "reversible": true,
     "decomp_learn": 0,
@@ -906,7 +906,7 @@
     "reversible": true,
     "autolearn": true,
     "decomp_learn": 1,
-    "flags": [ "BLIND_EASY" ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ],
     "components": [
       [ [ "xacto", 1 ] ],
       [ [ "saw", 1 ], [ "bow_saw", 1 ], [ "saw_bronze", 1 ] ],
@@ -975,6 +975,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -1134,20 +1135,6 @@
   },
   {
     "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "result": "survivor_scope",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
-    "difficulty": 4,
-    "time": "10 m",
-    "book_learn": [ [ "plastics_book", 3 ] ],
-    "proficiencies": [ { "proficiency": "prof_plasticworking" } ],
-    "using": [ [ "soldering_standard", 10 ], [ "plastic_molding", 3 ] ],
-    "components": [ [ [ "plastic_chunk", 4 ] ], [ [ "lens", 1 ] ], [ [ "lens", 1 ], [ "lens_small", 1 ] ] ]
-  },
-  {
-    "type": "recipe",
     "activity_level": "NO_EXERCISE",
     "result": "crackpipe",
     "category": "CC_OTHER",
@@ -1170,6 +1157,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -1334,7 +1322,7 @@
     "components": [
       [ [ "pipe", 12 ] ],
       [ [ "sheet_metal_small", 10 ] ],
-      [ [ "motor_small", 1 ] ],
+      [ [ "motor_medium", 1 ] ],
       [ [ "small_storage_battery", 1 ] ],
       [ [ "wheel_small", 2 ] ],
       [ [ "wheel_mount_light", 2 ] ],
@@ -2192,6 +2180,7 @@
   {
     "type": "recipe",
     "activity_level": "BRISK_EXERCISE",
+    "//": "Butted mail.  The recipe lacks a rod to wind the wire around to give it shape, but you could use practically anything for that, so who cares.",
     "result": "chain_link",
     "id_suffix": "fabrication",
     "category": "CC_OTHER",
@@ -2201,7 +2190,7 @@
     "time": "5 m",
     "book_learn": [ [ "textbook_armwest", 1 ], [ "textbook_fabrication", 1 ], [ "recipe_melee", 1 ] ],
     "qualities": [ { "id": "WRENCH", "level": 1 } ],
-    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ] ], [ [ "cu_pipe", -1 ] ] ],
+    "tools": [ [ [ "boltcutters", -1 ], [ "toolset", -1 ], [ "tin_snips", -1 ], [ "pliers", -1 ] ] ],
     "components": [ [ [ "wire", 1 ] ] ]
   },
   {
@@ -2230,7 +2219,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "cotton_patch", 100 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_cotton",
@@ -2244,7 +2233,7 @@
     "using": [ [ "filament", 16 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "cotton_sheet", 25 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_leather",
@@ -2258,7 +2247,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "leather_patch", 50 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_wool",
@@ -2272,7 +2261,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "felt_patch", 100 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_nylon",
@@ -2287,7 +2276,7 @@
     "using": [ [ "filament", 8 ] ],
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 50 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "flags": [ "BLIND_HARD", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_plank",
@@ -2300,7 +2289,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "2x4", 10 ] ], [ [ "rope_any_short", 1, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_rebar",
@@ -2313,7 +2302,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "rebar", 10 ] ], [ [ "rope_any_short", 1, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_pipe",
@@ -2326,7 +2315,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "pipe", 10 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_copper_pipe",
@@ -2339,7 +2328,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "cu_pipe", 10 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_branch",
@@ -2352,7 +2341,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "stick", 10 ] ], [ [ "rope_any_short", 1, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_javelin",
@@ -2365,7 +2354,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "javelin", 5 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "bundle_branch_long",
@@ -2378,7 +2367,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "stick_long", 5 ] ], [ [ "rope_any_short", 2, "LIST" ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",
@@ -2675,6 +2664,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -2772,6 +2762,36 @@
     "autolearn": true,
     "using": [ [ "fabric_standard", 200 ], [ "marking_hard", 1 ] ],
     "components": [ [ [ "box_medium", 1 ] ] ]
+  },
+  {
+    "result": "target_spinner",
+    "type": "recipe",
+    "category": "CC_OTHER",
+    "subcategory": "CSC_OTHER_OTHER",
+    "skill_used": "fabrication",
+    "difficulty": 2,
+    "time": "3 h",
+    "activity_level": "MODERATE_EXERCISE",
+    "autolearn": true,
+    "qualities": [
+      { "id": "HAMMER", "level": 2 },
+      { "id": "SAW_M", "level": 2 },
+      { "id": "DRILL", "level": 3 },
+      { "id": "WRENCH", "level": 2 }
+    ],
+    "components": [
+      [ [ "mil_plate", 1 ], [ "hard_plate", 1 ], [ "alloy_plate", 1 ] ],
+      [
+        [ "mil_plate", 1 ],
+        [ "hard_plate", 1 ],
+        [ "alloy_plate", 1 ],
+        [ "steel_plate", 1 ],
+        [ "steel_chunk", 1 ],
+        [ "sheet_metal", 1 ]
+      ],
+      [ [ "pipe", 8 ] ],
+      [ [ "nuts_bolts", 30 ] ]
+    ]
   },
   {
     "type": "recipe",
@@ -2904,7 +2924,7 @@
     "time": "10 s",
     "autolearn": true,
     "components": [ [ [ "seaweed", 20 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "dry_seaweed_pile",
@@ -2916,7 +2936,7 @@
     "time": "10 s",
     "autolearn": true,
     "components": [ [ [ "dry_seaweed", 20 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",

@@ -97,7 +97,7 @@
       { "u_message": "[Skill experience test]" },
       { "math": [ "u_skill_test = u_skill_exp('swimming')" ] },
       { "u_message": "Swimming skill experience before: <u_val:skill_test>" },
-      { "math": [ "u_skill_exp('swimming')", "+=", "10" ] },
+      { "math": [ "u_skill_exp('swimming') += 10" ] },
       { "math": [ "u_skill_test = u_skill_exp('swimming')" ] },
       { "u_message": "Swimming skill experience after: <u_val:skill_test>" },
       { "u_message": "[Weight and volume test]" },
@@ -300,7 +300,7 @@
                   { "math": [ "_coverage = n_coverage(_id)" ] },
                   { "math": [ "_encumbrance = n_encumbrance(_id)" ] },
                   {
-                    "if": { "math": [ "_coverage", ">", "0" ] },
+                    "if": { "math": [ "_coverage > 0" ] },
                     "then": [
                       { "u_message": "  <npc_name>" },
                       { "u_message": "  coverage:<context_val:coverage>" },
@@ -511,7 +511,7 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_print_item_charge",
-    "condition": { "math": [ "n_val('power_max')", ">", "0" ] },
+    "condition": { "math": [ "n_val('power_max') > 0" ] },
     "effect": [
       { "math": [ "ITEM_POWER = n_val('power')" ] },
       { "math": [ "ITEM_POWER_MAX = n_val('power_max')" ] },

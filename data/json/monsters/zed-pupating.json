@@ -32,18 +32,52 @@
           "monster_message": "The pupating zombie crawler bursts, and gore-smeared winged beasts climb out of the corpse!"
         }
       ]
-    }
+    },
+    "delete": { "upgrades": { "half_life": 4, "into": "mon_zombie_crawler_pupa" } }
   },
   {
     "id": "mon_zombie_pupa_decoy",
     "type": "MONSTER",
     "name": { "str": "pupating zombie" },
     "description": "This human corpse is wrapped in sticky black fibers that cover everything from the neck down.  Beneath the wrapping there is a strange rhythmic movement, grotesque to behold.",
-    "copy-from": "mon_zombie_fat",
+    "default_faction": "zombie",
+    "bodytype": "blob",
+    "species": [ "ZOMBIE", "HUMAN" ],
+    "volume": "75000 ml",
+    "weight": "74000 g",
+    "hp": 95,
+    "speed": 55,
+    "material": [ "flesh" ],
+    "symbol": "Z",
+    "color": "green",
+    "aggression": 100,
+    "morale": 100,
+    "melee_dice": 2,
+    "melee_dice_sides": 4,
+    "melee_damage": [ { "damage_type": "cut", "amount": 0 } ],
+    "weakpoint_sets": [ "wps_humanoid_body", "wps_humanoid_head_small" ],
+    "families": [ "prof_intro_biology", "prof_physiology", "prof_wp_zombie" ],
+    "vision_night": 3,
+    "death_drops": "default_zombie_death_drops",
+    "burn_into": "mon_zombie_scorched",
+    "fungalize_into": "mon_zombie_fat_fungus",
+    "flags": [
+      "SEES",
+      "HEARS",
+      "STUMBLES",
+      "WARM",
+      "GRABS",
+      "BASHES",
+      "GROUP_BASH",
+      "POISON",
+      "NO_BREATHE",
+      "REVIVES",
+      "PUSH_MON",
+      "FILTHY",
+      "GEN_DORMANT"
+    ],
     "harvest": "zombie_pupating",
     "decay": "zombie_decay",
-    "bodytype": "blob",
-    "delete": { "categories": [ "CLASSIC" ] },
     "bleed_rate": 50,
     "special_attacks": [ { "type": "bite", "cooldown": 3 } ],
     "upgrades": { "half_life": 4, "into": "mon_zombie_pupa" },
@@ -69,7 +103,8 @@
           "monster_message": "The pupating zombie bursts, and gore-smeared winged beasts climb out of the corpse!"
         }
       ]
-    }
+    },
+    "delete": { "upgrades": { "half_life": 4, "into": "mon_zombie_pupa" } }
   },
   {
     "id": "mon_brute_pupa_decoy",
@@ -101,8 +136,10 @@
           "cooldown": 50,
           "monster_message": "The pupating brute bursts, and gore-smeared winged beasts climb out of the corpse!"
         }
-      ]
-    }
+      ],
+      "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF" ]
+    },
+    "delete": { "upgrades": { "half_life": 168, "into_group": "GROUP_BRUTE_PUPA" } }
   },
   {
     "id": "mon_hulk_pupa_decoy",
@@ -230,9 +267,8 @@
     "type": "MONSTER",
     "name": { "str": "shady pupating zombie" },
     "description": "An uncanny shadow envelops this creature.  You can make out the outline of what once may have been a human being, but its edges bulge rhythmically in places that are not anatomically possible for humans.",
-    "copy-from": "mon_zombie_fat",
+    "copy-from": "mon_zombie_pupa_decoy",
     "bodytype": "blob",
-    "delete": { "categories": [ "CLASSIC" ] },
     "special_attacks": [ { "type": "bite", "cooldown": 3 } ],
     "regenerates": 5,
     "bleed_rate": 0,
@@ -259,7 +295,9 @@
           "cooldown": 50,
           "monster_message": "The pupating zombie bursts, and shadowy winged beasts climb out of the corpse!"
         }
-      ]
-    }
+      ],
+      "flags": [ "SMALLSLUDGETRAIL", "SLUDGEPROOF", "NIGHT_INVISIBILITY" ]
+    },
+    "delete": { "upgrades": { "half_life": 4, "into": "mon_zombie_pupa_shady" } }
   }
 ]

@@ -61,7 +61,7 @@
   {
     "type": "item_group",
     "subtype": "collection",
-    "id": "mon_zombie_swimmer_death_drops",
+    "id": "mon_zombie_drowned_death_drops",
     "entries": [
       {
         "distribution": [

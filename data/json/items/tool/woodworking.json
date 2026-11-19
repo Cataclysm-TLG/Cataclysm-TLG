@@ -4,6 +4,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "bow saw" },
+    "category": "tools",
     "description": "A saw that is more at home outdoors than inside.  It's used for trimming trees, pruning, and cutting firewood, but may be used for other rough cuts as well.",
     "weight": "750 g",
     "volume": "3500 ml",
@@ -23,13 +24,14 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "chainsaw (off)", "str_pl": "chainsaws (off)" },
+    "category": "tools",
     "description": "A treecutting tool moonlighting as a weapon of opportunity.  If loaded with gas, using this item will turn it on, turning it into a very powerful but unwieldy melee weapon.",
     "weight": "6577 g",
     "volume": "2500 ml",
     "longest_side": "82 cm",
     "price": "80 USD",
     "price_postapoc": "5 USD",
-    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "clumsy" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "uneven" },
     "material": [ "steel", "plastic" ],
     "symbol": "/",
     "color": "red",
@@ -42,7 +44,7 @@
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_activate__chainsaw",
-          "condition": { "and": [ { "math": [ "rng(0, 10) - n_damage_level()", ">", "5" ] }, { "not": "u_is_underwater" }, "has_ammo" ] },
+          "condition": { "and": [ { "math": [ "rng(0, 10) - n_damage_level() > 5" ] }, { "not": "u_is_underwater" }, "has_ammo" ] },
           "effect": [
             { "turn_cost": 0.8 },
             { "u_make_sound": "With a roar, the chainsaw screams to life!", "type": "combat", "volume": 60 },
@@ -65,8 +67,9 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "chainsaw (on)", "str_pl": "chainsaws (on)" },
+    "category": "weapons",
     "description": "This chainsaw is on and making a lot of noise.  Use it to turn it off.",
-    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "clumsy" },
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "uneven" },
     "turns_per_charge": 4,
     "charges_per_use": 0,
     "revert_to": "chainsaw_off",
@@ -111,19 +114,20 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "pole saw (off)", "str_pl": "pole saws (off)" },
+    "category": "tools",
     "description": "A lumbering tool intended for trimming hedges and tree branches at a distance.  If loaded with gas, using this item will cause it to turn on, making it into an unwieldy polearm.",
     "weight": "9525 g",
     "volume": "2500 ml",
     "longest_side": "275 cm",
     "price": "400 USD",
     "price_postapoc": "4 USD 50 cent",
-    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "clumsy" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "looks_like": "chainsaw_off",
     "material": [ "steel", "plastic" ],
     "symbol": "/",
     "color": "red",
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "gasoline": 450 }, "watertight": true, "rigid": true } ],
-    "charges_per_use": 5,
+    "charges_per_use": 0,
     "techniques": [ "SWEEP" ],
     "use_action": {
       "type": "effect_on_conditions",
@@ -131,16 +135,16 @@
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_activate__polesaw",
-          "effect": {
-            "run_eocs": "EOC_toolweapon_activate",
-            "variables": {
-              "turn_cost": 0.8,
-              "transform_target": "polesaw_on",
-              "success_message": { "i18n": true, "str": "With a roar, the pole saw screams to life!" },
-              "volume": 50,
-              "failure_message": { "i18n": true, "str": "You yank the cord, but nothing happens." }
-            }
-          }
+          "condition": { "and": [ { "math": [ "rng(0, 10) - n_damage_level() > 5" ] }, { "not": "u_is_underwater" }, "has_ammo" ] },
+          "effect": [
+            { "turn_cost": 0.8 },
+            { "u_make_sound": "With a roar, the chainsaw screams to life!", "type": "combat", "volume": 60 },
+            { "u_message": "With a roar, the chainsaw screams to life!" },
+            { "transform_item": "polesaw_on", "active": true },
+            { "sound_effect": "chainsaw_on", "id": "chainsaw_cord" },
+            { "sound_effect": "chainsaw_on", "id": "chainsaw_start" }
+          ],
+          "false_effect": [ { "sound_effect": "chainsaw_on", "id": "chainsaw_cord" }, { "u_message": "You yank the cord, but nothing happens." } ]
         }
       ]
     },
@@ -154,8 +158,9 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "pole saw (on)", "str_pl": "pole saws (on)" },
+    "category": "weapons",
     "description": "This pole saw is on and making a lot of noise.  Use it to turn it off.",
-    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "clumsy" },
+    "to_hit": { "grip": "solid", "length": "long", "surface": "line", "balance": "uneven" },
     "turns_per_charge": 4,
     "charges_per_use": 0,
     "revert_to": "polesaw_off",
@@ -197,13 +202,14 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "circular saw (off)", "str_pl": "circular saws (off)" },
+    "category": "tools",
     "description": "A lightweight, handheld cordless circular saw.  Spins a circular blade fast enough to cut wood, zombies, or in an emergency, pizza.  The blade, while effective in combat, is hard to hit with due to its small size.",
     "weight": "2940 g",
     "volume": "750 ml",
     "longest_side": "44 cm",
     "price": "50 USD",
     "price_postapoc": "2 USD 50 cent",
-    "to_hit": -3,
+    "to_hit": { "grip": "solid", "length": "hand", "surface": "line", "balance": "uneven" },
     "material": [ "steel", "plastic" ],
     "symbol": "/",
     "color": "yellow",
@@ -229,7 +235,11 @@
     },
     "flags": [ "NONCONDUCTIVE" ],
     "pocket_data": [
-      { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "BATTERY_HEAVY" ], "default_magazine": "heavy_battery_cell" }
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "flag_restriction": [ "BATTERY_HEAVY" ],
+        "default_magazine": "heavy_plus_battery_cell"
+      }
     ],
     "melee_damage": { "bash": 2, "cut": 4 },
     "tool_ammo": [ "battery" ]
@@ -240,10 +250,10 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "circular saw (on)", "str_pl": "circular saws (on)" },
-    "//": "Circular saw would be very fast but imprecise butchering tool - alas the qualities are not separate and so speed is sacrificed.",
+    "category": "weapons",
     "description": "A lightweight, handheld cordless circular saw.  It is currently on and the blade is spinning; use this item to turn it off.",
-    "to_hit": -4,
-    "power_draw": "1200 W",
+    "to_hit": { "grip": "solid", "length": "hand", "surface": "line", "balance": "uneven" },
+    "power_draw": "400 W",
     "revert_to": "circsaw_off",
     "qualities": [ [ "CUT", 1 ], [ "SAW_W", 2 ], [ "BUTCHER", -40 ] ],
     "use_action": {
@@ -282,6 +292,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "luthier toolset" },
+    "category": "tools",
     "description": "A set of luthier tools in several sizes and types.  Guaranteed to have the right tools for creating musical instruments from wood.",
     "looks_like": "screwdriver_set",
     "weight": "1600 g",
@@ -302,17 +313,18 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "electric chainsaw (off)", "str_pl": "electric chainsaws (off)" },
+    "category": "tools",
     "description": "A treecutting tool moonlighting as a weapon of opportunity.  If loaded with batteries, using this item will turn it on, turning it into a very powerful but unwieldy melee weapon.",
     "weight": "6577 g",
     "volume": "2500 ml",
     "longest_side": "82 cm",
     "price": "80 USD",
     "price_postapoc": "5 USD",
-    "to_hit": -3,
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "uneven" },
     "material": [ "steel", "plastic" ],
     "symbol": "/",
     "color": "red",
-    "charges_per_use": 5,
+    "charges_per_use": 0,
     "techniques": [ "SWEEP" ],
     "use_action": {
       "type": "effect_on_conditions",
@@ -320,7 +332,7 @@
       "effect_on_conditions": [
         {
           "id": "EOC_toolweapon_activate__elec_chainsaw",
-          "condition": { "math": [ "rng(0, 10) - n_damage_level()", ">", "5" ] },
+          "condition": { "math": [ "rng(6, 10) - n_damage_level() > 5" ] },
           "effect": {
             "run_eocs": "EOC_toolweapon_activate",
             "variables": {
@@ -337,7 +349,11 @@
     },
     "flags": [ "NONCONDUCTIVE", "FRAGILE_MELEE" ],
     "pocket_data": [
-      { "pocket_type": "MAGAZINE_WELL", "flag_restriction": [ "BATTERY_HEAVY" ], "default_magazine": "heavy_battery_cell" }
+      {
+        "pocket_type": "MAGAZINE_WELL",
+        "flag_restriction": [ "BATTERY_HEAVY" ],
+        "default_magazine": "heavy_plus_battery_cell"
+      }
     ],
     "melee_damage": { "bash": 10 },
     "tool_ammo": [ "battery" ]
@@ -348,9 +364,10 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "electric chainsaw (on)", "str_pl": "electric chainsaws (on)" },
+    "category": "weapons",
     "description": "This electric chainsaw is on and making a lot of noise.  Use it to turn it off.",
-    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "clumsy" },
-    "power_draw": "2 kW",
+    "to_hit": { "grip": "solid", "length": "short", "surface": "line", "balance": "uneven" },
+    "power_draw": "500 W",
     "charges_per_use": 0,
     "revert_to": "elec_chainsaw_off",
     "qualities": [ [ "AXE", 4 ], [ "BUTCHER", -100 ] ],
@@ -389,6 +406,7 @@
     "id": "elec_chainsaw_cord_off",
     "copy-from": "elec_chainsaw_off",
     "looks_like": "elec_chainsaw_off",
+    "category": "tools",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "price": "66 USD",
@@ -401,7 +419,7 @@
         "effect_on_conditions": [
           {
             "id": "EOC_toolweapon_activate__elec_chainsaw_cord",
-            "condition": { "math": [ "rng(0, 10) - n_damage_level()", ">", "5" ] },
+            "condition": { "math": [ "rng(6, 10) - n_damage_level() > 5" ] },
             "effect": {
               "run_eocs": "EOC_toolweapon_activate",
               "variables": {
@@ -423,6 +441,7 @@
   {
     "id": "elec_chainsaw_cord_on",
     "copy-from": "elec_chainsaw_off",
+    "category": "weapons",
     "looks_like": "elec_chainsaw_on",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
@@ -458,17 +477,19 @@
         }
       ]
     },
-    "power_draw": "2 kW",
+    "power_draw": "500 W",
     "qualities": [ [ "AXE", 4 ], [ "BUTCHER", -100 ] ],
     "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "SPAWN_ACTIVE", "POWERED", "FRAGILE_MELEE" ],
     "pocket_data": [  ],
-    "revert_to": "elec_chainsaw_cord_off"
+    "revert_to": "elec_chainsaw_cord_off",
+    "melee_damage": { "bash": 4, "cut": 52 }
   },
   {
     "id": "saw",
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "wood saw" },
+    "category": "tools",
     "description": "A thin saw, useful for cutting through wood objects.  Activate it to turn pre-cut logs into planks.",
     "weight": "283 g",
     "volume": "1 L",
@@ -488,6 +509,7 @@
     "type": "ITEM",
     "subtypes": [ "TOOL" ],
     "name": { "str": "stone chisel" },
+    "category": "tools",
     "looks_like": "chisel",
     "description": "A short, primitive chisel made from hard stone, usually used for primitive woodworking.",
     "weight": "600 g",
@@ -499,7 +521,6 @@
     "symbol": ";",
     "color": "light_gray",
     "qualities": [ [ "CHISEL", 1 ], [ "CHISEL_WOOD", 1 ] ],
-    "flags": [ "BELT_CLIP" ],
-    "melee_damage": { "bash": 2, "cut": 1 }
+    "melee_damage": { "bash": 4, "cut": 1 }
   }
 ]

@@ -84,6 +84,9 @@
 #include "ranged.h"
 #include "rng.h"
 #include "safemode_ui.h"
+#if defined(TILES)
+#include "sdl_gamepad.h"
+#endif
 #include "sleep.h"
 #include "sounds.h"
 #include "string_formatter.h"
@@ -317,13 +320,21 @@ input_context game::get_player_input( std::string &action )
             }
 
             if( current_turn.async_anim_timeout() ) {
-                g->void_async_anim_curses();
+                bool cleared = g->void_async_anim_curses();
 #if defined(TILES)
-                tilecontext->void_async_anim();
-#else
-                g->invalidate_main_ui_adaptor();
+                cleared |= tilecontext->void_async_anim();
 #endif
+                if( cleared ) {
+                    invalidate_main_ui_adaptor();
+                }
             }
+
+#if defined(TILES)
+            // Expire stale hit-animation overlays between draws
+            if( tilecontext->expire_hit_animations() ) {
+                invalidate_main_ui_adaptor();
+            }
+#endif
 
             if( g->has_blink_curses() && current_turn.blink_timeout() ) {
                 g->blink_active_phase = !g->blink_active_phase;
@@ -477,14 +488,17 @@ static void pldrive( point_rel_ms d )
     return pldrive( tripoint_rel_ms( d, 0 ) );
 }
 
-static void open()
+static void open( const std::optional<tripoint_bub_ms> &p = std::nullopt )
 {
     map &here = get_map();
 
     avatar &player_character = get_avatar();
-    const std::optional<tripoint_bub_ms> openp_ = choose_adjacent_highlight( here, _( "Open where?" ),
-            pgettext( "no door, gate, curtain, etc.", "There is nothing that can be opened nearby." ),
-            ACTION_OPEN, false );
+    std::optional<tripoint_bub_ms> openp_ = p;
+    if( !openp_ ) {
+        openp_ = choose_adjacent_highlight( here, _( "Open where?" ),
+                                            pgettext( "no door, gate, curtain, etc.", "There is nothing that can be opened nearby." ),
+                                            ACTION_OPEN, false );
+    }
 
     if( !openp_ ) {
         return;
@@ -564,14 +578,19 @@ static void open()
     }
 }
 
-static void close()
+static void close( const std::optional<tripoint_bub_ms> &p = std::nullopt )
 {
     map &here = get_map();
 
-    if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent_highlight(
-                here, _( "Close where?" ),
-                pgettext( "no door, gate, etc.", "There is nothing that can be closed nearby." ),
-                ACTION_CLOSE, false ) ) {
+    std::optional<tripoint_bub_ms> pnt = p;
+    if( !pnt ) {
+        pnt = choose_adjacent_highlight(
+                  here, _( "Close where?" ),
+                  pgettext( "no door, gate, etc.", "There is nothing that can be closed nearby." ),
+                  ACTION_CLOSE, false );
+    }
+
+    if( pnt ) {
         doors::close_door( here, get_player_character(), *pnt );
     }
 }
@@ -599,7 +618,7 @@ static void auto_features_warn()
 }
 
 // Establish or release a grab on a vehicle
-static void grab()
+static void grab( const std::optional<tripoint_bub_ms> &p = std::nullopt )
 {
     avatar &you = get_avatar();
     map &here = get_map();
@@ -620,7 +639,10 @@ static void grab()
         return;
     }
 
-    const std::optional<tripoint_bub_ms> grabp_ = choose_adjacent( _( "Grab where?" ) );
+    std::optional<tripoint_bub_ms> grabp_ = p;
+    if( !grabp_ ) {
+        grabp_ = choose_adjacent( _( "Grab where?" ) );
+    }
     if( !grabp_ ) {
         add_msg( _( "Nevermind." ) );
         return;
@@ -645,6 +667,15 @@ static void grab()
         }
     }
     if( creatures.creature_at( grabp ) && !creatures.creature_at( grabp )->is_hallucination() ) {
+        Creature *target = creatures.creature_at( grabp );
+        if( ( you.is_underwater() && !target->is_underwater() ) ||
+            ( !you.is_underwater() && target->is_underwater() ) ) {
+            if( here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, you.pos_bub() ) ||
+                here.has_flag( ter_furn_flag::TFLAG_SWIM_UNDER, grabp ) ) {
+                add_msg( _( "You can't grab through the floor." ) );
+                return;
+            }
+        }
         if( you.is_armed() ) {
             add_msg( _( "You'll need your hands free for grappling." ) );
             return;
@@ -655,11 +686,10 @@ static void grab()
         }
         // TODO: Dynamically calculate stamina cost.
         if( you.get_stamina() < 400 ) {
-            you.add_msg_if_player( ( "You're too exhausted to wrestle anything." ) );
+            you.add_msg_if_player( _( "You're too exhausted to wrestle anything." ) );
             return;
         }
-        if( creatures.creature_at( grabp )->is_monster() &&
-            creatures.creature_at( grabp )->as_monster()->has_flag( mon_flag_GRAB_IMMUNE ) ) {
+        if( target->is_monster() && target->as_monster()->has_flag( mon_flag_GRAB_IMMUNE ) ) {
             add_msg( _( "You can't grab %s." ), creatures.creature_at( grabp )->disp_name() );
             return;
         }
@@ -676,28 +706,36 @@ static void grab()
 
         bool tolerate = false;
         // Friends will tolerate grabs, enemies are already mad. Neutral NPCs will not tolerate grabs unless they are helpless.
-        if( creatures.creature_at( grabp )->is_npc() ) {
-            tolerate = creatures.creature_at( grabp )->as_npc()->is_player_ally() ||
-                       creatures.creature_at( grabp )->as_npc()->is_enemy() ||
-                       creatures.creature_at( grabp )->as_npc()->has_effect( effect_narcosis ) ||
-                       !creatures.creature_at( grabp )->as_npc()->enough_working_legs();
-            // You can grab your pets.
-        } else if( creatures.creature_at( grabp )->is_monster() ) {
-            tolerate = creatures.creature_at( grabp )->as_monster()->is_pet();
+        if( target->is_npc() ) {
+            npc *target_npc = target->as_npc();
+            tolerate = target_npc->is_player_ally() ||
+                       target_npc->is_enemy() ||
+                       target_npc->has_effect( effect_narcosis ) ||
+                       !target_npc->enough_working_legs();
+            // You can grab your own pets.
+        } else if( target->is_monster() ) {
+            tolerate = target->as_monster()->is_pet();
         }
 
-        if( creatures.creature_at( grabp )->is_npc() && !tolerate ) {
-            if( !query_yn( _( "Really attack %s?" ), creatures.creature_at( grabp )->disp_name() ) ) {
-                return;
+        if( !tolerate ) {
+            if( target->is_npc() ) {
+                if( !query_yn( _( "Really attack %s?" ), target->disp_name() ) ) {
+                    return;
+                }
+            } else if( target->as_monster()->attitude_to( you ) != Creature::Attitude::HOSTILE ) {
+                if( !g->warn_player_maybe_anger_local_faction( true, false ) ) {
+                    return;
+                }
             }
         }
+
         // Most melee combat is EXPLOSIVE, but here we're just grabbing on.
         const float weary_mult = you.exertion_adjusted_move_multiplier( EXTRA_EXERCISE );
         item weap =  null_item_reference();
         you.mod_moves( -100 - you.attack_speed( weap ) / weary_mult );
         you.as_character()->burn_energy_arms( -120 );
-        if( creatures.creature_at( grabp )->is_monster() ) {
-            monster *z = creatures.creature_at( grabp )->as_monster();
+        if( target->is_monster() ) {
+            monster *z = target->as_monster();
             // TODO: Force this to use unarmed skill for one-handed or multilimb grabs. Will need to
             // write an optional member into hit_roll to name a weapon skill.
             // TODO TWO: Grabbing with whip-type weapons? Definitely no one should tolerate that.
@@ -716,7 +754,7 @@ static void grab()
                     accuracy_penalty = -8.0f;
                 }
             }
-            int hitspread = creatures.creature_at( grabp )->deal_melee_attack( you.as_character(),
+            int hitspread = target->deal_melee_attack( you.as_character(),
                             you.as_character()->hit_roll() + accuracy_penalty );
             if( hitspread < 0 && !tolerate ) {
                 add_msg( m_warning, _( "You reach for %s, but fail to make contact!" ), z->disp_name() );
@@ -730,9 +768,9 @@ static void grab()
             you.add_effect( effect_grabbing, 1_days, true, 1 );
             you.grab_1.set( victimptr, grab_strength );
         } else {
-            Character *guy = creatures.creature_at( grabp )->as_character();
+            Character *guy = target->as_character();
             if( guy->is_npc() && !tolerate ) {
-                int hitspread = creatures.creature_at( grabp )->deal_melee_attack( you.as_character(),
+                int hitspread = target->deal_melee_attack( you.as_character(),
                                 you.as_character()->hit_roll() );
                 if( hitspread < 0 ) {
                     add_msg( m_warning, _( "You reach for %s, but fail to make contact!" ), guy->disp_name() );
@@ -949,13 +987,16 @@ static bool is_smashable_corpse( const item &maybe_corpse )
                                             maybe_corpse.has_flag( flag_FROZEN ) && !maybe_corpse.has_flag( flag_PULPED ) ) );
 }
 
-static void smash()
+static void smash( const std::optional<tripoint_bub_ms> &p = std::nullopt )
 {
     static tripoint_bub_ms last_smash;
     static int repeat_count = 0;
     const bool allow_floor_bash = debug_mode;
-    const std::optional<tripoint_bub_ms> smashp_ = choose_adjacent( _( "Smash where?" ),
-            allow_floor_bash );
+    std::optional<tripoint_bub_ms> smashp_ = p;
+    if( !smashp_ ) {
+        smashp_ = choose_adjacent( _( "Smash where?" ),
+                                   allow_floor_bash );
+    }
     if( !smashp_ ) {
         repeat_count = 0;
         return;
@@ -1846,7 +1887,7 @@ static void fire()
 static void open_movement_mode_menu()
 {
     avatar &player_character = get_avatar();
-    const std::vector<move_mode_id> &modes = move_modes_by_speed();
+    std::vector<move_mode_id> modes = move_modes_by_speed();
     const int cycle = 1027;
     uilist as_m;
 
@@ -1859,7 +1900,7 @@ static void open_movement_mode_menu()
                                    curr->name() );
     }
     as_m.entries.emplace_back( cycle,
-                               player_character.can_switch_to( player_character.current_movement_mode()->cycle() ),
+                               true, // cycling movement is controlled in relevant functions, always allow
                                hotkey_for_action( ACTION_OPEN_MOVEMENT, /*maximum_modifier_count=*/1 ),
                                _( "Cycle move mode" ) );
     // This should select the middle move mode
@@ -2501,14 +2542,17 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_OPEN:
-            open();
+            open( mouse_target );
             break;
 
         case ACTION_CLOSE:
             if( mouse_target ) {
                 doors::close_door( here, player_character, *mouse_target );
+            }
+            if( player_character.is_mounted() ) {
+                add_msg( m_info, _( "You can't close things while you're riding." ) );
             } else {
-                close();
+                close( mouse_target );
             }
             break;
 
@@ -2516,7 +2560,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             if( has_vehicle_control( player_character ) ) {
                 handbrake( here );
             } else {
-                smash();
+                smash( mouse_target );
             }
             break;
 
@@ -2548,7 +2592,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_GRAB:
-            grab();
+            grab( mouse_target );
             break;
 
         case ACTION_HAUL:
@@ -2560,15 +2604,19 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             break;
 
         case ACTION_BUTCHER:
-            butcher();
+            butcher( mouse_target );
             break;
 
         case ACTION_CHAT:
-            chat();
+            chat( mouse_target );
             break;
 
         case ACTION_PEEK:
-            peek();
+            if( mouse_target ) {
+                peek( *mouse_target );
+            } else {
+                peek();
+            }
             break;
 
         case ACTION_LIST_ITEMS:
@@ -2727,14 +2775,18 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
 
         case ACTION_UNLOAD_CONTAINER:
             // You CAN drop things to your own tile while in the shell.
-            unload_container();
+            unload_container( mouse_target );
             break;
 
         case ACTION_DROP:
             drop_in_direction( player_character.pos_bub() );
             break;
-        case ACTION_DIR_DROP:
-            if( const std::optional<tripoint_bub_ms> pnt = choose_adjacent( _( "Drop where?" ) ) ) {
+        case ACTION_DIR_DROP: {
+            std::optional<tripoint_bub_ms> pnt = mouse_target;
+            if( !pnt ) {
+                pnt = choose_adjacent( _( "Drop where?" ) );
+            }
+            if( pnt ) {
                 if( *pnt != player_character.pos_bub() && in_shell ) {
                     add_msg( m_info, _( "You can't drop things to another tile while you're in your shell." ) );
                 } else {
@@ -2742,6 +2794,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                 }
             }
             break;
+        }
         case ACTION_BIONICS:
             player_character.power_bionics();
             break;
@@ -2801,7 +2854,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
                     !player_character.has_effect_with_flag( json_flag_GRAB ) ) {
                     here.board_vehicle( player_character.pos_bub(), player_character.as_character() );
                 }
-                control_vehicle();
+                control_vehicle( mouse_target );
             }
             break;
 
@@ -2868,7 +2921,7 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
             if( query_yn( _( "Abandon this character?" ) ) ) {
                 if( query_yn( _( "This will kill your character.  Continue?" ) ) ) {
                     player_character.set_moves( 0 );
-                    player_character.place_corpse( &here );
+                    player_character.place_corpse( &here, get_player_character().get_faction()->id );
                     uquit = QUIT_SUICIDE;
                 }
             }
@@ -3001,12 +3054,6 @@ bool game::do_regular_action( action_id &act, avatar &player_character,
         case ACTION_TOGGLE_AUTO_PULP_BUTCHER:
             // Set Auto pulp or butcher to x
             set_next_option( "AUTO_PULP_BUTCHER" );
-            auto_features_warn();
-            break;
-
-        case ACTION_TOGGLE_AUTO_MINING:
-            // Set Auto Mining to x
-            set_next_option( "AUTO_MINING" );
             auto_features_warn();
             break;
 
@@ -3206,6 +3253,22 @@ bool game::handle_action()
             }
         }
 
+#if defined(TILES)
+        if( gamepad::is_active() ) {
+            gamepad::direction dir = gamepad::get_left_stick_direction();
+            if( dir != gamepad::direction::NONE ) {
+                // List of actions that can use the directional cursor
+                if( act == ACTION_INTERACT || act == ACTION_SMASH || act == ACTION_GRAB ||
+                    act == ACTION_PEEK || act == ACTION_UNLOAD_CONTAINER || act == ACTION_DIR_DROP ||
+                    act == ACTION_EXAMINE || act == ACTION_EXAMINE_AND_PICKUP ||
+                    act == ACTION_PICKUP || act == ACTION_PICKUP_ALL || act == ACTION_CONTROL_VEHICLE ) {
+                    tripoint offset = gamepad::direction_to_offset( dir );
+                    mouse_target = player_character.pos_bub() + tripoint_rel_ms( offset.x, offset.y, 0 );
+                }
+            }
+        }
+#endif
+
         if( act == ACTION_ACTIONMENU ) {
             if( uquit == QUIT_WATCH ) {
                 return false;
@@ -3222,6 +3285,16 @@ bool game::handle_action()
                 add_best_key_for_action_to_quick_shortcuts( act, ctxt.get_category(), false );
             }
 #endif
+        }
+
+        if( act == ACTION_INTERACT ) {
+            if( !mouse_target ) {
+                mouse_target = player_character.pos_bub();
+            }
+            act = handle_interact( here, *mouse_target );
+            if( act == ACTION_NULL ) {
+                return false;
+            }
         }
 
         if( act == ACTION_KEYBINDINGS ) {

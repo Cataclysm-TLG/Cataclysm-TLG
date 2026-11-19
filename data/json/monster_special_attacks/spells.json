@@ -723,8 +723,8 @@
     "condition": { "not": { "u_has_worn_with_flag": "PORTAL_PROOF" } },
     "effect": [
       { "math": [ "u_val('fatigue') = min(u_val('fatigue') + ps_str + 20, 1200)" ] },
-      { "math": [ "u_val('stamina')", "*=", "ps_str + 50" ] },
-      { "math": [ "u_sleep_deprivation", "+=", "time('1 minutes')" ] }
+      { "math": [ "u_val('stamina') *= ps_str + 50" ] },
+      { "math": [ "u_sleep_deprivation += time('1 minutes')" ] }
     ]
   },
   {
@@ -740,7 +740,7 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_impossible_shape_attack",
-    "condition": { "and": [ "u_can_see", { "math": [ "u_madness", ">", "10" ] } ] },
+    "condition": { "and": [ "u_can_see", { "math": [ "u_madness > 10" ] } ] },
     "effect": [
       { "u_add_effect": "nightmares", "duration": "18 hours" },
       { "u_add_effect": "disrupted_sleep", "duration": "18 hours" },
@@ -751,14 +751,14 @@
         "duration": "36 hours",
         "decay_start": "24 hours"
       },
-      { "math": [ "u_pain()", "+=", "3" ] },
+      { "math": [ "u_pain() += 3" ] },
       { "math": [ "u_madness = 0" ] },
       {
         "u_message": "Your mind lurches, the shapes and figures dance across your vision, you feel like your head is going to explode."
       }
     ],
     "false_effect": [
-      { "math": [ "u_pain()", "+=", "3" ] },
+      { "math": [ "u_pain() += 3" ] },
       { "math": [ "u_madness", "++" ] },
       {
         "u_message": "You can't look away from the impossible shape, staring at it is making you feel sick, you have to get away!"
@@ -778,7 +778,7 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_absence_capture_attack",
-    "condition": { "math": [ "distance('u', 'npc')", ">", "3" ] },
+    "condition": { "math": [ "distance('u', 'npc') > 3" ] },
     "effect": [
       { "u_location_variable": { "global_val": "portal_cage" } },
       {
@@ -1230,7 +1230,7 @@
           "effect": [
             { "u_message": "Your reflection feasts directly on your essence." },
             { "math": [ "u_val('fatigue') = min(u_val('fatigue') + portal_dungeon_reflect_strength, 1200)" ] },
-            { "math": [ "portal_dungeon_reflect_strength", "+=", "3" ] }
+            { "math": [ "portal_dungeon_reflect_strength += 3" ] }
           ]
         },
         {
@@ -1603,7 +1603,7 @@
     "type": "effect_on_condition",
     "id": "EOC_veiled_butterfly_irradiate",
     "condition": "u_is_character",
-    "effect": [ { "math": [ "u_val('rad')", "+=", "20" ] } ]
+    "effect": [ { "math": [ "u_val('rad') += 20" ] } ]
   },
   {
     "type": "SPELL",

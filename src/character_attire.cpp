@@ -398,7 +398,7 @@ std::optional<std::list<item>::iterator> outfit::wear_item( Character &guy, cons
         guy.add_msg_if_npc( _( "<npcname> puts on their %s." ), to_wear.tname() );
     }
 
-    // skip this for unsorted items in debug mode
+    // Skip this for unsorted items in debug mode.
     if( do_sort_items ) {
         new_item_it->on_wear( guy );
 
@@ -833,11 +833,12 @@ bool Character::is_wearing_active_optcloak() const
 }
 
 static void layer_item( std::map<bodypart_id, encumbrance_data> &vals, const item &it,
-                        std::map<sub_bodypart_id, layer_level> &highest_layer_so_far, const Character &c )
+                        std::map<sub_bodypart_id, layer_level> &highest_layer_so_far, const Character &c,
+                        const body_part_set &skip_parts = body_part_set() )
 {
     body_part_set covered_parts = it.get_covered_body_parts();
     for( const bodypart_id &bp : c.get_all_body_parts() ) {
-        if( !covered_parts.test( bp.id() ) ) {
+        if( !covered_parts.test( bp.id() ) || skip_parts.test( bp.id() ) ) {
             continue;
         }
 
@@ -908,6 +909,24 @@ static void layer_item( std::map<bodypart_id, encumbrance_data> &vals, const ite
     }
 }
 
+static void layer_item_with_ablatives( std::map<bodypart_id, encumbrance_data> &vals,
+                                       const item &it, std::map<sub_bodypart_id, layer_level> &highest_layer_so_far,
+                                       const Character &c )
+{
+    layer_item( vals, it, highest_layer_so_far, c );
+    if( !it.is_ablative() ) {
+        return;
+    }
+    const body_part_set parent_parts = it.get_covered_body_parts();
+    for( const item_pocket *pocket : it.get_all_ablative_pockets() ) {
+        for( const item *pocketed : pocket->all_items_top() ) {
+            if( !pocketed->is_null() ) {
+                layer_item( vals, *pocketed, highest_layer_so_far, c, parent_parts );
+            }
+        }
+    }
+}
+
 /*
  * Encumbrance logic:
  * Some clothing is intrinsically encumbering, such as heavy jackets, backpacks, body armor, etc.
@@ -933,63 +952,15 @@ void outfit::item_encumb( std::map<bodypart_id, encumbrance_data> &vals,
     // Track highest layer observed so far to penalize out-of-order items.
     std::map<sub_bodypart_id, layer_level> highest_layer_so_far;
 
-    // First, handle normal worn items + new_item insertion.
+    // Handle worn items (and their ablative inserts) plus new_item insertion.
     for( auto w_it = worn.begin(); w_it != worn.end(); ++w_it ) {
         if( w_it == new_item_position ) {
-            layer_item( vals, new_item, highest_layer_so_far, guy );
+            layer_item_with_ablatives( vals, new_item, highest_layer_so_far, guy );
         }
-        layer_item( vals, *w_it, highest_layer_so_far, guy );
+        layer_item_with_ablatives( vals, *w_it, highest_layer_so_far, guy );
     }
     if( worn.end() == new_item_position && !new_item.is_null() ) {
-        layer_item( vals, new_item, highest_layer_so_far, guy );
-    }
-
-    // Handle ablative pockets.
-    for( const item &worn_item : worn ) {
-        if( !worn_item.is_ablative() ) {
-            continue; // Skip items without ablative pockets.
-        }
-
-        // Iterate over first-order ablative pockets.
-        for( const item_pocket *pocket_ptr : worn_item.get_all_ablative_pockets() ) {
-            const item_pocket &pocket = *pocket_ptr;
-
-            // Iterate over top-level items in pocket.
-            for( const item *pocketed_ptr : pocket.all_items_top() ) {
-                const item &pocketed = *pocketed_ptr;
-                if( pocketed.is_null() ) {
-                    continue;
-                }
-                // Compute encumbrance in a temporary map.
-                std::map<bodypart_id, encumbrance_data> temp_vals;
-                std::map<sub_bodypart_id, layer_level> dummy_highest_layer;
-                layer_item( temp_vals, pocketed, dummy_highest_layer, guy );
-                // Merge only to bodyparts NOT covered by the parent.
-                for( const auto &pair : temp_vals ) {
-                    const bodypart_id &bp = pair.first;
-                    // Check if parent covers this bodypart.
-                    bool overlaps = false;
-                    for( const string_id<body_part_type> &bpt : worn_item.get_covered_body_parts() ) {
-                        if( bpt == bp.id() ) {
-                            overlaps = true;
-                            break;
-                        }
-                    }
-                    // We don't need to special-case overlapping coverage, it works already.
-                    if( overlaps ) {
-                        continue;
-                    }
-                    encumbrance_data &elem = vals[bp];
-                    elem.armor_encumbrance += pair.second.armor_encumbrance;
-                    elem.layer_penalty += pair.second.layer_penalty;
-                    // Copy layer details.
-                    const auto &src = pair.second.layer_penalty_details;
-                    for( size_t i = 0; i < src.size(); i++ ) {
-                        elem.layer_penalty_details[i] = src[i];
-                    }
-                }
-            }
-        }
+        layer_item_with_ablatives( vals, new_item, highest_layer_so_far, guy );
     }
 
     // Final sanity check and aggregation.
@@ -1392,9 +1363,7 @@ static ret_val<void> rigid_test(
 
 ret_val<void> outfit::check_rigid_conflicts( const item &clothing, side s ) const
 {
-
     std::unordered_set<sub_bodypart_id> to_test;
-
     // if not overridden get the actual side of the item
     if( s == side::num_sides ) {
         s = clothing.get_side();
@@ -1436,14 +1405,11 @@ ret_val<void> outfit::check_rigid_conflicts( const item &clothing ) const
     if( !clothing.is_sided() ) {
         return check_rigid_conflicts( clothing, side::BOTH );
     }
-
     ret_val<void> ls = check_rigid_conflicts( clothing, side::LEFT );
     ret_val<void> rs = check_rigid_conflicts( clothing, side::RIGHT );
-
     if( !ls.success() && !rs.success() ) {
         return ls;
     }
-
     return ret_val<void>::make_success();
 }
 
@@ -1878,7 +1844,22 @@ void outfit::absorb_damage( Character &guy, damage_unit &elem, bodypart_id bp,
     for( auto iter = worn.rbegin(); iter != worn.rend(); ) {
         item &armor = *iter;
 
-        if( !armor.covers( bp ) ) {
+        bool is_ablative = armor.is_ablative();
+        bool ablative_covers_bp = false;
+        bool ablative_covers_sbp = false;
+        if( is_ablative ) {
+            for( const item_pocket *pocket : armor.get_all_ablative_pockets() ) {
+                if( !pocket->empty() && pocket->front().get_coverage( bp ) > 0 ) {
+                    ablative_covers_bp = true;
+                    if( pocket->front().get_coverage( sbp ) > 0 ) {
+                        ablative_covers_sbp = true;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if( !armor.covers( bp ) && !ablative_covers_bp ) {
             ++iter;
             continue;
         }
@@ -1902,13 +1883,13 @@ void outfit::absorb_damage( Character &guy, damage_unit &elem, bodypart_id bp,
         }
 
         if( !destroy ) {
-            // if the armor location has ablative armor apply that first
-            if( armor.is_ablative() ) {
+            // If the armor location has ablative armor, apply that first.
+            if( is_ablative && ablative_covers_sbp ) {
                 guy.ablative_armor_absorb( elem, armor, sbp, roll );
             }
-            // if not already destroyed to an armor absorb
+            // If not already destroyed to an armor absorb.
             destroy = guy.armor_absorb( elem, armor, bp, sbp, roll );
-            // for the torso we also need to consider if it hits anything hanging off the character or their neck
+            // We need to check if it hits a secondary SBP, these are usually "draped" or "hanging".
             if( secondary_sbp != sub_bodypart_id() && !destroy ) {
                 destroy = guy.armor_absorb( elem, armor, bp, secondary_sbp, roll );
             }
@@ -2360,6 +2341,7 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
                                    const std::set<sub_bodypart_id> &sub_parts, const Character &person ) const
 {
     std::map<sub_bodypart_id, resistances> best_cases;
+    std::map<sub_bodypart_id, resistances> average_cases;
     std::map<sub_bodypart_id, resistances> median_cases;
     std::map<sub_bodypart_id, resistances> worst_cases;
 
@@ -2435,14 +2417,19 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
         for( const sub_bodypart_id &sbp : sub_parts ) {
             int coverage = armor.get_coverage( sbp );
 
-            // get worst case armor protection
-            // if it doesn't 100% cover it may not protect you
+            // Get worst case armor protection
+            // if it doesn't 100% cover it may not protect you.
             if( coverage == 100 ) {
                 worst_cases[sbp] += resistances( armor, false, 99, sbp );
             }
 
-            // get median case armor protection
-            // if it doesn't at least 50% cover it may not protect you
+            // Get average armor protection.
+            if( coverage >= 50 ) {
+                average_cases[sbp] += resistances( armor, false, average_resistance, sbp );
+            }
+
+            // Get median case armor protection.
+            // If it doesn't at least 50% cover it may not protect you.
             if( coverage >= 50 ) {
                 median_cases[sbp] += resistances( armor, false, 50, sbp );
             }
@@ -2456,12 +2443,14 @@ void outfit::prepare_bodymap_info( bodygraph_info &info, const bodypart_id &bp,
     // need to average the protection values on each sublimb for full limbs
     if( sub_parts.size() == 1 ) {
         info.worst_case += worst_cases[*sub_parts.begin()];
+        info.average_case += average_cases[*sub_parts.begin()];
         info.median_case += median_cases[*sub_parts.begin()];
         info.best_case += best_cases[*sub_parts.begin()];
     } else {
         for( const sub_bodypart_id &sbp : sub_parts ) {
             float scale_factor = static_cast<float>( sbp->max_coverage ) / 100.0f;
             info.worst_case += worst_cases[sbp] * scale_factor;
+            info.average_case += average_cases[sbp] * scale_factor;
             info.median_case += median_cases[sbp] * scale_factor;
             info.best_case += best_cases[sbp] * scale_factor;
         }

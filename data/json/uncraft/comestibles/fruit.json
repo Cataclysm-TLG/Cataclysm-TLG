@@ -5,7 +5,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "watermelon_wedge", 16 ] ], [ [ "seed_watermelon", 5 ] ] ]
+    "components": [ [ [ "watermelon_wedge", 16 ] ], [ [ "seed_watermelon", 2 ] ] ]
   },
   {
     "result": "melon",
@@ -13,7 +13,7 @@
     "activity_level": "LIGHT_EXERCISE",
     "time": "1 m",
     "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "melon_chunks", 4 ] ], [ [ "seed_melon", 3 ] ] ]
+    "components": [ [ [ "melon_chunks", 4 ] ], [ [ "seed_melon", 2 ] ] ]
   },
   {
     "result": "pineapple",

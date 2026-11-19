@@ -125,8 +125,6 @@ static const quality_id qual_WELD( "WELD" );
 
 static const requirement_id requirement_data_mining_standard( "mining_standard" );
 
-static const skill_id skill_survival( "survival" );
-
 static const species_id species_FERAL( "FERAL" );
 static const species_id species_HUMAN( "HUMAN" );
 static const species_id species_ZOMBIE( "ZOMBIE" );
@@ -220,7 +218,7 @@ static bool handle_spillable_contents( Character &c, item &it, map &m )
     return false;
 }
 
-//try to put items into_vehicle .If fail,first try to add to character bag, then character try wield  it, last drop.
+// Try to put items into_vehicle. If fail, first try to add to character bag, then character try wield  it, last drop.
 static std::vector<item_location> try_to_put_into_vehicle( Character &c, item_drop_reason reason,
         const std::list<item> &items,
         const vpart_reference &vpr )
@@ -607,8 +605,9 @@ static bool vehicle_activity( Character &you, const tripoint_bub_ms &src_loc, in
     }
     time_duration time_to_take = 0_seconds;
     if( vpindex >= veh->part_count() ) {
-        // if parts got removed during our work, we can't just carry on removing, we want to repair parts!
-        // so just bail out, as we don't know if the next shifted part is suitable for repair.
+        // The vehicle may have changed since the part index was stored.
+        // Repair cannot safely continue with an invalid index, while removal
+        // can try to find the corresponding shifted part.
         if( type == 'r' ) {
             return false;
         } else if( type == 'o' ) {
@@ -1067,7 +1066,7 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
         if( std::abs( veh->velocity ) > 100 || veh->player_in_control( here, player_character ) ) {
             return activity_reason_info::fail( do_activity_reason::NO_VEHICLE );
         }
-        do_activity_reason result = do_activity_reason::NO_ZONE;
+        do_activity_reason result = do_activity_reason::ALREADY_DONE;
 
         for( const npc &guy : g->all_npcs() ) {
             if( &guy == &you ) {
@@ -1134,16 +1133,15 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 }
                 const requirement_data &reqs = vpinfo.removal_requirements();
                 const inventory &inv = you.crafting_inventory( false );
-
                 const bool can_make = reqs.can_make_with_inventory( inv, is_crafting_component );
-                you.set_value( "veh_index_type", vpinfo.name() );
-                // temporarily store the intended index, we do this so two NPCs don't try and work on the same part at same time.
-                you.activity_vehicle_part_index = vpindex;
+                // Continue here so that we don't give up the first time we find a part we can't remove.
                 if( !can_make ) {
-                    return activity_reason_info::fail( do_activity_reason::NEEDS_VEH_DECONST );
-                } else {
-                    return activity_reason_info::ok( do_activity_reason::NEEDS_VEH_DECONST );
+                    continue;
                 }
+                you.set_value( "veh_index_type", vpinfo.name() );
+                // Temporarily store the intended index, we do this so two NPCs don't try and work on the same part at same time.
+                you.activity_vehicle_part_index = vpindex;
+                return activity_reason_info::ok( do_activity_reason::NEEDS_VEH_DECONST );
             }
         } else if( act == ACT_VEHICLE_REPAIR ) {
             // find out if there is a vehicle part here we can repair.
@@ -1530,7 +1528,7 @@ static activity_reason_info can_do_activity_there( const activity_id &act, Chara
                 return activity_reason_info::ok( do_activity_reason::NEEDS_DISASSEMBLE );
             }
         }
-        if( !req.is_null() || !req.is_empty() ) {
+        if( !req.is_null() && !req.is_empty() ) {
             // need tools
             return activity_reason_info( do_activity_reason::NEEDS_DISASSEMBLE, false, req );
         } else {
@@ -2631,29 +2629,6 @@ void activity_on_turn_move_loot( player_activity &act, Character &you )
     you.activity.set_to_null();
 }
 
-static int chop_moves( Character &you, item &it )
-{
-    // Quality of tool.
-    const int quality = it.get_quality( qual_AXE );
-
-    // Attribute; regular tools - based on STR, powered tools - based on DEX.
-    const int attr = it.has_flag( flag_POWERED ) ? you.dex_cur : you.get_arm_str();
-
-    // Ecology skill cuts chopping time.
-    int skill_modifier = 450 - std::clamp( static_cast<int>( ( you.get_skill_level(
-            skill_survival ) * 40.f ) ), 0, 400 );
-
-    if( it.has_flag( flag_POWERED ) ) {
-        skill_modifier = 50 + ( skill_modifier - 50 ) * 0.5f;
-    }
-
-    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr + skill_modifier ) / std::pow( 2,
-                               quality - 1 ) );
-    const int helpersize = you.get_num_crafting_helpers( 3 );
-    moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
-}
-
 static bool mine_activity( Character &you, const tripoint_bub_ms &src_loc )
 {
     map &here = get_map();
@@ -2716,7 +2691,7 @@ static bool chop_tree_activity( Character &you, const tripoint_bub_ms &src_loc )
     if( best_qual.is_null() ) {
         return false;
     }
-    int moves = chop_moves( you, best_qual );
+    int moves = you.chop_moves( best_qual );
     if( best_qual.type->can_have_charges() ) {
         you.consume_charges( best_qual, best_qual.type->charges_to_use() );
     }
@@ -3059,13 +3034,17 @@ static requirement_check_result generic_multi_activity_check_requirement(
         if( you.is_npc() ) {
             if( zone ) {
                 add_msg_if_player_sees( you, m_info,
-                                        _( "%s is trying to find necessary items to do the %s job on zone %s, reason %s" ),
-                                        you.disp_name(), act_id.c_str(), zone->get_name(), do_activity_reason_string[int( reason )] );
+                                        _( "%s is unable to find necessary items to do the %s job in the %s zone." ),
+                                        you.disp_name(), act_id.c_str(), zone->get_name() );
             } else {
                 add_msg_if_player_sees( you, m_info,
-                                        _( "%s is trying to find necessary items to do the %s job, reason %s" ),
-                                        you.disp_name(), act_id.c_str(), do_activity_reason_string[int( reason )] );
+                                        _( "%s is unable to find necessary items to do the %s job." ),
+                                        you.disp_name(), act_id.c_str() );
             }
+        }
+        if( reason == do_activity_reason::NO_COMPONENTS &&
+            act_id == ACT_MULTIPLE_DIS ) {
+            return requirement_check_result::SKIP_LOCATION;
         }
         requirement_id what_we_need;
         std::vector<tripoint_bub_ms> loot_zone_spots;
@@ -3313,9 +3292,11 @@ static bool generic_multi_activity_do(
           ( reason == do_activity_reason::NEEDS_CUT_HARVESTING ) ) &&
         here.has_flag_furn( ter_furn_flag::TFLAG_GROWTH_HARVEST, src_loc ) ) {
         iexamine::harvest_plant( you, src_loc, true );
+        return false;
     } else if( ( reason == do_activity_reason::NEEDS_CLEARING ) &&
                here.has_flag_furn( ter_furn_flag::TFLAG_GROWTH_OVERGROWN, src_loc ) ) {
         iexamine::clear_overgrown( you, src_loc );
+        return false;
     } else if( reason == do_activity_reason::NEEDS_TILLING &&
                here.has_flag( ter_furn_flag::TFLAG_PLOWABLE, src_loc ) &&
                you.has_quality( qual_DIG, 1 ) && !here.has_furn( src_loc ) ) {
@@ -3731,7 +3712,7 @@ bool generic_multi_activity_handler( player_activity &act, Character &you, bool 
                      you.disp_name(), activity_to_restore.c_str() );
         } else if( reason.skip_location_no_match ) {
             add_msg( m_neutral,
-                     _( "%1$s failed to perform the %2$s activity because no criteria could be matched." ),
+                     _( "%1$s failed to perform the %2$s activity because there is nothing further that can be worked on." ),
                      you.disp_name(), activity_to_restore.c_str() );
         } else if( reason.skip_location ) {
             // Assumed to have been reported already.
@@ -4012,8 +3993,7 @@ int get_auto_consume_moves( Character &you, const bool food )
 bool try_fuel_fire( player_activity &act, Character &you, const bool starting_fire )
 {
     const tripoint_bub_ms pos = you.pos_bub();
-    std::vector<tripoint_bub_ms> adjacent = closest_points_first( pos, PICKUP_RANGE );
-    adjacent.erase( adjacent.begin() );
+    std::vector<tripoint_bub_ms> adjacent = closest_points_first( pos, 1, PICKUP_RANGE );
 
     map &here = get_map();
     std::optional<tripoint_bub_ms> best_fire =

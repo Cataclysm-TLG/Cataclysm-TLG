@@ -50,7 +50,6 @@ class item_location
         item_location( const map_cursor &mc, item *which );
         item_location( const vehicle_cursor &vc, item *which );
         item_location( const item_location &container, item *which );
-
         void serialize( JsonOut &js ) const;
         void deserialize( const JsonObject &obj );
 
@@ -173,6 +172,9 @@ class item_location
          */
         void overflow( map &here );
 
+        // Potentially drops some components on map when an item is destroyed. Does not destroy the item.
+        void salvage_on_break( map &here, item &it ) const;
+
         /**
          * returns whether the item can be reloaded with the specified item.
          * @param ammo item to be loaded in
@@ -192,6 +194,9 @@ class item_location
 
         std::shared_ptr<impl> ptr;
 };
+
+item_location get_item_location( Character &p, item &it, map *here, const tripoint_bub_ms &pos );
+
 std::unique_ptr<talker> get_talker_for( item_location &it );
 std::unique_ptr<const_talker> get_const_talker_for( const item_location &it );
 std::unique_ptr<talker> get_talker_for( item_location *it );

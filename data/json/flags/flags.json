@@ -25,7 +25,7 @@
   {
     "id": "ACTIVE_CLOAKING",
     "type": "json_flag",
-    "info": "This gear has <info>cloaking tech</info> that will <good>make you invisible</good> when active, at the cost of <info>power from a UPS</info>."
+    "info": "This gear has <info>cloaking tech</info> that will <good>make you invisible</good> when active."
   },
   {
     "id": "ALLOWS_TAIL",
@@ -33,7 +33,7 @@
   },
   {
     "id": "ALLOWS_TALONS",
-    "//": "Makes footwear compatable with the TOE_TALONS mutation.",
+    "//": "Makes footwear compatable with the RAP_TALONS mutation.",
     "type": "json_flag"
   },
   {
@@ -97,6 +97,11 @@
     "id": "BIONIC_NPC_USABLE",
     "type": "json_flag",
     "info": "A <good>follower</good> could <info>make use of this CBM</info> if installed properly."
+  },
+  {
+    "id": "BIONIC_STARTS_ACTIVE",
+    "type": "json_flag",
+    "//": "This bionic will be toggled on when generating a player character or NPC who starts with it."
   },
   {
     "id": "BLIND",
@@ -632,7 +637,12 @@
   {
     "id": "HINT_THE_LOCATION",
     "type": "json_flag",
-    "//": "Same as PRESERVE_SPAWN_LOC, but also shows a snippet of how far the character from the `spawn_location`: 1 OMT or less is `(from here)`, less than 6 OMT is `(from nearby)`, less than 30 OMT is `(from this area)`, anything more is (from far away)"
+    "//": "Shows a snippet of how far the character from the `spawn_location`: 1 OMT or less is `(from here)`, less than 6 OMT is `(from nearby)`, less than 30 OMT is `(from this area)`, anything more is (from far away)"
+  },
+  {
+    "id": "LOCATION_PRECISE_CLOSEST_CITY",
+    "type": "json_flag",
+    "//": "Shows a snippet with the name of the closest city to the `spawn_location`"
   },
   {
     "id": "PROVIDES_TECHNIQUES",
@@ -977,11 +987,6 @@
     "type": "json_flag"
   },
   {
-    "id": "POWERARMOR_COMPATIBLE",
-    "type": "json_flag",
-    "//": "Allows power armor to be worn with compatible armors like ear plugs and mouthpieces."
-  },
-  {
     "id": "ZERO_WEIGHT",
     "type": "json_flag"
   },
@@ -989,31 +994,6 @@
     "id": "ZOOM",
     "type": "json_flag",
     "info": "This item can be used to <good>better</good> see <info>things far away</info>."
-  },
-  {
-    "id": "furred",
-    "type": "json_flag",
-    "info": "This clothing has a fur lining sewn into it to <good>increase</good> its overall <info>warmth</info>."
-  },
-  {
-    "id": "kevlar_padded",
-    "type": "json_flag",
-    "info": "This gear has Kevlar inserted into strategic locations to <good>increase protection</good> with some <bad>increase to encumbrance</bad>."
-  },
-  {
-    "id": "leather_padded",
-    "type": "json_flag",
-    "info": "This gear has certain parts padded with leather to <good>increase protection</good> with moderate <bad>increase to encumbrance</bad>."
-  },
-  {
-    "id": "steel_padded",
-    "type": "json_flag",
-    "info": "This gear has certain parts padded with steel to <good>increase protection</good> with moderate <bad>increase to encumbrance</bad>."
-  },
-  {
-    "id": "wooled",
-    "type": "json_flag",
-    "info": "This clothing has a wool lining sewn into it to <good>increase</good> its overall <info>warmth</info>."
   },
   {
     "id": "WONT_TRAIN_MARKSMANSHIP",
@@ -1024,7 +1004,7 @@
   {
     "id": "NANOFAB_REPAIR",
     "type": "json_flag",
-    "info": "This item has a holographic patch that reflects the light oddly.  It was constructed in a nanofabricator and can be <info>repaired in one</info>."
+    "info": "This item was constructed in a nanofabricator and can be <info>repaired in one</info>."
   },
   {
     "id": "NANOFAB_TEMPLATE",
@@ -1192,6 +1172,11 @@
     "//": "Applies robust genetic bonus - mutations give only 1 unit of instability for all traits instead of 1 unit for your current tree, and 2 for any outer tree."
   },
   {
+    "id": "CANNOT_USE_COMPUTERS",
+    "type": "json_flag",
+    "//": "For some reason, you're unable to use a computer terminal."
+  },
+  {
     "id": "HIDDEN_HALLU",
     "type": "json_flag",
     "craft_inherit": true,
@@ -1288,7 +1273,8 @@
   },
   {
     "id": "BOMB",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "Makes the item immediately go off if activated by radio mod."
   },
   {
     "id": "BYPRODUCT",
@@ -1338,7 +1324,6 @@
   },
   {
     "id": "COLLAPSIBLE_STOCK",
-    "//": "this is deprecated for the COLLAPSED_STOCK and FOLDED_STOCK, kept around for mod support",
     "type": "json_flag"
   },
   {
@@ -1355,9 +1340,7 @@
   },
   {
     "id": "COLLAPSED_STOCK",
-    "//": "for weapons that stock collapses into the body reducing volume as well.",
-    "type": "json_flag",
-    "info": "This items stock is collapsed it will be hard to shoot with."
+    "type": "json_flag"
   },
   {
     "id": "CONDUCTIVE",
@@ -1532,7 +1515,7 @@
   {
     "id": "IS_UPS",
     "type": "json_flag",
-    "info": "This item provides power to <info>UPS compatible items</info>.",
+    "info": "This item provides power to <info>items which can use a power bank</info>.",
     "inherit": false
   },
   {
@@ -1627,6 +1610,7 @@
   {
     "id": "NEEDS_UNFOLD",
     "//": "should not be used for folding mods, use a transforming mod instead",
+    "info": "This weapon will take <bad>longer to wield</bad> than usual.",
     "type": "json_flag"
   },
   {
@@ -1710,7 +1694,8 @@
   },
   {
     "id": "NPC_THROW_NOW",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "An NPC will immediately throw this item if they have it."
   },
   {
     "id": "NVG_GREEN",
@@ -1745,7 +1730,28 @@
     "type": "json_flag"
   },
   {
+    "id": "PUMP_RAIL",
+    "//": "Can only fit small underbarrel mods due to the presence of a pump or other conflicting part.",
+    "type": "json_flag"
+  },
+  {
+    "id": "LEVER_ACTION",
+    "info": "This weapon uses a manual lever to chamber each round, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
+    "type": "json_flag"
+  },
+  {
+    "id": "SINGLE_ACTION",
+    "info": "This weapon must be manually cocked before each shot, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
+    "type": "json_flag"
+  },
+  {
     "id": "PUMP_ACTION",
+    "info": "This weapon requires pumping a sliding grip to cycle each round, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
+    "type": "json_flag"
+  },
+  {
+    "id": "BOLT_ACTION",
+    "info": "This weapon utilizes a turn-bolt to manually cycle each round, which <bad>takes additional time</bad> and <bad>may necessitate re-aiming</bad>.  Skill with marksmanship and this type of weapon will reduce this penalty.",
     "type": "json_flag"
   },
   {
@@ -1935,6 +1941,7 @@
   },
   {
     "id": "USE_UPS",
+    "info": "This item <info>uses a power bank to function</info>.",
     "type": "json_flag"
   },
   {
@@ -1999,11 +2006,13 @@
   {
     "id": "GRENADE",
     "type": "json_flag",
-    "restriction": "Item must be a grenade"
+    "restriction": "Item must be a grenade",
+    "//": "Used for grenade-like items so grenade pouches etc. can find them."
   },
   {
     "id": "JAVELIN",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "Used for javelin-like items so javelin bags etc. can find them."
   },
   {
     "id": "LEAK_ALWAYS",
@@ -2013,14 +2022,17 @@
     "id": "MAG_COMPACT",
     "type": "json_flag",
     "info": "This item has a small profile consistent with a compact magazine.",
-    "restriction": "Item must be a compact magazine"
+    "restriction": "Item must be a compact magazine",
+    "//": "Used for small mags so ammo pouches etc. can find them."
   },
   {
     "id": "NOGIB",
-    "type": "json_flag"
+    "type": "json_flag",
+    "//": "This ammo won't damage monster corpses if it overkills them."
   },
   {
     "id": "PUMP_RAIL_COMPATIBLE",
+    "//": "Small enough or otherwise specially designed to fit as an underbarrel attachment on pump-action weapons.",
     "type": "json_flag"
   },
   {
@@ -2138,8 +2150,8 @@
   {
     "id": "BATTERY_LIGHT",
     "type": "json_flag",
-    "info": "This fits in items that use dry cell batteries.",
-    "name": "dry cell battery"
+    "info": "This fits in items that use alkaline batteries.",
+    "name": "alkaline battery"
   },
   {
     "id": "BATTERY_MEDIUM",

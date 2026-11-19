@@ -2020,62 +2020,6 @@
   },
   {
     "type": "overmap_terrain",
-    "id": "anthill",
-    "copy-from": "anthill",
-    "name": "anthill",
-    "sym": "a",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "slimepit_z0",
-    "copy-from": "slimepit_z0",
-    "name": "slime pit",
-    "sym": "S",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "slimepit_z-1",
-    "copy-from": "slimepit_z-1",
-    "name": "slime pit",
-    "sym": "S",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "slimepit_z-2",
-    "copy-from": "slimepit_z-2",
-    "name": "slime pit",
-    "sym": "S",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "triffid_grove",
-    "copy-from": "triffid_grove",
-    "name": "triffid grove",
-    "sym": "T",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "triffid_roots",
-    "copy-from": "triffid_roots",
-    "name": "triffid roots",
-    "sym": "t",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "triffid_finale",
-    "copy-from": "triffid_finale",
-    "name": "triffid heart",
-    "sym": "T",
-    "color": "i_pink"
-  },
-  {
-    "type": "overmap_terrain",
     "id": "basement",
     "copy-from": "basement",
     "sym": "b"
@@ -2101,37 +2045,6 @@
     "copy-from": "sewer",
     "name": "sewer",
     "color": "green"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "ants",
-    "copy-from": "ants",
-    "name": "ant tunnel",
-    "color": "brown"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "ants_food",
-    "copy-from": "ants_food",
-    "name": "ant food storage",
-    "sym": "O",
-    "color": "green"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "ants_larvae",
-    "copy-from": "ants_larvae",
-    "name": "ant larva chamber",
-    "sym": "O",
-    "color": "white"
-  },
-  {
-    "type": "overmap_terrain",
-    "id": "ants_queen",
-    "copy-from": "ants_queen",
-    "name": "ant queen chamber",
-    "sym": "O",
-    "color": "red"
   },
   {
     "type": "overmap_terrain",

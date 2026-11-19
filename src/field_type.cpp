@@ -29,7 +29,7 @@ const field_type_str_id fd_fatigue( "fd_fatigue" );
 const field_type_str_id fd_fire( "fd_fire" );
 const field_type_str_id fd_fire_vent( "fd_fire_vent" );
 const field_type_str_id fd_flame_burst( "fd_flame_burst" );
-const field_type_str_id fd_spores( "fd_spores" );
+const field_type_str_id fd_fuel( "fd_fuel" );
 const field_type_str_id fd_fungicidal_gas( "fd_fungicidal_gas" );
 const field_type_str_id fd_gas_vent( "fd_gas_vent" );
 const field_type_str_id fd_gibs_flesh( "fd_gibs_flesh" );
@@ -54,6 +54,7 @@ const field_type_str_id fd_slime( "fd_slime" );
 const field_type_str_id fd_sludge( "fd_sludge" );
 const field_type_str_id fd_smoke( "fd_smoke" );
 const field_type_str_id fd_smoke_vent( "fd_smoke_vent" );
+const field_type_str_id fd_spores( "fd_spores" );
 const field_type_str_id fd_tear_gas( "fd_tear_gas" );
 const field_type_str_id fd_tindalos_rift( "fd_tindalos_rift" );
 const field_type_str_id fd_toxic_gas( "fd_toxic_gas" );
@@ -221,6 +222,14 @@ void field_type::load( const JsonObject &jo, std::string_view )
                   fallback_intensity_level.monster_spawn_group );
         optional( jao, was_loaded, "light_emitted", intensity_level.light_emitted,
                   fallback_intensity_level.light_emitted );
+        if( jao.has_array( "light_color" ) ) {
+            JsonArray jarr = jao.get_array( "light_color" );
+            intensity_level.light_color.r = jarr.get_int( 0 ) / 255.0f;
+            intensity_level.light_color.g = jarr.get_int( 1 ) / 255.0f;
+            intensity_level.light_color.b = jarr.get_int( 2 ) / 255.0f;
+        } else {
+            intensity_level.light_color = fallback_intensity_level.light_color;
+        }
         optional( jao, was_loaded, "light_override", intensity_level.local_light_override,
                   fallback_intensity_level.local_light_override );
         optional( jao, was_loaded, "translucency", intensity_level.translucency,

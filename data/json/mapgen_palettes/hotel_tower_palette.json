@@ -68,7 +68,6 @@
     "toilets": { "&": {  } },
     "items": {
       "B": { "item": "bed", "chance": 30, "repeat": [ 1, 2 ] },
-      "L": { "item": "hotel_luggage", "chance": 66 },
       "c": { "item": "magazines", "chance": 15 },
       "d": [ { "item": "traveler", "chance": 80, "repeat": [ 3, 5 ] }, { "item": "book_hotel_tower_bible", "chance": 100 } ],
       "o": { "item": "hotel_coffee_bar", "chance": 50 },
@@ -78,6 +77,7 @@
     },
     "item": { "O": { "item": "television" } },
     "vehicles": {
+      "L": { "vehicle": "luggage", "chance": 66, "rotation": 270 },
       "V": { "vehicle": "parking_garage", "chance": 45, "rotation": 270 },
       "v": { "vehicle": "parking_garage", "chance": 45, "rotation": 90 }
     }

@@ -117,6 +117,8 @@ enum class debug_menu_index : int {
     WRITE_CITY_LIST,
     TALK_TOPIC,
     VEHICLE_EFFECTS,
+    RELOAD_GPU_SHADERS,
+    SHADER_TINT_SELF_TEST,
     last
 };
 

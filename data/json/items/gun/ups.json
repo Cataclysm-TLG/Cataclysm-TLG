@@ -160,7 +160,7 @@
     "cooling_value": 2,
     "heat_per_shot": 5,
     "loudness": 12,
-    "energy_drain": "40 kJ",
+    "energy_drain": "25 kJ",
     "reload": 0,
     "valid_mod_locations": [
       [ "emitter", 1 ],

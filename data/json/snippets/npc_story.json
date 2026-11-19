@@ -91,7 +91,7 @@
       "a motorbike gang",
       "strange, glowing mushrooms",
       "the godhead",
-      "zombie moose",
+      { "text": { "str": "zombie moose", "ctxt": "mercenary story subject" } },
       "a camspy drone",
       "crabs",
       "carnivorous plants",

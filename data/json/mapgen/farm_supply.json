@@ -358,7 +358,7 @@
         { "monster": "mon_feral_militia", "x": [ 30, 34 ], "y": [ 41, 44 ], "chance": 100, "repeat": [ 2, 3 ] }
       ],
       "vehicles": {
-        "Ü": { "vehicle": "farm_vehicles", "chance": 50, "rotation": 180 },
+        "Ü": { "vehicle": "farm_vehicles", "chance": 40, "rotation": 180 },
         "Ú": { "vehicle": "parkinglotbasic", "chance": 15, "rotation": 90 },
         "Û": { "vehicle": "parkinglotbasic", "chance": 20, "rotation": 90, "status": 1 },
         "Ù": { "vehicle": "industrial_transport", "chance": 10, "rotation": 180 }
@@ -810,7 +810,7 @@
       ],
       "place_corpses": [ { "group": "FERAL_HUMANS", "x": 7, "y": 42 } ],
       "vehicles": {
-        "Ü": { "vehicle": "farm_vehicles", "chance": 50, "rotation": 180 },
+        "Ü": { "vehicle": "farm_vehicles", "chance": 40, "rotation": 180 },
         "Ú": { "vehicle": "parkinglotbasic", "chance": 15, "rotation": 90 },
         "Û": { "vehicle": "parkinglotbasic", "chance": 20, "rotation": 90, "status": 1 },
         "Ù": { "vehicle": "industrial_transport", "chance": 10, "rotation": 180 }

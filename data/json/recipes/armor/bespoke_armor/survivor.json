@@ -106,29 +106,6 @@
     "proficiencies": [ { "proficiency": "prof_closures_waterproofing" } ]
   },
   {
-    "result": "survivor_rig",
-    "type": "recipe",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_ARMOR",
-    "subcategory": "CSC_ARMOR_STORAGE",
-    "skill_used": "tailor",
-    "difficulty": 5,
-    "time": "5 h",
-    "autolearn": true,
-    "using": [ [ "sewing_standard", 100 ], [ "fastener_large", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_closures" },
-      { "proficiency": "prof_closures_waterproofing" },
-      { "proficiency": "prof_polymerworking" }
-    ],
-    "components": [
-      [ [ "nylon_patch", 10 ] ],
-      [ [ "duct_tape", 200 ] ],
-      [ [ "legrig", 1 ], [ "ragpouch", 6 ], [ "leather_pouch", 4 ], [ "dump_pouch", 2 ] ],
-      [ [ "purse", 2 ], [ "fanny", 2 ], [ "mbag", 2 ] ]
-    ]
-  },
-  {
     "result": "fsurvivor_suit",
     "type": "recipe",
     "activity_level": "LIGHT_EXERCISE",

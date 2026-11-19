@@ -46,6 +46,7 @@
 #include "event.h"
 #include "event_bus.h"
 #include "explosion.h"
+#include "faction.h"
 #include "field.h"
 #include "field_type.h"
 #include "flag.h"
@@ -244,6 +245,8 @@ static const efftype_id effect_weak_antibiotic_visible( "weak_antibiotic_visible
 static const efftype_id effect_webbed( "webbed" );
 static const efftype_id effect_zapped( "zapped" );
 
+static const faction_id faction_your_followers( "your_followers" );
+
 static const flag_id json_flag_GRAB_FILTER( "GRAB_FILTER" );
 static const flag_id json_flag_NUMB( "NUMB" );
 static const flag_id json_flag_VERMINOUS( "VERMINOUS" );
@@ -317,6 +320,7 @@ static const itype_id itype_water_purifying_active( "water_purifying_active" );
 static const itype_id itype_wax( "wax" );
 static const itype_id itype_weather_reader( "weather_reader" );
 
+static const json_character_flag json_flag_CANNOT_USE_COMPUTERS( "CANNOT_USE_COMPUTERS" );
 static const json_character_flag json_flag_ENHANCED_VISION( "ENHANCED_VISION" );
 static const json_character_flag json_flag_HYPEROPIC( "HYPEROPIC" );
 static const json_character_flag json_flag_GLARE_RESIST( "GLARE_RESIST" );
@@ -353,6 +357,7 @@ static const quality_id qual_HAMMER_FINE( "HAMMER_FINE" );
 static const quality_id qual_HOTPLATE( "HOTPLATE" );
 static const quality_id qual_LOCKPICK( "LOCKPICK" );
 static const quality_id qual_PRY( "PRY" );
+static const quality_id qual_SAW_M( "SAW_M" );
 static const quality_id qual_SCREW( "SCREW" );
 static const quality_id qual_SCREW_FINE( "SCREW_FINE" );
 static const quality_id qual_VISE( "VISE" );
@@ -1475,6 +1480,7 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
 
     creature_tracker &creatures = get_creature_tracker();
     if( monster *const mon = creatures.creature_at<monster>( *pnt, true ) ) {
+
         p->mod_moves( -to_moves<int>( 1_seconds ) );
 
         bool can_feed = false;
@@ -1487,10 +1493,18 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
                 break;
             }
         }
-
         if( !can_feed ) {
             p->add_msg_if_player( _( "The %s doesn't want that kind of food." ), mon->get_name() );
             return std::nullopt;
+        }
+
+        std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
+        if( bcp ) {
+            basecamp *actual_camp = *bcp;
+            if( actual_camp->get_owner() != faction_your_followers ) {
+                p->add_msg_if_player( _( "That animal belongs to %s." ), actual_camp->get_owner()->name );
+                return std::nullopt;
+            }
         }
 
         bool halluc = mon->is_hallucination();
@@ -1535,7 +1549,7 @@ std::optional<int> iuse::petfood( Character *p, item *it, const tripoint_bub_ms 
         if( petfood.feed.empty() ) {
             p->add_msg_if_player( m_good, _( "The %1$s is your pet now!" ), mon->get_name() );
         } else {
-            p->add_msg_if_player( m_good, petfood.feed, mon->get_name() );
+            p->add_msg_if_player( m_good, _( petfood.feed ), mon->get_name() );
         }
 
         mon->friendly = -1;
@@ -3123,6 +3137,9 @@ std::optional<int> iuse::molotov_lit( Character *p, item *it, const tripoint_bub
         const time_duration target_duration = 1_minutes;
         const time_duration base_age = ( fd_fire->half_life / 2 ) - target_duration;
         for( const tripoint_bub_ms &pt : here.points_in_radius( pos, 2, 0 ) ) {
+            if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 3 ) ) {
+                here.add_field( pt, fd_fuel );
+            }
             if( here.clear_path( pos, pt, 2, 1, 100 ) && one_in( 2 ) ) {
                 here.add_field( pt, fd_fire, rng( 1, 2 ), base_age );
             }
@@ -4164,13 +4181,12 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
     item blood( itype_blood, calendar::turn );
     bool drew_blood = false;
     bool acid_blood = false;
-    bool vampire = false;
-    units::temperature blood_temp = units::from_kelvin( -1.0f ); //kelvins
+    units::temperature blood_temp = units::from_kelvin( -1.0f );
     for( item &map_it : here.i_at( pos.xy() ) ) {
         if( map_it.is_corpse() &&
             query_yn( _( "Draw blood from %s?" ),
                       colorize( map_it.tname(), map_it.color_in_inventory() ) ) ) {
-            p->add_msg_if_player( m_info, _( "You drew blood from the %s…" ), map_it.tname() );
+            p->add_msg_if_player( m_info, _( "You draw blood from the %s…" ), map_it.tname() );
             drew_blood = true;
             blood_temp = map_it.temperature;
 
@@ -4190,43 +4206,11 @@ std::optional<int> iuse::blood_draw( Character *p, item *it, const tripoint_bub_
         }
     }
 
-    if( !drew_blood && query_yn( _( "Draw your own blood?" ) ) ) {
-        p->add_msg_if_player( m_info, _( "You drew your own blood…" ) );
-        drew_blood = true;
-        blood_temp = units::from_celsius( 37 );
-        if( p->has_trait( trait_ACIDBLOOD ) ) {
-            acid_blood = true;
-        }
-        if( p->has_trait( trait_VAMPIRE ) ) {
-            vampire = true;
-        }
-        // From wikipedia,
-        // "To compare, this (volume of blood loss that causes death) is five to eight times
-        // as much blood as people usually give in a blood donation.[2]"
-        // This is half a TU, hence I'm setting it to 1/10th of a lethal exsanguination.
-        p->vitamin_mod( vitamin_redcells, vitamin_redcells->min() / 10 );
-        p->vitamin_mod( vitamin_blood, vitamin_blood->min() / 10 );
-        p->mod_pain( 3 );
-    }
-
     if( acid_blood ) {
-        item acid( itype_blood_acid, calendar::turn );
-        acid.set_item_temperature( blood_temp );
-        it->put_in( acid, pocket_type::CONTAINER );
-        if( one_in( 3 ) ) {
-            if( it->inc_damage() ) {
-                p->add_msg_if_player( m_info, _( "…but acidic blood melts the %s, destroying it!" ),
-                                      it->tname() );
-                p->i_rem( it );
-                return 0;
-            }
-            p->add_msg_if_player( m_info, _( "…but acidic blood damages the %s!" ), it->tname() );
-        }
-        return 1;
-    }
-
-    if( vampire ) {
-        p->vitamin_mod( vitamin_human_blood_vitamin, -500 );
+        p->add_msg_if_player( m_info, _( "…but the acidic blood melts the %s, destroying it!" ),
+                              it->tname() );
+        p->i_rem( it );
+        return 0;
     }
 
     if( !drew_blood ) {
@@ -4292,20 +4276,6 @@ std::optional<int> iuse::lumber( Character *p, item *it, const tripoint_bub_ms &
     return 1;
 }
 
-static int chop_moves( Character *p, item *it )
-{
-    // quality of tool
-    const int quality = it->get_quality( qual_AXE );
-
-    // attribute; regular tools - based on STR, powered tools - based on DEX
-    const int attr = it->has_flag( flag_POWERED ) ? p->dex_cur : p->get_arm_str();
-
-    int moves = to_moves<int>( time_duration::from_minutes( 60 - attr ) / std::pow( 2, quality - 1 ) );
-    const int helpersize = p->get_num_crafting_helpers( 3 );
-    moves *= ( 1.0f - ( helpersize / 10.0f ) );
-    return moves;
-}
-
 std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_ms & )
 {
     if( !p ) {
@@ -4332,16 +4302,16 @@ std::optional<int> iuse::chop_tree( Character *p, item *it, const tripoint_bub_m
     const tripoint_bub_ms &pnt = *pnt_;
     if( !f( pnt ) ) {
         if( pnt == p->pos_bub( here ) ) {
-            p->add_msg_if_player( m_info, _( "You're not stern enough to shave yourself with THIS." ) );
+            p->add_msg_if_player( m_info, _( "You cannot chop yourself down." ) );
         } else {
-            p->add_msg_if_player( m_info, _( "You can't chop down that." ) );
+            p->add_msg_if_player( m_info, _( "You can't chop that down." ) );
         }
         return std::nullopt;
     }
     if( p->is_avatar() && !g->warn_player_maybe_anger_local_faction( true ) ) {
         return std::nullopt; // player declined to anger locals
     }
-    int moves = chop_moves( p, it );
+    int moves = p->chop_moves( *it );
     const std::vector<Character *> helpers = p->get_crafting_helpers();
     for( std::size_t i = 0; i < helpers.size() && i < 3; i++ ) {
         add_msg( m_info, _( "%s helps with this task…" ), helpers[i]->get_name() );
@@ -4385,8 +4355,8 @@ std::optional<int> iuse::chop_logs( Character *p, item *it, const tripoint_bub_m
         p->add_msg_if_player( m_info, _( "You can't chop that." ) );
         return std::nullopt;
     }
-
-    int moves = chop_moves( p, it );
+    // It's a bit easier than cutting down a whole ass tree.
+    int moves = static_cast<int>( std::round( p->chop_moves( *it ) * 0.8 ) );
     const std::vector<Character *> helpers = p->get_crafting_helpers();
     for( std::size_t i = 0; i < helpers.size() && i < 3; i++ ) {
         add_msg( m_info, _( "%s helps with this task…" ), helpers[i]->get_name() );
@@ -4513,6 +4483,13 @@ std::optional<int> iuse::hacksaw( Character *p, item *it, const tripoint_bub_ms 
     query += _( "Time to complete: " );
     int required_moves = p->activity.moves_left;
     add_msg_debug( debugmode::DF_ACTIVITY, "iuse hacksaw required_moves: %d.", required_moves );
+
+    // We must exceed 15x the number of minutes required for the terrain/furniture.
+    if( it->has_quality( qual_SAW_M ) && it->get_quality( qual_SAW_M ) * 90000 < required_moves ) {
+        p->cancel_activity();
+        p->add_msg_if_player( m_info, _( "Your %1$s isn't able to cut through that." ), it->tname() );
+        return std::nullopt;
+    }
 
     const float weary_mult = p->exertion_adjusted_move_multiplier( p->activity.exertion_level() );
     time_duration required_time = time_duration::from_turns( required_moves * weary_mult /
@@ -4653,7 +4630,7 @@ std::optional<int> iuse::spray_can( Character *p, item *it, const tripoint_bub_m
             if( critter->in_species( species_ROBOT ) ) {
                 critter->add_effect( effect_blind, rng( 5_seconds, 10_seconds ) );
             } else {
-                critter->add_effect( effect_blind, rng( 3_seconds, 6_seconds ) );
+                critter->add_effect( effect_blind, rng( 4_seconds, 8_seconds ) );
             }
         }
         viewer &player_view = get_player_view();
@@ -5195,6 +5172,11 @@ std::optional<int> iuse::robotcontrol( Character *p, item *it, const tripoint_bu
             return std::nullopt;
         }
 
+        if( p->has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
+            p->add_msg_if_player( m_info, _( "You don't have any idea how to operate that." ) );
+            return std::nullopt;
+        }
+
         if( p->has_flag( json_flag_HYPEROPIC ) && !p->worn_with_flag( flag_FIX_FARSIGHT ) &&
             !p->has_effect( effect_contacts ) && !p->has_effect( effect_transition_contacts ) &&
             !p->has_flag( json_flag_ENHANCED_VISION ) ) {
@@ -5366,6 +5348,11 @@ std::optional<int> iuse::efiledevice( Character *p, item *it, const tripoint_bub
         return std::nullopt;
     }
     if( p->cant_do_underwater() ) {
+        return std::nullopt;
+    }
+    if( p->has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
+        p->add_msg_if_player( m_info,
+                              _( "You push some buttons but have no idea how to get it to work." ) );
         return std::nullopt;
     }
     if( p->has_trait( trait_ILLITERATE ) ) {
@@ -6311,6 +6298,7 @@ static bool show_photo_selection( Character &p, item &it, const std::string &var
 
 std::optional<int> iuse::camera( Character *p, item *it, const tripoint_bub_ms & )
 {
+
     enum {c_shot, c_view};
 
     // From item processing
@@ -7199,7 +7187,7 @@ std::optional<int> iuse::sextant( Character *p, item *, const tripoint_bub_ms &p
     if( debug_mode ) {
         // Debug mode always shows all sun angles
         const float azimuth = to_degrees( sun_position.first );
-        p->add_msg_if_player( m_neutral, "Sun altitude %.1f°, azimuth %.1f°", altitude, azimuth );
+        p->add_msg_if_player( m_neutral, _( "Sun altitude %.1f°, azimuth %.1f°" ), altitude, azimuth );
     } else if( g->is_sheltered( pos ) ) {
         p->add_msg_if_player( m_neutral, _( "You can't see the Sun from here." ) );
     } else if( altitude > 0 ) {
@@ -7404,7 +7392,19 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
 
         // Capture the thing, if it's on the target square.
         if( const monster *const mon_ptr = get_creature_tracker().creature_at<monster>( target ) ) {
+            // std::optional<basecamp *> bcp = overmap_buffer.find_camp( p->pos_abs_omt().xy() );
             const monster &f = *mon_ptr;
+            if( !f.is_pet() ) {
+                p->add_msg_if_player( _( "%s is not a tame creature that you own." ), f.disp_name( false, true ) );
+                return std::nullopt;
+            }
+            // if( bcp && !f.is_pet() ) {
+            //     basecamp *actual_camp = *bcp;
+            //     if( actual_camp->get_owner() != faction_your_followers ) {
+            //         p->add_msg_if_player( _( "That belongs to %s." ), actual_camp->get_owner()->name );
+            //         return std::nullopt;
+            //     }
+            // }
 
             if( f.get_size() > Creature::size_map.find( capacity )->second ) {
                 p->add_msg_if_player( m_info, _( "The %1$s is too big to put in your %2$s." ),
@@ -7431,7 +7431,7 @@ std::optional<int> iuse::capture_monster_act( Character *p, item *it, const trip
             }
             p->mod_moves( -to_moves<int>( 1_seconds ) );
         } else {
-            add_msg( _( "The %s can't capture nothing" ), it->tname() );
+            add_msg( _( "The %s can't capture something if it isn't there." ), it->tname() );
             return std::nullopt;
         }
     }
@@ -8339,6 +8339,10 @@ std::optional<int> iuse::measure_resonance( Character *p, item *it, const tripoi
 
 std::optional<int> iuse::ebooksave( Character *p, item *it, const tripoint_bub_ms & )
 {
+    if( p->has_flag( json_flag_CANNOT_USE_COMPUTERS ) ) {
+        p->add_msg_if_player( m_info, _( "You push some buttons but it's all meaningless to you." ) );
+        return std::nullopt;
+    }
     if( !p ) {
         debugmsg( "%s called action ebooksave that requires character but no character is present",
                   it->typeId().str() );

@@ -354,7 +354,7 @@ int armor_portion_data::max_coverage( bodypart_str_id bp ) const
 bool armor_portion_data::should_consolidate( const armor_portion_data &l,
         const armor_portion_data &r )
 {
-    //check if the following are equal:
+    // Check if the following are equal:
     return l.encumber == r.encumber &&
            l.max_encumber == r.max_encumber &&
            l.volume_encumber_modifier == r.volume_encumber_modifier &&
@@ -370,9 +370,8 @@ bool armor_portion_data::should_consolidate( const armor_portion_data &l,
 
 int armor_portion_data::calc_encumbrance( units::mass weight, bodypart_id bp ) const
 {
-    // this function takes some fixed points for mass to encumbrance and interpolates them to get results for head encumbrance
-    // TODO: Generalize this for other body parts (either with a modifier or seperated point graphs)
-    // TODO: Handle distributed weight
+    // This function takes some fixed points for mass to encumbrance and interpolates them to get results for head encumbrance.
+    // TODO: Remove this.
 
     int encumbrance = 0;
 

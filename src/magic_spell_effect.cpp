@@ -653,7 +653,8 @@ static void damage_targets( const spell &sp, Creature &caster,
             const float dodge_training = sp.dodge_training( caster );
             if( cr->dodge_check( spell_accuracy, dodge_training ) ) {
                 if( !cr->is_monster() ) {
-                    cr->add_msg_player_or_npc( "You dodge out of the way!", "%s dodges out of the way!" );
+                    cr->add_msg_player_or_npc( _( "You dodge out of the way!" ),
+                                               _( "<npcname> dodges out of the way!" ) );
                 } else {
                     if( !cr->has_effect( effect_invisibility ) ) {
                         add_msg_if_player_sees( cr->pos_bub(), m_bad, _( "%1$s dodges out of the way!" ),

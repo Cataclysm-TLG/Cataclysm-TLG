@@ -165,105 +165,18 @@
     "type": "talk_topic",
     "id": "TALK_REFUGEE_Fatima_Teach",
     "dynamic_line": {
-      "u_has_var": "barter_flag_Fatima_barter_success",
+      "u_has_var": "mission_flag_Fatima_Mission1",
       "value": "yes",
-      "yes": "Sure.  As agreed, 3 merch.",
-      "no": {
-        "u_has_var": "mission_flag_Fatima_Mission1",
-        "value": "yes",
-        "no": "Sure, I could teach you the basics, I'll have to charge you though.  Let's say, 5 merch for a teaching session, plus a bit in trade depending on how in-depth you're looking for?",
-        "yes": {
-          "gendered_line": "Sure, I could teach you the basics, it'll cost you merch though.  Since you helped me out, I can shave a bit off the price, let's say 4 merch, plus a bit in trade depending on how in-depth you're looking for?",
-          "relevant_genders": [ "u" ]
-        }
-      }
+      "yes": "Sure, I can teach you a bit of anything I know.  You helped me out, but I'll still have to charge you.  If I'm teaching you I'm not working, and around here if we don't work, we don't eat.",
+      "no": "Sorry.  I just have too much weighing on my mind right now."
     },
     "speaker_effect": { "effect": { "u_add_var": "knowledge_trade_Fatima_Teacher", "value": "yes" } },
     "responses": [
       {
-        "//": "5 merch if player has not bartered nor finished mission",
-        "text": "[5 merch] All right, here's your money.",
+        "text": "Let's get started then.",
         "topic": "TALK_TRAIN",
-        "condition": {
-          "and": [
-            { "not": { "u_has_var": "barter_flag_Fatima_barter_success", "value": "yes" } },
-            { "not": { "u_has_var": "mission_flag_Fatima_Mission1", "value": "yes" } },
-            { "u_has_items": { "item": "FMCNote", "count": 5 } }
-          ]
-        },
-        "effect": [ { "u_sell_item": "FMCNote", "count": 5 } ]
+        "condition": { "and": [ { "u_has_var": "mission_flag_Fatima_Mission1", "value": "yes" } ] }
       },
-      {
-        "//": "4 merch if player has not bartered but has done the mission",
-        "text": "[4 merch] All right, here's your money.",
-        "topic": "TALK_TRAIN",
-        "condition": {
-          "and": [
-            { "not": { "u_has_var": "barter_flag_Fatima_barter_success", "value": "yes" } },
-            { "u_has_var": "mission_flag_Fatima_Mission1", "value": "yes" },
-            { "u_has_items": { "item": "FMCNote", "count": 4 } }
-          ]
-        },
-        "effect": [ { "u_sell_item": "FMCNote", "count": 4 } ]
-      },
-      {
-        "//": "3 merch if player has successfully bartered price down",
-        "text": "[3 merch] All right, here's your money.",
-        "topic": "TALK_TRAIN",
-        "condition": {
-          "and": [
-            { "u_has_var": "barter_flag_Fatima_barter_success", "value": "yes" },
-            { "u_has_items": { "item": "FMCNote", "count": 3 } }
-          ]
-        },
-        "effect": [ { "u_sell_item": "FMCNote", "count": 3 } ]
-      },
-      {
-        "text": "[BARTER] Come on, I'm serious here.",
-        "condition": {
-          "and": [
-            { "math": [ "time_since(n_timer_flag_Fatima_barter_fail)", ">", "time('1 d')" ] },
-            { "not": { "u_has_var": "barter_flag_Fatima_barter_success", "value": "yes" } },
-            { "not": { "u_has_var": "mission_flag_Fatima_Mission1", "value": "yes" } }
-          ]
-        },
-        "trial": { "type": "PERSUADE", "difficulty": 35 },
-        "failure": { "topic": "TALK_REFUGEE_Fatima_Teach_nobarter" },
-        "success": { "topic": "TALK_REFUGEE_Fatima_Teach_yesbarter" }
-      },
-      {
-        "text": "[BARTER] That's still pretty steep, I risked my neck out there for your book.  Can't you manage a little lower?",
-        "condition": {
-          "and": [
-            { "math": [ "time_since(n_timer_flag_Fatima_barter_fail)", ">", "time('1 d')" ] },
-            { "not": { "u_has_var": "barter_flag_Fatima_barter_success", "value": "yes" } },
-            { "u_has_var": "mission_flag_Fatima_Mission1", "value": "yes" }
-          ]
-        },
-        "trial": { "type": "PERSUADE", "difficulty": 15 },
-        "failure": { "topic": "TALK_REFUGEE_Fatima_Teach_nobarter" },
-        "success": { "topic": "TALK_REFUGEE_Fatima_Teach_yesbarter" }
-      },
-      { "text": "What were you saying before?", "topic": "TALK_NONE" },
-      { "text": "Actually I'm just heading out.", "topic": "TALK_DONE" }
-    ]
-  },
-  {
-    "type": "talk_topic",
-    "id": "TALK_REFUGEE_Fatima_Teach_nobarter",
-    "dynamic_line": "Hey, I appreciate that, but I know what I've got, and I can make good money with that time.  Sorry, my price stands.",
-    "speaker_effect": { "effect": { "math": [ "n_timer_flag_Fatima_barter_fail = time('now')" ] } },
-    "responses": [
-      { "text": "What were you saying before?", "topic": "TALK_NONE" },
-      { "text": "Actually I'm just heading out.", "topic": "TALK_DONE" }
-    ]
-  },
-  {
-    "type": "talk_topic",
-    "id": "TALK_REFUGEE_Fatima_Teach_yesbarter",
-    "dynamic_line": "Oh, fine, you weasel.  I suppose I can manage for 3 notes.  I seriously can't go lower though, we'll be using up my resources and time and I gotta pay for the gas and the food somehow.",
-    "speaker_effect": { "effect": { "u_add_var": "barter_flag_Fatima_barter_success", "value": "yes" } },
-    "responses": [
       { "text": "What were you saying before?", "topic": "TALK_NONE" },
       { "text": "Actually I'm just heading out.", "topic": "TALK_DONE" }
     ]
@@ -271,7 +184,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_REFUGEE_Fatima_Cataclysm",
-    "dynamic_line": "I was on my way to visit my parents back in Burlington, waiting at a bus station, when the evacuation notices started sounding.  I'd been a little out of touch for a bit and didn't realize how bad the rioting was getting.  When my bus arrived it got repurposed into an evacuation vehicle, and took me here.  I… I didn't used to be very religious, it's just something I was born to, but since this happened I've been thinking a lot more about God, and how grateful I am for His help in surviving.  With things still so difficult, it helps to know He's got some plan for me.\n\nAnyway, mine was the second bus to arrive, and they were just getting some triage and processing stuff set up.  I was put in charge of helping with the wounded, along with Uyen.  Things went a little strange later on… one of the women doing triage and processing had a bit of a hang-up about particular, um, colors of people being allowed into the center.  She claimed to have lost our 'papers', along with a lot of other peoples'.  Thankfully because we'd helped so many we were able to argue that they couldn't leave us out, but there was no space left downstairs by the time we got that sorted, so here we are."
+    "dynamic_line": "I was on my way to visit my parents back in Burlington, waiting at a bus station, when the evacuation notices started sounding.  I'd been a little out of touch for a bit and didn't realize how bad the rioting was getting.  When my bus arrived it got repurposed into an evacuation vehicle, and took me here.  I… I didn't used to be very religious, it's just something I was born to, but since this happened I've been thinking a lot more about God, and how grateful I am for His help in surviving.  With things still so difficult, it helps to know He's got some plan for me.\n\nAnyway, mine was the second bus to arrive, and they were just getting some triage and processing stuff set up.  I was put in charge of helping with the wounded, along with Uyen.  Things went a little strange later on… one of the women doing triage and processing had a bit of a hang-up about particular, um, colors of people being allowed into the center.  I almost didn't get a bed, but in the end somebody got her to shut up."
   },
   {
     "type": "talk_topic",

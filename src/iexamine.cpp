@@ -2009,25 +2009,6 @@ void iexamine::bulletin_board( Character &you, const tripoint_bub_ms &examp )
             if( !you.is_avatar() ) {
                 return; // One day, NPCs may be able to use bulletin boards
             }
-            // Checks the reality bubble for NPCs
-            // std::vector<shared_ptr_fast<npc>> nearby_npcs = overmap_buffer.get_npcs_near_player( HALF_MAPSIZE );
-            // bool unoccupied_camp = true;
-            // for( npc_ptr &some_guy : nearby_npcs ) {
-            //     if( !some_guy ) {
-            //         continue;
-            //     } else if( some_guy->get_faction()->id == temp_camp->get_owner() ) {
-            //         unoccupied_camp = false;
-            //     }
-            // }
-            // if( unoccupied_camp &&
-            //     query_yn( _( "There's nobody here to protect %s.  Do you want to claim ownership?" ),
-            //               temp_camp->camp_name() ) ) {
-            //     bool plunder = query_yn(
-            //                        _( "Take whatever you can find from the stores?  This may anger %s and their allies." ),
-            //                        temp_camp->get_owner()->name );
-            //     temp_camp->handle_takeover_by( you.get_faction()->id, plunder );
-            //     return;
-            // }
             you.add_msg_if_player( _( "You don't run this settlement, the board is useless to you." ) );
             return;
         }
@@ -2035,7 +2016,6 @@ void iexamine::bulletin_board( Character &you, const tripoint_bub_ms &examp )
         temp_camp->validate_bb_pos( here.get_abs( examp ) );
         temp_camp->validate_assignees();
         temp_camp->validate_sort_points();
-        temp_camp->scan_pseudo_items();
 
         const std::string title = "Base Missions";
         mission_data mission_key;
@@ -2322,7 +2302,7 @@ void iexamine::harvest_ter( Character &you, const tripoint_bub_ms &examp )
  */
 void iexamine::harvested_plant( Character &you, const tripoint_bub_ms &examp )
 {
-    you.add_msg_if_player( m_info, _( "Nothing can be harvested from this plant in current season" ) );
+    you.add_msg_if_player( m_info, _( "Nothing can be harvested here in the current season" ) );
     iexamine::none( you, examp );
 }
 
@@ -5357,10 +5337,6 @@ void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
             }
             break;
         }
-        /*case ledge_climb_down: {
-            g->climb_down( examp );
-            break;
-        }*/
         case ledge_peek_down: {
             // Peek
             tripoint_bub_ms where = examp;
@@ -5386,27 +5362,6 @@ void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
             here.furn( just_below ).obj().examine( you, just_below );
             break;
         }
-        /*case ledge_cling_down: {
-            // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
-            if( !you.move_effects( false ) ) {
-                you.mod_moves( -to_moves<int>( 1_seconds ) );
-                return;
-            }
-
-            if( !here.valid_move( you.pos(), examp, false, true ) ) {
-                // Covered with something
-                return;
-            } else {
-                you.setpos( examp );
-                g->vertical_move( -1, false );
-                if( here.has_flag( ter_furn_flag::TFLAG_DEEP_WATER, you.pos() ) ) {
-                    you.set_underwater( true );
-                    g->water_affect_items( you );
-                    you.add_msg_if_player( _( "You crawl down and dive underwater." ) );
-                }
-            }
-            break;
-        }*/
         case ledge_glide: {
             // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
             if( !you.move_effects( false, examp ) ) {
@@ -5450,7 +5405,7 @@ void iexamine::ledge( Character &you, const tripoint_bub_ms &examp )
         case ledge_fall_down: {
             if( query_yn( _( "Climbing might be safer.  Really fall from the ledge?" ) ) ) {
                 you.mod_moves( -to_moves<int>( 1_seconds ) );
-                // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free
+                // If player is grabbed, trapped, or somehow otherwise movement-impeded, first try to break free.
                 if( !you.move_effects( false, examp ) ) {
                     return;
                 }
@@ -6279,9 +6234,8 @@ static void smoker_activate( Character &you, const tripoint_bub_ms &examp )
     }
 }
 
-void iexamine::mill_finalize( Character &, const tripoint_bub_ms &examp )
+void iexamine::mill_finalize( Character &, map &here, const tripoint_bub_ms &examp )
 {
-    map &here = get_map();
     const furn_id &cur_mill_type = here.furn( examp );
     furn_id next_mill_type = furn_str_id::NULL_ID();
     if( cur_mill_type == furn_f_wind_mill_active ) {
@@ -6395,10 +6349,9 @@ void iexamine::mill_finalize( Character &, const tripoint_bub_ms &examp )
     here.furn_set( examp, next_mill_type );
 }
 
-static void smoker_finalize( Character &, const tripoint_bub_ms &examp,
+static void smoker_finalize( map &here, Character &, const tripoint_bub_ms &examp,
                              const time_point &start_time )
 {
-    map &here = get_map();
     const furn_id &cur_smoker_type = here.furn( examp );
     furn_id next_smoker_type = furn_str_id::NULL_ID();
     if( cur_smoker_type == furn_f_smoking_rack_active ) {
@@ -6633,12 +6586,12 @@ static void mill_load_food( Character &you, const tripoint_bub_ms &examp,
     you.invalidate_inventory();
 }
 
-void iexamine::on_smoke_out( const tripoint_bub_ms &examp, const time_point &start_time )
+void iexamine::on_smoke_out( map &here, const tripoint_bub_ms &examp, const time_point &start_time )
 {
-    const furn_id &f = get_map().furn( examp );
+    const furn_id &f = here.furn( examp );
     if( f == furn_f_smoking_rack_active ||
         f == furn_f_metal_smoking_rack_active ) {
-        smoker_finalize( get_avatar(), examp, start_time );
+        smoker_finalize( here, get_avatar(), examp, start_time );
     }
 }
 

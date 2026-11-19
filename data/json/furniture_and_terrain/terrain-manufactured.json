@@ -402,7 +402,7 @@
     "symbol": "&",
     "color": "light_gray",
     "move_cost": 0,
-    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "NOITEM", "PERMEABLE" ],
     "bash": {
       "str_min": 60,
       "str_max": 210,
@@ -496,7 +496,7 @@
     "move_cost": 0,
     "coverage": 50,
     "concealment": 50,
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "THIN_OBSTACLE" ],
     "bash": {
       "str_min": 30,
       "str_max": 210,
@@ -517,7 +517,7 @@
     "move_cost": 0,
     "coverage": 50,
     "concealment": 50,
-    "flags": [ "NOITEM", "REDUCE_SCENT", "MOUNTABLE" ],
+    "flags": [ "NOITEM", "REDUCE_SCENT", "MOUNTABLE", "INDOORS" ],
     "bash": {
       "str_min": 20,
       "str_max": 150,
@@ -690,7 +690,7 @@
         { "item": "RAM", "count": [ 14, 20 ] },
         { "item": "nanomaterial", "count": 1, "prob": 10 },
         { "item": "bearing", "charges": [ 20, 60 ] },
-        { "item": "motor_small", "count": 4 },
+        { "item": "motor_medium", "count": 4 },
         { "item": "power_supply", "count": [ 4, 16 ] },
         { "item": "amplifier", "count": [ 4, 16 ] },
         { "item": "cable", "charges": [ 250, 500 ] },
@@ -1454,7 +1454,7 @@
     "move_cost": 2,
     "coverage": 40,
     "concealment": 40,
-    "flags": [ "TRANSPARENT", "FLAT", "MINEABLE" ],
+    "flags": [ "TRANSPARENT", "FLAT" ],
     "bash": {
       "str_min": 80,
       "str_max": 300,
@@ -1467,56 +1467,6 @@
         { "item": "nail", "charges": [ 1, 4 ] },
         { "item": "splinter", "count": [ 1, 2 ] }
       ]
-    }
-  },
-  {
-    "type": "terrain",
-    "id": "t_covered_salt_water_well",
-    "//": "After #78419 this can no longer be constructed, but is left in for old save compatibility",
-    "name": "covered salt water well",
-    "description": "A deep well, collecting salt water from a surrounding swamp.  You won't be able to get any water unless you add some mechanism for drawing it up to the surface.",
-    "symbol": "#",
-    "color": "dark_gray",
-    "looks_like": "t_covered_well",
-    "move_cost": 2,
-    "coverage": 40,
-    "concealment": 40,
-    "flags": [ "TRANSPARENT", "FLAT", "MINEABLE" ],
-    "bash": {
-      "str_min": 80,
-      "str_max": 300,
-      "sound": "crash!",
-      "sound_fail": "whump!",
-      "ter_set": "t_pit",
-      "items": [
-        { "item": "rock", "count": [ 8, 18 ] },
-        { "item": "2x4", "count": [ 0, 2 ] },
-        { "item": "nail", "charges": [ 1, 4 ] },
-        { "item": "splinter", "count": [ 1, 2 ] }
-      ]
-    }
-  },
-  {
-    "type": "terrain",
-    "id": "t_pit_straw",
-    "name": "pit filled with straw",
-    "symbol": "#",
-    "description": "A shallow pit filled with some straw.  Very crude.  Itchy and uncomfortable, but better than the bare ground.",
-    "color": "yellow",
-    "move_cost": 2,
-    "coverage": 35,
-    "concealment": 35,
-    "comfort": 1,
-    "floor_bedding_warmth": 100,
-    "deconstruct": { "items": [ { "item": "straw_pile", "count": [ 55, 60 ] } ], "ter_set": "t_pit_shallow" },
-    "flags": [ "TRANSPARENT", "FLAMMABLE", "ORGANIC", "FLAMMABLE_ASH", "TINDER", "MOUNTABLE", "SHORT", "EASY_DECONSTRUCT" ],
-    "bash": {
-      "str_min": 6,
-      "str_max": 20,
-      "sound": "crunch!",
-      "sound_fail": "brush.",
-      "ter_set": "t_pit_shallow",
-      "items": [ { "item": "straw_pile", "count": [ 30, 40 ] } ]
     }
   },
   {

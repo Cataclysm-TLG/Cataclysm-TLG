@@ -20,7 +20,14 @@
     "tools": [ [ [ "surface_heat", 50, "LIST" ] ] ],
     "components": [
       [ [ "any_shortening", 5, "LIST" ], [ "any_butter", 5, "LIST" ] ],
-      [ [ "meat_red_raw", 1, "LIST" ], [ "fish", 1 ], [ "meat_offal", 1, "LIST" ] ],
+      [
+        [ "meat_red_raw", 1, "LIST" ],
+        [ "fish", 1 ],
+        [ "fish_freshwater", 1 ],
+        [ "fish_scrap", 10 ],
+        [ "fish_scrap_freshwater", 10 ],
+        [ "meat_offal", 1, "LIST" ]
+      ],
       [ [ "salt_preservation", 1, "LIST" ] ]
     ]
   },

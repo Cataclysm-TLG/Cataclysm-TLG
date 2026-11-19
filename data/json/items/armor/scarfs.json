@@ -94,7 +94,7 @@
     "description": "A warm knitted scarf, a quintessential piece of autumn fashion.",
     "price": "20 USD",
     "price_postapoc": "1 USD",
-    "material": [ "cotton" ],
+    "material": [ "wool" ],
     "weight": "96 g",
     "volume": "750 ml",
     "to_hit": -3,
@@ -184,7 +184,7 @@
     "color": "green",
     "warmth": 10,
     "material_thickness": 1,
-    "environmental_protection": 0,
+    "environmental_protection": 1,
     "flags": [ "OVERSIZE", "COLLAR", "ALLOWS_NATURAL_ATTACKS", "HOOD", "UNRESTRICTED" ],
     "armor": [ { "encumbrance": 3, "coverage": 85, "covers": [ "head" ], "specifically_covers": [ "head_throat" ] } ]
   },
@@ -559,14 +559,5 @@
     "name": { "str": "XS plate aventail" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE" ] }
-  },
-  {
-    "id": "chainmail_junk_aventail",
-    "copy-from": "chainmail_aventail",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "chainmail aventail" },
-    "description": "Poor-quality armor made from a sheet of interlocking steel rings which secures around the neck."
   }
 ]

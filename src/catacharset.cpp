@@ -464,29 +464,82 @@ std::wstring utf8_to_wstr( const std::string &utf8 )
     return utf8_to_wstr_android( utf8 );
 
 #else
+    // Replace invalid UTF-8 sequences with ? instead of aborting.
+    std::string sanitized;
+    sanitized.reserve( utf8.size() );
+    for( size_t i = 0; i < utf8.size(); ) {
+        const unsigned char c = static_cast<unsigned char>( utf8[i] );
+        size_t len = 0;
+        if( c < 0x80 ) {
+            len = 1;
+        } else if( c >= 0xC2 && c <= 0xDF ) {
+            len = 2;
+        } else if( c >= 0xE0 && c <= 0xEF ) {
+            len = 3;
+        } else if( c >= 0xF0 && c <= 0xF4 ) {
+            len = 4;
+        }
+        bool valid = len > 0 && i + len <= utf8.size();
+        if( valid ) {
+            for( size_t j = 1; j < len; ++j ) {
+                const unsigned char continuation =
+                    static_cast<unsigned char>( utf8[i + j] );
+                if( continuation < 0x80 || continuation > 0xBF ) {
+                    valid = false;
+                    break;
+                }
+            }
+            // Reject overlong encodings and UTF-16 surrogate values.
+            if( valid && len == 3 ) {
+                const unsigned char c1 =
+                    static_cast<unsigned char>( utf8[i + 1] );
+                if( ( c == 0xE0 && c1 < 0xA0 ) ||
+                    ( c == 0xED && c1 >= 0xA0 ) ) {
+                    valid = false;
+                }
+            }
+            if( valid && len == 4 ) {
+                const unsigned char c1 =
+                    static_cast<unsigned char>( utf8[i + 1] );
+                if( ( c == 0xF0 && c1 < 0x90 ) ||
+                    ( c == 0xF4 && c1 > 0x8F ) ) {
+                    valid = false;
+                }
+            }
+        }
+        if( valid ) {
+            sanitized.append( utf8, i, len );
+            i += len;
+        } else {
+            // Replace invalid UTF-8 with a visible ASCII fallback.
+            sanitized += '?';
+            ++i;
+        }
+    }
     iconv_t cd = iconv_open( "UTF-32LE", "UTF-8" );
     if( cd == reinterpret_cast<iconv_t>( -1 ) ) {
         throw std::runtime_error( "iconv_open failed in utf8_to_wstr" );
     }
-
-    size_t in_size = utf8.size();
+    size_t in_size = sanitized.size();
     size_t out_size = ( in_size + 1 ) * sizeof( wchar_t );
     std::vector<char> outbuf( out_size );
-
-    char *inbuf = const_cast<char *>( utf8.data() );
+    char *inbuf = const_cast<char *>( sanitized.data() );
     char *outptr = outbuf.data();
     size_t in_bytes_left = in_size;
     size_t out_bytes_left = out_size;
-
-    size_t res = iconv( cd, &inbuf, &in_bytes_left, &outptr, &out_bytes_left );
+    size_t res = iconv( cd, &inbuf, &in_bytes_left,
+                        &outptr, &out_bytes_left );
     iconv_close( cd );
-
     if( res == static_cast<size_t>( -1 ) ) {
-        throw std::runtime_error( std::string( "iconv failed in utf8_to_wstr: " ) + strerror( errno ) );
+        throw std::runtime_error(
+            std::string( "iconv failed in utf8_to_wstr: " ) +
+            strerror( errno )
+        );
     }
-
-    return std::wstring( reinterpret_cast<wchar_t *>( outbuf.data() ),
-                         ( out_size - out_bytes_left ) / sizeof( wchar_t ) );
+    return std::wstring(
+               reinterpret_cast<wchar_t *>( outbuf.data() ),
+               ( out_size - out_bytes_left ) / sizeof( wchar_t )
+           );
 #endif
 }
 

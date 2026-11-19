@@ -538,7 +538,6 @@
     "material": [ "flesh", "vegetable", "wheat", "tomato" ],
     "primary_material": "processed_food",
     "volume": "125 ml",
-    "flags": [ "EATEN_HOT" ],
     "fun": 8,
     "vitamins": [
       [ "vitC", 10 ],
@@ -546,7 +545,8 @@
       [ "iron", 18 ],
       [ "meat_allergen", 1 ],
       [ "vegetable_allergen", 1 ],
-      [ "wheat_allergen", 1 ]
+      [ "wheat_allergen", 1 ],
+      [ "junk_allergen", 1 ]
     ]
   }
 ]

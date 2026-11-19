@@ -39,6 +39,11 @@
 #include "ui_manager.h"
 #include "worldfactory.h"
 
+#if defined(__ANDROID__)
+#include <jni.h>
+#include "sdl_wrappers.h" // for GetAndroidJNIEnv(), GetAndroidActivity()
+#endif
+
 #if defined(TILES)
 #include "cata_tiles.h"
 #endif // TILES
@@ -199,7 +204,6 @@ static const std::map<std::string, std::pair<std::string, std::map<std::string, 
 {
     static const std::map<std::string, std::pair<std::string, std::map<std::string, std::string>>> opt
     = {
-        {"DELETE_WORLD", { "WORLD_END", { {"no", "keep" }, {"yes", "delete"} } } },
         {"MONSTER_UPGRADE_FACTOR", { "EVOLUTION_INVERSE_MULTIPLIER", {} }} //TODO: Remove after stable after world option reserialising is added, value migration done in migrateOptionValue instead
     };
     return opt;
@@ -1431,8 +1435,8 @@ std::vector<options_manager::id_and_option> options_manager::get_lang_options()
 #if defined(__ANDROID__)
 bool android_get_default_setting( const char *settings_name, bool default_value )
 {
-    JNIEnv *env = ( JNIEnv * )SDL_AndroidGetJNIEnv();
-    jobject activity = ( jobject )SDL_AndroidGetActivity();
+    JNIEnv *env = ( JNIEnv * )GetAndroidJNIEnv();
+    jobject activity = ( jobject )GetAndroidActivity();
     jclass clazz( env->GetObjectClass( activity ) );
     jmethodID method_id = env->GetMethodID( clazz, "getDefaultSetting", "(Ljava/lang/String;Z)Z" );
     jboolean ans = env->CallBooleanMethod( activity, method_id, env->NewStringUTF( settings_name ),
@@ -1569,13 +1573,6 @@ void options_manager::add_options_general()
 
         get_option( "AUTO_PULP_BUTCHER" ).setPrerequisite( "AUTO_FEATURES" );
 
-        add( "AUTO_MINING", page_id, to_translation( "Auto mining" ),
-             to_translation( "If true, enables automatic use of wielded pickaxes and jackhammers whenever trying to move into mineable terrain." ),
-             false
-           );
-
-        get_option( "AUTO_MINING" ).setPrerequisite( "AUTO_FEATURES" );
-
         add( "AUTO_MOPPING", page_id, to_translation( "Auto mopping" ),
              to_translation( "If true, enables automatic use of wielded mops to clean surrounding terrain." ),
              false
@@ -1651,8 +1648,14 @@ void options_manager::add_options_general()
 
         add( "SAFEMODEIGNORETURNS", page_id, to_translation( "Turns to remember ignored monsters" ),
              to_translation( "Number of turns an ignored monster stays ignored after it is no longer seen.  0 disables this option and monsters are permanently ignored." ),
-             0, 3600, 200
+             0, 3600, 600
            );
+
+        add( "SAFEMODEIGNOREAPPROACH", page_id, to_translation( "Re-alert when ignored monsters approach" ),
+             to_translation( "If true, an ignored monster will trigger safe mode again once it closes to half the distance it was at when ignored.  If false, it stays ignored no matter how close it gets." ),
+             true
+           );
+
     } );
 
     add_empty_line();
@@ -1987,7 +1990,7 @@ void options_manager::add_options_interface()
 
          */
     to_translation( "Allows diagonal movement with cursor keys using CTRL and SHIFT modifiers.  Diagonal movement action keys are taken from keybindings, so you need these to be configured." ), { { "none", to_translation( "None" ) }, { "mode1", to_translation( "Mode 1: Numpad Emulation" ) }, { "mode2", to_translation( "Mode 2: CW/CCW" ) }, { "mode3", to_translation( "Mode 3: L/R Tilt" ) }, { "mode4", to_translation( "Mode 4: Diagonal Lock" ) } },
-    "none", COPT_CURSES_HIDE );
+    "mode3", COPT_CURSES_HIDE );
 
     add_empty_line();
 
@@ -2424,8 +2427,16 @@ void options_manager::add_options_graphics()
              true, COPT_CURSES_HIDE
            );
 
+        add( "LIGHTING_MODE", page_id, to_translation( "Lighting" ),
+        to_translation( "How the map shows light levels.  Classic: lit or shadowed tiles.  Smooth: more shades of light per tile.  Smooth filtered: shades blend across tiles.  The smooth modes need the GPU renderer.  Without it the map uses Classic." ), {
+            { "classic", to_translation( "Classic" ) },
+            { "smooth", to_translation( "Smooth" ) },
+            { "smooth_filtered", to_translation( "Smooth filtered" ) },
+        }, "smooth_filtered", COPT_CURSES_HIDE
+           );
+
         add( "MEMORY_MAP_MODE", page_id, to_translation( "Memory map overlay preset" ),
-        to_translation( "Specify the overlay in which the memory map is drawn.  Requires restart.  For custom overlay, define RGB values for dark and bright colors as well as gamma." ), {
+        to_translation( "Specify the overlay in which the memory map is drawn.  For the custom overlay, define RGB values for dark and bright colors as well as gamma." ), {
             { "color_pixel_darken", to_translation( "Darkened" ) },
             { "color_pixel_sepia_light", to_translation( "Sepia" ) },
             { "color_pixel_sepia_dark", to_translation( "Sepia Dark" ) },
@@ -2433,6 +2444,13 @@ void options_manager::add_options_graphics()
             { "color_pixel_custom", to_translation( "Custom" ) },
         }, "color_pixel_darken", COPT_CURSES_HIDE
            );
+
+        add( "LIGHTING_MEMORY_BLEND", page_id, to_translation( "Blend light into memory" ),
+             to_translation( "If true, Smooth filtered lighting fades the edge of sight into the memory map overlay, and remembered tiles next to it blend back toward what you see.  If false, the edge of sight fades into darkness." ),
+             true, COPT_CURSES_HIDE
+           );
+
+        get_option( "LIGHTING_MEMORY_BLEND" ).setPrerequisite( "LIGHTING_MODE", "smooth_filtered" );
 
         add( "MEMORY_RGB_DARK_RED", page_id, to_translation( "Custom dark color RGB overlay - RED" ),
              to_translation( "Specify RGB value for color RED for dark color overlay." ),
@@ -2598,9 +2616,16 @@ void options_manager::add_options_graphics()
             }
         }
 #   endif
+        // Renderer selection is driven through SDL_HINT_RENDER_DRIVER; the
+        // saved RENDERER value is ignored at startup but the option ID is
+        // retained so configs from existing worlds still parse.
         add( "RENDERER", page_id, to_translation( "Renderer" ),
              to_translation( "Set which renderer to use.  Requires restart." ), renderer_list,
-             default_renderer, COPT_CURSES_HIDE );
+             default_renderer, COPT_ALWAYS_HIDE );
+
+        add( "GPU_BACKEND", page_id, to_translation( "GPU backend" ),
+             to_translation( "Sets which graphics API the GPU renderer uses.  Try another one if the game crashes or draws wrongly.  An SDL_GPU_DRIVER environment variable overrides this.  Requires restart." ),
+             cata_tiles::build_gpu_backend_list(), "auto", COPT_CURSES_HIDE );
 #   endif
 
 #else
@@ -2612,26 +2637,26 @@ void options_manager::add_options_graphics()
            );
 #endif
 
-#if defined(SDL_HINT_RENDER_BATCHING)
-        add( "RENDER_BATCHING", page_id, to_translation( "Allow render batching" ),
-             to_translation( "If true, use render batching for 2D render API to make it more efficient.  Requires restart." ),
-             true, COPT_CURSES_HIDE
-           );
-#endif
+        // The renderer is hidden and the software fallback is automatic, so
+        // this option is hidden too; the ID is retained so existing configs
+        // still parse.
         add( "FRAMEBUFFER_ACCEL", page_id, to_translation( "Software framebuffer acceleration" ),
              to_translation( "If true, use hardware acceleration for the framebuffer when using software rendering.  Requires restart." ),
-             false, COPT_CURSES_HIDE
+             false, COPT_ALWAYS_HIDE
            );
 
 #if defined(__ANDROID__)
         get_option( "FRAMEBUFFER_ACCEL" ).setPrerequisite( "SOFTWARE_RENDERING" );
-#else
-        get_option( "FRAMEBUFFER_ACCEL" ).setPrerequisite( "RENDERER", "software" );
 #endif
 
+        // Color-modulated textures replaced RenderFillRect with a stretched
+        // 1x1 texture. The renderer now batches fills efficiently and the
+        // texture path blends differently, so the saved value is ignored at
+        // startup and the option is hidden; the ID is retained so existing
+        // configs still parse.
         add( "USE_COLOR_MODULATED_TEXTURES", page_id, to_translation( "Use color modulated textures" ),
              to_translation( "If true, tries to use color modulated textures to speed-up ASCII drawing.  Requires restart." ),
-             false, COPT_CURSES_HIDE
+             false, COPT_ALWAYS_HIDE
            );
 
         add( "SCALING_MODE", page_id, to_translation( "Scaling mode" ),
@@ -2664,29 +2689,17 @@ void options_manager::add_options_world_default()
         this->add_empty_line( "world_default" );
     };
 
-    add( "WORLD_END", "world_default", to_translation( "World end handling" ),
-    to_translation( "Handling of game world when last character dies." ), {
-        { "reset", to_translation( "Reset" ) }, { "delete", to_translation( "Delete" ) },
-        { "query", to_translation( "Query" ) }, { "keep", to_translation( "Keep" ) }
-    }, "reset"
-       );
-
     add_empty_line();
 
-    // These optiosn are purposefully and permanently hidden. It can only be modified through the sliders when creating a new world.
-    // As such there is no name or description to show, those are blanked.
-    add( "CITY_SIZE", "world_default", translation(), translation(), 0, 16, 8, COPT_ALWAYS_HIDE
-       );
-
-    add( "CITY_SPACING", "world_default", translation(), translation(), 0, 8, 4, COPT_ALWAYS_HIDE
-       );
-
+    // These options are purposefully and permanently hidden, left intact for mods.
     add( "SPAWN_DENSITY", "world_default", translation(), translation(), 0.0, 50.0, 1.0, 0.1,
          COPT_ALWAYS_HIDE
        );
 
-    add( "NPC_SPAWNTIME", "world_default", translation(), translation(), 0.0, 100.0, 4.0, 0.01,
-         COPT_ALWAYS_HIDE
+    add( "NPC_SPAWNTIME", "world_default", to_translation( "NPC spawn rate" ),
+         to_translation( "The rate at which random NPCs will spawn in the world over time.  Setting this higher means they will show up more frequently." ),
+         0.0, 100.0, 4.0, 0.01,
+         COPT_NO_HIDE
        );
 
     add( "EVOLUTION_INVERSE_MULTIPLIER", "world_default",
@@ -2702,7 +2715,7 @@ void options_manager::add_options_world_default()
     [&]( const std::string & page_id ) {
 
         add( "ETERNAL_SEASON", page_id, to_translation( "Eternal season" ),
-             to_translation( "If true, keep the initial season forever.  Warning: currently bugged and may not work properly." ),
+             to_translation( "If set to true, the current season (or the one selected at game start) will never change." ),
              false
            );
 
@@ -2798,6 +2811,13 @@ void options_manager::add_options_android()
     add( "ANDROID_QUICKSAVE", "android", to_translation( "Quicksave on app lose focus" ),
          to_translation( "If true, quicksave whenever the app loses focus (screen locked, app moved into background etc.)  WARNING: Experimental.  This may result in corrupt save games." ),
          false
+       );
+
+    add_empty_line();
+
+    add( "ANDROID_RENDER_SAFE_AREA", "android", to_translation( "Confine display to safe area" ),
+         to_translation( "If true, keep the game within the screen's safe area so it does not draw under the camera cutout or other unsafe edges.  If false, the game fills the entire screen." ),
+         true
        );
 
     add_empty_line();
@@ -3367,8 +3387,10 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
                 case ItemType::GroupHeader:
                     return true;
                 case ItemType::BlankLine:
-                case ItemType::Option:
                     return groups_state[it.group];
+                case ItemType::Option:
+                    return groups_state[it.group]
+                    && !get_options().get_option( it.data ).is_hidden();
                 default:
                     cata_fatal( "invalid ItemType" );
             }
@@ -3610,7 +3632,8 @@ std::string options_manager::show( bool ingame, const bool world_options_only, b
                 case ItemType::GroupHeader:
                     return true;
                 case ItemType::Option:
-                    return groups_state[curr_item.group];
+                    return groups_state[curr_item.group]
+                    && !get_options().get_option( curr_item.data ).is_hidden();
                 default:
                     cata_fatal( "invalid ItemType" );
             }

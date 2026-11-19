@@ -405,6 +405,21 @@
     "looks_like": "fd_sap"
   },
   {
+    "id": "fd_fuel",
+    "type": "field_type",
+    "substance_name": "fuel",
+    "mopsafe": true,
+    "intensity_levels": [ { "name": "fuel", "sym": "#", "color": "dark_gray" } ],
+    "description_affix": "covered_in",
+    "is_splattering": true,
+    "priority": 2,
+    "half_life": "30 minutes",
+    "phase": "liquid",
+    "underwater_age_speedup": "4 seconds",
+    "display_field": true,
+    "looks_like": "fd_sap"
+  },
+  {
     "id": "fd_fire",
     "type": "field_type",
     "substance_name": "flames",
@@ -416,11 +431,24 @@
         "color": "yellow",
         "dangerous": true,
         "light_emitted": 20,
+        "light_color": [ 255, 180, 120 ],
         "translucency": 0.7,
         "convection_temperature_mod": 300
       },
-      { "name": { "ctxt": "noun", "str": "fire" }, "color": "light_red", "light_emitted": 60, "translucency": 0.4 },
-      { "name": "raging fire", "color": "red", "light_emitted": 160, "translucency": 0.1 }
+      {
+        "name": { "ctxt": "noun", "str": "fire" },
+        "color": "light_red",
+        "light_emitted": 60,
+        "light_color": [ 255, 200, 160 ],
+        "translucency": 0.4
+      },
+      {
+        "name": "raging fire",
+        "color": "red",
+        "light_emitted": 140,
+        "light_color": [ 255, 225, 190 ],
+        "translucency": 0.1
+      }
     ],
     "description_affix": "on",
     "underwater_age_speedup": "60 minutes",
@@ -537,20 +565,6 @@
     "percent_spread": 90,
     "dirty_transparency_cache": true,
     "immunity_data": { "body_part_env_resistance": [ [ "mouth", 8 ] ] }
-  },
-  {
-    "id": "fd_rubble",
-    "type": "field_type",
-    "substance_name": "rubble",
-    "legacy_enum_id": 11,
-    "intensity_levels": [ { "name": "legacy rubble", "sym": "#", "color": "dark_gray" } ],
-    "description_affix": "covered_in",
-    "half_life": "1 turns",
-    "phase": "solid",
-    "display_items": false,
-    "display_field": true,
-    "looks_like": "f_rubble",
-    "legacy_make_rubble": true
   },
   {
     "id": "fd_biolum",
@@ -994,7 +1008,6 @@
     "priority": 8,
     "half_life": "100 minutes",
     "phase": "gas",
-    "display_items": false,
     "display_field": false,
     "looks_like": "fd_smoke"
   },
@@ -1019,8 +1032,10 @@
     "type": "field_type",
     "substance_name": "bent spacetime",
     "intensity_levels": [
-      { "name": "angular ripple", "color": "light_gray", "sym": "*", "light_emitted": 160, "concentration": 1 },
-      { "name": "angular rift", "color": "dark_gray", "concentration": 1 },
+      { "name": "angular ripple", "color": "light_gray", "sym": "*", "concentration": 1 },
+      { "name": "angular rift", "color": "dark_gray", "concentration": 1, 
+        "light_emitted": 30,
+        "light_color": [ 200, 0, 180 ] },
       {
         "name": "fractal fissure",
         "color": "magenta",
@@ -1029,9 +1044,9 @@
         "monster_spawn_chance": 15,
         "monster_spawn_count": 1,
         "monster_spawn_radius": 1,
-        "monster_spawn_group": "GROUP_TINDALOS",
-        "light_emitted": 160
-      }
+        "monster_spawn_group": "GROUP_TINDALOS", 
+        "light_emitted": 60,
+        "light_color": [ 200, 0, 180 ] }
     ],
     "priority": 9,
     "half_life": "10 seconds",
@@ -1089,16 +1104,16 @@
     "substance_name": "sparks",
     "legacy_enum_id": 19,
     "intensity_levels": [
-      { "name": "sparks", "sym": "9", "dangerous": true, "light_emitted": 0.01 },
-      { "//": "repeat last entry", "light_emitted": 1 },
-      { "//": "repeat last entry", "light_emitted": 2.5 },
-      { "name": "electric crackle", "color": "cyan", "light_emitted": 4 },
-      { "//": "repeat last entry", "light_emitted": 7.5 },
-      { "//": "repeat last entry", "light_emitted": 11 },
-      { "name": "electric cloud", "color": "blue", "light_emitted": 14.5 },
-      { "//": "repeat last entry", "light_emitted": 18 },
-      { "//": "repeat last entry", "light_emitted": 21.5 },
-      { "//": "repeat last entry", "light_emitted": 25 }
+      { "name": "sparks", "sym": "9", "dangerous": true, "light_emitted": 0.01, "light_color": [ 100, 140, 220 ] },
+      { "//": "repeat last entry", "light_emitted": 1, "light_color": [ 100, 140, 220 ] },
+      { "//": "repeat last entry", "light_emitted": 2.5, "light_color": [ 100, 140, 220 ] },
+      { "name": "electric crackle", "color": "cyan", "light_emitted": 4, "light_color": [ 135, 180, 240 ] },
+      { "//": "repeat last entry", "light_emitted": 7.5, "light_color": [ 135, 180, 240 ] },
+      { "//": "repeat last entry", "light_emitted": 11, "light_color": [ 135, 180, 255 ] },
+      { "name": "electric cloud", "color": "blue", "light_emitted": 14.5, "light_color": [ 135, 180, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 18, "light_color": [ 200, 190, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 21.5, "light_color": [ 200, 190, 255 ] },
+      { "//": "repeat last entry", "light_emitted": 25, "light_color": [ 200, 190, 255 ] }
     ],
     "description_affix": "illuminated_by",
     "has_elec": true,
@@ -1132,6 +1147,8 @@
         "monster_spawn_chance": 600,
         "monster_spawn_count": 1,
         "monster_spawn_radius": 1,
+        "light_emitted": 30,
+        "light_color": [ 190, 0, 10 ],
         "monster_spawn_group": "GROUP_NETHER_FATIGUE_FIELD"
       }
     ],
@@ -1476,7 +1493,7 @@
     "type": "field_type",
     "substance_name": "foul fog",
     "intensity_levels": [
-      { "name": "swirl of fog", "translucency": 5, "light_emitted": 20 },
+      { "name": "swirl of fog", "translucency": 5 },
       { "name": "foul fog", "color": "cyan" },
       { "name": "thick foul fog", "color": "pink" }
     ],

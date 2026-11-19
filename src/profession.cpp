@@ -346,6 +346,11 @@ void profession::load( const JsonObject &jo, std::string_view )
     // Flag which denotes if a profession is a hobby
     optional( jo, was_loaded, "subtype", _subtype, "" );
     optional( jo, was_loaded, "missions", _missions, string_id_reader<::mission_type> {} );
+
+    bonus_aggression = load_distribution( jo, "bonus_aggression" );
+    bonus_bravery = load_distribution( jo, "bonus_bravery" );
+    bonus_collector = load_distribution( jo, "bonus_collector" );
+    bonus_altruism = load_distribution( jo, "bonus_altruism" );
 }
 
 const profession *profession::generic()
@@ -950,6 +955,26 @@ const
         }
     }
     return ret;
+}
+
+int profession::roll_aggression() const
+{
+    return bonus_aggression.roll();
+}
+
+int profession::roll_bravery() const
+{
+    return bonus_bravery.roll();
+}
+
+int profession::roll_collector() const
+{
+    return bonus_collector.roll();
+}
+
+int profession::roll_altruism() const
+{
+    return bonus_altruism.roll();
 }
 
 profession_id profession::get_profession_id() const

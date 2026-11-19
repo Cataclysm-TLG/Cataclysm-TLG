@@ -416,7 +416,7 @@
     "subcategory": "CSC_WEAPON_BASHING",
     "skill_used": "fabrication",
     "difficulty": 3,
-    "book_learn": [ [ "textbook_weapeast", 2 ], [ "textbook_weapwest", 2 ] ],
+    "book_learn": [ [ "textbook_weapeast", 2 ], [ "textbook_weapwest", 2 ], [ "book_arms_india", 2 ] ],
     "time": "1 h 40 m",
     "autolearn": true,
     "proficiencies": [ { "proficiency": "prof_carving", "time_multiplier": 1.25, "max_experience": "100 m" } ],

@@ -20,6 +20,7 @@
 #include "effect.h"
 #include "effect_source.h"
 #include "enums.h"
+#include "lightmap.h"
 #include "magic.h"
 #include "mapdata.h"
 #include "map_field.h"
@@ -117,6 +118,7 @@ struct field_intensity_level {
     int monster_spawn_radius = 0;
     mongroup_id monster_spawn_group;
     float light_emitted = 0.0f;
+    light_color_rgb light_color;
     float local_light_override = -1.0f;
     float translucency = 0.0f;
     int concentration = 0;
@@ -148,7 +150,7 @@ extern const field_type_str_id fd_fatigue;
 extern const field_type_str_id fd_fire;
 extern const field_type_str_id fd_fire_vent;
 extern const field_type_str_id fd_flame_burst;
-extern const field_type_str_id fd_spores;
+extern const field_type_str_id fd_fuel;
 extern const field_type_str_id fd_fungicidal_gas;
 extern const field_type_str_id fd_gas_vent;
 extern const field_type_str_id fd_gibs_flesh;
@@ -173,6 +175,7 @@ extern const field_type_str_id fd_slime;
 extern const field_type_str_id fd_sludge;
 extern const field_type_str_id fd_smoke;
 extern const field_type_str_id fd_smoke_vent;
+extern const field_type_str_id fd_spores;
 extern const field_type_str_id fd_tear_gas;
 extern const field_type_str_id fd_tindalos_rift;
 extern const field_type_str_id fd_toxic_gas;

@@ -208,8 +208,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "drill press", "str_pl": "drill presses" },
     "copy-from": "fake_appliance_tool",
-    "charges_per_use": 25,
-    "charged_qualities": [ [ "DRILL", 3 ] ]
+    "charges_per_use": 25
   },
   {
     "id": "glassblowers_crucible_tool",

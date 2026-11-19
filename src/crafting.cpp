@@ -136,6 +136,7 @@ static const std::string flag_BLIND_HARD( "BLIND_HARD" );
 static const std::string flag_FULL_MAGAZINE( "FULL_MAGAZINE" );
 static const std::string flag_NO_BENCH( "NO_BENCH" );
 static const std::string flag_NO_ENCHANTMENT( "NO_ENCHANTMENT" );
+static const std::string flag_NO_FAIL( "NO_FAIL" );
 static const std::string flag_NO_MANIP( "NO_MANIP" );
 static const std::string flag_NO_MORALE_OK( "NO_MORALE_OK" );
 static const std::string flag_NO_RESIZE( "NO_RESIZE" );
@@ -894,9 +895,15 @@ static item_location set_item_map_or_vehicle( const Character &p, const tripoint
 }
 
 static item_location place_craft_or_disassembly(
-    Character &ch, item &craft, std::optional<tripoint_bub_ms> target )
+    Character &ch, item &craft, std::optional<tripoint_bub_ms> target,
+    bool always_start_on_ground = false )
 {
     item_location craft_in_world;
+
+    if( always_start_on_ground ) {
+        craft_in_world = set_item_map_or_vehicle( ch, ch.pos_bub(), craft );
+        return craft_in_world;
+    }
 
     // Check if we are standing next to a workbench. If so, just use that.
     float best_bench_multi = 0.0f;
@@ -1853,7 +1860,8 @@ void Character::start_craft( craft_command &command, const std::optional<tripoin
         calc_encumbrance();
     }
 
-    item_location craft_in_world = place_craft_or_disassembly( *this, craft, loc );
+    item_location craft_in_world = place_craft_or_disassembly( *this, craft, loc,
+                                   command.always_start_on_ground() );
 
     if( !craft_in_world ) {
         return;
@@ -2046,7 +2054,7 @@ float Character::get_recipe_weighted_skill_average( const recipe &making ) const
         !has_effect( effect_contacts ) &&
         !has_effect( effect_transition_contacts ) ) {
         float vision_penalty = 0.0f;
-        if( making.skill_used == skill_electronics || skill_traps ) {
+        if( making.skill_used == skill_electronics || making.skill_used == skill_traps ) {
             vision_penalty = 2.0f;
         } else if( making.skill_used == skill_tailor ) {
             vision_penalty = 1.0f;
@@ -2125,7 +2133,7 @@ Character::craft_roll_data Character::recipe_success_roll_data( const recipe &ma
         // Store that it was negative to reapply later, then make it positive because we need a sqrt.
         summed_skills *= -1;
     }
-    float weighted_skill_average = sqrt( summed_skills );
+    float weighted_skill_average = std::sqrt( summed_skills );
     if( negative ) {
         weighted_skill_average *= -1;
     }
@@ -2212,6 +2220,9 @@ float Character::crafting_failure_roll( const recipe &making ) const
 
 float Character::recipe_success_chance( const recipe &making ) const
 {
+    if( making.has_flag( flag_NO_FAIL ) ) {
+        return 1.0f;
+    }
     // We calculate the failure chance of a recipe by performing a normal roll with a given
     // standard deviation and center, then subtracting a "final difficulty" score from that.
     // If that result is above 1, there is no chance of failure.
@@ -3358,112 +3369,10 @@ Character::select_tool_component( const std::vector<tool_comp> &tools, int batch
             selected.comp = both_has[uselection];
         }
     }
-
+    if( selected.comp.type == itype_id::NULL_ID() ) {
+        selected.use_from = usage_from::cancel;
+    }
     return selected;
-}
-
-bool Character::craft_consume_tools( item &craft, int multiplier, bool start_craft )
-{
-    if( !craft.is_craft() ) {
-        debugmsg( "craft_consume_tools() called on non-craft '%s.' Aborting.", craft.tname() );
-        return false;
-    }
-    if( has_trait( trait_DEBUG_HS ) ) {
-        return true;
-    }
-
-    const auto calc_charges = [&craft, &start_craft, &multiplier]( int charges ) {
-        int ret = charges;
-
-        if( ret <= 0 ) {
-            return ret;
-        }
-
-        // Account for batch size
-        ret *= craft.get_making_batch_size();
-
-        // In case more than 5% progress was accomplished in one turn
-        ret *= multiplier;
-
-        // Only for the next 5% progress
-        ret /= 20;
-
-        // If just starting consume the remainder as well
-        if( start_craft ) {
-            ret += ( charges * craft.get_making_batch_size() ) % 20;
-        }
-        return ret;
-    };
-
-    // First check if we still have our cached selections
-    std::vector<comp_selection<tool_comp>> cached_tool_selections;
-    for( const std::vector<step_tool_alloc> &step_allocs : craft.get_step_tool_allocs() ) {
-        for( const step_tool_alloc &alloc : step_allocs ) {
-            cached_tool_selections.push_back( alloc.sel );
-        }
-    }
-
-    inventory map_inv;
-    map_inv.form_from_map( pos_bub(), PICKUP_RANGE, this );
-
-    for( const comp_selection<tool_comp> &tool_sel : cached_tool_selections ) {
-        itype_id type = tool_sel.comp.type;
-        if( tool_sel.comp.count > 0 ) {
-            const int count = calc_charges( tool_sel.comp.count );
-            switch( tool_sel.use_from ) {
-                case usage_from::player:
-                    if( !has_charges( type, count ) ) {
-                        add_msg_player_or_npc(
-                            _( "You have insufficient %s charges and can't continue crafting." ),
-                            _( "<npcname> has insufficient %s charges and can't continue crafting." ),
-                            item::nname( type ) );
-                        craft.set_tools_to_continue( false );
-                        return false;
-                    }
-                    break;
-                case usage_from::map:
-                    if( !map_inv.has_charges( type, count ) ) {
-                        add_msg_player_or_npc(
-                            _( "You have insufficient %s charges and can't continue crafting." ),
-                            _( "<npcname> has insufficient %s charges and can't continue crafting." ),
-                            item::nname( type ) );
-                        craft.set_tools_to_continue( false );
-                        return false;
-                    }
-                    break;
-                case usage_from::both:
-                    if( !crafting_inventory().has_charges( type, count ) ) {
-                        add_msg_player_or_npc(
-                            _( "You have insufficient %s charges and can't continue crafting." ),
-                            _( "<npcname> has insufficient %s charges and can't continue crafting." ),
-                            item::nname( type ) );
-                        craft.set_tools_to_continue( false );
-                        return false;
-                    }
-                    break;
-                case usage_from::none:
-                case usage_from::cancel:
-                case usage_from::num_usages_from:
-                    break;
-            }
-        } else if( ( type != itype_id::NULL_ID() ) && !has_amount( type, 1 ) &&
-                   !map_inv.has_tools( type, 1 ) ) {
-            add_msg_player_or_npc(
-                _( "You no longer have a %s and can't continue crafting." ),
-                _( "<npcname> no longer has a %s and can't continue crafting." ),
-                item::nname( type ) );
-            craft.set_tools_to_continue( false );
-            return false;
-        }
-    }
-
-    // We have the selections, so consume them
-    for( const comp_selection<tool_comp> &tool : cached_tool_selections ) {
-        comp_selection<tool_comp> to_consume = tool;
-        to_consume.comp.count = calc_charges( to_consume.comp.count );
-        consume_tools( to_consume, 1 );
-    }
-    return true;
 }
 
 // Charges (count units) consumed through `count` 5% buckets.  Front-loads the
@@ -4094,6 +4003,7 @@ void Character::complete_disassemble( item_location target )
         } else {
             // No more targets
             activity.set_to_null();
+            activity_handlers::resume_for_multi_activities( *this );
             return;
         }
     }
@@ -4536,7 +4446,7 @@ void npc::do_npc_craft( const std::optional<tripoint_bub_ms> &loc, const recipe_
         craft( loc, goto_recipe );
     } else {
         uilist menu;
-        menu.text = "Craft what?";
+        menu.text = _( "Craft what?" );
         menu.addentry( 0, true, MENU_AUTOASSIGN, _( "Craft new item" ) );
         menu.addentry( 1, true, MENU_AUTOASSIGN, _( "Work on craft" ) );
         menu.query();
@@ -4548,10 +4458,10 @@ void npc::do_npc_craft( const std::optional<tripoint_bub_ms> &loc, const recipe_
             uilist item_selection;
             do {
                 item_selection.init();
-                item_selection.text = "Craft what?";
+                item_selection.text = _( "Craft what?" );
                 item_selection.selected = selected;
-                item_selection.addentry( 0, true, MENU_AUTOASSIGN, "Start crafting" );
-                item_selection.addentry( 1, true, MENU_AUTOASSIGN, "Select all" );
+                item_selection.addentry( 0, true, MENU_AUTOASSIGN, _( "Start crafting" ) );
+                item_selection.addentry( 1, true, MENU_AUTOASSIGN, _( "Select all" ) );
                 int index = 2;
 
                 for( item_location &itm : craft_item_list ) {

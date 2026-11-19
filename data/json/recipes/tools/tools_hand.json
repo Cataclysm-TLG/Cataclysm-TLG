@@ -84,16 +84,10 @@
     "activity_level": "BRISK_EXERCISE",
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
+    "skill_used": "survival",
     "difficulty": 4,
-    "time": "2 h",
+    "time": "1 m",
     "autolearn": true,
-    "using": [ [ "blacksmithing_basic", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_toolsmithing" }
-    ],
     "components": [ [ [ "steel_fragment", 1 ] ], [ [ "flint", 1 ] ] ]
   },
   {
@@ -200,6 +194,7 @@
     "book_learn": [
       [ "textbook_fabrication", 3 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -248,6 +243,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -273,6 +269,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -298,6 +295,7 @@
     "book_learn": [
       [ "textbook_fabrication", 4 ],
       [ "textbook_weapeast", 5 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 5 ],
       [ "textbook_armeast", 5 ],
       [ "textbook_armwest", 5 ],
@@ -561,24 +559,6 @@
     "time": "5 h",
     "autolearn": true,
     "using": [ [ "blacksmithing_standard", 1 ], [ "steel_tiny", 1 ] ],
-    "proficiencies": [
-      { "proficiency": "prof_metalworking" },
-      { "proficiency": "prof_blacksmithing" },
-      { "proficiency": "prof_toolsmithing" }
-    ],
-    "qualities": [ { "id": "GRIND", "level": 2 } ]
-  },
-  {
-    "type": "recipe",
-    "activity_level": "BRISK_EXERCISE",
-    "result": "wrench_large",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_TOOLS",
-    "skill_used": "fabrication",
-    "difficulty": 6,
-    "time": "7 h",
-    "autolearn": true,
-    "using": [ [ "blacksmithing_standard", 8 ], [ "steel_standard", 2 ] ],
     "proficiencies": [
       { "proficiency": "prof_metalworking" },
       { "proficiency": "prof_blacksmithing" },
@@ -1682,6 +1662,7 @@
     "book_learn": [
       [ "textbook_fabrication", 3 ],
       [ "textbook_weapeast", 4 ],
+      [ "book_arms_india", 5 ],
       [ "textbook_weapwest", 4 ],
       [ "textbook_armeast", 4 ],
       [ "textbook_armwest", 4 ],
@@ -1723,6 +1704,7 @@
     "book_learn": [
       [ "textbook_fabrication", 2 ],
       [ "textbook_weapeast", 3 ],
+      [ "book_arms_india", 4 ],
       [ "textbook_weapwest", 3 ],
       [ "textbook_armeast", 3 ],
       [ "textbook_armwest", 3 ],

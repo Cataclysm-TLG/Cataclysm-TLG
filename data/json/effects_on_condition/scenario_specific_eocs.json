@@ -5,6 +5,8 @@
     "effect": [
       { "u_add_effect": "flu", "intensity": 1, "duration": "1000 minutes" },
       { "u_add_effect": "drunk", "intensity": 1, "duration": "270 minutes" },
+      { "math": [ "u_vitamin('ethanol') = 100" ] },
+      { "math": [ "u_vitamin('BAC') = 1400" ] },
       {
         "u_add_morale": "morale_feeling_bad",
         "bonus": -100,
@@ -85,7 +87,7 @@
         "npc_run_monster_eocs": [
           {
             "id": "EOC_BANISH_MONSTERS_AROUND_MANSION_CENTER",
-            "condition": { "math": [ "rand(1)", "==", "0" ] },
+            "condition": { "math": [ "rand(1) == 0" ] },
             "effect": { "run_eocs": "EOC_BANISH_SELF" }
           }
         ],

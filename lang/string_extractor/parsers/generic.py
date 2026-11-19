@@ -32,6 +32,14 @@ def parse_generic(json, origin):
         write_text(json["description"], origin, c_format=False,
                    comment=comment + ["Description of \"{}\"".format(name)])
 
+    port_comment = "Electronic port type of item \"{}\"".format(name)
+    if "e_port" in json:
+        write_text(json["e_port"], origin, context="electronic port type",
+                   comment=port_comment, c_format=False)
+    for port in json.get("e_ports_banned", []):
+        write_text(port, origin, context="electronic port type",
+                   comment=port_comment, c_format=False)
+
     if "use_action" in json:
         parse_use_action(json["use_action"], origin, name)
     if "tick_action" in json:

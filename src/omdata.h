@@ -677,7 +677,7 @@ class overmap_special
         effect_on_condition_id get_eoc() const {
             return eoc;
         }
-        bool can_spawn() const;
+        bool can_spawn( int city_size ) const;
         /** Returns terrain at the given point. */
         const overmap_special_terrain &get_terrain_at( const tripoint_rel_omt &p ) const;
         /** @returns true if this special requires a city */
@@ -798,7 +798,7 @@ void reset();
 
 const std::vector<overmap_special> &get_all();
 
-overmap_special_batch get_default_batch( const point_abs_om &origin );
+overmap_special_batch get_default_batch( const point_abs_om &origin, int city_size );
 /**
  * Generates a simple special from a building id.
  */

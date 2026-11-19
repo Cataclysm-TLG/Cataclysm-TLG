@@ -2881,6 +2881,9 @@ class jmapgen_corpse : public jmapgen_piece
                     const std::string &/*context*/ ) const override {
             const std::vector<mtype_id> monster_group =
                 MonsterGroupManager::GetMonstersFromGroup( group, true );
+            if( monster_group.empty() ) {
+                return;
+            }
             const mtype_id &corpse_type = random_entry_ref( monster_group );
             item corpse = item::make_corpse( corpse_type,
                                              std::max( calendar::turn - age, calendar::fall_of_civilization ) );
@@ -7977,6 +7980,7 @@ std::vector<item *> map::place_items(
         }
 
         e->randomize_rot();
+        e->preserve_location( project_to<coords::ms>( get_abs_sub() ) );
         e->set_owner( faction_id( faction ) );
     }
     return res;
@@ -9218,7 +9222,7 @@ mapgen_update_func add_mapgen_update_func( const JsonObject &jo, bool &defer )
 }
 
 static const std::string missing_update_operation =
-    "missing update operation (not vehicle/appliance)";
+    translate_marker( "missing update operation (not vehicle/appliance)" );
 
 ret_val<void> run_mapgen_update_func(
     const update_mapgen_id &update_mapgen_id, const tripoint_abs_omt &omt_pos,

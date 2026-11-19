@@ -262,6 +262,13 @@ void overmapbuffer::save()
     }
 }
 
+void overmapbuffer::reset()
+{
+    overmaps.clear();
+    global_state.highway_intersections.clear();
+    last_requested_overmap = nullptr;
+}
+
 void overmapbuffer::clear()
 {
     overmaps.clear();
@@ -347,8 +354,23 @@ overmap *overmapbuffer::get_existing( const point_abs_om &p )
         // checked in a previous call of this function).
         return nullptr;
     }
-    assure_dir_exist( PATH_INFO::current_dimension_save_path() );
-    if( file_exist( terrain_filename( p ) ) ) {
+
+    cata_path path;
+
+    const std::string terfilename = overmapbuffer::terrain_filename( p );
+    const std::filesystem::path terfilename_path = std::filesystem::u8path( terfilename );
+
+    if( world_generator->active_world->has_compression_enabled() ) {
+        assure_dir_exist( PATH_INFO::world_base_save_path() / zzip_overmap_directory );
+        path = PATH_INFO::world_base_save_path() / zzip_overmap_directory / terfilename_path
+               +
+               zzip_suffix;
+    } else {
+        assure_dir_exist( PATH_INFO::world_base_save_path() );
+        path = PATH_INFO::world_base_save_path() / terfilename_path;
+    }
+
+    if( file_exist( path ) ) {
         // File exists, load it normally (the get function
         // indirectly call overmap::open to do so).
         return &get( p );
@@ -1951,10 +1973,19 @@ std::string overmapbuffer::get_description_at( const tripoint_abs_sm &where )
     }
 
     // Display Origin
-    const std::string mod_src = enumerate_as_string( oter->get_type_id().obj().src,
+    std::vector<std::pair<oter_type_str_id, mod_id>> filtered_src;
+    std::copy_if( oter->get_type_id().obj().src.begin(),
+                  oter->get_type_id().obj().src.end(),
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
+
+    const std::string mod_src = enumerate_as_string(
+                                    filtered_src,
     []( const std::pair<oter_type_str_id, mod_id> &source ) {
         return string_format( "'%s'", source.second->name() );
     }, enumeration_conjunction::arrow );
+
     format_string += "\n" + string_format( _( "Origin: %s" ), mod_src );
 
     return string_format( format_string, ter_name, dir_name, closest_city_name );

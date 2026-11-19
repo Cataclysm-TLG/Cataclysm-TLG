@@ -1,7 +1,7 @@
 [
   {
     "id": "p226mag_12rd_357sig",
-    "//": "Copied from Beretta 12rd .40S&W magazine.",
+    "//": "Copied from Beretta 12rd .40 S&W magazine.",
     "looks_like": "glock17_17",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],
@@ -21,7 +21,7 @@
   },
   {
     "id": "p320mag_13rd_357sig",
-    "//": "Copied from Beretta 12rd .40S&W magazine.",
+    "//": "Copied from Beretta 12rd .40 S&W magazine.",
     "looks_like": "glock17_17",
     "type": "ITEM",
     "subtypes": [ "MAGAZINE" ],

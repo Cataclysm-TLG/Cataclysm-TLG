@@ -1082,7 +1082,7 @@ void vehicle::backfire( map *here, const vehicle_part &vp ) const
 }
 
 // engines & alternators all have power.
-// engines provide, whilst alternators consume.
+// engines provide, while alternators consume.
 units::power vehicle::part_vpower_w( map &here, const vehicle_part &vp,
                                      const bool at_full_hp ) const
 {
@@ -1149,7 +1149,7 @@ units::power vehicle::part_vpower_w( map &here, const vehicle_part &vp,
 }
 
 // alternators, solar panels, reactors, and accessories all have epower.
-// alternators, solar panels, and reactors provide, whilst accessories consume.
+// alternators, solar panels, and reactors provide, while accessories consume.
 // for motor consumption see @ref vpart_info::energy_consumption instead
 units::power vehicle::part_epower( const vehicle_part &vp ) const
 {
@@ -6394,6 +6394,9 @@ std::optional<vehicle_stack::iterator> vehicle::add_item( map &here, vehicle_par
             if( !item_ptr->merge_charges( itm ) ) {
                 return std::nullopt;
             } else {
+                if( itm.is_emissive() ) {
+                    here.set_lightmap_cache_dirty( bub_part_pos( here, vp ).z() );
+                }
                 return std::optional<vehicle_stack::iterator>( istack.get_iterator_from_pointer( item_ptr ) );
             }
         }
@@ -6407,8 +6410,13 @@ std::optional<vehicle_stack::iterator> vehicle::add_item( map &here, vehicle_par
         itm_copy.spill_contents( bub_part_pos( here, vp ) );
     }
 
+    itm_copy.preserve_location( pos_abs() );
+
     const vehicle_stack::iterator new_pos = vp.items.insert( itm_copy );
     active_items.add( *new_pos, vp.mount );
+    if( itm_copy.is_emissive() ) {
+        here.set_lightmap_cache_dirty( bub_part_pos( here, vp ).z() );
+    }
 
     invalidate_mass();
     return std::optional<vehicle_stack::iterator>( new_pos );
@@ -6428,6 +6436,10 @@ bool vehicle::remove_item( vehicle_part &vp, item *it )
 vehicle_stack::iterator vehicle::remove_item( vehicle_part &vp,
         const vehicle_stack::const_iterator &it )
 {
+    if( it->is_emissive() ) {
+        map &here = get_map();
+        here.set_lightmap_cache_dirty( bub_part_pos( here, vp ).z() );
+    }
     invalidate_mass();
     return vp.items.erase( it );
 }
@@ -8048,6 +8060,7 @@ time_duration vehicle::unfolding_time() const
 
 item vehicle::get_folded_item( map &here ) const
 {
+    // FIXME: This generic folded vehicle has no pockets. Should we fold into bespoke items sometimes, or...?
     item folded( itype_generic_folded_vehicle, calendar::turn );
     const std::vector<std::reference_wrapper<const vehicle_part>> &parts = real_parts();
     try {
@@ -8095,7 +8108,11 @@ item vehicle::get_folded_item( map &here ) const
 
 bool vehicle::restore_folded_parts( const item &it )
 {
-    const JsonValue jv_parts = json_loader::from_string( it.get_var( "folded_parts" ) );
+    const std::string folded_parts = it.get_var( "folded_parts" );
+    if( folded_parts.empty() ) {
+        return false;
+    }
+    const JsonValue jv_parts = json_loader::from_string( folded_parts );
     deserialize_parts( static_cast<JsonArray>( jv_parts ) );
 
     // item should have snapshot of average part damage in item var. take difference of current
@@ -8133,6 +8150,7 @@ bool vehicle::restore_folded_parts( const item &it )
                 add_msg_debug( debugmode::DF_VEHICLE, "unfolding applied %d damage to %s %d left to apply",
                                applied_damage, pt.name(), damage_to_apply );
             }
+            refresh( );
         }
     }
 

@@ -500,7 +500,12 @@
   {
     "type": "construction_group",
     "id": "build_bee_hive",
-    "name": "Build An Apiary"
+    "name": "Build an Apiary"
+  },
+  {
+    "type": "construction_group",
+    "id": "fill_bee_hive",
+    "name": "Stock an Empty Apiary"
   },
   {
     "type": "construction_group",
@@ -994,11 +999,6 @@
     "type": "construction_group",
     "id": "fill_pit_with_dirt",
     "name": "Fill Pit With Dirt"
-  },
-  {
-    "type": "construction_group",
-    "id": "pit_straw",
-    "name": "Fill Shallow Pit with Straw"
   },
   {
     "type": "construction_group",
@@ -1744,11 +1744,6 @@
     "type": "construction_group",
     "id": "build_training_dummy_heavy",
     "name": "Install Armored Training Dummy"
-  },
-  {
-    "type": "construction_group",
-    "id": "build_archery_target_box",
-    "name": "Set Up Box Archery Target"
   },
   {
     "type": "construction_group",

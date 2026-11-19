@@ -196,16 +196,6 @@
     "components": [ [ [ "plastic_chunk", 4 ] ], [ [ "lens", 1 ] ], [ [ "wire", 1 ] ] ]
   },
   {
-    "result": "survivor_scope",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "skill_used": "fabrication",
-    "difficulty": 1,
-    "time": "5 m",
-    "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "plastic_chunk", 4 ] ], [ [ "lens", 1 ] ], [ [ "lens_small", 1 ] ] ]
-  },
-  {
     "result": "fishing_rod_professional",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",

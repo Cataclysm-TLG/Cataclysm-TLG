@@ -91,6 +91,10 @@
         { "item": "microwave", "x": 19, "y": 24, "chance": 75 },
         { "item": "coffeemaker", "x": 19, "y": 24, "chance": 75 },
         { "group": "cash_register_random", "x": 14, "y": [ 49, 51 ] }
+      ],
+      "place_monsters": [
+        { "monster": "GROUP_VANILLA", "x": [ 15, 22 ], "y": [ 7, 17 ], "repeat": [ 5, 10 ], "density": 0.1 },
+        { "monster": "GROUP_VANILLA", "x": [ 50, 56 ], "y": [ 25, 30 ], "repeat": [ 5, 10 ], "density": 0.1 }
       ]
     }
   },
@@ -178,7 +182,11 @@
         "________________________________________________________________________________________________________________________"
       ],
       "palettes": [ "convention_palette" ],
-      "terrain": { "_": "t_open_air" }
+      "terrain": { "_": "t_open_air" },
+      "place_monsters": [
+        { "monster": "GROUP_VANILLA", "x": [ 15, 22 ], "y": [ 7, 17 ], "repeat": [ 5, 10 ], "density": 0.1 },
+        { "monster": "GROUP_VANILLA", "x": [ 50, 56 ], "y": [ 25, 30 ], "repeat": [ 5, 10 ], "density": 0.1 }
+      ]
     }
   },
   {

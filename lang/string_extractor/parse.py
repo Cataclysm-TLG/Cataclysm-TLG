@@ -11,6 +11,8 @@ def parse_json_object(json, origin):
     """
     if "type" in json and type(json["type"]) is str:
         json_type = json["type"].lower()
+        if json_type == "field_type_migration":
+            return
         if json_type in parsers:
             try:
                 parsers[json_type](json, origin)

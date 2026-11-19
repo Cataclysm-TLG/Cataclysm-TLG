@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
+# Defaults to CMAKE_SOURCE_DIR for in-tree builds; Android sets it explicitly.
+if(NOT DEFINED CATA_REPO_ROOT)
+    set(CATA_REPO_ROOT "${CMAKE_SOURCE_DIR}")
+endif()
+
 # Don't clang-tidy third party code
 set(CMAKE_CXX_CLANG_TIDY "")
 
@@ -10,8 +15,9 @@ add_library(
 
 set(THIRD_PARTY_SOURCE_DIR ${CMAKE_SOURCE_DIR}/src/third-party)
 
-file(GLOB FLATBUFFERS_HEADERS ${THIRD_PARTY_SOURCE_DIR}/flatbuffers/**/*.h)
-file(GLOB FLATBUFFERS_SOURCES ${THIRD_PARTY_SOURCE_DIR}/flatbuffers/*.cpp)
+# Flatbuffers
+file(GLOB FLATBUFFERS_HEADERS flatbuffers/**/*.h)
+file(GLOB FLATBUFFERS_SOURCES flatbuffers/*.cpp)
 
 add_library(
         flatbuffers
@@ -23,14 +29,20 @@ target_include_directories(
         flatbuffers
         SYSTEM
         PUBLIC
-        ${THIRD_PARTY_SOURCE_DIR})
+        ${CMAKE_CURRENT_SOURCE_DIR})
 
 # For cata_flatbuffers_assert.h
 target_include_directories(
         flatbuffers
         PUBLIC
-        ${CMAKE_SOURCE_DIR}/src)
+        ${CATA_REPO_ROOT}/src)
 
+target_link_libraries(
+        third-party
+        INTERFACE
+        flatbuffers
+        )
+        
 file(GLOB GHC_HEADERS ${THIRD_PARTY_SOURCE_DIR}/ghc/*.hpp)
 
 add_library(
@@ -46,7 +58,32 @@ target_include_directories(
         ghc-filesystem
         SYSTEM
         INTERFACE
-        ${THIRD_PARTY_SOURCE_DIR})
+        ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(
+        third-party
+        INTERFACE
+        ghc-filesystem
+        )
+
+# We use snmalloc in header only mode
+file(GLOB SNMALLOC_HEADERS snmalloc/**/*)
+
+add_library(
+        snmalloc
+        INTERFACE)
+
+target_include_directories(
+        snmalloc
+        SYSTEM
+        INTERFACE
+        ${CMAKE_CURRENT_SOURCE_DIR})
+
+target_link_libraries(
+        third-party
+        INTERFACE
+        snmalloc
+        )
 
 # Zstandard
 file(GLOB ZSTD_HEADERS zstd/**/*.h)

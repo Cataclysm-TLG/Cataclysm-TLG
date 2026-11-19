@@ -90,7 +90,7 @@
       [ "underbarrel mount", 1 ]
     ],
     "clip_size": 6,
-    "extend": { "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "EASY_CLEAN" ] },
+    "extend": { "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "EASY_CLEAN", "LEVER_ACTION" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ],
     "melee_damage": { "bash": 10 }
   },
@@ -101,7 +101,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Kel-Tec KSG shotgun" },
-    "description": "This pump-action shotgun uses a system of twin magazines to carry 14 total rounds of 12-gauge shotgun shells.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, the firearm's notably more compact than its peers despite having a higher capacity when compared against more classically designed shotguns.",
+    "description": "This pump-action shotgun features two magazines side by side to carry 14 total rounds of 12-gauge shotgun shells.  Each tube must be loaded separately, but this offers the option of loading different ammunition for different situations.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, it is notably more compact than a typical shotgun despite its higher capacity.",
     "weight": "1550 g",
     "volume": "3371 ml",
     "longest_side": "672 mm",
@@ -114,6 +114,7 @@
     "sight_dispersion": 500,
     "durability": 7,
     "clip_size": 7,
+    "built_in_mods": [ "ksg_aux_shotgun" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
@@ -125,7 +126,7 @@
       [ "sling", 1 ],
       [ "underbarrel", 2 ]
     ],
-    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 14 } } ],
+    "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 7 } } ],
     "melee_damage": { "bash": 9 }
   },
   {
@@ -135,7 +136,7 @@
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Kel-Tec KSG-25 shotgun" },
-    "description": "This pump-action shotgun uses a system of twin magazines to carry 24 total rounds of 12-gauge shotgun shells.  Each tube must be loaded separately, but this offers the option of loading different ammunition for different situations.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, the firearm's still only as long as conventional shotguns despite having a comparatively far higher capacity.",
+    "description": "This pump-action shotgun uses a system of twin magazines to carry 24 total rounds of 12-gauge shotgun shells.  Each tube must be loaded separately, but this offers the option of loading different ammunition for different situations.  As the weapon's trigger is situated forwards of the chamber in what is termed as a 'bullpup' design, the firearm isn't much longer than a typical shotgun despite its high capacity.",
     "weight": "2100 g",
     "volume": "4495 ml",
     "longest_side": "971 mm",
@@ -337,7 +338,7 @@
     "description": "This semi-automatic offering from Mossberg features a recoil reducing gas system, rifle style sights and a factory-installed Picatinny rail.  Affordable pricing and decent ergonomics make this a popular entry-level 3-gun shotgun.",
     "weight": "3402 g",
     "volume": "2623 ml",
-    "longest_side": "994 mm",
+    "longest_side": "964 mm",
     "barrel_length": "470 mm",
     "looks_like": "remington_870",
     "price": "600 USD",
@@ -347,7 +348,6 @@
     "dispersion": 345,
     "durability": 7,
     "clip_size": 8,
-    "built_in_mods": [ "wire_stock" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "loading port", 1 ],
@@ -383,7 +383,7 @@
     "dispersion": 345,
     "durability": 7,
     "clip_size": 8,
-    "built_in_mods": [ "wire_stock" ],
+    "built_in_mods": [ "folding_stock" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "loading port", 1 ],
@@ -445,7 +445,6 @@
   {
     "id": "remington_1100",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Remington 1100 competition shotgun" },
@@ -481,7 +480,6 @@
   {
     "id": "browning_a5",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Browning Auto 5 shotgun" },
@@ -517,7 +515,6 @@
   {
     "id": "ithaca37",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Ithaca M37 Featherlight shotgun" },
@@ -553,7 +550,6 @@
   {
     "id": "remington_870",
     "copy-from": "shotgun_pump_3gun",
-    "//": "Tileset whitelist for shotguns.",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "name": { "str": "Remington 870 Wingmaster shotgun" },
@@ -799,7 +795,7 @@
     "reload": 220,
     "barrel_volume": "505 ml",
     "default_mods": [ "grip" ],
-    "built_in_mods": [ "wire_stock" ],
+    "built_in_mods": [ "folding_stock" ],
     "valid_mod_locations": [
       [ "barrel", 1 ],
       [ "brass catcher", 1 ],
@@ -917,7 +913,7 @@
       [ "stock mount", 1 ],
       [ "underbarrel mount", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET" ],
+    "flags": [ "FIRE_TWOHAND", "RELOAD_ONE", "NO_TURRET", "LEVER_ACTION" ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "rigid": true, "ammo_restriction": { "shot": 6 } } ],
     "melee_damage": { "bash": 8 }
   },
@@ -1191,6 +1187,7 @@
     "barrel_volume": "252 ml",
     "valid_mod_locations": [ [ "sling", 1 ], [ "sights mount", 1 ], [ "stock", 1 ] ],
     "built_in_mods": [ "m26_mass_stock" ],
+    "extend": { "flags": [ "BOLT_ACTION" ] },
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "m26_mass_mag_3", "m26_mass_mag_5" ] } ],
     "melee_damage": { "bash": 3 }
   }

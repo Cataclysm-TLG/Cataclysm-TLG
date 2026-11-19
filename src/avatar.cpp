@@ -50,6 +50,7 @@
 #include "iuse.h"
 #include "json.h"
 #include "line.h"
+#include "level_cache.h"
 #include "map.h"
 #include "map_memory.h"
 #include "mapdata.h"
@@ -173,6 +174,7 @@ void avatar::control_npc( npc &np, const bool debug )
     const std::function<void( npc & )> update_npc = [new_character]( npc & guy ) {
         guy.update_missions_target( get_avatar().getID(), new_character );
     };
+
     overmap_buffer.foreach_npc( update_npc );
     mission().update_world_missions_character( get_avatar().getID(), new_character );
     // move avatar character data into shadow npc
@@ -188,11 +190,15 @@ void avatar::control_npc( npc &np, const bool debug )
     np.set_fac( faction_your_followers );
     // perception and mutations may have changed, so reset light level caches
     g->reset_light_level();
+    for( int z = -OVERMAP_DEPTH; z <= OVERMAP_HEIGHT; z++ ) {
+        get_map().set_lightmap_cache_dirty( z );
+    }
     // center the map on the new avatar character
     const bool z_level_changed = g->vertical_shift( posz() );
     g->update_map( *this, z_level_changed );
     character_mood_face( true );
-
+    invalidate_flag_caches();
+    np.invalidate_flag_caches();
     profession_id prof_id = prof ? prof->ident() : profession::generic()->ident();
     get_event_bus().send<event_type::game_avatar_new>( /*is_new_game=*/false, debug,
             getID(), name, male, prof_id, custom_profession );
@@ -210,7 +216,7 @@ void avatar::control_npc_menu( const bool debug )
             charmenu.addentry( charnum++, true, MENU_AUTOASSIGN, follower->get_name() );
         }
         if( follower && ( follower->has_effect( effect_narcosis ) || ( follower->in_sleep_state() &&
-                          follower->has_bionic( bio_sleep_shutdown ) ) ) ) {
+                          follower->has_active_bionic( bio_sleep_shutdown ) ) ) ) {
             followers.emplace_back( follower );
             std::string reason = _( " (unavailable)" );
             charmenu.addentry( charnum++, false, MENU_AUTOASSIGN, follower->get_name() + reason );
@@ -1213,6 +1219,12 @@ bool avatar::cant_see( const tripoint_bub_ms &p ) const
     return aim_cache[p.x()][p.y()];
 }
 
+void avatar::mark_aim_cache_dirty()
+{
+    aim_cache_dirty = true;
+    aim_cache_generation = next_cache_generation();
+}
+
 void avatar::rebuild_aim_cache() const
 {
     map &here = get_map();
@@ -1358,21 +1370,25 @@ void avatar::reset_move_mode()
 
 void avatar::cycle_move_mode()
 {
-    const move_mode_id next = current_movement_mode()->cycle();
-    set_movement_mode( next );
-    // if a movemode is disabled then just cycle to the next one
-    if( !movement_mode_is( next ) ) {
-        set_movement_mode( next->cycle() );
+    move_mode_id next = current_movement_mode()->cycle();
+    while( next != current_movement_mode() ) {
+        if( can_switch_to( next ) ) {
+            set_movement_mode( next );
+            return;
+        }
+        next = next->cycle();
     }
 }
 
 void avatar::cycle_move_mode_reverse()
 {
-    const move_mode_id prev = current_movement_mode()->cycle_reverse();
-    set_movement_mode( prev );
-    // if a movemode is disabled then just cycle to the previous one
-    if( !movement_mode_is( prev ) ) {
-        set_movement_mode( prev->cycle_reverse() );
+    move_mode_id prev = current_movement_mode()->cycle_reverse();
+    while( prev != current_movement_mode() ) {
+        if( can_switch_to( prev ) ) {
+            set_movement_mode( prev );
+            return;
+        }
+        prev = prev->cycle_reverse();
     }
 }
 

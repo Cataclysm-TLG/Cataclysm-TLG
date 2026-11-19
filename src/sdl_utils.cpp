@@ -23,6 +23,7 @@ static color_pixel_function_map builtin_color_pixel_functions = {
     { "color_pixel_overexposed", color_pixel_overexposed },
     { "color_pixel_underwater", color_pixel_underwater },
     { "color_pixel_underwater_dark", color_pixel_underwater_dark },
+    { "color_pixel_silhouette", color_pixel_silhouette },
 };
 
 color_pixel_function_pointer get_color_pixel_function( const std::string &name )

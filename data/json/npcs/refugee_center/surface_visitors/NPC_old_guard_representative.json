@@ -77,7 +77,7 @@
   {
     "id": "TALK_OLD_GUARD_REP_NEW_DOING",
     "type": "talk_topic",
-    "dynamic_line": "I ensure that the citizens here have what they need to survive and protect themselves from raiders.  Keeping some form of law is going to be the most important element in rebuilding the world.  We do what we can to keep the 'Free Merchants' here prospering and in return they have provided us with spare men and supplies when they can.",
+    "dynamic_line": "I ensure that the citizens here have what they need to survive and protect themselves from raiders.  Keeping some form of law is going to be the most important element in rebuilding the world.  We do what we can to keep the center in good shape and in return they have provided us with spare men and supplies when they can.",
     "responses": [
       { "text": "Is there a catch?", "topic": "TALK_OLD_GUARD_REP_NEW_DOWNSIDE" },
       { "text": "Anything more to it?", "topic": "TALK_OLD_GUARD_REP_NEW_DOWNSIDE" },
@@ -135,7 +135,7 @@
     "speaker_effect": {
       "effect": [
         { "npc_add_var": "mission_Boris_mission_1_cleanup_asked", "value": "yes" },
-        { "math": [ "u_mission_cleanup_promises_Boris_mission_1", "+=", "2" ] }
+        { "math": [ "u_mission_cleanup_promises_Boris_mission_1 += 2" ] }
       ]
     },
     "responses": [ { "text": "Thanks, that's great news!", "topic": "TALK_OLD_GUARD_REP" } ]
@@ -157,7 +157,7 @@
           { "point": "trap", "id": "tr_landmine_buried", "x": 8, "y": 5 },
           { "point": "trap", "id": "tr_landmine_buried", "x": 0, "y": 11 }
         ],
-        "place_npcs": [ { "class": "bandit", "x": 12, "y": 12, "target": true } ]
+        "place_npcs": [ { "class": "bandit_guard", "x": 12, "y": 12, "target": true } ]
       }
     },
     "end": { "effect": [ { "u_add_var": "proven_worth_to_old_guard_representative", "value": "yes" } ] },
@@ -180,7 +180,7 @@
     "id": "MISSION_OLD_GUARD_REP_2",
     "type": "mission_definition",
     "name": { "str": "Deal with Informant" },
-    "description": "The Hell's Raiders bandit group may have an informant working inside the Refugee Center.  Investigate and bring them to justice without arousing any suspicions.",
+    "description": "I have reason to believe that a local group of bandits may have an informant working inside the Refugee Center.  Investigate and bring them to justice without arousing any suspicions.",
     "goal": "MGOAL_ASSASSINATE",
     "difficulty": 5,
     "value": 50000,
@@ -198,7 +198,7 @@
     "followup": "MISSION_OLD_GUARD_REP_3",
     "dialogue": {
       "describe": "We need help…",
-      "offer": "This task is going to require a little more persuasive skill.  I believe the Hell's Raiders have an informant here to monitor who comes and goes.  I need you to find out who it is and deal with them without letting anyone else know of my suspicions.  We normally allow the Free Merchants to govern themselves so I would hate to offend them.",
+      "offer": "This task is going to require a little more subtlety.  I believe the bandits who've been targeting the local scavengers have an informant here to monitor who comes and goes.  I need you to find out who it is and deal with them without letting anyone else know of my suspicions.  This building is technically federal property, but we're still guests here, so tread lightly.",
       "accepted": "Thank you, please keep this discreet.",
       "rejected": "Come back when you get a chance, we could use a few good men.",
       "advice": "If they draw first blood their friends are less likely to blame you…",
@@ -211,8 +211,8 @@
   {
     "id": "MISSION_OLD_GUARD_REP_3",
     "type": "mission_definition",
-    "name": { "str": "Secure Trade Route" },
-    "description": "One of the Free Merchants silently disappeared while escorting a trade caravan.  Whoever or whatever is responsible must be quick and quiet - investigate the trade route and eliminate the threat.",
+    "name": { "str": "Investigate Disappearance" },
+    "description": "A member of a scavenger group vanished on their way back to the center.  Whoever or whatever is responsible must be quick and quiet - investigate the route and eliminate the threat.",
     "goal": "MGOAL_KILL_MONSTER",
     "difficulty": 5,
     "value": 100000,
@@ -243,14 +243,14 @@
   {
     "id": "MISSION_OLD_GUARD_REP_4",
     "type": "mission_definition",
-    "name": { "str": "Assassinate Raider Leader" },
-    "description": "The Old Guard have located a Hell's Raiders encampment that is coordinating attacks on the Free Merchants.  Pay them a visit and execute the area leadership.",
+    "name": { "str": "Assassinate Bandit Leaser" },
+    "description": "The Old Guard have located a bandit camp that's been coordinating attacks on scavenging parties.  Pay them a visit and execute the area leadership.",
     "goal": "MGOAL_ASSASSINATE",
     "difficulty": 10,
     "value": 300000,
     "start": {
       "assign_mission_target": { "om_terrain": "bandit_camp_1", "om_special": "bandit_camp", "reveal_radius": 1, "min_distance": 10 },
-      "update_mapgen": { "place_npcs": [ { "class": "bandit", "x": 17, "y": 9, "target": true } ] },
+      "update_mapgen": { "place_npcs": [ { "class": "bandit_guard", "x": 17, "y": 9, "target": true } ] },
       "effect": [
         { "u_spawn_item": "sw629" },
         { "u_spawn_item": "44magnum", "count": 17 },
@@ -264,12 +264,12 @@
     "followup": "MISSION_OLD_GUARD_REPEATER_BEGIN",
     "dialogue": {
       "describe": "We need help…",
-      "offer": "I've located a Hell's Raiders encampment in the region that appears to be coordinating operations against the Free Merchants.  We know almost nothing about the command structure in the 'gang' so I need to send someone in to decapitate the leadership.  The raid will be held under orders of the U.S. Marshals Service and by agreeing to the mission you will become a marshal, swearing to assist the federal government in regaining order.",
+      "offer": "A hostile survivor group has been hitting scavenger parties on their way back to the center.  We know almost nothing about the command structure in the 'gang' so I need to send someone in to decapitate the leadership.  The raid will be held under orders of the U.S. Marshals Service and by agreeing to the mission you will become a marshal, swearing to assist the federal government in regaining order.",
       "accepted": "Now repeat after me… I do solemnly swear that I will support and defend the Constitution of the United States against all enemies, foreign and domestic… that I will bear true faith and allegiance to the same… that I take this obligation freely, without any mental reservation or purpose of evasion… and that I will well and faithfully discharge the duties of the office on which I am about to enter.  To establish justice, insure domestic tranquility, provide for the common defense, promote the general welfare and secure the blessings of liberty.  So help me God.  Congratulations Marshal, don't forget your badge and gun.  As a marshal all men or women assisting you are considered deputy marshals so keep them in line.",
       "rejected": "Come back when you get a chance, we could use a few good men.",
-      "advice": "I'd recommend having two deputies… it would be a death trap if a single man got surrounded.",
+      "advice": "I'd recommend having two deputies… it would be a death trap if you got surrounded.",
       "inquire": "Has the leadership been dealt with?",
-      "success": "Marshal, you continue to impress us.  We may have some hope of long term survival yet thanks to you.",
+      "success": "Marshal, you continue to impress us.  There may be some hope yet for these people.",
       "success_lie": "What good does this do us?",
       "failure": "It was a lost cause anyways…"
     }

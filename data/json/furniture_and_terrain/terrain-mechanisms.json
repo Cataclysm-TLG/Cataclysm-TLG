@@ -746,7 +746,7 @@
     "roof": "t_metal_roof",
     "connect_groups": "WALL",
     "connects_to": "WALL",
-    "flags": [ "NOITEM", "MINEABLE" ],
+    "flags": [ "NOITEM" ],
     "bash": {
       "str_min": 200,
       "str_max": 600,
@@ -800,11 +800,11 @@
     }
   },
   {
+    "id": "t_elevator_control_no_roof",
     "copy-from": "t_elevator_control",
     "type": "terrain",
     "symbol": ".",
     "color": "dark_gray",
-    "id": "t_elevator_control_no_roof",
     "roof": "t_null",
     "flags": [ "NOITEM" ]
   },
@@ -962,7 +962,7 @@
     "move_cost": 0,
     "coverage": 50,
     "concealment": 50,
-    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "MINEABLE", "SEALED" ],
+    "flags": [ "TRANSPARENT", "MOUNTABLE", "PERMEABLE", "SEALED" ],
     "examine_action": "pedestal_wyrm",
     "bash": {
       "str_min": 100,

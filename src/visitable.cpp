@@ -373,8 +373,7 @@ VisitResponse item_contents::visit_contents( const std::function<VisitResponse( 
         &func, item *parent )
 {
     for( item_pocket &pocket : contents ) {
-        if( !pocket.is_type( pocket_type::CONTAINER ) ) {
-            // anything that is not CONTAINER is accessible only via its specific accessor
+        if( !pocket.is_type( pocket_type::CONTAINER ) && !pocket.is_type( pocket_type::E_FILE_STORAGE ) ) {
             continue;
         }
         switch( pocket.visit_contents( func, parent ) ) {
@@ -723,6 +722,9 @@ std::list<item> map_cursor::remove_items_with( const
         if( filter( *iter ) ) {
             // if necessary remove item from the luminosity map
             sub->update_lum_rem( offset, *iter );
+            if( iter->is_emissive() ) {
+                here.set_lightmap_cache_dirty( pos_bub().z() );
+            }
 
             // finally remove the item
             res.push_back( *iter );
@@ -776,6 +778,10 @@ std::list<item> vehicle_cursor::remove_items_with( const
     cata::colony<item> &items = veh.part( idx ).items;
     for( auto iter = items.begin(); iter != items.end(); ) {
         if( filter( *iter ) ) {
+            if( iter->is_emissive() ) {
+                map &here = get_map();
+                here.set_lightmap_cache_dirty( veh.bub_part_pos( here, veh.part( part ) ).z() );
+            }
             res.push_back( *iter );
             iter = items.erase( iter );
 

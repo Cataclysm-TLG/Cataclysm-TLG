@@ -42,6 +42,12 @@ def parse_recipe(json, origin):
         write_text(json["blueprint_name"], origin,
                    comment="Blueprint name of recipe crafting \"{}\""
                    .format(result_hint(json)))
+    if json.get("steps"):
+        for i, step in enumerate(json["steps"], start=1):
+            if "unattend_message" in step:
+                write_text(step["unattend_message"], origin,
+                           comment="Unattended message for recipe step {}"
+                           .format(i))
     if "result_eocs" in json:
         for eoc in json["result_eocs"]:
             if type(eoc) is dict:

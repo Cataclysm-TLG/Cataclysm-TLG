@@ -31,6 +31,7 @@
     "copy-from": "generic_river_bank",
     "extras": "river",
     "delete": { "flags": [ "NO_ROTATE" ] },
+    "name": "river bank",
     "mapgen": [ { "builtin": "river_straight" } ]
   },
   {

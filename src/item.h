@@ -864,7 +864,7 @@ class item : public visitable
         bool allow_crafting_component() const;
 
         // seal the item's pockets. used for crafting and spawning items.
-        bool seal();
+        bool seal( bool force = false );
 
         bool all_pockets_sealed() const;
         bool any_pockets_sealed() const;
@@ -1016,7 +1016,7 @@ class item : public visitable
          */
         item in_its_container( int qty = 0 ) const;
         item in_container( const itype_id &container_type, int qty = 0, bool sealed = true,
-                           const std::string &container_variant = "" ) const;
+                           const std::string &container_variant = "", bool force_sealed = false ) const;
         void add_automatic_whitelist();
         void clear_automatic_whitelist();
 
@@ -1083,6 +1083,12 @@ class item : public visitable
          * @param mod How many charges should be removed.
          */
         void mod_charges( int mod );
+
+        /**
+         * Store items current location into spawn_location, if flag PRESERVE_SPAWN_LOC is present. Works
+         * recursively.
+         */
+        void preserve_location( const tripoint_abs_ms &location );
 
         /**
          * Returns rate of rot (rot/h) at the given temperature
@@ -1184,9 +1190,12 @@ class item : public visitable
             return goes_bad() && get_relative_rot() < 0.1;
         }
 
-        /** an item is about to become rotten when shelf life has nearly elapsed */
+        /** An item is about to become rotten when shelf life has nearly elapsed. */
         bool is_going_bad() const {
-            return goes_bad() && get_shelf_life() - rot < 12_hours;
+            if( !goes_bad() ) {
+                return false;
+            }
+            return get_relative_rot() >= 0.5 && get_shelf_life() - rot < 12_hours;
         }
 
         /** returns true if item is now rotten after all shelf life has elapsed */
@@ -1351,6 +1360,11 @@ class item : public visitable
         float resist( const damage_type_id &dmg_type, bool to_self = false,
                       const bodypart_target &bp = bodypart_target(),
                       int resist_value = 0 ) const;
+        float average_resist( const damage_type_id &dmg_type, bool to_self,
+                              const bodypart_id &bp ) const;
+
+        float average_resist( const damage_type_id &dmg_type, bool to_self,
+                              const sub_bodypart_id &bp ) const;
 
     private:
         float _resist( const damage_type_id &dmg_type, bool to_self = false, int resist_value = 0,
@@ -1371,6 +1385,12 @@ class item : public visitable
                                      int resist_value = 0,
                                      bool bp_null = true,
                                      const std::vector<const part_material *> &armor_mats = {} ) const;
+        float _average_resist( const damage_type_id &dmg_type, bool to_self, int resist_value,
+                               const bool bp_null,
+                               const std::vector<const part_material *> &armor_mats,
+                               const float avg_thickness ) const;
+
+
         /*@}*/
     public:
 
@@ -3175,6 +3195,10 @@ class item : public visitable
         item *get_item_with( const std::function<bool( const item & )> &filter );
         const item *get_item_with( const std::function<bool( const item & )> &filter ) const;
 
+
+        /** Used by cut_up() and item::salvage_on_break() **/
+        std::optional<recipe> find_uncraft_recipe() const;
+
         /**
          * returns the number of items stacks in contents
          * each item that is not count_by_charges,
@@ -3197,6 +3221,8 @@ class item : public visitable
         void combine( const item_contents &read_input, bool convert = false );
 
         bool is_collapsed() const;
+
+        units::mass proportional_weight( int material_portions ) const;
 
     private:
         /** migrates an item into this item. */
@@ -3462,7 +3488,7 @@ class item : public visitable
         mutable cat_cache cached_category;
 
         /** Is this item electronically browsed? */
-        bool browsed;
+        bool browsed = false;
         /** Additional encumbrance this item (not itype) has. */
         units::volume additional_encumbrance = 0_ml;
 

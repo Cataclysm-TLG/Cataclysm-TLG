@@ -310,6 +310,16 @@
   },
   {
     "type": "mutation",
+    "id": "PALE",
+    "name": { "str": "Pale Skin" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.  It is now Skin tone: pale",
+    "random_at_chargen": false,
+    "valid": false
+  },
+  {
+    "type": "mutation",
     "id": "FASTLEARNER",
     "name": { "str": "Fast Learner" },
     "points": 0,
@@ -496,6 +506,15 @@
     "type": "mutation",
     "id": "PROF_SKATER",
     "name": { "str": "Skater" },
+    "points": 0,
+    "player_display": false,
+    "description": "Obsoleted trait.",
+    "random_at_chargen": false
+  },
+  {
+    "type": "mutation",
+    "id": "MANSBESTFRIEND",
+    "name": { "str": "Man's Best Friend" },
     "points": 0,
     "player_display": false,
     "description": "Obsoleted trait.",
@@ -703,7 +722,7 @@
     "vitamins": [ [ "vitC", 0 ], [ "calcium", 0 ], [ "iron", 0 ], [ "meat_allergen", 1 ] ],
     "flags": [  ],
     "use_action": {
-      "target": "raw_cured_fatty_meat",
+      "target": "raw_cured_porkbelly",
       "msg": "You pat off a bit of extra brine from the slice; this piece of meat is now fully cured.",
       "moves": 150,
       "type": "delayed_transform",
@@ -1341,5 +1360,123 @@
     "default_time_multiplier": 1.5,
     "default_skill_penalty": 0.2,
     "can_learn": false
+  },
+  {
+    "type": "weakpoint_set",
+    "id": "wps_netherium_abomination",
+    "//": "Deprecated, only here for mod compatability.",
+    "weakpoints": [
+      {
+        "id": "vulnerable spot",
+        "name": "a spot that's more vulnerable than the rest",
+        "coverage": 5,
+        "difficulty": { "melee": 4, "ranged": 5 },
+        "coverage_mult": { "point": 0.25 },
+        "armor_mult": { "all": 0.75 }
+      }
+    ]
+  },
+  {
+    "type": "weakpoint_set",
+    "id": "wps_humanoid_child_anatomy",
+    "//": "Deprecated, only here for mod compatability.",
+    "weakpoints": [
+      {
+        "id": "head",
+        "name": "the head",
+        "coverage": 5,
+        "difficulty": { "melee": 4, "ranged": 5 },
+        "coverage_mult": { "point": 0.25 },
+        "armor_mult": { "all": 0.75 }
+      }
+    ]
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_netherium_abomination",
+    "category": "prof_weakpoint",
+    "name": { "str": "Alien Abominations" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_spider",
+    "category": "prof_weakpoint",
+    "name": { "str": "Arachnid Anatomy" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_hymenoptera",
+    "category": "prof_weakpoint",
+    "name": { "str": "Hymenoptera Anatomy" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_centipede",
+    "category": "prof_weakpoint",
+    "name": { "str": "Centipede Anatomy" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_beetle",
+    "category": "prof_weakpoint",
+    "name": { "str": "Beetle Anatomy" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_child",
+    "category": "prof_weakpoint",
+    "name": { "str": "Small Humanoid Anatomy" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_fungaloid_basic",
+    "category": "prof_weakpoint",
+    "name": { "str": "Basic Fungal Anatomy" },
+    "description": "Obsoleted weakpont proficiency.  You can safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
+  },
+  {
+    "type": "proficiency",
+    "id": "prof_wp_fungaloid_advanced",
+    "category": "prof_weakpoint",
+    "name": { "str": "Advanced Fungal Anatomy" },
+    "description": "Obsoleted weakpoint proficiency.  You may safely ignore this.",
+    "can_learn": false,
+    "time_to_learn": "24 h",
+    "default_weakpoint_bonus": 0,
+    "default_weakpoint_penalty": 0
   }
 ]

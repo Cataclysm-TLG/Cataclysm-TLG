@@ -26,7 +26,7 @@
     "clip_size": 1,
     "reload": 700,
     "loudness": 8,
-    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ] ],
+    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ], [ "mechanism", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "gravel": 1 } } ],
     "melee_damage": { "bash": 6 }
   },
@@ -61,7 +61,6 @@
     "loudness": 1,
     "valid_mod_locations": [
       [ "grip", 1 ],
-      [ "mechanism", 2 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
@@ -102,7 +101,7 @@
     "loudness": 1,
     "valid_mod_locations": [
       [ "grip", 1 ],
-      [ "mechanism", 2 ],
+      [ "mechanism", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "stock", 1 ],
@@ -114,7 +113,6 @@
   },
   {
     "id": "crossbow",
-    "//": "Tileset whitelist for crossbows",
     "type": "ITEM",
     "subtypes": [ "GUN" ],
     "reload_noise_volume": 2,
@@ -143,7 +141,7 @@
     "durability": 6,
     "clip_size": 1,
     "reload": 900,
-    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ] ],
+    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ], [ "mechanism", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "bolt": 1 } } ],
     "melee_damage": { "bash": 7 }
   },
@@ -191,7 +189,6 @@
     "name": { "str": "compound crossbow" },
     "reload_noise_volume": 4,
     "description": "A modern hunting crossbow with shaped cams and extra cables for high-power shots.  An integrated cocking rope assists the user with string pulling.",
-    "//": "27in Carbon fiber compound crossbow at 17in draw with 20in, 197J, 175 lbs draw, 0.636 Slugs with 300grain quarrels.",
     "price": "2000 USD",
     "material": [ "aluminum", "plastic", "fiberglass" ],
     "flags": [ "PRIMITIVE_RANGED_WEAPON", "FIRE_TWOHAND", "CROSSBOW", "RELOAD_ONE" ],
@@ -212,7 +209,7 @@
     "reload": 800,
     "valid_mod_locations": [
       [ "grip", 1 ],
-      [ "mechanism", 2 ],
+      [ "mechanism", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],
@@ -286,7 +283,7 @@
     "durability": 6,
     "clip_size": 1,
     "reload": 1600,
-    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ] ],
+    "valid_mod_locations": [ [ "dampening", 1 ], [ "sling", 1 ], [ "mechanism", 1 ] ],
     "pocket_data": [ { "pocket_type": "MAGAZINE", "ammo_restriction": { "bolt": 10 } } ],
     "melee_damage": { "bash": 5 }
   },
@@ -322,7 +319,7 @@
     "reload": 1750,
     "valid_mod_locations": [
       [ "grip", 1 ],
-      [ "mechanism", 2 ],
+      [ "mechanism", 1 ],
       [ "rail", 1 ],
       [ "sights", 1 ],
       [ "sling", 1 ],

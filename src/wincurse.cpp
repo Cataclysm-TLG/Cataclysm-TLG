@@ -10,6 +10,9 @@
 #include <fstream>
 
 #include "cached_options.h"
+#if defined(SDL_SOUND)
+#include "sound_backend.h"
+#endif
 #include "cursesdef.h"
 #include "options.h"
 #include "output.h"
@@ -789,10 +792,6 @@ void input_manager::set_timeout( const int t )
     inputdelay = t;
 }
 
-void cata_cursesport::handle_additional_window_clear( WINDOW * )
-{
-}
-
 int get_scaling_factor()
 {
     return 1;
@@ -805,7 +804,18 @@ HWND getWindowHandle()
 
 void refresh_display()
 {
+#if defined(SDL_SOUND)
+    sound_backend::poll();
+#endif
     RedrawWindow( WindowHandle, nullptr, nullptr, RDW_INVALIDATE | RDW_UPDATENOW );
+}
+
+void drain_renderer_recovery()
+{
+}
+
+void refresh_mouse_config()
+{
 }
 
 void set_title( const std::string &title )

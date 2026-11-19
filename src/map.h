@@ -23,6 +23,7 @@
 #include "active_item_cache.h"
 #include "calendar.h"
 #include "cata_assert.h"
+#include "cata_small_literal_vector.h"
 #include "cata_type_traits.h"
 #include "cata_utility.h"
 #include "colony.h"
@@ -42,6 +43,7 @@
 #include "maptile_fwd.h"
 #include "point.h"
 #include "rng.h"
+#include "tile_tint.h"
 #include "type_id.h"
 #include "units.h"
 #include "value_ptr.h"
@@ -309,11 +311,61 @@ struct drawsq_params {
         //@}
 };
 
+// Accumulated screen-pixel bounding box of all sprites drawn for a single tile
+// during the current frame. Used by the ortho tint overlay to cover the full
+// sprite extent instead of a fixed tile_width x tile_height rect.
+// NOLINTNEXTLINE(cata-xy)
+struct sprite_screen_bounds {
+    int x = 0, y = 0, w = 0, h = 0;
+    bool valid = false;
+    // NOLINTNEXTLINE(cata-large-inline-function,cata-xy)
+    void expand( int rx, int ry, int rw, int rh ) {
+        if( !valid ) {
+            x = rx;
+            y = ry;
+            w = rw;
+            h = rh;
+            valid = true;
+        } else {
+            const int nx = x < rx ? x : rx; // NOLINT(cata-combine-locals-into-point)
+            const int ny = y < ry ? y : ry;
+            const int x2 = ( x + w > rx + rw ) ? x + w : rx + rw;
+            const int y2 = ( y + h > ry + rh ) ? y + h : ry + rh;
+            x = nx;
+            y = ny;
+            w = x2 - nx;
+            h = y2 - ny;
+        }
+    }
+};
+
+// Snapshot of a single sprite draw call, recorded during the layer loop so the
+// ortho tint overlay can replay the sprite as a white silhouette into a mask
+// texture. Captures everything needed to reproduce the draw at the same screen
+// position with the silhouette color filter variant.
+struct tint_sprite_record {
+    int sprite_index;      // index into tileset tile_values / silhouette_tile_values
+    struct { // NOLINT(cata-xy)
+        int x, y, w, h;
+    } destination;         // screen-space destination rect at time of draw
+    double angle;          // rotation angle (0, -90, 90)
+    int flip;              // CataFlipMode cast to int (avoids SDL include)
+};
+
 struct tile_render_info {
     struct common {
         const tripoint_bub_ms pos;
         // accumulator for 3d tallness of sprites rendered here so far;
         int height_3d = 0;
+        // Ortho tint overlay state, populated during the draw prepass and layer
+        // loop. For tiles where needs_tint is true:
+        //   bounds       - union of all content sprite screen rects (opaque only)
+        //   tint_sprites - draw records for silhouette mask replay
+        //   tint_color   - precomputed RGBA tint from the colored light cache
+        sprite_screen_bounds bounds;
+        small_literal_vector<tint_sprite_record, 4> tint_sprites;
+        bool needs_tint = false;
+        tile_tint tint_color;
 
         common( const tripoint_bub_ms &pos, const int height_3d )
             : pos( pos ), height_3d( height_3d ) {}
@@ -444,6 +496,8 @@ class map
         void set_seen_cache_dirty( int zlevel );
         void set_outside_cache_dirty( int zlev );
         void set_floor_cache_dirty( int zlev );
+        void set_lightmap_cache_dirty( int zlev );
+        void set_lightmap_cache_dirty_below( int zlev );
         void set_pathfinding_cache_dirty( int zlev );
         void set_pathfinding_cache_dirty( const tripoint_bub_ms &p );
         /*@}*/
@@ -657,12 +711,11 @@ class map
          */
         double ranged_target_size( const tripoint_bub_ms &p ) const;
 
-        // Sees:
-        /**
-        * Returns whether `F` sees `T` with a view range of `range`.
-        */
+
+        // Wrapper 1 for sees_full, when we don't have a slope candidate. Helps prevent redundant calls, and returns a bool.
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
                    bool with_fields = true, bool allow_cached = true ) const;
+        // Internal function used by Wrapper 1. Gives the private sees_full a dummy slope candidate so it gets its own slope.
         visibility_result sees_full( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
                                      bool with_fields = true, bool allow_cached = true ) const;
         // Same but for IR, checking for solid obstructions etc
@@ -1248,10 +1301,6 @@ class map
         bash_params bash( const tripoint_bub_ms &p, int str, bool silent = false,
                           bool destroy = false, bool bash_floor = false, bool fire = false,
                           const vehicle *bashing_vehicle = nullptr, bool crystalline_only = false );
-
-        // Effects of attacks/items
-        bool hit_with_acid( const tripoint_bub_ms &p );
-        bool hit_with_fire( const tripoint_bub_ms &p );
 
         /**
          * Returns true if there is furniture for which filter returns true in a 1 tile radius of p.
@@ -2158,11 +2207,15 @@ class map
         void apply_light_source( const tripoint_bub_ms &p, float luminance );
         // ...this, which will apply the light after at the end of generate_lightmap, and prevent redundant
         // light rays from causing massive slowdowns, if there's a huge amount of light.
-        void add_light_source( const tripoint_bub_ms &p, float luminance );
+        // Color rides the same buffer; omit for white (uncolored) light.
+        void add_light_source( const tripoint_bub_ms &p, float luminance,
+                               const light_color_rgb &color = {} );
         // Handle just cardinal directions and 45 deg angles.
-        void apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance );
+        void apply_directional_light( const tripoint_bub_ms &p, int direction, float luminance,
+                                      const light_color_rgb &color = {} );
         void apply_light_arc( const tripoint_bub_ms &p, const units::angle &angle, float luminance,
-                              const units::angle &wideangle = 30_degrees );
+                              const units::angle &wideangle = 30_degrees,
+                              const light_color_rgb &color = {} );
         void apply_light_ray( cata::mdarray<bool, point_bub_ms, MAPSIZE_X, MAPSIZE_Y> &lit,
                               const tripoint_bub_ms &s, const tripoint_bub_ms &e, float luminance );
         void add_light_from_items( const tripoint_bub_ms &p, const item_stack &items );
@@ -2176,10 +2229,9 @@ class map
         void bash_vehicle( const tripoint_bub_ms &p, bash_params &params );
         void bash_field( const tripoint_bub_ms &p, bash_params &params );
 
-        // Gets the roof type of the tile at p
-        // Second argument refers to whether we have to get a roof (we're over an unpassable tile)
-        // or can just return air because we bashed down an entire floor tile
-        ter_str_id get_roof( const tripoint_bub_ms &p, bool allow_air ) const;
+        // Gets the roof type of the tile at p. Returns open_air if it doesn't find one, or rock floor
+        // if it's below the min Z level.
+        ter_str_id get_roof( const tripoint_bub_ms &p ) const;
 
     public:
         void process_items();
@@ -2272,6 +2324,7 @@ class map
         pathfinding_cache &get_pathfinding_cache( int zlev ) const;
 
         visibility_variables visibility_variables_cache;
+        uint64_t seen_cache_generation = 0;
 
         // caches the highest zlevel above which all zlevels are uniform
         // !value || value->first != map::abs_sub means cache is invalid
@@ -2301,6 +2354,10 @@ class map
         void update_visibility_cache( int zlev );
         void invalidate_visibility_cache();
         const visibility_variables &get_visibility_variables_cache() const;
+        // changes each time build_seen_cache rewrites seen_cache or camera_cache
+        uint64_t seen_generation() const {
+            return seen_cache_generation;
+        }
 
         void update_submaps_with_active_items();
 
@@ -2354,6 +2411,8 @@ class map
         point_rel_ms prev_top_left;
         point_rel_ms prev_bottom_right;
         point prev_o;
+        // bubble corner the tiles memorize sweep last covered
+        tripoint_abs_ms prev_memory_sweep_origin = tripoint_abs_ms::invalid;
         std::multimap<point, formatted_text> overlay_strings_cache;
         color_block_overlay_container color_blocks_cache;
 #endif

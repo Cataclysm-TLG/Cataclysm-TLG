@@ -45,26 +45,19 @@ constexpr std::optional<T> _get_common( C const &cnt, std::string_view token )
     return std::nullopt;
 }
 
-constexpr std::optional<double> get_constant( std::string_view token )
-{
-    if( std::optional<math_const const *> ret = _get_common<pmath_const>( constants, token ); ret ) {
-        return ( *ret )->val;
-    }
-    return std::nullopt;
-}
-
 std::optional<double> get_number( std::string_view token )
 {
     // FIXME: port to std::from_chars once double conversion is supported
     std::istringstream conv( std::string{ token } );
     conv.imbue( std::locale::classic() );
-    double val{};
+    std::optional<double> ret;
+    double val = 0;
     conv >> val;
     if( conv && conv.eof() ) {
-        return val;
+        ret.emplace( val );
     }
 
-    return get_constant( token );
+    return ret;
 }
 
 constexpr std::optional<pmath_func> get_function( std::string_view token )

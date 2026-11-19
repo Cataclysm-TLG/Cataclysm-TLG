@@ -11,6 +11,10 @@ def parse_field_type(json, origin):
         else:
             id_or_name = json["id"]
         field_names.append(id_or_name)
+        if "radiation_hurt_message" in fd:
+            write_text(fd["radiation_hurt_message"], origin,
+                       comment="Radiation damage message of field {}"
+                       .format(id_or_name))
         for eff in fd.get("effects", []):
             if "message" in eff:
                 write_text(eff["message"], origin,

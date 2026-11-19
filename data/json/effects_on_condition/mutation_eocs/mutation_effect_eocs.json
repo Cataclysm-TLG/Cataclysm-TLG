@@ -643,7 +643,7 @@
     "type": "effect_on_condition",
     "id": "EOC_ink_grand_spray",
     "//": "will cast 'ink_gland_spray' spell when player has stored ink charges",
-    "condition": { "math": [ "u_effect_intensity('ink_gland_ink')", ">", "1" ] },
+    "condition": { "math": [ "u_effect_intensity('ink_gland_ink') > 1" ] },
     "effect": [
       { "u_cast_spell": { "id": "ink_gland_spray" } },
       { "u_message": "Your ink glands spray some ink into your attacker's eyes!", "type": "good" },
@@ -663,13 +663,13 @@
       "and": [
         { "u_has_trait": "INK_GLANDS" },
         { "not": { "u_has_effect": "ink_gland_ink", "intensity": 4 } },
-        { "math": [ "u_calories('format': 'percent')", ">", "33" ] },
-        { "math": [ "u_val('instant_thirst')", "<", "240" ] }
+        { "math": [ "u_calories('format': 'percent') > 33" ] },
+        { "math": [ "u_val('instant_thirst') < 240" ] }
       ]
     },
     "effect": [
-      { "math": [ "u_calories()", "-=", "47" ] },
-      { "math": [ "u_val('thirst')", "+=", "4" ] },
+      { "math": [ "u_calories() -= 47" ] },
+      { "math": [ "u_val('thirst') += 4" ] },
       {
         "u_add_effect": "ink_gland_ink",
         "duration": "PERMANENT",
@@ -689,7 +689,7 @@
   {
     "type": "effect_on_condition",
     "id": "EOC_insect_wings_shutoff",
-    "condition": { "and": [ { "math": [ "u_val('stamina')", "<", "3000" ] }, { "u_has_trait": "WINGS_INSECT_active" } ] },
+    "condition": { "and": [ { "math": [ "u_val('stamina') < 3000" ] }, { "u_has_trait": "WINGS_INSECT_active" } ] },
     "effect": [
       { "u_activate_trait": "WINGS_INSECT_active" },
       { "u_message": "You don't have the stamina to keep buzzing.", "type": "bad" }
@@ -704,7 +704,7 @@
       "and": [
         { "u_has_flag": "SOCIAL1" },
         { "not": { "u_has_effect": "took_prozac" } },
-        { "math": [ "u_characters_nearby('radius': 30)", ">", "0" ] },
+        { "math": [ "u_characters_nearby('radius': 30) > 0" ] },
         { "not": { "u_has_effect": "sleep" } },
         { "not": { "u_has_effect": "narcosis" } }
       ]
@@ -722,7 +722,7 @@
       "and": [
         { "u_has_flag": "SOCIAL2" },
         { "not": { "u_has_effect": "took_prozac" } },
-        { "math": [ "u_characters_nearby('radius': 30, 'attitude': 'allies')", ">", "0" ] },
+        { "math": [ "u_characters_nearby('radius': 30, 'attitude': 'allies') > 0" ] },
         { "not": { "u_has_effect": "narcosis" } },
         { "not": { "u_has_effect": "sleep" } }
       ]
@@ -739,7 +739,7 @@
     "condition": {
       "and": [
         { "u_has_flag": "SOCIAL2" },
-        { "math": [ "u_characters_nearby('radius': 30, 'attitude': 'allies')", "==", "0" ] },
+        { "math": [ "u_characters_nearby('radius': 30, 'attitude': 'allies') == 0" ] },
         { "not": { "u_has_effect": "took_prozac" } },
         { "not": { "u_has_effect": "valium" } },
         { "not": { "u_has_effect": "took_xanax" } },
@@ -767,7 +767,7 @@
       "and": [
         { "u_has_flag": "ASOCIAL1" },
         { "not": { "u_has_effect": "took_prozac" } },
-        { "math": [ "u_characters_nearby('radius': 30)", "==", "0" ] },
+        { "math": [ "u_characters_nearby('radius': 30) == 0" ] },
         { "not": { "u_has_effect": "narcosis" } },
         { "not": { "u_has_effect": "sleep" } }
       ]
@@ -784,7 +784,7 @@
     "condition": {
       "and": [
         { "u_has_flag": "ASOCIAL2" },
-        { "math": [ "u_characters_nearby('radius': 30)", "==", "0" ] },
+        { "math": [ "u_characters_nearby('radius': 30) == 0" ] },
         { "not": { "u_has_effect": "took_prozac" } },
         { "not": { "u_has_effect": "narcosis" } },
         { "not": { "u_has_effect": "sleep" } }
@@ -803,7 +803,7 @@
         { "not": { "u_has_effect": "valium" } },
         { "not": { "u_has_effect": "took_xanax" } },
         { "not": { "u_has_effect": "drunk" } },
-        { "math": [ "u_characters_nearby('radius': 30)", ">", "0" ] },
+        { "math": [ "u_characters_nearby('radius': 30) > 0" ] },
         { "not": { "u_has_effect": "narcosis" } },
         { "not": { "u_has_effect": "sleep" } },
         { "not": { "u_has_effect": "asocial_dissatisfied", "intensity": 3 } }
@@ -848,8 +848,8 @@
     "id": "EOC_EATHEALTH_active",
     "//": "Handle thirst cost, because inline costs can't be different and EATHEALTH has a huge mutation cost",
     "recurrence": [ "5 minutes", "30 minutes" ],
-    "condition": { "and": [ { "u_has_trait": "EATHEALTH_active" }, { "math": [ "u_val('instant_thirst')", "<", "240" ] } ] },
-    "effect": [ { "math": [ "u_val('thirst')", "+=", "10" ] }, { "u_message": "Steam rises from your sweltering skin." } ]
+    "condition": { "and": [ { "u_has_trait": "EATHEALTH_active" }, { "math": [ "u_val('instant_thirst') < 240" ] } ] },
+    "effect": [ { "math": [ "u_val('thirst') += 10" ] }, { "u_message": "Steam rises from your sweltering skin." } ]
   },
   {
     "type": "effect_on_condition",

@@ -227,6 +227,7 @@
   {
     "type": "mapgen",
     "om_terrain": [ "campsite_field_biker" ],
+    "weight": 30,
     "object": {
       "predecessor_mapgen": "field",
       "rows": [
@@ -265,22 +266,23 @@
       "terrain": { "-": "t_region_groundcover", "b": "t_pit_shallow", "d": "t_region_soil", "r": "t_region_groundcover" },
       "furniture": { "-": "f_camp_chair", "b": "f_firering", "r": "f_tourist_table" },
       "place_items": [
-        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 },
-        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 },
-        { "item": "pasta", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 },
+        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 50 },
+        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 45 },
+        { "item": "pasta", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 35 },
         { "item": "camping", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 }
       ],
       "place_monsters": [ { "monster": "CAMPERS", "x": [ 0, 23 ], "y": [ 0, 23 ], "chance": 75, "repeat": [ 1, 3 ] } ],
       "place_vehicles": [
-        { "vehicle": "motorcycle", "x": 3, "y": 3, "chance": 90, "rotation": 0 },
-        { "vehicle": "motorcycle", "x": 17, "y": 3, "chance": 75, "rotation": 180 },
-        { "vehicle": "motorcycle", "x": 17, "y": 5, "chance": 25, "rotation": 180 }
+        { "vehicle": "bicycle_dirt", "x": 3, "y": 3, "chance": 35, "rotation": 0 },
+        { "vehicle": "motorcycle_cross", "x": 17, "y": 3, "chance": 35, "rotation": 180 },
+        { "vehicle": "quad_bike", "x": 17, "y": 5, "chance": 35, "rotation": 180 }
       ]
     }
   },
   {
     "type": "mapgen",
     "om_terrain": [ "campsite_field_biker_destroyed" ],
+    "weight": 60,
     "object": {
       "predecessor_mapgen": "field",
       "rows": [
@@ -327,9 +329,9 @@
       },
       "furniture": { "-": "f_camp_chair", "b": "f_firering" },
       "place_items": [
-        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 90 },
-        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 },
-        { "item": "pasta", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 },
+        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 30 },
+        { "item": "cannedfood", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 50 },
+        { "item": "pasta", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 25 },
         { "item": "map_extra_college_lake", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75, "repeat": [ 3, 5 ] },
         { "item": "camping", "x": [ 5, 16 ], "y": [ 7, 17 ], "chance": 75 }
       ],
@@ -340,9 +342,9 @@
         { "field": "fd_bile", "x": [ 0, 23 ], "y": [ 0, 23 ], "repeat": [ 6, 10 ] }
       ],
       "place_vehicles": [
-        { "vehicle": "motorcycle", "x": 3, "y": 3, "chance": 50, "rotation": 0 },
-        { "vehicle": "motorcycle", "x": 17, "y": 3, "chance": 25, "rotation": 180 },
-        { "vehicle": "motorcycle", "x": 17, "y": 7, "chance": 10, "rotation": 180 }
+        { "vehicle": "bicycle_dirt", "x": 3, "y": 3, "chance": 25, "rotation": 0 },
+        { "vehicle": "motorcycle_cross", "x": 17, "y": 3, "chance": 25, "rotation": 180 },
+        { "vehicle": "quad_bike", "x": 17, "y": 5, "chance": 25, "rotation": 180 }
       ]
     }
   },

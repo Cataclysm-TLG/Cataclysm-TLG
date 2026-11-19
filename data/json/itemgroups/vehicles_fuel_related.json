@@ -74,12 +74,7 @@
         "collection": [
           { "distribution": [ { "item": "pliers_locking" }, { "item": "big_pliers" }, { "item": "pliers" } ], "prob": 30 },
           {
-            "distribution": [
-              { "item": "wrench" },
-              { "item": "wrench_small", "count": [ 1, 2 ] },
-              { "item": "wrench_large" },
-              { "item": "socket_wrench_set" }
-            ],
+            "distribution": [ { "item": "wrench" }, { "item": "wrench_small", "count": [ 1, 2 ] }, { "item": "socket_wrench_set" } ],
             "prob": 30
           }
         ],

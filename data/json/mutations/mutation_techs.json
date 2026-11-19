@@ -427,7 +427,7 @@
         { "u_has_trait": "MUZZLE" },
         {
           "and": [
-            { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+            { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
             { "not": { "npc_has_effect": "downed" } },
             { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } },
             { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }
@@ -485,7 +485,7 @@
         { "u_has_trait": "MUZZLE" },
         {
           "and": [
-            { "math": [ "u_val('size') + 2", ">=", "n_val('size')" ] },
+            { "math": [ "u_val('size') + 2 >= n_val('size')" ] },
             { "not": { "npc_has_effect": "downed" } },
             { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } }
           ]
@@ -538,7 +538,7 @@
         { "u_has_trait": "MUZZLE" },
         {
           "and": [
-            { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+            { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
             { "math": [ "n_val('size')", "!=", "1" ] },
             { "not": { "npc_has_effect": "downed" } },
             { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } },
@@ -1519,7 +1519,7 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         {
@@ -1557,7 +1557,7 @@
     "crit_ok": true,
     "condition": {
       "and": [
-        { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+        { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
         { "npc_has_flag": "GRAB" },
         { "u_has_flag": "GRAB_FILTER" },
         {
@@ -1768,7 +1768,7 @@
       "and": [
         {
           "and": [
-            { "math": [ "u_val('size') + 1", ">=", "n_val('size')" ] },
+            { "math": [ "u_val('size') + 1 >= n_val('size')" ] },
             { "not": { "npc_has_effect": "downed" } },
             { "not": { "and": [ { "npc_bodytype": "blob" }, { "npc_bodytype": "snake" } ] } },
             { "or": [ { "not": { "npc_has_flag": "FLIES" } }, { "npc_has_flag": "DISABLE_FLIGHT" } ] }

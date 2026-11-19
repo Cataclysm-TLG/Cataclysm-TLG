@@ -1,0 +1,140 @@
+[
+  {
+    "id": "basket_laundry",
+    "type": "ITEM",
+    "name": { "str": "laundry basket" },
+    "description": "A plastic basket meant for storing and hauling clothing.",
+    "weight": "680 g",
+    "volume": "52500 ml",
+    "price": "75 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": -2,
+    "material": [ "plastic" ],
+    "symbol": ")",
+    "looks_like": "plastic_shopping_bag",
+    "color": "light_gray",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "50 L",
+        "max_contains_weight": "12 kg",
+        "max_item_length": "80 cm",
+        "moves": 300
+      }
+    ],
+    "flags": [ "NO_SALVAGE" ],
+    "melee_damage": { "bash": 1 }
+  },
+  {
+    "id": "straw_basket",
+    "type": "ITEM",
+    "name": { "str": "straw basket" },
+    "description": "A handmade straw basket.  Carry it with you for extra storage.",
+    "weight": "100 g",
+    "volume": "10500 ml",
+    "price": "2 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -1,
+    "material": [ "paper" ],
+    "symbol": "[",
+    "looks_like": "plastic_shopping_bag",
+    "color": "light_gray",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "10 L",
+        "max_contains_weight": "3 kg",
+        "max_item_length": "40 cm",
+        "moves": 300
+      }
+    ]
+  },
+  {
+    "id": "briefcase",
+    "type": "ITEM",
+    "name": { "str": "briefcase" },
+    "description": "Useful for carrying money, documents, or smuggled goods.",
+    "weight": "1700 g",
+    "volume": "15750 ml",
+    "longest_side": "46 cm",
+    "price": "240 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -2,
+    "material": [ "plastic" ],
+    "symbol": "[",
+    "looks_like": "plastic_shopping_bag",
+    "color": "light_gray",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "15 L",
+        "max_contains_weight": "30 kg",
+        "max_item_length": "50 cm",
+        "moves": 200
+      }
+    ],
+    "melee_damage": { "bash": 6 }
+  },
+  {
+    "id": "case_violin",
+    "type": "ITEM",
+    "name": { "str": "violin case" },
+    "description": "Useful to carry your precious musical instrument around protected from any harm.",
+    "weight": "2800 g",
+    "volume": "10500 ml",
+    "price": "240 USD",
+    "price_postapoc": "50 cent",
+    "to_hit": -4,
+    "material": [ "plastic", "vinyl", "cardboard", "nylon" ],
+    "symbol": "&",
+    "looks_like": "briefcase",
+    "color": "dark_gray",
+    "pocket_data": [
+      {
+        "pocket_type": "CONTAINER",
+        "rigid": true,
+        "max_contains_volume": "10 L",
+        "max_contains_weight": "20 kg",
+        "max_item_length": "65 cm",
+        "moves": 200
+      }
+    ],
+    "melee_damage": { "bash": 3 }
+  },
+  {
+    "id": "bindle",
+    "type": "ITEM",
+    "name": { "str": "bindle" },
+    "description": "You're ready for a trip down some train tracks.  Also known as a hobo stick.",
+    "weight": "980 g",
+    "volume": "3 L",
+    "price": "80 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": -2,
+    "material": [ "cotton", "wood" ],
+    "symbol": "[",
+    "looks_like": "plastic_shopping_bag",
+    "color": "light_gray",
+    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "5 L", "max_contains_weight": "15 kg", "moves": 300 } ],
+    "melee_damage": { "bash": 4 }
+  },
+  {
+    "id": "plastic_shopping_bag",
+    "type": "ITEM",
+    "name": { "str": "plastic shopping bag" },
+    "description": "A disposable plastic bag used to carry groceries or other items from the store.",
+    "category": "container",
+    "weight": "2 g",
+    "volume": "30 ml",
+    "price": "1 cent",
+    "price_postapoc": "10 cent",
+    "to_hit": -2,
+    "material": [ "vinyl" ],
+    "symbol": "[",
+    "color": "white",
+    "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "5 L", "max_contains_weight": "3 kg", "moves": 150 } ]
+  }
+]

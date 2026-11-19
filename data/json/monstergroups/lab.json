@@ -309,8 +309,8 @@
     "type": "monstergroup",
     "name": "GROUP_LAB_HOSPITAL",
     "monsters": [
-      { "monster": "mon_zombie_medical", "weight": 20, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
-      { "monster": "mon_zombie_medical_brute", "weight": 10, "cost_multiplier": 3 },
+      { "monster": "mon_zombie_medical", "weight": 25, "cost_multiplier": 0, "pack_size": [ 1, 2 ] },
+      { "monster": "mon_zombie_brute", "weight": 5, "cost_multiplier": 3 },
       { "monster": "mon_zombie_technician", "weight": 5, "cost_multiplier": 5 },
       { "monster": "mon_feral_human_tool", "weight": 2, "cost_multiplier": 5 },
       { "monster": "mon_zombie_hazmat", "weight": 5 },

@@ -113,8 +113,6 @@ extern mon_flag_id mon_flag_ACIDPROOF,
        mon_flag_DORMANT,
        mon_flag_DRACULIN_IMMUNE,
        mon_flag_GEN_DORMANT,
-       mon_flag_DRIPS_GASOLINE,
-       mon_flag_DRIPS_NAPALM,
        mon_flag_DROPS_AMMO,
        mon_flag_EATS,
        mon_flag_ELECTRIC,
@@ -369,7 +367,7 @@ struct mtype {
         */
         int starting_ammo_min = 0;
 
-        // Name of item group that is used to create item dropped upon death, or empty.
+        // Name of itemgroup that is used to generate inventory.
         item_group_id death_drops;
 
         std::set<species_id> species;

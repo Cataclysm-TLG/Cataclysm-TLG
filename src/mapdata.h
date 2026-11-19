@@ -19,6 +19,9 @@
 #include "enum_bitset.h"
 #include "game_constants.h"
 #include "iexamine.h"
+#include "lightmap.h"
+#include "requirements.h"
+#include "translation.h"
 #include "translations.h"
 #include "type_id.h"
 #include "units.h"
@@ -560,6 +563,7 @@ struct map_data_common_t {
         void examine( Character &, const tripoint_bub_ms & ) const;
 
         int light_emitted = 0;
+        light_color_rgb light_color;
         // The amount of movement points required to pass this terrain by default.
         int movecost = 0;
         int heat_radiation = 0;

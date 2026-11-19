@@ -320,14 +320,19 @@ void add_category_and_values( std::vector<std::string> &current_text, const int 
 
 std::vector<std::pair<std::string, std::string>> collect_protection_subvalues(
             const resistances &worst_res, const resistances &best_res, const resistances &median_res,
-            const bool display_median, const damage_type_id &type )
+            const resistances &average_res,
+            const bool display_average, const damage_type_id &type )
 {
     std::vector<std::pair<std::string, std::string>> subvalues;
     subvalues.emplace_back( _( "Worst:" ), string_format( "%.2f",
                             worst_res.type_resist( type ) ) );
-    if( display_median ) {
+    if( display_average ) {
         subvalues.emplace_back( _( "Median:" ), string_format( "%.2f",
                                 median_res.type_resist( type ) ) );
+    }
+    if( display_average ) {
+        subvalues.emplace_back( _( "Average:" ), string_format( "%.2f",
+                                average_res.type_resist( type ) ) );
     }
     subvalues.emplace_back( _( "Best:" ), string_format( "%.2f",
                             best_res.type_resist( type ) ) );
@@ -356,10 +361,11 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
 
     // prebuild and calc some values
     // the rolls are basically a perfect hit for protection and a
-    // worst possible and a median hit
+    // worst possible and an average hit
     resistances worst_res = resistances( worn_item, false, 99, used_bp );
     resistances best_res = resistances( worn_item, false, 0, used_bp );
     resistances median_res = resistances( worn_item, false, 50, used_bp );
+    resistances average_res = resistances( worn_item, false, average_resistance, used_bp );
 
     int percent_best = 100;
     int percent_worst = 0;
@@ -369,8 +375,42 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
         percent_best = portion->best_protection_chance;
         percent_worst = portion->worst_protection_chance;
     }
+    if( !worn_item.covers( used_bp ) && worn_item.is_ablative() ) {
+        for( const item_pocket *pocket : worn_item.get_all_ablative_pockets() ) {
+            if( pocket->empty() ) {
+                continue;
+            }
 
-    bool display_median = percent_best < 50 && percent_worst < 50;
+            const item &plate = pocket->front();
+            bool covers_location = plate.get_coverage( used_bp ) > 0;
+
+            if( !covers_location ) {
+                for( const sub_bodypart_str_id &sbp : used_bp->sub_parts ) {
+                    if( plate.get_coverage( sbp ) > 0 ) {
+                        covers_location = true;
+                        break;
+                    }
+                }
+            }
+
+            if( !covers_location ) {
+                continue;
+            }
+
+            worst_res = resistances( plate, false, 99, used_bp );
+            best_res = resistances( plate, false, 0, used_bp );
+            median_res = resistances( plate, false, 50, used_bp );
+            average_res = resistances( plate, false, average_resistance, used_bp );
+
+            const armor_portion_data *plate_portion = plate.portion_for_bodypart( used_bp );
+            if( plate_portion ) {
+                percent_best = plate_portion->best_protection_chance;
+                percent_worst = plate_portion->worst_protection_chance;
+            }
+            break;
+        }
+    }
+    bool display_average = percent_best < 50 && percent_worst < 50;
 
     prot.push_back( string_format( "<color_c_green>[%s]</color>", _( "Protection" ) ) );
     for( const damage_type &dt : damage_type::get_all() ) {
@@ -380,7 +420,7 @@ std::vector<std::string> clothing_protection( const item &worn_item, const int w
         if( dio->info_display == damage_info_order::info_disp::DETAILED ) {
             if( percent_worst > 0 ) {
                 std::vector<std::pair<std::string, std::string>> subvalues = collect_protection_subvalues(
-                            worst_res, best_res, median_res, display_median, dt.id );
+                            worst_res, best_res, median_res, average_res, display_average, dt.id );
                 add_category_and_values( prot, width, dtname, subvalues );
             } else {
                 skipped_details = true;
@@ -403,7 +443,7 @@ std::vector<std::string> clothing_flags_description( const item &worn_item, cons
     std::vector<std::string> description_stack;
     std::vector<std::string> current_description;
 
-    //Handle flag_FIT and flag_VARSIZE as a special case
+    // Handle flag_FIT and flag_VARSIZE as a special case.
     if( worn_item.has_flag( flag_FIT ) ) {
         current_description = foldstring( _( "It fits you well." ), width );
         description_stack.insert( description_stack.end(), current_description.begin(),
@@ -412,29 +452,6 @@ std::vector<std::string> clothing_flags_description( const item &worn_item, cons
         current_description = foldstring( _( "It could be refitted." ), width );
         description_stack.insert( description_stack.end(), current_description.begin(),
                                   current_description.end() );
-    }
-
-    //Handle all other flags:
-    const std::vector<std::pair<flag_id, std::string>> flag_descriptions = {
-        { flag_HOOD, translate_marker( "It has a hood." ) },
-        { flag_POCKETS, translate_marker( "It has pockets." ) },
-        { flag_SUN_GLASSES, translate_marker( "It keeps the sun out of your eyes." ) },
-        { flag_WATERPROOF, translate_marker( "It is waterproof." ) },
-        { flag_WATER_FRIENDLY, translate_marker( "It is water friendly." ) },
-        { flag_FANCY, translate_marker( "It looks fancy." ) },
-        { flag_SUPER_FANCY, translate_marker( "It looks really fancy." ) },
-        { flag_FLOTATION, translate_marker( "You will not drown today." ) },
-        { flag_OVERSIZE, translate_marker( "It is very bulky." ) },
-        { flag_SWIM_GOGGLES, translate_marker( "It helps you to see clearly underwater." ) },
-        { flag_SEMITANGIBLE, translate_marker( "It can occupy the same space as other things." ) }
-    };
-
-    for( const std::pair<flag_id, std::string> &flag_pair : flag_descriptions ) {
-        if( worn_item.has_flag( std::get<0>( flag_pair ) ) ) {
-            current_description = foldstring( _( std::get<1>( flag_pair ) ), width );
-            description_stack.insert( description_stack.end(), current_description.begin(),
-                                      current_description.end() );
-        }
     }
 
     return description_stack;
@@ -556,10 +573,23 @@ std::vector<layering_item_info> outfit::items_cover_bp( const Character &c, cons
 {
     std::vector<layering_item_info> s;
     for( auto elem_it = worn.begin(); elem_it != worn.end(); ++elem_it ) {
-        if( elem_it->covers( bp ) ) {
+        const item *display_item = &*elem_it;
+        bool covers_bp = elem_it->covers( bp );
+
+        if( !covers_bp && elem_it->is_ablative() ) {
+            for( const item_pocket *pocket : elem_it->get_all_ablative_pockets() ) {
+                if( !pocket->empty() && pocket->front().get_coverage( bp ) > 0 ) {
+                    display_item = &pocket->front();
+                    covers_bp = true;
+                    break;
+                }
+            }
+        }
+
+        if( covers_bp ) {
             s.push_back( { get_item_penalties( elem_it, c, bp ),
                            elem_it->get_encumber( c, bp ),
-                           elem_it->tname()
+                           display_item->tname()
                          } );
         }
     }
@@ -710,7 +740,18 @@ void outfit::sort_armor( Character &guy )
         } else {
             // bp_*
             for( auto it = worn.begin(); it != worn.end(); ++it ) {
-                if( it->covers( bp ) ) {
+                bool covers_bp = it->covers( bp );
+                // Check for attachments which aren't worn on the BP they cover.
+                if( !covers_bp && it->is_ablative() ) {
+                    for( const item_pocket *pocket : it->get_all_ablative_pockets() ) {
+                        if( !pocket->empty() && pocket->front().get_coverage( bp ) > 0 ) {
+                            covers_bp = true;
+                            break;
+                        }
+                    }
+                }
+
+                if( covers_bp ) {
                     tmp_worn.push_back( it );
                 }
             }
@@ -876,7 +917,9 @@ void outfit::sort_armor( Character &guy )
                 continue;
             }
             if( curr >= rightListOffset && pos <= rightListLines ) {
-                mvwprintz( w_sort_right, point( 1, pos ), ( cover == bp ? c_yellow : c_white ),
+                mvwprintz( w_sort_right, point( 1, pos ), ( ( cover == bp || ( combine_bp( cover ) &&
+                           cover.obj().opposite_part.id() == bp ) )
+                           ? c_yellow : c_white ),
                            "%s:", body_part_name_as_heading( cover, combine_bp( cover ) ? 2 : 1 ) );
                 pos++;
             }

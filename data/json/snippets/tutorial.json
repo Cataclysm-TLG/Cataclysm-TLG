@@ -177,7 +177,7 @@
       },
       {
         "id": "LESSON_FLASHLIGHT",
-        "text": "There is a <color_light_cyan>flashlight</color> and a <color_light_cyan>dry cell battery</color> lying on the rack.  Flashlights are very useful tools as they allow you to see in the dark.\n\nTo continue the tutorial, please reload the flashlight by pressing <keybind:reload_item>.  Take it with you and move to the stairs."
+        "text": "There is a <color_light_cyan>flashlight</color> and a <color_light_cyan>alkaline battery</color> lying on the rack.  Flashlights are very useful tools as they allow you to see in the dark.\n\nTo continue the tutorial, please reload the flashlight by pressing <keybind:reload_item>.  Take it with you and move to the stairs."
       },
       {
         "id": "LESSON_REMOTE_USE",

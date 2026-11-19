@@ -63,7 +63,7 @@
       "str_max": 200,
       "sound": "metal screeching!",
       "sound_fail": "clang!",
-      "ter_set": "t_pit_shallow",
+      "ter_set": "t_lake_bed",
       "items": [ { "item": "steel_fragment", "count": [ 10, 22 ] } ]
     }
   },

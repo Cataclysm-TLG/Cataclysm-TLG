@@ -63,6 +63,7 @@ enum class spell_flag : int {
     LIQUID_DAMAGE_TARGET, // Requires LIQUID. Will damage target characters according to the liquid_volume amount that isn't blocked by their armor. Monsters are damaged normally.
     LOUD, // Spell makes extra noise at target.
     MAKE_FILTHY, // Requires LIQUID. The liquid splashed by this spell can add the FILTHY flag to items worn by characters, according to its liquid_volume.
+    MAX_RANGE_ONLY, // The spell can only target the farthest tile(s) in its range.
     MUST_HAVE_CLASS_TO_LEARN, // You can't learn the spell unless you already have the class.
     MUTATE_TRAIT, // Overrides the mutate spell_effect to use a specific trait_id instead of a category.
     NO_BLOCK_MITIGATION, // This attack does not allow for the usual 1/3 damage mitigation via a block roll.

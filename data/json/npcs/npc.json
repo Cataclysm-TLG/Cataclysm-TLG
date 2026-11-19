@@ -4,11 +4,11 @@
     "id": "deserter",
     "//": "Generic hostile military deserter.",
     "name_suffix": "Deserter",
-    "class": "NC_SOLDIER",
+    "class": "NC_DESERTER",
     "attitude": 10,
-    "mission": 0,
+    "mission": 8,
     "chat": "TALK_DONE",
-    "faction": "no_faction"
+    "faction": "hells_raiders"
   },
   {
     "type": "npc",
@@ -24,8 +24,8 @@
   {
     "type": "npc",
     "id": "derelict_dweller",
-    "//": "Crazy Person.",
-    "name_suffix": "Psycho",
+    "//": "Somebody who's more or less lost their mind.",
+    "name_suffix": "Squatter",
     "class": "NC_THUG",
     "attitude": 8,
     "mission": 0,

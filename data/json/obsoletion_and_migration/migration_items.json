@@ -1,37 +1,5 @@
 [
   {
-    "id": "bottle_suppressor",
-    "type": "MIGRATION",
-    "replace": "filter_suppressor"
-  },
-  {
-    "id": "riv_suppressor",
-    "type": "MIGRATION",
-    "replace": "suppressor"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "2h_club_kanabo_spiked",
-    "replace": "kanabo_wood"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "2h_club_kanabo_studded",
-    "replace": "kanabo_wood"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "sinister_cane",
-    "replace": "cane_toy",
-    "variant": "cane_toy_sinister"
-  },
-  {
-    "type": "MIGRATION",
-    "id": "wizard_cane_cheap",
-    "replace": "cane_toy",
-    "variant": "cane_toy_wizard"
-  },
-  {
     "type": "MIGRATION",
     "id": "wizard_cane_cheap_on",
     "replace": "cane_toy",
@@ -2666,12 +2634,17 @@
   {
     "type": "MIGRATION",
     "id": "scimitar_inferior",
-    "replace": "scimitar"
+    "replace": "talwar"
   },
   {
     "type": "MIGRATION",
     "id": "scimitar_fake",
-    "replace": "scimitar"
+    "replace": "talwar"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "scimitar",
+    "replace": "talwar"
   },
   {
     "type": "MIGRATION",
@@ -3290,6 +3263,16 @@
   },
   {
     "type": "MIGRATION",
+    "id": "bio_armor_arms",
+    "replace": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_armor_legs",
+    "replace": "bio_weight"
+  },
+  {
+    "type": "MIGRATION",
     "id": "bio_fuel_cell_gasoline",
     "replace": "bio_cable"
   },
@@ -3305,6 +3288,11 @@
   },
   {
     "type": "bionic_migration",
+    "from": "bio_membrane",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
     "from": "bio_fuel_cell_gasoline",
     "to": "bio_cable"
   },
@@ -3312,6 +3300,71 @@
     "type": "bionic_migration",
     "from": "bio_lampoil",
     "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_armor_arms",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_armor_legs",
+    "to": "bio_weight"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_emp_armgun",
+    "to": "bio_emp"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_heat_absorb",
+    "to": "bio_cable"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_earplugs",
+    "to": "bio_ears"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_heatsink",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "bionic_migration",
+    "from": "bio_ads",
+    "to": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_emp_armgun",
+    "replace": "bio_emp"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_earplugs",
+    "replace": "bio_ears"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_membrane",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_heatsink",
+    "replace": "bio_carbon"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_heatabsorb",
+    "replace": "bio_cable"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "bio_ads",
+    "replace": "bio_carbon"
   },
   {
     "type": "MIGRATION",
@@ -3586,7 +3639,7 @@
   {
     "id": "gas_charger_on",
     "type": "MIGRATION",
-    "replace": "UPS_ON"
+    "replace": "UPS_off"
   },
   {
     "id": "gas_charger",
@@ -4106,32 +4159,32 @@
   {
     "type": "MIGRATION",
     "id": "armor_farmor",
-    "replace": "leather_armor_suit"
+    "replace": "leather_cuirass"
   },
   {
     "type": "MIGRATION",
     "id": "xl_armor_farmor",
-    "replace": "leather_armor_suit_xl"
+    "replace": "leather_cuirass_xl"
   },
   {
     "type": "MIGRATION",
     "id": "armor_farmor_xs",
-    "replace": "leather_armor_suit_xs"
+    "replace": "leather_cuirass_xs"
   },
   {
     "type": "MIGRATION",
     "id": "armor_faux_farmor",
-    "replace": "leather_armor_suit"
+    "replace": "leather_cuirass"
   },
   {
     "type": "MIGRATION",
     "id": "xl_armor_faux_farmor",
-    "replace": "leather_armor_suit_xl"
+    "replace": "leather_cuirass_xl"
   },
   {
     "type": "MIGRATION",
     "id": "armor_faux_farmor_xs",
-    "replace": "leather_armor_suit_xs"
+    "replace": "leather_cuirass_xs"
   },
   {
     "type": "MIGRATION",
@@ -4222,5 +4275,285 @@
     "type": "MIGRATION",
     "id": "bellyband",
     "replace": "bellywrap"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "plaguedoctor_robe",
+    "replace": "cassock"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "wrench_large",
+    "replace": "wrench"
+  },
+  {
+    "type": "vehicle_part_migration",
+    "from": "engine_electric_small",
+    "to": "engine_electric_medium"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "hide_tainted_bag",
+    "replace": "hide_bag"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "swag_bag",
+    "replace": "bag_canvas"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "suitcase_m",
+    "replace": "suitcase"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "suitcase_l",
+    "replace": "suitcase_large"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "folded_trashcan_large",
+    "replace": "roller_bin"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "UPS_OFF",
+    "replace": "UPS_off"
+  },
+  {
+    "type": "MIGRATION",
+    "id": "UPS_ON",
+    "replace": "UPS_off"
+  },
+  {
+    "id": "junk_platemail_suit",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass"
+  },
+  {
+    "id": "platemail_suit",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass"
+  },
+  {
+    "id": "platemail_suit_xl",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass_xl"
+  },
+  {
+    "id": "platemail_suit_xs",
+    "type": "MIGRATION",
+    "replace": "platemail_cuirass_xs"
+  },
+  {
+    "id": "chainmail_suit",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk"
+  },
+  {
+    "id": "chainmail_suit_xl",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_xl"
+  },
+  {
+    "id": "chainmail_suit_xs",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_xs"
+  },
+  {
+    "id": "chainmail_junk_sleeves",
+    "type": "MIGRATION",
+    "replace": "chainmail_sleeves"
+  },
+  {
+    "id": "chainmail_junk_sleeves_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_sleeves_loose"
+  },
+  {
+    "id": "chainmail_junk_gloves",
+    "type": "MIGRATION",
+    "replace": "chainmail_gloves"
+  },
+  {
+    "id": "chainmail_junk_coif",
+    "type": "MIGRATION",
+    "replace": "chainmail_coif"
+  },
+  {
+    "id": "chainmail_junk_chausses",
+    "type": "MIGRATION",
+    "replace": "chainmail_chausses"
+  },
+  {
+    "id": "chainmail_junk_aventail",
+    "type": "MIGRATION",
+    "replace": "chainmail_aventail"
+  },
+  {
+    "id": "chainmail_junk_hauberk",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk"
+  },
+  {
+    "id": "chainmail_junk_hauberk_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_hauberk_loose"
+  },
+  {
+    "id": "chainmail_junk_vest",
+    "type": "MIGRATION",
+    "replace": "chainmail_vest"
+  },
+  {
+    "id": "chainmail_junk_vest_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_vest_loose"
+  },
+  {
+    "id": "chainmail_skirt_budget",
+    "type": "MIGRATION",
+    "replace": "chainmail_skirt"
+  },
+  {
+    "id": "chainmail_skirt_budget_loose",
+    "type": "MIGRATION",
+    "replace": "chainmail_skirt_loose"
+  },
+  {
+    "id": "5l_budget_steel",
+    "type": "MIGRATION",
+    "replace": "5l_steel"
+  },
+  {
+    "id": "10l_budget_steel",
+    "type": "MIGRATION",
+    "replace": "10l_steel"
+  },
+  {
+    "id": "budget_steel_fragment",
+    "type": "MIGRATION",
+    "replace": "steel_fragment"
+  },
+  {
+    "id": "budget_steel_chunk",
+    "type": "MIGRATION",
+    "replace": "steel_chunk"
+  },
+  {
+    "id": "armor_riot",
+    "type": "MIGRATION",
+    "replace": "armor_riot_torso"
+  },
+  {
+    "id": "armor_tiresuit",
+    "type": "MIGRATION",
+    "replace": "tire_cuirass"
+  },
+  {
+    "id": "wrapper_foil_roll",
+    "type": "MIGRATION",
+    "replace": "aluminum_foil_roll"
+  },
+  {
+    "id": "harmonica_holder",
+    "type": "MIGRATION",
+    "replace": "harmonica"
+  },
+  {
+    "id": "rope_loop",
+    "type": "MIGRATION",
+    "replace": "rope_30"
+  },
+  {
+    "id": "egg_roach_plague",
+    "type": "MIGRATION",
+    "replace": "egg_roach"
+  },
+  {
+    "id": "bolt_wood",
+    "type": "MIGRATION",
+    "replace": "bolt_wood_broadhead"
+  },
+  {
+    "id": "ar_glasses_basic",
+    "type": "MIGRATION",
+    "replace": "smart_glasses"
+  },
+  {
+    "id": "ar_glasses_advanced",
+    "type": "MIGRATION",
+    "replace": "smart_glasses"
+  },
+  {
+    "id": "survivor_dry_duffelbag",
+    "type": "MIGRATION",
+    "replace": "dry_duffelbag"
+  },
+  {
+    "id": "survivor_duffel_bag",
+    "type": "MIGRATION",
+    "replace": "long_duffelbag"
+  },
+  {
+    "id": "survivor_dry_bag",
+    "type": "MIGRATION",
+    "replace": "dry_bag_large"
+  },
+  {
+    "id": "survivor_rig",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "id": "survivor_runner_pack",
+    "type": "MIGRATION",
+    "replace": "runner_bag"
+  },
+  {
+    "id": "survivor_pack",
+    "type": "MIGRATION",
+    "replace": "backpack"
+  },
+  {
+    "id": "survivor_belt_notools",
+    "type": "MIGRATION",
+    "replace": "webbing_belt"
+  },
+  {
+    "id": "survivor_vest",
+    "type": "MIGRATION",
+    "replace": "chestrig"
+  },
+  {
+    "id": "xs_survivor_vest",
+    "type": "MIGRATION",
+    "replace": "xs_chestrig"
+  },
+  {
+    "id": "xl_survivor_vest",
+    "type": "MIGRATION",
+    "replace": "xl_chestrig"
+  },
+  {
+    "id": "survivor_scope",
+    "type": "MIGRATION",
+    "replace": "binoculars"
+  },
+  {
+    "id": "spring_plate",
+    "type": "MIGRATION",
+    "replace": "spring"
+  },
+  {
+    "id": "egg_spider_jumping",
+    "type": "MIGRATION",
+    "replace": "egg_spider_wolf"
+  },
+  {
+    "id": "laptop_screen_lit",
+    "type": "MIGRATION",
+    "replace": "laptop_on"
   }
 ]

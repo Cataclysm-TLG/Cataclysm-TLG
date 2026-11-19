@@ -493,7 +493,6 @@ void start_location::place_player( avatar &you, const tripoint_abs_omt &omtstart
     }
 
     // Otherwise, find a random starting spot
-
     int tries = 0;
     const auto check_spot = [&]( const tripoint_bub_ms & pt ) {
         ++tries;

@@ -169,11 +169,11 @@ const weakpoint *Character::absorb_hit( const weakpoint_attack &, const bodypart
                     elem.amount -= rng( 1, 4 );
                     absorbed = true;
                 } else if( elem.type == STATIC( damage_type_id( "cut" ) ) ) {
-                    elem.amount -= rng( 2, 8 );
+                    elem.amount -= rng( 1, 8 );
                     absorbed = true;
                 } else if( elem.type == STATIC( damage_type_id( "stab" ) ) ||
                            STATIC( damage_type_id( "bullet" ) ) ) {
-                    elem.amount -= rng( 4, 16 );
+                    elem.amount -= rng( 1, 16 );
                     absorbed = true;
                 }
                 if( absorbed ) {
@@ -228,8 +228,8 @@ bool Character::armor_absorb( damage_unit &du, item &armor, const bodypart_id &b
     // We copy the damage unit here since it will be mutated by mitigate_damage()
     damage_unit pre_mitigation = du;
 
-    // reduce the damage
-    // -1 is passed as roll so that each material is rolled individually
+    // Reduce the damage
+    // -1 is passed as roll so that each material is rolled individually.
     armor.mitigate_damage( du, sbp, -1 );
 
     // check if the armor was damaged

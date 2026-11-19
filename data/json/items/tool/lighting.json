@@ -184,7 +184,7 @@
       "target": "flashlight",
       "ammo_scale": 0
     },
-    "light": 300,
+    "light": 200,
     "flags": [
       "CHARGEDIM",
       "TRADER_AVOID",
@@ -389,7 +389,7 @@
     "revert_to": "handflare_dead",
     "revert_msg": "The flare sputters out",
     "use_action": { "type": "firestarter", "moves": 50 },
-    "light": 240,
+    "light": 180,
     "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD", "SPAWN_ACTIVE" ]
   },
   {
@@ -404,7 +404,7 @@
     "revert_to": "handflare_dead",
     "revert_msg": "The flare sputters out",
     "use_action": { "type": "firestarter", "moves": 50 },
-    "light": 720,
+    "light": 420,
     "flags": [ "FIRE", "CHARGEDIM", "FLAMING", "TRADER_AVOID", "FIRESTARTER", "NO_UNLOAD", "NO_RELOAD", "SPAWN_ACTIVE" ]
   },
   {
@@ -467,7 +467,7 @@
         "default_magazine": "medium_battery_cell"
       }
     ],
-    "light": 500,
+    "light": 280,
     "flags": [ "CHARGEDIM", "SPAWN_ACTIVE" ]
   },
   {

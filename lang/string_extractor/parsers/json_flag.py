@@ -2,6 +2,9 @@ from ..write_text import write_text
 
 
 def parse_json_flag(json, origin):
+    if "name" in json:
+        write_text(json["name"], origin, c_format=False,
+                   comment="Name of JSON flag \"{}\"".format(json["id"]))
     if "info" in json:
         write_text(json["info"], origin, c_format=False, comment=[
             "Please leave anything in <angle brackets> unchanged.",

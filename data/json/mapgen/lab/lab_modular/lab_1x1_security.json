@@ -517,9 +517,9 @@
       "items": {
         "q": { "item": "guns_milspec", "chance": 40, "repeat": [ 1, 2 ] },
         "Q": { "item": "SUS_rivtech_loot", "chance": 80 },
-        "V": { "item": "UPS_power", "chance": 100, "repeat": [ 1, 2 ] },
+        "V": { "item": "ups_power", "chance": 70, "repeat": [ 1, 2 ] },
         "r": { "item": "tools_gunsmith", "chance": 10 },
-        "N": [ { "item": "tools_gunsmith", "chance": 100 }, { "item": "mechanics", "chance": 50 } ],
+        "N": [ { "item": "tools_gunsmith", "chance": 70 }, { "item": "mechanics", "chance": 50 } ],
         "≠": [
           { "item": "ammo_milspec", "chance": 70, "repeat": [ 1, 2 ] },
           { "item": "mags_milspec", "chance": 40, "repeat": [ 1, 2 ] }

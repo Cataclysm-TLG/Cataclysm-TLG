@@ -27,6 +27,7 @@
 #include "faction.h"
 #include "field.h"
 #include "field_type.h"
+#include "flag.h"
 #include "game.h"
 #include "game_constants.h"
 #include "harvest.h"
@@ -105,6 +106,7 @@ static const efftype_id effect_fake_common_cold( "fake_common_cold" );
 static const efftype_id effect_fake_flu( "fake_flu" );
 static const efftype_id effect_fallout( "fallout" );
 static const efftype_id effect_fungus( "fungus" );
+static const efftype_id effect_grabbed( "grabbed" );
 static const efftype_id effect_grabbing( "grabbing" );
 static const efftype_id effect_has_bag( "has_bag" );
 static const efftype_id effect_heavysnare( "heavysnare" );
@@ -128,6 +130,7 @@ static const efftype_id effect_pet( "pet" );
 static const efftype_id effect_photophobia( "photophobia" );
 static const efftype_id effect_poison( "poison" );
 static const efftype_id effect_psi_stunned( "psi_stunned" );
+static const efftype_id effect_revived_marker( "revived_marker" );
 static const efftype_id effect_ridden( "ridden" );
 static const efftype_id effect_run( "run" );
 static const efftype_id effect_slippery_terrain( "slippery_terrain" );
@@ -363,6 +366,12 @@ void monster::on_move( const tripoint_abs_ms &old_pos )
         return;
     }
     g->update_zombie_pos( *this, old_pos, pos_abs() );
+    if( has_effect( effect_onfire ) ||
+        calculate_by_enchantment( type->luminance, enchant_vals::mod::LUMINATION, true ) > 0 ) {
+        map &here = get_map();
+        here.set_lightmap_cache_dirty( old_pos.z() );
+        here.set_lightmap_cache_dirty( pos_bub().z() );
+    }
     if( has_effect( effect_ridden ) && mounted_player &&
         mounted_player->pos_abs() != pos_abs() ) {
         add_msg_debug( debugmode::DF_MONSTER, "Ridden monster %s moved independently and dumped player",
@@ -375,13 +384,109 @@ void monster::on_move( const tripoint_abs_ms &old_pos )
     invalidate_tile_eye_level_cache();
 }
 
+void monster::on_effect_int_change( const efftype_id &/*eid*/, int /*intensity*/,
+                                    const bodypart_id &/*bp*/ )
+{
+    map &here = get_map();
+    if( here.inbounds( pos_bub() ) ) {
+        here.set_lightmap_cache_dirty( posz() );
+    }
+}
+
 void monster::poly( const mtype_id &id )
 {
     double hp_percentage = static_cast<double>( hp ) / static_cast<double>( type->hp );
+    dissectable_inv.erase(
+        std::remove_if( dissectable_inv.begin(), dissectable_inv.end(),
+    []( const item & it ) {
+        return it.has_flag( json_flag_MUTAGEN_SAMPLE );
+    } ),
+    dissectable_inv.end()
+    );
     if( !no_extra_death_drops ) {
         generate_inventory();
     }
+    const creature_size old_size = type->size;
+
     type = &id.obj();
+
+    // If we change into a larger monster, destroy any clothing or armor that wouldn't fit anymore.
+    if( type->size > old_size ) {
+        inv.erase( std::remove_if( inv.begin(), inv.end(), []( const item & it ) {
+            return ( it.is_armor() || it.is_pet_armor() ) &&
+                   !it.has_flag( flag_OVERSIZE );
+        } ), inv.end() );
+    }
+
+    if( type->in_species( species_ZOMBIE ) ) {
+        for( item &it : inv ) {
+            // Gun filthiness is handles by dirt, not flag. We needn't bother with it here as
+            // at this time only ferals upgrade into zombies, and feral guns are already dirty.
+            if( ( it.is_armor() || it.is_pet_armor() ) && !it.is_gun() ) {
+                it.set_flag( STATIC( flag_id( "FILTHY" ) ) );
+            }
+        }
+    }
+
+    creature_tracker &creatures = get_creature_tracker();
+    map &here = get_map();
+    // Duplicated from monster::die(). Should probably live in a single place like release_grapple().
+    if( has_effect_with_flag( json_flag_GRAB ) ) {
+        const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
+        Creature *grabber = nullptr;
+        for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            const efftype_id grab_id = grab.get_id();
+            // Is our grabber around?
+            for( const tripoint_bub_ms loc : surrounding ) {
+                Character *guy = creatures.creature_at<Character>( loc );
+                if( guy && guy->grab_1.victim && guy->grab_1.victim.get() == static_cast<Creature *>( this ) ) {
+                    add_msg_debug( debugmode::DF_MONSTER, "Transforming monster found grabbing character: %s",
+                                   guy->disp_name() );
+                    grabber = guy;
+                    break;
+                }
+            }
+            if( grabber == nullptr ) {
+                remove_effect( grab_id );
+                add_msg_debug( debugmode::DF_MONSTER, "Orphan grab found and removed from dead monster" );
+                continue;
+            }
+            if( grabber && !grabber->is_monster() ) {
+                grabber->as_character()->release_grapple();
+            }
+            remove_effect( grab_id );
+        }
+    }
+    if( has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
+        for( const tripoint_bub_ms &player_pos : here.points_in_radius( pos_bub(), 1,
+                0 ) ) {
+            Creature *you = creatures.creature_at( here.get_abs( player_pos ) );
+            if( !you || !you->has_effect_with_flag( json_flag_GRAB ) ) {
+                continue;
+            }
+            bool grabbed = false;
+            for( const tripoint_bub_ms &mon_pos : here.points_in_radius( player_pos, 1, 0 ) ) {
+                const monster *const mon = creatures.creature_at<monster>( here.get_abs( mon_pos ) );
+                if( mon && mon->has_effect_with_flag( json_flag_GRAB_FILTER ) && mon != this ) {
+                    grabbed = true;
+                    break;
+                }
+            }
+            if( !grabbed ) {
+                for( const effect &grab : you->get_effects_with_flag( json_flag_GRAB ) ) {
+                    you->remove_effect( grab.get_id() );
+                }
+                continue;
+            }
+            for( const effect &grab : you->get_effects_with_flag( json_flag_GRAB ) ) {
+                if( is_grabbing( grab.get_bp().id() ) ) {
+                    const effect_type effid = *grab.get_effect_type();
+                    you->remove_effect( effid.id, grab.get_bp() );
+                }
+            }
+        }
+    }
+
     moves = 0;
     Creature::set_speed_base( type->speed );
     anger = type->agro;
@@ -914,23 +1019,25 @@ std::string monster::speed_description( float mon_speed_rating,
 int monster::print_info( const catacurses::window &w, int vStart, int vLines, int column ) const
 {
     const map &here = get_map();
-
     const int vEnd = vStart + vLines;
     const int max_width = getmaxx( w ) - column - 1;
     std::ostringstream oss;
-
-    oss << get_tag_from_color( c_white ) << _( "Origin: " );
-    oss << enumerate_as_string( type->src.begin(),
-    type->src.end(), []( const std::pair<mtype_id, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
-    }, enumeration_conjunction::arrow );
-    oss << "</color>" << "\n";
-
-    if( debug_mode ) {
-        oss << colorize( type->id.str(), c_white );
+    std::vector<std::pair<mtype_id, mod_id>> filtered_src;
+    std::copy_if( type->src.begin(), type->src.end(),
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
+    if( !filtered_src.empty() ) {
+        oss << get_tag_from_color( c_white ) << _( "Origin: " );
+        oss << enumerate_as_string( filtered_src,
+        []( const std::pair<mtype_id, mod_id> &source ) {
+            return string_format( "'%s'", source.second->name() );
+        }, enumeration_conjunction::arrow );
+        oss << "</color>\n";
     }
-    oss << "\n";
-
+    if( debug_mode ) {
+        oss << colorize( type->id.str(), c_white ) << "\n";
+    }
     // Print health bar, monster name, then statuses on the first line.
     nc_color bar_color = c_white;
     std::string bar_str;
@@ -1023,32 +1130,24 @@ std::string monster::extended_description() const
     Character &pc = get_player_character();
     const bool player_knows = !pc.has_trait( trait_INATTENTIVE );
     const std::pair<std::string, nc_color> att = get_attitude();
-
     std::string att_colored = colorize( att.first, att.second );
     std::string difficulty_str;
     if( debug_mode ) {
         difficulty_str = _( "Difficulty " ) + std::to_string( type->difficulty );
-    } else {
-        if( type->difficulty < 3 ) {
-            difficulty_str = _( "<color_light_gray>Minimal threat.</color>" );
-        } else if( type->difficulty < 10 ) {
-            difficulty_str = _( "<color_light_gray>Mildly dangerous.</color>" );
-        } else if( type->difficulty < 20 ) {
-            difficulty_str = _( "<color_light_red>Dangerous.</color>" );
-        } else if( type->difficulty < 30 ) {
-            difficulty_str = _( "<color_red>Very dangerous.</color>" );
-        } else if( type->difficulty < 50 ) {
-            difficulty_str = _( "<color_red>Extremely dangerous.</color>" );
-        } else {
-            difficulty_str = _( "<color_red>Fatally dangerous!</color>" );
-        }
     }
+    std::vector<std::pair<mtype_id, mod_id>> filtered_src;
+    std::copy_if( type->src.begin(), type->src.end(),
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
 
-    ss += _( "Origin: " );
-    ss += enumerate_as_string( type->src.begin(),
-    type->src.end(), []( const std::pair<mtype_id, mod_id> &source ) {
-        return string_format( "'%s'", source.second->name() );
-    }, enumeration_conjunction::arrow );
+    if( !filtered_src.empty() ) {
+        ss += _( "Origin: " );
+        ss += enumerate_as_string( filtered_src,
+        []( const std::pair<mtype_id, mod_id> &source ) {
+            return string_format( "'%s'", source.second->name() );
+        }, enumeration_conjunction::arrow );
+    }
 
     ss += "\n--\n";
 
@@ -1613,7 +1712,6 @@ Creature::Attitude monster::attitude_to( const Creature &other ) const
         if( m == this ) {
             return Attitude::FRIENDLY;
         }
-
         mf_attitude faction_att = faction.obj().attitude( m->faction );
         if( ( friendly != 0 && m->friendly != 0 ) ||
             ( friendly == 0 && m->friendly == 0 && faction_att == MFA_FRIENDLY ) ) {
@@ -1946,13 +2044,14 @@ bool monster::is_immune_effect( const efftype_id &effect ) const
 {
     // Currently monsters aren't affected by radiation. Fungal effects are handled with the fungal_poison effect.
     if( effect == effect_bite || effect == effect_infected || effect == effect_fallout ||
-        effect == effect_fungus ) {
+        effect == effect_fungus || effect == effect_fungus ) {
         return true;
     }
 
     if( effect == effect_onfire ) {
         return is_immune_damage( damage_heat ) ||
-               made_of( phase_id::LIQUID ) ||
+               get_armor_type( damage_heat, bodypart_id( "torso" ) ) > 15 ||
+               made_of( phase_id::LIQUID ) || has_flag( mon_flag_FIREPROOF ) ||
                has_flag( mon_flag_FIREY );
     }
 
@@ -2026,10 +2125,6 @@ bool monster::is_immune_damage( const damage_type_id &dt ) const
                 return true;
             }
         }
-    }
-    // FIXME: Hardcoded damage type specific immunities
-    if( dt == damage_heat && ( made_of( material_steel ) || made_of( material_stone ) ) ) {
-        return true;
     }
     if( dt == damage_electric && type->sp_defense == &mdefense::zapback ) {
         return true;
@@ -2333,7 +2428,11 @@ void monster::deal_damage_handle_type( const effect_source &source, const damage
         }
     }
     if( ( du.type == damage_bullet || du.type->edged ) && adjusted_damage >= 1 ) {
-        make_bleed( source, 1_minutes * rng( 0, adjusted_damage ) );
+        int bleed_damage = adjusted_damage;
+        if( du.type != damage_cut ) {
+            bleed_damage = static_cast<int>( std::round( bleed_damage * 0.75f ) );
+        }
+        make_bleed( source, 1_minutes * rng( 0, bleed_damage ) );
     }
 
     Creature::deal_damage_handle_type( source, du,  bp, damage, pain );
@@ -2381,7 +2480,7 @@ void monster::apply_damage( Creature *source, bodypart_id /*bp*/, int dam,
         die( &here, source );
     } else if( dam > 0 ) {
         process_trigger( mon_trigger::HURT, 1 + static_cast<int>( dam / 3 ) );
-        // Get angry at characters if hurt by one
+        // Get angry at characters if hurt by one.
         if( source != nullptr && !aggro_character && !source->is_monster() && !source->is_fake() ) {
             aggro_character = true;
         }
@@ -3047,8 +3146,10 @@ void monster::die( map *here, Creature *nkiller )
             ch = get_killer()->get_summoner()->as_character();
         }
         if( !is_hallucination() && ch != nullptr ) {
+            // Revived creatures never grant any kill xp.
+            const int kill_xp = has_effect( effect_revived_marker ) ? 0 : compute_kill_xp( type->id );
             cata::event e = cata::event::make<event_type::character_kills_monster>( ch->getID(), type->id,
-                            compute_kill_xp( type->id ) );
+                            kill_xp );
             get_event_bus().send_with_talker( ch, this, e );
         }
     }
@@ -3059,6 +3160,7 @@ void monster::die( map *here, Creature *nkiller )
         const tripoint_range<tripoint_bub_ms> &surrounding = here->points_in_radius( pos_bub(), 1, 0 );
         Creature *grabber = nullptr;
         for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            const efftype_id grab_id = grab.get_id();
             // Is our grabber around?
             for( const tripoint_bub_ms loc : surrounding ) {
                 Character *guy = creatures.creature_at<Character>( loc );
@@ -3070,14 +3172,14 @@ void monster::die( map *here, Creature *nkiller )
                 }
             }
             if( grabber == nullptr ) {
-                remove_effect( grab.get_id() );
+                remove_effect( grab_id );
                 add_msg_debug( debugmode::DF_MONSTER, "Orphan grab found and removed from dead monster" );
                 continue;
             }
             if( grabber && !grabber->is_monster() ) {
                 grabber->as_character()->release_grapple();
             }
-            remove_effect( grab.get_id() );
+            remove_effect( grab_id );
         }
     }
     if( has_effect_with_flag( json_flag_GRAB_FILTER ) ) {
@@ -3311,7 +3413,7 @@ void monster::generate_inventory( bool disableDrops )
     no_extra_death_drops = disableDrops;
 }
 
-void monster::drop_items_on_death( map *here, item *corpse )
+void monster::drop_items_on_death( map *here, item *corpse ) const
 {
     if( is_hallucination() ) {
         return;
@@ -3326,6 +3428,7 @@ void monster::drop_items_on_death( map *here, item *corpse )
 
     for( item &e : new_items ) {
         e.randomize_rot();
+        e.preserve_location( pos_abs() );
     }
 
     // for non corpses this is much simpler
@@ -3374,25 +3477,6 @@ void monster::drop_items_on_death( map *here, item *corpse )
             }
         }
     }
-
-    // Check if item has PRESERVE_SPAWN_LOC and set it if necessary
-    // This probably needs to be encapsulated in some generic function
-    for( item &it : new_items ) {
-        if( it.has_flag( json_flag_PRESERVE_SPAWN_LOC ) &&
-            !it.has_var( "spawn_location" ) ) {
-            it.set_var( "spawn_location", pos_abs().to_string_writable() );
-        }
-
-        // since efiles are not in standard pocket, check it separately
-        if( it.has_pocket_type( pocket_type::E_FILE_STORAGE ) ) {
-            for( item *it_software : it.all_items_top( pocket_type::E_FILE_STORAGE ) ) {
-                if( it_software->has_flag( json_flag_PRESERVE_SPAWN_LOC ) &&
-                    !it_software->has_var( "spawn_location" ) ) {
-                    it_software->set_var( "spawn_location", pos_abs().to_string_writable() );
-                }
-            }
-        }
-    };
 }
 
 void monster::spawn_dissectables_on_death( item *corpse ) const
@@ -3454,7 +3538,6 @@ void monster::process_one_effect( effect &it, bool is_new )
     }
 
     const efftype_id &id = it.get_id();
-    // TODO: MATERIALS use fire resistance
     if( it.impairs_movement() ) {
         effect_cache[MOVEMENT_IMPAIRED] = true;
     } else if( id == effect_onfire ) {
@@ -3464,7 +3547,6 @@ void monster::process_one_effect( effect &it, bool is_new )
         } else if( made_of( material_flesh ) || made_of( material_iflesh ) ) {
             dam = rng( 1, 8 );
         }
-
         dam -= get_armor_type( damage_heat, bodypart_id( "torso" ) );
         if( dam > 0 ) {
             apply_damage( it.get_source().resolve_creature(), bodypart_id( "torso" ), dam );
@@ -3934,17 +4016,17 @@ void monster::init_from_item( item &itm )
 
         hp -= burnt_penalty;
 
-        // HP can be 0 or less, in this case revive_corpse will just deactivate the corpse
-        if( hp > 0 && type->has_flag( mon_flag_REVIVES_HEALTHY ) ) {
-            hp = type->hp;
-            set_speed_base( type->speed );
-        }
-        // if parent corpse is revives healthy *and* dormant, so will the monster
-        const mtype *corpse_mtype = itm.get_mtype();
-        if( hp > 0 && corpse_mtype->has_flag( mon_flag_REVIVES_HEALTHY ) &&
-            corpse_mtype->has_flag( mon_flag_DORMANT ) ) {
-            hp = type->hp;
-            set_speed_base( type->speed );
+        // HP can be 0 or less, in this case revive_corpse will just deactivate the corpse.
+        if( hp > 0 ) {
+            if( type->has_flag( mon_flag_REVIVES_HEALTHY ) ) {
+                hp = type->hp;
+                set_speed_base( type->speed );
+            }
+            // Dormant zombies don't get the speed penalty, but they don't come back healthy unless flagged.
+            const mtype *corpse_mtype = itm.get_mtype();
+            if( corpse_mtype->has_flag( mon_flag_DORMANT ) ) {
+                set_speed_base( type->speed );
+            }
         }
         upgrade_time = itm.get_var( "upgrade_time", -1 );
         for( item *it : itm.all_items_top( pocket_type::CONTAINER ) ) {
@@ -3954,7 +4036,7 @@ void monster::init_from_item( item &itm )
             inv.push_back( *it );
             itm.remove_item( *it );
         }
-        // Move dissectables (installed bionics, etc)
+        // Move dissectables (installed bionics, etc).
         for( item *dissectable : itm.all_items_top( pocket_type::CORPSE ) ) {
             // Mutagen samples do not survive this process.
             if( !itm.has_flag( json_flag_MUTAGEN_SAMPLE ) ) {
@@ -4415,14 +4497,16 @@ std::vector<std::pair<std::string, std::string>> monster::get_overlay_ids() cons
 {
     std::vector<std::pair<std::string, std::string>> rval;
 
-    // get effects
-    // at this moment we share id for effect overlay for character and for monster
+    // Get effects.
     if( show_creature_overlay_icons ) {
-        // if at one point there would be more overlay types than one
-        // someone would need to tinker pre-allocation
         rval.reserve( effects->size() );
         for( const auto &eff_pr : *effects ) {
-            rval.emplace_back( "effect_" + eff_pr.first.str(), "" );
+            std::string effect_id = "effect_" + eff_pr.first.str();
+            const int intensity = get_effect_int( eff_pr.first );
+            if( intensity > 1 && eff_pr.first != effect_grabbed && eff_pr.first != effect_grabbing ) {
+                effect_id += "_int" + std::to_string( intensity );
+            }
+            rval.emplace_back( effect_id, "" );
         }
     }
 

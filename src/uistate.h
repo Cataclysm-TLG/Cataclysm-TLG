@@ -14,6 +14,8 @@
 #include "omdata.h"
 #include "type_id.h"
 
+constexpr int DEFAULT_TILESET_ZOOM = 16;
+
 class item;
 
 struct advanced_inv_pane_save_state {
@@ -171,6 +173,9 @@ class uistatedata
         bool overmap_debug_mongroup = false;
         bool overmap_fast_travel = false;
         bool overmap_fast_scroll = false;
+
+        int tileset_zoom = DEFAULT_TILESET_ZOOM;
+        int overmap_tileset_zoom = DEFAULT_TILESET_ZOOM;
 
         consume_menu_uistate consume_uistate;
 

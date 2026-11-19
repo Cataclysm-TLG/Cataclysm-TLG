@@ -119,7 +119,8 @@ void game::extended_description( const tripoint_bub_ms &p )
                     const furn_id fid = m.furn( p );
                     const std::string mod_src = enumerate_as_string( fid->src.begin(),
                     fid->src.end(), []( const std::pair<furn_str_id, mod_id> &source ) {
-                        return string_format( "'%s'", source.second->name() );
+                        return source.second == mod_id( "tlg" ) ? std::string() :
+                               string_format( "'%s'", source.second->name() );
                     }, enumeration_conjunction::arrow );
                     desc = string_format( _( "Origin: %s\n%s" ), mod_src, fid->extended_description() );
                 }
@@ -131,7 +132,8 @@ void game::extended_description( const tripoint_bub_ms &p )
                     const ter_id tid = m.ter( p );
                     const std::string mod_src = enumerate_as_string( tid->src.begin(),
                     tid->src.end(), []( const std::pair<ter_str_id, mod_id> &source ) {
-                        return string_format( "'%s'", source.second->name() );
+                        return source.second == mod_id( "tlg" ) ? std::string() :
+                               string_format( "'%s'", source.second->name() );
                     }, enumeration_conjunction::arrow );
                     desc = string_format( _( "Origin: %s\n%s" ), mod_src, tid->extended_description() );
                 }

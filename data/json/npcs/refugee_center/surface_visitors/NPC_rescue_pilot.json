@@ -8,7 +8,7 @@
     "attitude": 0,
     "mission": 7,
     "chat": "TALK_RESCUE_PILOT",
-    "faction": "wasteland_scavengers",
+    "faction": "no_faction",
     "mission_offered": "MISSION_RESCUE_PILOT_HOSPITAL"
   },
   {
@@ -260,7 +260,14 @@
     "goal_condition": { "math": [ "time_since('fall_of_civilization', 'unit':'days') >= 0" ] },
     "difficulty": 1,
     "value": 0,
-    "start": { "effect": [ "follow" ] },
+    "start": {
+      "effect": [
+        "follow",
+        { "npc_lose_trait": "RETURN_TO_START_POS" },
+        { "npc_lose_trait": "NO_BASH" },
+        { "npc_lose_trait": "IGNORE_SOUND" }
+      ]
+    },
     "origins": [ "ORIGIN_SECONDARY" ],
     "urgent": true,
     "has_generic_rewards": false,

@@ -14,6 +14,7 @@
 #include "activity_type.h"
 #include "auto_pickup.h"
 #include "basecamp.h"
+#include "bionics.h"
 #include "bodypart.h"
 #include "catacharset.h"
 #include "character.h"
@@ -63,6 +64,7 @@
 #include "overmapbuffer.h"
 #include "pathfinding.h"
 #include "player_activity.h"
+#include "profession.h"
 #include "ret_val.h"
 #include "rng.h"
 #include "skill.h"
@@ -617,7 +619,7 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     male = one_in( 2 );
     pick_name();
     randomize_height();
-    // Normally 16-55, but potential violence towards *underage* NPCs is a more problematic than towards adults.
+    // Teen/kid NPCs are pending age restricted professions and stat mods for them.
     set_base_age( rng( 18, 55 ) );
     str_max = dice( 4, 3 );
     dex_max = dice( 4, 3 );
@@ -664,10 +666,17 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     int_max += myclass->roll_intelligence();
     per_max += myclass->roll_perception();
 
-    personality.aggression += myclass->roll_aggression();
-    personality.bravery += myclass->roll_bravery();
-    personality.collector += myclass->roll_collector();
-    personality.altruism += myclass->roll_altruism();
+    if( myclass.is_valid() ) {
+        personality.aggression += myclass->roll_aggression();
+        personality.bravery += myclass->roll_bravery();
+        personality.collector += myclass->roll_collector();
+        personality.altruism += myclass->roll_altruism();
+    } else {
+        personality.aggression += prof->roll_aggression();
+        personality.bravery += prof->roll_bravery();
+        personality.collector += prof->roll_collector();
+        personality.altruism += prof->roll_altruism();
+    }
 
     personality.aggression = std::clamp<int8_t>( personality.aggression,
                              NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
@@ -743,7 +752,7 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
 
     // Add martial arts
     learn_ma_styles_from_traits();
-    // Add spells for magiclysm mod
+    // Add spells for magiclysm mod.
     for( const std::pair<const spell_id, int> &spell_pair : myclass->_starting_spells ) {
         this->magic->learn_spell( spell_pair.first, *this, true );
         spell &sp = this->magic->get_spell( spell_pair.first );
@@ -1216,15 +1225,15 @@ void npc::place_on_map( map *here )
     if( g->is_empty( here, pos_abs() ) || is_mounted() ) {
         return;
     }
-    const tripoint_bub_ms pos = pos_bub( *here );
-    for( const tripoint_bub_ms &p : closest_points_first( pos, 1, SEEX + 1 ) ) {
+
+    for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), 1, SEEX + 1 ) ) {
         if( g->is_empty( p ) ) {
             setpos( *here, p );
             return;
         }
     }
 
-    debugmsg( "Failed to place NPC in a valid location near %s", pos.to_string() );
+    debugmsg( "Failed to place NPC in a valid location near %s", pos_bub().to_string() );
 }
 
 std::pair<skill_id, int> npc::best_combat_skill( combat_skills subset, bool randomize ) const
@@ -1587,11 +1596,16 @@ void npc::stow_item( item &it )
             add_msg_if_npc( m_info, _( "<npcname> puts away the %s." ), ret->tname() );
         }
         mod_moves( -item_handling_cost( it ) );
-    } else { // No room for weapon, so we drop it
+    } else { // No room for weapon, so we drop it.
         if( avatar_sees ) {
             add_msg_if_npc( m_info, _( "<npcname> drops the %s." ), it.tname() );
         }
-        here.add_item_or_charges( pos_bub( here ), remove_item( it ) );
+        if( is_hallucination() ) {
+            // We're a hallucination, so get rid of the item without actually placing anything on the ground.
+            remove_item( it );
+        } else {
+            here.add_item_or_charges( pos_bub( here ), remove_item( it ) );
+        }
     }
 }
 
@@ -3158,6 +3172,7 @@ void npc::die( map *here, Creature *nkiller )
         const tripoint_range<tripoint_bub_ms> &surrounding = here.points_in_radius( pos_bub(), 1, 0 );
         Creature *grabber = nullptr;
         for( const effect &grab : get_effects_with_flag( json_flag_GRAB ) ) {
+            const efftype_id grab_id = grab.get_id();
             // Is our grabber around?
             for( const tripoint_bub_ms loc : surrounding ) {
                 Creature *someone = creatures.creature_at( loc );
@@ -3168,14 +3183,14 @@ void npc::die( map *here, Creature *nkiller )
                 }
             }
             if( grabber == nullptr ) {
-                remove_effect( grab.get_id() );
+                remove_effect( grab_id );
                 add_msg_debug( debugmode::DF_MATTACK, "Orphan grab found and removed from dead NPC" );
                 continue;
             }
             if( grabber && !grabber->is_monster() ) {
                 grabber->as_character()->release_grapple();
             }
-            remove_effect( grab.get_id() );
+            remove_effect( grab_id );
         }
     }
     release_grapple();
@@ -3197,7 +3212,9 @@ void npc::die( map *here, Creature *nkiller )
         murder = true;
     }
     // if this NPC was the only member of a micro-faction, clean it up.
+
     if( my_fac ) {
+        fac_id = my_fac->id;
         if( !is_fake() && !is_hallucination() ) {
             if( my_fac->members.size() == 1 ) {
                 for( const item *elem : inv_dump() ) {
@@ -3262,7 +3279,7 @@ void npc::die( map *here, Creature *nkiller )
     }
 
     if( spawn_corpse ) {
-        place_corpse( here );
+        place_corpse( here, fac_id );
     }
 }
 
@@ -3560,11 +3577,11 @@ void npc::process_turn()
 
     // NPCs shouldn't be using stamina, but if they have, set it back to max
     // If the stamina is higher than the max (Languorous), set it back to max
+    // FIXME: NPCs should really be using stamina!
     if( calendar::once_every( 1_minutes ) && get_stamina() != get_stamina_max() ) {
         set_stamina( get_stamina_max() );
     }
 
-    // TODO: Probably ought to get rid of this if needs are disabled.
     if( is_player_ally() && calendar::once_every( 1_hours ) &&
         get_hunger() < 200 && get_thirst() < 100 && op_of_u.trust < 5 ) {
         // Friends who are well fed will like you more
@@ -3575,7 +3592,7 @@ void npc::process_turn()
         int op_penalty = std::max( 0, op_of_u.anger ) +
                          std::max( 0, -op_of_u.value ) +
                          std::max( 0, op_of_u.fear );
-        // Being barely hungry and thirsty, not in pain and not wounded means good care
+        // Being barely hungry and thirsty, not in pain and not wounded means good care.
         int state_penalty = get_hunger() + get_thirst() + ( 100 - hp_percentage() ) + get_pain();
         if( x_in_y( trust_chance, 240 + 10 * op_penalty + state_penalty ) ) {
             op_of_u.trust++;

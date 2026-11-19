@@ -283,6 +283,12 @@ static void add_electronic_toggle( map &here, vehicle &veh, veh_menu &menu, cons
                 e.enabled = state;
             }
         }
+        map &here = get_map();
+        for( const vpart_reference &vp : found )
+        {
+            here.set_lightmap_cache_dirty( vp.pos_bub( here ).z() );
+            break;
+        }
     } );
 }
 
@@ -657,7 +663,8 @@ bool vehicle::start_engine( map &here, vehicle_part &vp )
             if( vpi.has_flag( "MUSCLE_ARMS" ) && !player_character.has_two_arms_lifting() ) {
                 add_msg( _( "You cannot use %s with a broken arm." ), vp.name() );
                 return false;
-            } else if( vpi.has_flag( "MUSCLE_LEGS" ) && ( player_character.get_working_leg_count() < 2 ) ) {
+            } else if( vpi.has_flag( "MUSCLE_LEGS" ) &&
+                       ( player_character.get_working_leg_count( false ) < 2 ) ) {
                 add_msg( _( "You cannot use %s without at least two legs." ), vp.name() );
                 return false;
             }
@@ -669,7 +676,7 @@ bool vehicle::start_engine( map &here, vehicle_part &vp )
     }
 
     if( has_part( player_character.pos_abs(), "NEED_LEG" ) &&
-        player_character.get_working_leg_count() < 1 &&
+        player_character.get_working_leg_count( false ) < 1 &&
         !has_part( player_character.pos_abs(), "IGNORE_LEG_REQUIREMENT" ) ) {
         add_msg( _( "You need at least one leg to control the %s." ), vp.name() );
         return false;

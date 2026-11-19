@@ -557,7 +557,7 @@
     "autolearn": true,
     "reversible": true,
     "components": [ [ [ "paper", 2 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "wrapper_foil",
@@ -569,8 +569,8 @@
     "time": "30 s",
     "autolearn": true,
     "reversible": true,
-    "components": [ [ [ "aluminum_foil", 6 ] ] ],
-    "flags": [ "BLIND_EASY" ]
+    "components": [ [ [ "aluminum_foil", 1 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "result": "cup_foil",
@@ -579,13 +579,11 @@
     "category": "CC_OTHER",
     "subcategory": "CSC_OTHER_CONTAINERS",
     "skill_used": "fabrication",
-    "difficulty": 1,
-    "time": "2 m",
+    "time": "30 s",
     "autolearn": true,
     "reversible": true,
-    "book_learn": [ [ "mag_dude", 0 ], [ "mag_survival", 0 ], [ "pocket_survival", 0 ] ],
-    "components": [ [ [ "aluminum_foil", 6 ] ] ],
-    "flags": [ "BLIND_HARD" ]
+    "components": [ [ [ "aluminum_foil", 1 ] ] ],
+    "flags": [ "BLIND_EASY", "NO_TRAIN", "NO_FAIL" ]
   },
   {
     "type": "recipe",

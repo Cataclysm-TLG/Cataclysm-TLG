@@ -307,6 +307,10 @@ void weakpoint_effect::apply_to( Creature &target, int total_damage,
         eoc->activate( d );
     }
 
+    if( x_in_y( rng( instant_death_chance.first, instant_death_chance.second ), 100 ) ) {
+        target.die( &get_map(), attack.source == nullptr ? nullptr : attack.source );
+    }
+
     if( !get_message().empty() && attack.source != nullptr && attack.source->is_avatar() ) {
         add_msg_if_player_sees( target, m_good, get_message(), target.get_name() );
     }
@@ -319,6 +323,7 @@ void weakpoint_effect::load( const JsonObject &jo )
     optional( jo, false, "chance", chance, numeric_bound_reader{0.f, 100.f} );
     optional( jo, false, "permanent", permanent );
     optional( jo, false, "message", message );
+    optional( jo, false, "instant_death_chance", instant_death_chance, pair_reader<int> {} );
     optional( jo, false, "duration", duration, pair_reader<int> {} );
     optional( jo, false, "intensity", intensity, pair_reader<int> {} );
     optional( jo, false, "damage_required", damage_required, pair_reader<float> {} );
@@ -520,7 +525,7 @@ float weakpoint::hit_chance( const weakpoint_attack &attack ) const
         // Probability of a sample from a normal distribution centered on `skill` with `SD = 2`
         // exceeding the difficulty.
         diff = attack.wp_skill - difficulty.of( attack );
-        difficulty_mult = 0.5f * ( 1.0f + erf( diff / ( 2.0f * sqrt( 2.0f ) ) ) );
+        difficulty_mult = 0.5f * ( 1.0f + erf( diff / ( 2.0f * std::sqrt( 2.0f ) ) ) );
         if( attack.source && attack.source->as_character() ) {
             final_coverage = attack.source->as_character()->enchantment_cache->modify_value(
                                  enchant_vals::mod::WEAKPOINT_ACCURACY, coverage );
@@ -530,7 +535,7 @@ float weakpoint::hit_chance( const weakpoint_attack &attack ) const
     } else {
         // Use erfc if the wp does not benefit the attacker.
         diff = attack.wp_skill - std::max( difficulty.of( attack ) + 10.0f, 10.0f );
-        difficulty_mult = std::max( 0.5f * erfc( diff / ( 2.0f * sqrt( 2.0f ) ) ), 0.1f );
+        difficulty_mult = std::max( 0.5f * erfc( diff / ( 2.0f * std::sqrt( 2.0f ) ) ), 0.1f );
         final_coverage = coverage;
     }
 

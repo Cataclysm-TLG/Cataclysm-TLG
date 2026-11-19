@@ -563,13 +563,15 @@ void inventory::form_from_map( map &m, std::vector<tripoint_bub_ms> pts, const C
             }
         }
         if( m.accessible_items( p ) ) {
+            // Liquidcont means the tile has a basin, tub, etc. that works like a watertight container.
+            const bool liquidcont = t->has_flag( ter_furn_flag::TFLAG_LIQUIDCONT );
             for( item &i : m.i_at( p ) ) {
-                // if it's *the* player requesting this from from map inventory
-                // then don't allow items owned by another faction to be factored into recipe components etc.
+                // If it's the player requesting this from from map inventory, don't allow
+                // items owned by another faction to be factored into recipe components etc.
                 if( pl && !i.is_owned_by( *pl, true ) ) {
                     continue;
                 }
-                if( !i.made_of( phase_id::LIQUID ) ) {
+                if( !i.made_of( phase_id::LIQUID ) || liquidcont ) {
                     if( i.empty_container() && i.is_watertight_container() ) {
                         const int count = i.count_by_charges() ? i.charges : 1;
                         update_liq_container_count( i.typeId(), count );

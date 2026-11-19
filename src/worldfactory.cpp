@@ -287,8 +287,6 @@ WORLD *worldfactory::make_new_world( special_game_type special_type )
     std::unique_ptr<WORLD> special_world = std::make_unique<WORLD>();
     special_world->world_name = worldname;
 
-    special_world->WORLD_OPTIONS["WORLD_END"].setValue( "delete" );
-
     special_world->create_timestamp();
 
     if( !special_world->save() ) {
@@ -402,7 +400,6 @@ void worldfactory::init()
         // load options into the world
         if( !all_worlds[worldname]->load_options() ) {
             all_worlds[worldname]->WORLD_OPTIONS = get_options().get_world_defaults();
-            all_worlds[worldname]->WORLD_OPTIONS["WORLD_END"].setValue( "delete" );
             save = true;
         }
 
@@ -957,7 +954,8 @@ void worldfactory::show_active_world_mods( const std::vector<mod_id> &world_mods
     }
 }
 
-int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win, WORLD *world,
+int worldfactory::show_worldgen_tab_modselection( const catacurses::window & /*parent_win*/,
+        WORLD *world,
         bool with_tabs )
 {
     // Use active_mod_order of the world,
@@ -1001,6 +999,8 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
     std::unique_ptr<string_input_popup> fpopup;
     bool recalc_start = false;
 
+    // Draw a new window because the main one is too small.
+    catacurses::window win;
     catacurses::window w_header1;
     catacurses::window w_header2;
     catacurses::window w_shift;
@@ -1016,6 +1016,8 @@ int worldfactory::show_worldgen_tab_modselection( const catacurses::window &win,
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
 
+        win           = catacurses::newwin( TERMY, iMinScreenWidth,
+                                            point( iOffsetX, 0 ) );
         w_header1     = catacurses::newwin( 1, iMinScreenWidth / 2 - 5,
                                             point( 1 + iOffsetX, 3 ) );
         w_header2     = catacurses::newwin( 1, iMinScreenWidth / 2 - 4,
@@ -1476,7 +1478,13 @@ int worldfactory::show_worldgen_basic( WORLD *world )
         recalc_startpos = true;
         const int iMinScreenWidth = std::max( FULL_SCREEN_WIDTH, TERMX / 2 );
         const int iOffsetX = TERMX > FULL_SCREEN_WIDTH ? ( TERMX - iMinScreenWidth ) / 2 : 0;
-        w_confirmation = catacurses::newwin( TERMY, iMinScreenWidth, point( iOffsetX, 0 ) );
+
+        const int window_height = std::max( 12, TERMY / 4 );
+        const int offset_y = ( TERMY - window_height ) / 2;
+
+        w_confirmation = catacurses::newwin(
+                             window_height, iMinScreenWidth, point( iOffsetX, offset_y )
+                         );
         win_height = getmaxy( w_confirmation );
         content_height = win_height - namebar_pos.y - 10;
         ui.position_from_window( w_confirmation );
@@ -1520,20 +1528,11 @@ int worldfactory::show_worldgen_basic( WORLD *world )
                              namebar_pos + point( name_txt_width, 0 ) ) );
         }
 
-        // Content scrollbar
-        scrollbar()
-        .border_color( BORDER_COLOR )
-        .offset_x( 0 )
-        .offset_y( 1 )
-        .viewport_pos( top_opt * 3 )
-        .viewport_size( content_height )
-        .apply( w_confirmation );
-
         // Bottom box
         wattron( w_confirmation, BORDER_COLOR );
         mvwaddch( w_confirmation, point( 0,             win_height - 10 ), LINE_XXXO );
-        mvwhline( w_confirmation, point( 1,             win_height - 10 ), LINE_OXOX, win_width - 2 );
-        mvwaddch( w_confirmation, point( win_width - 1, win_height - 10 ), LINE_XOXX );
+        mvwhline( w_confirmation, point( 1,             win_height - 10 ), LINE_OXOX, win_width );
+        mvwaddch( w_confirmation, point( win_width + 1, win_height - 10 ), LINE_XOXX );
         wattroff( w_confirmation, BORDER_COLOR );
 
         // Hint text
@@ -1645,7 +1644,6 @@ void worldfactory::draw_modselection_borders( const catacurses::window &win,
     std::array<bool, 5> hv = {{true, true, true, false, false}}; // horizontal line = true, vertical line = false
 
     wattron( win, BORDER_COLOR );
-
     for( int i = 0; i < 5; ++i ) {
         const point p( xs[i], ys[i] );
         if( hv[i] ) {
@@ -1752,8 +1750,8 @@ bool worldfactory::valid_worldname( const std::string &name, bool automated ) co
 bool WORLD::create_timestamp()
 {
 #if defined( TIME_UTC ) && !defined( MACOSX ) && !defined(__ANDROID__)
-    std::timespec t;
-    if( std::timespec_get( &t, TIME_UTC ) != TIME_UTC ) {
+    timespec t;
+    if( timespec_get( &t, TIME_UTC ) != TIME_UTC ) {
         return false;
     }
 #else
@@ -1823,10 +1821,6 @@ void WORLD::load_options( const JsonArray &options_json )
         if( opts.has_option( name ) && opts.get_option( name ).getPage() == "world_default" ) {
             WORLD_OPTIONS[ name ].setValue( value );
         }
-    }
-    // for legacy saves, try to simulate old city_size based density
-    if( WORLD_OPTIONS.count( "CITY_SPACING" ) == 0 ) {
-        WORLD_OPTIONS["CITY_SPACING"].setValue( 5 - get_option<int>( "CITY_SIZE" ) / 3 );
     }
 }
 

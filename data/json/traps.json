@@ -854,6 +854,19 @@
   },
   {
     "type": "trap",
+    "id": "tr_target_spinner",
+    "name": "spinner target",
+    "color": "light_gray",
+    "symbol": "%",
+    "visibility": -1,
+    "avoidance": 0,
+    "difficulty": 0,
+    "action": "none",
+    "drops": [ "target_spinner" ],
+    "benign": true
+  },
+  {
+    "type": "trap",
     "id": "tr_unfinished_construction",
     "name": "unfinished construction",
     "color": "white",
@@ -1116,8 +1129,6 @@
     "valid_targets": [ "hostile", "ally", "self" ],
     "max_level": 1,
     "flags": [ "NO_HANDS", "NO_LEGS", "NO_EXPLOSION_SFX", "TOUCH", "NON_MAGICAL", "RANDOM_DURATION", "RANDOM_EFFECT_PART" ],
-    "min_aoe": 1,
-    "max_aoe": 1,
     "min_effect_intensity": 1,
     "effect_intensity_increment": 1,
     "max_effect_intensity": 3,

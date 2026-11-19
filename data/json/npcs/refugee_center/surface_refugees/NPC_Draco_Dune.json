@@ -156,7 +156,7 @@
   {
     "type": "talk_topic",
     "id": "TALK_REFUGEE_Draco_4",
-    "dynamic_line": "Would you believe that they don't!  Not a one in the whole place.  Well, maybe downstairs, but that's a different matter, isn't it?  Say, you're not planning on sticking around, right?  You're a free-roller, not a settler, seems like to me.  Don't know if I could beg or cajole you into maybe keepin' an ear out for a new guitar for me?  There gotta still be plenty out there not gettin' any love these days.  Whattya say?  Help an old man play some blues?  Would be good to have some real music around this place.  Be good for PEOPLE, you know what I'm sayin'?",
+    "dynamic_line": "Would you believe that they don't!  Not a one in the whole place.  Say, you're not planning on sticking around, right?  You're a free-roller, not a settler, seems like to me.  Don't know if I could beg or cajole you into maybe keepin' an ear out for a new guitar for me?  There gotta still be plenty out there not gettin' any love these days.  Whattya say?  Help an old man play some blues?  Would be good to have some real music around this place.  Be good for PEOPLE, you know what I'm sayin'?",
     "responses": [
       { "text": "Where would we be without music?", "topic": "TALK_REFUGEE_Draco_5a" },
       {
@@ -440,37 +440,37 @@
       {
         "text": "[Shuffle back and forth a little.]",
         "topic": "TALK_REFUGEE_Draco_Dance_1",
-        "condition": { "math": [ "u_val('dodge')", "<", "1" ] },
+        "condition": { "math": [ "u_val('dodge') < 1" ] },
         "switch": true
       },
       {
         "text": "[Do a little dance.]",
         "topic": "TALK_REFUGEE_Draco_Dance_2",
-        "condition": { "math": [ "u_val('dodge')", "<", "6" ] },
+        "condition": { "math": [ "u_val('dodge') < 6" ] },
         "switch": true
       },
       {
         "text": "[Perform a decent dance.]",
         "topic": "TALK_REFUGEE_Draco_Dance_3",
-        "condition": { "math": [ "u_val('dodge')", "<", "10" ] },
+        "condition": { "math": [ "u_val('dodge') < 10" ] },
         "switch": true
       },
       {
         "text": "[Perform an impressive dance.]",
         "topic": "TALK_REFUGEE_Draco_Dance_4",
-        "condition": { "math": [ "u_val('dodge')", "<", "15" ] },
+        "condition": { "math": [ "u_val('dodge') < 15" ] },
         "switch": true
       },
       {
         "text": "[Perform a masterful dance.]",
         "topic": "TALK_REFUGEE_Draco_Dance_5",
-        "condition": { "math": [ "u_val('dodge')", "<", "20" ] },
+        "condition": { "math": [ "u_val('dodge') < 20" ] },
         "switch": true
       },
       {
         "text": "[Perform a legendary dance.]",
         "topic": "TALK_REFUGEE_Draco_Dance_6",
-        "condition": { "math": [ "u_val('dodge')", ">", "20" ] },
+        "condition": { "math": [ "u_val('dodge') > 20" ] },
         "switch": true,
         "default": true
       }
@@ -534,7 +534,7 @@
     "end": {
       "effect": [
         { "u_add_var": "general_mission_NC_REFUGEE_Draco_has_guitar", "value": "yes" },
-        { "math": [ "u_counter_refugee_center_refugee_happiness", "+=", "2" ] }
+        { "math": [ "u_counter_refugee_center_refugee_happiness += 2" ] }
       ]
     },
     "dialogue": {

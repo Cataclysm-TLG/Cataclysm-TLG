@@ -137,8 +137,8 @@
       { "id": "bite_humanoid", "cooldown": 5, "min_mul": 0.8 },
       {
         "type": "spell",
-        "spell_data": { "id": "acid_barf", "min_level": 6 },
-        "monster_message": "The %s barfs acid!",
+        "spell_data": { "id": "acid_barf", "min_level": 5 },
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": {
           "and": [
@@ -190,8 +190,8 @@
       {
         "type": "spell",
         "id": "acid_barf",
-        "spell_data": { "id": "acid_barf", "min_level": 6 },
-        "monster_message": "The %s barfs acid!",
+        "spell_data": { "id": "acid_barf", "min_level": 7 },
+        "monster_message": "The %s vomits acid!",
         "cooldown": 10,
         "condition": {
           "and": [

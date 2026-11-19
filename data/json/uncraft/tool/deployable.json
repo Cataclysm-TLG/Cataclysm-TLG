@@ -68,7 +68,7 @@
     "time": "45 m",
     "qualities": [ { "id": "SCREW", "level": 1 }, { "id": "SAW_M", "level": 2 } ],
     "components": [
-      [ [ "motor_small", 1 ] ],
+      [ [ "motor_medium", 1 ] ],
       [ [ "compressor", 1 ] ],
       [ [ "nitrogen_membrane_filter", 1 ] ],
       [ [ "filter_air", 1 ] ],
@@ -108,5 +108,20 @@
     "time": "15 m",
     "qualities": [ { "id": "HAMMER", "level": 2 }, { "id": "SAW_M", "level": 2 } ],
     "components": [ [ [ "steel_chunk", 4 ] ], [ [ "steel_fragment", 1 ] ], [ [ "scrap", 4 ] ] ]
+  },
+  {
+    "result": "target_spinner",
+    "type": "uncraft",
+    "activity_level": "MODERATE_EXERCISE",
+    "skill_used": "fabrication",
+    "difficulty": 2,
+    "time": "90 m",
+    "qualities": [
+      { "id": "HAMMER", "level": 2 },
+      { "id": "SAW_M", "level": 1 },
+      { "id": "SCREW", "level": 2 },
+      { "id": "WRENCH", "level": 2 }
+    ],
+    "components": [ [ [ "hard_plate", 1 ] ], [ [ "sheet_metal_small", 3 ] ], [ [ "pipe", 6 ] ], [ [ "nuts_bolts", 25 ] ] ]
   }
 ]

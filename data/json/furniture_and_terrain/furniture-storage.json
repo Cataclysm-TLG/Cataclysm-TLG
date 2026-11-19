@@ -218,20 +218,20 @@
     "symbol": "X",
     "description": "A large box made of brown corrugated paper.  Could contain a number of things, and you could even hide inside.  Considering it only has two small flaps for carrying, it's very hard to see out of, and won't do anything to protect you if you're found.",
     "color": "brown",
-    "move_cost_mod": 7,
+    "move_cost_mod": 3,
     "coverage": 50,
     "concealment": 50,
     "comfort": 1,
     "floor_bedding_warmth": 200,
-    "required_str": 3,
+    "required_str": 2,
     "deconstruct": { "items": [ { "item": "box_large", "count": 1 } ] },
     "max_volume": "324 L",
     "deployed_item": "box_large",
     "examine_action": "deployed_furniture",
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "PLACE_ITEM", "ORGANIC", "EASY_DECONSTRUCT", "HIDE_PLACE", "NO_SIGHT", "CONTAINER" ],
     "bash": {
-      "str_min": 2,
-      "str_max": 15,
+      "str_min": 1,
+      "str_max": 6,
       "sound": "crumple!",
       "sound_fail": "thud.",
       "items": [ { "item": "cardboard", "count": [ 150, 180 ] } ]
@@ -245,20 +245,20 @@
     "description": "A large box made of brown corrugated paper that was doubled up for extra strength.  Could contain a number of things, and you could even hide inside.  Considering it only has two small flaps for carrying, it's very hard to see out of, and won't do anything to protect you if you're found.",
     "color": "brown",
     "looks_like": "f_cardboard_box",
-    "move_cost_mod": 7,
+    "move_cost_mod": 3,
     "coverage": 50,
     "concealment": 50,
     "comfort": 1,
     "floor_bedding_warmth": 200,
-    "required_str": 3,
+    "required_str": 2,
     "deconstruct": { "items": [ { "item": "box_large_reinforced", "count": 1 } ] },
     "max_volume": "324 L",
     "deployed_item": "box_large_reinforced",
     "examine_action": "deployed_furniture",
     "flags": [ "TRANSPARENT", "FLAMMABLE_ASH", "PLACE_ITEM", "ORGANIC", "EASY_DECONSTRUCT", "HIDE_PLACE", "NO_SIGHT", "CONTAINER" ],
     "bash": {
-      "str_min": 3,
-      "str_max": 16,
+      "str_min": 4,
+      "str_max": 12,
       "sound": "crumple!",
       "sound_fail": "thud.",
       "items": [ { "item": "cardboard", "count": [ 300, 360 ] } ]
@@ -395,7 +395,8 @@
     "lockpick_result": "f_gunsafe_o",
     "lockpick_message": "With a satisfying click, the lock on the gun safe door opens.",
     "examine_action": "locked_object_pickable",
-    "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
+    "hacksaw": { "result": "f_gunsafe_o", "duration": "45 minutes", "message": "You finish cutting the metal." },
+    "oxytorch": { "result": "f_gunsafe_o", "duration": "30 seconds" },
     "bash": {
       "str_min": 50,
       "str_max": 200,
@@ -422,7 +423,8 @@
     "required_str": 14,
     "max_volume": "250 L",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
-    "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
+    "hacksaw": { "result": "f_gunsafe_o", "duration": "45 minutes", "message": "You finish cutting the metal." },
+    "oxytorch": { "result": "f_gunsafe_o", "duration": "30 seconds" },
     "bash": {
       "str_min": 50,
       "str_max": 200,
@@ -449,7 +451,8 @@
     "required_str": 14,
     "max_volume": "250 L",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
-    "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
+    "hacksaw": { "result": "f_gunsafe_o", "duration": "45 minutes", "message": "You finish cutting the metal." },
+    "oxytorch": { "result": "f_gunsafe_o", "duration": "30 seconds" },
     "examine_action": "gunsafe_el",
     "bash": {
       "str_min": 50,
@@ -481,7 +484,8 @@
         { "item": "sheet_metal", "count": [ 1, 2 ] },
         { "item": "sheet_metal_small", "count": [ 0, 4 ] },
         { "item": "lock", "count": [ 0, 1 ] },
-        { "item": "pipe", "count": [ 4, 8 ] }
+        { "item": "nuts_bolts", "count": [ 2, 6 ] },
+        { "item": "pipe", "count": [ 2, 4 ] }
       ]
     },
     "max_volume": "500 L",
@@ -493,7 +497,9 @@
       "items": [
         { "item": "scrap", "count": [ 2, 8 ] },
         { "item": "steel_fragment", "count": [ 2, 4 ] },
-        { "item": "sheet_metal_small", "count": [ 6, 10 ] },
+        { "item": "sheet_metal_small", "count": [ 3, 5 ] },
+        { "item": "nuts_bolts", "count": [ 0, 3 ] },
+        { "item": "sheet_metal", "count": [ 0, 1 ] },
         { "item": "pipe", "count": [ 0, 1 ] }
       ]
     }
@@ -576,13 +582,13 @@
     "concealment": 70,
     "required_str": 8,
     "hacksaw": {
-      "duration": "2 minutes",
+      "duration": "4 minutes",
       "message": "You finish cutting the metal.",
       "byproducts": [ { "item": "pipe", "count": [ 1, 3 ] }, { "item": "steel_fragment", "count": 1 } ]
     },
     "flags": [ "TRANSPARENT", "FLAMMABLE_HARD", "PLACE_ITEM", "BLOCKSDOOR", "MOUNTABLE" ],
     "rotates_to": "INDOORFLOOR",
-    "oxytorch": { "duration": "1 seconds", "byproducts": [ { "item": "steel_fragment", "count": [ 2, 6 ] } ] },
+    "oxytorch": { "duration": "20 seconds", "byproducts": [ { "item": "steel_fragment", "count": [ 2, 6 ] } ] },
     "deconstruct": {
       "items": [
         { "item": "pipe", "count": [ 6, 12 ] },
@@ -758,7 +764,8 @@
     "required_str": 14,
     "max_volume": "250 L",
     "flags": [ "TRANSPARENT", "CONTAINER", "SEALED", "PLACE_ITEM", "MOUNTABLE" ],
-    "oxytorch": { "result": "f_safe_o", "duration": "14 seconds" },
+    "hacksaw": { "duration": "60 minutes", "message": "You finish cutting the metal." },
+    "oxytorch": { "result": "f_safe_o", "duration": "40 seconds" },
     "examine_action": "safe",
     "bash": {
       "str_min": 60,

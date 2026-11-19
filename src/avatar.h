@@ -3,6 +3,7 @@
 #define CATA_SRC_AVATAR_H
 
 #include <array>
+#include <cstdint>
 #include <list>
 #include <map>
 #include <memory>
@@ -373,10 +374,21 @@ class avatar : public Character
         std::set<character_id> follower_ids;
 
         mutable bool aim_cache_dirty = true;
+        // dirty the aim cache and record that the aim cone may have changed
+        void mark_aim_cache_dirty();
+        // changes each time mark_aim_cache_dirty runs
+        uint64_t aim_generation() const {
+            return aim_cache_generation;
+        }
 
         const mood_face_id &character_mood_face( bool clear_cache = false ) const;
 
     private:
+        uint64_t aim_cache_generation = 0;
+        std::map<char, itype_id> assigned_invlet;
+        invlet_favorites invlet_cache;
+        char find_usable_cached_invlet( const itype_id &item_type );
+
         npc &get_shadow_npc();
 
         // The name used to generate save filenames for this avatar. Not serialized in json.

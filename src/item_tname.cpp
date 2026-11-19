@@ -7,6 +7,7 @@
 #include "avatar.h"
 #include "calendar.h"
 #include "cata_utility.h"
+#include "city.h"
 #include "color.h"
 #include "coordinates.h"
 #include "debug.h"
@@ -22,6 +23,7 @@
 #include "map.h"
 #include "mutation.h"
 #include "options.h"
+#include "overmapbuffer.h"
 #include "point.h"
 #include "recipe.h"
 #include "relic.h"
@@ -34,6 +36,7 @@
 #include "units.h"
 
 static const flag_id json_flag_HINT_THE_LOCATION( "HINT_THE_LOCATION" );
+static const flag_id json_flag_LOCATION_PRECISE_CLOSEST_CITY( "LOCATION_PRECISE_CLOSEST_CITY" );
 
 static const itype_id itype_barrel_small( "barrel_small" );
 static const itype_id itype_disassembly( "disassembly" );
@@ -122,15 +125,6 @@ std::string durability( item const &it, unsigned int /* quantity */,
     return {};
 }
 
-std::string wheel_diameter( item const &it, unsigned int /* quantity */,
-                            segment_bitset const &/* segments */ )
-{
-    if( it.is_wheel() && it.type->wheel->diameter > 0 ) {
-        return string_format( pgettext( "vehicle adjective", "%d\" " ), it.type->wheel->diameter );
-    }
-    return {};
-}
-
 std::string burn( item const &it, unsigned int /* quantity */,
                   segment_bitset const &/* segments */ )
 {
@@ -184,10 +178,10 @@ std::string mods( item const &it, unsigned int /* quantity */,
     }
     if( ( ( it.is_gun() || it.is_tool() || it.is_magazine() ) ) ||
         it.get_contents().has_additional_pockets() ) {
-
         for( const item *mod : it.is_gun() ? it.gunmods() : it.toolmods() ) {
-            if( !it.type->gun || !it.type->gun->built_in_mods.count( mod->typeId() ) ||
-                !it.type->gun->default_mods.count( mod->typeId() ) ) {
+            if( !mod->has_flag( flag_IRREMOVABLE ) &&
+                ( !it.type->gun || !it.type->gun->built_in_mods.count( mod->typeId() ) ||
+                  !it.type->gun->default_mods.count( mod->typeId() ) ) ) {
                 amt++;
             }
         }
@@ -362,6 +356,24 @@ std::string location_hint( item const &it, unsigned int /* quantity */,
     return {};
 }
 
+std::string location_closest_city( item const &it, unsigned int /* quantity */,
+                                   segment_bitset const &/* segments */ )
+{
+    if( it.has_flag( json_flag_LOCATION_PRECISE_CLOSEST_CITY ) ) {
+        const tripoint_abs_ms map_pos_ms = it.get_var( "spawn_location", tripoint_abs_ms::invalid );
+        city_reference closest_city = city_reference::invalid;
+        if( !map_pos_ms.is_invalid() ) {
+            const tripoint_abs_omt map_pos_omt = project_to<coords::omt>( map_pos_ms );
+            const tripoint_abs_sm map_pos = project_to<coords::sm>( map_pos_omt );
+            closest_city = overmap_buffer.closest_city( map_pos );
+        }
+        if( closest_city.city != nullptr ) {
+            return string_format( ", %s", closest_city.city->name );
+        }
+    }
+    return {};
+}
+
 std::string ethereal( item const &it, unsigned int /* quantity */,
                       segment_bitset const &/* segments */ )
 {
@@ -376,9 +388,7 @@ std::string food_status( item const &it, unsigned int /* quantity */,
 {
     std::string tagtext;
     if( it.goes_bad() || it.is_food() ) {
-        if( it.has_own_flag( flag_DIRTY ) ) {
-            tagtext += _( " (dirty)" );
-        } else if( it.rotten() ) {
+        if( it.rotten() ) {
             tagtext += _( " (rotten)" );
         } else if( it.has_flag( flag_MUSHY ) ) {
             tagtext += _( " (mushy)" );
@@ -665,7 +675,6 @@ constexpr std::array<decl_f_print_segment *, num_segments> get_segs_array()
     arr[static_cast<size_t>( tname::segments::OVERHEAT ) ] = overheat_symbol;
     arr[static_cast<size_t>( tname::segments::FAVORITE_PRE ) ] = pre_asterisk;
     arr[static_cast<size_t>( tname::segments::DURABILITY ) ] = durability;
-    arr[static_cast<size_t>( tname::segments::WHEEL_DIAMETER ) ] = wheel_diameter;
     arr[static_cast<size_t>( tname::segments::BURN ) ] = burn;
     arr[static_cast<size_t>( tname::segments::WEAPON_MODS ) ] = weapon_mods;
     arr[static_cast<size_t>( tname::segments::CUSTOM_ITEM_PREFIX )] = custom_item_prefix;
@@ -681,6 +690,7 @@ constexpr std::array<decl_f_print_segment *, num_segments> get_segs_array()
     arr[static_cast<size_t>( tname::segments::FOOD_IRRADIATED ) ] = food_irradiated;
     arr[static_cast<size_t>( tname::segments::TEMPERATURE ) ] = temperature;
     arr[static_cast<size_t>( tname::segments::LOCATION_HINT ) ] = location_hint;
+    arr[static_cast<size_t>( tname::segments::LOCATION_PRECISE_CLOSEST_CITY ) ] = location_closest_city;
     arr[static_cast<size_t>( tname::segments::CLOTHING_SIZE ) ] = clothing_size;
     arr[static_cast<size_t>( tname::segments::ETHEREAL ) ] = ethereal;
     arr[static_cast<size_t>( tname::segments::FILTHY ) ] = filthy;
@@ -730,7 +740,6 @@ std::string enum_to_string<tname::segments>( tname::segments seg )
         case tname::segments::OVERHEAT: return "OVERHEAT";
         case tname::segments::FAVORITE_PRE: return "FAVORITE_PRE";
         case tname::segments::DURABILITY: return "DURABILITY";
-        case tname::segments::WHEEL_DIAMETER: return "WHEEL_DIAMETER";
         case tname::segments::BURN: return "BURN";
         case tname::segments::WEAPON_MODS: return "WEAPON_MODS";
         case tname::segments::CUSTOM_ITEM_PREFIX: return "CUSTOM_ITEM_PREFIX";
@@ -746,6 +755,7 @@ std::string enum_to_string<tname::segments>( tname::segments seg )
         case tname::segments::FOOD_IRRADIATED: return "FOOD_IRRADIATED";
         case tname::segments::TEMPERATURE: return "TEMPERATURE";
         case tname::segments::LOCATION_HINT: return "LOCATION_HINT";
+        case tname::segments::LOCATION_PRECISE_CLOSEST_CITY: return "LOCATION_PRECISE_CLOSEST_CITY";
         case tname::segments::CLOTHING_SIZE: return "CLOTHING_SIZE";
         case tname::segments::ETHEREAL: return "ETHEREAL";
         case tname::segments::FILTHY: return "FILTHY";
@@ -832,7 +842,7 @@ tname_set const &get_tname_set()
         }
 
         //~ You can use this string to change the order of item name segments. The default order is:
-        //~ FAULTS DIRT OVERHEAT FAVORITE_PRE DURABILITY WHEEL_DIAMETER BURN WEAPON_MODS
+        //~ FAULTS DIRT OVERHEAT FAVORITE_PRE DURABILITY BURN WEAPON_MODS
         //~ CUSTOM_ITEM_PREFIX TYPE CATEGORY CUSTOM_ITEM_SUFFIX MODS CRAFT WHITEBLACKLIST CHARGES
         //~ FOOD_TRAITS FOOD_STATUS FOOD_IRRADIATED TEMPERATURE LOCATION_HINT CLOTHING_SIZE ETHEREAL
         //~ FILTHY BROKEN CBM_STATUS UPS TAGS VARS WETNESS ACTIVE SEALED FAVORITE_POST RELIC LINK

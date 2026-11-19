@@ -2,6 +2,7 @@
 
 
 import biplist
+import glob
 import os.path
 
 # defines is provided by dmgbuild, but pretend to define it here for the
@@ -34,13 +35,19 @@ def icon_from_app(app_path):
 # volume_name = 'Test'
 
 # Volume format (see hdiutil create -help)
-format = defines.get('format', 'UDBZ')
+format = defines.get('format', 'UDZO')
 
 # Volume size (must be large enough for your files)
 size = defines.get('size', '500M')
 
 # Files to include
-files = [application]
+#
+# Tiles builds stage LICENSE-SDL*.txt / LICENSE-vendored-*.txt at the repo
+# root (dmgbuild CWD); ship them in the DMG. Empty glob on a local build.
+license_files = sorted(
+    glob.glob('LICENSE-SDL*.txt') + glob.glob('LICENSE-vendored-*.txt')
+)
+files = [application] + license_files
 
 # Symlinks to create
 symlinks = {'Applications': '/Applications'}

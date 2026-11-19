@@ -19,6 +19,7 @@
 #include "achievement.h"
 #include "activity_type.h"
 #include "action.h"
+#include "activity_actor_definitions.h"
 #include "auto_pickup.h"
 #include "avatar.h"
 #include "bionics.h"
@@ -111,6 +112,7 @@
 
 static const activity_id ACT_AIM( "ACT_AIM" );
 static const activity_id ACT_SOCIALIZE( "ACT_SOCIALIZE" );
+static const activity_id ACT_TARGET_PRACTICE( "ACT_TARGET_PRACTICE" );
 static const activity_id ACT_TRAIN( "ACT_TRAIN" );
 static const activity_id ACT_WAIT_NPC( "ACT_WAIT_NPC" );
 
@@ -993,7 +995,7 @@ static void tell_magic_veh_stop_following()
     }
 }
 
-void game::chat()
+void game::chat( const std::optional<tripoint_bub_ms> &p )
 {
     map &here = get_map();
 
@@ -1004,24 +1006,37 @@ void game::chat()
         // TODO: Get rid of the z-level check when z-level vision gets "better"
         return ( guy.is_npc() || ( guy.is_monster() &&
                                    guy.as_monster()->has_flag( mon_flag_CONVERSATION ) &&
-                                   !guy.as_monster()->type->chat_topics.empty() ) ) && u.posz() == guy.posz() &&
-               u.sees( here, guy.pos_bub( here ) ) &&
-               rl_dist( u.pos_abs(), guy.pos_abs() ) <= SEEX * 2;
+                                   !guy.as_monster()->type->chat_topics.empty() ) ) && player_character.posz() == guy.posz() &&
+               player_character.sees( here, guy.pos_bub( here ) ) &&
+               rl_dist( player_character.pos_abs(), guy.pos_abs() ) <= SEEX * 2;
     } );
+
+    if( p.has_value() ) {
+        Creature *target = get_creature_tracker().creature_at( *p );
+        if( target ) {
+            auto it = std::find( available.begin(), available.end(), target );
+            if( it != available.end() ) {
+                get_avatar().talk_to( get_talker_for( **it ) );
+                return;
+            }
+        }
+    }
+
     const int available_count = available.size();
     const std::vector<npc *> followers = get_npcs_if( [&]( const npc & guy ) {
-        return guy.is_player_ally() && guy.is_following() && guy.can_hear( u.pos_bub(), volume );
+        return guy.is_player_ally() && guy.is_following() &&
+               guy.can_hear( player_character.pos_bub(), volume );
     } );
     const int follower_count = followers.size();
     const std::vector<npc *> guards = get_npcs_if( [&]( const npc & guy ) {
         return guy.mission == NPC_MISSION_GUARD_ALLY &&
                guy.companion_mission_role_id != "FACTION_CAMP" &&
-               guy.can_hear( u.pos_bub(), volume );
+               guy.can_hear( player_character.pos_bub(), volume );
     } );
     const int guard_count = guards.size();
 
     const std::vector<npc *> available_for_activities = get_npcs_if( [&]( const npc & guy ) {
-        return guy.is_player_ally() && guy.can_hear( u.pos_bub(), volume ) &&
+        return guy.is_player_ally() && guy.can_hear( player_character.pos_bub(), volume ) &&
                guy.companion_mission_role_id != "FACTION CAMP";
     } );
     const int available_for_activities_count = available_for_activities.size();
@@ -4916,6 +4931,7 @@ talk_effect_fun_t::func f_bulk_trade_accept( const JsonObject &jo, std::string_v
             // Now let's actually transfer the items!
             for( item *transferred : items_to_transfer ) {
                 item transfer_copy( *transferred );
+                transfer_copy.set_owner( *buyer->get_character() );
                 buyer->i_add_or_drop( transfer_copy );
 
                 auto remove_items_filter = [&]( const item & it ) {
@@ -4931,6 +4947,7 @@ talk_effect_fun_t::func f_bulk_trade_accept( const JsonObject &jo, std::string_v
             int number_transferred = 0;
             for( item *transferred : items_to_transfer ) {
                 item transfer_copy( *transferred );
+                transfer_copy.set_owner( *buyer->get_character() );
                 buyer->i_add_or_drop( transfer_copy );
 
                 // Count now, while the item still exists
@@ -5217,12 +5234,17 @@ talk_effect_fun_t::func f_message( const JsonObject &jo, std::string_view member
 talk_effect_fun_t::func f_assign_activity( const JsonObject &jo, std::string_view member,
         std::string_view, bool is_npc )
 {
-    duration_or_var dov = get_duration_or_var( jo, "duration", true );
+    duration_or_var dov = get_duration_or_var( jo, "duration", false );
     str_or_var act = get_str_or_var( jo.get_member( member ), member, true );
     return [is_npc, dov, act]( dialogue & d ) {
         Character *target = d.actor( is_npc )->get_character();
         if( target ) {
-            target->assign_activity( activity_id( act.evaluate( d ) ), to_moves<int>( dov.evaluate( d ) ) );
+            const activity_id a = activity_id( act.evaluate( d ) );
+            if( a == ACT_TARGET_PRACTICE ) {
+                target->assign_activity( target_practice_activity_actor() );
+            } else {
+                target->assign_activity( a, to_moves<int>( dov.evaluate( d ) ) );
+            }
         }
     };
 }

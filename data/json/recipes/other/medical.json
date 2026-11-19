@@ -315,7 +315,7 @@
     "skill_used": "firstaid",
     "difficulty": 3,
     "time": "2 m 30 s",
-    "reversible": true,
+    "reversible": false,
     "autolearn": true,
     "qualities": [ { "id": "SEW", "level": 1 } ],
     "//": "This is just a container, a tube pushed into your mouth, and knowing how to get a good flow rate without killing yourself or waking up in the middle of your chest surgery. Suitable only for inhalative anesthetics. See https://github.com/CleverRaven/Cataclysm-DDA/pull/44899 ",

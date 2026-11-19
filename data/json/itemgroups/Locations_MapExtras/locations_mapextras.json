@@ -202,8 +202,7 @@
       { "item": "camera", "container-item": "camera_bag", "prob": 5, "charges": [ 0, 150 ] },
       [ "camera_bag", 10 ],
       [ "chem_hexamine", 5 ],
-      { "item": "ar_glasses_basic", "prob": 1, "charges": [ 0, -1 ] },
-      { "item": "ar_glasses_advanced", "prob": 1, "charges": [ 0, -1 ] }
+      { "item": "smart_glasses", "prob": 1, "charges": [ 0, -1 ] }
     ]
   },
   {

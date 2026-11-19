@@ -248,6 +248,7 @@
       [ "cane", 3 ],
       [ "teapot", 5 ],
       [ "pan", 20 ],
+      { "item": "harmonica", "prob": 1 },
       [ "dutch_oven", 5 ],
       [ "waffleiron", 25 ],
       [ "binoculars", 20 ],
@@ -318,7 +319,7 @@
       { "item": "water_purifier", "prob": 5 },
       { "item": "radio", "prob": 20, "charges": [ 0, 100 ] },
       [ "beartrap", 5 ],
-      { "item": "UPS_OFF", "prob": 8, "charges": [ 0, 1000 ] },
+      { "group": "ups_power", "prob": 8 },
       [ "string_36", 40 ],
       [ "longbow", 5 ],
       [ "compbow", 1 ],
@@ -439,8 +440,7 @@
       [ "bottle_folding", 10 ],
       { "distribution": [ { "group": "full_survival_kit" }, { "group": "used_survival_kit" } ], "prob": 30 },
       { "group": "premium_contents", "prob": 3 },
-      { "item": "ar_glasses_basic", "prob": 1, "charges": [ 0, -1 ] },
-      { "item": "ar_glasses_advanced", "prob": 1, "charges": [ 0, -1 ] },
+      { "item": "smart_glasses", "prob": 1, "charges": [ 0, -1 ] },
       [ "light_snare_kit", 5 ],
       [ "camping_multitool", 5 ]
     ]
@@ -463,6 +463,7 @@
       [ "pot_copper", 5 ],
       [ "teapot", 5 ],
       [ "pan", 20 ],
+      { "item": "harmonica", "prob": 1 },
       [ "binoculars", 20 ],
       { "item": "hotplate", "prob": 10 },
       { "item": "popcan_stove", "prob": 10, "charges": [ 0, 500 ] },
@@ -658,7 +659,7 @@
   },
   {
     "type": "item_group",
-    "//": "oriental games, for dojo location.",
+    "//": "Board games for dojos.",
     "id": "games_dojo",
     "items": [ [ "go", 50 ], [ "shogi", 50 ], [ "mahjong", 50 ], [ "chaturanga", 25 ] ]
   },

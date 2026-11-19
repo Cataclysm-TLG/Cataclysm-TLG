@@ -88,7 +88,7 @@
     "type": "LOOT_ZONE",
     "name": "No NPC Pickup",
     "display_field": "fd_no_npc_pickup_zone",
-    "description": "Friendly NPCs don't pickup items inside the zone."
+    "description": "Friendly NPCs don't pick up items inside the zone."
   },
   {
     "id": "NPC_NO_INVESTIGATE",
@@ -123,6 +123,7 @@
     "id": "ZONE_START_POINT",
     "type": "LOOT_ZONE",
     "name": "Start Point",
+    "hidden": true,
     "display_field": "fd_start_point_zone",
     "description": "A prioritized spawn point."
   },

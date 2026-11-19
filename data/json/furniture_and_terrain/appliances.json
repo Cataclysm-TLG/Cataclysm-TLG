@@ -72,6 +72,7 @@
     "description": "A bulky upright arcade cabinet, brightly painted and slightly worn with age.  Ready to be played.",
     "color": "red",
     "broken_color": "red",
+    "light_color": [ 120, 200, 255 ],
     "damage_modifier": 10,
     "damage_reduction": { "all": 10 },
     "durability": 80,

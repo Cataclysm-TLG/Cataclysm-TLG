@@ -19,7 +19,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 11 ] ]
     ]
@@ -43,7 +43,7 @@
       [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 5 ] ]
     ]
@@ -69,7 +69,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 11 ] ]
     ]
@@ -95,7 +95,7 @@
       [ [ "hose", 2 ] ],
       [ [ "pipe_fittings", 12 ] ],
       [ [ "thermostat", 2 ] ],
-      [ [ "motor_tiny", 2 ] ],
+      [ [ "motor_small", 2 ] ],
       [ [ "refrigerant_tank", 2 ] ],
       [ [ "plastic_chunk", 22 ] ]
     ]
@@ -120,7 +120,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 18 ] ]
     ]
@@ -146,7 +146,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 26 ] ]
     ]
@@ -171,7 +171,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 3 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 7 ] ]
     ]
@@ -195,7 +195,7 @@
       [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 5 ] ]
     ]
@@ -219,7 +219,7 @@
       [ [ "cable", 2 ] ],
       [ [ "hose", 1 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 8 ] ]
     ]
@@ -244,7 +244,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 11 ] ]
     ]
@@ -269,7 +269,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 18 ] ]
     ]
@@ -295,7 +295,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 15 ] ]
     ]
@@ -321,7 +321,7 @@
       [ [ "hose", 1 ] ],
       [ [ "pipe_fittings", 6 ] ],
       [ [ "thermostat", 1 ] ],
-      [ [ "motor_tiny", 1 ] ],
+      [ [ "motor_small", 1 ] ],
       [ [ "refrigerant_tank", 1 ] ],
       [ [ "plastic_chunk", 16 ] ]
     ]

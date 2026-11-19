@@ -260,8 +260,8 @@
         "topic": "TALK_TACOMA_Pablo_Bakery-RootCellar1",
         "condition": {
           "and": [
-            { "math": [ "u_skill('survival')", ">=", "4" ] },
-            { "math": [ "u_skill('fabrication')", ">=", "4" ] },
+            { "math": [ "u_skill('survival') >= 4" ] },
+            { "math": [ "u_skill('fabrication') >= 4" ] },
             { "u_has_var": "rootcellar_tacoma_bakery", "value": "known" },
             { "not": { "npc_has_var": "rootcellar_tacoma_bakery", "value": "helped" } }
           ]

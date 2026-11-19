@@ -40,7 +40,7 @@
     "symbol": ";",
     "color": "light_gray",
     "use_action": { "target": "c4armed", "set_timer": true, "menu_text": "Activate", "type": "transform" },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ALLOWS_REMOTE_USE", "NPC_ACTIVATE" ]
   },
   {
     "id": "c4armed",
@@ -58,7 +58,7 @@
     "color": "light_gray",
     "countdown_action": { "type": "explosion", "explosion": { "power": 1960 } },
     "countdown_interval": "6 seconds",
-    "flags": [ "NPC_THROW_NOW", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "SPAWN_ACTIVE", "DANGEROUS" ]
   },
   {
     "id": "dynamite",
@@ -86,7 +86,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "NPC_ACTIVATE", "BOMB" ]
   },
   {
     "id": "dynamite_act",
@@ -97,7 +97,7 @@
     "copy-from": "dynamite",
     "symbol": "*",
     "color": "red",
-    "flags": [ "TRADER_AVOID", "BOMB", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "SPAWN_ACTIVE", "DANGEROUS", "WATER_EXTINGUISH" ],
     "countdown_action": { "type": "explosion", "explosion": { "power": 135 } }
   },
   {
@@ -126,7 +126,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ]
   },
   {
     "id": "dynamite_bundle_act",
@@ -137,7 +137,7 @@
     "copy-from": "dynamite",
     "symbol": "*",
     "color": "red",
-    "flags": [ "TRADER_AVOID", "BOMB", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "SPAWN_ACTIVE", "DANGEROUS", "WATER_EXTINGUISH" ],
     "countdown_action": { "type": "explosion", "explosion": { "power": 1080 } }
   },
   {
@@ -165,7 +165,7 @@
       "menu_text": "Arm",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "WATER_BREAK" ],
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "WATER_BREAK" ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -192,7 +192,7 @@
       "emp_blast_radius": 10,
       "explosion": { "power": 600, "shrapnel": { "casing_mass": 3214, "fragment_mass": 0.5 } }
     },
-    "flags": [ "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE", "DANGEROUS" ],
     "melee_damage": { "bash": 12 }
   },
   {
@@ -236,7 +236,7 @@
     "color": "red",
     "tick_action": [ { "type": "sound", "sound_message": "ssss…", "sound_volume": 4, "sound_id": "misc", "sound_variant": "lit_fuse" } ],
     "countdown_action": { "type": "sound", "sound_message": "Bang!", "sound_volume": 40, "sound_id": "explosion", "sound_variant": "small" },
-    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "SPAWN_ACTIVE", "DANGEROUS" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -279,7 +279,7 @@
     "symbol": "*",
     "color": "red",
     "tick_action": [ "FIRECRACKER_PACK_ACT" ],
-    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "SPAWN_ACTIVE", "DANGEROUS" ]
   },
   {
     "id": "flashbang",
@@ -304,7 +304,7 @@
       "menu_text": "Arm",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ],
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -317,7 +317,7 @@
     "price": "0 cent",
     "price_postapoc": "0 cent",
     "countdown_action": { "type": "explosion", "do_flashbang": true },
-    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "SPAWN_ACTIVE", "DANGEROUS" ]
   },
   {
     "id": "fungicidalbomb",
@@ -340,7 +340,7 @@
     "looks_like": "smokebomb_act",
     "type": "ITEM",
     "category": "weapons",
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "symbol": "*",
@@ -351,7 +351,7 @@
     "description": "This fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_fungicidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "fungicidalbomb_makeshift",
@@ -375,7 +375,7 @@
     "looks_like": "smokebomb_act",
     "type": "ITEM",
     "category": "weapons",
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "symbol": "*",
@@ -386,7 +386,7 @@
     "description": "This makeshift fungicidal bomb has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_small_fungicidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "gasbomb_makeshift",
@@ -394,7 +394,7 @@
     "type": "ITEM",
     "name": { "str": "improvised gas grenade" },
     "description": "A crude gas bomb made using household chemicals.  Once the pin is pulled, it will begin emitting a highly toxic gas.",
-    "weight": "1264 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "price": "5 USD",
     "price_postapoc": "2 USD 50 cent",
@@ -406,7 +406,7 @@
       "target_timer": "10 seconds",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ]
   },
   {
     "id": "gasbomb_makeshift_act",
@@ -415,7 +415,7 @@
     "category": "weapons",
     "name": { "str": "live improvised gas grenade" },
     "description": "This canister of poison gas has been unsealed, and is (or will shortly be) expelling highly toxic gas.  You should consider getting rid of it soon.",
-    "weight": "1264 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -425,7 +425,7 @@
     "color": "dark_gray",
     "revert_to": "canister_empty",
     "emits": [ "emit_small_toxic_stream" ],
-    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -451,7 +451,7 @@
       "menu_text": "Arm",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ],
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -471,7 +471,7 @@
     "color": "green",
     "countdown_action": { "type": "explosion", "explosion": { "power": 240, "shrapnel": { "casing_mass": 217, "fragment_mass": 0.02 } } },
     "countdown_interval": "5 seconds",
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -499,7 +499,7 @@
       "menu_text": "Arm",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "WATER_BREAK" ],
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "WATER_BREAK", "NPC_ACTIVATE", "GRENADE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -525,7 +525,7 @@
       "fields_max_intensity": 10,
       "emp_blast_radius": 4
     },
-    "flags": [ "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "DANGEROUS", "TRADER_AVOID", "WATER_BREAK", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -535,7 +535,7 @@
     "category": "weapons",
     "name": { "str": "incendiary grenade" },
     "description": "A military-grade incendiary hand grenade.  Use this item to pull the pin and start the fuse.  You will then have five seconds before it explodes into a raging inferno; throwing it would be a good idea.",
-    "weight": "180 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "price": "20 USD",
     "price_postapoc": "15 USD",
@@ -551,7 +551,7 @@
       "menu_text": "Arm",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ACT_IN_FIRE", "GRENADE" ],
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "ACT_IN_FIRE", "NPC_ACTIVATE", "GRENADE" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -561,7 +561,7 @@
     "category": "weapons",
     "name": { "str": "live incendiary grenade" },
     "description": "An active incendiary grenade, likely to burst into an inferno any second now.  Better throw it!",
-    "weight": "180 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "price": "0 cent",
     "price_postapoc": "0 cent",
@@ -571,7 +571,7 @@
     "color": "light_red",
     "revert_to": "canister_empty",
     "countdown_action": "GRENADE_INC_ACT",
-    "flags": [ "ACT_IN_FIRE", "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "ACT_IN_FIRE", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 6 }
   },
   {
@@ -580,7 +580,7 @@
     "type": "ITEM",
     "category": "weapons",
     "name": { "str": "tear gas grenade" },
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "symbol": "*",
@@ -596,14 +596,14 @@
       "target_timer": "50 seconds",
       "target": "gasbomb_act"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ]
   },
   {
     "id": "gasbomb_act",
     "looks_like": "smokebomb_act",
     "type": "ITEM",
     "name": { "str": "live tear gas grenade" },
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "symbol": "*",
@@ -614,7 +614,7 @@
     "use_action": { "type": "message", "message": "You've already pulled the pin, try throwing it instead.", "name": "Pull pin" },
     "emits": [ "emit_tear_gas_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "bug_bomb",
@@ -623,7 +623,7 @@
     "name": { "str": "bug bomb" },
     "price": "15 USD",
     "price_postapoc": "2 USD",
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "description": "A pest control device designed to kill bugs dead by fumigating an entire room.  The label instructs that you activate it, then drop it and quickly leave the area.  The fogger will dispense its payload over four minutes.",
@@ -634,14 +634,15 @@
       "type": "transform",
       "target_timer": "240 seconds",
       "target": "bug_bomb_active"
-    }
+    },
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ]
   },
   {
     "id": "bug_bomb_active",
     "looks_like": "smokebomb_act",
     "type": "ITEM",
     "category": "weapons",
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "symbol": "*",
@@ -652,7 +653,7 @@
     "description": "This bug bomb has had its valve opened and is (or will shortly be) spraying a continuous stream of insecticidal gas.  While it's designed to kill bugs, it's probably not exactly healthy for anybody else.",
     "emits": [ "emit_insecticidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "insecticidalbomb_makeshift",
@@ -669,14 +670,15 @@
       "type": "transform",
       "target_timer": "100 seconds",
       "target": "insecticidalbomb_makeshift_act"
-    }
+    },
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE" ]
   },
   {
     "id": "insecticidalbomb_makeshift_act",
     "looks_like": "smokebomb_act",
     "type": "ITEM",
     "category": "weapons",
-    "weight": "1058 g",
+    "weight": "300 g",
     "volume": "270 ml",
     "material": [ "steel" ],
     "symbol": "*",
@@ -687,7 +689,7 @@
     "description": "This makeshift insecticidal grenade has had its pin removed and is (or will shortly be) expelling highly toxic gas.",
     "emits": [ "emit_small_insecticidal_stream" ],
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW",  "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "LAW_Packed",
@@ -761,7 +763,7 @@
       "fields_max_intensity": 3,
       "explosion": { "power": 9000000 }
     },
-    "flags": [ "LEAK_DAM", "RADIOACTIVE", "TRADER_AVOID", "SPAWN_ACTIVE" ]
+    "flags": [ "LEAK_DAM", "RADIOACTIVE", "TRADER_AVOID", "SPAWN_ACTIVE", "DANGEROUS", "NPC_THROW_NOW" ]
   },
   {
     "id": "molotov",
@@ -788,7 +790,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "NPC_ACTIVATE", "NO_REPAIR" ],
+    "flags": [ "NPC_ACTIVATE", "NO_REPAIR", "ACT_IN_FIRE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -809,7 +811,7 @@
     "color": "light_gray",
     "tick_action": [ "MOLOTOV_LIT" ],
     "light": 15,
-    "flags": [ "TRADER_AVOID", "NPC_THROW_NOW", "NO_REPAIR", "WATER_EXTINGUISH", "SPAWN_ACTIVE" ],
+    "flags": [ "DANGEROUS", "TRADER_AVOID", "NPC_THROW_NOW", "NO_REPAIR", "WATER_EXTINGUISH", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -855,7 +857,7 @@
     "symbol": "*",
     "color": "yellow",
     "countdown_action": { "type": "explosion", "draw_explosion_radius": 4, "draw_explosion_color": "cyan", "scrambler_blast_radius": 4 },
-    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
+    "flags": [ "NPC_THROW_NOW", "DANGEROUS", "TRADER_AVOID", "SPAWN_ACTIVE" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -874,7 +876,8 @@
       "type": "transform",
       "target_timer": "5 seconds",
       "target": "smokebomb_act"
-    }
+    },
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ]
   },
   {
     "id": "smokebomb_act",
@@ -885,7 +888,7 @@
     "emits": [ "emit_smoke_stream" ],
     "countdown_action": { "type": "transform", "target": "canister_empty" },
     "revert_to": "canister_empty",
-    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ]
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "tool_rocket_candy",
@@ -936,7 +939,7 @@
       "fields_max_intensity": 3,
       "explosion": { "power": 1 }
     },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -964,7 +967,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ]
   },
   {
     "id": "military_explosive_small_grenade_act",
@@ -975,7 +978,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.  Better throw it!",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 200, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "military_explosive_grenade",
@@ -1002,7 +1005,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ]
   },
   {
     "id": "military_explosive_grenade_act",
@@ -1013,7 +1016,7 @@
     "description": "The fuse on this improvised grenade is lit.  It will explode any second now.",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 300, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "military_explosive_pipebomb",
@@ -1054,7 +1057,7 @@
     "price": "0 cent",
     "color": "light_gray",
     "countdown_action": { "type": "explosion", "explosion": { "power": 400, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "military_explosive_bomb",
@@ -1095,7 +1098,7 @@
       "type": "explosion",
       "explosion": { "power": 6970, "shrapnel": { "casing_mass": 3000, "fragment_mass": 0.5, "drop": "scrap", "recovery": 20 } }
     },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "military_explosive_half_barrel_bomb",
@@ -1142,7 +1145,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 100000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1188,7 +1191,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 200000, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1216,7 +1219,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE", "GRENADE" ]
   },
   {
     "id": "small_homemade_grenade_act",
@@ -1227,7 +1230,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 100, "shrapnel": { "casing_mass": 200, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "homemade_grenade",
@@ -1252,7 +1255,7 @@
       "menu_text": "Ignite",
       "type": "transform"
     },
-    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "GRENADE", "NPC_ACTIVATE" ]
+    "flags": [ "RADIO_MODABLE", "RADIO_INVOKE_PROC", "BOMB", "NPC_ACTIVATE" ]
   },
   {
     "id": "homemade_grenade_act",
@@ -1263,7 +1266,7 @@
     "description": "The fuse on this improvised grenade is lit, and it will explode any second now.",
     "price": "0 cent",
     "countdown_action": { "type": "explosion", "explosion": { "power": 150, "shrapnel": { "casing_mass": 400, "fragment_mass": 0.4 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "NPC_THROW_NOW", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
   },
   {
     "id": "pipebomb",
@@ -1315,7 +1318,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 200, "shrapnel": { "casing_mass": 410, "fragment_mass": 0.5 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ],
     "melee_damage": { "bash": 5 }
   },
   {
@@ -1364,7 +1367,7 @@
       "type": "explosion",
       "explosion": { "power": 2320, "shrapnel": { "casing_mass": 3000, "fragment_mass": 0.5, "drop": "scrap", "recovery": 20 } }
     },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ]
   },
   {
     "id": "homemade_demolition_charge",
@@ -1411,7 +1414,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 2590 },
     "countdown_action": { "type": "explosion", "explosion": { "power": 2590 } },
-    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "SPAWN_ACTIVE", "NPC_THROW_NOW", "DANGEROUS" ],
     "melee_damage": { "bash": 4 }
   },
   {
@@ -1457,7 +1460,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 34400, "shrapnel": { "casing_mass": 12600, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1503,7 +1506,7 @@
     "explode_in_fire": true,
     "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } },
     "countdown_action": { "type": "explosion", "explosion": { "power": 69200, "shrapnel": { "casing_mass": 12000, "fragment_mass": 600 } } },
-    "flags": [ "BOMB", "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ],
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE", "NPC_THROW_NOW" ],
     "melee_damage": { "bash": 20 }
   },
   {
@@ -1520,5 +1523,64 @@
     "material": [ { "type": "plastic", "portion": 80 }, { "type": "powder", "portion": 20 } ],
     "symbol": "=",
     "color": "dark_gray"
+  },
+  {
+    "id": "debug_grenade",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "category": "weapons",
+    "looks_like": "grenade",
+    "name": { "str": "Test Grenade" },
+    "description": "A basic grenade for testing.",
+    "weight": "397 g",
+    "volume": "540 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "steel", "plastic" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "use_action": {
+      "need_wielding": true,
+      "target": "debug_grenade_act",
+      "msg": "You press the buttons on the sides of the null grenade.",
+      "target_timer": "5 seconds",
+      "menu_text": "Push buttons",
+      "type": "transform"
+    },
+    "flags": [ "BOMB", "RADIO_INVOKE_PROC", "RADIO_MODABLE", "GRENADE" ]
+  },
+  {
+    "id": "debug_grenade_act",
+    "type": "ITEM",
+    "subtypes": [ "TOOL" ],
+    "category": "weapons",
+    "name": { "str": "Active Test Grenade" },
+    "description": "A basic grenade for testing (it's active).",
+    "weight": "397 g",
+    "volume": "270 ml",
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "steel", "plastic" ],
+    "symbol": "*",
+    "color": "dark_gray",
+    "countdown_action": { "type": "cast_spell", "spell_id": "debug_spell_explosion", "no_fail": true, "level": 1 },
+    "countdown_interval": "5 seconds",
+    "flags": [ "TRADER_AVOID", "DANGEROUS", "SPAWN_ACTIVE" ]
+  },
+  {
+    "id": "debug_spell_explosion",
+    "type": "SPELL",
+    "name": "Test grenade spell",
+    "description": "Test spell for grenade explosions",
+    "valid_targets": [ "ground" ],
+    "effect": "attack",
+    "shape": "blast",
+    "difficulty": 1,
+    "max_level": 1,
+    "min_aoe": 5,
+    "max_aoe": 5,
+    "min_damage": 10,
+    "max_damage": 10,
+    "flags": [ "LOUD", "NO_PROJECTILE", "RANDOM_DURATION", "NO_HANDS", "NO_LEGS" ]
   }
 ]

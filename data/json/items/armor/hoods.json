@@ -219,15 +219,5 @@
     "name": { "str": "XS chainmail coif" },
     "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
     "extend": { "flags": [ "UNDERSIZE" ] }
-  },
-  {
-    "id": "chainmail_junk_coif",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "copy-from": "chainmail_coif",
-    "replace_materials": { "steel_chain": "budget_steel_chain" },
-    "name": { "str": "chainmail coif" },
-    "description": "A protective hood made of interlocking steel rings that drape down to cover the neck.  It is of poor quality.",
-    "delete": { "flags": [ "STURDY" ] }
   }
 ]

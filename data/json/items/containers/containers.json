@@ -164,7 +164,7 @@
     "category": "container",
     "name": { "str": "canvas sack" },
     "looks_like": "bag_plastic",
-    "description": "A large and sturdy canvas sack.  Smells faintly of soil and hard work.",
+    "description": "A large and sturdy canvas sack.",
     "weight": "415 g",
     "volume": "1 L",
     "price": "0 cent",
@@ -200,7 +200,7 @@
     "category": "container",
     "name": { "str": "plastic bag" },
     "looks_like": "bag_canvas",
-    "description": "An open plastic bag.  Essentially trash.",
+    "description": "A big plastic bag.",
     "weight": "5 g",
     "volume": "10 ml",
     "price": "0 cent",
@@ -2270,9 +2270,7 @@
   {
     "id": "flask_hip",
     "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "category": "clothing",
-    "name": { "str": "hip flask" },
+    "name": { "str": "flask" },
     "looks_like": "2lcanteen",
     "description": "A 250 mL metal flask with a hinged screw-on lid, commonly used to discreetly transport alcohol.",
     "weight": "270 g",
@@ -2294,39 +2292,9 @@
         "max_contains_weight": "1 kg"
       }
     ],
-    "sided": true,
-    "armor": [
-      {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ],
-        "coverage": 2,
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_hip_r", "leg_hip_l" ]
-      },
-      {
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ],
-        "coverage": 1,
-        "encumbrance": 1,
-        "covers": [ "gastropod_foot" ],
-        "specifically_covers": [ "gastropod_foot_upper" ]
-      },
-      {
-        "encumbrance": 2,
-        "coverage": 4,
-        "covers": [ "cephalopod_arm_2", "cephalopod_arm_5" ],
-        "specifically_covers": [ "cephalopod_arm_2_base", "cephalopod_arm_5_base" ],
-        "material": [ { "type": "steel", "covered_by_mat": 100, "thickness": 0.6 } ]
-      },
-      {
-        "encumbrance": 2,
-        "coverage": 14,
-        "covers": [ "crab_leg_1", "crab_leg_2" ],
-        "specifically_covers": [ "crab_leg_1_coxa", "crab_leg_2_coxa" ],
-        "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
-      }
-    ],
     "qualities": [ [ "BOIL", 1 ] ],
     "use_action": [ "HEAT_LIQUID_ITEMS" ],
-    "flags": [ "BELTED", "OVERSIZE", "WATER_FRIENDLY", "COLLAPSE_CONTENTS" ],
+    "flags": [ "COLLAPSE_CONTENTS" ],
     "melee_damage": { "bash": 3 }
   },
   {
@@ -2721,7 +2689,7 @@
         "specifically_covers": [ "torso_hanging_front" ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ]
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ]
   },
   {
     "id": "stomach_sealed",
@@ -2860,7 +2828,7 @@
         "material": [ { "type": "plastic", "covered_by_mat": 100, "thickness": 1.0 } ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "melee_damage": { "bash": 1 }
   },
   {
@@ -2896,7 +2864,7 @@
         "specifically_covers": [ "torso_hanging_front" ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "melee_damage": { "bash": 2 }
   },
   {
@@ -2932,7 +2900,7 @@
         "specifically_covers": [ "torso_hanging_front" ]
       }
     ],
-    "flags": [ "BELTED", "WATER_FRIENDLY" ],
+    "flags": [ "BELTED", "WATER_FRIENDLY", "OVERSIZE", "UNRESTRICTED" ],
     "melee_damage": { "bash": 3 }
   },
   {
@@ -2985,8 +2953,7 @@
     "type": "ITEM",
     "category": "container",
     "name": { "str": "foil wrapper" },
-    "description": "A piece of aluminum foil, large enough to wrap around something.  You could also cook food in it.",
-    "//": "50 cm length, 30 cm width, 0.02 mm thickness - 3ml, but without wrapper roll 4 times as much",
+    "description": "A piece of aluminum foil folded up into a pouch.  It could be used to heat up food.",
     "weight": "8 g",
     "volume": "12 ml",
     "price": "0 cent",
@@ -2994,18 +2961,17 @@
     "material": [ "aluminum" ],
     "symbol": ",",
     "color": "light_gray",
-    "//2": "mathematically perfect sprehe out of sheet is 2110 ml, but we are less than perfect",
     "pocket_data": [ { "pocket_type": "CONTAINER", "max_contains_volume": "1500 ml", "max_contains_weight": "6 kg" } ],
     "qualities": [ [ "COOK", 1 ] ],
     "use_action": [ "HEAT_SOLID_ITEMS" ],
     "flags": [ "SOFT", "NO_REPAIR", "COLLAPSE_CONTENTS" ]
   },
   {
-    "id": "wrapper_foil_roll",
+    "id": "aluminum_foil_roll",
     "type": "ITEM",
     "category": "other",
-    "name": { "str": "aluminum foil roll" },
-    "description": "Long tube of cardboard, used to conveniently store long sheets of foil.",
+    "name": { "str": "cardboard tube" },
+    "description": "A long tube of cardboard, essentially garbage.",
     "//": "20 m of aluminum foil, 40 units",
     "weight": "52 g",
     "volume": "96 ml",
@@ -3018,13 +2984,13 @@
     "pocket_data": [
       {
         "pocket_type": "CONTAINER",
-        "max_contains_volume": "1 L",
-        "max_contains_weight": "1 kg",
-        "item_restriction": [ "wrapper_foil" ],
+        "max_contains_volume": "500 ml",
+        "max_contains_weight": "500 g",
+        "item_restriction": [ "aluminum_foil" ],
         "volume_multiplier": 0.75
       }
     ],
-    "flags": [ "NO_UNLOAD", "NO_RELOAD" ]
+    "flags": [ "NO_RELOAD", "TINDER" ]
   },
   {
     "id": "styrofoam_cup",

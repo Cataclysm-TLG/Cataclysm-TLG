@@ -159,7 +159,7 @@ void Character::check_and_recover_morale()
     apply_persistent_morale();
 
     if( !morale->consistent_with( test_morale ) ) {
-        *morale = player_morale( test_morale ); // Recover consistency
+        morale->sync_permanent( test_morale ); // Recover only permanent morale
         add_msg_debug( debugmode::DF_CHARACTER, "%s morale was recovered.", disp_name( true ) );
     }
 }
@@ -167,15 +167,12 @@ void Character::check_and_recover_morale()
 void Character::disp_morale()
 {
     int equilibrium = calc_focus_equilibrium();
-
     int fatigue_penalty = 0;
     const int fatigue_cap = focus_equilibrium_fatigue_cap( equilibrium );
-
     if( fatigue_cap < equilibrium ) {
         fatigue_penalty = equilibrium - fatigue_cap;
         equilibrium = fatigue_cap;
     }
-
     int pain_penalty = 0;
     if( get_perceived_pain() && !has_trait( trait_CENOBITE ) ) {
         pain_penalty = calc_focus_equilibrium( true ) - equilibrium - fatigue_penalty;

@@ -80,7 +80,7 @@ bool gunmode_checks_weapon( avatar &you, const map &m, std::vector<std::string> 
 
 int throw_cost( const Character &c, const item &to_throw );
 
-// check for steadiness for a given pos
+// Check for steadiness for a given tripoint.
 double calc_steadiness( const Character &you, const item &weapon, const tripoint_bub_ms &pos,
                         double predicted_recoil );
 

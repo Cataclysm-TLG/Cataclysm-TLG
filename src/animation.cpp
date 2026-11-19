@@ -1,3 +1,4 @@
+#include "player_activity.h"
 #include "animation.h"
 
 #include "avatar.h"
@@ -42,6 +43,7 @@
 #include <type_traits>
 #include <utility>
 #include <vector>
+static const activity_id ACT_TARGET_PRACTICE( "ACT_TARGET_PRACTICE" );
 
 namespace
 {
@@ -93,10 +95,25 @@ class explosion_animation : public basic_animation
         }
 };
 
+bool skip_bullet_animation_delay()
+{
+    return get_avatar().activity.id() == ACT_TARGET_PRACTICE;
+}
+
 class bullet_animation : public basic_animation
 {
     public:
         bullet_animation() : basic_animation( 1 ) {
+        }
+
+        void progress() const {
+            draw();
+
+            // Skip artificial animation delay to greatly reduce the realtime
+            // delay between shots during player target practice activity
+            if( !skip_bullet_animation_delay() ) {
+                basic_animation::progress();
+            }
         }
 };
 
@@ -581,12 +598,8 @@ void game::draw_hit_mon( const tripoint_bub_ms &p, const monster &m, const bool 
         return;
     }
 
-    shared_ptr_fast<draw_callback_t> hit_cb = make_shared_fast<draw_callback_t>( [&]() {
-        tilecontext->init_draw_hit( p, m.type->id.str() );
-    } );
-    add_draw_callback( hit_cb );
-
-    bullet_animation().progress();
+    // Use creature reference to resolve sprite position at draw time
+    tilecontext->init_draw_hit( m );
 }
 
 #else
@@ -607,7 +620,7 @@ void draw_hit_player_curses( const game &/* g */, const Character &p, const int 
 } //namespace
 
 #if defined(TILES)
-void game::draw_hit_player( const Character &p, const int dam )
+void game::draw_hit_player( const Character &p, const int dam ) const
 {
     if( test_mode ) {
         // avoid segfault from null tilecontext in tests
@@ -618,24 +631,13 @@ void game::draw_hit_player( const Character &p, const int dam )
         draw_hit_player_curses( *this, p, dam );
         return;
     }
-
-    static const std::string player_male   {"player_male"};
-    static const std::string player_female {"player_female"};
-    static const std::string npc_male      {"npc_male"};
-    static const std::string npc_female    {"npc_female"};
-
-    const std::string &type = p.is_avatar() ? ( p.male ? player_male : player_female )
-                              : p.male ? npc_male : npc_female;
-
-    shared_ptr_fast<draw_callback_t> hit_cb = make_shared_fast<draw_callback_t>( [&]() {
-        tilecontext->init_draw_hit( p.pos_bub(), type );
-    } );
-    add_draw_callback( hit_cb );
-
+    // Use creature reference to resolve sprite position at draw time
+    tilecontext->init_draw_hit( p );
+    // this creates a blocking delay in user inputs, to give the player time to mentally register the hit
     bullet_animation().progress();
 }
 #else
-void game::draw_hit_player( const Character &p, const int dam )
+void game::draw_hit_player( const Character &p, const int dam ) const
 {
     draw_hit_player_curses( *this, p, dam );
 }

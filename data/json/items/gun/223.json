@@ -5,7 +5,6 @@
     "subtypes": [ "GUN" ],
     "name": { "str": "AR-15 rifle" },
     "copy-from": "rifle_auto",
-    "//": "This is assumed to be the standard model matching the (currently not in-game) M16. Tileset whitelist for rifles",
     "description": "This ubiquitous rifle is the forefather of the M16 rifle series.  It is lightweight and accurate, but will malfunction if not properly maintained.  This one is a semi-automatic civilian version.",
     "weight": "902 g",
     "volume": "1550 ml",
@@ -477,7 +476,8 @@
       [ "mechanism", 2 ],
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
-      [ "stock", 1 ]
+      [ "stock", 1 ],
+      [ "grip", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND" ],
     "melee_damage": { "bash": 12 }
@@ -519,7 +519,8 @@
       [ "mechanism", 2 ],
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
-      [ "stock", 1 ]
+      [ "stock", 1 ],
+      [ "grip", 1 ]
     ],
     "flags": [ "FIRE_TWOHAND" ],
     "melee_damage": { "bash": 12 }
@@ -578,7 +579,8 @@
       [ "rail mount", 2 ],
       [ "sights mount", 1 ],
       [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
+      [ "underbarrel mount", 1 ],
+      [ "grip", 1 ]
     ],
     "//": "This weapon has an extremely high rate of fire, due to the open bolt design. This is based on a cyclic rate of fire of 1150 RPM, which is close to 19 rounds per second. 6 rounds is comparable to to other weapons with similar rates, such as the MAC-11.",
     "modes": [ [ "DEFAULT", "auto", 6 ] ],
@@ -706,7 +708,8 @@
       [ "stock accessory", 1 ],
       [ "sights mount", 1 ],
       [ "rail mount", 1 ],
-      [ "stock", 1 ]
+      [ "stock", 1 ],
+      [ "grip", 1 ]
     ],
     "pocket_data": [
       {
@@ -747,7 +750,8 @@
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
+      [ "underbarrel mount", 1 ],
+      [ "grip", 1 ]
     ],
     "pocket_data": [
       {
@@ -809,7 +813,8 @@
       [ "sights mount", 1 ],
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
-      [ "stock mount", 1 ]
+      [ "stock mount", 1 ],
+      [ "grip", 1 ]
     ],
     "pocket_data": [
       { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "augmag_30rd", "augmag_10rd", "augmag_42rd", "augmag_100rd" ] }
@@ -847,7 +852,8 @@
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
-      [ "underbarrel mount", 1 ]
+      [ "underbarrel mount", 1 ],
+      [ "grip", 1 ]
     ],
     "pocket_data": [ { "pocket_type": "MAGAZINE_WELL", "item_restriction": [ "zpap85mag" ] } ],
     "melee_damage": { "bash": 12 }
@@ -988,7 +994,8 @@
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
       [ "stock mount", 1 ],
-      [ "underbarrel", 1 ]
+      [ "underbarrel", 1 ],
+      [ "grip", 1 ]
     ],
     "pocket_data": [
       {
@@ -1046,9 +1053,10 @@
       [ "sights", 1 ],
       [ "sling", 1 ],
       [ "stock accessory", 2 ],
-      [ "stock", 1 ]
+      [ "stock", 1 ],
+      [ "grip", 1 ]
     ],
-    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN" ],
+    "flags": [ "FIRE_TWOHAND", "EASY_CLEAN", "BOLT_ACTION" ],
     "melee_damage": { "bash": 10 }
   },
   {
@@ -1084,7 +1092,8 @@
       [ "sights", 1 ],
       [ "sling", 1 ],
       [ "stock accessory", 1 ],
-      [ "underbarrel", 1 ]
+      [ "underbarrel", 1 ],
+      [ "grip", 1 ]
     ],
     "pocket_data": [
       {

@@ -72,6 +72,7 @@
   },
   {
     "type": "ITEM",
+    "subtypes": [ "MILLING" ],
     "id": "antler_piece",
     "symbol": "%",
     "color": "white",
@@ -83,7 +84,9 @@
     "weight": "140 g",
     "volume": "80 ml",
     "longest_side": "4 cm",
-    "to_hit": -2
+    "to_hit": -2,
+    "into": "meal_bone",
+    "recipe": "meal_bone_mill_1_1"
   },
   {
     "type": "ITEM",
@@ -134,7 +137,7 @@
     "price": "10 USD",
     "price_postapoc": "5 USD",
     "fall_damage_reduction": 20,
-    "material": [ "cotton", "steel" ],
+    "material": [ { "id": "nylon", "portion": 1 }, { "id": "synthetic_fluff", "portion": 40 }, { "id": "steel", "portion": 1 } ],
     "symbol": "0",
     "color": "white",
     "flags": [ "NONCONDUCTIVE", "SINGLE_USE" ],
@@ -159,7 +162,7 @@
     "price": "10 USD",
     "price_postapoc": "7 USD 50 cent",
     "fall_damage_reduction": 15,
-    "material": [ "cotton" ],
+    "material": [ { "id": "nylon", "portion": 1 }, { "id": "feathers", "portion": 50 }, { "id": "steel", "portion": 1 } ],
     "symbol": "0",
     "color": "white",
     "flags": [ "SINGLE_USE" ],

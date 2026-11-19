@@ -349,6 +349,7 @@ Character flags can be `trait_id`, `json_flag_id` or `flag_id`.  Some of these a
 - ```CANNOT_ATTACK``` A creature with this flag cannot attack (includes spellcasting).
 - ```CANNOT_MOVE``` A creature with this flag cannot move.
 - ```CANNOT_TAKE_DAMAGE``` A creature with this flag cannot take any damage.
+- ```CANNOT_USE_COMPUTERS``` A creature with this flag cannot activate a computer terminal or use various computer functions (e.g. saving ebooks or reading efiles).
 - ```CBQ_LEARN_BONUS``` You learn CBQ from the bionic bio_cqb faster.
 - ```CHANGING```This flag is silently given to player to detect it can mutate.
 - ```CLAIRVOYANCE_PLUS``` Gives a clairvoyance effect, used for debug purposes.
@@ -411,6 +412,7 @@ Character flags can be `trait_id`, `json_flag_id` or `flag_id`.  Some of these a
 - ```PRED3``` Learn combat skills with double catchup modifier.  Resist skill rust on combat skills.  Medium morale bonus from foods with the `PREDATOR_FUN` flag.  Immune to the guilt mondeath effect.
 - ```PRED4``` Learn combat skills with triple catchup modifier.  Learn combat skills without spending focus.  Resist skill rust on combat skills.  Large morale bonus from foods with the `PREDATOR_FUN` flag.  Immune to the `guilt` mondeath effect.
 - ```PSYCHOPATH``` Butcher humans without a morale penalty.
+- ```RAIN_IMMUNE``` Precipitation will not get you wet
 - ```ROOTS2``` Gain enhanced effects from the Mycorrhizal Communion mutation.
 - ```ROOTS3``` Gain enhanced effects from the Mycorrhizal Communion mutation (slightly faster than `ROOTS2`).
 - ```SAPIOVORE``` Butcher humans without a morale penalty.
@@ -937,8 +939,12 @@ These can be applied to guns or gunmods, adding different effects to the guns.
 - ```NO_TURRET``` Prevents generation of a vehicle turret prototype for this gun.
 - ```NO_UNLOAD``` Cannot be unloaded.
 - ```PRIMITIVE_RANGED_WEAPON``` Allows using non-gunsmith tools to repair (but not reinforce) it.
-- ```PUMP_ACTION``` Gun has rails on its pump action, allowing to install only mods with `PUMP_RAIL_COMPATIBLE` flag on underbarrel slot.
+- ```PUMP_RAIL``` Gun has rails on its pump action, allowing to install only mods with `PUMP_RAIL_COMPATIBLE` flag on underbarrel slot.
 - ```PUMP_RAIL_COMPATIBLE``` Mod can be installed on underbarrel slot of guns with rails on their pump action.
+- ```BOLT_ACTION```  this gun uses bolt-action mechanism, this applies major penalty (1.6 seconds) of time and aim between each shot (can be mitigated by skill, up to 50%)
+- ```PUMP_ACTION``` same as BOLT_ACTION, but minor penalty (1.2 seconds)
+- ```SINGLE_ACTION``` same as BOLT_ACTION, but minor penalty (1 second)
+- ```LEVER_ACTION``` same as BOLT_ACTION, but minor penalty (0.8 seconds)
 - ```RELOAD_AND_SHOOT``` Firing automatically reloads and then shoots.
 - ```RELOAD_EJECT``` Ejects shell from gun on reload instead of when fired.
 - ```RELOAD_ONE``` Only reloads one round at a time.
@@ -1357,11 +1363,11 @@ See [Character](#character)
 - ```NO_RESIZE``` This clothes you crafted spawn unfitted.
 - ```NO_MORALE_OK``` Low morale can slow this craft up to 50%, but on its own won't prevent it outright.
 - ```SECRET``` Not automatically learned at character creation time based on high skill levels.
-- ```AFFECTED_BY_PAIN``` 1 unit of pain decreases the speed of craft for 1%. Recommended to not use in vanilla recipes.
-- ```NO_MANIP``` Manipulation score do not affect crafting this recipe.
-- ```NO_BENCH``` Workbench bonus or penalty do not apply to this recipe.
-- ```NO_ENCHANTMENT``` Enchantment (used in mutations, CBM, effects etc) bonus or penalty do not apply to this recipe.
-
+- ```AFFECTED_BY_PAIN``` 1 unit of pain decreases the speed of craft for 1%. Recommended to not use in vanilla recipes
+- ```NO_MANIP``` Manipulation score do not affect crafting this recipe
+- ```NO_BENCH``` Workbench bonus or penalty do not apply to this recipe
+- ```NO_ENCHANTMENT``` Enchantment (used in mutations, CBM, effects etc) bonus or penalty do not apply to this recipe
+- ```ALWAYS_START_ON_GROUND``` This recipe bypasses asking if you want to start crafting in your arms or on the ground, if you have an item in your hands, and starts crafting on the ground (also ignores picking the crafting table)
 
 ### Crafting recipes
 

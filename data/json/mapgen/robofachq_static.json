@@ -573,11 +573,9 @@
         "E": [ "f_ergometer", "f_ergometer_mechanical" ],
         "T": [ "f_treadmill", "f_treadmill_mechanical" ],
         "X": "f_exercise",
-        "&": "f_machinery_electronic"
-      },
-      "sealed_item": {
-        "P": { "item": { "item": "seed_tomato" }, "furniture": "f_planter_mature" },
-        "p": { "item": { "item": "seed_wheat" }, "furniture": "f_planter_mature" }
+        "&": "f_machinery_electronic",
+        "P": "f_planter",
+        "p": "f_planter"
       },
       "items": {
         "S": [

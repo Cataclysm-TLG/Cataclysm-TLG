@@ -1149,7 +1149,16 @@ veh_collision vehicle::part_collision( map &here, int part, const tripoint_abs_m
             }
 
             if( ph != nullptr ) {
-                ph->hitall( dam, 40, driver );
+                const int damage_taken = ph->hitall( dam, 40, driver );
+                if( driver && ph->is_npc() ) {
+                    int tolerance = 0;
+                    if( ph->as_npc()->is_player_ally() ) {
+                        tolerance = 25;
+                    }
+                    if( damage_taken > tolerance ) {
+                        ph->as_npc()->on_attacked( *driver );
+                    }
+                }
             } else {
                 const int armor = vpi.has_flag( "SHARP" ) ?
                                   critter->get_armor_type( damage_cut, bodypart_id( "torso" ) ) :
@@ -1328,10 +1337,10 @@ double vehicle::wheel_damage_chance_vs_item( const item &it, vehicle_part &vp_wh
     // Stab armor protects wheels from damage. Wheels do not benefit from other armor on their tile, it checks the wheel itself.
     // TODO: Make different items use different damage types.
     double armor = std::clamp( vp_wheel.info().damage_reduction.at( damage_stab ) / 100.0, 0.0,
-                               0.75 ) / rng_float( 1.0, 4.0 );
+                               0.75 ) / rng_float( 1.0, 15.0 );
     // It is exponentially more difficult for soft items to damage wheels, even if you're hitting a lot of them.
     const double base_chance = std::min( std::pow( item_hardness / wheel_hardness, 2.0 ) / 10, 0.5 );
-    const double chance_to_damage = std::max( 0.0, base_chance - armor );
+    const double chance_to_damage = std::max( 0.005, base_chance - armor );
     add_msg_debug(
         debugmode::DF_VEHICLE_MOVE,
         "Vehicle %s running over item %s."

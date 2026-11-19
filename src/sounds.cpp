@@ -48,11 +48,7 @@
 #include "weather_type.h"
 
 #if defined(SDL_SOUND)
-#   if defined(_MSC_VER) && defined(USE_VCPKG)
-#      include <SDL2/SDL_mixer.h>
-#   else
-#      include <SDL_mixer.h>
-#   endif
+#   include "sound_backend.h"
 #   include <thread>
 #   if defined(_WIN32) && !defined(_MSC_VER)
 #       include "mingw.thread.h"
@@ -530,7 +526,7 @@ void sounds::process_sounds()
     recent_sounds.clear();
 }
 
-// skip some sounds to avoid message spam
+// Skip some sounds to avoid message spam.
 static bool describe_sound( sounds::sound_t category, bool from_player_position )
 {
     if( from_player_position ) {
@@ -568,7 +564,7 @@ static bool describe_sound( sounds::sound_t category, bool from_player_position 
             case sounds::sound_t::activity:
                 return one_in( 50 );
             case sounds::sound_t::destructive_activity:
-                return one_in( 20 );
+                return one_in( 10 );
             case sounds::sound_t::speech:
             case sounds::sound_t::electronic_speech:
             case sounds::sound_t::alarm:
@@ -640,10 +636,9 @@ void sounds::process_sound_markers( Character *you )
         // The heard volume of a sound is the player heard volume, regardless of true volume level.
         const int heard_volume = static_cast<int>( std::round( ( ( raw_volume - weather_vol ) *
                                  volume_multiplier ) - distance_to_sound ) );
-        // Player volume meter includes all sounds from their tile.
-        if( distance_to_sound < 1 && heard_volume > 0 ) {
-            // Min here because good hearing doesn't overestimate sounds, but bad will underestimate.
-            you->volume = std::min( you->volume, heard_volume );
+        // Player volume meter includes all sounds from their tile, or combat sounds from adjacent.
+        if( distance_to_sound < 2  && heard_volume > 0 ) {
+            you->volume = std::min( heard_volume, raw_volume );
         }
         if( heard_volume < 1 ) {
             continue;
@@ -653,7 +648,7 @@ void sounds::process_sound_markers( Character *you )
         if( you->controlling_vehicle ) {
             vehicle *veh = veh_pointer_or_null( here.veh_at( you->pos_abs() ) );
             const int noise = veh ? static_cast<int>( veh->vehicle_noise ) : 0;
-            you->volume = std::max( you->volume, noise );
+            you->volume = std::min( you->volume, std::min( noise, raw_volume ) );
         }
 
         // Secure the flag before wake_up() clears the effect.
@@ -661,7 +656,7 @@ void sounds::process_sound_markers( Character *you )
         // See if we need to wake someone up.
         if( you->in_sleep_state() ) {
             // Bail immediately if we're insensate.
-            if( you->has_effect( effect_narcosis ) && you->has_active_bionic( bio_sleep_shutdown ) ) {
+            if( you->has_effect( effect_narcosis ) || you->has_active_bionic( bio_sleep_shutdown ) ) {
                 continue;
             }
             int sound_insensitivity = 0;
@@ -864,7 +859,7 @@ void sfx::fade_audio_group( group group, int duration )
     if( test_mode ) {
         return;
     }
-    Mix_FadeOutGroup( static_cast<int>( group ), duration );
+    sound_backend::fade_group( group, duration );
 }
 
 void sfx::fade_audio_channel( channel channel, int duration )
@@ -872,7 +867,11 @@ void sfx::fade_audio_channel( channel channel, int duration )
     if( test_mode ) {
         return;
     }
-    Mix_FadeOutChannel( static_cast<int>( channel ), duration );
+    if( channel == channel::any ) {
+        sound_backend::stop_all_sfx( duration );
+    } else {
+        sound_backend::stop_reserved( channel, duration );
+    }
 }
 
 bool sfx::is_channel_playing( channel channel )
@@ -880,7 +879,7 @@ bool sfx::is_channel_playing( channel channel )
     if( test_mode ) {
         return false;
     }
-    return Mix_Playing( static_cast<int>( channel ) ) != 0;
+    return sound_backend::is_reserved_playing( channel );
 }
 
 void sfx::stop_sound_effect_fade( channel channel, int duration )
@@ -888,17 +887,14 @@ void sfx::stop_sound_effect_fade( channel channel, int duration )
     if( test_mode ) {
         return;
     }
-    if( Mix_FadeOutChannel( static_cast<int>( channel ), duration ) == -1 ) {
-        dbg( D_ERROR ) << "Failed to stop sound effect: " << Mix_GetError();
-    }
+    sound_backend::stop_reserved( channel, duration );
 }
 
-void sfx::stop_sound_effect_timed( channel channel, int time )
+void sfx::stop_sound_effect_timed( channel /*channel*/, int /*time*/ )
 {
-    if( test_mode ) {
-        return;
-    }
-    Mix_ExpireChannel( static_cast<int>( channel ), time );
+    // Mix_ExpireChannel has no callers in the codebase; retained as a
+    // no-op for ABI stability of sfx::. The backend intentionally does
+    // not expose a timed-expiry verb.
 }
 
 int sfx::set_channel_volume( channel channel, int volume )
@@ -906,14 +902,7 @@ int sfx::set_channel_volume( channel channel, int volume )
     if( test_mode ) {
         return 0;
     }
-    int ch = static_cast<int>( channel );
-    if( !Mix_Playing( ch ) ) {
-        return -1;
-    }
-    if( Mix_FadingChannel( ch ) != MIX_NO_FADING ) {
-        return -1;
-    }
-    return Mix_Volume( ch, volume );
+    return sound_backend::set_reserved_volume( channel, volume );
 }
 
 void sfx::do_vehicle_engine_sfx()
@@ -1044,7 +1033,7 @@ void sfx::do_vehicle_engine_sfx()
     }
 
     if( !veh->is_autodriving && current_speed != previous_speed ) {
-        Mix_HaltChannel( static_cast<int>( ch ) );
+        sound_backend::stop_reserved( ch, 0 );
         add_msg_debug( debugmode::DF_SOUND, "STOP speed %d =/= %d", current_speed, previous_speed );
         play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
                                     seas_str, indoors, night,
@@ -1063,7 +1052,6 @@ void sfx::do_vehicle_exterior_engine_sfx()
     }
 
     static const channel ch = channel::exterior_engine_sound;
-    static const int ch_int = static_cast<int>( ch );
     const Character &player_character = get_player_character();
     // early bail-outs for efficiency
     if( player_character.in_vehicle ) {
@@ -1098,7 +1086,7 @@ void sfx::do_vehicle_exterior_engine_sfx()
         return;
     }
 
-    vol = MIX_MAX_VOLUME * noise_factor / veh->vehicle_noise;
+    vol = 128 * noise_factor / veh->vehicle_noise; // 128 = MIX_MAX_VOLUME equivalent
     std::pair<std::string, std::string> id_and_variant;
     const season_type seas = season_of_year( calendar::turn );
     const std::string seas_str = season_str( seas );
@@ -1127,26 +1115,24 @@ void sfx::do_vehicle_exterior_engine_sfx()
 
     if( is_channel_playing( ch ) ) {
         if( engine_external_id_and_variant == id_and_variant ) {
-            Mix_SetPosition( ch_int, to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
+            sound_backend::set_reserved_position( ch,
+                                                  to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
             set_channel_volume( ch, vol );
         } else {
             engine_external_id_and_variant = id_and_variant;
-            Mix_HaltChannel( ch_int );
+            sound_backend::stop_reserved( ch, 0 );
             play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
                                         seas_str, indoors, night, 128, ch, 0 );
-            Mix_SetPosition( ch_int, to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
+            sound_backend::set_reserved_position( ch,
+                                                  to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
             set_channel_volume( ch, vol );
         }
     } else {
         play_ambient_variant_sound( id_and_variant.first, id_and_variant.second,
                                     seas_str, indoors, night, 128, ch, 0 );
-        add_msg_debug( debugmode::DF_SOUND, "Vol: %d %d", vol, Mix_Volume( ch_int, -1 ) );
-        Mix_SetPosition( ch_int, to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
-        add_msg_debug( debugmode::DF_SOUND, "Vol: %d %d", vol, Mix_Volume( ch_int, -1 ) );
+        sound_backend::set_reserved_position( ch,
+                                              to_degrees( get_heard_angle( veh->pos_bub( here ) ) ), 0 );
         set_channel_volume( ch, vol );
-        add_msg_debug( debugmode::DF_SOUND, "START exterior_engine_sound NEW %s %s vol: ex:%d true:%d",
-                       id_and_variant.first,
-                       id_and_variant.second, vol, Mix_Volume( ch_int, -1 ) );
     }
 }
 
