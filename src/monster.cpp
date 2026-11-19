@@ -1024,9 +1024,9 @@ int monster::print_info( const catacurses::window &w, int vStart, int vLines, in
     std::ostringstream oss;
     std::vector<std::pair<mtype_id, mod_id>> filtered_src;
     std::copy_if( type->src.begin(), type->src.end(),
-                std::back_inserter( filtered_src ), []( const auto &source ) {
-            return source.second != mod_id( "tlg" );
-        } );
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
     if( !filtered_src.empty() ) {
         oss << get_tag_from_color( c_white ) << _( "Origin: " );
         oss << enumerate_as_string( filtered_src,
@@ -1137,9 +1137,9 @@ std::string monster::extended_description() const
     }
     std::vector<std::pair<mtype_id, mod_id>> filtered_src;
     std::copy_if( type->src.begin(), type->src.end(),
-                std::back_inserter( filtered_src ), []( const auto &source ) {
-            return source.second != mod_id( "tlg" );
-        } );
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
 
     if( !filtered_src.empty() ) {
         ss += _( "Origin: " );

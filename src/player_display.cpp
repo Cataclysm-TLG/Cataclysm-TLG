@@ -754,7 +754,8 @@ static void draw_effects_tab( ui_adaptor &ui, const catacurses::window &w_effect
             ui.set_cursor( w_effects, pos );
         }
         trim_and_print( w_effects, pos, width,
-                        highlight_line ? h_light_gray : c_light_gray, effect_name_and_text[i].first );
+                        highlight_line ? hilite( c_white ) : c_white,
+                        effect_name_and_text[i].first );
     }
     if( do_draw_scrollbar ) {
         draw_scrollbar( w_effects, i_start, height, effect_name_and_text.size(), point( width + 1, 1 ),
