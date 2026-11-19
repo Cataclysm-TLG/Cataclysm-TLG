@@ -118,7 +118,7 @@
     "to_hit": -2,
     "material": [ "steel", "aluminum", "plastic" ],
     "symbol": "-",
-    "color": "black",
+    "color": "dark_gray",
     "ammo": [ "300" ],
     "dispersion": 70,
     "durability": 8,
