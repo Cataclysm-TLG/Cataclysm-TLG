@@ -468,7 +468,7 @@
     "material": [ "plastic" ],
     "symbol": "[",
     "looks_like": "holster",
-    "color": "black",
+    "color": "dark_gray",
     "sided": true,
     "material_thickness": 1,
     "pocket_data": [
