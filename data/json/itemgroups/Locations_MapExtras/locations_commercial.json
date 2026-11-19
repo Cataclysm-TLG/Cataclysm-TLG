@@ -1896,7 +1896,8 @@
       [ "noise_emitter", 20 ],
       [ "eyedrops", 20 ],
       [ "mag_electronics", 20 ],
-      [ "ecig", 20 ],
+      { "group": "charged_ecig", "prob": 10, "count": [ 1, 4 ] },
+      { "group": "charged_advanced_ecig", "prob": 8 },
       { "group": "new_usb_drives", "prob": 20 }
     ]
   },

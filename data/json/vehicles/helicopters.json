@@ -688,7 +688,7 @@
       { "x": -1, "y": -1, "chance": 7, "items": [ "wrench" ] },
       { "x": 0, "y": -1, "chance": 5, "items": [ "screwdriver_set" ] },
       { "x": 0, "y": -1, "chance": 10, "items": [ "knife_combat" ] },
-      { "x": 0, "y": -1, "chance": 5, "ammo": 90, "items": [ "ecig" ] },
+      { "x": 0, "y": -1, "chance": 5, "ammo": 90, "item_groups": [ "ecig" ] },
       { "x": 2, "y": -1, "chance": 5, "ammo": 90, "items": [ "mp3" ] }
     ]
   },

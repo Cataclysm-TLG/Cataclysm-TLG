@@ -213,9 +213,11 @@
           { "item": "cigar", "prob": 5 },
           { "group": "pocket_cigar", "prob": 1 },
           { "item": "handrolled_cig", "prob": 10 },
-          { "item": "nic_gum", "prob": 3 },
-          { "group": "box_small_nicotine_patch_1_10", "prob": 2 },
-          { "item": "ecig", "prob": 15 },
+          { "item": "nic_gum", "prob": 4 },
+          { "group": "box_small_nicotine_patch_1_10", "prob": 3 },
+          { "group": "ecig", "prob": 20 },
+          { "group": "empty_ecig", "prob": 5 },
+          { "group": "advanced_ecig", "prob": 15 },
           {
             "collection": [
               { "item": "tobacco" },

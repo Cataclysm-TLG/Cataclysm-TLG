@@ -1072,25 +1072,6 @@
     }
   },
   {
-    "id": "ecig",
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
-    "comestible_type": "MED",
-    "name": { "str": "electronic cigarette" },
-    "description": "This battery-operated device vaporizes a liquid that contains flavorings and nicotine.  A less harmful alternative to traditional cigarettes, but it's still addictive.  It can't be reused once it's empty.",
-    "weight": "1 g",
-    "volume": "6 ml",
-    "price": "75 cent",
-    "price_postapoc": "12 cent",
-    "symbol": "!",
-    "color": "dark_gray",
-    "fun": 5,
-    "addiction_potential": 50,
-    "addiction_type": "nicotine",
-    "flags": [ "NO_INGEST", "IRREPLACEABLE_CONSUMABLE" ],
-    "use_action": [ "ECIG" ]
-  },
-  {
     "id": "eyedrops",
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
