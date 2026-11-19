@@ -1708,7 +1708,7 @@
     "material": [ "cotton" ],
     "symbol": "[",
     "looks_like": "kilt",
-    "color": "black",
+    "color": "dark_gray",
     "warmth": 10,
     "material_thickness": 0.2,
     "flags": [ "VARSIZE" ],
