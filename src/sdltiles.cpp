@@ -1156,8 +1156,8 @@ SDL_Point window_to_display_buffer_coords( SDL_Point window_pt )
         return SDL_Point{ static_cast<int>( rx ), static_cast<int>( ry ) };
     }
     return SDL_Point{
-        static_cast<int>( std::floor( ( rx - dst.x ) * buf_w / dst.w ) ) * scaling_factor,
-        static_cast<int>( std::floor( ( ry - dst.y ) * buf_h / dst.h ) ) * scaling_factor
+        static_cast<int>( std::floor( ( rx - dst.x ) * buf_w / dst.w ) ) *scaling_factor,
+        static_cast<int>( std::floor( ( ry - dst.y ) * buf_h / dst.h ) ) *scaling_factor
     };
 #endif
 }

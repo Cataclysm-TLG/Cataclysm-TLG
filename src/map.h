@@ -711,7 +711,7 @@ class map
          */
         double ranged_target_size( const tripoint_bub_ms &p ) const;
 
-        
+
         // Wrapper 1 for sees_full, when we don't have a slope candidate. Helps prevent redundant calls, and returns a bool.
         bool sees( const tripoint_bub_ms &F, const tripoint_bub_ms &T, int range,
                    bool with_fields = true, bool allow_cached = true ) const;

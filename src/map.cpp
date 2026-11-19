@@ -3360,8 +3360,8 @@ void map::drop_items( const tripoint_bub_ms &p )
                                             i.tname(), creature_below->disp_name(),
                                             static_cast<int>( damage ) );
                 }
-            // FIXME: Hardcoded damage type!
-            creature_below->deal_damage( nullptr, hit_part, damage_instance( damage_bash, damage ) );
+                // FIXME: Hardcoded damage type!
+                creature_below->deal_damage( nullptr, hit_part, damage_instance( damage_bash, damage ) );
             } else {
                 add_msg_if_player_sees( creature_below->pos_bub(), _( "Falling %1$s misses %2$s!" ), i.tname(),
                                         creature_below->disp_name() );

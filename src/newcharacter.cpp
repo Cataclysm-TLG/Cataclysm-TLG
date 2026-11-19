@@ -1148,8 +1148,8 @@ static void draw_points( const catacurses::window &w, pool_type pool, const avat
         multi_pool p( u );
         bool is_valid = p.stat_points_left >= 0 && p.trait_points_left >= 0 && p.skill_points_left >= 0;
         std::string total_msg = string_format(
-                _( "Total: <color_%s>%d</color>" ),
-                is_valid ? "light_gray" : "red", p.skill_points_left );
+                                    _( "Total: <color_%s>%d</color>" ),
+                                    is_valid ? "light_gray" : "red", p.skill_points_left );
         print_colored_text( w, point( 2, 4 ), color, c_light_gray, total_msg );
     }
     if( pool != pool_type::FREEFORM ) {
@@ -2269,8 +2269,8 @@ static std::string assemble_profession_details( const avatar &u, const input_con
     // Display Origin
     const std::string mod_src = enumerate_as_string( sorted_profs[cur_id]->src, [](
     const std::pair<profession_id, mod_id> &source ) {
-    return source.second == mod_id( "tlg" ) ? std::string() :
-        string_format( "'%s'", source.second->name() );
+        return source.second == mod_id( "tlg" ) ? std::string() :
+               string_format( "'%s'", source.second->name() );
     }, enumeration_conjunction::arrow );
     assembled += string_format( _( "Origin: %s" ), mod_src ) + "\n";
 
@@ -3477,15 +3477,15 @@ static std::string assemble_scenario_details( const avatar &u, const input_conte
     // Display Origin
     std::vector<std::pair<string_id<scenario>, mod_id>> filtered_src;
     std::copy_if( current_scenario->src.begin(), current_scenario->src.end(),
-                std::back_inserter( filtered_src ), []( const auto &source ) {
-            return source.second != mod_id( "tlg" );
-        } );
+    std::back_inserter( filtered_src ), []( const auto & source ) {
+        return source.second != mod_id( "tlg" );
+    } );
 
     const std::string mod_src = enumerate_as_string(
-        filtered_src,
-        []( const std::pair<string_id<scenario>, mod_id> &source ) {
-            return string_format( "'%s'", source.second->name() );
-        }, enumeration_conjunction::arrow );
+                                    filtered_src,
+    []( const std::pair<string_id<scenario>, mod_id> &source ) {
+        return string_format( "'%s'", source.second->name() );
+    }, enumeration_conjunction::arrow );
 
     assembled += string_format( _( "Origin: %s" ), mod_src ) + "\n";
 
