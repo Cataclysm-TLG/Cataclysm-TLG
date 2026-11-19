@@ -322,6 +322,16 @@
   },
   {
     "type": "item_group",
+    "id": "full_stab_vest",
+    "subtype": "distribution",
+    "entries": [
+      {
+        "collection": [ { "item": "stab_vest" }, { "group": "some_stab_front_plates" } ]
+      }
+    ]
+  },
+  {
+    "type": "item_group",
     "id": "civilian_ballistic_inserts",
     "subtype": "distribution",
     "//": "armor that a civilian might have.",
