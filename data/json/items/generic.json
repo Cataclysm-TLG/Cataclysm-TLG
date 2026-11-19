@@ -3192,7 +3192,7 @@
     "price_postapoc": "10 cent",
     "material": [ "steel" ],
     "symbol": "#",
-    "color": "black"
+    "color": "dark_gray"
   },
   {
     "id": "condensor_coil",
@@ -3206,7 +3206,7 @@
     "price_postapoc": "10 cent",
     "material": [ "steel" ],
     "symbol": "#",
-    "color": "black"
+    "color": "dark_gray"
   },
   {
     "id": "refrigerant_tank",
