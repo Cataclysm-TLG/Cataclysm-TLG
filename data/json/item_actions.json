@@ -337,7 +337,7 @@
   {
     "type": "item_action",
     "id": "ECIG",
-    "name": { "ctxt": "ECIG", "str": "Smoke" }
+    "name": { "ctxt": "ECIG", "str": "Vape" }
   },
   {
     "type": "item_action",

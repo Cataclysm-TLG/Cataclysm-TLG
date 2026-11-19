@@ -58,7 +58,7 @@
     "type": "item_group",
     "id": "REFUGEE_Vanessa_carried",
     "subtype": "collection",
-    "entries": [ { "item": "lighter" }, { "item": "ecig", "count": 40 } ]
+    "entries": [ { "group": "advanced_ecig" } ]
   },
   {
     "type": "item_group",

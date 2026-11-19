@@ -1228,8 +1228,9 @@
   },
   {
     "type": "ITEM",
-    "subtypes": [ "AMMO" ],
     "id": "nicotine_liquid",
+    "subtypes": [ "COMESTIBLE" ],
+    "comestible_type": "INVALID",
     "category": "drugs",
     "price": "10 USD",
     "price_postapoc": "5 USD",
@@ -1238,10 +1239,11 @@
     "color": "yellow",
     "description": "Liquid made up of propylene glycol, vegetable glycerin, flavorings, and nicotine.  Intended for use in an advanced electronic cigarette.",
     "phase": "liquid",
-    "volume": "30 ml",
+    "volume": "10 ml",
     "weight": "1 g",
-    "ammo_type": "components",
-    "count": 30
+    "flags": [ "INEDIBLE" ],
+    "charges": 10,
+    "stack_size": 10
   },
   {
     "id": "fish_bait",

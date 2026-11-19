@@ -7,10 +7,85 @@
       { "prob": 20, "group": "tobacco_bag_plastic_1_20" },
       { "prob": 20, "group": "chaw_wrapper_1_20" },
       { "item": "cigar", "prob": 10, "count": [ 1, 5 ] },
-      { "item": "ecig", "prob": 10 },
-      { "item": "advanced_ecig", "prob": 8, "charges": [ 1, 100 ] },
+      { "group": "charged_ecig", "prob": 10, "count": [ 1, 4 ] },
+      { "group": "charged_advanced_ecig", "prob": 8 },
       { "group": "nicotine_liquid_bottle_part", "prob": 15 },
       [ "pipe_tobacco", 10 ]
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "charged_ecig",
+    "entries": [ 
+      { "item": "ecig", "charges": 20, "contents-group": "nicotine_liquid_15" } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "charged_advanced_ecig",
+    "entries": [ 
+      { "item": "advanced_ecig", "charges": 20, "contents-group": "nicotine_liquid_30" } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "ecig",
+    "entries": [ 
+      { "item": "ecig", "charges": [ 0, 20 ], "contents-group": "nicotine_liquid_0-15" } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "advanced_ecig",
+    "entries": [ 
+      { "item": "advanced_ecig", "charges": 20, "contents-group": "nicotine_liquid_0-30" } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "empty_ecig",
+    "entries": [ 
+      { "item": "ecig", "charges": [ 0, 5 ], "contents-group": "nicotine_liquid_0-1" } ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "nicotine_liquid_15",
+    "entries": [ 
+      { "item": "nicotine_liquid", "charges": 15 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "nicotine_liquid_30",
+    "entries": [ 
+      { "item": "nicotine_liquid", "charges": 30 }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "nicotine_liquid_0-15",
+    "entries": [ 
+      { "item": "nicotine_liquid", "charges": [ 0, 15 ] }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "nicotine_liquid_0-30",
+    "entries": [ 
+      { "item": "nicotine_liquid", "charges": [ 0, 30 ] }
+    ]
+  },
+  {
+    "type": "item_group",
+    "subtype": "collection",
+    "id": "nicotine_liquid_0-1",
+    "entries": [ 
+      { "item": "nicotine_liquid", "charges": [ 0, 1 ] }
     ]
   },
   {

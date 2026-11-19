@@ -257,7 +257,6 @@ static const furn_str_id furn_f_translocator_buoy( "f_translocator_buoy" );
 
 static const harvest_drop_type_id harvest_drop_blood( "blood" );
 
-static const itype_id itype_advanced_ecig( "advanced_ecig" );
 static const itype_id itype_apparatus( "apparatus" );
 static const itype_id itype_arcade_machine( "arcade_machine" );
 static const itype_id itype_atomic_coffeepot( "atomic_coffeepot" );
@@ -273,7 +272,6 @@ static const itype_id itype_cigar( "cigar" );
 static const itype_id itype_cigar_lit( "cigar_lit" );
 static const itype_id itype_cow_bell( "cow_bell" );
 static const itype_id itype_detergent( "detergent" );
-static const itype_id itype_ecig( "ecig" );
 static const itype_id itype_efile_photos( "efile_photos" );
 static const itype_id itype_fire( "fire" );
 static const itype_id itype_geiger_on( "geiger_on" );
@@ -587,21 +585,27 @@ std::optional<int> iuse::smoking( Character *p, item *it, const tripoint_bub_ms 
 
 std::optional<int> iuse::ecig( Character *p, item *it, const tripoint_bub_ms & )
 {
-    if( it->typeId() == itype_ecig ) {
-        p->add_msg_if_player( m_neutral, _( "You take a puff from your electronic cigarette." ) );
-    } else if( it->typeId() == itype_advanced_ecig ) {
-        if( p->has_charges( itype_nicotine_liquid, 1 ) ) {
-            p->add_msg_if_player( m_neutral,
-                                  _( "You inhale some vapor from your advanced electronic cigarette." ) );
-            p->use_charges( itype_nicotine_liquid, 1 );
-            item dummy_ecig = item( itype_ecig, calendar::turn );
-            p->consume_effects( dummy_ecig );
-        } else {
-            p->add_msg_if_player( m_info, _( "You don't have any nicotine liquid!" ) );
-            return std::nullopt;
-        }
+    if( !p->is_wielding( *it ) && !p->is_worn( *it ) ) {
+        p->add_msg_if_player( _( "You need to be wielding the %s to use it." ), it->tname() );
+        return std::nullopt;
     }
+    if( !it->ammo_sufficient( p ) ) {
+        p->add_msg_if_player( m_bad, _( "Your %s is out of battery." ), it->tname() );
+        return std::nullopt;
+    }
+    item *liquid = it->get_contents().get_item_with( []( const item &contained ) {
+        return contained.typeId() == itype_nicotine_liquid;
+    } );
+
+    if( liquid == nullptr || liquid->charges < 1 ) {
+        p->add_msg_if_player( m_bad, _( "Your %s is out of nicotine liquid." ), it->tname() );
+        return std::nullopt;
+    }
+    p->add_msg_if_player( m_neutral, _( "You take a puff from your %s." ), it->tname() );
+    p->reduce_charges( liquid, 1 );
     p->vitamin_mod( vitamin_nicotine, 2 );
+    p->add_addiction( addiction_nicotine, 25 );
+    p->mod_moves( 2 );
     return 1;
 }
 
