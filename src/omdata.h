@@ -229,6 +229,7 @@ enum class oter_flags : int {
     source_tailoring,
     source_vehicles,
     source_weapon,
+    defined_rotate,
     num_oter_flags
 };
 

@@ -167,7 +167,40 @@
     "color": "yellow",
     "see_cost": "full_high",
     "extras": "subway",
-    "flags": [ "KNOWN_UP", "KNOWN_DOWN", "NO_ROTATE" ]
+    "flags": [ "KNOWN_UP", "KNOWN_DOWN", "DEFINED_ROTATE" ]
+  },
+    {
+    "type": "overmap_terrain",
+    "id": "sewer_sub_station_east",
+    "name": "subway station (sewer level)",
+    "vision_levels": "underground_dirt",
+    "sym": "S",
+    "color": "yellow",
+    "see_cost": "full_high",
+    "extras": "subway",
+    "flags": [ "KNOWN_UP", "KNOWN_DOWN" ]
+  },
+    {
+    "type": "overmap_terrain",
+    "id": "sewer_sub_station_south",
+    "name": "subway station (sewer level)",
+    "vision_levels": "underground_dirt",
+    "sym": "S",
+    "color": "yellow",
+    "see_cost": "full_high",
+    "extras": "subway",
+    "flags": [ "KNOWN_UP", "KNOWN_DOWN" ]
+  },
+    {
+    "type": "overmap_terrain",
+    "id": "sewer_sub_station_west",
+    "name": "subway station (sewer level)",
+    "vision_levels": "underground_dirt",
+    "sym": "S",
+    "color": "yellow",
+    "see_cost": "full_high",
+    "extras": "subway",
+    "flags": [ "KNOWN_UP", "KNOWN_DOWN" ]
   },
   {
     "type": "overmap_terrain",
