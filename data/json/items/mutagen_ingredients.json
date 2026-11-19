@@ -68,7 +68,7 @@
     "type": "ITEM",
     "id": "cephalopod_sample",
     "copy-from": "mutagen_sample",
-    "color": "black",
+    "color": "dark_gray",
     "name": { "str": "cephalopod sample" },
     "description": "A bizarrely arranged collection of tissue samples from deep within the vitals of some unlucky cephalopod.  Somehow, the sample appears to be alive.",
     "looks_like": "medical_sample",
