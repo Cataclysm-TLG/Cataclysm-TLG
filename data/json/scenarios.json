@@ -7,6 +7,7 @@
     "description": "You have survived the initial wave of panic, and have achieved (relative) safety in one of the many government evac shelters.",
     "allowed_locs": [ "sloc_shelter_a", "sloc_shelter_b", "sloc_shelter_c" ],
     "start_name": "Evac Shelter",
+    "professions": [ "unemployed", "senior", "national_guard", "old_vet", "nerd", "tourist", "politician", "tailor", "chef", "butcher", "mechanic", "scoundrel", "hacker", "cyclist", "vandal", "veteran", "security", "groundskeeper", "homemaker", "construction_worker", "fastfoodcook", "hacker", "electrician", "student" ],
     "flags": [ "CITY_START" ]
   },
   {
@@ -432,7 +433,7 @@
       "sloc_bikeshop",
       "sloc_petstore"
     ],
-    "professions": [ "svictim", "naked", "unemployed", "homeless", "hitchhiker", "patriot", "clown", "lost_sub", "spouse" ],
+    "professions": [ "svictim", "naked", "unemployed", "homeless", "patriot", "clown", "lost_sub", "spouse" ],
     "eoc": [ "scenario_infected", "scenario_bad_day" ],
     "flags": [ "FIRE_START", "CHALLENGE", "CITY_START", "LONE_START" ]
   },
@@ -738,14 +739,10 @@
       "recruit",
       "national_guard",
       "politician",
-      "hitman",
-      "mil_auto_rifleman",
       "mili_pilot",
       "mili_medic",
-      "major-general",
       "nco",
       "combat-mechanic",
-      "combat-engineer",
       "bio_soldier",
       "bio_sniper",
       "bionic_spy"
@@ -780,14 +777,11 @@
       "rifleman",
       "labtech",
       "surgeon",
-      "mil_auto_rifleman",
       "mili_pilot",
       "mili_medic",
       "hazmat_unit",
-      "major-general",
       "nco",
       "combat-mechanic",
-      "combat-engineer",
       "bio_soldier",
       "bio_sniper"
     ],
@@ -820,8 +814,7 @@
       "svictim",
       "clown",
       "spouse",
-      "naked",
-      "hitman"
+      "naked"
     ],
     "flags": [ "CHALLENGE", "LONE_START" ]
   },
@@ -851,7 +844,6 @@
       "maid",
       "frat",
       "lost_sub",
-      "backpacker",
       "heli_pilot",
       "politician",
       "dancer",
@@ -872,11 +864,9 @@
       "tourist",
       "burglar",
       "urban_samurai",
-      "fencer",
-      "major-general",
-      "hitman"
+      "fencer"
     ],
-    "missions": [ "MISSION_MANSION_START" ]
+    "missions": [ "MISSION_MANSION_START", "LONE_START" ]
   },
   {
     "type": "scenario",

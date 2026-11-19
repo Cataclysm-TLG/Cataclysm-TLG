@@ -1138,11 +1138,11 @@
   {
     "type": "profession",
     "id": "cyclist",
-    "name": "Professional Cyclist",
+    "name": "Cyclist",
     "description": "You were a promising cyclist with a bright career in front of you before this all happened.  Perhaps you'll never get to participate in the grand tours now, but as the saying goes, life is like riding a bicycle: you've got to keep moving.",
     "npc_background": "BG_survival_story_SPORTS",
     "points": 4,
-    "skills": [ { "level": 5, "name": "driving" }, { "level": 3, "name": "dodge" } ],
+    "skills": [ { "level": 5, "name": "driving" }, { "level": 2, "name": "dodge" } ],
     "items": {
       "both": {
         "entries": [
@@ -1196,53 +1196,6 @@
       "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
-  },
-  {
-    "type": "profession",
-    "id": "major-general",
-    "name": "Major General",
-    "description": "You worked your way up through the ranks from a no-name private to a big shot Major General, respected and decorated.  On the downside, years of desk duty have left your shooting skills rusty, and all the medals in the world won't protect you now.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "bonus_aggression": { "rng": [ 3, 5 ] },
-    "bonus_bravery": { "rng": [ 4, 6 ] },
-    "points": 4,
-    "proficiencies": [ "prof_gunsmithing_basic", "prof_gun_cleaning" ],
-    "skills": [
-      { "level": 6, "name": "speech" },
-      { "level": 3, "name": "gun" },
-      { "level": 3, "name": "rifle" },
-      { "level": 2, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 1, "name": "firstaid" },
-      { "level": 1, "name": "throw" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "tank_top" },
-          { "item": "officer_uniform" },
-          { "item": "jacket_army_modern" },
-          { "item": "gloves_liner" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "beret" },
-          { "item": "silver_watch" },
-          { "item": "fancy_sunglasses" },
-          { "item": "binoculars" },
-          { "item": "cigar", "entry-wrapper": "case_cigar", "count": 2 },
-          { "item": "id_military", "container-item": "wallet_leather" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "m17", "ammo-item": "9mm", "container-item": "holster", "charges": 17 },
-          { "item": "p320mag_17rd_9x19mm", "ammo-item": "9mm", "charges": 17, "count": 2 },
-          { "item": "militarymap" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_bottom" } ] }
-    },
-    "missions": [ "MISSION_SOCIAL_BUTTERFLY" ],
-    "age_lower": 45
   },
   {
     "type": "profession",
@@ -1425,6 +1378,7 @@
     "bonus_aggression": { "rng": [ 3, 5 ] },
     "bonus_bravery": { "rng": [ 4, 6 ] },
     "points": 3,
+    "age_lower": 23,
     "proficiencies": [ "prof_gunsmithing_basic", "prof_gun_cleaning" ],
     "skills": [
       { "level": 5, "name": "gun" },
@@ -1524,16 +1478,13 @@
     "points": 5,
     "proficiencies": [ "prof_gunsmithing_basic", "prof_metalworking", "prof_welding_basic", "prof_welding", "prof_gun_cleaning" ],
     "skills": [
-      { "level": 7, "name": "mechanics" },
-      { "level": 2, "name": "gun" },
-      { "level": 3, "name": "rifle" },
-      { "level": 3, "name": "throw" },
-      { "level": 3, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "stabbing" },
-      { "level": 2, "name": "dodge" },
+      { "level": 4, "name": "mechanics" },
+      { "level": 2, "name": "traps" },
+      { "level": 1, "name": "gun" },
+      { "level": 1, "name": "rifle" },
+      { "level": 1, "name": "throw" },
+      { "level": 1, "name": "melee" },
       { "level": 1, "name": "firstaid" },
-      { "level": 1, "name": "survival" },
       { "level": 1, "name": "swimming" }
     ],
     "items": {
@@ -1559,116 +1510,6 @@
           { "item": "goggles_welding", "custom-flags": [ "no_auto_equip" ] },
           { "item": "jack" },
           { "item": "tinyweldtank", "charges": 60, "container-item": "oxy_torch" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "combat-engineer",
-    "name": "Combat Engineer",
-    "description": "Your job was simple: Keep the army moving.  You built bridges, you built roads, you destroyed fortifications, and you cleared mines.  It has been years since you last handled a rifle in basic training; now might be the time to dust off those skills.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "bonus_aggression": { "rng": [ 2, 4 ] },
-    "bonus_bravery": { "rng": [ 2, 4 ] },
-    "points": 7,
-    "proficiencies": [ "prof_gunsmithing_basic", "prof_traps", "prof_trapsetting", "prof_disarming", "prof_spotting", "prof_gun_cleaning" ],
-    "skills": [
-      { "level": 7, "name": "traps" },
-      { "level": 6, "name": "fabrication" },
-      { "level": 6, "name": "mechanics" },
-      { "level": 2, "name": "gun" },
-      { "level": 2, "name": "rifle" },
-      { "level": 2, "name": "throw" },
-      { "level": 2, "name": "swimming" },
-      { "level": 1, "name": "firstaid" },
-      { "level": 2, "name": "pistol" },
-      { "level": 1, "name": "melee" },
-      { "level": 1, "name": "stabbing" },
-      { "level": 1, "name": "dodge" },
-      { "level": 2, "name": "survival" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "pants_army" },
-          { "item": "tshirt" },
-          { "item": "helmet_army" },
-          { "item": "mask_ski" },
-          { "item": "gloves_liner" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "wristwatch" },
-          { "item": "molle_pack" },
-          { "group": "charged_two_way_radio" },
-          { "group": "us_ballistic_vest_pristine" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "c4", "count": 3 }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "nco",
-    "name": "Non-Commissioned Officer",
-    "description": "You're a veteran of several peacekeeping missions.  You led your squad as a sort of parental figure, and they relied on you to give orders and keep them alive.  You failed them.  And now you're alone.",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "bonus_aggression": { "rng": [ 2, 3 ] },
-    "bonus_bravery": { "rng": [ 2, 3 ] },
-    "points": 6,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_spotting",
-      "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
-    ],
-    "skills": [
-      { "level": 5, "name": "speech" },
-      { "level": 3, "name": "gun" },
-      { "level": 2, "name": "rifle" },
-      { "level": 2, "name": "shotgun" },
-      { "level": 1, "name": "pistol" },
-      { "level": 1, "name": "melee" },
-      { "level": 1, "name": "firstaid" },
-      { "level": 2, "name": "survival" },
-      { "level": 2, "name": "throw" },
-      { "level": 3, "name": "swimming" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "pants_army" },
-          { "item": "tshirt" },
-          { "item": "combat_shirt" },
-          { "item": "helmet_army" },
-          { "item": "mask_ski" },
-          { "item": "gloves_liner" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "diving_watch" },
-          { "item": "molle_pack" },
-          { "group": "charged_two_way_radio" },
-          { "group": "us_ballistic_vest_pristine" },
-          { "item": "water_clean", "container-item": "canteen" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "knife_combat_army", "variant": "m9bayonet", "container-item": "sheath" },
-          { "item": "shot_00", "count": 2 },
-          {
-            "item": "m1014",
-            "ammo-item": "shot_00",
-            "charges": 8,
-            "contents-item": [ "shoulder_strap", "holo_sight" ]
-          }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -1986,43 +1827,6 @@
   },
   {
     "type": "profession",
-    "id": "security",
-    "name": "Security Guard",
-    "description": "You had a boring, underpaid job watching cameras and patrolling hallways, but things have suddenly gotten a lot more dangerous.  You have some useful equipment, but you've never had any call to use it until now.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 2,
-    "skills": [
-      { "level": 2, "name": "gun" },
-      { "level": 2, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "bashing" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "longshirt" },
-          { "item": "knife_folding" },
-          { "item": "hat_ball" },
-          { "item": "wristwatch" },
-          { "item": "leather_belt" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_flashlight" },
-          { "item": "pants" },
-          { "item": "level_3_vest" },
-          { "item": "baton", "custom-flags": [ "auto_wield" ] },
-          { "item": "m9", "ammo-item": "9mm", "charges": 15, "container-item": "holster" },
-          { "item": "m9mag", "ammo-item": "9mm", "charges": 15 },
-          { "item": "m9mag", "ammo-item": "9mm", "charges": 15 }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
     "id": "groundskeeper",
     "name": "Landscaper",
     "description": "You used to mow lawns and trim hedges for the wealthy.  Contract work was getting scarce even before the zombies came, but now you've got nothing left except your tools and expertise.",
@@ -2045,13 +1849,13 @@
           { "item": "glasses_safety" },
           { "item": "socks" },
           { "item": "sneakers" },
-          { "item": "pants_cargo" },
+          { "item": "armguard_cut_resistant" },
+          { "item": "technician_pants_gray" },
           { "group": "charged_smart_phone" },
-          { "item": "g_shovel" },
-          { "item": "scabbard", "contents-item": "machete" }
+          { "item": "g_shovel", "custom-flags": [ "auto_wield" ] }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
@@ -2061,7 +1865,7 @@
     "name": "Nursing Assistant",
     "description": "You went on providing in-home care for the elderly even as the whole world fell apart around you.  You can only pray that you don't see your former clients among the walking dead…",
     "npc_background": "BG_survival_story_MEDICAL",
-    "points": 1,
+    "points": 3,
     "skills": [ { "level": 3, "name": "firstaid" }, { "level": 3, "name": "cooking" }, { "level": 3, "name": "speech" } ],
     "proficiencies": [ "prof_field_medic" ],
     "items": {
@@ -2308,7 +2112,7 @@
           { "item": "mbag", "contents-group": "dog_lover_bag" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     },
     "missions": [ "MISSION_DOG_LOVER" ]
@@ -2340,7 +2144,7 @@
           { "item": "catfood_dry", "count": 10 }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
@@ -2435,7 +2239,7 @@
           { "group": "charged_tazer" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
@@ -2514,7 +2318,7 @@
           { "item": "tank_top" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
@@ -2553,7 +2357,7 @@
           { "item": "tank_top" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
@@ -2592,46 +2396,7 @@
           { "item": "tank_top" }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    },
-    "missions": [ "MISSION_HUNTER" ]
-  },
-  {
-    "type": "profession",
-    "id": "conversion_hunter",
-    "name": "Big-Bore Hunter",
-    "description": "You always harbored a passion for hunting and a particular fondness for big-bore rifle calibers and affordable conversion kits.  Whether it was their cost-effective nature or the simple, testosterone-amplifying notion that you could retool your rifle to belt out .50-caliber bullets, you preferred them for your hunting trips.  Now, with your converted rifle in hand, you fancy that there isn't any game too large for you to take down.",
-    "npc_background": "BG_survival_story_RURAL",
-    "points": 3,
-    "proficiencies": [ "prof_gun_cleaning", "prof_knives_familiar" ],
-    "skills": [ { "level": 4, "name": "gun" }, { "level": 4, "name": "rifle" }, { "level": 3, "name": "survival" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "tank_top" },
-          { "item": "knit_scarf" },
-          { "item": "socks" },
-          { "item": "boots_steel" },
-          { "item": "pants_cargo" },
-          { "item": "jacket_flannel" },
-          { "item": "hat_hunting" },
-          { "item": "wristwatch" },
-          { "item": "back_holster" },
-          { "group": "charged_smart_phone" },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          {
-            "group": "ar15_50",
-            "ammo-item": "50beowulf_xtp",
-            "charges": 10,
-            "contents-item": "shoulder_strap_simple",
-            "custom-flags": [ "no_auto_equip" ]
-          },
-          { "item": "chestrig", "contents-group": "mags_50beowulf_ar15" },
-          { "item": "sheath", "contents-item": "knife_hunting" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
     },
     "missions": [ "MISSION_HUNTER" ]
@@ -2642,16 +2407,12 @@
     "name": { "male": "Handy Man", "female": "Handy Woman" },
     "description": "You used to work at a local hardware store, and you did plenty of home renovations yourself.  Now you look out at the horizon of a ruined world, and wonder - are your meager skills, and the few supplies you grabbed on the way out, sufficient to help rebuild?",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 3,
+    "points": 4,
     "proficiencies": [
       "prof_plumbing",
-      "prof_elec_soldering",
-      "prof_metalworking",
-      "prof_lockpicking",
-      "prof_carpentry_basic",
-      "prof_appliance_repair"
+      "prof_carpentry_basic"
     ],
-    "skills": [ { "level": 5, "name": "fabrication" }, { "level": 5, "name": "traps" } ],
+    "skills": [ { "level": 4, "name": "fabrication" }, { "level": 3, "name": "traps" } ],
     "items": {
       "both": {
         "entries": [
@@ -2664,7 +2425,9 @@
           { "item": "nail", "charges": 180 },
           { "item": "tool_belt", "contents-item": "hammer" },
           { "item": "tank_top" },
-          { "item": "pants" }
+          { "item": "jacket_flannel" },
+          { "item": "hat_hard" },
+          { "item": "technician_pants_gray" }
         ]
       },
       "male": { "entries": [ { "item": "boxer_shorts" } ] },
@@ -2724,43 +2487,6 @@
       "female": {
         "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" }, { "item": "jeans_skinny" } ]
       }
-    }
-  },
-  {
-    "id": "handymanservice",
-    "type": "profession",
-    "name": { "male": "Serviceman", "female": "Servicewoman" },
-    "description": "Employed by a large company, you performed installation and troubleshooting services at the homes of ungrateful luddites.  Driving back from your last call, you were suddenly swarmed by what you believed to be angry rioters.  You veered off onto an old, neglected side road to escape, only to find yourself lost and low on gas.",
-    "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 3,
-    "proficiencies": [ "prof_appliance_repair", "prof_driver" ],
-    "skills": [
-      { "level": 4, "name": "mechanics" },
-      { "level": 4, "name": "electronics" },
-      { "level": 3, "name": "computer" },
-      { "level": 3, "name": "driving" }
-    ],
-    "vehicle": "cube_van_cheap",
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "dress_shirt" },
-          { "item": "socks" },
-          { "item": "boots" },
-          { "item": "multitool" },
-          { "item": "wristwatch" },
-          { "item": "mbag" },
-          { "item": "water_clean" },
-          { "item": "gloves_work" },
-          { "item": "hammer" },
-          { "item": "hat_ball" },
-          { "group": "charged_smart_phone" },
-          { "group": "charged_electrical_measuring" },
-          { "item": "pants" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     }
   },
   {
@@ -3047,9 +2773,9 @@
     "name": "Electrician",
     "description": "Small businesses often hired you for electrical work.  You were halfway through your latest job when the whole power grid went dead.",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 2,
+    "points": 3,
     "proficiencies": [ "prof_elec_soldering", "prof_appliance_repair" ],
-    "skills": [ { "level": 6, "name": "electronics" } ],
+    "skills": [ { "level": 5, "name": "electronics" } ],
     "items": {
       "both": {
         "entries": [
@@ -3076,8 +2802,8 @@
     "name": "Computer Hacker",
     "description": "Caffeine pills and all-nighters in front of a computer screen made you an expert at writing and cracking code.  The power's gone out, and suddenly your elite skills seem significantly less useful.  At least there's no one stopping you from your dream of breaking into a military mainframe now.",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 2,
-    "skills": [ { "level": 6, "name": "computer" } ],
+    "points": 3,
+    "skills": [ { "level": 5, "name": "computer" } ],
     "items": {
       "both": {
         "entries": [
@@ -3096,32 +2822,6 @@
         ]
       },
       "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
-    }
-  },
-  {
-    "type": "profession",
-    "id": "backpacker",
-    "name": "Backpacker",
-    "description": "For the past few years you've been traveling the world, sightseeing and living off your parents' trust fund.  You came home to find the world in ruins, and the only thing between you and death is the open road and your backpack.",
-    "npc_background": "BG_survival_story_RURAL",
-    "points": 1,
-    "skills": [ { "level": 3, "name": "survival" } ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "backpack_hiking" },
-          { "item": "jeans" },
-          { "item": "boots_hiking" },
-          { "item": "knit_scarf" },
-          { "item": "socks" },
-          { "item": "wristwatch" },
-          { "item": "fun_survival" },
-          { "group": "charged_smart_phone" },
-          { "item": "tshirt" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
@@ -3259,19 +2959,6 @@
     },
     "flags": [ "SCEN_ONLY" ],
     "age_lower": 16
-  },
-  {
-    "type": "profession",
-    "id": "hitchhiker",
-    "name": "Hitchhiker",
-    "description": "Your house has been demolished and your planet destroyed, but at least you still have your towel.",
-    "npc_background": "BG_survival_story_VULNERABLE",
-    "points": -1,
-    "items": {
-      "both": [ "house_coat", "slippers", "towel", "guidebook" ],
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    }
   },
   {
     "type": "profession",
@@ -3415,7 +3102,7 @@
         ]
       }
     },
-    "age_lower": 50
+    "age_lower": 55
   },
   {
     "type": "profession",
@@ -4014,7 +3701,7 @@
     "type": "profession",
     "id": "pizzaboy",
     "name": { "male": "Pizza Delivery Boy", "female": "Pizza Delivery Girl" },
-    "description": "You were delivering the last pizza of the night to the local cryogenics lab when hungry zombies attempted to make a meal out of you.  Fleeing for safety, you find yourself with only your wits and some leftover pizza.  And they didn't even leave a tip!",
+    "description": "You were delivering the last pizza of the night when you were swarmed by the undead.  Fleeing for safety, you find yourself with only your wits and some leftover pizza.  And they didn't even leave a tip!",
     "points": 0,
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
     "skills": [ { "level": 3, "name": "driving" }, { "level": 1, "name": "speech" } ],
@@ -4087,12 +3774,11 @@
     "bonus_aggression": { "rng": [ 3, 5 ] },
     "bonus_bravery": { "rng": [ 4, 6 ] },
     "skills": [
-      { "level": 4, "name": "gun" },
-      { "level": 4, "name": "rifle" },
-      { "level": 3, "name": "pistol" },
-      { "level": 3, "name": "firstaid" },
-      { "level": 2, "name": "melee" },
-      { "level": 2, "name": "bashing" },
+      { "level": 2, "name": "gun" },
+      { "level": 2, "name": "rifle" },
+      { "level": 1, "name": "pistol" },
+      { "level": 2, "name": "firstaid" },
+      { "level": 1, "name": "melee" },
       { "level": 2, "name": "swimming" }
     ],
     "proficiencies": [ "prof_gun_cleaning" ],
@@ -4223,11 +3909,11 @@
   },
   {
     "type": "profession",
-    "id": "mall_cop",
-    "name": "Mall Security",
-    "description": "You spent dull nights guarding the local mall against teen hooligans and petty thieves.  Your job training didn't provide any terribly useful skills, but you do have your trusty stun gun, baton, and pocket knife.",
+    "id": "security",
+    "name": "Security Guard",
+    "description": "You spend dull nights guarding your workplace from hooligans and petty thieves.  You're equipped for trouble, but this might be more than you can handle.",
     "npc_background": "BG_survival_story_WORKER_COMMERCIAL",
-    "points": 0,
+    "points": 3,
     "skills": [ { "level": 2, "name": "melee" }, { "level": 2, "name": "bashing" } ],
     "items": {
       "both": {
@@ -4243,11 +3929,12 @@
           { "group": "charged_flashlight" },
           { "group": "charged_tazer" },
           { "item": "pants" },
-          { "item": "stab_vest" },
-          { "item": "baton", "custom-flags": [ "auto_wield" ] }
+          { "group": "full_stab_vest" },
+          { "group": "charged_two_way_radio" },
+          { "item": "baton-extended", "custom-flags": [ "auto_wield" ] }
         ]
       },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
+      "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_top" }, { "group": "female_underwear_bottom" } ] }
     }
   },
@@ -4902,66 +4589,6 @@
   },
   {
     "type": "profession",
-    "id": "mil_auto_rifleman",
-    "name": "Military Automatic Rifleman",
-    "npc_background": "BG_survival_story_SOLDIER",
-    "bonus_aggression": { "rng": [ 3, 5 ] },
-    "bonus_bravery": { "rng": [ 4, 6 ] },
-    "description": "You were trusted with a big-ass, belt-fed machine gun and plenty of ammo to lay down suppressing fire for your team.  Now that it's going to be much harder to resupply, you should probably be more selective with the ol' spray-and-pray.",
-    "points": 5,
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_gun_cleaning",
-      "prof_knives_familiar",
-      "prof_auto_rifles_familiar",
-      "prof_auto_pistols_familiar"
-    ],
-    "skills": [
-      { "level": 4, "name": "gun" },
-      { "level": 4, "name": "rifle" },
-      { "level": 1, "name": "pistol" },
-      { "level": 2, "name": "melee" },
-      { "level": 1, "name": "stabbing" },
-      { "level": 1, "name": "dodge" },
-      { "level": 1, "name": "firstaid" },
-      { "level": 2, "name": "throw" },
-      { "level": 1, "name": "survival" },
-      { "level": 2, "name": "swimming" }
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "pants_army" },
-          { "item": "tshirt" },
-          { "item": "combat_shirt" },
-          { "item": "helmet_army" },
-          { "item": "mask_ski" },
-          { "item": "gloves_liner" },
-          { "item": "gloves_tactical" },
-          { "item": "socks" },
-          { "item": "boots_combat" },
-          { "item": "wristwatch" },
-          { "item": "pockknife" },
-          { "item": "molle_pack" },
-          { "group": "charged_two_way_radio" },
-          { "group": "us_ballistic_vest_pristine" },
-          { "item": "water_clean", "container-item": "canteen" },
-          {
-            "item": "m249",
-            "ammo-item": "556",
-            "charges": 200,
-            "contents-item": [ "shoulder_strap_simple", "holo_sight", "bipod" ]
-          },
-          { "item": "ear_plugs", "custom-flags": [ "no_auto_equip" ] },
-          { "item": "m17", "ammo-item": "9mm", "charges": 17, "container-item": "holster" }
-        ]
-      },
-      "male": { "entries": [ { "item": "boxer_shorts" } ] },
-      "female": { "entries": [ { "group": "female_underwear_top" }, { "item": "boxer_shorts" } ] }
-    }
-  },
-  {
-    "type": "profession",
     "id": "mili_pilot",
     "name": "Military Pilot",
     "description": "You got to see things fall apart from the sky, transporting soldiers and survivors from one holdout to the next.  You knew it was only a matter of time before the horrors patrolling the skies shot you down.",
@@ -5300,87 +4927,14 @@
   },
   {
     "type": "profession",
-    "id": "hitman",
-    "name": { "male": "Hitman", "female": "Femme Fatale" },
-    "description": "You were the best undercover agent they had, with a mission so vital that you had to take it even with the riots going on.  Your target seems to have turned feral as well as your contact, you are all alone now.",
-    "points": 5,
-    "npc_background": "BG_survival_story_CRIMINAL",
-    "bonus_aggression": { "rng": [ 3, 5 ] },
-    "bonus_bravery": { "rng": [ 3, 5 ] },
-    "skills": [
-      { "level": 4, "name": "gun" },
-      { "level": 4, "name": "pistol" },
-      { "level": 4, "name": "melee" },
-      { "level": 4, "name": "stabbing" },
-      { "level": 3, "name": "unarmed" },
-      { "level": 3, "name": "dodge" },
-      { "level": 4, "name": "speech" }
-    ],
-    "proficiencies": [
-      "prof_gunsmithing_basic",
-      "prof_spotting",
-      "prof_wp_syn_armored",
-      "prof_auto_pistols_familiar",
-      "prof_auto_pistols_pro",
-      "prof_unarmed_familiar",
-      "prof_unarmed_pro"
-    ],
-    "items": {
-      "both": {
-        "entries": [
-          { "item": "fancy_sunglasses" },
-          { "item": "platinum_watch" },
-          { "item": "knit_scarf" },
-          { "item": "gloves_liner" },
-          { "item": "polaroid_photo" },
-          { "item": "suppressor" },
-          { "item": "rail_laser_sight" },
-          { "group": "charged_cell_phone" },
-          { "item": "sig_p230", "ammo-item": "32_acp_jhp", "charges": 8, "container-item": "bbholster" },
-          { "item": "sigp230mag", "ammo-item": "32_acp_jhp", "charges": 8 }
-        ]
-      },
-      "male": {
-        "entries": [
-          { "item": "briefs" },
-          { "item": "socks" },
-          { "item": "dress_shoes" },
-          { "item": "bowhat" },
-          { "item": "suit" },
-          { "item": "tie_necktie" },
-          { "item": "tieclip" },
-          { "item": "leather_belt" },
-          { "item": "briefcase" }
-        ]
-      },
-      "female": {
-        "entries": [
-          { "group": "female_underwear_bottom" },
-          { "group": "female_underwear_top" },
-          { "item": "stockings" },
-          { "item": "garter_belt" },
-          { "item": "heels" },
-          { "item": "hat_cotton" },
-          { "item": "dress" },
-          { "item": "purse" },
-          { "item": "gold_earring" },
-          { "item": "gold_necklace" },
-          { "item": "gold_hairpin" }
-        ]
-      }
-    },
-    "missions": [ "MISSION_ASSASSINATION" ]
-  },
-  {
-    "type": "profession",
     "id": "old_vet",
     "name": "Old Veteran",
     "description": "You've been through hell once before.  Hopefully those weekend range trips have kept your skills sharp.",
     "npc_background": "BG_survival_story_RETIRED",
-    "points": 4,
+    "points": 5,
     "skills": [
       { "level": 3, "name": "gun" },
-      { "level": 3, "name": "rifle" },
+      { "level": 2, "name": "rifle" },
       { "level": 2, "name": "pistol" },
       { "level": 2, "name": "firstaid" },
       { "level": 2, "name": "throw" },
@@ -5410,7 +4964,7 @@
       "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
       "female": { "entries": [ { "group": "female_underwear_bottom" }, { "group": "female_underwear_top" } ] }
     },
-    "age_lower": 50
+    "age_lower": 55
   },
   {
     "type": "profession",
