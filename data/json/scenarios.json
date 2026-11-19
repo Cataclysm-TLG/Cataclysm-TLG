@@ -7,7 +7,7 @@
     "description": "You have survived the initial wave of panic, and have achieved (relative) safety in one of the many government evac shelters.",
     "allowed_locs": [ "sloc_shelter_a", "sloc_shelter_b", "sloc_shelter_c" ],
     "start_name": "Evac Shelter",
-    "professions": [ "unemployed", "senior", "national_guard", "old_vet", "nerd", "tourist", "politician", "tailor", "chef", "butcher", "mechanic", "scoundrel", "hacker", "cyclist", "vandal", "veteran", "security", "groundskeeper", "homemaker", "construction_worker", "fastfoodcook", "hacker", "electrician", "student" ],
+    "professions": [ "unemployed", "senior", "national_guard", "old_vet", "nerd", "tourist", "politician", "tailor", "chef", "butcher", "mechanic", "scoundrel", "cyclist", "vandal", "veteran", "security", "groundskeeper", "homemaker", "construction_worker", "fastfoodcook", "hacker", "electrician", "student" ],
     "flags": [ "CITY_START" ]
   },
   {
@@ -741,7 +741,6 @@
       "politician",
       "mili_pilot",
       "mili_medic",
-      "nco",
       "combat-mechanic",
       "bio_soldier",
       "bio_sniper",
@@ -780,7 +779,6 @@
       "mili_pilot",
       "mili_medic",
       "hazmat_unit",
-      "nco",
       "combat-mechanic",
       "bio_soldier",
       "bio_sniper"
@@ -866,7 +864,7 @@
       "urban_samurai",
       "fencer"
     ],
-    "missions": [ "MISSION_MANSION_START", "LONE_START" ]
+    "missions": [ "MISSION_MANSION_START" ]
   },
   {
     "type": "scenario",
