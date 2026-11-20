@@ -8832,7 +8832,7 @@ void item::get_warmth_by_bodypart( std::vector<std::pair<bodypart_id, int>> &res
 
     if( is_ablative() ) {
         std::vector<std::pair<bodypart_id, int>> ablative_warmth;
-        for( const item_pocket *pocket : contents.get_ablative_pockets() ) {
+        for( const item_pocket *pocket : contents.get_all_ablative_pockets() ) {
             if( pocket->empty() ) {
                 continue;
             }
