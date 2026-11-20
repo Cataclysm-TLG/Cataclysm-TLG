@@ -2162,7 +2162,6 @@ std::map<bodypart_id, int> outfit::wind_resistance( const Character &guy ) const
     }
     return ret;
 }
-
 std::unordered_set<bodypart_id> outfit::where_discomfort( const Character &guy ) const
 {
     // get all rigid body parts to begin with
