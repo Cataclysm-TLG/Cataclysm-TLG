@@ -209,7 +209,7 @@
     "price_postapoc": "10 cent",
     "material": [ "cotton" ],
     "symbol": "[",
-    "color": "black",
+    "color": "dark_gray",
     "armor": [ { "encumbrance": 0, "coverage": 1, "covers": [ "torso" ], "specifically_covers": [ "torso_neck" ] } ],
     "flags": [ "FANCY", "BELTED" ]
   },

@@ -541,7 +541,7 @@
     "symbol": "$",
     "looks_like": "f_barber_chair",
     "description": "A stationary and surprisingly comfortable reclining chair made of cloth and steel.",
-    "color": "black",
+    "color": "red",
     "move_cost_mod": 2,
     "coverage": 38,
     "concealment": 38,

@@ -1676,7 +1676,7 @@
     "description": "Whatever this floor used to be made of, it's little more than charred remains now.",
     "symbol": ".",
     "looks_like": "t_dirtfloor",
-    "color": "black",
+    "color": "dark_gray",
     "move_cost": 2,
     "connect_groups": "INDOORFLOOR",
     "flags": [ "TRANSPARENT", "COLLAPSES", "INDOORS" ],

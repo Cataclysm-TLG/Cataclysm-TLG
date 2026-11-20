@@ -71,7 +71,7 @@
     "description": "Liquid rubber that comes in a sealed, pressurized container and is released in an aerosol spray when a valve button is depressed.  It dries in air, and can be used to waterproof items or repair leaks.",
     "volume": "1 ml",
     "weight": "1 mg",
-    "color": "black",
+    "color": "dark_gray",
     "material": [ "soft_rubber" ],
     "flags": [ "TRADER_AVOID", "NO_SALVAGE" ],
     "phase": "liquid",
