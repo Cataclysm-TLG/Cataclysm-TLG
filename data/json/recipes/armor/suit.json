@@ -463,7 +463,7 @@
     "time": "22 h",
     "autolearn": true,
     "using": [ [ "tailoring_denim_sheet", 16 ], [ "strap_large", 2 ] ],
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "proficiencies": [ { "proficiency": "prof_closures" } ]
   },
   {
@@ -478,7 +478,7 @@
     "time": "6 h",
     "book_learn": [ [ "textbook_fireman", 8 ], [ "tailor_portfolio", 8 ] ],
     "using": [ [ "sewing_standard", 200 ], [ "tailoring_nomex_sheet", 40 ], [ "glue_strong", 5 ] ],
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "proficiencies": [
       { "proficiency": "prof_closures" },
       { "proficiency": "prof_closures_waterproofing" },
@@ -501,7 +501,7 @@
     "copy-from": "entry_suit",
     "time": "6 h",
     "using": [ [ "sewing_standard", 150 ], [ "tailoring_nomex_sheet", 30 ], [ "glue_strong", 3 ] ],
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [
       [ [ "kevlar_sheet_layered", 6 ] ],
       [ [ "duct_tape", 150 ] ],
@@ -519,7 +519,7 @@
     "copy-from": "entry_suit",
     "time": "6 h 45 m",
     "using": [ [ "sewing_standard", 300 ], [ "tailoring_nomex_sheet", 50 ], [ "glue_strong", 1 ] ],
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [
       [ [ "kevlar_sheet_layered", 12 ] ],
       [ [ "duct_tape", 300 ] ],

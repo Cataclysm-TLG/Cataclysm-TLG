@@ -382,7 +382,6 @@
       { "item": "soldering_iron", "prob": 15, "damage": [ -1, 5 ] },
       { "item": "soldering_iron_portable", "prob": 15, "charges": [ 0, 50 ] },
       { "item": "xacto", "prob": 15, "damage": [ -1, 5 ] },
-      { "item": "kevlar_shears", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "tin_snips", "prob": 10, "damage": [ -1, 5 ] },
       { "item": "wristwatch", "prob": 15, "damage": [ -1, 5 ] },
       { "item": "light_battery_cell", "count": 4, "prob": 25, "charges": 300 },
