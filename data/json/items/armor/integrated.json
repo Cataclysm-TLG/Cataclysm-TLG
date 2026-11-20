@@ -753,7 +753,7 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 4 } ],
-        "covers": [ "torso", "long_tail" ],
+        "covers": [ "torso" ],
         "coverage": 100,
         "encumbrance": 14,
         "layers": [ "SKINTIGHT", "NORMAL" ]
@@ -819,7 +819,7 @@
     "armor": [
       {
         "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 3.5 } ],
-        "covers": [ "torso", "long_tail" ],
+        "covers": [ "torso" ],
         "coverage": 100,
         "encumbrance": 12,
         "layers": [ "SKINTIGHT", "NORMAL" ]
@@ -897,7 +897,6 @@
           "foot_l",
           "foot_r",
           "head",
-          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",
