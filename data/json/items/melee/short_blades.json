@@ -148,7 +148,7 @@
     "category": "weapons",
     "description": "A menacing-looking knife with a broad, square shaped blade, curved for fast vegetable chopping.  Its heft and sharpness make it a decent weapon as well, although not as good as a meat cleaver.",
     "copy-from": "base_kitchen_knife",
-    "looks_like": "knife_butcher",
+    "looks_like": "knife_meat_cleaver",
     "weight": "340 g",
     "volume": "653 ml",
     "longest_side": "33 cm",
