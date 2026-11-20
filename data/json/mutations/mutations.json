@@ -4782,7 +4782,8 @@
     "allowed_items": [ "ALLOWS_TAIL" ],
     "allow_soft_gear": true,
     "social_modifiers": { "lie": -20, "persuade": 10 },
-    "enchantments": [ "ench_long_tail", { "values": [ { "value": "DODGE_CHANCE", "add": 0.8 } ] } ]
+    "enchantments": [ "ench_long_tail", { "values": [ { "value": "DODGE_CHANCE", "add": 0.8 } ] } ],
+    "integrated_armor": [ "integrated_tail_fluffy" ]
   },
   {
     "type": "mutation",

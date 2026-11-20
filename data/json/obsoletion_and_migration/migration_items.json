@@ -4555,5 +4555,10 @@
     "id": "laptop_screen_lit",
     "type": "MIGRATION",
     "replace": "laptop_on"
+  },
+  {
+    "id": "kevlar_shears",
+    "type": "MIGRATION",
+    "replace": "scissors"
   }
 ]

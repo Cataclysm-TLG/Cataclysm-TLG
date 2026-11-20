@@ -311,7 +311,7 @@
   {
     "id": "filament",
     "type": "requirement",
-    "//": "Materials for use when sewing items. 10 inches of thread, sinew, fiber, canvas or yarn, or 12 inches of nomex and kevlar thread per unit.",
+    "//": "Materials for use when sewing items. 25 inches of thread, sinew, fiber, canvas or yarn, or 30 cm of Nomex or Kevlar thread per unit.",
     "components": [
       [
         [ "thread", 1 ],

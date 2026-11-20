@@ -4306,21 +4306,13 @@
     "flags": [ "BLIND_EASY" ]
   },
   {
-    "result": "kevlar_shears",
-    "type": "uncraft",
-    "activity_level": "MODERATE_EXERCISE",
-    "time": "12 s",
-    "qualities": [ { "id": "HAMMER", "level": 1 } ],
-    "components": [ [ [ "scrap", 2 ] ] ]
-  },
-  {
     "result": "ballistic_vest_esapi",
     "type": "uncraft",
     "activity_level": "LIGHT_EXERCISE",
     "time": "5 m",
     "skill_used": "tailor",
     "difficulty": 3,
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 10 ] ], [ [ "kevlar_sheet_layered", 12 ] ] ]
   },
   {
@@ -4330,7 +4322,7 @@
     "time": "15 m",
     "skill_used": "tailor",
     "difficulty": 3,
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 20 ] ], [ [ "kevlar_sheet_layered", 20 ] ] ]
   },
   {
@@ -4340,7 +4332,7 @@
     "time": "5 m",
     "skill_used": "tailor",
     "difficulty": 3,
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 10 ] ], [ [ "kevlar_sheet_layered", 12 ] ] ]
   },
   {
@@ -4350,7 +4342,7 @@
     "time": "5 m",
     "skill_used": "tailor",
     "difficulty": 3,
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 10 ] ], [ [ "kevlar_sheet_layered", 12 ] ] ]
   },
   {
@@ -4360,7 +4352,7 @@
     "time": "5 m",
     "skill_used": "tailor",
     "difficulty": 3,
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "nylon_patch", 6 ] ], [ [ "kevlar_sheet_layered", 7 ] ] ]
   },
   {
@@ -4378,7 +4370,7 @@
     "time": "1 m",
     "skill_used": "tailor",
     "difficulty": 1,
-    "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "kevlar_patch", 8 ] ] ]
   },
   {
@@ -4386,7 +4378,7 @@
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "time": "4 m",
-    "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "CUT_FINE", "level": 2 }, { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "thread_kevlar", 8 ] ] ]
   },
   {
@@ -4743,7 +4735,7 @@
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
     "time": "30 s",
-    "qualities": [ { "id": "FABRIC_CUT", "level": 2 } ],
+    "qualities": [ { "id": "FABRIC_CUT", "level": 1 } ],
     "components": [ [ [ "nomex_patch", 8 ] ] ]
   },
   {
@@ -5803,7 +5795,7 @@
     "skill_used": "tailor",
     "time": "15 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 2 ] ], [ [ "thread_kevlar", 18 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 1 ] ], [ [ "thread_kevlar", 18 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5813,7 +5805,7 @@
     "skill_used": "tailor",
     "time": "5 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 1 ] ], [ [ "thread_kevlar", 5 ] ] ],
+    "components": [ [ [ "kevlar_patch", 3 ] ], [ [ "thread_kevlar", 5 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {
@@ -5823,7 +5815,37 @@
     "skill_used": "tailor",
     "time": "30 m",
     "qualities": [ { "id": "CUT", "level": 2 } ],
-    "components": [ [ [ "kevlar_sheet", 4 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "components": [ [ [ "kevlar_sheet", 3 ] ], [ [ "thread_kevlar", 25 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_warmer",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "15 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "cotton_sheet", 1 ] ], [ [ "thread", 18 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_warmer_xs",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "5 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "cotton_patch", 3 ] ], [ [ "thread", 5 ] ] ],
+    "flags": [ "BLIND_HARD" ]
+  },
+  {
+    "result": "tail_warmer_xl",
+    "type": "uncraft",
+    "activity_level": "NO_EXERCISE",
+    "skill_used": "tailor",
+    "time": "30 m",
+    "qualities": [ { "id": "CUT", "level": 2 } ],
+    "components": [ [ [ "cotton_sheet", 2 ] ], [ [ "thread", 25 ] ] ],
     "flags": [ "BLIND_HARD" ]
   },
   {

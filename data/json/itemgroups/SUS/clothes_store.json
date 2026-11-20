@@ -69,8 +69,7 @@
               { "item": "needle_curved", "prob": 75 },
               { "item": "scissors", "prob": 90 },
               { "item": "knitting_needles", "prob": 20 },
-              { "item": "sewing_kit", "prob": 85, "charges": [ 0, -1 ] },
-              { "item": "kevlar_shears", "prob": 5 }
+              { "item": "sewing_kit", "prob": 85, "charges": [ 0, -1 ] }
             ],
             "prob": 25
           },

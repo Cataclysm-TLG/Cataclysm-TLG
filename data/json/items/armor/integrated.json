@@ -415,6 +415,35 @@
     ]
   },
   {
+    "id": "integrated_tail_fluffy",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "category": "armor",
+    "name": { "str_sp": "tail fluff" },
+    "description": "An extra coat of long, wispy fur adorning the tail.  It provides some extra warmth.",
+    "weight": "30 g",
+    "volume": "60 ml",
+    "to_hit": 0,
+    "price": "0 cent",
+    "price_postapoc": "0 cent",
+    "material": [ "fur" ],
+    "symbol": "x",
+    "color": "white",
+    "warmth": 15,
+    "environmental_protection": 1,
+    "flags": [ "INTEGRATED", "NO_SALVAGE", "ALLOWS_NATURAL_ATTACKS", "UNBREAKABLE", "PERSONAL", "TRANSPARENT" ],
+    "armor": [
+      {
+        "material": [ { "type": "fur", "covered_by_mat": 100, "thickness": 1.0 } ],
+        "covers": [
+          "long_tail"
+        ],
+        "coverage": 100,
+        "encumbrance": 3
+      }
+    ]
+  },
+  {
     "id": "integrated_lightfur",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -553,6 +582,7 @@
           "foot_l",
           "foot_r",
           "head",
+          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",
@@ -617,6 +647,7 @@
           "foot_l",
           "foot_r",
           "head",
+          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",
@@ -675,6 +706,7 @@
           "foot_l",
           "foot_r",
           "head",
+          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",
@@ -740,6 +772,7 @@
           "foot_l",
           "foot_r",
           "head",
+          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",
@@ -805,6 +838,7 @@
           "foot_l",
           "foot_r",
           "head",
+          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",
@@ -863,6 +897,7 @@
           "foot_l",
           "foot_r",
           "head",
+          "long_tail",
           "cephalopod_tentacle_l",
           "cephalopod_tentacle_r",
           "cephalopod_arm_1",

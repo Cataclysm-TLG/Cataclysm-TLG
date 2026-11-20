@@ -13,7 +13,7 @@
     "symbol": "[",
     "looks_like": "armguard_larmor",
     "color": "light_gray",
-    "warmth": 20,
+    "warmth": 15,
     "material_thickness": 0.5,
     "flags": [ "SKINTIGHT" ],
     "armor": [
@@ -562,7 +562,7 @@
     "symbol": "[",
     "looks_like": "leggings",
     "color": "light_gray",
-    "warmth": 20,
+    "warmth": 15,
     "material_thickness": 0.1,
     "flags": [ "SKINTIGHT" ],
     "armor": [
@@ -574,6 +574,24 @@
       },
       { "coverage": 90, "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ] }
     ]
+  },
+    {
+    "id": "leg_warmers_xl",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "leg_warmers",
+    "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
+    "proportional": { "weight": 1.5, "volume": 1.5 },
+    "extend": { "flags": [ "OVERSIZE", "PREFIX_XL" ] }
+  },
+  {
+    "id": "leg_warmers_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "leg_warmers",
+    "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
   },
   {
     "id": "leg_warmers_f",
@@ -603,6 +621,15 @@
     ]
   },
   {
+    "id": "leg_warmers_xsf",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "copy-from": "leg_warmers_f",
+    "name": { "str": "fur leggings", "str_pl": "pairs of fur leggings" },
+    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
+    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+  },
+  {
     "id": "leg_warmers_xlf",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
@@ -629,49 +656,51 @@
     ]
   },
   {
-    "id": "leg_warmers_xsf",
+    "id": "tail_warmer",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "copy-from": "leg_warmers_f",
-    "name": { "str": "fur leggings", "str_pl": "pairs of fur leggings" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
-  },
-  {
-    "id": "leg_warmers_xl",
-    "type": "ITEM",
-    "subtypes": [ "ARMOR" ],
-    "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
-    "description": "Large, soft, snug cloth sleeves to keep your exotic anatomy warm.",
+    "category": "armor",
+    "name": { "str": "tail warmer", "str_pl": "tail warmer" },
+    "description": "A simple tube of fabric to help keep the wearer's tail warm.",
     "weight": "90 g",
-    "volume": "750 ml",
-    "price": "200 USD",
-    "price_postapoc": "50 cent",
+    "volume": "190 ml",
+    "price": "0 USD",
+    "price_postapoc": "5 cent",
+    "to_hit": 1,
     "material": [ "cotton" ],
     "symbol": "[",
-    "looks_like": "leg_warmers",
     "color": "light_gray",
     "warmth": 20,
-    "material_thickness": 2,
-    "flags": [ "VARSIZE", "SKINTIGHT", "OVERSIZE", "PREFIX_XL" ],
+    "flags": [ "SKINTIGHT" ],
     "armor": [
       {
-        "encumbrance": 7,
-        "coverage": 100,
-        "covers": [ "leg_l", "leg_r" ],
-        "specifically_covers": [ "leg_lower_l", "leg_lower_r", "leg_knee_l", "leg_knee_r" ]
-      },
-      { "coverage": 90, "covers": [ "leg_l", "leg_r" ], "specifically_covers": [ "leg_upper_l", "leg_upper_r" ] }
+        "material": [ { "type": "cotton", "covered_by_mat": 100, "thickness": 0.1 } ],
+        "covers": [ "long_tail" ],
+        "encumbrance": 2,
+        "specifically_covers": [ "long_tail_base", "long_tail_tip" ],
+        "coverage": 95
+      }
     ]
   },
   {
-    "id": "leg_warmers_xs",
+    "id": "tail_warmer_xl",
     "type": "ITEM",
     "subtypes": [ "ARMOR" ],
-    "copy-from": "leg_warmers",
-    "name": { "str": "leg warmers", "str_pl": "pairs of leg warmers" },
-    "proportional": { "weight": 0.75, "volume": 0.75, "price": 0.5 },
-    "extend": { "flags": [ "UNDERSIZE", "PREFIX_XS" ] }
+    "name": { "str": "tail warmer", "str_pl": "tail warmer" },
+    "copy-from": "tail_warmer",
+    "weight": "180 g",
+    "volume": "380 ml",
+    "extend": { "flags": [ "PREFIX_XL", "OVERSIZE" ] }
+  },
+  {
+    "id": "tail_warmer_xs",
+    "type": "ITEM",
+    "subtypes": [ "ARMOR" ],
+    "name": { "str": "tail warmer", "str_pl": "tail warmers" },
+    "copy-from": "tail_warmer",
+    "weight": "45 g",
+    "volume": "95 ml",
+    "extend": { "flags": [ "PREFIX_XS", "UNDERSIZE" ] }
   },
   {
     "id": "long_underpants",
