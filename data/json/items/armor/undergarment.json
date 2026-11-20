@@ -670,7 +670,7 @@
     "material": [ "cotton" ],
     "symbol": "[",
     "color": "light_gray",
-    "warmth": 20,
+    "warmth": 15,
     "flags": [ "SKINTIGHT" ],
     "armor": [
       {
