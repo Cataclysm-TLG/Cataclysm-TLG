@@ -3378,7 +3378,7 @@
           { "item": "boltcutters" },
           { "item": "stethoscope" },
           { "item": "picklocks" },
-          { "item": "pants" }
+          { "item": "jeans" }
         ]
       },
       "male": { "entries": [ { "group": "male_underwear_bottom" } ] },
