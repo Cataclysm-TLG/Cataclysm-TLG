@@ -1151,7 +1151,7 @@ class npc : public Character
             int dist;
         };
         std::vector<scored_water_source> find_nearby_water_sources() const;
-        std::vector<scored_item> find_nearby_food();
+        std::vector<scored_item> find_nearby_food( bool require_visibility = true );
         std::vector<scored_item> find_nearby_warm_clothing();
         std::vector<scored_shelter> find_nearby_shelters() const;
         std::vector<scored_water_source> find_nearby_harvestable() const;

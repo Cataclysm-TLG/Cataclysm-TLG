@@ -5999,7 +5999,7 @@ std::vector<npc::scored_water_source> npc::find_nearby_water_sources() const
     return results;
 }
 
-std::vector<npc::scored_item> npc::find_nearby_food()
+std::vector<npc::scored_item> npc::find_nearby_food( bool require_visibility )
 {
     std::vector<scored_item> results;
     if( is_player_ally() && !rules.has_flag( ally_rule::allow_pick_up ) ) {
@@ -6034,12 +6034,14 @@ std::vector<npc::scored_item> npc::find_nearby_food()
         if( is_player_ally() && g->check_zone( zone_type_NO_NPC_PICKUP, p ) ) {
             continue;
         }
-        const bool can_see_tile = sees( here, p );
-        if( !can_see_tile ) {
-            continue;
+        if( require_visibility ) {
+            const bool can_see_tile = sees( here, p );
+            if( !can_see_tile ) {
+                continue;
+            }
         }
         // Ground items (need sees_some_items for visibility gate).
-        if( here.sees_some_items( p, *this ) ) {
+        if( !require_visibility || here.sees_some_items( p, *this ) ) {
             for( item &it : here.i_at( p ) ) {
                 if( score_item( it ) ) {
                     float w = rate_food( *this, it, want_hunger, want_quench );
