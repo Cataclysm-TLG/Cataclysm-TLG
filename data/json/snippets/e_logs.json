@@ -37,7 +37,7 @@
       {
         "id": "local_files_simple_7",
         "name": "Forum question about unknown plant",
-        "text": "A screenshot of a post in a very vintage looking forum about plants.\n\nSubject: Help identifying these weeds\nAuthor: WildVariety\n\n\"I tried making my garden more suitable for bees and other insects by using native flora but these poppies are looking unusual.  Are these really poppies?  I can't stand their smell, it makes me feel woozy.\"\n\nAn image is attached, showing a giant red flower with roots visible above ground."
+        "text": "A screenshot of a post in a very vintage looking forum about plants.\n\nSubject: Help identifying these weeds\nAuthor: WildVariety\n\n\"None of the stuff I planted came up this year, but there's this big thorny thing growing out front.  Insane that it got so big so early in the year.  It looks kind of like an artichoke but it smells really sweet, it's almost nauseating."
       },
       {
         "id": "local_files_simple_8",
@@ -52,12 +52,12 @@
       {
         "id": "local_files_simple_10",
         "name": "Zombie photos",
-        "text": "A series of 39 photographs were taken in the span of 2 minutes, all of them blurry and only lit by the phone's camera flash, of a street in the dark.  The final 2 photographs have the vague outline of several zombies in the background, the camera flash reflecting in their eyes."
+        "text": "A series of thirty-nine photographs were taken in the span of two minutes, all of them blurry and only lit by the phone's camera flash, of a street in the dark.  The final 2 photographs have the vague outline of several zombies in the background, the camera flash reflecting in their eyes."
       },
       {
         "id": "local_files_simple_11",
-        "name": "notes.txt",
-        "text": "notes.txt\n\nDon't go in <city>, big horde 25-50\nWatch for black goop\nThey get up after death, smash corpse\nGov building outside town, almost died, secrets???\nFeed Besse 3 times daily\nDon't eat the <zombie>s\nBig community up north, good spot?\nRhode Island still good?  Heard rumors"
+        "name": "fishing photo",
+        "text": "A photograph of a man proudly holding up a fish he has just caught."
       },
       {
         "id": "local_files_simple_12",
@@ -77,7 +77,7 @@
       {
         "id": "local_files_simple_15",
         "name": "video of caseless handgun",
-        "text": "Downloads/taufledermaus_8x40_shooting.mp4.\n\nA middle aged man in a field shows off some pricey looking caseless cartridges for an even pricier looking handgun, before shooting them at a range of targets.  A slo-mo camera catches the shots ripping through a block of ballistic gel like air."
+        "text": "Downloads/8x40_shooting.mp4.\n\nA middle aged man in a field shows off some pricey looking caseless cartridges for an even pricier looking handgun, before shooting them at a range of targets.  A slo-mo camera catches the shots ripping through a block of ballistic gel like air."
       },
       {
         "id": "local_files_simple_16",
@@ -86,8 +86,8 @@
       },
       {
         "id": "local_files_simple_17",
-        "name": "Some Harry Potter meme",
-        "text": "An image of a big, matted man from some movie, with text \"You're a feral, Harry\"."
+        "name": "mold",
+        "text": "A collection of photographs documenting the extensive spread of a dense, grayish mold throughout somebody's home."
       },
       {
         "id": "local_files_simple_18",
@@ -101,8 +101,8 @@
       },
       {
         "id": "local_files_simple_20",
-        "name": "Some meme",
-        "text": "An image from some movie, featuring a funky long-haired man, that says \"The last 24 hours have been really exciting\"."
+        "name": "a meme",
+        "text": "An image from a movie featuring a funky long-haired man that says, \"The last 24 hours have been really exciting\"."
       },
       {
         "id": "local_files_simple_21",
