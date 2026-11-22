@@ -30,7 +30,7 @@
   {
     "type": "SCENARIO_BLACKLIST",
     "subtype": "whitelist",
-    "scenarios": [ "lone_survivor_start", "largebuilding", "fire", "bad_day", "last_delivery" ]
+    "scenarios": [ "lone_survivor_start", "largebuilding", "fire", "bad_day", "last_delivery", "fallout_always", "cyberpunk", "sewer_start" ]
   },
   {
     "type": "region_settings_city",
