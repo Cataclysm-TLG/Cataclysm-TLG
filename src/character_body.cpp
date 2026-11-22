@@ -333,9 +333,7 @@ void Character::update_body( const time_point &from, const time_point &to )
         reset_daily_sleep();
     }
     set_value( "was_sleeping", in_sleep_state() ? "true" : "false" );
-
     activity_history.new_turn( in_sleep_state() );
-
     // Lifestyle and cardio stuff.
     if( calendar::once_every( 1_days ) ) {
         // not getting below half stamina even once in a whole day is not healthy
@@ -363,7 +361,6 @@ void Character::update_body( const time_point &from, const time_point &to )
         if( cardio_accumultor >= get_cardio_acc_base() ) {
             mod_daily_health( 1, 200 );
         }
-
         // Low morale flags last a day, unless their morale still meets the threshold throughout days.
         if( !get_value( "got_to_low_morale" ).is_empty() ) {
             mod_daily_health( -1, -100 );
@@ -377,7 +374,6 @@ void Character::update_body( const time_point &from, const time_point &to )
                 remove_value( "got_to_very_low_morale" );
             }
         }
-
         // Being badly injured is not healthy, though your immune system might be able to handle it.
         bool wounded = false;
         for( const bodypart_id &bp : get_all_body_parts( get_body_part_flags::only_main ) ) {
@@ -394,12 +390,10 @@ void Character::update_body( const time_point &from, const time_point &to )
                 mod_daily_health( -1, -200 );
             }
         }
-
         if( worn_with_flag( flag_FILTHY ) ) {
             mod_daily_health( -1, -200 );
         }
     }
-
     for( const auto &v : vitamin::all() ) {
         const time_duration rate = vitamin_rate( v.first );
 
@@ -407,7 +401,6 @@ void Character::update_body( const time_point &from, const time_point &to )
         if( v.first == vitamin_blood && has_effect( effect_hypovolemia ) && get_thirst() > 240 ) {
             continue;
         }
-
         if( rate > 0_turns ) {
             int qty = ticks_between( from, to, rate );
             if( qty > 0 ) {
@@ -441,28 +434,23 @@ void Character::update_body( const time_point &from, const time_point &to )
                     mod_daily_health( std::max( -5, -toxin_malus ), -200 );
                 }
             }
-
             // Once we've checked daily intake we should reset it.
             reset_daily_vitamin( v.first );
         }
     }
-
     const int thirty_mins = ticks_between( from, to, 30_minutes );
     if( thirty_mins > 0 ) {
         update_health();
     }
-
     if( calendar::once_every( 1_minutes ) ) {
         update_bloodvol_index();
         update_heartrate_index();
         update_circulation();
     }
-
     if( is_avatar() && ticks_between( from, to, 24_hours ) > 0 ) {
         as_avatar()->update_cardio_acc();
         as_avatar()->advance_daily_calories();
     }
-
 }
 
 /* Here lies the intended effects of body temperature

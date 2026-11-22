@@ -225,6 +225,24 @@
   },
   {
     "type": "mutation",
+    "id": "personality_collector",
+    "name": { "str": "Greedy" },
+    "description": "Obsoleted NPC personality trait.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "id": "personality_collector_plus",
+    "type": "mutation",
+    "name": { "str": "Scrooge" },
+    "description": "Obsoleted NPC personality trait.",
+    "points": 0,
+    "valid": false,
+    "player_display": false
+  },
+  {
+    "type": "mutation",
     "id": "BADTEMPER",
     "name": { "str": "Bad temper" },
     "description": "Renamed/re-IDed mutation.",

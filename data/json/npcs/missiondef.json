@@ -508,31 +508,6 @@
     }
   },
   {
-    "id": "MISSION_KILL_100_Z",
-    "type": "mission_definition",
-    "name": { "str": "Kill 100 Zombies" },
-    "goal": "MGOAL_KILL_MONSTER_SPEC",
-    "monster_species": "ZOMBIE",
-    "monster_kill_goal": 100,
-    "difficulty": 5,
-    "value": 250000,
-    "start": { "effect": "follow_only" },
-    "end": { "effect": "stop_following" },
-    "origins": [ "ORIGIN_SECONDARY" ],
-    "followup": "MISSION_KILL_HORDE_MASTER",
-    "dialogue": {
-      "describe": "You seem to know this new world better than most…",
-      "offer": "You're kitted out better than most… would you be interested in making this world a little better for the rest of us?  The towns have enough supplies for us survivors to start securing a foothold but we don't have anyone with the skills and equipment to thin the masses of undead.  I'll lend you a hand to the best of my ability but you really showed promise taking out that other beast.  You, I, and a 100 zombies laid to rest, what do you say?",
-      "accepted": "Hell ya, we may get ourselves killed but we'll be among the first legends of the apocalypse.",
-      "rejected": "Hey, I know I wouldn't volunteer for it either… but then I remember that most of us survivors won't make it unless someone decides to take the initiative.",
-      "advice": "I'd secure an ammo cache and try to sweep a town in multiple passes.",
-      "inquire": "Got this knocked out?",
-      "success": "Man… you're a goddamn machine.  It was a pleasure working with you.  You know, you may just change our little neck of the world if you keep this up.",
-      "success_lie": "I don't think that was quite a hundred dead zeds.",
-      "failure": "Quitting already?"
-    }
-  },
-  {
     "id": "MISSION_KILL_HORDE_MASTER",
     "type": "mission_definition",
     "name": { "str": "Kill Horde Master" },
@@ -543,7 +518,7 @@
     "start": {
       "update_mapgen": {
         "place_monster": [
-          { "monster": "mon_zombie_master", "x": [ 12, 15 ], "y": [ 12, 15 ], "target": true, "name": "Demonic Soul" },
+          { "monster": "mon_zombie_master", "x": [ 12, 15 ], "y": [ 12, 15 ], "target": true, "name": "Smiler" },
           { "group": "GROUP_ZOMBIE", "x": [ 12, 15 ], "y": [ 12, 15 ], "repeat": [ 21, 29 ] }
         ]
       },
@@ -557,19 +532,19 @@
         "z": 0
       }
     },
-    "end": { "effect": "stop_following" },
-    "origins": [ "ORIGIN_SECONDARY" ],
+    "end": { "effect": "npc_thankful" },
+    "origins": [ "ORIGIN_ANY_NPC" ],
     "followup": "MISSION_RECRUIT_TRACKER",
     "dialogue": {
-      "describe": "I've heard some bad rumors so I hope you are up for another challenge…",
-      "offer": "Apparently one of the other survivors picked up on an unusually dense horde of undead moving into the area.  At the center of this throng there was a 'leader' of some sort.  The short of it is, kill the son of a bitch.  We don't know what it is capable of or why it is surrounded by other zombies but this thing reeks of trouble.  Do whatever it takes but we can't risk it getting away.",
-      "accepted": "I'll lend you a hand but I'd try and recruit another gunslinger if you can.",
-      "rejected": "What's the use of walking away, they'll track you down eventually.",
-      "advice": "Don't risk torching the building it may be hiding in if it has a basement.  The sucker may still be alive under the rubble and ash.",
-      "inquire": "Got this knocked out?",
-      "success": "May that bastard never get up again.",
-      "success_lie": "I don't think we got it yet.",
-      "failure": "Quitting already?"
+      "describe": "I saw something.  I think it's following me.",
+      "offer": "There was a huge crowd of zombies, that's nothing new I know, but one of them was different.  It stood upright, it walked like a human being, and it had this big, horrible smile.  I was pretty far away but it looked at me.  It looked right at me and pointed, and all the others turned to look, too.  I don't know how, but it's like it's leading them.  Somebody's got to kill it, but I'm not going back out there.  Not while it's still looking for me.",
+      "accepted": "Be careful, whatever you do.  There were a lot of zombies with it.",
+      "rejected": "Yeah, I guess that's the smart thing to do.",
+      "advice": "Whatever you do, try to take it out first.  Maybe use a rifle, or sneak up on it if it gets separated from the others.",
+      "inquire": "Did you do it?",
+      "success": "That's a load off my mind.",
+      "success_lie": "Bullshit.",
+      "failure": "Ugh, forget I said anything."
     }
   },
   {
@@ -594,7 +569,6 @@
     },
     "end": { "effect": "npc_thankful" },
     "origins": [ "ORIGIN_OPENER_NPC", "ORIGIN_ANY_NPC" ],
-    "followup": "MISSION_KILL_100_Z",
     "dialogue": {
       "describe": "The eater of the dead… something was ripping zombies to shreds and only leaving a few scattered limbs…",
       "offer": "A few days ago another survivor and I were trying to avoid the cities by staying in the woods during the day and foraging for gear at night.  It worked well against the normal zeds but one night something caught onto our trail and chased us for ten minutes or so until we decided to split up and meet-up back here.  My buddy never showed up and I don't have the means to kill whatever it was.  Can you lend a hand?",

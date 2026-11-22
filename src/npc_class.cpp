@@ -184,7 +184,6 @@ void npc_class::load( const JsonObject &jo, std::string_view )
 
     bonus_aggression = load_distribution( jo, "bonus_aggression" );
     bonus_bravery = load_distribution( jo, "bonus_bravery" );
-    bonus_collector = load_distribution( jo, "bonus_collector" );
     bonus_altruism = load_distribution( jo, "bonus_altruism" );
 
     if( jo.has_member( "shopkeeper_item_group" ) ) {
@@ -377,11 +376,6 @@ int npc_class::roll_aggression() const
 int npc_class::roll_bravery() const
 {
     return bonus_bravery.roll();
-}
-
-int npc_class::roll_collector() const
-{
-    return bonus_collector.roll();
 }
 
 int npc_class::roll_altruism() const

@@ -167,8 +167,7 @@
     "job_description": "I'm collecting gear and selling it.",
     "traits": [ { "group": "BG_survival_story_EVACUEE" }, { "group": "NPC_starting_traits" }, { "group": "Appearance_demographics" } ],
     "bonus_int": { "one_in": 4 },
-    "bonus_per": { "one_in": 4 },
-    "bonus_collector": { "rng": [ 1, 5 ] }
+    "bonus_per": { "one_in": 4 }
   },
   {
     "type": "npc_class",
@@ -180,7 +179,6 @@
     "bonus_dex": { "rng": [ 0, 2 ] },
     "bonus_per": { "rng": [ 0, 2 ] },
     "bonus_bravery": { "rng": [ 0, 3 ] },
-    "bonus_collector": { "rng": [ -6, -1 ] },
     "skills": [
       { "skill": "ALL", "level": { "mul": [ { "one_in": 3 }, { "sum": [ { "dice": [ 2, 2 ] }, { "rng": [ -1, -2 ] } ] } ] } },
       { "skill": "dodge", "bonus": { "rng": [ 2, 4 ] } },
@@ -261,7 +259,6 @@
     "bonus_int": { "rng": [ 2, 5 ] },
     "bonus_aggression": { "rng": [ -5, -1 ] },
     "bonus_bravery": { "rng": [ -2, -3 ] },
-    "bonus_collector": { "rng": [ 0, 2 ] },
     "proficiencies": [
       "prof_intro_chemistry",
       "prof_intro_biology",
@@ -581,7 +578,6 @@
     "traits": [ { "group": "NPC_starting_traits" }, { "group": "Appearance_demographics" } ],
     "common": false,
     "bonus_per": { "one_in": 4 },
-    "bonus_collector": { "rng": [ 1, 5 ] },
     "shopkeeper_item_group": "NC_BARTENDER_misc",
     "skills": [
       {
@@ -600,7 +596,6 @@
     "//": "This is a unique NPC who doesn't get randomly selected background traits",
     "common": false,
     "bonus_per": { "one_in": 4 },
-    "bonus_collector": { "rng": [ 1, 5 ] },
     "shopkeeper_item_group": "NC_JUNK_SHOPKEEP_misc",
     "skills": [
       {

@@ -102,8 +102,6 @@ struct mut_personality_score {
     int max_aggression = 10;
     int min_bravery = -10;
     int max_bravery = 10;
-    int min_collector = -10;
-    int max_collector = 10;
     int min_altruism = -10;
     int max_altruism = 10;
     mut_personality_score();

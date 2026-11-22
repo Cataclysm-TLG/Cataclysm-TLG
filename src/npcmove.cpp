@@ -338,11 +338,11 @@ const std::vector<bionic_id> weapon_cbms = { {
 
 const int avoidance_vehicles_radius = 5;
 
-bool good_for_pickup( const item &it, npc &who, const tripoint_bub_ms &there )
+bool good_for_pickup( const item &it, npc &who )
 {
     return who.can_take_that( it ) &&
            who.wants_take_that( it ) &&
-           who.would_take_that( it, there );
+           who.would_take_that( it );
 }
 
 } // namespace
@@ -3945,10 +3945,10 @@ void npc::find_item()
     fetching_item = false;
     wanted_item = {};
     int best_value = minimum_item_value();
-    // Not perfect, but has to mirror pickup code
+    // Not perfect, but has to mirror pickup code.
     units::volume volume_allowed = volume_capacity() - volume_carried();
     units::mass   weight_allowed = weight_capacity() - weight_carried();
-    // For some reason range limiting by vision doesn't work properly
+    // For some reason range limiting by vision doesn't work properly.
     const int range = 6;
     //int range = sight_range( g->light_level( posz() ) );
     //range = std::max( 1, std::min( 12, range ) );
@@ -3962,7 +3962,7 @@ void npc::find_item()
     const auto consider_item =
         [&best_value, this]
     ( const item & it, const tripoint_bub_ms & p ) {
-        if( ::good_for_pickup( it, *this, p ) ) {
+        if( ::good_for_pickup( it, *this ) ) {
             wanted_item_pos = p;
             best_value = has_item_whitelist() ? 1000 : value( it );
             return true;
@@ -3972,11 +3972,11 @@ void npc::find_item()
     };
 
     map &here = get_map();
-    // Harvest item doesn't exist, so we'll be checking by its name
+    // Harvest item doesn't exist, so we'll be checking by its name.
     std::string wanted_name;
     const auto consider_terrain =
     [ this, volume_allowed, &wanted_name, &here ]( const tripoint_bub_ms & p ) {
-        // We only want to pick plants when there are no items to pick
+        // We only want to pick plants when there are no items to pick.
         if( !has_item_whitelist() || wanted_item.get_item() != nullptr || !wanted_name.empty() ||
             volume_allowed < 250_ml ) {
             return;
@@ -3993,8 +3993,8 @@ void npc::find_item()
     };
 
     for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), range ) ) {
-        // TODO: Make this sight check not overdraw nearby tiles
-        // TODO: Optimize that zone check
+        // TODO: Make this sight check not overdraw nearby tiles.
+        // TODO: Optimize that zone check.
         if( is_player_ally() && g->check_zone( zone_type_NO_NPC_PICKUP, p ) ) {
             add_msg_debug( debugmode::DF_NPC_ITEMAI,
                            "%s didn't pick up an item because it's in a no-pickup zone.", name );
@@ -4124,7 +4124,7 @@ void npc::pick_up_item()
     // Check: Is the item owned? Has the situation changed since we last moved? Am 'I' now
     // standing in front of the shopkeeper/player that I am about to steal from?
     if( wanted_item ) {
-        if( !::good_for_pickup( *wanted_item, *this, wanted_item_pos ) ) {
+        if( !::good_for_pickup( *wanted_item, *this ) ) {
             add_msg_debug( debugmode::DF_NPC_ITEMAI,
                            "%s canceling pickup - situation changed since they decided to take item", get_name() );
             fetching_item = false;
@@ -4228,9 +4228,7 @@ std::list<item> npc_pickup_from_stack( npc &who, T &items )
 bool npc::can_take_that( const item &it )
 {
     bool good = false;
-
     auto weight_allowed = weight_capacity() - weight_carried();
-
     if( !it.made_of_from_type( phase_id::LIQUID ) && ( it.weight() <= weight_allowed ) &&
         can_stash( it ) ) {
         good = true;
@@ -4242,40 +4240,24 @@ bool npc::can_take_that( const item &it )
 bool npc::wants_take_that( const item &it )
 {
     bool good = false;
-    int min_value = minimum_item_value();
-    const bool whitelisting = has_item_whitelist();
-
     item &weap = get_wielded_item() ? *get_wielded_item() : null_item_reference();
-    if( ( ( !whitelisting && value( it ) > min_value ) || item_whitelisted( it ) ) ||
-        weapon_value( it ) > weapon_value( weap ) ) {
+    if( item_whitelisted( it ) || weapon_value( it ) > weapon_value( weap ) ) {
         good = true;
     }
-
     return good;
 }
 
-bool npc::would_take_that( const item &it, const tripoint_bub_ms &p )
+bool npc::would_take_that( const item &it )
 {
-    const map &here = get_map();
-
     const bool is_stealing = !it.is_owned_by( *this, true );
     if( !is_stealing ) {
         return true;
     }
     Character &player = get_player_character();
-    // Actual numeric relations are only relative to player faction
+    // Actual numeric relations are only relative to player faction.
     if( it.is_owned_by( player ) ) {
         bool would_always_steal = false;
-        int stealing_threshold = 10;
-        // Trust = less likely to steal. Distrust? more likely!
-        stealing_threshold += ( get_faction()->trusts_u / 5 );
-        // We've already decided we want the item. So the primary motivator for stealing is aggression, not hoarding.
-        stealing_threshold -= personality.aggression;
-        stealing_threshold -= static_cast<int>( personality.collector / 3 );
-        if( stealing_threshold < 0 ) {
-            would_always_steal = true;
-        }
-        // Anyone willing to kill you no longer cares for your property rights
+        // Anyone willing to kill you no longer cares for your property rights.
         if( has_faction_relationship( player, npc_factions::relationship::kill_on_sight ) ) {
             would_always_steal = true;
         }
@@ -4284,36 +4266,8 @@ bool npc::would_take_that( const item &it, const tripoint_bub_ms &p )
                            it.tname() );
             return true;
         }
-
-        /*Handle player and follower vision*/
-        viewer &player_view = get_player_view();
-        if( player_view.sees( here, this->pos_bub( here ) ) || player_view.sees( here,  p ) ) {
-            return false;
-        }
-        std::vector<npc *> followers;
-        for( const character_id &elem : g->get_follower_list() ) {
-            shared_ptr_fast<npc> npc_to_get = overmap_buffer.find_npc( elem );
-            if( !npc_to_get ) {
-                continue;
-            }
-            npc *npc_to_add = npc_to_get.get();
-            followers.push_back( npc_to_add );
-        }
-        for( npc *&elem : followers ) {
-            if( elem->sees( here, this->pos_bub( here ) ) || elem->sees( here,  p ) ) {
-                return false;
-            }
-        }
-        //Fallthrough, no consequences if you won't be caught!
-        add_msg_debug( debugmode::DF_NPC_ITEMAI,
-                       "%s attempting to steal %s (owned by player) because it isn't guarded.",
-                       get_name(), it.tname() );
-        return true;
     }
-
-
-    // Currently always willing to steal from other NPCs
-    return true;
+    return false;
 }
 
 std::list<item> npc::pick_up_item_map( const tripoint_bub_ms &where )
@@ -5201,12 +5155,10 @@ bool npc::consume_food()
     bool consumed = false;
     int want_hunger = std::max( 0, get_hunger() );
     int want_quench = std::max( 0, get_thirst() );
-
     // Add medication to our food list so we can eat vitamins.
     std::vector<item *> inv_food = cache_get_items_with( "is_medication", &item::is_medication );
     const auto food = cache_get_items_with( "is_food", &item::is_food );
     inv_food.insert( inv_food.end(), food.begin(), food.end() );
-
     if( inv_food.empty() ) {
         if( !needs_food() ) {
             // Silently reset hunger/thirst.
@@ -5216,14 +5168,13 @@ bool npc::consume_food()
     } else {
         for( item * const &food_item : inv_food ) {
             float cur_weight = rate_food( *this, *food_item, want_hunger, want_quench );
-            // Note: will_eat is expensive, avoid calling it if possible
+            // Note: will_eat is expensive, avoid calling it if possible.
             if( cur_weight > best_weight && will_eat( *food_item ).success() ) {
                 best_weight = cur_weight;
                 best_food = food_item;
             }
         }
-
-        // consume doesn't return a meaningful answer, we need to compare moves
+        // Consume doesn't return a meaningful answer, we need to compare moves.
         if( best_food != nullptr ) {
             const time_duration &consume_time = get_consume_time( *best_food );
             consumed = consume( item_location( *this, best_food ) ) != trinary::NONE;
@@ -5236,9 +5187,7 @@ bool npc::consume_food()
                 debugmsg( "%s failed to consume %s", get_name(), best_food->tname() );
             }
         }
-
     }
-
     return consumed;
 }
 
@@ -5279,8 +5228,8 @@ void npc::mug_player( Character &mark )
     // value_mod affects at what point we "take the money and run"
     // A lower value means we'll take more stuff
     double value_mod = 1 - ( ( 10 - personality.bravery ) * .05 ) -
-                       ( ( 10 - personality.aggression ) * .04 ) -
-                       ( ( 10 - personality.collector ) * .06 );
+                       ( ( 10 - personality.aggression ) * .04 ) +
+                       ( ( 10 - personality.altruism ) * .04 );
     if( !mark.is_npc() ) {
         value_mod += ( op_of_u.fear * .08 );
         value_mod -= ( ( 8 - op_of_u.value ) * .07 );
@@ -6065,12 +6014,12 @@ std::vector<npc::scored_item> npc::find_nearby_food()
 
     // No thirst-dominant filter: rate_food() already penalizes dry food when
     // thirsty via the quench-vs-hunger ratio, so hydrating items rank higher.
-    const auto score_item = [&]( item & it, const tripoint_bub_ms & p ) -> bool {
+    const auto score_item = [&]( item & it ) -> bool {
         if( !it.is_food() )
         {
             return false;
         }
-        if( !would_take_that( it, p ) )
+        if( !would_take_that( it ) )
         {
             return false;
         }
@@ -6092,7 +6041,7 @@ std::vector<npc::scored_item> npc::find_nearby_food()
         // Ground items (need sees_some_items for visibility gate).
         if( here.sees_some_items( p, *this ) ) {
             for( item &it : here.i_at( p ) ) {
-                if( score_item( it, p ) ) {
+                if( score_item( it ) ) {
                     float w = rate_food( *this, it, want_hunger, want_quench );
                     results.push_back( {
                         item_location( map_cursor( p ), &it ), w
@@ -6113,7 +6062,7 @@ std::vector<npc::scored_item> npc::find_nearby_food()
             continue;
         }
         for( item &it : cargo->items() ) {
-            if( score_item( it, p ) ) {
+            if( score_item( it ) ) {
                 float w = rate_food( *this, it, want_hunger, want_quench );
                 results.push_back( {
                     item_location{
@@ -6144,8 +6093,8 @@ std::vector<npc::scored_item> npc::find_nearby_warm_clothing()
     static const std::string locked_string( "LOCKED" );
     static const std::string cargo_locking_string( "CARGO_LOCKING" );
 
-    const auto score_clothing = [&]( item & it, const tripoint_bub_ms & p ) -> bool {
-        return it.get_warmth() > 0 && can_wear( it ).success() && would_take_that( it, p );
+    const auto score_clothing = [&]( item & it ) -> bool {
+        return it.get_warmth() > 0 && can_wear( it ).success() && would_take_that( it );
     };
 
     for( const tripoint_bub_ms &p : closest_points_first( pos_bub(), 6 ) ) {
@@ -6162,7 +6111,7 @@ std::vector<npc::scored_item> npc::find_nearby_warm_clothing()
         // Ground items.
         if( here.sees_some_items( p, *this ) ) {
             for( item &it : here.i_at( p ) ) {
-                if( score_clothing( it, p ) ) {
+                if( score_clothing( it ) ) {
                     results.push_back( {
                         item_location( map_cursor( p ), &it ),
                         static_cast<float>( it.get_warmth() )
@@ -6183,7 +6132,7 @@ std::vector<npc::scored_item> npc::find_nearby_warm_clothing()
             continue;
         }
         for( item &it : cargo->items() ) {
-            if( score_clothing( it, p ) ) {
+            if( score_clothing( it ) ) {
                 results.push_back( {
                     item_location{
                         vehicle_cursor{

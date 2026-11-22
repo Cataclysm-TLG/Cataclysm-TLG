@@ -480,7 +480,6 @@ void npc_template::load( const JsonObject &jsobj, std::string_view src )
         tem.personality = npc_personality();
         tem.personality->aggression = personality.get_int( "aggression" );
         tem.personality->bravery = personality.get_int( "bravery" );
-        tem.personality->collector = personality.get_int( "collector" );
         tem.personality->altruism = personality.get_int( "altruism" );
     }
     for( JsonValue jv : jsobj.get_array( "death_eocs" ) ) {
@@ -631,7 +630,6 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
         if( tem.personality.has_value() ) {
             personality.aggression = tem.personality->aggression;
             personality.bravery = tem.personality->bravery;
-            personality.collector = tem.personality->collector;
             personality.altruism = tem.personality->altruism;
         }
         if( tem.str.has_value() ) {
@@ -669,12 +667,10 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
     if( myclass.is_valid() ) {
         personality.aggression += myclass->roll_aggression();
         personality.bravery += myclass->roll_bravery();
-        personality.collector += myclass->roll_collector();
         personality.altruism += myclass->roll_altruism();
     } else {
         personality.aggression += prof->roll_aggression();
         personality.bravery += prof->roll_bravery();
-        personality.collector += prof->roll_collector();
         personality.altruism += prof->roll_altruism();
     }
 
@@ -682,8 +678,6 @@ void npc::randomize( const npc_class_id &type, const npc_template_id &tem_id )
                              NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
     personality.bravery = std::clamp<int8_t>( personality.bravery,
                           NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
-    personality.collector = std::clamp<int8_t>( personality.collector,
-                            NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
     personality.altruism = std::clamp<int8_t>( personality.altruism,
                            NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
 
@@ -804,7 +798,6 @@ void npc::generate_personality_traits()
             // This looks intimidating, but it's really just a bounds check, repeated for every personality score.
             if( ( required->min_aggression <= ur.aggression && ur.aggression <= required->max_aggression ) &&
                 ( required->min_bravery <= ur.bravery && ur.bravery <= required->max_bravery ) &&
-                ( required->min_collector <= ur.collector && ur.collector <= required->max_collector ) &&
                 ( required->min_altruism <= ur.altruism && ur.altruism <= required->max_altruism ) ) {
                 set_mutation( mdata.id );
             }
@@ -816,7 +809,6 @@ void npc::randomize_personality()
 {
     personality.aggression = rng( NPC_PERSONALITY_MIN, NPC_PERSONALITY_MAX );
     personality.bravery = rng( -3, NPC_PERSONALITY_MAX );
-    personality.collector = rng( -1, NPC_PERSONALITY_MAX );
     // Normal distribution. Mean = 0, stddev = 3, clamp at NPC_PERSONALITY_MIN and NPC_PERSONALITY_MAX. Rounded to return integer value.
     personality.altruism = std::round( std::clamp( normal_roll( 0, 3 ),
                                        static_cast<double>( NPC_PERSONALITY_MIN ), static_cast<double>( NPC_PERSONALITY_MAX ) ) );
@@ -841,7 +833,7 @@ void npc::learn_ma_styles_from_traits()
 
 void npc::randomize_from_faction( faction *fac )
 {
-    // Personality = aggression, bravery, altruism, collector
+    // Personality = aggression, bravery, altruism
     set_fac( fac->id );
     randomize( npc_class_id::NULL_ID() );
 }
@@ -2354,7 +2346,7 @@ int npc::minimum_item_value() const
 {
     // TODO: Base on inventory
     int ret = 20;
-    ret -= personality.collector;
+    ret -= personality.altruism;
     return ret;
 }
 
@@ -2381,7 +2373,7 @@ double npc::value( const item &it ) const
 double npc::value( const item &it, double market_price ) const
 {
     if( is_shopkeeper() ||
-        // faction currency trades at market price
+        // Faction currency trades at market price.
         ( my_fac != nullptr && my_fac->currency == it.typeId() ) ) {
         return market_price;
     }
@@ -2389,7 +2381,7 @@ double npc::value( const item &it, double market_price ) const
     const item_location weapon = get_wielded_item();
     float ret = 1;
     if( it.is_maybe_melee_weapon() || it.is_gun() ) {
-        // todo: remove when weapon_value takes an item_location
+        // todo: remove when weapon_value takes an item_location.
         double wield_val = weapon ? weapon_value( *weapon ) : weapon_value( null_item_reference() );
         double weapon_val = weapon_value( it ) - wield_val;
 
@@ -3484,7 +3476,7 @@ void npc::on_load( map *here )
     last_updated = calendar::turn;
     time_point cur = calendar::turn - dt;
     add_msg_debug( debugmode::DF_NPC, "on_load() by %s, %d turns", get_name(), to_turns<int>( dt ) );
-    // First update with 30 minute granularity, then 5 minutes, then turns
+    // First update with 30 minute granularity, then 5 minutes, then turns.
     for( ; cur < calendar::turn - 30_minutes; cur += 30_minutes + 1_turns ) {
         update_body( cur, cur + 30_minutes );
         advance_effects( 30_minutes );

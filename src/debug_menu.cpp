@@ -2195,7 +2195,6 @@ static void character_edit_personality_menu( npc *np )
     uilist smenu;
     smenu.addentry( 0, true, 'h', "%s: %d", _( "aggression" ), np->personality.aggression );
     smenu.addentry( 1, true, 's', "%s: %d", _( "bravery" ), np->personality.bravery );
-    smenu.addentry( 2, true, 't', "%s: %d", _( "collector" ), np->personality.collector );
     smenu.addentry( 3, true, 'f', "%s: %d", _( "altruism" ), np->personality.altruism );
 
     smenu.query();
@@ -2213,12 +2212,6 @@ static void character_edit_personality_menu( npc *np )
             }
             break;
         case 2:
-            if( query_int( value, false, _( "Set collector to?  Currently: %d" ),
-                           np->personality.collector ) ) {
-                np->personality.collector = value;
-            }
-            break;
-        case 3:
             if( query_int( value, false, _( "Set altruism to?  Currently: %d" ),
                            np->personality.altruism ) ) {
                 np->personality.altruism = value;
@@ -2386,7 +2379,6 @@ static void character_edit_menu()
         data << string_format( _( "Aggression: %d" ),
                                static_cast<int>( np->personality.aggression ) ) << " "
              << string_format( _( "Bravery: %d" ), static_cast<int>( np->personality.bravery ) ) << " "
-             << string_format( _( "Collector: %d" ), static_cast<int>( np->personality.collector ) ) << " "
              << string_format( _( "Altruism: %d" ), static_cast<int>( np->personality.altruism ) ) << std::endl;
 
         data << _( "Needs:" );

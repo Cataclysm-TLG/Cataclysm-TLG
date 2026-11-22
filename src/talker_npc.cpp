@@ -228,9 +228,6 @@ int talker_npc_const::parse_mod( const std::string &attribute, const int factor 
     } else if( attribute == "BRAVERY" ) {
         // NOLINTNEXTLINE(bugprone-signed-char-misuse,cert-str34-c)
         modifier = me_npc->personality.bravery;
-    } else if( attribute == "COLLECTOR" ) {
-        // NOLINTNEXTLINE(bugprone-signed-char-misuse,cert-str34-c)
-        modifier = me_npc->personality.collector;
     } else if( attribute == "MISSIONS" ) {
         modifier = me_npc->assigned_missions_value() / OWED_VAL;
     } else if( attribute == "NPC_INTIMIDATE" ) {

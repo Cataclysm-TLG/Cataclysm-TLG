@@ -1982,15 +1982,12 @@ void npc_personality::deserialize( const JsonObject &data )
     data.allow_omitted_members();
     int tmpagg = 0;
     int tmpbrav = 0;
-    int tmpcol = 0;
     int tmpalt = 0;
     if( data.read( "aggression", tmpagg ) &&
         data.read( "bravery", tmpbrav ) &&
-        data.read( "collector", tmpcol ) &&
         data.read( "altruism", tmpalt ) ) {
         aggression = static_cast<signed char>( tmpagg );
         bravery = static_cast<signed char>( tmpbrav );
-        collector = static_cast<signed char>( tmpcol );
         altruism = static_cast<signed char>( tmpalt );
     } else {
         debugmsg( "npc_personality: bad data" );
@@ -2002,7 +1999,6 @@ void npc_personality::serialize( JsonOut &json ) const
     json.start_object();
     json.member( "aggression", static_cast<int>( aggression ) );
     json.member( "bravery", static_cast<int>( bravery ) );
-    json.member( "collector", static_cast<int>( collector ) );
     json.member( "altruism", static_cast<int>( altruism ) );
     json.end_object();
 }

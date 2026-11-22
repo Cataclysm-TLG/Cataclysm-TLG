@@ -15,7 +15,7 @@
     "dex": 8,
     "int": 10,
     "per": 10,
-    "personality": { "aggression": 1, "bravery": 3, "collector": 1, "altruism": 3 },
+    "personality": { "aggression": 1, "bravery": 3, "altruism": 3 },
     "faction": "free_merchants"
   },
   {

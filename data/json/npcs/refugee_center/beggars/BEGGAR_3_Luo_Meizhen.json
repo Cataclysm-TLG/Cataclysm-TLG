@@ -24,7 +24,7 @@
     "dex": 7,
     "int": 15,
     "per": 10,
-    "personality": { "aggression": -10, "bravery": -8, "collector": 0, "altruism": 3 },
+    "personality": { "aggression": -10, "bravery": -8, "altruism": 3 },
     "talk_friend": "TALK_FRIEND_Luo",
     "talk_friend_guard": "TALK_FRIEND_GUARD_Luo"
   },
