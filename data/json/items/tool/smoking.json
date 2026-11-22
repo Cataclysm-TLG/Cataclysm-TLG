@@ -15,7 +15,7 @@
     "material": [ "plastic", "aluminum", "steel" ],
     "symbol": "!",
     "color": "white",
-    "flags": [ "WATER_BREAK", "ELECTRONIC" ],
+    "flags": [ "WATER_BREAK", "ELECTRONIC", "NO_UNLOAD" ],
     "charges_per_use": 1,
     "use_action": [ 
       { "type": "link_up", "cable_length": 5, "charge_rate": "140 W" }, "ECIG" ],
@@ -46,7 +46,7 @@
     "material": [ "plastic", "aluminum", "steel" ],
     "symbol": "!",
     "color": "white",
-    "flags": [ "WATER_BREAK", "ELECTRONIC" ],
+    "flags": [ "WATER_BREAK", "ELECTRONIC", "NO_UNLOAD", "NO_RELOAD" ],
     "charges_per_use": 1,
     "use_action": [ "ECIG" ],
     "pocket_data": [

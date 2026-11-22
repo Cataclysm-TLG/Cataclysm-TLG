@@ -25,6 +25,7 @@
     "weight": "1319 g",
     "volume": "703 ml",
     "longest_side": "322 mm",
+    "etransfer_rate": "30 MB",
     "price": "1049 USD",
     "price_postapoc": "2 USD 50 cent",
     "tool_ammo": [ "battery" ],
