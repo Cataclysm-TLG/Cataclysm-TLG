@@ -231,6 +231,7 @@
       },
       {
         "pocket_type": "CONTAINER",
+        "holster": true,
         "volume_encumber_modifier": 0,
         "max_contains_volume": "300 ml",
         "max_contains_weight": "500 g",
@@ -458,6 +459,7 @@
       },
       {
         "pocket_type": "CONTAINER",
+        "holster": true,
         "volume_encumber_modifier": 0,
         "max_contains_volume": "300 ml",
         "max_contains_weight": "500 g",
@@ -1920,6 +1922,7 @@
       },
       {
         "pocket_type": "CONTAINER",
+        "holster": true,
         "volume_encumber_modifier": 0,
         "max_contains_volume": "300 ml",
         "max_contains_weight": "500 g",
