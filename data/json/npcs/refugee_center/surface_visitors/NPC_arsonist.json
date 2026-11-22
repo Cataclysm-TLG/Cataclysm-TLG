@@ -41,8 +41,9 @@
     "bonus_dex": { "rng": [ 2, 2 ] },
     "bonus_int": { "rng": [ 1, 1 ] },
     "bonus_per": { "rng": [ 2, 2 ] },
-    "bonus_aggression": { "rng": [ 0, 1 ] },
-    "bonus_collector": { "rng": [ 0, 2 ] },
+    "bonus_aggression": { "rng": [ 0, 2 ] },
+    "bonus_bravery": { "rng": [ 0, 2 ] },
+    "bonus_altruism": { "rng": [ -1, 0 ] },
     "shopkeeper_item_group": [ { "group": "NC_ARSONIST_STOCK", "rigid": true } ],
     "shopkeeper_price_rules": [
       { "item": "FMCNote", "fixed_adj": 0 },

@@ -93,7 +93,6 @@ class profession
         // These are only used for NPCs.
         distribution bonus_aggression;
         distribution bonus_bravery;
-        distribution bonus_collector;
         distribution bonus_altruism;
 
         std::string _subtype;
@@ -146,7 +145,6 @@ class profession
 
         int roll_aggression() const;
         int roll_bravery() const;
-        int roll_collector() const;
         int roll_altruism() const;
 
         std::vector<std::pair<string_id<profession>, mod_id>> src;

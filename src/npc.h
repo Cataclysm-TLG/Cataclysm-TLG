@@ -214,7 +214,6 @@ enum npc_need {
 enum npc_personality_type : int {
     NPE_AGGRESSION,
     NPE_BRAVERY,
-    NPE_COLLECTOR,
     NPE_ALTRUISM,
     NUM_NPE
 };
@@ -223,12 +222,10 @@ struct npc_personality {
     // All values should be in the -10 to 10 range.
     int8_t aggression;
     int8_t bravery;
-    int8_t collector;
     int8_t altruism;
     npc_personality() {
         aggression = 0;
         bravery    = 0;
-        collector  = 0;
         altruism   = 0;
     }
 
@@ -1245,10 +1242,10 @@ class npc : public Character
         void see_item_say_smth( const itype_id &object, const std::string &smth );
         // Consider available storage
         bool can_take_that( const item &it );
-        // Consider hoarding
+        // Decide if we want something.
         bool wants_take_that( const item &it );
-        // Consider a life of crime
-        bool would_take_that( const item &it, const tripoint_bub_ms &p );
+        // Consider if we can take it or not.
+        bool would_take_that( const item &it );
         // Look around and pick an item
         void find_item();
         // Move to, or grab, our targeted item

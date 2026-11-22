@@ -244,8 +244,7 @@ item_location Character::try_add( item it, const item *avoid, const item *origin
     invalidate_leak_level_cache();
     itype_id item_type_id = it.typeId();
     last_item = item_type_id;
-
-    // if there's a desired invlet for this item type, try to use it
+    // If there's a desired invlet for this item type, try to use it.
     bool keep_invlet = false;
     const invlets_bitset cur_inv = allocated_invlets();
     for( const auto &iter : inv->assigned_invlet ) {
@@ -266,7 +265,7 @@ item_location Character::try_add( item it, const item *avoid, const item *origin
             return ret;
         }
     } else {
-        // this will set ret to either it, or to stack where it was placed
+        // This will set ret to either it, or to stack where it was placed.
         item *newit = nullptr;
         pocket.second->add( it, &newit );
         if( !keep_invlet && ( !it.count_by_charges() || it.charges == newit->charges ) ) {

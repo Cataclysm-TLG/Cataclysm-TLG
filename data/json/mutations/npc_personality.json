@@ -107,28 +107,6 @@
     "personality_score": { "min_bravery": 5, "min_altruism": 2 }
   },
   {
-    "id": "personality_collector",
-    "type": "mutation",
-    "name": { "str": "Miser" },
-    "description": "<npc_name> loves their trinkets, and hates giving them away.",
-    "points": 0,
-    "valid": false,
-    "purifiable": false,
-    "player_display": true,
-    "personality_score": { "min_collector": 3, "max_altruism": -1 }
-  },
-  {
-    "id": "personality_collector_plus",
-    "type": "mutation",
-    "name": { "str": "Scrooge" },
-    "description": "<npc_name> collects trash like a RPG protagonist collects potions.",
-    "points": 0,
-    "valid": false,
-    "purifiable": false,
-    "player_display": true,
-    "personality_score": { "min_collector": 6 }
-  },
-  {
     "id": "personality_altruist",
     "type": "mutation",
     "name": { "str": "Kind" },

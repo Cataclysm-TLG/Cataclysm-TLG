@@ -16,7 +16,7 @@
     "dex": 9,
     "int": 9,
     "per": 11,
-    "personality": { "aggression": -2, "bravery": -1, "collector": 1, "altruism": 4 }
+    "personality": { "aggression": -2, "bravery": -1, "altruism": 4 }
   },
   {
     "type": "npc_class",

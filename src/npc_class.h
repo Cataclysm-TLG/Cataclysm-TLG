@@ -62,7 +62,6 @@ class npc_class
 
         distribution bonus_aggression;
         distribution bonus_bravery;
-        distribution bonus_collector;
         distribution bonus_altruism;
 
         std::map<skill_id, distribution> skills;
@@ -106,7 +105,6 @@ class npc_class
 
         int roll_aggression() const;
         int roll_bravery() const;
-        int roll_collector() const;
         int roll_altruism() const;
 
         int roll_skill( const skill_id & ) const;

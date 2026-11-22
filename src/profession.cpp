@@ -349,7 +349,6 @@ void profession::load( const JsonObject &jo, std::string_view )
 
     bonus_aggression = load_distribution( jo, "bonus_aggression" );
     bonus_bravery = load_distribution( jo, "bonus_bravery" );
-    bonus_collector = load_distribution( jo, "bonus_collector" );
     bonus_altruism = load_distribution( jo, "bonus_altruism" );
 }
 
@@ -965,11 +964,6 @@ int profession::roll_aggression() const
 int profession::roll_bravery() const
 {
     return bonus_bravery.roll();
-}
-
-int profession::roll_collector() const
-{
-    return bonus_collector.roll();
 }
 
 int profession::roll_altruism() const
