@@ -8417,7 +8417,6 @@ ret_val<void> Character::can_wield( const item &it ) const
         return ret_val<void>::make_failure(
                    _( "You can't wield this.  It looks like it has to be attached to a bionic." ) );
     }
-
     if( is_armed() && !can_unwield( weapon ).success() ) {
         return ret_val<void>::make_failure( _( "The %s prevents you from wielding the %s." ),
                                             weapname(), it.tname() );
@@ -8426,35 +8425,25 @@ ret_val<void> Character::can_wield( const item &it ) const
     bool item_twohand = it.has_flag( flag_ALWAYS_TWOHAND );
     bool missing_arms = !has_two_arms_lifting();
     bool two_handed = it.is_two_handed( *this );
-
-    if( two_handed &&
-        ( missing_arms || armor_restricts_hands ) ) {
-        if( armor_restricts_hands ) {
-            return ret_val<void>::make_failure(
-                       _( "Something you are wearing hinders the use of both hands." ) );
-        } else if( item_twohand ) {
-            return ret_val<void>::make_failure( _( "You can't wield the %s with only one arm." ),
-                                                it.tname() );
-        } else {
-            return ret_val<void>::make_failure( _( "You are too weak to wield the %s with only one arm." ),
-                                                it.tname() );
+    if( two_handed || item_twohand ) {
+        if( controlling_vehicle ) {
+            map &here = get_map();
+            const optional_vpart_position veh_part = here.veh_at( pos_abs() );
+            if( !veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", false ) ) {
+                return ret_val<void>::make_failure( _( "You need both hands to wield the %s but are driving." ),
+                    it.tname() );
+            }
+        }
+        if( missing_arms || armor_restricts_hands ) {
+            if( armor_restricts_hands ) {
+                return ret_val<void>::make_failure(
+                        _( "Something you are wearing hinders the use of both hands." ) );
+            } else {
+                return ret_val<void>::make_failure( _( "You are too weak to wield the %s with only one good arm." ),
+                                                    it.tname() );
+            }
         }
     }
-    if( controlling_vehicle ) {
-        if( two_handed ) {
-            return ret_val<void>::make_failure( _( "You need both hands to wield the %s but are driving." ),
-                                                it.tname() );
-        }
-        if( armor_restricts_hands ) {
-            return ret_val<void>::make_failure(
-                       _( "Something you are wearing hinders the use of both hands." ) );
-        }
-        if( missing_arms || item_twohand ) {
-            return ret_val<void>::make_failure( _( "You can't wield your %s while driving." ),
-                                                it.tname() );
-        }
-    }
-
     return ret_val<void>::make_success();
 }
 
@@ -8674,7 +8663,6 @@ void Character::on_hit( map *here, Creature *source, bodypart_id bp_hit,
 
     const optional_vpart_position veh_part = here->veh_at( pos_abs() );
     bool in_skater_vehicle = in_vehicle && veh_part.part_with_feature( "SEAT_REQUIRES_BALANCE", false );
-
     if( ( worn_with_flag( flag_REQUIRES_BALANCE ) || in_skater_vehicle ) && !is_on_ground() &&
         !has_effect_with_flag( json_flag_LEVITATION ) ) {
         int rolls = 4;
@@ -8690,7 +8678,6 @@ void Character::on_hit( map *here, Creature *source, bodypart_id bp_hit,
         if( has_trait( trait_CLUMSY ) ) {
             rolls++;
         }
-
         if( stability_roll() < dice( rolls, 10 ) ) {
             if( !is_avatar() ) {
                 if( u_see ) {
