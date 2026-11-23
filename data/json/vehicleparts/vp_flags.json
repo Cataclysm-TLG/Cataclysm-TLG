@@ -666,7 +666,8 @@
   },
   {
     "id": "SEAT_REQUIRES_BALANCE",
-    "type": "json_flag"
+    "type": "json_flag",
+    "info": "Controlling this vehicle effectively requires good balance, athletics skill, and dexterity."
   },
   {
     "id": "WHEEL_MOUNT_SKATEBOARD",

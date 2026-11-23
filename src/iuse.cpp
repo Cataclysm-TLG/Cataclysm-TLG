@@ -8088,6 +8088,9 @@ static item *wield_before_use( Character *const p, item *const it, const std::st
 
 std::optional<int> iuse::craft( Character *p, item *it, const tripoint_bub_ms & )
 {
+    if( p->controlling_vehicle ) {
+        return std::nullopt;
+    }
     if( p->cant_do_mounted() ) {
         return std::nullopt;
     }

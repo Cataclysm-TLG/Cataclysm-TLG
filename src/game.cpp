@@ -6088,7 +6088,7 @@ void game::control_vehicle( const std::optional<tripoint_bub_ms> &p )
                     } else {
                         return;
                     }
-                } else if( weapon->is_two_handed( u ) ) {
+                } else if( ( weapon->is_two_handed( u ) || weapon->has_flag( flag_FIRE_TWOHAND ) ) && !vp.part_with_feature( "SEAT_REQUIRES_BALANCE", false ) ) {
                     if( query_yn(
                             _( "You can't drive because you have to wield a %s with both hands.\n\nPut it away?" ),
                             weapon->tname() ) ) {

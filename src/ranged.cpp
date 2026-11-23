@@ -4689,8 +4689,8 @@ bool gunmode_checks_common( avatar &you, const map &m, std::vector<std::string> 
     }
 
     const optional_vpart_position vp = m.veh_at( you.pos_bub() );
-    if( vp && vp->vehicle().player_in_control( m, you ) && ( gmode->is_two_handed( you ) ||
-            gmode->has_flag( flag_FIRE_TWOHAND ) ) ) {
+    if( vp && vp->vehicle().player_in_control( m, you ) && ( ( ( gmode->is_two_handed( you ) ||
+            gmode->has_flag( flag_FIRE_TWOHAND ) ) ) && !vp.part_with_feature( "SEAT_REQUIRES_BALANCE", false ) ) ) {
         messages.push_back( string_format( _( "You can't fire your %s while driving." ),
                                            gmode->tname() ) );
         result = false;
