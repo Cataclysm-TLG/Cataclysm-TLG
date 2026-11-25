@@ -6488,7 +6488,7 @@
       { "point": [ 3, 7, 0 ], "overmap": "retirement_community_road_north" },
       { "point": [ 4, 7, 0 ], "overmap": "sub_station_west" },
       { "point": [ 4, 7, 1 ], "overmap": "sub_station_roof_west" },
-      { "point": [ 4, 7, -1 ], "overmap": "sewer_sub_station" },
+      { "point": [ 4, 7, -1 ], "overmap": "sewer_sub_station_west" },
       { "point": [ 4, 7, -2 ], "overmap": "underground_sub_station" },
       { "point": [ 2, 7, 0 ], "overmap": "s_lot_no_sidewalk_east" },
       { "point": [ 1, 1, -1 ], "overmap": "sewer_es" },
