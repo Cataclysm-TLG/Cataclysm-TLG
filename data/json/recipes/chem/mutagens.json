@@ -1305,7 +1305,7 @@
       { "proficiency": "prof_chem_synth" }
     ],
     "using": [ [ "mutagen_production_standard", 31 ] ],
-    "components": [ [ [ "raptor_sample", 1 ] ], [ [ "purifier", 1 ] ] ],
+    "components": [ [ [ "raptor_sample", 1 ] ] ],
     "flags": [ "SECRET" ]
   },
   {
@@ -1554,7 +1554,7 @@
         [ "diazepam", 3 ],
         [ "pills_sleep", 5 ]
       ],
-      [ [ "lsd", 1 ], [ "meth", 1 ], [ "adderall", 2 ] ],
+      [ [ "lsd", 1 ], [ "meth", 2 ], [ "pure_meth", 1 ], [ "adderall", 2 ] ],
       [ [ "vitamins", 5 ], [ "iodine", 5 ], [ "disinfectant", 25 ], [ "protein_powder", 20 ] ]
     ],
     "flags": [ "SECRET" ]
