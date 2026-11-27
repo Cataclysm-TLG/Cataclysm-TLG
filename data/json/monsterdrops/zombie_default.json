@@ -194,12 +194,12 @@
       },
       {
         "distribution": [
-          { "item": "meth", "prob": 5 },
-          { "item": "pure_meth", "prob": 5 },
-          { "item": "coke", "prob": 5 },
-          { "item": "lsd", "prob": 2 },
+          { "item": "meth", "prob": 4 },
+          { "item": "pure_meth", "prob": 3 },
+          { "item": "coke", "prob": 6 },
+          { "item": "lsd", "prob": 1 },
           { "item": "heroin", "prob": 5 },
-          { "item": "naloxone", "prob": 2 },
+          { "item": "naloxone", "prob": 4 },
           { "collection": [ { "item": "crackpipe" }, { "item": "crack" } ], "prob": 5 },
           { "collection": [ { "item": "weed" }, { "item": "pipe_glass", "prob": 50 } ], "prob": 10 },
           { "distribution": [ { "item": "joint", "prob": 80 }, { "item": "joint_roach", "prob": 20 } ], "prob": 10 }
