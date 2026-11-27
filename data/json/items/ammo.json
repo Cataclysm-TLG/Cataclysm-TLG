@@ -1233,7 +1233,7 @@
     "comestible_type": "INVALID",
     "category": "drugs",
     "price": "10 USD",
-    "price_postapoc": "5 USD",
+    "price_postapoc": "5 cent",
     "name": { "str_sp": "nicotine liquid" },
     "symbol": "=",
     "color": "yellow",

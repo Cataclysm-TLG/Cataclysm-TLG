@@ -41,7 +41,7 @@
     "volume": "45 ml",
     "price": "15 USD",
     "longest_side": "8 cm",
-    "price_postapoc": "10 cent",
+    "price_postapoc": "0 cent",
     "to_hit": -1,
     "material": [ "plastic", "aluminum", "steel" ],
     "symbol": "!",
