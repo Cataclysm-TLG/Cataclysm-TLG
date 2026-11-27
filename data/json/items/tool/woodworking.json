@@ -5,7 +5,7 @@
     "subtypes": [ "TOOL" ],
     "name": { "str": "bow saw" },
     "category": "tools",
-    "description": "A saw that is more at home outdoors than inside.  It's used for trimming trees, pruning, and cutting firewood, but may be used for other rough cuts as well.",
+    "description": "A saw that is more at home outdoors than inside.  It's used for trimming trees and roughly shaping wood, but unfit for cutting down a tree.",
     "weight": "750 g",
     "volume": "3500 ml",
     "longest_side": "88 cm",
@@ -15,7 +15,7 @@
     "material": [ "steel", "plastic" ],
     "symbol": "(",
     "color": "red",
-    "qualities": [ [ "AXE", 2 ], [ "SAW_W", 2 ], [ "BUTCHER", -90 ] ],
+    "qualities": [ [ "AXE", 1 ], [ "SAW_W", 2 ], [ "BUTCHER", -90 ] ],
     "flags": [ "NONCONDUCTIVE", "BELT_CLIP", "NO_SALVAGE" ],
     "melee_damage": { "cut": 1 }
   },
