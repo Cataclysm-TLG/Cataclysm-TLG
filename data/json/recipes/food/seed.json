@@ -39,7 +39,7 @@
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "pumpkin", 1 ] ] ],
     "byproducts": [ [ "pumpkin_cut", 4 ] ],
-    "charges": 6
+    "charges": 2
   },
   {
     "result": "seed_watermelon",
@@ -48,7 +48,7 @@
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "watermelon", 1 ] ] ],
     "byproducts": [ [ "watermelon_wedge", 16 ] ],
-    "charges": 5
+    "charges": 2
   },
   {
     "result": "seed_melon",
@@ -57,7 +57,7 @@
     "qualities": [ { "id": "CUT", "level": 1 } ],
     "components": [ [ [ "melon", 1 ] ] ],
     "byproducts": [ [ "melon_chunks", 4 ] ],
-    "charges": 3
+    "charges": 2
   },
   {
     "result": "seed_cucumber",

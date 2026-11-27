@@ -172,7 +172,7 @@
     "symbol": ";",
     "color": "light_gray",
     "name": { "str": "hatchet" },
-    "description": "A one-handed hatchet.  Makes a great melee weapon, and is useful both for chopping things and hammering them.",
+    "description": "A small axe used for all kinds of bushcraft and landscaping tasks.  It's certainly capable of splitting zombie skulls, but cutting down a tree with something like this would probably take an obnoxiously long time for anyone who didn't really know what they were doing.",
     "price": "25 USD",
     "price_postapoc": "5 USD",
     "material": [ "steel", "wood" ],

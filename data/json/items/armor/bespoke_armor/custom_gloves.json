@@ -182,7 +182,7 @@
     "subtypes": [ "ARMOR" ],
     "category": "armor",
     "name": { "str": "faux fur winter survivor gloves", "str_pl": "pairs of faux fur winter survivor gloves" },
-    "description": "A pair of hand-crafted gloves armored with kevlar, rubberized to offer protection from chemicals.  These are lined with real fur.",
+    "description": "A pair of hand-crafted gloves armored with kevlar, rubberized to offer protection from chemicals.  These are lined with faux fur.",
     "weight": "300 g",
     "volume": "1250 ml",
     "price": "100 USD",
