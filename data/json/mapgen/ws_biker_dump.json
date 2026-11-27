@@ -217,7 +217,6 @@
         "V": "t_junk_floor",
         "@": "t_junk_floor",
         "M": "t_junk_floor",
-        "P": "t_junk_floor",
         " ": "t_junk_floor",
         "l": "t_junk_floor",
         "=": "t_door_curtain_c",
@@ -232,8 +231,7 @@
         "@": "f_sofa",
         "K": "f_water_heater",
         "M": "f_utility_shelf",
-        "H": "f_55gal_firebarrel",
-        "P": "f_shower"
+        "H": "f_55gal_firebarrel"
       },
       "toilets": { "&": {  } },
       "liquids": { "K": { "liquid": "water_clean", "amount": [ 0, 100 ] } },
