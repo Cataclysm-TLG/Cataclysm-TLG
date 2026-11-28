@@ -3481,6 +3481,21 @@ void npc::on_load( map *here )
         update_body( cur, cur + 30_minutes );
         advance_effects( 30_minutes );
         advance_focus( 30 );
+        // Quick patch to get NPCs to somewhat feed themselves when the player is away.
+        if( get_bmi_fat() <= character_weight_category::skinny ) {
+            for( scored_item &food : find_nearby_food( false ) ) {
+                item *it = food.loc.get_item();
+                if( it == nullptr ) {
+                    continue;
+                }
+                const nutrients food_nutrients = compute_effective_nutrients( *it );
+                set_stored_kcal( get_stored_kcal() + food_nutrients.kcal() );
+                food.loc.remove_item();
+                if( get_bmi_fat() >= character_weight_category::skinny ) {
+                    break;
+                }
+            }
+        }
     }
     for( ; cur < calendar::turn - 5_minutes; cur += 5_minutes + 1_turns ) {
         update_body( cur, cur + 5_minutes );
