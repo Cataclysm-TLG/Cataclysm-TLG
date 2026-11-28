@@ -1397,31 +1397,6 @@
     ]
   },
   {
-    "id": "nested_bundle_of_items",
-    "type": "nested_category",
-    "activity_level": "LIGHT_EXERCISE",
-    "category": "CC_OTHER",
-    "subcategory": "CSC_OTHER_MATERIALS",
-    "name": "bundle of items",
-    "description": "Recipes related to tying items into compact bundles for transport or storage.",
-    "nested_category_data": [
-      "bundle_rag",
-      "bundle_cotton",
-      "bundle_leather",
-      "bundle_wool",
-      "bundle_nylon",
-      "bundle_plank",
-      "bundle_rebar",
-      "bundle_pipe",
-      "bundle_copper_pipe",
-      "bundle_branch",
-      "bundle_branch_long",
-      "bundle_javelin",
-      "seaweed_pile",
-      "dry_seaweed_pile"
-    ]
-  },
-  {
     "id": "nested_cardboard_boxes",
     "type": "nested_category",
     "activity_level": "LIGHT_EXERCISE",

@@ -1367,23 +1367,6 @@
   {
     "type": "ITEM",
     "subtypes": [ "COMESTIBLE" ],
-    "id": "seaweed_pile",
-    "name": { "str_sp": "pile of seaweed" },
-    "weight": "600 g",
-    "color": "green",
-    "spoils_in": "2 days",
-    "comestible_type": "FOOD",
-    "symbol": "%",
-    "description": "A slimy heap of seaweed.  It doesn't look edible, but properly dried, it might make for decent kindling.",
-    "material": [ "vegetable" ],
-    "volume": "600 ml",
-    "flags": [ "SMOKABLE", "INEDIBLE" ],
-    "smoking_result": "dry_seaweed_pile",
-    "vitamins": [ [ "vegetable_allergen", 1 ] ]
-  },
-  {
-    "type": "ITEM",
-    "subtypes": [ "COMESTIBLE" ],
     "id": "sea_lettuce",
     "name": { "str_sp": "sea lettuce" },
     "weight": "100 g",

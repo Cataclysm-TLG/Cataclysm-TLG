@@ -4560,5 +4560,65 @@
     "id": "kevlar_shears",
     "type": "MIGRATION",
     "replace": "scissors"
+  },
+  {
+    "id": "bundle_rag",
+    "type": "MIGRATION",
+    "replace": "cotton_sheet"
+  },
+  {
+    "id": "bundle_cotton",
+    "type": "MIGRATION",
+    "replace": "cotton_sheet"
+  },
+  {
+    "id": "bundle_leather",
+    "type": "MIGRATION",
+    "replace": "leather_sheet"
+  },
+  {
+    "id": "bundle_nylon",
+    "type": "MIGRATION",
+    "replace": "nylon_sheet"
+  },
+  {
+    "id": "bundle_wool",
+    "type": "MIGRATION",
+    "replace": "felt_sheet"
+  },
+  {
+    "id": "bundle_plank",
+    "type": "MIGRATION",
+    "replace": "2x4"
+  },
+  {
+    "id": "bundle_rebar",
+    "type": "MIGRATION",
+    "replace": "rebar"
+  },
+  {
+    "id": "bundle_pipe",
+    "type": "MIGRATION",
+    "replace": "pipe"
+  },
+  {
+    "id": "bundle_copper_pipe",
+    "type": "MIGRATION",
+    "replace": "cu_pipe"
+  },
+  {
+    "id": "bundle_branch",
+    "type": "MIGRATION",
+    "replace": "stick"
+  },
+  {
+    "id": "bundle_branch_long",
+    "type": "MIGRATION",
+    "replace": "stick_long"
+  },
+  {
+    "id": "bundle_javelin",
+    "type": "MIGRATION",
+    "replace": "javelin"
   }
 ]
