@@ -3677,42 +3677,6 @@
     ]
   },
   {
-    "result": "bundle_rag",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "skill_used": "fabrication",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "cotton_patch", 100 ] ], [ [ "thread", 8 ] ] ],
-    "flags": [ "BLIND_EASY" ]
-  },
-  {
-    "result": "bundle_cotton",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "skill_used": "fabrication",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "cotton_sheet", 25 ] ], [ [ "thread", 16 ] ] ],
-    "flags": [ "BLIND_EASY" ]
-  },
-  {
-    "result": "bundle_leather",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "skill_used": "fabrication",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "leather_patch", 50 ] ], [ [ "thread", 8 ] ] ],
-    "flags": [ "BLIND_EASY" ]
-  },
-  {
-    "result": "bundle_wool",
-    "type": "uncraft",
-    "activity_level": "NO_EXERCISE",
-    "skill_used": "fabrication",
-    "qualities": [ { "id": "CUT", "level": 1 } ],
-    "components": [ [ [ "felt_patch", 100 ] ], [ [ "thread", 8 ] ] ],
-    "flags": [ "BLIND_EASY" ]
-  },
-  {
     "result": "garlic",
     "type": "uncraft",
     "activity_level": "NO_EXERCISE",
